@@ -1,13 +1,14 @@
-import { BoardGroup } from "../cmps/board-group";
+import { GroupList } from "../cmps/group-list";
 import { BoardHeader } from "../cmps/board-header";
+import { NavBar } from "../cmps/nav-bar";
 
-
-export function BoardDetails({ board }) {
+export function BoardDetails({ board, groups }) {
     return <section className="board-details">
+        <NavBar />
         <h1>Board Details</h1>
         <BoardHeader />
-        <section className="board-groups-container">
-            <BoardGroup />
+        <section className="groups-container">
+             <GroupList />
         </section>
     </section>
 }

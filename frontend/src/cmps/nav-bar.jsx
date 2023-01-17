@@ -37,19 +37,15 @@ export function NavBar() {
     return <header className="nav-bar">
 
         <nav>
-            <div className="top">
-                <NavLink to='/'><img src={logo} alt="Logo" style={{ maxWidth: '100px' }} /></NavLink>
-                <NavLink to='/board'>Work Managment</NavLink>
-                <button>Notifications</button>
-                <NavLink to='/inbox'>Inbox</NavLink>
-                <NavLink to='/my_work'>My Work</NavLink>
-                <button>Favorites</button>
-            </div>
+            <NavLink to='/'><img src={logo} alt="Logo" style={{ maxWidth: '100px' }} /></NavLink>
+            <NavLink to='/board/:boardId'>Work Managment</NavLink>
+            {/* <button>Notifications</button> */}
+            {/* <NavLink to='/inbox'>Inbox</NavLink> */}
+            {/* <NavLink to='/my_work'>My Work</NavLink> */}
+            {/* <button>Favorites</button> */}
 
-            <div className="bottom">
-                <button>Search</button>
-                <button>Profile</button>
-            </div>
+            {/* <button>Search</button> */}
+            <button>Profile</button>
         </nav>
 
         {/* <nav>
