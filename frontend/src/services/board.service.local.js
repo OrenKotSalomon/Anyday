@@ -5,13 +5,18 @@ import { userService } from './user.service.js'
 
 const STORAGE_KEY = 'boardDB'
 
+function createDemoBoard() {
+    save(demoBoard)
+}
+
 export const boardService = {
     query,
     getById,
     save,
     remove,
     getEmptyBoard,
-    addBoardMsg
+    addBoardMsg,
+    createDemoBoard
 }
 window.bs = boardService
 
@@ -37,6 +42,7 @@ async function remove(boardId) {
 }
 
 async function save(board) {
+    console.log('board:', board)
     var savedBoard
     if (board._id) {
         savedBoard = await storageService.put(STORAGE_KEY, board)
@@ -74,9 +80,11 @@ function getEmptyBoard() {
 // TEST DATA
 // storageService.post(STORAGE_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
 
+
+
 const demoBoard = {
-    "_id": "b101",
-    "title": "Robot dev proj",
+    // "_id": "b101",
+    "title": "Demo Board",
     "isStarred": false,
     "archivedAt": 1589983468418,
     "groups": [
@@ -96,7 +104,41 @@ const demoBoard = {
             ],
             "style": {}
         },
+        {
+            "id": "g102",
+            "title": "Group 2",
+            "archivedAt": 1589983468418,
+            "tasks": [
+                {
+                    "id": "c101",
+                    "title": "kill kai"
+                },
+                {
+                    "id": "c102",
+                    "title": "be a master"
+                }
+            ],
+            "style": {}
+        },
+        {
+            "id": "g103",
+            "title": "Group 3",
+            "archivedAt": 1589983468418,
+            "tasks": [
+                {
+                    "id": "c101",
+                    "title": "win the game"
+                },
+                {
+                    "id": "c102",
+                    "title": "exrecise"
+                }
+            ],
+            "style": {}
+        },
     ]
+
+
 }
 
 const board = {

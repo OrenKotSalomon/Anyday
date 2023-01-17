@@ -11,12 +11,12 @@ html {
     font-family: montserrat;
     line-height: 1.6;
     color: $clr2;
+    margin: 0;
 }
 
 body {
     font-size: rem(18px);
     margin: 0;
-    max-width: 1024px;
     margin: auto;
 }
 
@@ -28,7 +28,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 section, main, footer {
-    padding: 5px;
+    // padding: 5px;
 }
 
 img {
@@ -41,8 +41,5 @@ p {
 
 a {
     text-decoration: none;
-}
-a:hover {
-    text-decoration: underline;
 }
 

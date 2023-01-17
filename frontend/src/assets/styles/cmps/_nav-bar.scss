@@ -1,9 +1,6 @@
 .nav-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
     height: 100vh;
-    background-color: #292f4c;
+    background-color: $side-nav;
     text-align: center;
 
     nav {
