@@ -4,7 +4,6 @@ import { Routes, Route } from 'react-router'
 import routes from './routes'
 
 import { NavBar } from './cmps/nav-bar'
-import { AppFooter } from './cmps/app-footer'
 import { UserDetails } from './pages/user-details'
 import { HomePage } from './pages/home-page'
 import { BoardDetails } from './pages/board-details'

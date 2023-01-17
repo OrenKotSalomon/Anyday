@@ -1,5 +1,5 @@
 import { Link, NavLink } from 'react-router-dom'
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 import routes from '../routes'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/user.actions.js'
@@ -13,7 +13,7 @@ export function NavBar() {
         try {
             const user = await login(credentials)
             showSuccessMsg(`Welcome: ${user.fullname}`)
-        } catch(err) {
+        } catch (err) {
             showErrorMsg('Cannot login')
         }
     }
@@ -21,7 +21,7 @@ export function NavBar() {
         try {
             const user = await signup(credentials)
             showSuccessMsg(`Welcome new user: ${user.fullname}`)
-        } catch(err) {
+        } catch (err) {
             showErrorMsg('Cannot signup')
         }
     }
@@ -29,25 +29,30 @@ export function NavBar() {
         try {
             await logout()
             showSuccessMsg(`Bye now`)
-        } catch(err) {
+        } catch (err) {
             showErrorMsg('Cannot logout')
         }
     }
 
     return <header className="nav-bar">
-            
-            <nav>
-            <NavLink to='/'><img src={logo} alt="Logo" style={{ maxWidth: '100px' }} /></NavLink>
-            <NavLink to='/board'>Work Managment</NavLink>
-            <button>Notifications</button>
-            <NavLink to='/inbox'>inbox</NavLink>
-            <NavLink to='/my_work'>My Work</NavLink>
-            <button>Favorites</button>
-            <button>Search</button>
-            <button>Profile</button>
-            </nav>
 
-            {/* <nav>
+        <nav>
+            <div className="top">
+                <NavLink to='/'><img src={logo} alt="Logo" style={{ maxWidth: '100px' }} /></NavLink>
+                <NavLink to='/board'>Work Managment</NavLink>
+                <button>Notifications</button>
+                <NavLink to='/inbox'>Inbox</NavLink>
+                <NavLink to='/my_work'>My Work</NavLink>
+                <button>Favorites</button>
+            </div>
+
+            <div className="bottom">
+                <button>Search</button>
+                <button>Profile</button>
+            </div>
+        </nav>
+
+        {/* <nav>
                 {routes.map(route => <NavLink key={route.path} to={route.path}>{route.label}</NavLink>)}
 
                 {user &&
@@ -66,5 +71,5 @@ export function NavBar() {
                     </section>
                 }
             </nav> */}
-        </header>
+    </header>
 }
