@@ -4,8 +4,9 @@ import { loadCars, addCar, updateCar, removeCar, addToCart } from '../store/car.
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { carService } from '../services/car.service.js'
+import { BoardDetails } from './board-details.jsx'
 
-export function CarIndex() {
+export function BoardIndex() {
 
     const cars = useSelector(storeState => storeState.carModule.cars)
 
@@ -56,26 +57,9 @@ export function CarIndex() {
 
     return (
         <div>
-            <h3>Cars App</h3>
+            <h3>Monday App</h3>
             <main>
-                <button onClick={onAddCar}>Add Car ⛐</button>
-                <ul className="car-list">
-                    {cars.map(car =>
-                        <li className="car-preview" key={car._id}>
-                            <h4>{car.vendor}</h4>
-                            <h1>⛐</h1>
-                            <p>Price: <span>${car.price.toLocaleString()}</span></p>
-                            <p>Owner: <span>{car.owner && car.owner.fullname}</span></p>
-                            <div>
-                                <button onClick={() => { onRemoveCar(car._id) }}>x</button>
-                                <button onClick={() => { onUpdateCar(car) }}>Edit</button>
-                            </div>
-
-                            <button onClick={() => { onAddCarMsg(car) }}>Add car msg</button>
-                            <button className="buy" onClick={() => { onAddToCart(car) }}>Add to cart</button>
-                        </li>)
-                    }
-                </ul>
+                <BoardDetails />
             </main>
         </div>
     )

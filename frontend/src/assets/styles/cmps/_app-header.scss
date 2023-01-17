@@ -51,3 +51,24 @@
     }
 
 }
+
+.nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background-color: #292f4c;
+    text-align: center;
+    nav {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        a {
+            color: #fff;
+        }
+        a.active {
+background-color: rgb(128, 128, 128);
+        }
+    }
+
+}
