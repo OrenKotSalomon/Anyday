@@ -3,11 +3,13 @@ import { TaskPreview } from "./task-preview";
 export function GroupList({ group }) {
     return <section className='group-list'>
         <div className="group-header-container">
-            <div className="group-header-name">
+            <div className="group-header-name"
+            style={{color: group.style}}>
                 <h1 className="group-name">{group.title}</h1>
             </div>
         </div>
-        <div className="main-group-container">
+        <div className="main-group-container"
+        style={{backgroundColor: group.style}}>
         <div className="group-labels flex">
             <div className="task-name cell">Task</div>
             <div className="task-person cell">Person</div>
