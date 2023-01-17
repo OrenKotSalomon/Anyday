@@ -112,6 +112,22 @@
     border-radius: 4px;
 }
 
+@mixin login-link-back {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+    background: transparent;
+    font: inherit;
+    line-height: normal;
+    -webkit-font-smoothing: inherit;
+    color: #0fa2e2;
+    text-decoration: none;
+    cursor: pointer;
+
+}
+
 @mixin login-input {
     width: $fullPrecent;
     height: 40px;

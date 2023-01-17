@@ -1,0 +1,71 @@
+.email-password-container {
+    @include login-flex;
+    margin-bottom: 16px;
+
+    .login-header {
+        font-size: 40px;
+        font-weight: 100;
+
+        b {
+            font-family: roboto-black;
+        }
+    }
+
+    .email-page-two {
+        margin-top: 28px;
+        width: 100%;
+    }
+
+}
+
+.email-password-input-and-button-container {
+    margin-bottom: 2rem;
+}
+
+.form-input-container {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 100px;
+    margin-bottom: 20px;
+
+    .email-password-label {
+        position: relative;
+        align-self: center;
+        color: #777;
+    }
+
+    .email-input-container {
+        height: auto;
+        width: 360px;
+        margin-left: 12px;
+
+        .email-input {
+            @include login-input;
+
+        }
+    }
+
+    .password-input-container {
+        height: auto;
+        width: 360px;
+        margin-left: 12px;
+
+        .password-input {
+            @include login-input;
+
+        }
+    }
+}
+
+.next-btn-wrapper {
+    display: flex;
+    justify-content: center;
+
+    .next-btn-container {
+        width: 360px;
+    }
+}
+
+.other-acc-btn {
+    @include login-link-back;
+}

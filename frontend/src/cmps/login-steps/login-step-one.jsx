@@ -1,8 +1,17 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export function LoginStepOne({ }) {
+export function LoginStepOne({ props }) {
 
+    function handleChange({ target }) {
+        let { value, name: field, type } = target
+        console.log(field);
+        props.setEmail(prevMail => {
+            return { ...prevMail, [field]: value }
+        })
+    }
+    console.log(props);
+    // 
     return (
         <section className='login-step-one'>
             <div className="router-wrapper">
@@ -11,13 +20,13 @@ export function LoginStepOne({ }) {
                     <div className="email-page">
                         <div className="email-input-and-button-container">
                             <div className="input-container">
-                                <label className="user-email-label" htmlFor="user_email">
+                                <label className="user-email-label" htmlFor="email">
                                     Enter your work email address</label>
-                                <input id="user_email" placeholder="Example@company.com" type="email"
+                                <input onChange={handleChange} id="email" name="email" placeholder="Example@company.com" type="email"
                                     className="email-input" aria-label="Enter your work email address" required />
                             </div>
                             <div className="next-btn-container">
-                                <button className="next-btn">
+                                <button onClick={() => props.setLoginPaging("login-step-2")} className="next-btn">
                                     <div className="next-wrapper">Next</div>
                                     <div className="right-arrow-icon">{'->'}</div>
                                 </button>
