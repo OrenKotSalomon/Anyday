@@ -1,4 +1,39 @@
 // Colors
+
+//main-bgc........................
+$main-bgc-white: rgb(255, 255, 255);
+
+//side-nav .......................
+$side-nav: rgb(41, 47, 76);
+
+//btns-color:......................
+
+//green-btn
+$btn-green: rgb(37, 135, 80);
+//blue-btn
+$btn-blue: rgb(0, 115, 234);
+
+//color-picker......................
+$yellow: #FFCB00;
+$drk-yellow: #CAB641;
+$li-green: #9CD326;
+$green: #00C875;
+$drk-green: #037F4C;
+$li-blue: #66CCFF;
+$blue: #579BFC;
+$drk-blue: #0086C0;
+$perple: #A25DDC;
+$drk-perple: #784BD1;
+$ornge: #FF642E;
+$pink: #FF5AC4;
+$drk-pink: #FF158A;
+$red: #E2445C;
+$drk-red: #BB3354;
+$grey: #808080;
+$li-grey: #C4C4C4;
+$li-orange: #FDAB3D;
+
+//old colors - TODO DELETE IT..............
 $clr1: #ce2e6c;
 $clr2: #4f3a65;
 $clr3: #574f7d;
@@ -7,7 +42,7 @@ $clr5: #dff0ea;
 $clr6: #fff;
 $clr7: #222;
 
-// LAYOUT
+// LAYOUT...............................
 $layoutPadding: 27px;
 
 // Breakpoints
