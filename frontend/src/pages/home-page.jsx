@@ -1,5 +1,7 @@
 import React from 'react'
 // import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import logo from '../assets/img/logo.png'
 import { Link } from 'react-router-dom'
 
@@ -11,7 +13,7 @@ export function HomePage() {
     return (
         <section className='home-page'>
             {/* <img src={logo} alt="Logo" style={{ maxWidth: '300px' }} /> */}
-         
+         <Link to='/board/boardId'>Get Started</Link>
          //TODO app header cmp..
 
             <div className='home-page-hero'>
