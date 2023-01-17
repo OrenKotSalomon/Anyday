@@ -28,31 +28,66 @@
 @mixin aspect-ratio($width, $height) {
     position: relative;
     overflow: hidden;
+
     &::before {
-      display: block;
-      content: "";
-      width: 100%;
-      padding-top: calc(($height / $width) * 100%);
+        display: block;
+        content: "";
+        width: 100%;
+        padding-top: calc(($height / $width) * 100%);
     }
-    > * {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+
+    >* {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
     }
-  
-    > img {
-      height: 100%;
-      object-fit: cover;
+
+    >img {
+        height: 100%;
+        object-fit: cover;
     }
-  }
-  
-  // Mixin for removing hover efects on iphone screen
-  @mixin hover-supported {    
+}
+
+// Mixin for removing hover efects on iphone screen
+@mixin hover-supported {
     @media not all and (pointer: coarse) {
         &:hover {
             @content;
         }
     }
-  }
+}
+
+//mixin for header home page and login page
+
+@mixin header {
+    width: 100%;
+    display: block;
+    padding-top: 10px;
+    padding-left: 8px;
+    border-bottom: 1px solid $header-border-bottom;
+    height: 65px;
+    background-color: $header-grey;
+}
+
+@mixin header-logo {
+    width: 180px;
+    height: 44px;
+    margin-left: 12px;
+}
+
+@mixin login-layout {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    color: $login-main-clr;
+}
+
+@mixin login-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
