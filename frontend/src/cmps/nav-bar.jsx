@@ -4,8 +4,9 @@ import routes from '../routes'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/user.actions.js'
 import { LoginSignup } from './login-signup.jsx'
+import logo from '../assets/img/logo.png'
 
-export function AppHeader() {
+export function NavBar() {
     const user = useSelector(storeState => storeState.userModule.user)
 
     async function onLogin(credentials) {
@@ -33,9 +34,20 @@ export function AppHeader() {
         }
     }
 
-    return (
-        <header className="app-header">
+    return <header className="nav-bar">
+            
             <nav>
+            <NavLink to='/'><img src={logo} alt="Logo" style={{ maxWidth: '100px' }} /></NavLink>
+            <NavLink to='/board'>Work Managment</NavLink>
+            <button>Notifications</button>
+            <NavLink to='/inbox'>inbox</NavLink>
+            <NavLink to='/my_work'>My Work</NavLink>
+            <button>Favorites</button>
+            <button>Search</button>
+            <button>Profile</button>
+            </nav>
+
+            {/* <nav>
                 {routes.map(route => <NavLink key={route.path} to={route.path}>{route.label}</NavLink>)}
 
                 {user &&
@@ -53,8 +65,6 @@ export function AppHeader() {
                         <LoginSignup onLogin={onLogin} onSignup={onSignup} />
                     </section>
                 }
-            </nav>
-            <h1>My App</h1>
+            </nav> */}
         </header>
-    )
 }
