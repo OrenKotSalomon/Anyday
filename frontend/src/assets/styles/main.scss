@@ -18,9 +18,11 @@
 @import "views/review-app";
 @import "views/user-details";
 @import "views/login-page";
+@import "views/board-details";
 
 // Components
-@import "cmps/app-header";
+@import "cmps/nav-bar";
 @import "cmps/app-footer";
 @import "cmps/user-msg";
 @import "cmps/shopping-cart";
+@import "cmps/board-header";

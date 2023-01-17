@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import logo from '../assets/img/logo.png'
 
+
 export function HomePage() {
     const dispatch = useDispatch()
 
