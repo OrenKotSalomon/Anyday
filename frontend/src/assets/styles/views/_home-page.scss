@@ -32,7 +32,7 @@
             display: inline-block;
             font-size: 14px;
             padding: 12px 42px;
-             background: linear-gradient(-60deg, $start-btn-li-blue 20%, $start-btn-blue 80%);
+            background: linear-gradient(-60deg, $start-btn-li-blue 20%, $start-btn-blue 80%);
             border-radius: 555em;
             transform: 1s;
 
@@ -74,6 +74,36 @@
             .home-page-promo2 {
                 margin-inline-start: 1.5em;
             }
+
+            margin-bottom: 2em;
         }
     }
+
+    .home-page-image {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+
+    .home-page-bottom-container {
+        color: $main-color;
+        letter-spacing: .1em;
+        min-width: 100vw;
+        background-color: $main-bgc-white;
+    }
+
+    .home-page-companies-logo {
+
+        .home-page-company-logo {
+            align-self: center;
+            width: 13%;
+            padding: 24px;
+        }
+    }
+
+    .home-page-span-bold {
+        font-family: roboto-regular;
+
+    }
+
 }

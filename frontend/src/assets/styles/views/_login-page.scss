@@ -57,22 +57,7 @@
         }
 
         .email-input {
-            width: $fullPrecent;
-            height: 40px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            padding: 6px 12px;
-            font-size: 16px;
-            color: #555;
-            outline: none;
-
-            &:focus {
-                border-color: $link-color;
-            }
-
-            &::placeholder {
-                font-family: roboto-thin;
-            }
+            @include login-input;
 
         }
 
@@ -87,23 +72,7 @@
 
     .next-btn {
 
-        width: $fullPrecent;
-        min-width: $fullPrecent;
-        height: 100%;
-        cursor: pointer;
-        outline: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        line-height: 28px;
-        border: none;
-        font-size: 18px;
-        color: #fff;
-        background-color: $btn-blue;
-        margin: 0;
-        margin-top: 20px;
-        padding: 8px 16px;
-        border-radius: 4px;
+        @include login-btn;
 
         .next-wrapper {
             margin-right: 12px;
@@ -140,7 +109,13 @@
     font-family: roboto-light;
     font-size: 1rem;
 
+    .signup-quest {
+
+        padding-right: 5px;
+    }
+
     .sign-up {
         color: $link-color;
+
     }
 }
