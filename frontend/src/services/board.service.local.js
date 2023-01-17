@@ -3,7 +3,7 @@ import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 import { userService } from './user.service.js'
 
-const STORAGE_KEY = 'boardDB'
+const BOARD_KEY = 'boardDB'
 
 function createDemoBoard() {
     save(demoBoard)
@@ -21,7 +21,7 @@ export const boardService = {
 window.bs = boardService
 
 async function query(filterBy = { txt: '', price: 0 }) {
-    var boards = await storageService.query(STORAGE_KEY)
+    var boards = await storageService.query(BOARD_KEY)
     if (filterBy.txt) {
         const regex = new RegExp(filterBy.txt, 'i')
         boards = boards.filter(board => regex.test(board.vendor) || regex.test(board.description))
@@ -33,23 +33,22 @@ async function query(filterBy = { txt: '', price: 0 }) {
 }
 
 function getById(boardId) {
-    return storageService.get(STORAGE_KEY, boardId)
+    return storageService.get(BOARD_KEY, boardId)
 }
 
 async function remove(boardId) {
     // throw new Error('Nope')
-    await storageService.remove(STORAGE_KEY, boardId)
+    await storageService.remove(BOARD_KEY, boardId)
 }
 
 async function save(board) {
-    console.log('board:', board)
     var savedBoard
     if (board._id) {
-        savedBoard = await storageService.put(STORAGE_KEY, board)
+        savedBoard = await storageService.put(BOARD_KEY, board)
     } else {
         // Later, owner is set by the backend
         board.owner = userService.getLoggedinUser()
-        savedBoard = await storageService.post(STORAGE_KEY, board)
+        savedBoard = await storageService.post(BOARD_KEY, board)
     }
     return savedBoard
 }
@@ -65,7 +64,7 @@ async function addBoardMsg(boardId, txt) {
         txt
     }
     board.msgs.push(msg)
-    await storageService.put(STORAGE_KEY, board)
+    await storageService.put(BOARD_KEY, board)
 
     return msg
 }
@@ -78,16 +77,16 @@ function getEmptyBoard() {
 }
 
 // TEST DATA
-// storageService.post(STORAGE_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
+// storageService.post(BOARD_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
 
 
 
 const demoBoard = {
     // "_id": "b101",
-    "title": "Demo Board",
-    "isStarred": false,
-    "archivedAt": 1589983468418,
-    "groups": [
+    title: "Demo Board",
+    isStarred: false,
+    archivedAt: 1589983468418,
+    groups: [
         {
             "id": "g101",
             "title": "Group 1",
@@ -137,8 +136,6 @@ const demoBoard = {
             "style": {}
         },
     ]
-
-
 }
 
 const board = {
