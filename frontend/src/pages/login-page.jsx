@@ -1,44 +1,29 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { LoginStepTwo } from "../cmps/login-steps/logi-step-two";
+import { LoginStepOne } from "../cmps/login-steps/login-step-one";
 
 export function Login() {
+    const [loginPaging, setLoginPaging] = useState("login-step-1")
+
     return (
         <section className='login-page'>
             <header className="top-header">
-                <img src="" alt="logo" />
+                <img className="login-logo" src="" alt="logo" />
             </header>
-
-            <div className="router-wrapper">
-                <div className="email-first-component">
-                    <h1>Log in to your account</h1>
-                    <div className="email-page">
-                        <div className="email-input-and-button-container">
-                            <div className="input-container">
-                                <label className="user-email-label" htmlFor="user_email">
-                                    Enter your work email address</label>
-                                <input id="user_email" placeholder="Example@company.com" type="email"
-                                    className="email-input" aria-label="Enter your work email address" />
-                            </div>
-                            <div className="btn-container">
-                                <button className="next-btn">
-                                    next {'->'}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="login-seperator-container">
-                        <div className="login-seperator">
-                            <span className="seperator-line"></span>
-                            <h2 >Or Sign in with</h2>
-                            <span className="seperator-line"></span>
-                        </div>
-                    </div>
-                </div>
-                <div className="suggest-signup-container">
-                    <span>Don't you have an account yet? <Link to="/signup"></Link></span>
-                </div>
-
-            </div>
+            <LoginDynamicCmp loginPaging={loginPaging} />
 
         </section>
     )
+}
+
+export function LoginDynamicCmp({ loginPaging, email }) {
+    switch (loginPaging) {
+        case "login-step-1":
+            return <LoginStepOne />;
+        case "login-step-1":
+            return <LoginStepTwo />;
+        // default:
+        //     return <p>UNKNOWN {cmp}</p>;
+    }
 }

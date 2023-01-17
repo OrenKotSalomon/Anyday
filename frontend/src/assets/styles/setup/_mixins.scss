@@ -70,3 +70,24 @@
     height: 65px;
     background-color: $header-grey;
 }
+
+@mixin header-logo {
+    width: 180px;
+    height: 44px;
+    margin-left: 12px;
+}
+
+@mixin login-layout {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    color: $login-main-clr;
+}
+
+@mixin login-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}

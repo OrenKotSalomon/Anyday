@@ -14,6 +14,7 @@ $btn-green: rgb(37, 135, 80);
 $btn-blue: rgb(0, 115, 234);
 
 //color-picker......................
+$link-color: #0fa2e2;
 $yellow: #FFCB00;
 $drk-yellow: #CAB641;
 $li-green: #9CD326;
@@ -34,7 +35,7 @@ $li-grey: #C4C4C4;
 $li-orange: #FDAB3D;
 $header-grey: #f7f7f7;
 $header-border-bottom: #e0e0e0;
-
+$login-main-clr: #333;
 
 //old colors - TODO DELETE IT..............
 $clr1: #ce2e6c;
@@ -47,6 +48,8 @@ $clr7: #222;
 
 // LAYOUT...............................
 $layoutPadding: 27px;
+$fullPrecent: 100%;
+$commonFontSize: 14px;
 
 // Breakpoints
 $mobile-breakpoint: 555px;
