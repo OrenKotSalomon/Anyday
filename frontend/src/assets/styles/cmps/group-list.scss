@@ -1,0 +1,21 @@
+.group-list {
+    width: max-content;
+
+    .main-group-container {
+        padding: 0 7px;
+        border-radius: 15px;
+        box-shadow: 0 1px 7px 0 rgb(128, 128, 128);
+    }
+
+    .group-name {
+        width: max-content;
+        font-size: 2rem;
+    }
+
+    .cell {
+        text-align: center;
+        border: 0.7px solid gray;
+        min-width: 9.375rem;
+    }
+
+}

@@ -1,7 +1,25 @@
 .board-details {
     display: flex;
+    height: min-content;
 }
 
 .board-container {
     width: 100%;
+    display: grid;
+    grid-template-columns: $layoutPadding 1fr $layoutPadding;
+    gap: $layoutPadding;
+
+    >* {
+        grid-column: 2;
+    }
+}
+
+.board-header {
+    height: min-content;
+}
+
+.groups-container {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
 }
