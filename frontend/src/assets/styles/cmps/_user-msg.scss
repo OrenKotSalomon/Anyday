@@ -3,10 +3,11 @@
     padding: 10px;
     font-size: 1.4em;
     position: fixed;
-    top:0;
-    right:0;
+    top:50%;
+    right:50%;
     background-color: grey;
 }
+
 .user-msg button {
     float:right;
     border:0;
@@ -16,8 +17,8 @@
 }
 
 .user-msg.success {
-    background-color: rgb(41, 189, 73);
+    background-color: lightgreen;
 }
 .user-msg.error {
-    background-color: rgb(216, 59, 59);
+    background-color: lightpink;
 }

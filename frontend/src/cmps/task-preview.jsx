@@ -3,7 +3,7 @@ import { TaskDetails } from "./task-details";
 export function TaskPreview({ task }) {
     return <section className='task-preview flex'>
         <div className="task-name cell">
-            <span contentEditable >{task.title}</span>
+            <span>{task.title}</span>
         </div>
         <div className="task-person cell">
             <span>Task Person</span>

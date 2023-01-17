@@ -2,7 +2,7 @@ import { boardService } from "../services/board.service.local.js";
 import { userService } from "../services/user.service.js";
 import { store } from './store.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { ADD_BOARD, ADD_TO_BOARD, REMOVE_BOARD, REMOVE_FROM_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UPDATE_BOARD } from "./board.reducer.js";
+import { ADD_BOARD, REMOVE_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UPDATE_BOARD } from "./board.reducer.js";
 
 // Action Creators:
 export function getActionRemoveboard(boardId) {
@@ -24,7 +24,7 @@ export function getActionUpdateboard(board) {
     }
 }
 
-export async function loadboards() {
+export async function loadBoards() {
     try {
         const boards = await boardService.query()
         console.log('boards from DB:', boards)
@@ -40,7 +40,7 @@ export async function loadboards() {
 
 }
 
-export async function removeboard(boardId) {
+export async function removeBoard(boardId) {
     try {
         await boardService.remove(boardId)
         store.dispatch(getActionRemoveboard(boardId))
@@ -50,7 +50,7 @@ export async function removeboard(boardId) {
     }
 }
 
-export async function addboard(board) {
+export async function addBoard(board) {
     try {
         const savedBoard = await boardService.save(board)
         console.log('Added board', savedBoard)
@@ -62,7 +62,7 @@ export async function addboard(board) {
     }
 }
 
-export function updateboard(board) {
+export function updateBoard(board) {
     return boardService.save(board)
         .then(savedBoard => {
             console.log('Updated board:', savedBoard)
@@ -75,38 +75,24 @@ export function updateboard(board) {
         })
 }
 
-export function addToboardt(board) {
-    store.dispatch({
-        type: ADD_TO_BOARD,
-        board
-    })
-}
-
-export function removeFromboardt(boardId) {
-    store.dispatch({
-        type: REMOVE_FROM_BOARD,
-        boardId
-    })
-}
-
 // Demo for Optimistic Mutation 
 // (IOW - Assuming the server call will work, so updating the UI first)
-export function onRemoveboardOptimistic(boardId) {
-    store.dispatch({
-        type: REMOVE_BOARD,
-        boardId
-    })
-    showSuccessMsg('board removed')
+// export function onRemoveboardOptimistic(boardId) {
+//     store.dispatch({
+//         type: REMOVE_BOARD,
+//         boardId
+//     })
+//     showSuccessMsg('board removed')
 
-    boardService.remove(boardId)
-        .then(() => {
-            console.log('Server Reported - Deleted Succesfully');
-        })
-        .catch(err => {
-            showErrorMsg('Cannot remove board')
-            console.log('Cannot load boards', err)
-            store.dispatch({
-                type: REMOVE_FROM_BOARD,
-            })
-        })
-}
+//     boardService.remove(boardId)
+//         .then(() => {
+//             console.log('Server Reported - Deleted Succesfully');
+//         })
+//         .catch(err => {
+//             showErrorMsg('Cannot remove board')
+//             console.log('Cannot load boards', err)
+//             store.dispatch({
+//                 type: REMOVE_FROM_BOARD,
+//             })
+//         })
+// }

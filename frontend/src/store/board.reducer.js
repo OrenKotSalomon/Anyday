@@ -6,13 +6,12 @@ export const UNDO_REMOVE_BOARD = 'UNDO_REMOVE_BOARD'
 
 const initialState = {
     boards: [],
-
     lastRemovedBoard: null
 }
 
 export function boardReducer(state = initialState, action) {
-    var newState = state
-    var boards
+    let newState = state
+    let boards
     // var board
     switch (action.type) {
         case SET_BOARDS:
@@ -38,5 +37,6 @@ export function boardReducer(state = initialState, action) {
             break
         default:
     }
+    console.log('newState:', newState)
     return newState
 }

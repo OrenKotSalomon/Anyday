@@ -5,7 +5,7 @@ export function GroupList({ group }) {
         <div className="group-header-container">
             <div className="group-header-name"
             style={{color: group.style}}>
-                <h1 contentEditable className="group-name">{group.title}</h1>
+                <h1 className="group-name">{group.title}</h1>
             </div>
         </div>
         <div className="main-group-container"

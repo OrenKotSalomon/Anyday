@@ -5,23 +5,22 @@ import { userService } from './user.service.js'
 
 const BOARD_KEY = 'boardDB'
 
-function createDemoBoard() {
-    save(demoBoard)
-}
-
 export const boardService = {
     query,
     getById,
     save,
     remove,
     getEmptyBoard,
-    addBoardMsg,
-    createDemoBoard
+    addBoardMsg
 }
 window.bs = boardService
 
 async function query(filterBy = { txt: '', price: 0 }) {
     var boards = await storageService.query(BOARD_KEY)
+    if (!boards.length) {
+        storageService.post(BOARD_KEY, demoBoard)
+        return demoBoard
+    }
     if (filterBy.txt) {
         const regex = new RegExp(filterBy.txt, 'i')
         boards = boards.filter(board => regex.test(board.vendor) || regex.test(board.description))
@@ -71,8 +70,59 @@ async function addBoardMsg(boardId, txt) {
 
 function getEmptyBoard() {
     return {
-        vendor: 'Susita-' + (Date.now() % 1000),
-        price: utilService.getRandomIntInclusive(1000, 9000),
+        title: '',
+        isStarred: false,
+        archivedAt: 1589983468418,
+        groups: [
+            {
+                "id": "g101",
+                "title": "Group 1",
+                "archivedAt": 1589983468418,
+                "tasks": [
+                    {
+                        "id": "c101",
+                        "title": "Task 1"
+                    },
+                    {
+                        "id": "c102",
+                        "title": "Task 2"
+                    }
+                ],
+                "style": 'red'
+            },
+            {
+                "id": "g102",
+                "title": "Group 2",
+                "archivedAt": 1589983468418,
+                "tasks": [
+                    {
+                        "id": "c101",
+                        "title": "Task 3"
+                    },
+                    {
+                        "id": "c102",
+                        "title": "Task 4"
+                    }
+                ],
+                "style": 'gold'
+            },
+            {
+                "id": "g103",
+                "title": "Group 3",
+                "archivedAt": 1589983468418,
+                "tasks": [
+                    {
+                        "id": "c101",
+                        "title": "Task 5"
+                    },
+                    {
+                        "id": "c102",
+                        "title": "Task 6"
+                    }
+                ],
+                "style": 'blue'
+            },
+        ]
     }
 }
 
@@ -82,11 +132,10 @@ function getEmptyBoard() {
 
 
 const demoBoard = {
-    // "_id": "b101",
-    "title": "Demo Board",
-    "isStarred": false,
-    "archivedAt": 1589983468418,
-    "groups": [
+    title: "Demo Board",
+    isStarred: false,
+    archivedAt: 1589983468418,
+    groups: [
         {
             "id": "g101",
             "title": "Group 1",
@@ -138,7 +187,7 @@ const demoBoard = {
     ]
 }
 
-const board = {
+// const board = {
 
     // "createdBy": {
     //     "_id": "u101",
@@ -165,80 +214,80 @@ const board = {
     //         "imgUrl": "https://www.google.com"
     //     }
     // ],
-    "groups": [
-        {
-            "id": "g102",
-            "title": "Group 2",
-            "tasks": [
-                {
-                    "id": "c103",
-                    "title": "Do that",
-                    "archivedAt": 1589983468418,
-                },
-                {
-                    "id": "c104",
-                    "title": "Help me",
-                    "status": "in-progress", // monday
-                    "priority": "high",
-                    "description": "description",
-                    "comments": [
-                        {
-                            "id": "ZdPnm",
-                            "txt": "also @yaronb please CR this",
-                            "createdAt": 1590999817436,
-                            "byMember": {
-                                "_id": "u101",
-                                "fullname": "Tal Tarablus",
-                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                            }
-                        }
-                    ],
-                    "checklists": [
-                        {
-                            "id": "YEhmF",
-                            "title": "Checklist",
-                            "todos": [
-                                {
-                                    "id": "212jX",
-                                    "title": "To Do 1",
-                                    "isDone": false
-                                }
-                            ]
-                        }
-                    ],
-                    "memberIds": ["u101"],
-                    "labelIds": ["l101", "l102"],
-                    "dueDate": 16156215211,
-                    "byMember": {
-                        "_id": "u101",
-                        "username": "Tal",
-                        "fullname": "Tal Tarablus",
-                        "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                    },
-                    "style": {
-                        "bgColor": "#26de81"
-                    }
-                }
-            ],
-            "style": {}
-        },
-    ],
-    "activities": [
-        {
-            "id": "a101",
-            "txt": "Changed Color",
-            "createdAt": 154514,
-            "byMember": {
-                "_id": "u101",
-                "fullname": "Abi Abambi",
-                "imgUrl": "http://some-img"
-            },
-            "task": {
-                "id": "c101",
-                "title": "Replace Logo"
-            }
-        }
-    ],
+//     "groups": [
+//         {
+//             "id": "g102",
+//             "title": "Group 2",
+//             "tasks": [
+//                 {
+//                     "id": "c103",
+//                     "title": "Do that",
+//                     "archivedAt": 1589983468418,
+//                 },
+//                 {
+//                     "id": "c104",
+//                     "title": "Help me",
+//                     "status": "in-progress", // monday
+//                     "priority": "high",
+//                     "description": "description",
+//                     "comments": [
+//                         {
+//                             "id": "ZdPnm",
+//                             "txt": "also @yaronb please CR this",
+//                             "createdAt": 1590999817436,
+//                             "byMember": {
+//                                 "_id": "u101",
+//                                 "fullname": "Tal Tarablus",
+//                                 "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+//                             }
+//                         }
+//                     ],
+//                     "checklists": [
+//                         {
+//                             "id": "YEhmF",
+//                             "title": "Checklist",
+//                             "todos": [
+//                                 {
+//                                     "id": "212jX",
+//                                     "title": "To Do 1",
+//                                     "isDone": false
+//                                 }
+//                             ]
+//                         }
+//                     ],
+//                     "memberIds": ["u101"],
+//                     "labelIds": ["l101", "l102"],
+//                     "dueDate": 16156215211,
+//                     "byMember": {
+//                         "_id": "u101",
+//                         "username": "Tal",
+//                         "fullname": "Tal Tarablus",
+//                         "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+//                     },
+//                     "style": {
+//                         "bgColor": "#26de81"
+//                     }
+//                 }
+//             ],
+//             "style": {}
+//         },
+//     ],
+//     "activities": [
+//         {
+//             "id": "a101",
+//             "txt": "Changed Color",
+//             "createdAt": 154514,
+//             "byMember": {
+//                 "_id": "u101",
+//                 "fullname": "Abi Abambi",
+//                 "imgUrl": "http://some-img"
+//             },
+//             "task": {
+//                 "id": "c101",
+//                 "title": "Replace Logo"
+//             }
+//         }
+//     ],
 
-    "cmpsOrder": ["status-picker", "member-picker", "date-picker"]
-}
+//     "cmpsOrder": ["status-picker", "member-picker", "date-picker"]
+// }

@@ -3,7 +3,7 @@ export const storageService = {
     get,
     post,
     put,
-    remove,
+    remove
 }
 
 function query(entityType, delay = 500) {
