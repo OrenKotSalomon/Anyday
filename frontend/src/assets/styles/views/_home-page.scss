@@ -1,0 +1,109 @@
+.home-page {
+    // background-image: url("https://gifimage.net/wp-content/uploads/2018/06/tumblr-header-gif-9.gif");
+    background-image: url("https://i.gifer.com/Cdsw.gif");
+    background-size: cover;
+    color: $main-bgc-white;
+    font-family: roboto-thin;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    .home-page-hero {
+        .home-page-hero-header {
+            margin-top: 1em;
+            font-size: 72px;
+            min-width: 100vw;
+        }
+
+        .home-page-hero-sub-header {
+            font-size: 16px;
+        }
+
+    }
+
+    .home-page-link {
+
+        .btn-get-started {
+            color: $main-bgc-white;
+            margin-top: 1em;
+            align-self: center;
+            box-sizing: border-box;
+            display: inline-block;
+            font-size: 14px;
+            padding: 12px 42px;
+            background: linear-gradient(-60deg, $start-btn-li-blue 20%, $start-btn-blue 80%);
+            border-radius: 555em;
+            transform: 1s;
+
+            .btn-get-started-arrow-container {
+                display: inline-block;
+                width: 10px;
+
+                .btn-get-started-arrow {
+                    padding-inline-start: 5px;
+                    font-size: 16px;
+                    font-weight: 600;
+                    transition: all .5s ease-in-out;
+                }
+
+            }
+        }
+
+        .btn-get-started:hover .btn-get-started-arrow {
+            padding-inline-start: 15px;
+        }
+
+        .btn-get-started:hover {
+            background: linear-gradient(-60deg, #9f9fe1 20%, #432cde 80%);
+
+        }
+
+        .home-page-promo {
+            margin-top: 1em;
+            display: flex;
+            justify-content: space-around;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .2em;
+
+            .home-page-promo1 {
+                margin-inline-end: 1.5em;
+            }
+
+            .home-page-promo2 {
+                margin-inline-start: 1.5em;
+            }
+
+            margin-bottom: 2em;
+        }
+    }
+
+    .home-page-image {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+
+    .home-page-bottom-container {
+        color: $main-color;
+        letter-spacing: .1em;
+        min-width: 100vw;
+        background-color: $main-bgc-white;
+    }
+
+    .home-page-companies-logo {
+
+        .home-page-company-logo {
+            align-self: center;
+            width: 13%;
+            padding: 24px;
+        }
+    }
+
+    .home-page-span-bold {
+        font-family: roboto-regular;
+
+    }
+
+}

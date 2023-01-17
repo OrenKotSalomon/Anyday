@@ -83,10 +83,10 @@ function getEmptyBoard() {
 
 const demoBoard = {
     // "_id": "b101",
-    title: "Demo Board",
-    isStarred: false,
-    archivedAt: 1589983468418,
-    groups: [
+    "title": "Demo Board",
+    "isStarred": false,
+    "archivedAt": 1589983468418,
+    "groups": [
         {
             "id": "g101",
             "title": "Group 1",
@@ -101,7 +101,7 @@ const demoBoard = {
                     "title": "Add Samples"
                 }
             ],
-            "style": {}
+            "style": 'red'
         },
         {
             "id": "g102",
@@ -117,7 +117,7 @@ const demoBoard = {
                     "title": "be a master"
                 }
             ],
-            "style": {}
+            "style": 'gold'
         },
         {
             "id": "g103",
@@ -133,7 +133,7 @@ const demoBoard = {
                     "title": "exrecise"
                 }
             ],
-            "style": {}
+            "style": 'blue'
         },
     ]
 }
