@@ -45,7 +45,7 @@ export function NavBar() {
             {/* <button>Favorites</button> */}
 
             {/* <button>Search</button> */}
-            <button>Profile</button>
+            <Link to='/login'>Login/Icon soon</Link>
         </nav>
 
         {/* <nav>
