@@ -14,6 +14,7 @@ export function RootCmp() {
                 <Routes>
                     <Route element={<HomePage />} path="/" />
                     {/* <Route element={<AboutUs />} path="/about" /> */}
+                    <Route element={<BoardDetails />} path="/board" />
                     <Route element={<BoardDetails />} path="/board/:boardId" />
                     <Route element={<UserDetails />} path="/user-details/:userId" />
                     <Route element={<Login />} path="/login" />

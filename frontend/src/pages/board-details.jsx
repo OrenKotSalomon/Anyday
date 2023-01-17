@@ -4,26 +4,27 @@ import { NavBar } from "../cmps/nav-bar";
 import { useEffect, useState } from "react";
 import { boardService } from "../services/board.service.local";
 import { SideGroupBar } from "../cmps/side-group-bar";
-import { loadBoards as loadBoards } from "../store/board.actions";
+import { loadBoards } from "../store/board.actions";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 export function BoardDetails() {
 
-    // const [board, setBoard] = useState(null)
-    const board = useSelector((storeState) => storeState.boardModule.boards[0])
+    const [board, setBoard] = useState(null)
+    const defaultBoard = useSelector((storeState) => storeState.boardModule.boards[0])
     const { boardId } = useParams()
-    useEffect(() => {
-        // boardService.createDemoBoard()
-        console.log('boardId:', boardId)
-        loadBoards()
-    }, [])
 
-    // async function loadBoard() {
-    //     const boardFromStorage = await boardService.query()
-    //     console.log('boardFromStorage:', boardFromStorage)
-    //     setBoard(boardFromStorage[0])
-    // }
+    useEffect(() => {
+        if (!boardId) {
+            loadBoards().then(() => loadBoard(defaultBoard._id))
+        }
+        loadBoard(boardId)
+    }, [boardId])
+
+    async function loadBoard(boardId) {
+        const board = await boardService.getById(boardId)
+            setBoard(board)
+    }
 
     if (!board) return <div>Loading...</div>
     return <section className="board-details">
