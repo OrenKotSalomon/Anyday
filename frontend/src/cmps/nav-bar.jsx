@@ -5,6 +5,7 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/user.actions.js'
 import { LoginSignup } from './login-signup.jsx'
 import logo from '../assets/img/logo.png'
+import wm_icon from '../assets/img/wm_icon.avif'
 
 export function NavBar() {
     const user = useSelector(storeState => storeState.userModule.user)
@@ -38,7 +39,7 @@ export function NavBar() {
 
         <nav>
             <NavLink to='/'><img src={logo} alt="Logo" style={{ maxWidth: '100px' }} /></NavLink>
-            <NavLink to='/board/:boardId'>Work Managment</NavLink>
+            <NavLink to='/board/:boardId'><img src={wm_icon} alt="Logo" style={{ maxWidth: '50px' }} /></NavLink>
             {/* <button>Notifications</button> */}
             {/* <NavLink to='/inbox'>Inbox</NavLink> */}
             {/* <NavLink to='/my_work'>My Work</NavLink> */}

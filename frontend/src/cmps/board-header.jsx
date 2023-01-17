@@ -4,7 +4,7 @@ import { BoardView } from "./board-view";
 export function BoardHeader() {
 
     return <section className="board-header">
-<BoardView />
-<BoardFilter />
+        <BoardView />
+        <BoardFilter />
     </section>
 }
