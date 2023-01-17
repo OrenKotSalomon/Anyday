@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export function LoginStepOne() {
+export function LoginStepOne({ }) {
 
     return (
         <section className='login-step-one'>
@@ -33,7 +33,7 @@ export function LoginStepOne() {
                     </div>
                 </div>
                 <div className="suggest-signup-container">
-                    <span>Don't you have an account yet?</span> <div ><Link className="sign-up" to="/signup">Sign up</Link></div>
+                    <span className="signup-quest">Don't you have an account yet?</span> <div ><Link className="sign-up" to="/signup">Sign up</Link></div>
                 </div>
 
             </div>
