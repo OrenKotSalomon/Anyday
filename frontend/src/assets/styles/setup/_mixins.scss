@@ -5,18 +5,21 @@
     @content;
   }
 }
+
 // 530px
 @mixin for-narrow-layout {
   @media (min-width: calc($mobile-breakpoint + $layoutPadding * 2)) {
     @content;
   }
 }
+
 //777px
 @mixin for-normal-layout {
   @media (min-width: calc($narrow-breakpoint + $layoutPadding * 2)) {
     @content;
   }
 }
+
 //1000px
 @mixin for-wide-layout {
   @media (min-width: calc($normal-breakpoint + $layoutPadding * 2)) {
@@ -36,7 +39,7 @@
     padding-top: calc(($height / $width) * 100%);
   }
 
-  > * {
+  >* {
     position: absolute;
     top: 0;
     left: 0;
@@ -44,7 +47,7 @@
     bottom: 0;
   }
 
-  > img {
+  >img {
     height: 100%;
     object-fit: cover;
   }
@@ -59,7 +62,21 @@
   }
 }
 
+@mixin hover-supported-header {
+  @media not all and (pointer: coarse) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
 //mixin for header home page and login page
+
+@mixin btn-no-style {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
 
 @mixin header {
   width: 100%;
@@ -86,10 +103,10 @@
 }
 
 @mixin flex-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 @mixin login-btn {
@@ -154,6 +171,7 @@
   padding: 7px;
   border-radius: 4px;
 }
+
 @mixin input {
   padding: 8px 16px;
   border-radius: 4px;
