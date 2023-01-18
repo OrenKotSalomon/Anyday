@@ -30,7 +30,7 @@ export function BoardDetails() {
         setBoard(board)
     }
 
-    // if (!board) return <div>Loading...</div>
+    if (!board) return <div>Loading...</div>
     return <section className="board-details">
         <NavBar />
         <SideGroupBar />
@@ -38,7 +38,7 @@ export function BoardDetails() {
         {boardId && <div className="board-container">
             <BoardHeader board={board} />
             <section className="groups-container">
-                {board.groups.map(group => <GroupList key={group.id} group={group} />)}
+                {board.groups.map(group => <GroupList key={group.id} board={board} group={group} />)}
             </section>
         </div>}
     </section>
