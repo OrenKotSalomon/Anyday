@@ -27,8 +27,6 @@ export function BoardList({ onRemoveBoard }) {
         navigate(`/board/${boardId}`)
     }
 
-    
-
         if (!boards) return <div>Loading...</div>
         return <section className='board-list'>
             {boards && boards.map(board => <NavLink to={`/board/${board._id}`} key={board._id} className="board-list-a flex">
@@ -42,8 +40,6 @@ export function BoardList({ onRemoveBoard }) {
                     // onClick={ev => onMenuClick(ev)}
                     >
                         <MenuItem
-                            // icon={function noRefCheck() { }}
-                            // iconType="SVG"
                             onClick={(ev) => {
                                 onMenuClick(ev)
                                 onRemoveBoard(board._id)

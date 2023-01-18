@@ -1,22 +1,39 @@
 .group-list {
-    width: max-content;
+  width: max-content;
 
-    .main-group-container {
-        padding: 0 4px;
-        border-radius: 5px;
-        box-shadow: $main-box-shadow;
+  .main-group-container {
+    padding: 0 4px;
+    border-radius: 5px;
+    box-shadow: $main-box-shadow;
+  }
+
+  .group-header-container {
+    position: relative;
+    &:hover {
+      .group-list-menu-btn {
+        opacity: 1;
+      }
     }
 
-    .group-name {
-        width: max-content;
-        font-size: 2rem;
+    .group-header-name {
+      margin-left: 15px;
+      width: max-content;
+      font-size: 2rem;
     }
 
-    .cell {
-        background-color: $main-bgc-white;
-        text-align: center;
-        border: .7px solid #d0d4e4;
-        min-width: 9.375rem;
+    .group-list-menu-btn {
+      position: absolute;
+      top: 20%;
+      left: -5%;
+      opacity: 0;
+      transition: .3s;
     }
+  }
 
+  .cell {
+    background-color: $main-bgc-white;
+    text-align: center;
+    border: 0.7px solid #d0d4e4;
+    min-width: 9.375rem;
+  }
 }
