@@ -1,12 +1,27 @@
 import { EditableHeading } from 'monday-ui-react-core'
+import { useState } from 'react';
+import { updateBoard } from '../store/board.actions';
 import { TaskPreview } from "./task-preview";
 
-export function GroupList({ group }) {
+export function GroupList({ board, group }) {
+
+    const [boardToUpdate, setBoardToUpdate] = useState(group)
+
+    function onFinishEditing() {
+        updateBoard(board)
+    }
+
+    function handleChange(value) {
+        setBoardToUpdate(prevGroup => ({...prevGroup, title: value}))
+    }
+
     return <section className='group-list'>
         <div className="group-header-container">
             <div className="group-header-name"
                 style={{ color: group.style }}>
                 <EditableHeading
+                    onFinishEditing={onFinishEditing}
+                    onChange={handleChange}
                     brandFont
                     value={group.title}
                 />
