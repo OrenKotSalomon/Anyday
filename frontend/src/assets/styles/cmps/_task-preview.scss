@@ -1,0 +1,12 @@
+.open-item-page-btn {
+    margin-inline-start: 1em;
+    opacity: 0;
+}
+
+.task-name.cell {
+    min-width: rem(180px);
+}
+
+.task-name.cell:hover .open-item-page-btn {
+    opacity: 100%;
+}
