@@ -30,7 +30,7 @@ export function BoardDetails() {
         setBoard(board)
     }
 
-    // if (!board) return <div>Loading...</div>
+    if (!board) return <div>Loading...</div>
     return <section className="board-details">
         <NavBar />
         <SideGroupBar />

@@ -12,7 +12,7 @@ export function BoardFilter() {
         <Flex >
 
             <SplitButton leftIcon={Add} size={Button.sizes.SMALL}  >
-                Left icon
+                New task
             </SplitButton>
             <Button kind={Button.kinds.TERTIARY} size={Button.sizes.SMALL} leftIcon={Search}>
                 Search
