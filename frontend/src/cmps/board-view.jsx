@@ -14,7 +14,6 @@ export function BoardView({ board }) {
     function handleChange(value) {
         setBoardToUpdate(prevBoard => ({ ...prevBoard, title: value }))
     }
-    console.log(boardToUpdate);
     return <section className='board-view'>
         <div className='board-header-main'>
             <div className='board-header-top'>

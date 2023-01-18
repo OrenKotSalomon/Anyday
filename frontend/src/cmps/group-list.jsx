@@ -5,14 +5,17 @@ import { TaskPreview } from "./task-preview";
 
 export function GroupList({ board, group }) {
 
-    const [boardToUpdate, setBoardToUpdate] = useState(group)
+    const [boardToUpdate, setBoardToUpdate] = useState(board)
+    const [groupToUpdate, setGroupToUpdate] = useState(group)
+    const groupIndex = board.groups.findIndex(currGroup => currGroup.id === group.id)
 
     function onFinishEditing() {
-        updateBoard(board)
+        setBoardToUpdate(prevBoard => ({...prevBoard, groups: [...prevBoard.groups.splice(groupIndex, 1, groupToUpdate)]}))
+        updateBoard(boardToUpdate)
     }
 
     function handleChange(value) {
-        setBoardToUpdate(prevGroup => ({...prevGroup, title: value}))
+        setGroupToUpdate(prevGroup => ({ ...prevGroup, title: value }))
     }
 
     return <section className='group-list'>

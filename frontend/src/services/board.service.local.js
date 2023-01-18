@@ -49,6 +49,7 @@ async function save(board) {
         board.owner = userService.getLoggedinUser()
         savedBoard = await storageService.post(BOARD_KEY, board)
     }
+    console.log('savedBoard:', savedBoard)
     return savedBoard
 }
 
@@ -75,52 +76,52 @@ function getEmptyBoard() {
         archivedAt: 1589983468418,
         groups: [
             {
-                "id": utilService.makeId(),
-                "title": "Group 1",
-                "archivedAt": 1589983468418,
-                "tasks": [
+                id: utilService.makeId(),
+                title: 'Group 1',
+                archivedAt: 1589983468418,
+                tasks: [
                     {
-                        "id": utilService.makeId(),
-                        "title": "Task 1"
+                        id: utilService.makeId(),
+                        title: 'Task 1'
                     },
                     {
-                        "id": utilService.makeId(),
-                        "title": "Task 2"
+                        id: utilService.makeId(),
+                        title: 'Task 2'
                     }
                 ],
-                "style": 'red'
+                style: 'red'
             },
             {
-                "id": utilService.makeId(),
-                "title": "Group 2",
-                "archivedAt": 1589983468418,
-                "tasks": [
+                id: utilService.makeId(),
+                title: 'Group 2',
+                archivedAt: 1589983468418,
+                tasks: [
                     {
-                        "id": utilService.makeId(),
-                        "title": "Task 3"
+                        id: utilService.makeId(),
+                        title: 'Task 3'
                     },
                     {
-                        "id": utilService.makeId(),
-                        "title": "Task 4"
+                        id: utilService.makeId(),
+                        title: 'Task 4'
                     }
                 ],
-                "style": 'gold'
+                style: 'gold'
             },
             {
-                "id": utilService.makeId(),
-                "title": "Group 3",
-                "archivedAt": 1589983468418,
-                "tasks": [
+                id: utilService.makeId(),
+                title: 'Group 3',
+                archivedAt: 1589983468418,
+                tasks: [
                     {
-                        "id": utilService.makeId(),
-                        "title": "Task 5"
+                        id: utilService.makeId(),
+                        title: 'Task 5'
                     },
                     {
-                        "id": utilService.makeId(),
-                        "title": "Task 6"
+                        id: utilService.makeId(),
+                        title: 'Task 6'
                     }
                 ],
-                "style": 'blue'
+                style: 'blue'
             },
         ]
     }
@@ -132,162 +133,162 @@ function getEmptyBoard() {
 
 
 const demoBoard = {
-    title: "Demo Board",
+    title: 'Demo Board',
     isStarred: false,
     archivedAt: 1589983468418,
     groups: [
         {
-            "id": "g101",
-            "title": "Group 1",
-            "archivedAt": 1589983468418,
-            "tasks": [
+            id: utilService.makeId(),
+            title: 'Group 1',
+            archivedAt: 1589983468418,
+            tasks: [
                 {
-                    "id": "c101",
-                    "title": "Replace logo"
+                    id: utilService.makeId(),
+                    title: 'Task 1'
                 },
                 {
-                    "id": "c102",
-                    "title": "Add Samples"
+                    id: utilService.makeId(),
+                    title: 'Task 2'
                 }
             ],
-            "style": 'red'
+            style: 'red'
         },
         {
-            "id": "g102",
-            "title": "Group 2",
-            "archivedAt": 1589983468418,
-            "tasks": [
+            id: utilService.makeId(),
+            title: 'Group 2',
+            archivedAt: 1589983468418,
+            tasks: [
                 {
-                    "id": "c101",
-                    "title": "kill kai"
+                    id: utilService.makeId(),
+                    title: 'Task 3'
                 },
                 {
-                    "id": "c102",
-                    "title": "be a master"
+                    id: utilService.makeId(),
+                    title: 'Task 4'
                 }
             ],
-            "style": 'gold'
+            style: 'gold'
         },
         {
-            "id": "g103",
-            "title": "Group 3",
-            "archivedAt": 1589983468418,
-            "tasks": [
+            id: utilService.makeId(),
+            title: 'Group 3',
+            archivedAt: 1589983468418,
+            tasks: [
                 {
-                    "id": "c101",
-                    "title": "win the game"
+                    id: utilService.makeId(),
+                    title: 'Task 5'
                 },
                 {
-                    "id": "c102",
-                    "title": "exrecise"
+                    id: utilService.makeId(),
+                    title: 'Task 6'
                 }
             ],
-            "style": 'blue'
+            style: 'blue'
         },
     ]
 }
 
 // const board = {
 
-    // "createdBy": {
-    //     "_id": "u101",
-    //     "fullname": "Abi Abambi",
-    //     "imgUrl": "http://some-img"
+    // 'createdBy': {
+    //     '_id': 'u101',
+    //     'fullname': 'Abi Abambi',
+    //     'imgUrl': 'http://some-img'
     // },
-    // "style": {},
-    // "labels": [
+    // 'style': {},
+    // 'labels': [
     //     {
-    //         "id": "l101",
-    //         "title": "Done",
-    //         "color": "#61bd4f"
+    //         'id': 'l101',
+    //         'title': 'Done',
+    //         'color': '#61bd4f'
     //     },
     //     {
-    //         "id": "l102",
-    //         "title": "Progress",
-    //         "color": "#61bd33"
+    //         'id': 'l102',
+    //         'title': 'Progress',
+    //         'color': '#61bd33'
     //     }
     // ],
-    // "members": [
+    // 'members': [
     //     {
-    //         "_id": "u101",
-    //         "fullname": "Tal Tarablus",
-    //         "imgUrl": "https://www.google.com"
+    //         '_id': 'u101',
+    //         'fullname': 'Tal Tarablus',
+    //         'imgUrl': 'https://www.google.com'
     //     }
     // ],
-//     "groups": [
+//     'groups': [
 //         {
-//             "id": "g102",
-//             "title": "Group 2",
-//             "tasks": [
+//             'id': 'g102',
+//             'title': 'Group 2',
+//             'tasks': [
 //                 {
-//                     "id": "c103",
-//                     "title": "Do that",
-//                     "archivedAt": 1589983468418,
+//                     'id': 'c103',
+//                     'title': 'Do that',
+//                     'archivedAt': 1589983468418,
 //                 },
 //                 {
-//                     "id": "c104",
-//                     "title": "Help me",
-//                     "status": "in-progress", // monday
-//                     "priority": "high",
-//                     "description": "description",
-//                     "comments": [
+//                     'id': 'c104',
+//                     'title': 'Help me',
+//                     'status': 'in-progress', // monday
+//                     'priority': 'high',
+//                     'description': 'description',
+//                     'comments': [
 //                         {
-//                             "id": "ZdPnm",
-//                             "txt": "also @yaronb please CR this",
-//                             "createdAt": 1590999817436,
-//                             "byMember": {
-//                                 "_id": "u101",
-//                                 "fullname": "Tal Tarablus",
-//                                 "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+//                             'id': 'ZdPnm',
+//                             'txt': 'also @yaronb please CR this',
+//                             'createdAt': 1590999817436,
+//                             'byMember': {
+//                                 '_id': 'u101',
+//                                 'fullname': 'Tal Tarablus',
+//                                 'imgUrl': 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg'
 //                             }
 //                         }
 //                     ],
-//                     "checklists": [
+//                     'checklists': [
 //                         {
-//                             "id": "YEhmF",
-//                             "title": "Checklist",
-//                             "todos": [
+//                             'id': 'YEhmF',
+//                             'title': 'Checklist',
+//                             'todos': [
 //                                 {
-//                                     "id": "212jX",
-//                                     "title": "To Do 1",
-//                                     "isDone": false
+//                                     'id': '212jX',
+//                                     'title': 'To Do 1',
+//                                     'isDone': false
 //                                 }
 //                             ]
 //                         }
 //                     ],
-//                     "memberIds": ["u101"],
-//                     "labelIds": ["l101", "l102"],
-//                     "dueDate": 16156215211,
-//                     "byMember": {
-//                         "_id": "u101",
-//                         "username": "Tal",
-//                         "fullname": "Tal Tarablus",
-//                         "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+//                     'memberIds': ['u101'],
+//                     'labelIds': ['l101', 'l102'],
+//                     'dueDate': 16156215211,
+//                     'byMember': {
+//                         '_id': 'u101',
+//                         'username': 'Tal',
+//                         'fullname': 'Tal Tarablus',
+//                         'imgUrl': 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg'
 //                     },
-//                     "style": {
-//                         "bgColor": "#26de81"
+//                     'style': {
+//                         'bgColor': '#26de81'
 //                     }
 //                 }
 //             ],
-//             "style": {}
+//             'style': {}
 //         },
 //     ],
-//     "activities": [
+//     'activities': [
 //         {
-//             "id": "a101",
-//             "txt": "Changed Color",
-//             "createdAt": 154514,
-//             "byMember": {
-//                 "_id": "u101",
-//                 "fullname": "Abi Abambi",
-//                 "imgUrl": "http://some-img"
+//             'id': 'a101',
+//             'txt': 'Changed Color',
+//             'createdAt': 154514,
+//             'byMember': {
+//                 '_id': 'u101',
+//                 'fullname': 'Abi Abambi',
+//                 'imgUrl': 'http://some-img'
 //             },
-//             "task": {
-//                 "id": "c101",
-//                 "title": "Replace Logo"
+//             'task': {
+//                 'id': 'c101',
+//                 'title': 'Replace Logo'
 //             }
 //         }
 //     ],
 
-//     "cmpsOrder": ["status-picker", "member-picker", "date-picker"]
+//     'cmpsOrder': ['status-picker', 'member-picker', 'date-picker']
 // }
