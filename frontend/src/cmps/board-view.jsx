@@ -1,19 +1,17 @@
 import { EditableHeading, Flex, AvatarGroup, Avatar, Icon } from 'monday-ui-react-core'
 import { Activity, Favorite, Info } from "monday-ui-react-core/icons";
 import { useEffect, useRef, useState } from 'react';
-import { utilService } from '../services/util.service.js';
-import { updateBoard } from '../store/board.actions.js';
 
-export function BoardView({ board }) {
-    const [boardToUpdate, setBoardToUpdate] = useState(board)
-
+export function BoardView({ boardToUpdate, editBoardTitle, setBoardToUpdate }) {
+    // const [boardToUpdate, setBoardToUpdate] = useState(board)
     function onFinishEditing() {
-        updateBoard(boardToUpdate)
+        editBoardTitle(boardToUpdate)
     }
 
     function handleChange(value) {
         setBoardToUpdate(prevBoard => ({ ...prevBoard, title: value }))
     }
+
     return <section className='board-view'>
         <div className='board-header-main'>
             <div className='board-header-top'>
@@ -23,7 +21,7 @@ export function BoardView({ board }) {
                             onFinishEditing={onFinishEditing}
                             onChange={handleChange}
                             type={EditableHeading.types.h1}
-                            value={board.title} brandFont={true} />
+                            value={boardToUpdate.title} brandFont={true} />
 
                     </div>
                     <div className='board-info-toggle'>

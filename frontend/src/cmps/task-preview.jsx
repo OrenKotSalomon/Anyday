@@ -1,10 +1,16 @@
+import { useState } from "react";
 import { TaskDetails } from "./task-details";
 // DyncComp
 export function TaskPreview({ task }) {
+    const [isOpenDetails, setIsOpenDetails] = useState(false)
     return <section className='task-preview flex'>
         <div className="task-name cell">
             <span className="task-preview-title">{task.title}</span>
-            <button className="open-item-page-btn">.</button>
+            <button onClick={() => setIsOpenDetails(!isOpenDetails)} className="open-item-page-btn">.</button>
+            {isOpenDetails && <TaskDetails
+                task={task}
+                isOpenDetails={isOpenDetails}
+                setIsOpenDetails={setIsOpenDetails} />}
         </div>
         <div className="task-person cell">
             <span>Task Members</span>

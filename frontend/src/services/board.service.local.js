@@ -11,7 +11,8 @@ export const boardService = {
     save,
     remove,
     getEmptyBoard,
-    addBoardMsg
+    addBoardMsg,
+    getNewTask
 }
 window.bs = boardService
 
@@ -67,6 +68,21 @@ async function addBoardMsg(boardId, txt) {
     await storageService.put(BOARD_KEY, board)
 
     return msg
+}
+
+async function getNewTask(boardId) {
+    try {
+        const board = await getById(boardId)
+        const task = board.groups[0].tasks[0]
+        const newTask = {
+            id: utilService.makeId(),
+            title: 'New Task',
+        }
+        return newTask
+    } catch (error) {
+
+    }
+
 }
 
 function getEmptyBoard() {
@@ -129,8 +145,6 @@ function getEmptyBoard() {
 
 // TEST DATA
 // storageService.post(BOARD_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
-
-
 
 const demoBoard = {
     title: 'Demo Board',
