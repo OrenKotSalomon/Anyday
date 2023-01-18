@@ -7,6 +7,7 @@ import { SideGroupBar } from "../cmps/side-group-bar";
 import { loadBoards } from "../store/board.actions";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { SelectBoard } from "../cmps/select-board";
 
 
 export function BoardDetails() {
@@ -30,16 +31,16 @@ export function BoardDetails() {
         setBoard(board)
     }
 
-    if (!board) return <div>Loading...</div>
+    // if (!board) return <div>Loading...</div>
     return <section className="board-details">
         <NavBar />
         <SideGroupBar />
-        <div className="board-container">
-            
+        {!boardId && <SelectBoard />}
+        {boardId && <div className="board-container">
             <BoardHeader title={board.title} />
             <section className="groups-container">
                 {board.groups.map(group => <GroupList key={group.id} group={group} />)}
             </section>
-        </div>
+        </div>}
     </section>
 }
