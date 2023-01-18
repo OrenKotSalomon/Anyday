@@ -5,17 +5,21 @@ import { LoginStepOne } from "../cmps/login-steps/login-step-one";
 
 export function Login() {
     const [loginPaging, setLoginPaging] = useState("login-step-1")
-    const [cardentials, setEmail] = useState('')
+    const [cardentials, setCardentials] = useState({ email: '', password: '' })
 
     return (
         <section className='login-page'>
-            <header className="top-header">
+            <Link to='/' className="top-header">
                 <img className="login-logo" src="" alt="logo" />
-            </header>
+            </Link>
+
+            {/* <LoginStepOne cardentials={cardentials} setCardentials={setCardentials} /> */}
+
             <LoginDynamicCmp
+
                 cardentials={cardentials}
                 setLoginPaging={setLoginPaging}
-                setEmail={setEmail}
+                setCardentials={setCardentials}
                 loginPaging={loginPaging} />
 
         </section>
@@ -28,6 +32,7 @@ export function LoginDynamicCmp(props) {
             return <LoginStepOne props={{ ...props }} />;
         case "login-step-2":
             return <LoginStepTwo props={{ ...props }} />;
+
         // default:
         //     return <p>UNKNOWN {cmp}</p>;
     }

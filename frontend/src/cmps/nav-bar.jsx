@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import routes from '../routes'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/user.actions.js'
-import { LoginSignup } from './login-signup.jsx'
+import { LoginSignup } from './login-signupReference.jsx'
 import logo from '../assets/img/logo.png'
 import wm_icon from '../assets/img/wm_icon.avif'
 

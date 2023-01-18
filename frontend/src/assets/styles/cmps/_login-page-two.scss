@@ -1,5 +1,5 @@
 .email-password-container {
-    @include login-flex;
+    @include flex-column;
     margin-bottom: 16px;
 
     .login-header {
@@ -20,6 +20,7 @@
 
 .email-password-input-and-button-container {
     margin-bottom: 2rem;
+
 }
 
 .form-input-container {

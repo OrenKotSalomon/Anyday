@@ -85,11 +85,11 @@
   color: $login-main-clr;
 }
 
-@mixin login-flex {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 @mixin login-btn {
