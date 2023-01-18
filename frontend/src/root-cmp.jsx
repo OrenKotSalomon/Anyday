@@ -20,7 +20,6 @@ export function RootCmp() {
                     <Route element={<Login />} path="/login" />
                 </Routes>
             </main>
-            {/* <AppFooter /> */}
         </div>
     )
 }

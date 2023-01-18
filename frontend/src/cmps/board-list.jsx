@@ -12,10 +12,9 @@ export function BoardList() {
         loadBoards()
     }, [])
 
-
     if (!boards) return <div>Loading...</div>
     return <section className='board-list'>
-        {boards && boards.map(board => <Link to={`/board/${board._id}`}>{board.title}</Link>)}
+        {boards && boards.map(board => <Link key={board._id} to={`/board/${board._id}`}>{board.title}</Link>)}
 
     </section>
 

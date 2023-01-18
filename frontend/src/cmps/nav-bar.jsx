@@ -11,6 +11,7 @@ export function NavBar() {
     const user = useSelector(storeState => storeState.userModule.user)
 
     async function onLogin(credentials) {
+        console.log('hi:')
         try {
             const user = await login(credentials)
             showSuccessMsg(`Welcome: ${user.fullname}`)
@@ -39,7 +40,7 @@ export function NavBar() {
 
         <nav>
             <NavLink to='/'><img src={logo} alt="Logo" style={{ maxWidth: '100px' }} /></NavLink>
-            <NavLink to='/board/:boardId'><img src={wm_icon} alt="Logo" style={{ maxWidth: '50px' }} /></NavLink>
+            <NavLink to='/board/'><img src={wm_icon} alt="Logo" style={{ maxWidth: '50px' }} /></NavLink>
             {/* <button>Notifications</button> */}
             {/* <NavLink to='/inbox'>Inbox</NavLink> */}
             {/* <NavLink to='/my_work'>My Work</NavLink> */}

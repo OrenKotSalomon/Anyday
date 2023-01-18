@@ -6,7 +6,7 @@ export function TaskPreview({ task }) {
             <span>{task.title}</span>
         </div>
         <div className="task-person cell">
-            <span>Task Person</span>
+            <span>Task Members</span>
         </div>
         <div className="task-status cell">
             <span>Task Status</span>
