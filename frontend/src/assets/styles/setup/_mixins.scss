@@ -85,7 +85,7 @@
     color: $login-main-clr;
 }
 
-@mixin login-flex {
+@mixin flex-column {
     display: flex;
     flex-direction: column;
     justify-content: center;

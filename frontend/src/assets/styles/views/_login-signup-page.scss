@@ -14,12 +14,12 @@
 }
 
 .router-wrapper {
-    @include login-flex;
+    @include flex-column;
     flex-grow: 1;
     padding: 2.5rem;
 
     .email-first-component {
-        @include login-flex;
+        @include flex-column;
         margin-top: 2.5rem;
         margin-bottom: 1rem;
         width: $fullPrecent;
@@ -118,5 +118,19 @@
     .sign-up {
         color: $link-color;
 
+    }
+}
+
+.name-input {
+    @include login-input;
+}
+
+.signup-header {
+    font-size: 40px;
+    font-weight: 100;
+    font-family: roboto-light;
+
+    b {
+        font-family: roboto-black;
     }
 }

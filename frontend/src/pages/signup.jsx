@@ -1,24 +1,31 @@
-export function LoginStepTwo({ props }) {
+import { useState } from "react"
+import { Link } from "react-router-dom"
+
+export function Signup() {
+    const [cardentials, setCardentials] = useState({ email: '', password: '', fullname: '' })
 
     function handleChange({ target }) {
         let { value, name: field, type } = target
-        props.setCardentials(prevMail => ({ ...prevMail, [field]: value }))
+        // props.setCardentials(prevMail => ({ ...prevMail, [field]: value }))
     }
 
     function submitLogin(ev) {
         ev.prventDefault()
         const valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-        if (props.cardentials.email.match(valid)) {
 
-        } else alert('Please enter a valid email address')
     }
+
     return (
-        <section className='login-step-two'>
+        <section className='signup'>
+            <Link to='/' className="top-header">
+                <img className="login-logo" src="" alt="logo" />
+            </Link>
+
             <div className="router-wrapper">
                 <div className="email-password-container">
-                    <h1 className="login-header">
-                        <b>Log</b>
-                        {" In"}
+                    <h1 className="signup-header">
+                        <b>Sign</b>
+                        {" Up"}
                     </h1>
 
                     <div className="email-page-two">
@@ -27,8 +34,15 @@ export function LoginStepTwo({ props }) {
                             <div className="form-input-container">
                                 <span className="email-password-label">Email</span>
                                 <div className="email-input-container">
-                                    <input onChange={handleChange} id="user_email" value={props.cardentials.email} placeholder="Example@company.com" type="email" name="email"
+                                    <input onChange={handleChange} id="user_email" placeholder="Example@company.com" type="email" name="email"
                                         className="email-input" aria-label="Enter your work email address" required />
+                                </div>
+                            </div>
+                            <div className="form-input-container">
+                                <span className="email-password-label">Name</span>
+                                <div className="password-input-container">
+                                    <input onChange={handleChange} className="name-input" id="user_name" type="text" name="name"
+                                        placeholder="Full name" required />
                                 </div>
                             </div>
                             <div className="form-input-container">
@@ -42,7 +56,7 @@ export function LoginStepTwo({ props }) {
                                 <div className="next-btn-container">
 
                                     <button onClick={submitLogin} type="submit" className="next-btn">
-                                        <div className="next-wrapper">Log in</div>
+                                        <div className="next-wrapper">Sign up</div>
                                         <div className="right-arrow-icon">{'->'}</div>
                                     </button>
                                 </div>
@@ -52,15 +66,16 @@ export function LoginStepTwo({ props }) {
                     <div className="login-seperator-container">
                         <div className="login-seperator">
                             <span className="seperator-line"></span>
-                            <h2 className="or-sign-in-txt" >Or Sign in with</h2>
+                            <h2 className="or-sign-in-txt" >Or</h2>
                             <span className="seperator-line"></span>
                         </div>
                     </div>
 
-                    <div className="login-to-other-acc">
-                        <button onClick={() => props.setLoginPaging('login-step-1')} className="other-acc-btn" >
-                            Login to another account</button>
-                    </div>
+                    <Link to='/login' className="login-to-other-acc">
+                        <span>Already have an account?   </span>
+                        <button className="other-acc-btn" >
+                            Log in</button>
+                    </Link >
                 </div>
             </div>
         </section>
