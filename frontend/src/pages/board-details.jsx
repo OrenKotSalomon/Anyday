@@ -36,7 +36,7 @@ export function BoardDetails() {
         <SideGroupBar />
         {!boardId && <SelectBoard />}
         {boardId && <div className="board-container">
-            <BoardHeader title={board.title} />
+            <BoardHeader board={board} />
             <section className="groups-container">
                 {board.groups.map(group => <GroupList key={group.id} group={group} />)}
             </section>
