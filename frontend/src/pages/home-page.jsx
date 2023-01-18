@@ -21,8 +21,8 @@ export function HomePage() {
             </header>
 
             <div className='home-page-hero'>
-                <h1 className='home-page-hero-header'><span>A platform built for a</span> <br></br> new way of working</h1>
-                <h3 className='home-page-hero-sub-header' >What would you like to manage with sprint4.com Work OS?</h3>
+                <h1 className='home-page-hero-header'><span className='header-top-txt'>A platform built for a</span><span className='header-lower-txt'>new way of working</span></h1>
+                <h3 className='home-page-hero-sub-header' >What would you like <span className='home-page-sub-header-span'>to manage</span> with sprint4.com Work OS?</h3>
             </div>
 
             <span className="elementToFadeInAndOut" style={{ fontSize: '18px', position: 'absolute', top: '4em', right: '11em' }}>✦</span>

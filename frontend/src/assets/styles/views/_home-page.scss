@@ -45,6 +45,11 @@
     }
 
     background-color: #07083c;
+    background: linear-gradient(to top,
+        #07083c 0%,
+        rgb(12, 13, 74)25%,
+        rgb(15, 16, 72)50%,
+        rgb(15, 16, 72) 100%);
     // background-image: url("https://thumbs.gfycat.com/CommonDeadlyAmericanpainthorse-size_restricted.gif");
     // background-image: linear-gradient(rgba(13, 14, 69,.5), rgba(13, 14, 69,.5), url("https://thumbs.gfycat.com/CommonDeadlyAmericanpainthorse-size_restricted.gif"));
 
@@ -62,8 +67,14 @@
             font-family: poppins-regular-400;
             font-weight: 400;
 
-            span {
+            .header-top-txt {
                 opacity: 88%;
+                display: block;
+            }
+
+            .header-lower-txt {
+                display: block;
+                line-height: .9em;
             }
 
             @include for-narrow-layout {
@@ -82,15 +93,23 @@
         }
 
         .home-page-hero-sub-header {
-            margin-top: 2em;
+            font-family: Poppins-Thin;
+            margin-top: 1.7em;
             font-size: rem(18px);
 
+            .home-page-sub-header-span {
+                background: linear-gradient(to right, rgb(15, 16, 72),$main-bgc-white 100%);
+                background-position: 0 100%;
+                background-size: 100% 1px;
+                background-repeat: repeat-x;
+            }
+
             @include for-narrow-layout {
-                font-size: rem(22px);
+                font-size: rem(20px);
             }
 
             @include for-normal-layout {
-                font-size: rem(26px);
+                font-size: rem(22px);
             }
 
         }
@@ -101,14 +120,16 @@
 
         .btn-get-started {
             color: $main-bgc-white;
-            margin-top: 2em;
+            margin-top: 3em;
             align-self: center;
             display: inline-block;
-            font-size: rem(14px);
+            font-size: rem(16px);
             padding: 12px 102px;
             background: linear-gradient(-60deg, $start-btn-li-blue 20%, $start-btn-blue 80%);
             border-radius: 25px;
             transform: 1s;
+            font-family: poppins-regular-400;
+
 
             @include for-narrow-layout {
                 padding: 12px 72px;
@@ -146,7 +167,7 @@
         }
 
         .home-page-promo {
-            margin-top: 1em;
+            margin-top: 1.5em;
             display: flex;
             justify-content: center;
             font-size: rem(12px);
@@ -155,14 +176,20 @@
             flex-wrap: nowrap;
 
             .home-page-promo1 {
+                letter-spacing: .1em;
                 margin-inline-end: 1.5em;
+                width: 200px;
+                text-align: end;
             }
 
             .home-page-promo2 {
+                letter-spacing: .1em;
                 margin-inline-start: 1.5em;
+                width: 200px;
+                text-align: start;
             }
 
-            margin-bottom: 2em;
+            margin-bottom: 5em;
         }
     }
 
@@ -226,8 +253,8 @@
 
 
     .elementToFadeInAndOut {
-        -webkit-animation: fadeinout 4s linear 10 forwards;
-        animation: fadeinout 4s linear 10 forwards;
+        -webkit-animation: fadeinout 4s linear infinite forwards;
+        animation: fadeinout 4s linear infinite forwards;
     }
 
     @-webkit-keyframes fadeinout {
@@ -255,8 +282,8 @@
     }
 
     .SecondElementToFadeInAndOut {
-        -webkit-animation: fadeinoutTwo 4s linear 10 forwards;
-        animation: fadeinoutTwo 4s linear 10 forwards;
+        -webkit-animation: fadeinoutTwo 4s linear infinite forwards;
+        animation: fadeinoutTwo 4s linear infinite forwards;
     }
 
     @-webkit-keyframes fadeinoutTwo {
