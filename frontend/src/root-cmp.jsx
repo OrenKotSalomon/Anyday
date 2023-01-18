@@ -6,6 +6,7 @@ import { HomePage } from './pages/home-page'
 import { BoardDetails } from './pages/board-details'
 import { Login } from './pages/login-page'
 import { Signup } from './pages/signup'
+import { UserMsg } from './cmps/user-msg'
 
 export function RootCmp() {
 
@@ -22,6 +23,7 @@ export function RootCmp() {
                     <Route element={<Signup />} path="/signup" />
                 </Routes>
             </main>
+            <UserMsg />
         </div>
     )
 }

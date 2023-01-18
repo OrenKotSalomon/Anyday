@@ -37,6 +37,5 @@ export function boardReducer(state = initialState, action) {
             break
         default:
     }
-    console.log('newState:', newState)
     return newState
 }

@@ -1,5 +1,31 @@
 .board-list {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  .board-list-menu-btn {
+    opacity: 0;
+    padding: 7px;
+    z-index: 3;
+  }
+  
+  .board-list-a {
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2px 8px;
+    border-radius: 4px;
+    transition: .3s;
+    color: $main-color;
+
+    &.active {
+      background-color: #cce5ff;
+    }
+    &:hover {
+      background-color: #dcdfec;
+      .board-list-menu-btn {
+        opacity: 1;
+      }
+    }
+  }
 }

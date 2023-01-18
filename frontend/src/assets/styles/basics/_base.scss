@@ -39,10 +39,10 @@ a {
   text-decoration: none;
 }
 
-button {
+.btn {
   @include btn;
 }
 
-input {
+.input {
   @include input;
 }
