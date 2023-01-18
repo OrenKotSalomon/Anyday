@@ -1,5 +1,123 @@
-.task-preview {
+.task-details {
+    box-sizing: border-box;
     position: absolute;
-    min-height: 100vh;
-    min-width: 40vw;
+    display: flex;
+    flex-direction: row-reverse;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    width: 0vw;
+    z-index: 33;
+    transition: transform 2s;
+}
+
+.task-main {
+    text-align: center;
+    color: $main-color;
+    background-color: #ffffff;
+    width: 55vw;
+    border-inline-start: 12px solid $grey;
+
+    .close-task-btn {
+        background-color: $main-bgc-white;
+        border: none;
+        position: relative;
+        left: 2em;
+        top: 1em;
+        font-size: 1em;
+        color: $main-color;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .close-task-btn:hover {
+        cursor: pointer;
+    }
+
+    .task-details-title {
+        text-align: left;
+        margin-top: 1.5em;
+        padding-inline-start: 2em;
+        font-family: roboto-regular;
+        font-size: rem(18px);
+    }
+
+    .task-main-nav {
+        max-width: 60%;
+        margin-top: 1em;
+        padding-inline-start: 2em;
+        display: flex;
+        justify-content: space-around;
+        font-size: rem(14px);
+    }
+
+    .task-main-nav-li {
+        color: $main-color;
+        width: 100%;
+        padding-bottom: .5em;
+    }
+
+    .task-main-nav-li.active {
+        border-bottom: #0073ea 2px solid;
+    }
+
+    .task-details-hr {
+        color: #c3c6d4;
+        opacity: 60%;
+        padding: 0;
+        margin: 0;
+    }
+
+
+    .task-details-open-input-btn {
+        margin-top: 2em;
+        text-align: left;
+        background-color: #fff;
+        border: 1px solid #0073ea;
+        padding: 1em;
+        border-radius: .5em;
+        width: 90%;
+    }
+
+    .details-img-container {
+        margin-top: 5em;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        .details-img {
+            width: rem(290px);
+        }
+    }
+
+    .details-p {
+        text-align: center;
+        padding: 2em;
+        display: flex;
+        flex-wrap: wrap;
+
+        .details-p-header {
+            font-size: rem(24px);
+            min-width: 100%;
+            font-family: roboto-black;
+        }
+
+        .details-p-txt {
+            margin: 12px;
+            font-size: rem(16px);
+        }
+
+    }
+
+}
+
+.task-main:hover+.close-task {
+    opacity: 30%;
+}
+
+.close-task {
+    width: 50vw;
+    background-color: rgb(6, 6, 39);
+    opacity: 0;
 }

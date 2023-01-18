@@ -7,7 +7,10 @@ export function TaskPreview({ task }) {
         <div className="task-name cell">
             <span className="task-preview-title">{task.title}</span>
             <button onClick={() => setIsOpenDetails(!isOpenDetails)} className="open-item-page-btn">.</button>
-            <TaskDetails task={task} isOpenDetails={isOpenDetails} />
+            {isOpenDetails && <TaskDetails
+                task={task}
+                isOpenDetails={isOpenDetails}
+                setIsOpenDetails={setIsOpenDetails} />}
         </div>
         <div className="task-person cell">
             <span>Task Members</span>
