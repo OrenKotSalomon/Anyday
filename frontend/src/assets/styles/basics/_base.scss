@@ -2,8 +2,7 @@
   box-sizing: border-box;
 }
 
-html {
-}
+html {}
 
 body {
   font-size: rem(18px);
@@ -39,7 +38,7 @@ a {
   text-decoration: none;
 }
 
-button {
+.btn {
   @include btn;
 }
 
