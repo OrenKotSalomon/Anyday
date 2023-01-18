@@ -20,38 +20,41 @@ export function BoardList({ onRemoveBoard }) {
         // ev.stopImmediatePropagation()
         // ev.stopPropagation()
     }
-    
+
     function onBoardClick(ev, boardId) {
         ev.preventDefault()
         ev.stopPropagation()
         navigate(`/board/${boardId}`)
     }
 
-    if (!boards) return <div>Loading...</div>
-    return <section className='board-list'>
-        {boards && boards.map(board => <NavLink to={`/board/${board._id}`} key={board._id} className="board-list-a flex">
-            {board.title}
-            <MenuButton className="board-list-menu-btn"
+    
+
+        if (!boards) return <div>Loading...</div>
+        return <section className='board-list'>
+            {boards && boards.map(board => <NavLink to={`/board/${board._id}`} key={board._id} className="board-list-a flex">
+                {board.title}
+                <MenuButton className="board-list-menu-btn"
                 // onClick={ev => onMenuClick(ev)}
                 >
-                <Menu
-                    id="menu"
-                    size="medium"
+                    <Menu
+                        id="menu"
+                        size="medium"
                     // onClick={ev => onMenuClick(ev)}
-                >
-                    <MenuItem
-                        // icon={function noRefCheck() { }}
-                        // iconType="SVG"
-                        onClick={(ev) => {
-                            onMenuClick(ev)
-                            onRemoveBoard(board._id)}}
-                        title="Remove Board"
-                    />
-                </Menu>
-            </MenuButton>
-            {/* <div onClick={ev => onMenuClick(ev)} >X</div> */}
-        </NavLink>)}
+                    >
+                        <MenuItem
+                            // icon={function noRefCheck() { }}
+                            // iconType="SVG"
+                            onClick={(ev) => {
+                                onMenuClick(ev)
+                                onRemoveBoard(board._id)
+                            }}
+                            title="Remove Board"
+                        />
+                    </Menu>
+                </MenuButton>
+                {/* <div onClick={ev => onMenuClick(ev)} >X</div> */}
+            </NavLink>)}
+          
+        </section>
 
-    </section>
-
-}
+    }

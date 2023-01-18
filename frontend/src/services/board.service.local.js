@@ -75,48 +75,48 @@ function getEmptyBoard() {
         archivedAt: 1589983468418,
         groups: [
             {
-                "id": "g101",
+                "id": utilService.makeId(),
                 "title": "Group 1",
                 "archivedAt": 1589983468418,
                 "tasks": [
                     {
-                        "id": "c101",
+                        "id": utilService.makeId(),
                         "title": "Task 1"
                     },
                     {
-                        "id": "c102",
+                        "id": utilService.makeId(),
                         "title": "Task 2"
                     }
                 ],
                 "style": 'red'
             },
             {
-                "id": "g102",
+                "id": utilService.makeId(),
                 "title": "Group 2",
                 "archivedAt": 1589983468418,
                 "tasks": [
                     {
-                        "id": "c101",
+                        "id": utilService.makeId(),
                         "title": "Task 3"
                     },
                     {
-                        "id": "c102",
+                        "id": utilService.makeId(),
                         "title": "Task 4"
                     }
                 ],
                 "style": 'gold'
             },
             {
-                "id": "g103",
+                "id": utilService.makeId(),
                 "title": "Group 3",
                 "archivedAt": 1589983468418,
                 "tasks": [
                     {
-                        "id": "c101",
+                        "id": utilService.makeId(),
                         "title": "Task 5"
                     },
                     {
-                        "id": "c102",
+                        "id": utilService.makeId(),
                         "title": "Task 6"
                     }
                 ],

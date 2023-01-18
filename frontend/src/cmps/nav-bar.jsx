@@ -5,9 +5,12 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/user.actions.js'
 import { LoginSignup } from './login-signupReference.jsx'
 import logo from '../assets/img/logo.png'
+import Harel from '../assets/img/Harel.jpg'
 import wm_icon from '../assets/img/wm_icon.avif'
+import { Avatar } from 'monday-ui-react-core'
 
 export function NavBar() {
+
     const user = useSelector(storeState => storeState.userModule.user)
 
     async function onLogin(credentials) {
@@ -39,15 +42,23 @@ export function NavBar() {
     return <header className="nav-bar">
 
         <nav>
-            <NavLink to='/'><img src={logo} alt="Logo" style={{ maxWidth: '100px' }} /></NavLink>
-            <NavLink to='/board/'><img src={wm_icon} alt="Logo" style={{ maxWidth: '50px' }} /></NavLink>
+            <div>
+                <NavLink to='/'><img src={logo} style={{ maxWidth: '77px' }} /></NavLink>
+                <hr style={{ width: '75%' }} />
+                <NavLink to='/board/'><img src={wm_icon} style={{ maxWidth: '37px' }} /></NavLink>
+            </div>
             {/* <button>Notifications</button> */}
             {/* <NavLink to='/inbox'>Inbox</NavLink> */}
             {/* <NavLink to='/my_work'>My Work</NavLink> */}
             {/* <button>Favorites</button> */}
 
             {/* <button>Search</button> */}
-            <Link to='/login'>Login/Icon soon</Link>
+            <Link to='/login'><Avatar
+                ariaLabel="Harel Natan"
+                size="large"
+                src={Harel}
+                type="img"
+            /></Link>
         </nav>
 
         {/* <nav>

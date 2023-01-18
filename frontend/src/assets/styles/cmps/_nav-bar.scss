@@ -2,18 +2,13 @@
     height: 100vh;
     background-color: $side-nav;
     text-align: center;
+    width: 65px;
 
     nav {
+        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-
-        >* {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-
-        }
 
         a {
             color: #fff;
@@ -36,6 +31,7 @@
     height: 100vh;
     padding: 13px;
     background-color: #f6f7fb;
+    width: 255px
 }
 
 .workspace-select {
