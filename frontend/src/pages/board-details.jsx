@@ -8,7 +8,6 @@ import { loadBoards } from "../store/board.actions";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-
 export function BoardDetails() {
 
     const [board, setBoard] = useState(null)
@@ -35,8 +34,8 @@ export function BoardDetails() {
         <NavBar />
         <SideGroupBar />
         <div className="board-container">
-            
-            <BoardHeader title={board.title} />
+
+            <BoardHeader board={board} />
             <section className="groups-container">
                 {board.groups.map(group => <GroupList key={group.id} group={group} />)}
             </section>
