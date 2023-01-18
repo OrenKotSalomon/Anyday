@@ -31,11 +31,17 @@
 }
 
 .side-group-bar {
+    flex-direction: column;
+    gap: 10px;
     height: 100vh;
     padding: 13px;
     background-color: #f6f7fb;
 }
 
+.workspace-select {
+    flex-direction: column;
+    gap: 27px;
+}
 .workspace {
     padding: 8px 16px;
     border-radius: 4px;

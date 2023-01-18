@@ -1,148 +1,179 @@
 /* Breakpoint mixins */
 
 @mixin for-mobile-layout {
-    @media (max-width: calc($mobile-breakpoint + 40px)) {
-        @content;
-    }
+  @media (max-width: calc($mobile-breakpoint + $layoutPadding * 2)) {
+    @content;
+  }
 }
 
+// 530px
 @mixin for-narrow-layout {
-    @media (min-width: calc($mobile-breakpoint + 40px)) {
-        @content;
-    }
+  @media (min-width: calc($mobile-breakpoint + $layoutPadding * 2)) {
+    @content;
+  }
 }
 
+//777px
 @mixin for-normal-layout {
-    @media (min-width: calc($narrow-breakpoint + 40px)) {
-        @content;
-    }
+  @media (min-width: calc($narrow-breakpoint + $layoutPadding * 2)) {
+    @content;
+  }
 }
 
+//1000px
 @mixin for-wide-layout {
-    @media (min-width: calc($normal-breakpoint + 40px)) {
-        @content;
-    }
+  @media (min-width: calc($normal-breakpoint + $layoutPadding * 2)) {
+    @content;
+  }
 }
 
 /* Media  Mixins */
 @mixin aspect-ratio($width, $height) {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
 
-    &::before {
-        display: block;
-        content: "";
-        width: 100%;
-        padding-top: calc(($height / $width) * 100%);
-    }
+  &::before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: calc(($height / $width) * 100%);
+  }
 
-    >* {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-    }
+  >* {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
 
-    >img {
-        height: 100%;
-        object-fit: cover;
-    }
+  >img {
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 // Mixin for removing hover efects on iphone screen
 @mixin hover-supported {
-    @media not all and (pointer: coarse) {
-        &:hover {
-            @content;
-        }
+  @media not all and (pointer: coarse) {
+    &:hover {
+      @content;
     }
+  }
+}
+
+@mixin hover-supported-header {
+  @media not all and (pointer: coarse) {
+    &:hover {
+      @content;
+    }
+  }
 }
 
 //mixin for header home page and login page
 
+@mixin btn-no-style {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
 @mixin header {
-    width: 100%;
-    display: block;
-    padding-top: 10px;
-    padding-left: 8px;
-    border-bottom: 1px solid $header-border-bottom;
-    height: 65px;
-    background-color: $header-grey;
+  width: 100%;
+  display: block;
+  padding-top: 10px;
+  padding-left: 8px;
+  border-bottom: 1px solid $header-border-bottom;
+  height: 65px;
+  background-color: $header-grey;
 }
 
 @mixin header-logo {
-    width: 180px;
-    height: 44px;
-    margin-left: 12px;
+  width: 180px;
+  height: 44px;
+  margin-left: 12px;
 }
 
 // login section mixins
 @mixin login-layout {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    color: $login-main-clr;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: $login-main-clr;
 }
 
 @mixin flex-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 @mixin login-btn {
-    width: $fullPrecent;
-    min-width: $fullPrecent;
-    height: 100%;
-    cursor: pointer;
-    outline: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    line-height: 28px;
-    border: none;
-    font-size: 18px;
-    color: #fff;
-    background-color: $btn-blue;
-    margin: 0;
-    margin-top: 20px;
-    padding: 8px 16px;
-    border-radius: 4px;
+  width: $fullPrecent;
+  min-width: $fullPrecent;
+  height: 100%;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 28px;
+  border: none;
+  font-size: 18px;
+  color: #fff;
+  background-color: $btn-blue;
+  margin: 0;
+  margin-top: 20px;
+  padding: 8px 16px;
+  border-radius: 4px;
 }
 
 @mixin login-link-back {
-    border: none;
-    margin: 0;
-    padding: 0;
-    width: auto;
-    overflow: visible;
-    background: transparent;
-    font: inherit;
-    line-height: normal;
-    -webkit-font-smoothing: inherit;
-    color: #0fa2e2;
-    text-decoration: none;
-    cursor: pointer;
-
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  font: inherit;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  color: #0fa2e2;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 @mixin login-input {
-    width: $fullPrecent;
-    height: 40px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    padding: 6px 12px;
-    font-size: 16px;
-    color: #555;
-    outline: none;
+  width: $fullPrecent;
+  height: 40px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  font-size: 16px;
+  color: #555;
+  outline: none;
 
-    &:focus {
-        border-color: $link-color;
-    }
+  &:focus {
+    border-color: $link-color;
+  }
 
-    &::placeholder {
-        font-family: roboto-thin;
-    }
+  &::placeholder {
+    font-family: roboto-thin;
+  }
+}
+
+@mixin btn {
+  color: #fff;
+  background-color: $btn-blue;
+  cursor: pointer;
+  border: 0;
+  padding: 7px;
+  border-radius: 4px;
+}
+
+@mixin input {
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid #c3c6d4;
 }

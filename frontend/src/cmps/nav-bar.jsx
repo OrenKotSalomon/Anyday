@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import routes from '../routes'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/user.actions.js'
-import { LoginSignup } from './login-signup.jsx'
+import { LoginSignup } from './login-signupReference.jsx'
 import logo from '../assets/img/logo.png'
 import wm_icon from '../assets/img/wm_icon.avif'
 
@@ -11,6 +11,7 @@ export function NavBar() {
     const user = useSelector(storeState => storeState.userModule.user)
 
     async function onLogin(credentials) {
+        console.log('hi:')
         try {
             const user = await login(credentials)
             showSuccessMsg(`Welcome: ${user.fullname}`)
@@ -39,7 +40,7 @@ export function NavBar() {
 
         <nav>
             <NavLink to='/'><img src={logo} alt="Logo" style={{ maxWidth: '100px' }} /></NavLink>
-            <NavLink to='/board/:boardId'><img src={wm_icon} alt="Logo" style={{ maxWidth: '50px' }} /></NavLink>
+            <NavLink to='/board/'><img src={wm_icon} alt="Logo" style={{ maxWidth: '50px' }} /></NavLink>
             {/* <button>Notifications</button> */}
             {/* <NavLink to='/inbox'>Inbox</NavLink> */}
             {/* <NavLink to='/my_work'>My Work</NavLink> */}

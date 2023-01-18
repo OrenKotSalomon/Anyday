@@ -25,8 +25,8 @@ export function SideGroupBar() {
         }
     }
 
-    return <section className='side-group-bar'>
-        <div className="workspace-select">
+    return <section className='side-group-bar flex'>
+        <div className="workspace-select flex">
             <h4>Workspace</h4>
             <span className="workspace">Main Workspace</span>
         </div>
@@ -38,7 +38,7 @@ export function SideGroupBar() {
             onChange={handleChange}
             placeholder="Add A New Board" />
         <button onClick={onAddBoard}>Add Board</button>
-        <hr />
+        <hr style={{width: '90%'}} />
         <section className="board-list">
             <BoardList />
         </section>
