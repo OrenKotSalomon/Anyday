@@ -1,15 +1,20 @@
 import { EditableHeading, Flex, AvatarGroup, Avatar, Icon } from 'monday-ui-react-core'
 import { Activity, Favorite, Info } from "monday-ui-react-core/icons";
-export function BoardView({ title }) {
+export function BoardView({ board }) {
+
+    function temp(ev) {
+        console.log(ev);
+    }
+
     return <section className='board-view'>
         <div className='board-header-main'>
             <div className='board-header-top'>
                 <div className='board-header-left'>
                     <div className='board-title'>
                         <EditableHeading
-                            brandFont
-                            value={title}
-                        />
+                            type={EditableHeading.types.h1}
+                            value={board.title} brandFont={true} />
+
                     </div>
                     <div className='board-info-toggle'>
                         <button className='info-header'>

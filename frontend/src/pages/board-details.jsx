@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { SelectBoard } from "../cmps/select-board";
 
-
 export function BoardDetails() {
 
     const [board, setBoard] = useState(null)
