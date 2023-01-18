@@ -10,7 +10,8 @@ import { useParams } from "react-router-dom";
 import { SelectBoard } from "../cmps/select-board";
 
 export function BoardDetails() {
-
+    // maybe create a currboard from store
+    const boards = useSelector((storeState) => storeState.boardModule.boards)
     const [board, setBoard] = useState(null)
     const defaultBoard = useSelector((storeState) => storeState.boardModule.boards[0])
     const { boardId } = useParams()
@@ -27,18 +28,21 @@ export function BoardDetails() {
 
     async function loadBoard(boardId) {
         const board = await boardService.getById(boardId)
+
         setBoard(board)
     }
 
-    function addNewTask(boardToUpdate) {
-
-        updateBoard(boardToUpdate)
+    function addNewTask(newTask) {
+        setBoard(prevBoard => {
+            const isFinished = prevBoard.groups[0].tasks.some(task => task.id === newTask.id)
+            if (isFinished) return { ...prevBoard }
+            return { ...prevBoard, board: prevBoard.groups[0].tasks.unshift(newTask) }
+        })
+        updateBoard(board)
     }
 
     function editBoardTitle(boardToUpdate) {
-
         updateBoard(boardToUpdate)
-
     }
 
     if (!board) return <div>Loading...</div>
@@ -49,7 +53,7 @@ export function BoardDetails() {
         {boardId && <div className="board-container">
             <BoardHeader
                 addNewTask={addNewTask} editBoardTitle={editBoardTitle}
-                board={board} />
+                board={board} setBoard={setBoard} />
             <section className="groups-container">
                 {board.groups.map(group => <GroupList key={group.id} board={board} group={group} />)}
             </section>
