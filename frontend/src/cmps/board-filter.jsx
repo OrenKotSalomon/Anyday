@@ -5,17 +5,19 @@ import { useEffect, useState } from 'react';
 import { boardService } from '../services/board.service.local';
 import { updateBoard } from '../store/board.actions';
 
-export function BoardFilter({ boardToUpdate, addNewTask, setBoardToUpdate }) {
+export function BoardFilter({ board, addNewTask, setBoard }) {
 
     const [newTask, setNewTask] = useState({})
+    // fix the way of crudl can do it way more efficiently
+    // check the way of crudl, a little bit confused
 
     useEffect(() => {
         loadDefaultTask()
-    }, [boardToUpdate]);
+    }, [board]);
 
     async function loadDefaultTask() {
         try {
-            const defaultNewTask = await boardService.getNewTask(boardToUpdate._id)
+            const defaultNewTask = await boardService.getNewTask(board._id)
             setNewTask(defaultNewTask)
         } catch (err) {
 
@@ -23,12 +25,7 @@ export function BoardFilter({ boardToUpdate, addNewTask, setBoardToUpdate }) {
     }
 
     async function onAddNewTask() {
-        setBoardToUpdate(prevBoard => {
-            const isFinished = prevBoard.groups[0].tasks.some(task => task.id === newTask.id)
-            if (isFinished) return { ...prevBoard }
-            return { ...prevBoard, board: prevBoard.groups[0].tasks.unshift(newTask) }
-        })
-        updateBoard(boardToUpdate)
+        addNewTask(newTask)
     }
     return <section className='board-filter'>
         <Flex >

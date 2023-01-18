@@ -2,8 +2,8 @@ import { EditableHeading, Flex, AvatarGroup, Avatar, Icon } from 'monday-ui-reac
 import { Activity, Favorite, Info } from "monday-ui-react-core/icons";
 import { useEffect, useRef, useState } from 'react';
 
-export function BoardView({ boardToUpdate, editBoardTitle, setBoardToUpdate }) {
-    // const [boardToUpdate, setBoardToUpdate] = useState(board)
+export function BoardView({ board, boardToUpdate, editBoardTitle, setBoardToUpdate }) {
+
     function onFinishEditing() {
         editBoardTitle(boardToUpdate)
     }
@@ -21,7 +21,7 @@ export function BoardView({ boardToUpdate, editBoardTitle, setBoardToUpdate }) {
                             onFinishEditing={onFinishEditing}
                             onChange={handleChange}
                             type={EditableHeading.types.h1}
-                            value={boardToUpdate.title} brandFont={true} />
+                            value={board.title} brandFont={true} />
 
                     </div>
                     <div className='board-info-toggle'>
