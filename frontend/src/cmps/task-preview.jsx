@@ -51,7 +51,9 @@ export function TaskPreview({ task, board, group }) {
             </Menu>
         </MenuButton>
         <div className="task-name cell">
-            <span className="task-preview-title">{task.title}</span>
+            <div className="task"></div>
+
+            <div className="task-preview-title">{task.title}</div>
             <button onClick={() => setIsOpenDetails(!isOpenDetails)} className="open-item-page-btn">
                 <Icon iconType={Icon.type.SVG} icon={Open} iconLabel="Task Details" iconSize={16} /><span>Open</span>
             </button>

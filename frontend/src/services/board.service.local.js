@@ -171,8 +171,10 @@ function taskServiceReducer(board, data, type) {
     const newTask = getNewTask()
     let currTask, groupIdx, taskIdx
 
-    if (data.groupId) groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
-    if (data.id) taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.id)
+    if (data) {
+        groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
+        taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.id)
+    }
 
     switch (type) {
         case DELETE_TASK:
