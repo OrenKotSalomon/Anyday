@@ -188,8 +188,11 @@ function taskServiceReducer(board, data, type) {
             board.groups[groupIdx].tasks[taskIdx].title = data.title
             return board
         case ADD_TASK_COMMENT:
-            currTask = board.groups[groupIdx].tasks[taskIdx]
-            currTask.comments ? currTask.comments = [data.comment] : currTask.push(data.comment)
+            if (!board.groups[groupIdx].tasks[taskIdx].comments) {
+                board.groups[groupIdx].tasks[taskIdx].comments = [data.comment]
+            } else {
+                board.groups[groupIdx].tasks[taskIdx].push(data.comment)
+            }
             return board
         case DELETE_TASK_COMMENT:
             currTask = board.groups[groupIdx].tasks[taskIdx]
