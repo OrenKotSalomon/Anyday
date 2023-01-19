@@ -5,7 +5,7 @@ import FormControl, { useFormControl } from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Box from '@mui/material/Box';
 
-import { TabList, Tab, EditableHeading, Icon  } from 'monday-ui-react-core'
+import { TabList, Tab, EditableHeading, Icon } from 'monday-ui-react-core'
 import { Home } from 'monday-ui-react-core/icons'
 
 import { CHANGE_TASK_TITLE, boardService } from '../services/board.service.local.js';
@@ -16,7 +16,7 @@ import { updateTask } from '../store/board.actions';
 
 export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, group }) {
     const [isAddComment, setAddComment] = useState(false)
-    const [newTitle, setNewTitle] = useState('')
+    const [newTitle, setNewTitle] = useState(task.title)
 
     function handleInputSubmit(ev) {
         ev.preventDefault()
@@ -29,6 +29,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
     }
 
     function handleChange(value) {
+        if (!value) return setNewTitle(task.title)
         setNewTitle(value)
     }
 
@@ -42,7 +43,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                 onFinishEditing={onFinishEditing}
                 onChange={handleChange}
                 type={EditableHeading.types.h4}
-                value={task.title} />
+                value={newTitle} />
 
             <TabList className='task-main-nav'>
                 <Tab>
