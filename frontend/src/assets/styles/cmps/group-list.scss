@@ -1,14 +1,8 @@
 .group-list {
   width: max-content;
 
-  // .main-group-container {
-  //   padding: 0 4px;
-  //   border-radius: 5px;
-  //   box-shadow: $main-box-shadow;
-  // }
-
   .group-header-container {
-    // position: relative;
+    position: relative;
     display: block;
     height: rem(76px);
 
@@ -35,8 +29,6 @@
 
   .cell {
     font-size: rem(14px);
-    padding: 2px 4px;
-    background-color: $main-bgc-white;
     text-align: center;
     border: 0.7px solid #d0d4e4;
     min-width: 9.375rem;
@@ -109,6 +101,7 @@
 
     .row-checkbox {
       margin: 0;
+      width: 18px;
     }
   }
 }

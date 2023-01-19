@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { TaskDetails } from "./task-details";
 
-import { MenuButton, Menu, MenuItem, Icon } from 'monday-ui-react-core'
-import { Open, Duplicate, Delete } from 'monday-ui-react-core/icons'
+import { MenuButton, Menu, MenuItem, Icon, EditableHeading } from 'monday-ui-react-core'
+import { Open, Duplicate, Delete, AddUpdate } from 'monday-ui-react-core/icons'
 import { updateTask } from "../store/board.actions";
 import { DELETE_TASK, DUPLICATE_TASK } from "../services/board.service.local";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
@@ -23,7 +23,7 @@ export function TaskPreview({ task, board, group }) {
         showSuccessMsg(`Task deleted successfully taskId:${data.id} `)
     }
 
-    return <section className='task-preview flex'>
+    return <section className='task-preview'>
         <MenuButton className="task-preview-menu-btn" >
             <Menu
                 id="menu"
@@ -50,13 +50,25 @@ export function TaskPreview({ task, board, group }) {
                 />
             </Menu>
         </MenuButton>
-        <div className="task-name cell">
-            <div className="task"></div>
+        <div className="task">
 
-            <div className="task-preview-title">{task.title}</div>
-            <button onClick={() => setIsOpenDetails(!isOpenDetails)} className="open-item-page-btn">
-                <Icon iconType={Icon.type.SVG} icon={Open} iconLabel="Task Details" iconSize={16} /><span>Open</span>
-            </button>
+            <div className="task-edit-wrapper">
+                <div className='checkbox-row-container'>
+                    <input className='row-checkbox' type="checkbox" />
+                </div>
+                <div className="task-edit">
+                    <EditableHeading type={EditableHeading.types.h5} value={task.title} />
+                    <button onClick={() => setIsOpenDetails(!isOpenDetails)} className="open-item-page-btn">
+                        <Icon iconType={Icon.type.SVG} icon={Open} iconLabel="Task Details" iconSize={16} /><span>Open</span>
+                    </button>
+                    <span>{Array.isArray(task.comments) && (task.comments.length !== 0) && task.comments.length}</span>
+                    <button className="message-btn">
+                        <Icon iconType={Icon.type.SVG} icon={AddUpdate} iconLabel="Task Details" iconSize={16} /><span></span>
+
+                    </button>
+
+                </div>
+            </div>
             {isOpenDetails && <TaskDetails
                 board={board}
                 task={task}
@@ -64,7 +76,7 @@ export function TaskPreview({ task, board, group }) {
                 isOpenDetails={isOpenDetails}
                 setIsOpenDetails={setIsOpenDetails} />}
         </div>
-        <div className="task-person cell">
+        {/* <div className="task-person cell">
             <span>Task Members</span>
         </div>
         <div className="task-status cell">
@@ -72,7 +84,7 @@ export function TaskPreview({ task, board, group }) {
         </div>
         <div className="task-priority cell">
             <span>Task Priority</span>
-        </div>
+        </div> */}
         {/* <TaskDetails /> */}
     </section>
 

@@ -1,16 +1,23 @@
 .task-preview {
   position: relative;
+
   &:hover {
     .task-preview-menu-btn {
-        opacity: 1;
+      opacity: 1;
     }
   }
+
   .open-item-page-btn {
     color: $grey;
     background-color: #fff;
     border: none;
     margin-inline-start: 1em;
-    opacity: 0;
+    // opacity: 0;
+    z-index: 10;
+
+    &:hover {
+      opacity: 1;
+    }
 
     span {
       padding: 6px;
@@ -28,11 +35,30 @@
     cursor: pointer;
   }
 
-  .task-name.cell {
-    min-width: rem(180px);
+}
+
+.task-name {
+  height: $cell-height;
+}
+
+//temp class name 
+
+.task-edit-wrapper {
+  display: flex;
+  justify-content: center;
+  height: 36px;
+
+  .task-edit {
+    display: flex;
   }
 
-  .task-name.cell:hover .open-item-page-btn {
-    opacity: 100%;
-  }
 }
+
+// display: flex;
+// min-width: 11.25rem;
+// flex-grow: 1;
+// flex-shrink: 1;
+// flex-basis: auto;
+// justify-content: center;
+// align-items: center;
+// font-size: 16px;
