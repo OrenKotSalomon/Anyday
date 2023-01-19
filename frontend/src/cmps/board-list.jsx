@@ -4,8 +4,9 @@ import { Link, NavLink, Navigate, useNavigate } from "react-router-dom"
 import { boardService } from "../services/board.service.local"
 import { loadBoards } from "../store/board.actions"
 import { MenuButton, Menu, MenuItem } from 'monday-ui-react-core'
+import { Duplicate, Delete } from 'monday-ui-react-core/icons'
 
-export function BoardList({ onRemoveBoard }) {
+export function BoardList({ onDuplicateBoard, onRemoveBoard }) {
     const navigate = useNavigate()
     const boards = useSelector((storeState) => storeState.boardModule.boards)
     useEffect(() => {
@@ -13,11 +14,10 @@ export function BoardList({ onRemoveBoard }) {
     }, [])
     console.log(boards);
     function onMenuClick(ev) {
-        console.log('ev:', ev)
-        console.log('Menu Click');
+        // console.log('ev:', ev)
+        // console.log('Menu Click');
         ev.preventDefault()
-        // ev.stopImmediatePropagation()
-        // ev.stopPropagation()
+        ev.stopPropagation()
     }
 
     function onBoardClick(ev, boardId) {
@@ -41,9 +41,18 @@ export function BoardList({ onRemoveBoard }) {
                     <MenuItem
                         onClick={(ev) => {
                             onMenuClick(ev)
+                            onDuplicateBoard(board)
+                        }}
+                        icon={Duplicate}
+                        title="Duplicate Board"
+                    />
+                    <MenuItem
+                        onClick={(ev) => {
+                            onMenuClick(ev)
                             onRemoveBoard(board._id)
                         }}
-                        title="Remove Board"
+                        icon={Delete}
+                        title="Delete"
                     />
                 </Menu>
             </MenuButton>

@@ -55,16 +55,6 @@ export function GroupList({ board, group }) {
         setNewTaskTitle('')
     }
 
-    function handleChangeTask(value) {
-        setNewTaskTitle(value)
-    }
-
-    function onAddGroupTask() {
-        if (!newTaskTitle) return console.log('error task empty');
-        updateGroup(board, { group, newTaskTitle }, ADD_GROUP_TASK)
-        setNewTaskTitle('')
-    }
-
     return <section className='group-list'>
         <div className="group-header-container">
             <MenuButton className="group-list-menu-btn" >
