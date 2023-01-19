@@ -25,6 +25,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
         let data = boardService.getEmptyTaskComment(newCommentTxt)
         let taskChanges = { comment: data, id: task.id, groupId: group.id }
         updateTask(board, taskChanges, ADD_TASK_COMMENT)
+        setComment('')
     }
 
     function onDeleteComment(comment) {
@@ -77,17 +78,17 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
             {isAddComment &&
 
                 <form onSubmit={onSubmitNewComment}>
-                    <input type='text' placeholder='Add a task comment...' onChange={handleInputChange} />
+                    <input type='text' name='' placeholder='Add a task comment...' onChange={handleInputChange} value={newCommentTxt} />
                     <button className='btn'>Submit</button>
                 </form>
 
 
             }
 
-            {task.comments ? <section>
+            {(Array.isArray(task.comments) && task.comments.length) ? <section>
                 {task.comments.map(comment => <div
                     key={comment.id} className='task-details-task-comment'>
-                    <button onClick={() => onDeleteComment(comment)}>X</button>{comment.txt}
+                    <button onClick={() => onDeleteComment(comment)}>X</button><h1>{comment.txt}</h1>
                 </div>)}
             </section > : <section>
                 <div className='details-img-container'><img className="details-img" src="https://cdn.monday.com/images/pulse-page-empty-state.svg" alt="" /></div>

@@ -171,9 +171,10 @@ function taskServiceReducer(board, data, type) {
     const newTask = getNewTask()
     let currTask, groupIdx, taskIdx
 
-    if (data.groupId) groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
-    if (data.id) taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.id)
-
+    if (data) {
+        groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
+        taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.id)
+    }
     switch (type) {
         case DELETE_TASK:
             board.groups[groupIdx].tasks = board.groups[groupIdx].tasks.filter(task => task.id !== data.id)
@@ -190,15 +191,13 @@ function taskServiceReducer(board, data, type) {
             return board
         case ADD_TASK_COMMENT:
             if (!board.groups[groupIdx].tasks[taskIdx].comments) {
-                board.groups[groupIdx].tasks[taskIdx].comments = [data.comment]
-            } else {
-                board.groups[groupIdx].tasks[taskIdx].push(data.comment)
+                board.groups[groupIdx].tasks[taskIdx].comments = []
             }
+            board.groups[groupIdx].tasks[taskIdx].comments.push(data.comment)
             return board
         case DELETE_TASK_COMMENT:
-            currTask = board.groups[groupIdx].tasks[taskIdx]
-            let deleteCommentIdx = currTask.comments.findIndex(currComment => currComment.id === data.commentIdx)
-            currTask.comments.splice(deleteCommentIdx, 1)
+            let deleteCommentIdx = board.groups[groupIdx].tasks[taskIdx].comments.findIndex(currComment => currComment.id === data.commentIdx)
+            board.groups[groupIdx].tasks[taskIdx].comments.splice(deleteCommentIdx, 1)
             return board
         default:
             return board
