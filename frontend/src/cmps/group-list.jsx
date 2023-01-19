@@ -106,14 +106,27 @@ export function GroupList({ board, group }) {
 
             </div>
         </div>
-        <div className="main-group-container"
-            style={{ backgroundColor: group.style }}>
-            <div className="group-labels flex">
-                <div className="task-name cell">Task</div>
+        <div className="main-group-container">
+            <div className='row-header-container'>
+                <div className='main-left-header'>
+                    <div className='left-row-container'>
+                        <div className='left-border'></div>
+                        <div className='checkbox-row-container'>
+                            <input className='row-checkbox' type="checkbox" />
+                        </div>
+                        <div className='task-main-container'>
+                            <div className="task-row-container">Task</div>
+                        </div>
+                    </div>
+                </div>
+                <div className='main-right-header'>+</div>
+            </div>
+            {/* // style={{ backgroundColor: group.style }} */}
+            {/* <div className="group-labels flex">
                 <div className="task-person cell">Person</div>
                 <div className="task-status cell">Status</div>
                 <div className="task-priority cell">Priority</div>
-            </div>
+            </div> */}
             <section className="tasks-container">
                 {group.tasks.map(task => <TaskPreview key={task.id} task={task} board={board} group={group} />)}
                 <div className='add-task-container'>
