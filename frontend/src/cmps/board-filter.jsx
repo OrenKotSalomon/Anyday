@@ -2,8 +2,8 @@ import { ThemeProvider } from '@emotion/react';
 import { Button, Flex, SplitButton, Tooltip, Icon, DialogContentContainer, Menu, MenuItem } from 'monday-ui-react-core'
 import { Add, Search, Person, Filter, Sort, Group } from "monday-ui-react-core/icons";
 import { useEffect, useMemo, useState } from 'react';
-import { ADD_TASK_FROM_HEADER, boardService } from '../services/board.service.local';
-import { updateBoard, updateTask } from '../store/board.actions';
+import { ADD_GROUP_FROM_HEADER, ADD_TASK_FROM_HEADER, boardService } from '../services/board.service.local';
+import { updateBoard, updateGroup, updateTask } from '../store/board.actions';
 
 export function BoardFilter({ board }) {
 
@@ -19,7 +19,7 @@ export function BoardFilter({ board }) {
     return <section className='board-filter'>
         <Flex >
 
-            <SplitButton children='New Task' onClick={onAddNewTask} secondaryDialogContent={<HeaderMenu />} leftIcon={Add} size={Button.sizes.SMALL}  >
+            <SplitButton children='New Task' onClick={onAddNewTask} secondaryDialogContent={<HeaderMenu board={board} />} leftIcon={Add} size={Button.sizes.SMALL}  >
 
             </SplitButton>
             <Button kind={Button.kinds.TERTIARY} size={Button.sizes.SMALL} leftIcon={Search}>
@@ -55,11 +55,12 @@ export function BoardFilter({ board }) {
 
 }
 
-export function HeaderMenu() {
+export function HeaderMenu({ board }) {
     return (
         <Menu>
             <MenuItem
                 icon={Group}
+                onClick={() => updateGroup(board, undefined, ADD_GROUP_FROM_HEADER)}
                 title="New group of Tasks"
             />
         </Menu>
