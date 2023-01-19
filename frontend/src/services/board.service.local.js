@@ -13,6 +13,7 @@ export const CHANGE_GROUP_TITLE = 'CHANGE_GROUP_TITLE'
 export const CHANGE_GROUP_COLOR = 'CHANGE_GROUP_COLOR'
 export const ADD_GROUP = 'ADD_GROUP'
 export const DUPLICATE_GROUP = 'DUPLICATE_GROUP'
+export const ADD_GROUP_TASK = 'ADD_GROUP_TASK'
 export const DELETE_GROUP = 'DELETE_GROUP'
 
 //Tasks
@@ -122,6 +123,8 @@ function boardServiceReducer(board, data, type) {
 
 function groupServiceReducer(board, data, type) {
     board = structuredClone(board)
+    let groupToUpdate
+    let newTask = getNewTask()
     let groupIdx
     switch (type) {
         case CHANGE_GROUP_TITLE:
@@ -139,6 +142,11 @@ function groupServiceReducer(board, data, type) {
             groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.id)
             data.id = utilService.makeId()
             board.groups.splice(groupIdx, 0, data)
+            return board
+        case ADD_GROUP_TASK:
+            groupToUpdate = board.groups.find(group => group.id === data.group.id)            // board.groups.splice(groupIdx, 1, data)
+            newTask.title = data.newTaskTitle
+            groupToUpdate.tasks.push(newTask)
             return board
         case DELETE_GROUP:
             board.groups = board.groups.filter(group => group.id !== data.id)

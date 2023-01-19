@@ -1,21 +1,19 @@
-import { NavLink } from "react-router-dom"
-import { useState } from 'react';
+import * as React from 'react'
+import { useState } from "react"
+
+import FormControl, { useFormControl } from '@mui/material/FormControl';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Box from '@mui/material/Box';
 
 import { TabList, Tab, EditableHeading, Icon } from 'monday-ui-react-core'
 import { Home, Bullet } from 'monday-ui-react-core/icons'
 
-import { Activity, Favorite, Info } from "monday-ui-react-core/icons";
-import { DoubleCheck } from "monday-ui-react-core/icons";
+
 
 
 export function TaskDetails({ task, isOpenDetails, setIsOpenDetails }) {
-    // const [taskTitle, setTaskTitle] = useState(task.title)
 
-    // function handleChange(ev) {
-    //     ev.preventDefault()
-    //     setTaskTitle(ev.target.value)
-
-    // }
+    const [isAddComment, setAddComment] = useState(false)
 
     return <section className='task-details' style={{ width: `${isOpenDetails ? 100 : 0}vw` }}>
         <div className='task-main'>
@@ -36,8 +34,17 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails }) {
 
             <hr className="task-details-hr"></hr>
 
-            <button className='task-details-open-input-btn'>Write an update...</button>
-            <button onClick={() => console.log(task)}>test</button>
+            {!isAddComment && <button onClick={() => setAddComment(!isAddComment)} className='task-details-open-input-btn'>Write an update...</button>}
+
+            {isAddComment && <Box className='task-details-add-comment' component="form" noValidate autoComplete="off">
+                <div className='task-details-add-comment-tools'>tool-bar here</div>
+                <FormControl sx={{ width: '25ch' }}>
+                    <OutlinedInput className='task-details-input' placeholder="Please enter text" />
+                </FormControl>
+            </Box>}
+
+
+
             <div className='details-img-container'><img className="details-img" src="https://cdn.monday.com/images/pulse-page-empty-state.svg" alt="" /></div>
 
             <p className='details-p' ><span className="details-p-header">No updates yet for this item</span>

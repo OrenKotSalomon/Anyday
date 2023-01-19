@@ -5,13 +5,14 @@ import { TaskPreview } from "./task-preview";
 import { MenuButton, Menu, MenuItem, ColorPicker } from 'monday-ui-react-core'
 import { Delete, Bullet, Duplicate, Add } from 'monday-ui-react-core/icons'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service';
-import { ADD_GROUP, boardService, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DELETE_GROUP, DUPLICATE_GROUP } from '../services/board.service.local';
+import { ADD_GROUP, ADD_GROUP_TASK, boardService, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DELETE_GROUP, DUPLICATE_GROUP } from '../services/board.service.local';
 import { utilService } from '../services/util.service';
 
 export function GroupList({ board, group }) {
 
     const [isPickColor, setIsPickColor] = useState(false)
     const [groupToUpdate, setGroupToUpdate] = useState(group)
+    const [newTaskTitle, setNewTaskTitle] = useState('')
 
     function onFinishEditing() {
         updateGroup(board, groupToUpdate, CHANGE_GROUP_TITLE)
@@ -37,10 +38,31 @@ export function GroupList({ board, group }) {
         setIsPickColor(!isPickColor)
     }
 
+
     function onColorPick([color]) {
         color = utilService.getColorHex(color)
         setIsPickColor(!isPickColor)
         updateGroup(board, { group, color }, CHANGE_GROUP_COLOR)
+    }
+
+    function handleChangeTask(value) {
+        setNewTaskTitle(value)
+    }
+
+    function onAddGroupTask() {
+        if (!newTaskTitle) return console.log('error task empty');
+        updateGroup(board, { group, newTaskTitle }, ADD_GROUP_TASK)
+        setNewTaskTitle('')
+    }
+
+    function handleChangeTask(value) {
+        setNewTaskTitle(value)
+    }
+
+    function onAddGroupTask() {
+        if (!newTaskTitle) return console.log('error task empty');
+        updateGroup(board, { group, newTaskTitle }, ADD_GROUP_TASK)
+        setNewTaskTitle('')
     }
 
     return <section className='group-list'>
@@ -106,6 +128,16 @@ export function GroupList({ board, group }) {
             </div>
             <section className="tasks-container">
                 {group.tasks.map(task => <TaskPreview key={task.id} task={task} />)}
+                <div className='add-task-container'>
+                    <EditableHeading
+                        type={EditableHeading.types.h6}
+                        onFinishEditing={onAddGroupTask}
+                        onChange={handleChangeTask}
+                        placeholder={'Add Task'}
+                        value={newTaskTitle}
+                        brandFont
+                    />
+                </div>
             </section>
         </div>
     </section>

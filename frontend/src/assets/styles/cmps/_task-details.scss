@@ -43,93 +43,88 @@
         font-size: rem(18px);
     }
 
-    // .task-main-nav {
-    //     max-width: 60%;
-    //     margin-top: 1em;
-    //     padding-inline-start: 2em;
-    //     display: flex;
-    //     justify-content: space-around;
-    //     font-size: rem(14px);
-    // }
+
 
     .task-main-nav {
         padding: 0;
     }
 
-    .task-main-nav-li {
-        color: $main-color;
-        width: 100%;
-        padding-bottom: .5em;
-
-        &.active {
-            border-bottom: #0073ea 2px solid;
-
-        }
+}
 
 
 
+.task-details-hr {
+    color: #c3c6d4;
+    border-top: 3px solid #c3c6d4;
+    ;
+    opacity: 60%;
+    padding: 0;
+    margin: 0;
+}
+
+
+.task-details-open-input-btn {
+    margin-top: 2em;
+    text-align: left;
+    background-color: #fff;
+    border: 1px solid #0073ea;
+    font-family: figtree-regular;
+    letter-spacing: 0.05em;
+    font-size: ren(16px);
+    padding: 1em;
+    border-radius: .5em;
+    width: 90%;
+}
+
+.task-details-open-input-btn:hover {
+    cursor: text;
+    background-color: #c8e3ff;
+    opacity: 70%;
+}
+
+.details-img-container {
+    margin-top: 5em;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .details-img {
+        width: rem(290px);
+    }
+}
+
+.details-p {
+    text-align: center;
+    padding: 2em;
+    display: flex;
+    flex-wrap: wrap;
+
+    .details-p-header {
+        font-size: rem(24px);
+        min-width: 100%;
+        font-family: roboto-black;
     }
 
-
-
-    .task-details-hr {
-        color: #c3c6d4;
-        border-top: 3px solid #c3c6d4;;
-        opacity: 60%;
-        padding: 0;
-        margin: 0;
+    .details-p-txt {
+        margin: 12px;
+        font-size: rem(16px);
     }
 
+}
 
-    .task-details-open-input-btn {
-        margin-top: 2em;
-        text-align: left;
-        background-color: #fff;
-        border: 1px solid #0073ea;
-        font-family: figtree-regular;
-        letter-spacing: 0.05em;
-        font-size: ren(16px);
-        padding: 1em;
-        border-radius: .5em;
-        width: 90%;
+.task-details-add-comment {
+    margin-top: 0;
+
+    .task-details-add-comment-tools {
+        align-self: center;
+        width: 50vw;
     }
 
-    .task-details-open-input-btn:hover {
-        cursor: text;
-        background-color: #c8e3ff;
-        opacity: 70%;
-    }
-
-    .details-img-container {
-        margin-top: 5em;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-
-        .details-img {
-            width: rem(290px);
-        }
-    }
-
-    .details-p {
-        text-align: center;
-        padding: 2em;
-        display: flex;
-        flex-wrap: wrap;
-
-        .details-p-header {
-            font-size: rem(24px);
-            min-width: 100%;
-            font-family: roboto-black;
-        }
-
-        .details-p-txt {
-            margin: 12px;
-            font-size: rem(16px);
-        }
+    .task-details-input {
+        align-self: center;
+        width: 50vw;
 
     }
-
 }
 
 .task-main:hover {

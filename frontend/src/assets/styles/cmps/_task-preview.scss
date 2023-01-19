@@ -1,6 +1,18 @@
 .open-item-page-btn {
+    color: $grey;
+    background-color: #fff;
+    border: none;
     margin-inline-start: 1em;
     opacity: 0;
+
+    span {
+        padding: 6px;
+        line-height: 16px;
+    }
+}
+
+span:hover {
+    cursor: pointer;
 }
 
 .task-name.cell {
