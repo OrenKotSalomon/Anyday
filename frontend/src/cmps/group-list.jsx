@@ -9,17 +9,13 @@ import { boardService } from '../services/board.service.local';
 
 export function GroupList({ board, group }) {
 
-    const [boardToUpdate, setBoardToUpdate] = useState(board)
+    // const [boardToUpdate, setBoardToUpdate] = useState(board)
     const [groupToUpdate, setGroupToUpdate] = useState(group)
     const groupIndex = board.groups.findIndex(currGroup => currGroup.id === group.id)
 
     function onFinishEditing() {
-        setBoardToUpdate(prevBoard => ({ ...prevBoard, groups: [...prevBoard.groups.splice(groupIndex, 1, groupToUpdate)] }))
-        // const newBoard = boardService.updateGroup(board, groupId)
-        // JSON.stringify(board)
-        // board = structuredClone(board)
-        // updateBoard(newBoard)
-        updateBoard(boardToUpdate)
+        const newBoard = boardService.updateGroupTitle(board, groupToUpdate, groupIndex)
+        updateBoard(newBoard)
     }
 
     function handleChange(value) {

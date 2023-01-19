@@ -45,3 +45,7 @@ a {
 .input {
   @include input;
 }
+
+.loader {
+  @include absoluteCenter
+}
