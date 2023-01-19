@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { TaskDetails } from "./task-details";
-// DyncComp
+
+import { Icon } from 'monday-ui-react-core'
+import { Open } from 'monday-ui-react-core/icons'
+
+
 export function TaskPreview({ task }) {
     const [isOpenDetails, setIsOpenDetails] = useState(false)
     return <section className='task-preview flex'>
         <div className="task-name cell">
             <span className="task-preview-title">{task.title}</span>
-            <button onClick={() => setIsOpenDetails(!isOpenDetails)} className="open-item-page-btn">.</button>
+            <button onClick={() => setIsOpenDetails(!isOpenDetails)} className="open-item-page-btn">
+            <Icon iconType={Icon.type.SVG} icon={Open} iconLabel="my svg icon" iconSize={16} /><span>Open</span>
+            </button>
             {isOpenDetails && <TaskDetails
                 task={task}
                 isOpenDetails={isOpenDetails}
