@@ -5,23 +5,25 @@ import { userService } from './user.service.js'
 
 const BOARD_KEY = 'boardDB'
 
-// cases to update
-//board
+//Board
 export const CHANGE_TITLE = 'CHANGE_TITLE'
-//groups
+
+//Groups
 export const CHANGE_GROUP_TITLE = 'CHANGE_GROUP_TITLE'
+export const CHANGE_GROUP_COLOR = 'CHANGE_GROUP_COLOR'
+export const ADD_GROUP = 'ADD_GROUP'
+export const DUPLICATE_GROUP = 'DUPLICATE_GROUP'
 export const ADD_GROUP_TASK = 'ADD_GROUP_TASK'
 export const DELETE_GROUP = 'DELETE_GROUP'
 
-//tasks
+//Tasks
 export const ADD_TASK_FROM_HEADER = 'ADD_TASK_FROM_HEADER'
-
-//
 
 export const boardService = {
     query,
     getById,
     save,
+    duplicate,
     remove,
     getEmptyBoard,
     addBoardMsg,
@@ -72,6 +74,18 @@ async function save(board) {
     return savedBoard
 }
 
+async function duplicate(board) {
+    let newBoard = board
+    newBoard._id = utilService.makeId()
+    newBoard.groups.map(group => {
+        group.id = utilService.makeId()
+        group.tasks.map(task => task.id = utilService.makeId())
+        return group
+    })
+    await storageService.post(BOARD_KEY, newBoard)
+    return newBoard
+}
+
 async function addBoardMsg(boardId, txt) {
     // Later, this is all done by the backend
     const board = await getById(boardId)
@@ -107,18 +121,30 @@ function boardServiceReducer(board, data, type) {
     }
 }
 
-// will be changed
 function groupServiceReducer(board, data, type) {
     board = structuredClone(board)
     let groupToUpdate
     let newTask = getNewTask()
+    let groupIdx
     switch (type) {
         case CHANGE_GROUP_TITLE:
-            const groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.id)
+            groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.id)
             board.groups.splice(groupIdx, 1, data)
             return board
+        case CHANGE_GROUP_COLOR:
+            const groupToUpdate = board.groups.find(currGroup => currGroup.id === data.group.id)
+            groupToUpdate.style = data.color
+            return board
+        case ADD_GROUP:
+            console.log('HIIIIII');
+            return board
+        case DUPLICATE_GROUP:
+            groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.id)
+            data.id = utilService.makeId()
+            board.groups.splice(groupIdx, 0, data)
+            return board
         case ADD_GROUP_TASK:
-            groupToUpdate = board.groups.find(group => group.id === data.group.id)            // board.groups.splice(groupIdx, 1, data)
+            groupToUpdate = board.groups.find(group => group.id === data.group.id)
             newTask.title = data.newTaskTitle
             groupToUpdate.tasks.push(newTask)
             return board
@@ -130,15 +156,12 @@ function groupServiceReducer(board, data, type) {
     }
 }
 
-// will be changed
 function taskServiceReducer(board, data, type) {
     board = structuredClone(board)
     const newTask = getNewTask()
 
     switch (type) {
         case ADD_TASK_FROM_HEADER:
-            console.log('newTask', newTask);
-
             board.groups[0].tasks.unshift(newTask)
             return board
         default:

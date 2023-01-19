@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Navigate, useNavigate } from "react-router-dom"
 import { boardService } from "../services/board.service.local"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
-import { addBoard, removeBoard } from "../store/board.actions"
+import { addBoard, duplicateBoard, removeBoard } from "../store/board.actions"
 import { BoardList } from "./board-list"
 // import { Modal, ModalContent, ModalFooter, MenuItem, Button } from 'monday-ui-react-core'
 import { Modal, Box } from '@mui/material'
@@ -32,6 +32,15 @@ export function SideGroupBar() {
             showSuccessMsg(`Board added (id: ${savedBoard._id})`)
         } catch (err) {
             showErrorMsg('Cannot Add Board', err)
+        }
+    }
+
+    async function onDuplicateBoard(board) {
+        await duplicateBoard(board)
+        try {
+            showSuccessMsg(`Board Duplicated`)
+        } catch (err) {
+            showErrorMsg('Cannot Remove Board', err)
         }
     }
 
@@ -79,7 +88,7 @@ export function SideGroupBar() {
 
         <hr style={{ width: '90%' }} />
         <section className="board-list">
-            <BoardList onRemoveBoard={onRemoveBoard} />
+            <BoardList onDuplicateBoard={onDuplicateBoard} onRemoveBoard={onRemoveBoard} />
         </section>
 
     </section>

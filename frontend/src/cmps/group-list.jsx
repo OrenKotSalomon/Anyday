@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { updateBoard, updateGroup } from '../store/board.actions';
 import { TaskPreview } from "./task-preview";
 import { MenuButton, Menu, MenuItem, ColorPicker } from 'monday-ui-react-core'
-import { Delete, Bullet } from 'monday-ui-react-core/icons'
+import { Delete, Bullet, Duplicate, Add } from 'monday-ui-react-core/icons'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service';
-import { ADD_GROUP_TASK, boardService, CHANGE_GROUP_TITLE, DELETE_GROUP } from '../services/board.service.local';
+import { ADD_GROUP, ADD_GROUP_TASK, boardService, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DELETE_GROUP, DUPLICATE_GROUP } from '../services/board.service.local';
 import { utilService } from '../services/util.service';
 
 export function GroupList({ board, group }) {
@@ -22,18 +22,27 @@ export function GroupList({ board, group }) {
         setGroupToUpdate(prevGroup => ({ ...prevGroup, title: value }))
     }
 
+    function onAddGroup(group) {
+        updateGroup(board, group, ADD_GROUP)
+    }
+
+    function onDuplicateGroup(group) {
+        updateGroup(board, group, DUPLICATE_GROUP)
+    }
+
     function onDeleteGroup(group) {
         updateGroup(board, group, DELETE_GROUP)
     }
 
-    function onSetColorGroup(groupId) {
-        console.log('groupId:', groupId)
+    function onSetColorGroup() {
         setIsPickColor(!isPickColor)
     }
+
 
     function onColorPick([color]) {
         color = utilService.getColorHex(color)
         setIsPickColor(!isPickColor)
+        updateGroup(board, { group, color }, CHANGE_GROUP_COLOR)
     }
 
     function handleChangeTask(value) {
@@ -58,9 +67,19 @@ export function GroupList({ board, group }) {
                     }}
                 >
                     <MenuItem
-                        onClick={() => onSetColorGroup(group.id)}
+                        onClick={() => onAddGroup()}
+                        icon={Add}
+                        title="Add Group"
+                    />
+                    <MenuItem
+                        onClick={() => onSetColorGroup()}
                         icon={Bullet}
                         title="Change Color"
+                    />
+                    <MenuItem
+                        onClick={() => onDuplicateGroup(group)}
+                        icon={Duplicate}
+                        title="Duplicate Group"
                     />
                     <MenuItem
                         onClick={() => onDeleteGroup(group)}
@@ -98,7 +117,7 @@ export function GroupList({ board, group }) {
                 <div className="task-priority cell">Priority</div>
             </div>
             <section className="tasks-container">
-                {group.tasks.map(task => <TaskPreview key={task.id} task={task} />)}
+                {group.tasks.map(task => <TaskPreview key={task.id} task={task} board={board} />)}
                 <div className='add-task-container'>
                     <EditableHeading
                         type={EditableHeading.types.h6}
