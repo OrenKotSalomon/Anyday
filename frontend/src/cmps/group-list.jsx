@@ -11,10 +11,10 @@ export function GroupList({ board, group }) {
 
     // const [boardToUpdate, setBoardToUpdate] = useState(board)
     const [groupToUpdate, setGroupToUpdate] = useState(group)
-    const groupIndex = board.groups.findIndex(currGroup => currGroup.id === group.id)
+    const groupIdx = board.groups.findIndex(currGroup => currGroup.id === group.id)
 
     function onFinishEditing() {
-        const newBoard = boardService.updateGroupTitle(board, groupToUpdate, groupIndex)
+        const newBoard = boardService.updateGroupTitle(board, groupToUpdate, groupIdx)
         updateBoard(newBoard)
     }
 
@@ -28,12 +28,8 @@ export function GroupList({ board, group }) {
 
     async function onDeleteGroup(groupId) {
         console.log('groupId:', groupId)
-        // const deletedGroup = await deleteGroup(groupId)
-        // try {
-        //     showSuccessMsg(`Group Removed ${groupId}`)
-        // } catch (err) {
-        //     showErrorMsg('Cannot Remove Group', err)
-        // }
+        const newBoard = boardService.deleteGroup(board, groupId, groupIdx)
+        updateBoard(newBoard)
     }
 
     return <section className='group-list'>

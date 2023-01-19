@@ -14,7 +14,8 @@ export const boardService = {
     addBoardMsg,
     changeBoardTitle,
     addTaskFromHeader,
-    updateGroupTitle
+    updateGroupTitle,
+    deleteGroup
 }
 
 window.bs = boardService
@@ -100,6 +101,14 @@ function addTaskFromHeader(board) {
 function updateGroupTitle(board, groupToUpdate, idx) {
     board = structuredClone(board)
     board.groups.splice(idx, 1, groupToUpdate)
+    return board
+}
+
+function deleteGroup(board, groupToDelete, idx) {
+    console.log('groupToDelete:', groupToDelete)
+    board = structuredClone(board)
+    board.groups.splice(idx, 1)
+    console.log('boardAfter:', board)
     return board
 }
 
