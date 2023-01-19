@@ -2,7 +2,7 @@ import { useState } from "react";
 import { TaskDetails } from "./task-details";
 
 import { MenuButton, Menu, MenuItem, Icon } from 'monday-ui-react-core'
-import { Open, Duplicate, Delete } from 'monday-ui-react-core/icons'
+import { Open, Duplicate, Delete, Bolt } from 'monday-ui-react-core/icons'
 import { updateTask } from "../store/board.actions";
 import { DELETE_TASK, DUPLICATE_TASK } from "../services/board.service.local";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
@@ -51,7 +51,7 @@ export function TaskPreview({ task, board, group }) {
             </Menu>
         </MenuButton>
         <div className="task-name cell">
-            <span className="task-preview-title">{task.title}</span>
+            <span className="task-preview-title"> {task.title}</span>
             <button onClick={() => setIsOpenDetails(!isOpenDetails)} className="open-item-page-btn">
                 <Icon iconType={Icon.type.SVG} icon={Open} iconLabel="Task Details" iconSize={16} /><span>Open</span>
             </button>
