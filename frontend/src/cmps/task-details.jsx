@@ -5,20 +5,42 @@ import FormControl, { useFormControl } from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Box from '@mui/material/Box';
 
-import { TabList, Tab, EditableHeading, Icon } from 'monday-ui-react-core'
-import { Home, Bullet } from 'monday-ui-react-core/icons'
+import { TabList, Tab, EditableHeading, Icon} from 'monday-ui-react-core'
+import { Home } from 'monday-ui-react-core/icons'
+
+import { CHANGE_TASK_TITLE } from '../services/board.service.local';
+import { updateBoard } from '../store/board.actions';
 
 
 
-
-export function TaskDetails({ task, isOpenDetails, setIsOpenDetails }) {
-
+export function TaskDetails({ task, isOpenDetails, setIsOpenDetails , board}) {
     const [isAddComment, setAddComment] = useState(false)
+    const [newTitle, setNewTitle] = useState('')
+
+    function handleInputSubmit(ev) {
+        ev.preventDefault()
+
+    }
+
+    function onFinishEditing() {
+        updateBoard(board, newTitle, CHANGE_TASK_TITLE)
+    }
+
+    function handleChange(value) {
+        setNewTitle(value)
+    }
 
     return <section className='task-details' style={{ width: `${isOpenDetails ? 100 : 0}vw` }}>
         <div className='task-main'>
+
             <button className='close-task-btn' onClick={() => setIsOpenDetails(!isOpenDetails)}>X</button>
-            <EditableHeading className='task-details-title' type={EditableHeading.types.h4} value={task.title} />
+
+                <EditableHeading
+                    className='task-details-title'
+                    onFinishEditing={onFinishEditing}
+                    onChange={handleChange}
+                    type={EditableHeading.types.h4}
+                    value={task.title} />
 
             <TabList className='task-main-nav'>
                 <Tab>
@@ -35,23 +57,35 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails }) {
             <hr className="task-details-hr"></hr>
 
             {!isAddComment && <button onClick={() => setAddComment(!isAddComment)} className='task-details-open-input-btn'>Write an update...</button>}
-
             {isAddComment && <Box className='task-details-add-comment' component="form" noValidate autoComplete="off">
                 <div className='task-details-add-comment-tools'>tool-bar here</div>
-                <FormControl sx={{ width: '25ch' }}>
+                <FormControl sx={{ width: '25ch' }} onSubmit={(ev) => handleInputSubmit(ev)}>
                     <OutlinedInput className='task-details-input' placeholder="Please enter text" />
+                    <button type='submit' className='btn'>Update</button>
                 </FormControl>
             </Box>}
 
+            {task.comments ? <TaskComment /> : <NoCommentsYet />}
 
-
-            <div className='details-img-container'><img className="details-img" src="https://cdn.monday.com/images/pulse-page-empty-state.svg" alt="" /></div>
-
-            <p className='details-p' ><span className="details-p-header">No updates yet for this item</span>
-                <span className='details-p-txt'>Be the first one to update about progress, mention someone
-                    or upload files to share with your team members</span></p>
-        </div>
+        </div >
         <div className='close-task' onClick={() => setIsOpenDetails(!isOpenDetails)}>.</div>
-
     </section>
+}
+
+
+function NoCommentsYet() {
+    return <section>
+        <div className='details-img-container'><img className="details-img" src="https://cdn.monday.com/images/pulse-page-empty-state.svg" alt="" /></div>
+
+        <p className='details-p' ><span className="details-p-header">No updates yet for this item</span>
+            <span className='details-p-txt'>Be the first one to update about progress, mention someone
+                or upload files to share with your team members</span></p>
+    </section >
+}
+
+
+function TaskComment(task) {
+    return <section>
+        {task.comments.map(comment => <div className='task-details-task-comment'>{comment}</div>)}
+    </section >
 }

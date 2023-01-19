@@ -55,16 +55,6 @@ export function GroupList({ board, group }) {
         setNewTaskTitle('')
     }
 
-    function handleChangeTask(value) {
-        setNewTaskTitle(value)
-    }
-
-    function onAddGroupTask() {
-        if (!newTaskTitle) return console.log('error task empty');
-        updateGroup(board, { group, newTaskTitle }, ADD_GROUP_TASK)
-        setNewTaskTitle('')
-    }
-
     return <section className='group-list'>
         <div className="group-header-container">
             <MenuButton className="group-list-menu-btn" >
@@ -127,7 +117,7 @@ export function GroupList({ board, group }) {
                 <div className="task-priority cell">Priority</div>
             </div>
             <section className="tasks-container">
-                {group.tasks.map(task => <TaskPreview key={task.id} task={task} />)}
+                {group.tasks.map(task => <TaskPreview key={task.id} task={task} board={board} />)}
                 <div className='add-task-container'>
                     <EditableHeading
                         type={EditableHeading.types.h6}

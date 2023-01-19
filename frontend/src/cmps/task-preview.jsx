@@ -5,15 +5,16 @@ import { Icon } from 'monday-ui-react-core'
 import { Open } from 'monday-ui-react-core/icons'
 
 
-export function TaskPreview({ task }) {
+export function TaskPreview({ task, board }) {
     const [isOpenDetails, setIsOpenDetails] = useState(false)
     return <section className='task-preview flex'>
         <div className="task-name cell">
             <span className="task-preview-title">{task.title}</span>
             <button onClick={() => setIsOpenDetails(!isOpenDetails)} className="open-item-page-btn">
-            <Icon iconType={Icon.type.SVG} icon={Open} iconLabel="my svg icon" iconSize={16} /><span>Open</span>
+                <Icon iconType={Icon.type.SVG} icon={Open} iconLabel="my svg icon" iconSize={16} /><span>Open</span>
             </button>
             {isOpenDetails && <TaskDetails
+                board={board}
                 task={task}
                 isOpenDetails={isOpenDetails}
                 setIsOpenDetails={setIsOpenDetails} />}
