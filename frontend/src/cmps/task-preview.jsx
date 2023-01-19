@@ -5,7 +5,7 @@ import { Icon } from 'monday-ui-react-core'
 import { Open } from 'monday-ui-react-core/icons'
 
 
-export function TaskPreview({ task, board }) {
+export function TaskPreview({ task, board, group }) {
     const [isOpenDetails, setIsOpenDetails] = useState(false)
     return <section className='task-preview flex'>
         <div className="task-name cell">
@@ -16,6 +16,7 @@ export function TaskPreview({ task, board }) {
             {isOpenDetails && <TaskDetails
                 board={board}
                 task={task}
+                group={group}
                 isOpenDetails={isOpenDetails}
                 setIsOpenDetails={setIsOpenDetails} />}
         </div>

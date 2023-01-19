@@ -117,7 +117,7 @@ export function GroupList({ board, group }) {
                 <div className="task-priority cell">Priority</div>
             </div>
             <section className="tasks-container">
-                {group.tasks.map(task => <TaskPreview key={task.id} task={task} board={board} />)}
+                {group.tasks.map(task => <TaskPreview key={task.id} task={task} board={board} group={group} />)}
                 <div className='add-task-container'>
                     <EditableHeading
                         type={EditableHeading.types.h6}

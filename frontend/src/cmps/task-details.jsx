@@ -5,15 +5,16 @@ import FormControl, { useFormControl } from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Box from '@mui/material/Box';
 
-import { TabList, Tab, EditableHeading, Icon} from 'monday-ui-react-core'
+import { TabList, Tab, EditableHeading, Icon } from 'monday-ui-react-core'
 import { Home } from 'monday-ui-react-core/icons'
 
-import { CHANGE_TASK_TITLE } from '../services/board.service.local';
-import { updateBoard } from '../store/board.actions';
+import { CHANGE_TASK_TITLE, boardService } from '../services/board.service.local.js';
+import { updateTask } from '../store/board.actions';
 
 
 
-export function TaskDetails({ task, isOpenDetails, setIsOpenDetails , board}) {
+
+export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, group }) {
     const [isAddComment, setAddComment] = useState(false)
     const [newTitle, setNewTitle] = useState('')
 
@@ -23,7 +24,8 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails , board}) {
     }
 
     function onFinishEditing() {
-        updateBoard(board, newTitle, CHANGE_TASK_TITLE)
+        let taskChanges = { title: newTitle, id: task.id, groupId: group.id }
+        updateTask(board, taskChanges, CHANGE_TASK_TITLE)
     }
 
     function handleChange(value) {
@@ -35,12 +37,12 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails , board}) {
 
             <button className='close-task-btn' onClick={() => setIsOpenDetails(!isOpenDetails)}>X</button>
 
-                <EditableHeading
-                    className='task-details-title'
-                    onFinishEditing={onFinishEditing}
-                    onChange={handleChange}
-                    type={EditableHeading.types.h4}
-                    value={task.title} />
+            <EditableHeading
+                className='task-details-title'
+                onFinishEditing={onFinishEditing}
+                onChange={handleChange}
+                type={EditableHeading.types.h4}
+                value={task.title} />
 
             <TabList className='task-main-nav'>
                 <Tab>
