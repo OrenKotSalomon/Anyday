@@ -8,11 +8,10 @@ import { MenuButton, Menu, MenuItem } from 'monday-ui-react-core'
 export function BoardList({ onRemoveBoard }) {
     const navigate = useNavigate()
     const boards = useSelector((storeState) => storeState.boardModule.boards)
-
     useEffect(() => {
         loadBoards()
     }, [])
-
+    console.log(boards);
     function onMenuClick(ev) {
         console.log('ev:', ev)
         console.log('Menu Click');
@@ -27,30 +26,30 @@ export function BoardList({ onRemoveBoard }) {
         navigate(`/board/${boardId}`)
     }
 
-        if (!boards) return <div>Loading...</div>
-        return <section className='board-list'>
-            {boards && boards.map(board => <NavLink to={`/board/${board._id}`} key={board._id} className="board-list-a flex">
-                {board.title}
-                <MenuButton className="board-list-menu-btn"
+    if (!boards) return <div>Loading...</div>
+    return <section className='board-list'>
+        {boards.map(board => <NavLink to={`/board/${board._id}`} key={board._id} className="board-list-a flex">
+            {board.title}
+            <MenuButton className="board-list-menu-btn"
+            // onClick={ev => onMenuClick(ev)}
+            >
+                <Menu
+                    id="menu"
+                    size="medium"
                 // onClick={ev => onMenuClick(ev)}
                 >
-                    <Menu
-                        id="menu"
-                        size="medium"
-                    // onClick={ev => onMenuClick(ev)}
-                    >
-                        <MenuItem
-                            onClick={(ev) => {
-                                onMenuClick(ev)
-                                onRemoveBoard(board._id)
-                            }}
-                            title="Remove Board"
-                        />
-                    </Menu>
-                </MenuButton>
-                {/* <div onClick={ev => onMenuClick(ev)} >X</div> */}
-            </NavLink>)}
-          
-        </section>
+                    <MenuItem
+                        onClick={(ev) => {
+                            onMenuClick(ev)
+                            onRemoveBoard(board._id)
+                        }}
+                        title="Remove Board"
+                    />
+                </Menu>
+            </MenuButton>
+            {/* <div onClick={ev => onMenuClick(ev)} >X</div> */}
+        </NavLink>)}
 
-    }
+    </section>
+
+}

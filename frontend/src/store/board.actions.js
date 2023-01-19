@@ -69,9 +69,12 @@ export async function addBoard(board) {
     }
 }
 
-export async function updateBoard(board) {
+export async function updateBoard(board, data, type) {
     try {
-        const savedBoard = await boardService.save(board)
+        // todo
+        const boardToUpdate = boardService.boardServiceReducer(board, data, type)
+
+        const savedBoard = await boardService.save(boardToUpdate)
         console.log('Updated board:', savedBoard)
         store.dispatch(getActionUpdateboard(savedBoard))
         console.log('savedBoard:', savedBoard)
@@ -80,6 +83,41 @@ export async function updateBoard(board) {
         console.log('Cannot save board', err)
         throw err
     }
+
+}
+
+export async function updateGroup(board, data, type) {
+    try {
+        // todo
+        const boardToUpdate = boardService.groupServiceReducer(board, data, type)
+
+        const savedBoard = await boardService.save(boardToUpdate)
+        console.log('Updated board:', savedBoard)
+        store.dispatch(getActionUpdateboard(savedBoard))
+        console.log('savedBoard:', savedBoard)
+        return savedBoard
+    } catch (err) {
+        console.log('Cannot save board', err)
+        throw err
+    }
+
+}
+
+export async function updateTask(board, data, type) {
+    try {
+        // todo
+        const boardToUpdate = boardService.taskServiceReducer(board, data, type)
+
+        const savedBoard = await boardService.save(boardToUpdate)
+        console.log('Updated board:', savedBoard)
+        store.dispatch(getActionUpdateboard(savedBoard))
+        console.log('savedBoard:', savedBoard)
+        return savedBoard
+    } catch (err) {
+        console.log('Cannot save board', err)
+        throw err
+    }
+
 }
 
 // Demo for Optimistic Mutation
