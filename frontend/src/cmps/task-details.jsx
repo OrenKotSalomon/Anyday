@@ -92,7 +92,6 @@ function TaskComment(task) {
     </section >
 }
 
-
 {/* <Box className='task-details-add-comment' component="form" noValidate autoComplete="off">
                 <div className='task-details-add-comment-tools'>tool-bar here</div>
                 <FormControl sx={{ width: '25ch' }} onSubmit={(ev) => handleInputSubmit(ev)}>
