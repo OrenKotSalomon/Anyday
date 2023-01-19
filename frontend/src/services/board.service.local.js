@@ -12,10 +12,11 @@ export const boardService = {
     remove,
     getEmptyBoard,
     addBoardMsg,
-    addTask,
-    updateGroupTitleFromHeader,
-    changeBoardTitle
+    changeBoardTitle,
+    addTaskFromHeader,
+    updateGroupTitle
 }
+
 window.bs = boardService
 
 async function query(filterBy = { txt: '', price: 0 }) {
@@ -82,45 +83,17 @@ function getNewTask() {
 
 }
 
-function addTaskFromHeader(board) {
-    const newTask = getNewTask()
-    board = structuredClone(board)
-    console.log('board', board);
-    board.groups[0].tasks.unshift(newTask)
-    console.log('board', board);
-
-    return board
-}
-
 function changeBoardTitle(board, title) {
     board = structuredClone(board)
-    // console.log('board', board, 'title', title);
     board.title = title
-    return board
-
-}
-function updateGroupTitle(board, groupToUpdate, idx) {
-    board = structuredClone(board)
-    board.groups.splice(idx, 1, groupToUpdate)
     return board
 }
 
 function addTaskFromHeader(board) {
     const newTask = getNewTask()
     board = structuredClone(board)
-    console.log('board', board);
     board.groups[0].tasks.unshift(newTask)
-    console.log('board', board);
-
     return board
-}
-
-function changeBoardTitle(board, title) {
-    board = structuredClone(board)
-    // console.log('board', board, 'title', title);
-    board.title = title
-    return board
-
 }
 
 function updateGroupTitle(board, groupToUpdate, idx) {
