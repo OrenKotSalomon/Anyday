@@ -5,14 +5,15 @@ import { boardService, CHANGE_TITLE } from '../services/board.service.local';
 import { updateBoard } from '../store/board.actions';
 
 export function BoardView({ board }) {
-    const [newTitle, setNewTitle] = useState('')
+    const [newTitle, setNewTitle] = useState(board.title)
 
     function onFinishEditing() {
-        console.log(newTitle);
+
         updateBoard(board, newTitle, CHANGE_TITLE)
     }
 
     function handleChange(value) {
+        value = !value ? board.title : value
         setNewTitle(value)
     }
 
@@ -25,11 +26,12 @@ export function BoardView({ board }) {
                             <Tooltip
                                 content="Click to Edit" animationType="expand">
                                 <EditableHeading
+
                                     onFinishEditing={onFinishEditing}
                                     onChange={handleChange}
                                     type={EditableHeading.types.h2}
                                     autoSize={true}
-                                    value={board.title} brandFont={true} />
+                                    value={newTitle} brandFont={true} />
                             </Tooltip>
                         </div>
 

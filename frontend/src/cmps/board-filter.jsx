@@ -7,12 +7,6 @@ import { updateBoard, updateGroup, updateTask } from '../store/board.actions';
 
 export function BoardFilter({ board }) {
 
-    const obj = [
-        { txt: 'ttt' },
-        { txt: 'ttt' },
-        { txt: 'ttt' },
-    ]
-
     function onAddNewTask() {
         updateTask(board, undefined, ADD_TASK_FROM_HEADER)
     }
