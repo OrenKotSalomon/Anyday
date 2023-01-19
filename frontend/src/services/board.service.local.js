@@ -12,8 +12,9 @@ export const boardService = {
     remove,
     getEmptyBoard,
     addBoardMsg,
-    getNewTask,
-    updateGroupTitle
+    addTask,
+    updateGroupTitleFromHeader,
+    changeBoardTitle
 }
 window.bs = boardService
 
@@ -47,6 +48,7 @@ async function save(board) {
     var savedBoard
     if (board._id) {
         savedBoard = await storageService.put(BOARD_KEY, board)
+        return savedBoard
     } else {
         // Later, owner is set by the backend
         board.owner = userService.getLoggedinUser()
@@ -72,18 +74,52 @@ async function addBoardMsg(boardId, txt) {
     return msg
 }
 
-async function getNewTask(boardId) {
-    try {
-        const board = await getById(boardId)
-        const task = board.groups[0].tasks[0]
-        const newTask = {
-            id: utilService.makeId(),
-            title: 'New Task',
-        }
-        return newTask
-    } catch (error) {
-
+function getNewTask() {
+    return {
+        id: utilService.makeId(),
+        title: 'New Task'
     }
+
+}
+
+function addTaskFromHeader(board) {
+    const newTask = getNewTask()
+    board = structuredClone(board)
+    console.log('board', board);
+    board.groups[0].tasks.unshift(newTask)
+    console.log('board', board);
+
+    return board
+}
+
+function changeBoardTitle(board, title) {
+    board = structuredClone(board)
+    // console.log('board', board, 'title', title);
+    board.title = title
+    return board
+
+}
+function updateGroupTitle(board, groupToUpdate, idx) {
+    board = structuredClone(board)
+    board.groups.splice(idx, 1, groupToUpdate)
+    return board
+}
+
+function addTaskFromHeader(board) {
+    const newTask = getNewTask()
+    board = structuredClone(board)
+    console.log('board', board);
+    board.groups[0].tasks.unshift(newTask)
+    console.log('board', board);
+
+    return board
+}
+
+function changeBoardTitle(board, title) {
+    board = structuredClone(board)
+    // console.log('board', board, 'title', title);
+    board.title = title
+    return board
 
 }
 

@@ -32,19 +32,24 @@ export function BoardDetails() {
     //     updateBoard(board)
     // }
 
-    function editBoardTitle(boardToUpdate) {
-        updateBoard(boardToUpdate)
-    }
+    // async function editBoardTitle(boardToUpdate) {
+    //     try {
+    //         const savedBoard = await updateBoard(boardToUpdate)
+    //         console.log('savedBoard', savedBoard);
+    //         console.log('mainboard', board);
+    //     } catch (error) {
+
+    //     }
+    // }
 
     if (!board) return <div className="loader"><Loader size={Loader.sizes.LARGE}/></div>
     return <section className="board-details">
         <NavBar />
         <SideGroupBar />
         {board && <div className="board-container">
-            {/* <BoardHeader
-                addNewTask={addNewTask} editBoardTitle={editBoardTitle}
-                board={board} setBoard={setgBoard}
-                 /> */}
+            <BoardHeader
+                board={board}
+            />
             <section className="groups-container">
                 {board.groups.map(group => <GroupList key={group.id} board={board} group={group} />)}
             </section>
