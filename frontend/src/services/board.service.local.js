@@ -19,6 +19,8 @@ export const DELETE_GROUP = 'DELETE_GROUP'
 //Tasks
 export const CHANGE_TASK_TITLE = 'CHANGE_TASK_TITLE'
 export const ADD_TASK_FROM_HEADER = 'ADD_TASK_FROM_HEADER'
+export const ADD_TASK_COMMENT = 'ADD_TASK_COMMENT'
+export const DELETE_TASK_COMMENT = 'DELETE_TASK_COMMENT'
 
 export const boardService = {
     query,
@@ -133,11 +135,12 @@ function groupServiceReducer(board, data, type) {
             board.groups.splice(groupIdx, 1, data)
             return board
         case CHANGE_GROUP_COLOR:
-            const groupToUpdate = board.groups.find(currGroup => currGroup.id === data.group.id)
+            groupToUpdate = board.groups.find(currGroup => currGroup.id === data.group.id)
             groupToUpdate.style = data.color
             return board
         case ADD_GROUP:
-            console.log('HIIIIII');
+            groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.id)
+            board.groups.splice(groupIdx + 1, 0, getEmptyGroup())
             return board
         case DUPLICATE_GROUP:
             groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.id)
@@ -160,13 +163,48 @@ function groupServiceReducer(board, data, type) {
 function taskServiceReducer(board, data, type) {
     board = structuredClone(board)
     const newTask = getNewTask()
+    let taskIdx
 
     switch (type) {
         case ADD_TASK_FROM_HEADER:
             board.groups[0].tasks.unshift(newTask)
             return board
+        case CHANGE_TASK_TITLE:
+            let groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
+            taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.id)
+            board.groups[groupIdx].tasks[taskIdx].title = data.title
+            return board
+        case ADD_TASK_COMMENT:
+            // let groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
+            // taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.id)
+            // board.groups[groupIdx].tasks[taskIdx].title = data.title
+            return board
+        case DELETE_TASK_COMMENT:
+            // let groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
+            // taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.id)
+            // board.groups[groupIdx].tasks[taskIdx].title = data.title
+            return board
         default:
             return board
+    }
+}
+
+function getEmptyGroup() {
+    return {
+        id: utilService.makeId(),
+        title: 'New Group',
+        archivedAt: 1589983468418,
+        tasks: [
+            {
+                id: utilService.makeId(),
+                title: 'Task 1'
+            },
+            {
+                id: utilService.makeId(),
+                title: 'Task 2'
+            }
+        ],
+        style: '#808080'
     }
 }
 
@@ -190,7 +228,7 @@ function getEmptyBoard() {
                         title: 'Task 2'
                     }
                 ],
-                style: 'red'
+                style: 'lightpink'
             },
             {
                 id: utilService.makeId(),
@@ -222,7 +260,7 @@ function getEmptyBoard() {
                         title: 'Task 6'
                     }
                 ],
-                style: 'blue'
+                style: 'lightblue'
             },
         ]
     }
@@ -250,7 +288,7 @@ const demoBoard = {
                     title: 'Task 2'
                 }
             ],
-            style: 'red'
+            style: 'lightpink'
         },
         {
             id: utilService.makeId(),
@@ -282,7 +320,7 @@ const demoBoard = {
                     title: 'Task 6'
                 }
             ],
-            style: 'blue'
+            style: 'lightblue'
         },
     ]
 }
