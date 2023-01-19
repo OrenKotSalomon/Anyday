@@ -10,14 +10,13 @@ import { useParams } from "react-router-dom";
 import { Loader } from 'monday-ui-react-core'
 
 export function BoardDetails() {
-
     const board = useSelector((storeState) => storeState.boardModule.board)
-    const boards = useSelector((storeState) => storeState.boardModule.boards)
+
     const { boardId } = useParams()
 
     useEffect(() => {
         loadBoard(boardId)
-    }, [boardId, boards])
+    }, [boardId])
 
     if (!board) return <div className="loader"><Loader size={Loader.sizes.LARGE} /></div>
     return <section className="board-details">
