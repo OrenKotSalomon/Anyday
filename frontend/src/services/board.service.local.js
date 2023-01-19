@@ -163,29 +163,29 @@ function groupServiceReducer(board, data, type) {
 function taskServiceReducer(board, data, type) {
     board = structuredClone(board)
     const newTask = getNewTask()
-    let taskIdx,groupIdx,currTask
+    let currTask, groupIdx, taskIdx
+    if (data.groupId) {
+        groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
+    }
+    if (data.id) {
+        taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.id)
+    }
 
     switch (type) {
         case ADD_TASK_FROM_HEADER:
             board.groups[0].tasks.unshift(newTask)
             return board
         case CHANGE_TASK_TITLE:
-            groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
-            taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.id)
             board.groups[groupIdx].tasks[taskIdx].title = data.title
             return board
         case ADD_TASK_COMMENT:
-            groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
-            taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.id)
             currTask = board.groups[groupIdx].tasks[taskIdx]
-            currTask.comments?currTask.comments=[data.comment]:currTask.push(data.comment)
+            currTask.comments ? currTask.comments = [data.comment] : currTask.push(data.comment)
             return board
         case DELETE_TASK_COMMENT:
-            groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
-            taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.id)
             currTask = board.groups[groupIdx].tasks[taskIdx]
             let deleteCommentIdx = currTask.comments.findIndex(currComment => currComment.id === data.commentIdx)
-            currTask.splice(deleteCommentIdx,1)
+            currTask.comments.splice(deleteCommentIdx, 1)
             return board
         default:
             return board

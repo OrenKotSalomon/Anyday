@@ -60,13 +60,15 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
             <hr className="task-details-hr"></hr>
 
             {!isAddComment && <button onClick={() => setAddComment(!isAddComment)} className='task-details-open-input-btn'>Write an update...</button>}
-            {isAddComment && <Box className='task-details-add-comment' component="form" noValidate autoComplete="off">
-                <div className='task-details-add-comment-tools'>tool-bar here</div>
-                <FormControl sx={{ width: '25ch' }} onSubmit={(ev) => handleInputSubmit(ev)}>
-                    <OutlinedInput className='task-details-input' placeholder="Please enter text" />
-                    <button type='submit' className='btn'>Update</button>
-                </FormControl>
-            </Box>}
+            {isAddComment &&
+
+                <form>
+                    <input type='text' placeholder='Add a task comment...' />
+                    <button className='btn'>Submit</button>
+                </form>
+
+
+            }
 
             {task.comments ? <TaskComment /> : <NoCommentsYet />}
 
@@ -90,3 +92,12 @@ function TaskComment(task) {
         {task.comments.map(comment => <div className='task-details-task-comment'>{comment}</div>)}
     </section >
 }
+
+
+{/* <Box className='task-details-add-comment' component="form" noValidate autoComplete="off">
+                <div className='task-details-add-comment-tools'>tool-bar here</div>
+                <FormControl sx={{ width: '25ch' }} onSubmit={(ev) => handleInputSubmit(ev)}>
+                    <OutlinedInput className='task-details-input' placeholder="Please enter text" />
+                    <button type='submit' className='btn'>Update</button>
+                </FormControl>
+            </Box> */}
