@@ -76,16 +76,7 @@
   }
 
   .left-border {
-    position: relative;
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 6px;
-    height: 100%;
-    overflow: hidden;
-    background-color: red;
-    transition: width .07s cubic-bezier(0, 0, 0.35, 1);
-    will-change: width;
-    border: none;
+    @include left-border;
     border-top-left-radius: 6px;
     // border-bottom-left-radius: 6px;
 

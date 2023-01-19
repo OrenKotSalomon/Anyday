@@ -15,7 +15,8 @@ $btn-green: rgb(37, 135, 80);
 $btn-blue: #0073ea;
 
 // border
-$border-cell: 0.7px solid red;
+$cell-border-color: #d0d4e4;
+$border-cell: 0.7px solid $cell-border-color;
 
 //Color Picker
 $hover-header: #dcdfec;

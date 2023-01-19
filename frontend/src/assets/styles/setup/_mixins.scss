@@ -195,3 +195,15 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+@mixin left-border {
+  position: relative;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 6px;
+  height: 100%;
+  overflow: hidden;
+  background-color: red;
+  will-change: width;
+  border: none;
+}

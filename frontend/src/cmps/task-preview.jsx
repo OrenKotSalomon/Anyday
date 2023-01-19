@@ -53,21 +53,25 @@ export function TaskPreview({ task, board, group }) {
         <div className="task">
 
             <div className="task-edit-wrapper">
+                <div className='left-border-task'></div>
                 <div className='checkbox-row-container'>
                     <input className='row-checkbox' type="checkbox" />
                 </div>
-                <div className="task-edit">
-                    <EditableHeading type={EditableHeading.types.h5} value={task.title} />
-                    <button onClick={() => setIsOpenDetails(!isOpenDetails)} className="open-item-page-btn">
+
+                <div className="task-name-cell">
+                    <EditableHeading className='task-title' type={EditableHeading.types.h5} value={task.title} />
+                    {/* <button onClick={() => setIsOpenDetails(!isOpenDetails)} className="open-item-page-btn">
                         <Icon iconType={Icon.type.SVG} icon={Open} iconLabel="Task Details" iconSize={16} /><span>Open</span>
-                    </button>
-                    <span>{Array.isArray(task.comments) && (task.comments.length !== 0) && task.comments.length}</span>
-                    <button className="message-btn">
-                        <Icon iconType={Icon.type.SVG} icon={AddUpdate} iconLabel="Task Details" iconSize={16} /><span></span>
-
-                    </button>
-
+                    </button> */}
                 </div>
+                {/* <span>{Array.isArray(task.comments) && (task.comments.length !== 0) && task.comments.length}</span> */}
+                <div className="msg-btn-container">
+
+                    <button className="msg-btn">
+                        <Icon iconType={Icon.type.SVG} icon={AddUpdate} iconLabel="Task Details" iconSize={24} /><span></span>
+                    </button>
+                </div>
+
             </div>
             {isOpenDetails && <TaskDetails
                 board={board}
