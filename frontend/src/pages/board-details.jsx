@@ -41,8 +41,14 @@ export function BoardDetails() {
         updateBoard(board)
     }
 
-    function editBoardTitle(boardToUpdate) {
-        updateBoard(boardToUpdate)
+    async function editBoardTitle(boardToUpdate) {
+        try {
+            const savedBoard = await updateBoard(boardToUpdate)
+            console.log('savedBoard', savedBoard);
+            console.log('mainboard', board);
+        } catch (error) {
+
+        }
     }
 
     if (!board) return <div>Loading...</div>

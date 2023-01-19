@@ -45,6 +45,7 @@ async function save(board) {
     var savedBoard
     if (board._id) {
         savedBoard = await storageService.put(BOARD_KEY, board)
+        return savedBoard
     } else {
         // Later, owner is set by the backend
         board.owner = userService.getLoggedinUser()
