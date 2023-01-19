@@ -1,4 +1,4 @@
-import { EditableHeading } from 'monday-ui-react-core'
+import { EditableHeading, Tooltip } from 'monday-ui-react-core'
 import { useState } from 'react';
 import { updateBoard } from '../store/board.actions';
 import { TaskPreview } from "./task-preview";
@@ -57,12 +57,18 @@ export function GroupList({ board, group }) {
             </MenuButton>
             <div className="group-header-name"
                 style={{ color: group.style }}>
-                <EditableHeading
-                    onFinishEditing={onFinishEditing}
-                    onChange={handleChange}
-                    brandFont
-                    value={group.title}
-                />
+                <div className="monday-storybook-tooltip_bottom">
+                    <Tooltip
+                        content="Click to Edit" animationType="expand">
+                        <EditableHeading
+                            onFinishEditing={onFinishEditing}
+                            onChange={handleChange}
+                            brandFont
+                            value={group.title}
+                        />
+                    </Tooltip>
+                </div>
+
             </div>
         </div>
         <div className="main-group-container"
