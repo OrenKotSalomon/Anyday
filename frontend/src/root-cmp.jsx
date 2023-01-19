@@ -7,6 +7,7 @@ import { BoardDetails } from './pages/board-details'
 import { Login } from './pages/login-page'
 import { Signup } from './pages/signup'
 import { UserMsg } from './cmps/user-msg'
+import { BoardIndex } from './pages/board-index'
 
 export function RootCmp() {
 
@@ -16,7 +17,7 @@ export function RootCmp() {
                 <Routes>
                     <Route element={<HomePage />} path="/" />
                     {/* <Route element={<AboutUs />} path="/about" /> */}
-                    <Route element={<BoardDetails />} path="/board" />
+                    <Route element={<BoardIndex />} path="/board" />
                     <Route element={<BoardDetails />} path="/board/:boardId" />
                     <Route element={<UserDetails />} path="/user-details/:userId" />
                     <Route element={<Login />} path="/login" />

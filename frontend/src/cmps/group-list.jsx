@@ -5,6 +5,7 @@ import { TaskPreview } from "./task-preview";
 import { MenuButton, Menu, MenuItem } from 'monday-ui-react-core'
 import { Delete, Bullet } from 'monday-ui-react-core/icons'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service';
+import { boardService } from '../services/board.service.local';
 
 export function GroupList({ board, group }) {
 
@@ -14,6 +15,10 @@ export function GroupList({ board, group }) {
 
     function onFinishEditing() {
         setBoardToUpdate(prevBoard => ({ ...prevBoard, groups: [...prevBoard.groups.splice(groupIndex, 1, groupToUpdate)] }))
+        // const newBoard = boardService.updateGroup(board, groupId)
+        // JSON.stringify(board)
+        // board = structuredClone(board)
+        // updateBoard(newBoard)
         updateBoard(boardToUpdate)
     }
 

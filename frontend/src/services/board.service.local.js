@@ -22,13 +22,14 @@ async function query(filterBy = { txt: '', price: 0 }) {
         storageService.post(BOARD_KEY, demoBoard)
         return demoBoard
     }
-    if (filterBy.txt) {
-        const regex = new RegExp(filterBy.txt, 'i')
-        boards = boards.filter(board => regex.test(board.vendor) || regex.test(board.description))
-    }
-    if (filterBy.price) {
-        boards = boards.filter(board => board.price <= filterBy.price)
-    }
+    // Filters
+    // if (filterBy.txt) {
+    //     const regex = new RegExp(filterBy.txt, 'i')
+    //     boards = boards.filter(board => regex.test(board.vendor) || regex.test(board.description))
+    // }
+    // if (filterBy.price) {
+    //     boards = boards.filter(board => board.price <= filterBy.price)
+    // }
     return boards
 }
 
