@@ -1,5 +1,5 @@
 .task-preview {
-  // position: relative;
+  position: relative;
   // display: flex;
 
   &:hover {
@@ -30,7 +30,7 @@
 
   .task-preview-menu-btn {
     position: absolute;
-    left: -6%;
+    left: -12%;
     transition: .3s;
     opacity: 0;
   }
@@ -54,7 +54,7 @@
   border-bottom: $border-cell;
   max-width: rem(272px);
   // flex-basis: rem(300px);
-  // align-items: flex-start;
+  align-items: center;
   text-align: left;
 
   .left-border-task {
@@ -67,15 +67,24 @@
   }
 
   .msg-btn-container {
+    display: flex;
+    align-items: center;
     margin-left: auto;
     border-left: $border-cell;
     border-right: $border-cell;
+    height: 100%;
 
     .msg-btn {
-
+      padding-right: 16px;
+      padding-left: 16px;
       @include btn-no-style;
 
     }
+  }
+
+  .AddUpdate {
+    font-weight: 100;
+    font-family: roboto-thin;
   }
 
   .checkbox-row-container {

@@ -68,7 +68,7 @@ export function TaskPreview({ task, board, group }) {
                 <div className="msg-btn-container">
 
                     <button className="msg-btn">
-                        <Icon iconType={Icon.type.SVG} icon={AddUpdate} iconLabel="Task Details" iconSize={24} /><span></span>
+                        <Icon style={{ color: "grey" }} SRC="AddUpdate" iconType={Icon.type.SVG} icon={AddUpdate} iconLabel="Task Details" iconSize={24} /><span></span>
                     </button>
                 </div>
 
