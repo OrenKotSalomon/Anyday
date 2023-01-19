@@ -1,4 +1,11 @@
-.open-item-page-btn {
+.task-preview {
+  position: relative;
+  &:hover {
+    .task-preview-menu-btn {
+        opacity: 1;
+    }
+  }
+  .open-item-page-btn {
     color: $grey;
     background-color: #fff;
     border: none;
@@ -6,19 +13,26 @@
     opacity: 0;
 
     span {
-        padding: 6px;
-        line-height: 16px;
+      padding: 6px;
     }
-}
+  }
 
-span:hover {
+  .task-preview-menu-btn {
+    position: absolute;
+    left: -6%;
+    transition: .3s;
+    opacity: 0;
+  }
+
+  span:hover {
     cursor: pointer;
-}
+  }
 
-.task-name.cell {
+  .task-name.cell {
     min-width: rem(180px);
-}
+  }
 
-.task-name.cell:hover .open-item-page-btn {
+  .task-name.cell:hover .open-item-page-btn {
     opacity: 100%;
+  }
 }
