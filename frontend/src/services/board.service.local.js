@@ -144,7 +144,7 @@ function groupServiceReducer(board, data, type) {
             board.groups.splice(groupIdx, 0, data)
             return board
         case ADD_GROUP_TASK:
-            groupToUpdate = board.groups.find(group => group.id === data.group.id)            // board.groups.splice(groupIdx, 1, data)
+            groupToUpdate = board.groups.find(group => group.id === data.group.id)
             newTask.title = data.newTaskTitle
             groupToUpdate.tasks.push(newTask)
             return board
