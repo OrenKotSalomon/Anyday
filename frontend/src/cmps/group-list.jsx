@@ -2,14 +2,15 @@ import { EditableHeading } from 'monday-ui-react-core'
 import { useState } from 'react';
 import { updateBoard } from '../store/board.actions';
 import { TaskPreview } from "./task-preview";
-import { MenuButton, Menu, MenuItem } from 'monday-ui-react-core'
+import { MenuButton, Menu, MenuItem, ColorPicker } from 'monday-ui-react-core'
 import { Delete, Bullet } from 'monday-ui-react-core/icons'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service';
 import { boardService } from '../services/board.service.local';
+import { utilService } from '../services/util.service';
 
 export function GroupList({ board, group }) {
 
-    // const [boardToUpdate, setBoardToUpdate] = useState(board)
+    const [isPickColor, setIsPickColor] = useState(false)
     const [groupToUpdate, setGroupToUpdate] = useState(group)
     const groupIdx = board.groups.findIndex(currGroup => currGroup.id === group.id)
 
@@ -22,14 +23,20 @@ export function GroupList({ board, group }) {
         setGroupToUpdate(prevGroup => ({ ...prevGroup, title: value }))
     }
 
-    function onSetColorGroup(groupId) {
-        console.log('groupId:', groupId)
-    }
-
-    async function onDeleteGroup(groupId) {
+    function onDeleteGroup(groupId) {
         console.log('groupId:', groupId)
         const newBoard = boardService.deleteGroup(board, groupId, groupIdx)
         updateBoard(newBoard)
+    }
+
+    function onSetColorGroup(groupId) {
+        console.log('groupId:', groupId)
+        setIsPickColor(!isPickColor)
+    }
+    
+    function onColorPick([color]) {
+        color = utilService.getColorHex(color)
+        setIsPickColor(!isPickColor)
     }
 
     return <section className='group-list'>
@@ -55,6 +62,10 @@ export function GroupList({ board, group }) {
                     />
                 </Menu>
             </MenuButton>
+            {isPickColor && <ColorPicker className="group-color-picker"
+                colorsList={['red', 'blue']}
+                colorSize={ColorPicker.sizes.SMALL}
+                onSave={(value) => onColorPick(value)} />}
             <div className="group-header-name"
                 style={{ color: group.style }}>
                 <EditableHeading
