@@ -3,6 +3,9 @@ import { NavBar } from '../cmps/nav-bar'
 import { SideGroupBar } from '../cmps/side-group-bar'
 
 export function BoardIndex() {
+
+ 
+
     return <section className='board-details'>
         <NavBar />
         <SideGroupBar />

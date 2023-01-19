@@ -38,7 +38,6 @@ export function GroupList({ board, group }) {
         setIsPickColor(!isPickColor)
     }
 
-
     function onColorPick([color]) {
         color = utilService.getColorHex(color)
         setIsPickColor(!isPickColor)
@@ -67,7 +66,7 @@ export function GroupList({ board, group }) {
                     }}
                 >
                     <MenuItem
-                        onClick={() => onAddGroup()}
+                        onClick={() => onAddGroup(group)}
                         icon={Add}
                         title="Add Group"
                     />
@@ -89,7 +88,6 @@ export function GroupList({ board, group }) {
                 </Menu>
             </MenuButton>
             {isPickColor && <ColorPicker className="group-color-picker"
-                colorsList={['red', 'blue']}
                 colorSize={ColorPicker.sizes.SMALL}
                 onSave={(value) => onColorPick(value)} />}
             <div className="group-header-name"

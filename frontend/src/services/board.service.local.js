@@ -17,6 +17,7 @@ export const ADD_GROUP_TASK = 'ADD_GROUP_TASK'
 export const DELETE_GROUP = 'DELETE_GROUP'
 
 //Tasks
+export const CHANGE_TASK_TITLE = 'CHANGE_TASK_TITLE'
 export const ADD_TASK_FROM_HEADER = 'ADD_TASK_FROM_HEADER'
 
 export const boardService = {
@@ -132,11 +133,12 @@ function groupServiceReducer(board, data, type) {
             board.groups.splice(groupIdx, 1, data)
             return board
         case CHANGE_GROUP_COLOR:
-            const groupToUpdate = board.groups.find(currGroup => currGroup.id === data.group.id)
+            groupToUpdate = board.groups.find(currGroup => currGroup.id === data.group.id)
             groupToUpdate.style = data.color
             return board
         case ADD_GROUP:
-            console.log('HIIIIII');
+            groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.id)
+            board.groups.splice(groupIdx + 1, 0, getEmptyGroup())
             return board
         case DUPLICATE_GROUP:
             groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.id)
@@ -169,6 +171,25 @@ function taskServiceReducer(board, data, type) {
     }
 }
 
+function getEmptyGroup() {
+    return {
+        id: utilService.makeId(),
+        title: 'New Group',
+        archivedAt: 1589983468418,
+        tasks: [
+            {
+                id: utilService.makeId(),
+                title: 'Task 1'
+            },
+            {
+                id: utilService.makeId(),
+                title: 'Task 2'
+            }
+        ],
+        style: '#808080'
+    }
+}
+
 function getEmptyBoard() {
     return {
         title: '',
@@ -189,7 +210,7 @@ function getEmptyBoard() {
                         title: 'Task 2'
                     }
                 ],
-                style: 'red'
+                style: 'lightpink'
             },
             {
                 id: utilService.makeId(),
@@ -221,7 +242,7 @@ function getEmptyBoard() {
                         title: 'Task 6'
                     }
                 ],
-                style: 'blue'
+                style: 'lightblue'
             },
         ]
     }
@@ -249,7 +270,7 @@ const demoBoard = {
                     title: 'Task 2'
                 }
             ],
-            style: 'red'
+            style: 'lightpink'
         },
         {
             id: utilService.makeId(),
@@ -281,7 +302,7 @@ const demoBoard = {
                     title: 'Task 6'
                 }
             ],
-            style: 'blue'
+            style: 'lightblue'
         },
     ]
 }
