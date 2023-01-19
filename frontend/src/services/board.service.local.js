@@ -10,6 +10,7 @@ const BOARD_KEY = 'boardDB'
 export const CHANGE_TITLE = 'CHANGE_TITLE'
 //groups
 export const CHANGE_GROUP_TITLE = 'CHANGE_GROUP_TITLE'
+export const ADD_GROUP_TASK = 'ADD_GROUP_TASK'
 export const DELETE_GROUP = 'DELETE_GROUP'
 
 //tasks
@@ -109,10 +110,17 @@ function boardServiceReducer(board, data, type) {
 // will be changed
 function groupServiceReducer(board, data, type) {
     board = structuredClone(board)
+    let groupToUpdate
+    let newTask = getNewTask()
     switch (type) {
         case CHANGE_GROUP_TITLE:
             const groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.id)
             board.groups.splice(groupIdx, 1, data)
+            return board
+        case ADD_GROUP_TASK:
+            groupToUpdate = board.groups.find(group => group.id === data.group.id)            // board.groups.splice(groupIdx, 1, data)
+            newTask.title = data.newTaskTitle
+            groupToUpdate.tasks.push(newTask)
             return board
         case DELETE_GROUP:
             board.groups = board.groups.filter(group => group.id !== data.id)
