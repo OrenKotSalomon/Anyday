@@ -1,15 +1,20 @@
 import { EditableHeading, Flex, AvatarGroup, Avatar, Icon } from 'monday-ui-react-core'
 import { Activity, Favorite, Info } from "monday-ui-react-core/icons";
 import { useEffect, useRef, useState } from 'react';
+import { boardService } from '../services/board.service.local';
+import { updateBoard } from '../store/board.actions';
 
-export function BoardView({ board, boardToUpdate, editBoardTitle, setBoardToUpdate }) {
+export function BoardView({ board }) {
+    const [newTitle, setNewTitle] = useState('')
 
     function onFinishEditing() {
-        editBoardTitle(boardToUpdate)
+        const boardToUpdate = boardService.changeBoardTitle(board, newTitle)
+
+        updateBoard(boardToUpdate)
     }
 
     function handleChange(value) {
-        setBoardToUpdate(prevBoard => ({ ...prevBoard, title: value }))
+        setNewTitle(value)
     }
 
     return <section className='board-view'>

@@ -12,8 +12,11 @@ export const boardService = {
     remove,
     getEmptyBoard,
     addBoardMsg,
-    getNewTask
+    changeBoardTitle,
+    addTaskFromHeader,
+    updateGroupTitle
 }
+
 window.bs = boardService
 
 async function query(filterBy = { txt: '', price: 0 }) {
@@ -22,13 +25,14 @@ async function query(filterBy = { txt: '', price: 0 }) {
         storageService.post(BOARD_KEY, demoBoard)
         return demoBoard
     }
-    if (filterBy.txt) {
-        const regex = new RegExp(filterBy.txt, 'i')
-        boards = boards.filter(board => regex.test(board.vendor) || regex.test(board.description))
-    }
-    if (filterBy.price) {
-        boards = boards.filter(board => board.price <= filterBy.price)
-    }
+    // Filters
+    // if (filterBy.txt) {
+    //     const regex = new RegExp(filterBy.txt, 'i')
+    //     boards = boards.filter(board => regex.test(board.vendor) || regex.test(board.description))
+    // }
+    // if (filterBy.price) {
+    //     boards = boards.filter(board => board.price <= filterBy.price)
+    // }
     return boards
 }
 
@@ -45,6 +49,7 @@ async function save(board) {
     var savedBoard
     if (board._id) {
         savedBoard = await storageService.put(BOARD_KEY, board)
+        return savedBoard
     } else {
         // Later, owner is set by the backend
         board.owner = userService.getLoggedinUser()
@@ -70,19 +75,32 @@ async function addBoardMsg(boardId, txt) {
     return msg
 }
 
-async function getNewTask(boardId) {
-    try {
-        const board = await getById(boardId)
-        const task = board.groups[0].tasks[0]
-        const newTask = {
-            id: utilService.makeId(),
-            title: 'New Task',
-        }
-        return newTask
-    } catch (error) {
-
+function getNewTask() {
+    return {
+        id: utilService.makeId(),
+        title: 'New Task'
     }
 
+}
+
+function changeBoardTitle(board, title) {
+    board = structuredClone(board)
+    board.title = title
+    return board
+}
+
+function addTaskFromHeader(board) {
+    const newTask = getNewTask()
+    board = structuredClone(board)
+    board.groups[0].tasks.unshift(newTask)
+
+    return board
+}
+
+function updateGroupTitle(board, groupToUpdate, idx) {
+    board = structuredClone(board)
+    board.groups.splice(idx, 1, groupToUpdate)
+    return board
 }
 
 function getEmptyBoard() {
