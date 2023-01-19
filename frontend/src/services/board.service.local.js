@@ -175,6 +175,11 @@ function taskServiceReducer(board, data, type) {
         groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
         taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.id)
     }
+    if (data) {
+        groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
+        taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.id)
+    }
+
     switch (type) {
         case DELETE_TASK:
             board.groups[groupIdx].tasks = board.groups[groupIdx].tasks.filter(task => task.id !== data.id)

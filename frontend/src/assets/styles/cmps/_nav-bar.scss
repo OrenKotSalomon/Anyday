@@ -1,44 +1,46 @@
 .nav-bar {
-    height: 100vh;
-    background-color: $side-nav;
-    text-align: center;
-    width: 65px;
-    nav {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+  height: 100vh;
+  background-color: $side-nav;
+  text-align: center;
+  width: 65px;
+  position: sticky;
+  top: 0;
 
-        a {
-            color: #fff;
-            &:hover {
-                background-color: #131523;
-                text-transform: none;
-            }
-        }
+  nav {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
-        a.active {
-            background-color: rgb(128, 128, 128);
-        }
+    a {
+      &:hover {
+        background-color: #131523;
+        text-transform: none;
+      }
     }
-
+    a.active {
+      background-color: rgb(128, 128, 128);
+    }
+  }
 }
 
 .side-group-bar {
-    flex-direction: column;
-    gap: 10px;
-    height: 100vh;
-    padding: 13px;
-    background-color: #f6f7fb;
-    width: 255px
+  position: sticky;
+  top: 0;
+  flex-direction: column;
+  gap: 10px;
+  height: 100vh;
+  padding: 13px;
+  background-color: #f6f7fb;
+  width: 255px;
 }
 
 .workspace-select {
-    flex-direction: column;
-    gap: 27px;
+  flex-direction: column;
+  gap: 27px;
 }
 .workspace {
-    padding: 8px 16px;
-    border-radius: 4px;
-    border: 1px solid #c3c6d4;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid #c3c6d4;
 }

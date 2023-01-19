@@ -119,6 +119,7 @@ export function GroupList({ board, group }) {
                         </div>
                     </div>
                 </div>
+
                 <div className='main-right-header'>+</div>
             </div>
             {/* // style={{ backgroundColor: group.style }} */}

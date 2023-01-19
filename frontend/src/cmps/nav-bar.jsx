@@ -43,9 +43,13 @@ export function NavBar() {
 
         <nav>
             <div>
-                <NavLink to='/'><img src={logo} style={{ maxWidth: '77px' }} /></NavLink>
+                <div className="nav-a-container">
+                <NavLink to='/'><img src={logo} style={{ minWidth: '55px' }} /></NavLink>
+                </div>
                 <hr style={{ width: '75%' }} />
-                <NavLink to='/board/'><img src={wm_icon} style={{ maxWidth: '37px' }} /></NavLink>
+                <div className="nav-a-container">
+                <NavLink to='/board/'><img src={wm_icon} style={{ maxWidth: '30px' }} /></NavLink>
+                </div>
             </div>
             {/* <button>Notifications</button> */}
             {/* <NavLink to='/inbox'>Inbox</NavLink> */}
@@ -53,12 +57,13 @@ export function NavBar() {
             {/* <button>Favorites</button> */}
 
             {/* <button>Search</button> */}
+
             <Link to='/login'><Avatar
                 ariaLabel="Harel Natan"
                 size="large"
                 src={Harel}
                 type="img"
-            /></Link>
+                /></Link>
         </nav>
 
         {/* <nav>
