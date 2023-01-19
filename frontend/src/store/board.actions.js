@@ -35,6 +35,7 @@ export async function loadBoard(boardId) {
     }
 
 }
+
 export async function loadBoards() {
     try {
         const boards = await boardService.query()
@@ -44,7 +45,16 @@ export async function loadBoards() {
         console.log('Cannot load boards', err)
         throw err
     }
+}
 
+export async function duplicateBoard(board) {
+    try {
+        const duplicatedBoard = await boardService.duplicate(board)
+        store.dispatch(getActionAddboard(duplicatedBoard))
+    } catch (err) {
+        console.log('Cannot duplicate board', err)
+        throw err
+    }
 }
 
 export async function removeBoard(boardId) {
@@ -60,7 +70,6 @@ export async function removeBoard(boardId) {
 export async function addBoard(board) {
     try {
         const savedBoard = await boardService.save(board)
-        console.log('Added board', savedBoard)
         store.dispatch(getActionAddboard(savedBoard))
         return savedBoard
     } catch (err) {
