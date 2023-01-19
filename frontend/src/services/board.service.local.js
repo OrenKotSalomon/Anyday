@@ -105,10 +105,8 @@ function updateGroupTitle(board, groupToUpdate, idx) {
 }
 
 function deleteGroup(board, groupToDelete, idx) {
-    console.log('groupToDelete:', groupToDelete)
     board = structuredClone(board)
     board.groups.splice(idx, 1)
-    console.log('boardAfter:', board)
     return board
 }
 
