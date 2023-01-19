@@ -1,11 +1,17 @@
+
 @font-face {
-    // font-family: caveat;
-    // src: url(../../fonts/Caveat/Caveat-Regular.ttf);
+    font-family: figtree-regular;
+    src: url('../../setup/fonts/Figtree/Figtree-Regular.ttf');
 }
 
 @font-face {
-    // font-family: montserrat;
-    // src: url(../../fonts/Montserrat/Montserrat-Regular.ttf);
+    font-family: figtree-light;
+    src: url('../../setup/fonts/Figtree/Figtree-Light.ttf');
+}
+
+@font-face {
+    font-family: figtree-bold;
+    src: url('../../setup/fonts/Figtree/Figtree-Bold.ttf');
 }
 
 @font-face {

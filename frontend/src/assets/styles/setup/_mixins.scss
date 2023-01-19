@@ -39,7 +39,7 @@
     padding-top: calc(($height / $width) * 100%);
   }
 
-  >* {
+  > * {
     position: absolute;
     top: 0;
     left: 0;
@@ -47,7 +47,7 @@
     bottom: 0;
   }
 
-  >img {
+  > img {
     height: 100%;
     object-fit: cover;
   }
@@ -166,10 +166,15 @@
 @mixin btn {
   color: #fff;
   background-color: $btn-blue;
-  cursor: pointer;
   border: 0;
   padding: 7px;
   border-radius: 4px;
+  cursor: pointer;
+  
+  &.clean {
+    color: $main-color;
+    background-color: transparent;
+  }
 }
 
 @mixin input {

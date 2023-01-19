@@ -31,9 +31,14 @@
   }
 
   .cell {
+    font-size: rem(14px);
+    padding: 2px 4px;
     background-color: $main-bgc-white;
     text-align: center;
     border: 0.7px solid #d0d4e4;
     min-width: 9.375rem;
+    &:hover {
+        cursor: pointer;
+    }
   }
 }

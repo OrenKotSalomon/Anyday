@@ -5,7 +5,9 @@ import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import { addBoard, removeBoard } from "../store/board.actions"
 import { BoardList } from "./board-list"
 // import { Modal, ModalContent, ModalFooter, MenuItem, Button } from 'monday-ui-react-core'
-import { Modal, Button, Box, Typography } from '@mui/material'
+import { Modal, Box } from '@mui/material'
+import { Button } from 'monday-ui-react-core'
+import { Add } from 'monday-ui-react-core/icons'
 
 export function SideGroupBar() {
 
@@ -21,6 +23,7 @@ export function SideGroupBar() {
     }
 
     async function onAddBoard() {
+        if (!boardToEdit.title) return
         const savedBoard = await addBoard(boardToEdit)
         try {
             setBoardToEdit(boardService.getEmptyBoard())
@@ -50,7 +53,7 @@ export function SideGroupBar() {
             <h4>Workspace</h4>
             <span className="workspace">Main Workspace</span>
         </div>
-        <button className="btn" onClick={handleOpen}>Add Board</button>
+        <button className="add-board-btn btn clean" onClick={handleOpen}><span>+</span> Add</button>
         <Modal
             open={isOpen}
             onClose={handleOpen}
@@ -58,15 +61,19 @@ export function SideGroupBar() {
             aria-describedby="modal-modal-description"
         >
             <Box className="add-board-modal">
-                <label htmlFor="text">Add Board: </label>
+                <div className="modal-header flex">Create Board <span onClick={handleOpen} className="close-add-board-modal">X</span></div>
+                <label htmlFor="text">Board Name: </label>
                 <input type="text"
                     className="input"
                     name="title"
                     id="title"
                     value={boardToEdit.title}
                     onChange={handleChange}
-                    placeholder="Add A New Board" />
-                <button className="btn" onClick={onAddBoard}>Add Board</button>
+                    placeholder="New Board Name" />
+                <div className="btn-container">
+                    <button className="btn clean" onClick={handleOpen}>Cancel</button>
+                    <button className="btn" onClick={onAddBoard}>Create Board</button>
+                </div>
             </Box>
         </Modal>
 

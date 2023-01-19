@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 7px;
   font-size: rem(14px);
-  
+
   .board-list-menu-btn {
     opacity: 0;
     padding: 7px;
@@ -31,27 +31,61 @@
   }
 }
 
+.add-board-btn {
+  text-align: left;
+  font-size: rem(14px);
+  transition: .3s;
+  &:hover {
+    background-color: #dcdfec;
+  }
+  span {
+    font-size: rem(20px);
+  }
+}
+
 .add-board-modal {
   position: absolute;
   top: 40%;
   left: 50%;
   transform: translate(-40%, -50%);
-  height: 30%;
-  width: 50%;
+  height: 33%;
+  width: 30%;
+  min-width: 240px;
   background-color: #fff;
   text-align: center;
   border-radius: 14px;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   box-shadow: $main-box-shadow;
+  font-family: figtree-regular;
+  font-weight: 400;
+  padding: 13px;
+
+  .modal-header {
+    width: 90%;
+    justify-content: space-between;
+    align-items: center;
+    font-size: rem(32px);
+    .close-add-board-modal {
+      font-size: rem(14px);
+      font-weight: 400;
+      cursor: pointer;
+      width: 5px;
+    }
+  }
 
   & .input {
-    width: 400px;
+    width: 70%;
+    min-width: 180px;
   }
+  .btn-container {
+    align-self: flex-end;
+  }
+
   & .btn {
-    width: 150px;
+    min-width: 100px;
   }
 }

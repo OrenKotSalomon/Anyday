@@ -4,6 +4,7 @@ import { updateBoard } from '../store/board.actions';
 import { TaskPreview } from "./task-preview";
 import { MenuButton, Menu, MenuItem } from 'monday-ui-react-core'
 import { Delete, Bullet } from 'monday-ui-react-core/icons'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service';
 
 export function GroupList({ board, group }) {
 
@@ -20,26 +21,38 @@ export function GroupList({ board, group }) {
         setGroupToUpdate(prevGroup => ({ ...prevGroup, title: value }))
     }
 
-    function onClickGroup(groupId) {
+    function onSetColorGroup(groupId) {
         console.log('groupId:', groupId)
     }
 
-    return <section className='group-list'>
-        <div className="group-header-container"
+    async function onDeleteGroup(groupId) {
+        console.log('groupId:', groupId)
+        // const deletedGroup = await deleteGroup(groupId)
+        // try {
+        //     showSuccessMsg(`Group Removed ${groupId}`)
+        // } catch (err) {
+        //     showErrorMsg('Cannot Remove Group', err)
+        // }
+    }
 
-        >
-            <MenuButton className="group-list-menu-btn">
+    return <section className='group-list'>
+        <div className="group-header-container">
+            <MenuButton className="group-list-menu-btn" >
                 <Menu
                     id="menu"
                     size="medium"
+                    style={{
+                        backgroundColor: 'red',
+                        color: 'red'
+                    }}
                 >
                     <MenuItem
-                        onClick={() => onClickGroup(group.id)}
+                        onClick={() => onSetColorGroup(group.id)}
                         icon={Bullet}
                         title="Change Color"
                     />
                     <MenuItem
-                        onClick={() => onClickGroup(group.id)}
+                        onClick={() => onDeleteGroup(group.id)}
                         icon={Delete}
                         title="Delete"
                     />
