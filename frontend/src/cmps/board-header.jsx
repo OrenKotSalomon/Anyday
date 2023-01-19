@@ -3,21 +3,13 @@ import { updateBoard } from "../store/board.actions";
 import { BoardFilter } from "./board-filter";
 import { BoardView } from "./board-view";
 
-export function BoardHeader({ addNewTask, editBoardTitle, board, setBoard }) {
-    const [boardToUpdate, setBoardToUpdate] = useState(null)
-    useEffect(() => {
-        loadBoard()
-    }, [board]);
-
-    function loadBoard() {
-        setBoardToUpdate(board)
-    }
+export function BoardHeader({ board }) {
 
     return <section className="board-header">
 
         <BoardView board={board}
-            editBoardTitle={editBoardTitle} setBoard={setBoard} />
+        />
         <BoardFilter board={board}
-            addNewTask={addNewTask} setBoard={setBoard} />
+        />
     </section>
 }
