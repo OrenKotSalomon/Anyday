@@ -14,6 +14,7 @@ import { Loader } from 'monday-ui-react-core'
 export function BoardDetails() {
 
     const board = useSelector((storeState) => storeState.boardModule.board)
+    const boards = useSelector((storeState) => storeState.boardModule.boards)
     // const boards = useSelector((storeState) => storeState.boardModule.boards)
     // const [gBoard, setgBoard] = useState(null)
     // const defaultBoard = useSelector((storeState) => storeState.boardModule.boards[0])
@@ -21,7 +22,7 @@ export function BoardDetails() {
 
     useEffect(() => {
         loadBoard(boardId)
-    }, [])
+    }, [boardId, boards])
 
     // function addNewTask(newTask) {
     //     setgBoard(prevBoard => {
