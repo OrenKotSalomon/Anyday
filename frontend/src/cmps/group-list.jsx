@@ -87,7 +87,7 @@ export function GroupList({ board, group }) {
                 <div className="task-priority cell">Priority</div>
             </div>
             <section className="tasks-container">
-                {group.tasks.map(task => <TaskPreview key={task.id} task={task} />)}
+                {group.tasks.map(task => <TaskPreview key={task.id} task={task} board={board} />)}
             </section>
         </div>
     </section>
