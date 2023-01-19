@@ -93,6 +93,7 @@ function addTaskFromHeader(board) {
     const newTask = getNewTask()
     board = structuredClone(board)
     board.groups[0].tasks.unshift(newTask)
+
     return board
 }
 
