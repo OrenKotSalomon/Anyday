@@ -8,6 +8,8 @@ import { loadBoard, loadBoards, updateBoard } from "../store/board.actions";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { SelectBoard } from "../cmps/select-board";
+import { Loader } from 'monday-ui-react-core'
+
 
 export function BoardDetails() {
 
@@ -34,7 +36,7 @@ export function BoardDetails() {
         updateBoard(boardToUpdate)
     }
 
-    if (!board) return <div>Loading...</div>
+    if (!board) return <div className="loader"><Loader size={Loader.sizes.LARGE}/></div>
     return <section className="board-details">
         <NavBar />
         <SideGroupBar />

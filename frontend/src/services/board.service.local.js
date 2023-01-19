@@ -12,7 +12,8 @@ export const boardService = {
     remove,
     getEmptyBoard,
     addBoardMsg,
-    getNewTask
+    getNewTask,
+    updateGroupTitle
 }
 window.bs = boardService
 
@@ -84,6 +85,12 @@ async function getNewTask(boardId) {
 
     }
 
+}
+
+function updateGroupTitle(board, groupToUpdate, idx) {
+    board = structuredClone(board)
+    board.groups.splice(idx, 1, groupToUpdate)
+    return board
 }
 
 function getEmptyBoard() {
