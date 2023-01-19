@@ -84,9 +84,7 @@ function getNewTask() {
 function addTaskFromHeader(board) {
     const newTask = getNewTask()
     board = structuredClone(board)
-    console.log('board', board);
     board.groups[0].tasks.unshift(newTask)
-    console.log('board', board);
 
     return board
 }
