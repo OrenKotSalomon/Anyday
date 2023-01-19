@@ -1,11 +1,17 @@
 import { ThemeProvider } from '@emotion/react';
-import { Button, Flex, SplitButton, Tooltip } from 'monday-ui-react-core'
-import { Add, Search, Person, Filter, Sort } from "monday-ui-react-core/icons";
-import { useEffect, useState } from 'react';
+import { Button, Flex, SplitButton, Tooltip, Icon, DialogContentContainer, Menu, MenuItem } from 'monday-ui-react-core'
+import { Add, Search, Person, Filter, Sort, Group } from "monday-ui-react-core/icons";
+import { useEffect, useMemo, useState } from 'react';
 import { ADD_TASK_FROM_HEADER, boardService } from '../services/board.service.local';
 import { updateBoard, updateTask } from '../store/board.actions';
 
 export function BoardFilter({ board }) {
+
+    const obj = [
+        { txt: 'ttt' },
+        { txt: 'ttt' },
+        { txt: 'ttt' },
+    ]
 
     function onAddNewTask() {
         updateTask(board, undefined, ADD_TASK_FROM_HEADER)
@@ -13,8 +19,8 @@ export function BoardFilter({ board }) {
     return <section className='board-filter'>
         <Flex >
 
-            <SplitButton onClick={onAddNewTask} leftIcon={Add} size={Button.sizes.SMALL}  >
-                New Task
+            <SplitButton children='New Task' onClick={onAddNewTask} secondaryDialogContent={<HeaderMenu />} leftIcon={Add} size={Button.sizes.SMALL}  >
+
             </SplitButton>
             <Button kind={Button.kinds.TERTIARY} size={Button.sizes.SMALL} leftIcon={Search}>
                 Search
@@ -45,6 +51,17 @@ export function BoardFilter({ board }) {
             </div>
 
         </Flex>
-    </section>
+    </section >
 
+}
+
+export function HeaderMenu() {
+    return (
+        <Menu>
+            <MenuItem
+                icon={Group}
+                title="New group of Tasks"
+            />
+        </Menu>
+    )
 }

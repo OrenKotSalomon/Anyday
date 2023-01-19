@@ -5,7 +5,7 @@ import FormControl, { useFormControl } from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Box from '@mui/material/Box';
 
-import { TabList, Tab, EditableHeading, Icon } from 'monday-ui-react-core'
+import { TabList, Tab, EditableHeading, Icon  } from 'monday-ui-react-core'
 import { Home } from 'monday-ui-react-core/icons'
 
 import { CHANGE_TASK_TITLE, boardService } from '../services/board.service.local.js';
@@ -74,7 +74,6 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
     </section>
 }
 
-
 function NoCommentsYet() {
     return <section>
         <div className='details-img-container'><img className="details-img" src="https://cdn.monday.com/images/pulse-page-empty-state.svg" alt="" /></div>
@@ -84,7 +83,6 @@ function NoCommentsYet() {
                 or upload files to share with your team members</span></p>
     </section >
 }
-
 
 function TaskComment(task) {
     return <section>
