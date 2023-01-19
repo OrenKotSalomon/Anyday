@@ -7,22 +7,18 @@ import { SideGroupBar } from "../cmps/side-group-bar";
 import { loadBoard, loadBoards, updateBoard } from "../store/board.actions";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { SelectBoard } from "../cmps/select-board";
 import { Loader } from 'monday-ui-react-core'
 
 export function BoardDetails() {
 
     const board = useSelector((storeState) => storeState.boardModule.board)
-    // const boards = useSelector((storeState) => storeState.boardModule.boards)
-    // const [gBoard, setgBoard] = useState(null)
-    // const defaultBoard = useSelector((storeState) => storeState.boardModule.boards[0])
+    const boards = useSelector((storeState) => storeState.boardModule.boards)
     const { boardId } = useParams()
 
     useEffect(() => {
         loadBoard(boardId)
-    }, [boardId])
+    }, [boardId, boards])
 
-    console.log(board);
     if (!board) return <div className="loader"><Loader size={Loader.sizes.LARGE} /></div>
     return <section className="board-details">
         <NavBar />
