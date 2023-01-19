@@ -2,7 +2,7 @@ import { useState } from "react";
 import { TaskDetails } from "./task-details";
 
 import { MenuButton, Menu, MenuItem, Icon, EditableHeading } from 'monday-ui-react-core'
-import { Open, Duplicate, Delete, AddUpdate } from 'monday-ui-react-core/icons'
+import { Open, Duplicate, Delete, Bolt, AddUpdate } from 'monday-ui-react-core/icons'
 import { updateTask } from "../store/board.actions";
 import { DELETE_TASK, DUPLICATE_TASK } from "../services/board.service.local";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
