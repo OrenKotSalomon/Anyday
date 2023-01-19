@@ -1,14 +1,15 @@
 import * as React from 'react'
 import { useState } from "react"
 
-import FormControl, { useFormControl } from '@mui/material/FormControl';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import Box from '@mui/material/Box';
+// import FormControl, { useFormControl } from '@mui/material/FormControl';
+// import OutlinedInput from '@mui/material/OutlinedInput';
+// import Box from '@mui/material/Box';
 
 import { TabList, Tab, EditableHeading, Icon } from 'monday-ui-react-core'
 import { Home } from 'monday-ui-react-core/icons'
 
-import { CHANGE_TASK_TITLE, boardService } from '../services/board.service.local.js';
+import { boardService } from '../services/board.service.js';
+import { CHANGE_TASK_TITLE, ADD_TASK_COMMENT, DELETE_TASK_COMMENT } from '../services/board.service.local.js';
 import { updateTask } from '../store/board.actions';
 
 
@@ -17,9 +18,23 @@ import { updateTask } from '../store/board.actions';
 export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, group }) {
     const [isAddComment, setAddComment] = useState(false)
     const [newTitle, setNewTitle] = useState(task.title)
+    const [newCommentTxt, setComment] = useState('')
 
-    function handleInputSubmit(ev) {
+    function onSubmitNewComment(ev) {
         ev.preventDefault()
+        let data = boardService.getEmptyTaskComment(newCommentTxt)
+        let taskChanges = { comment: data, id: task.id, groupId: group.id }
+        updateTask(board, taskChanges, ADD_TASK_COMMENT)
+    }
+
+    function onDeleteComment(comment) {
+        let taskChanges = { commentIdx: comment.id, id: task.id, groupId: group.id }
+        updateTask(board, taskChanges, DELETE_TASK_COMMENT)
+    }
+
+    function handleInputChange(ev) {
+        ev.preventDefault()
+        setComment(ev.target.value)
     }
 
     function onFinishEditing() {
@@ -61,36 +76,42 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
             {!isAddComment && <button onClick={() => setAddComment(!isAddComment)} className='task-details-open-input-btn'>Write an update...</button>}
             {isAddComment &&
 
-                <form>
-                    <input type='text' placeholder='Add a task comment...' />
+                <form onSubmit={onSubmitNewComment}>
+                    <input type='text' placeholder='Add a task comment...' onChange={handleInputChange} />
                     <button className='btn'>Submit</button>
                 </form>
 
 
             }
 
-            {task.comments ? <TaskComment /> : <NoCommentsYet />}
+            {task.comments ? <section>
+                {task.comments.map(comment => <div
+                    key={comment.id} className='task-details-task-comment'>
+                    <button onClick={() => onDeleteComment(comment)}>X</button>{comment.txt}
+                </div>)}
+            </section > : <section>
+                <div className='details-img-container'><img className="details-img" src="https://cdn.monday.com/images/pulse-page-empty-state.svg" alt="" /></div>
+
+                <p className='details-p' ><span className="details-p-header">No updates yet for this item</span>
+                    <span className='details-p-txt'>Be the first one to update about progress, mention someone
+                        or upload files to share with your team members</span></p>
+            </section >}
 
         </div >
         <div className='close-task' onClick={() => setIsOpenDetails(!isOpenDetails)}>.</div>
     </section>
 }
 
-function NoCommentsYet() {
-    return <section>
-        <div className='details-img-container'><img className="details-img" src="https://cdn.monday.com/images/pulse-page-empty-state.svg" alt="" /></div>
+// function NoCommentsYet() {
+//     return <section>
+//         <div className='details-img-container'><img className="details-img" src="https://cdn.monday.com/images/pulse-page-empty-state.svg" alt="" /></div>
 
-        <p className='details-p' ><span className="details-p-header">No updates yet for this item</span>
-            <span className='details-p-txt'>Be the first one to update about progress, mention someone
-                or upload files to share with your team members</span></p>
-    </section >
-}
+//         <p className='details-p' ><span className="details-p-header">No updates yet for this item</span>
+//             <span className='details-p-txt'>Be the first one to update about progress, mention someone
+//                 or upload files to share with your team members</span></p>
+//     </section >
+// }
 
-function TaskComment(task) {
-    return <section>
-        {task.comments.map(comment => <div className='task-details-task-comment'>{comment}</div>)}
-    </section >
-}
 
 {/* <Box className='task-details-add-comment' component="form" noValidate autoComplete="off">
                 <div className='task-details-add-comment-tools'>tool-bar here</div>

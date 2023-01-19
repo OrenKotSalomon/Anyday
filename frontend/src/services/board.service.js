@@ -12,7 +12,8 @@ export const boardService = {
     save,
     remove,
     getEmptyBoard,
-    addBoardMsg
+    addBoardMsg, 
+    getEmptyTaskComment
 }
 window.bs = boardService
 
@@ -53,5 +54,14 @@ function getEmptyBoard() {
     return {
         vendor: 'Susita-' + (Date.now() % 1000),
         price: utilService.getRandomIntInclusive(1000, 9000),
+    }
+}
+
+function getEmptyTaskComment(txt='') {
+
+    return {
+        id: utilService.makeId(),
+        txt,
+        createdAt: Date.now(),
     }
 }
