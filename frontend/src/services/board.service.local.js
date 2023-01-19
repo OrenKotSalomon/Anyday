@@ -19,6 +19,7 @@ export const DELETE_GROUP = 'DELETE_GROUP'
 
 //Tasks
 export const DELETE_TASK = 'DELETE_TASK'
+export const DUPLICATE_TASK = 'DUPLICATE_TASK'
 export const CHANGE_TASK_TITLE = 'CHANGE_TASK_TITLE'
 export const ADD_TASK_FROM_HEADER = 'ADD_TASK_FROM_HEADER'
 export const ADD_TASK_COMMENT = 'ADD_TASK_COMMENT'
@@ -169,17 +170,17 @@ function taskServiceReducer(board, data, type) {
     board = structuredClone(board)
     const newTask = getNewTask()
     let currTask, groupIdx, taskIdx
-    if (data.groupId) {
-        groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
-    }
-    if (data.id) {
-        taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.id)
-    }
+
+    if (data.groupId) groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
+    if (data.id) taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.id)
 
     switch (type) {
         case DELETE_TASK:
-            // board.groups[0].tasks.unshift(newTask)
-            console.log('data:', data)
+            board.groups[groupIdx].tasks = board.groups[groupIdx].tasks.filter(task => task.id !== data.id)
+            return board
+        case DUPLICATE_TASK:
+            data.taskToDuplicate.id = utilService.makeId()
+            board.groups[groupIdx].tasks.splice(taskIdx + 1, 0, data.taskToDuplicate)
             return board
         case ADD_TASK_FROM_HEADER:
             board.groups[0].tasks.unshift(newTask)
