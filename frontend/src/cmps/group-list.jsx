@@ -41,7 +41,7 @@ export function GroupList({ board, group }) {
     }
 
     function onAddGroupTask() {
-        if (!newTaskTitle) return console.log('error task empty');
+        if (!newTaskTitle) throw new Error('Task title is empty')
         updateGroup(board, { group, newTaskTitle }, ADD_GROUP_TASK)
         setNewTaskTitle('')
     }
