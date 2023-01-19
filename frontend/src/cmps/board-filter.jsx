@@ -54,7 +54,7 @@ export function HeaderMenu({ board }) {
         <Menu>
             <MenuItem
                 icon={Group}
-                onClick={() => updateGroup(board, undefined, ADD_GROUP_FROM_HEADER)}
+                onClick={() => updateGroup(board, null, ADD_GROUP_FROM_HEADER)}
                 title="New group of Tasks"
             />
         </Menu>

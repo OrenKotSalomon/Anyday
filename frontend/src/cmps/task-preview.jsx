@@ -3,9 +3,17 @@ import { TaskDetails } from "./task-details";
 
 import { MenuButton, Menu, MenuItem, Icon } from 'monday-ui-react-core'
 import { Open, Duplicate, Delete } from 'monday-ui-react-core/icons'
+import { updateTask } from "../store/board.actions";
+import { DELETE_GROUP, DELETE_TASK } from "../services/board.service.local";
 
 export function TaskPreview({ task, board, group }) {
     const [isOpenDetails, setIsOpenDetails] = useState(false)
+
+    function onDeleteTask(taskk) {
+        console.log('taskk:', taskk)
+        updateTask(board, taskk, DELETE_TASK)
+    }
+
     return <section className='task-preview flex'>
         <MenuButton className="task-preview-menu-btn" >
                 <Menu
@@ -17,7 +25,7 @@ export function TaskPreview({ task, board, group }) {
                     }}
                 >
                     <MenuItem
-                        // onClick={() => onAddGroup(group)}
+                        onClick={() => setIsOpenDetails(!isOpenDetails)}
                         icon={Open}
                         title="Open"
                     />
@@ -27,7 +35,7 @@ export function TaskPreview({ task, board, group }) {
                         title="Duplicate Task"
                     />
                     <MenuItem
-                        // onClick={() => onDeleteGroup(group)}
+                        onClick={() => onDeleteTask(task)}
                         icon={Delete}
                         title="Delete"
                     />

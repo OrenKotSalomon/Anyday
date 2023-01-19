@@ -20,7 +20,6 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
 
     function handleInputSubmit(ev) {
         ev.preventDefault()
-
     }
 
     function onFinishEditing() {
@@ -33,7 +32,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
         setNewTitle(value)
     }
 
-    return <section className='task-details' style={{ width: `${isOpenDetails ? 100 : 0}vw` }}>
+    return <section className='task-details' style={{ width: `${isOpenDetails ? 100 : 1}vw` }}>
         <div className='task-main'>
 
             <button className='close-task-btn' onClick={() => setIsOpenDetails(!isOpenDetails)}>X</button>

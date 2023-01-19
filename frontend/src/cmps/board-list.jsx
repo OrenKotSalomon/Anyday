@@ -12,7 +12,6 @@ export function BoardList({ onDuplicateBoard, onRemoveBoard }) {
     useEffect(() => {
         loadBoards()
     }, [])
-    console.log(boards);
     function onMenuClick(ev) {
         // console.log('ev:', ev)
         // console.log('Menu Click');

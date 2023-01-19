@@ -27,7 +27,6 @@ export function getActionUpdateboard(board) {
 export async function loadBoard(boardId) {
     try {
         const board = await boardService.getById(boardId)
-        console.log('board from Store:', board)
         store.dispatch({ type: SET_BOARD, board })
     } catch (err) {
         console.log('Cannot load board', err)

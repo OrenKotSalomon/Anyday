@@ -18,6 +18,7 @@ export const ADD_GROUP_TASK = 'ADD_GROUP_TASK'
 export const DELETE_GROUP = 'DELETE_GROUP'
 
 //Tasks
+export const DELETE_TASK = 'DELETE_TASK'
 export const CHANGE_TASK_TITLE = 'CHANGE_TASK_TITLE'
 export const ADD_TASK_FROM_HEADER = 'ADD_TASK_FROM_HEADER'
 export const ADD_TASK_COMMENT = 'ADD_TASK_COMMENT'
@@ -170,6 +171,10 @@ function taskServiceReducer(board, data, type) {
     let taskIdx,groupIdx,currTask
 
     switch (type) {
+        case DELETE_TASK:
+            // board.groups[0].tasks.unshift(newTask)
+            console.log('data:', data)
+            return board
         case ADD_TASK_FROM_HEADER:
             board.groups[0].tasks.unshift(newTask)
             return board
