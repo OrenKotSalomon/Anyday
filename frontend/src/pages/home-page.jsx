@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import logo from '../assets/img/logo.png'
-
+import { loadBoards } from '../store/board.actions'
 
 export function HomePage() {
     const baseImgUrl = `https://i.pinimg.com/236x/`
@@ -11,6 +11,10 @@ export function HomePage() {
     function scrollTop() {
         window.scrollTo({ top: 0, behavior: 'smooth' })
     }
+
+    useEffect(() => {
+        loadBoards()
+    }, []);
 
     return (
         <section className='home-page'>

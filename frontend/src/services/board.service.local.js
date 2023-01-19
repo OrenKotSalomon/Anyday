@@ -5,6 +5,18 @@ import { userService } from './user.service.js'
 
 const BOARD_KEY = 'boardDB'
 
+// cases to update
+//board
+export const CHANGE_TITLE = 'CHANGE_TITLE'
+//groups
+export const CHANGE_GROUP_TITLE = 'CHANGE_GROUP_TITLE'
+export const DELETE_GROUP = 'DELETE_GROUP'
+
+//tasks
+export const ADD_TASK_FROM_HEADER = 'ADD_TASK_FROM_HEADER'
+
+//
+
 export const boardService = {
     query,
     getById,
@@ -12,10 +24,9 @@ export const boardService = {
     remove,
     getEmptyBoard,
     addBoardMsg,
-    changeBoardTitle,
-    addTaskFromHeader,
-    updateGroupTitle,
-    deleteGroup
+    boardServiceReducer,
+    groupServiceReducer,
+    taskServiceReducer
 }
 
 window.bs = boardService
@@ -24,7 +35,7 @@ async function query(filterBy = { txt: '', price: 0 }) {
     var boards = await storageService.query(BOARD_KEY)
     if (!boards.length) {
         storageService.post(BOARD_KEY, demoBoard)
-        return demoBoard
+        return boards
     }
     // Filters
     // if (filterBy.txt) {
@@ -84,30 +95,47 @@ function getNewTask() {
 
 }
 
-function changeBoardTitle(board, title) {
+function boardServiceReducer(board, data, type) {
     board = structuredClone(board)
-    board.title = title
-    return board
+    switch (type) {
+        case CHANGE_TITLE:
+            board.title = data
+            return board
+        default:
+            return board
+    }
 }
 
-function addTaskFromHeader(board) {
+// will be changed
+function groupServiceReducer(board, data, type) {
+    board = structuredClone(board)
+    switch (type) {
+        case CHANGE_GROUP_TITLE:
+            const groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.id)
+            board.groups.splice(groupIdx, 1, data)
+            return board
+        case DELETE_GROUP:
+            board.groups = board.groups.filter(group => group.id !== data.id)
+            return board
+        default:
+            return board
+    }
+}
+
+// will be changed
+function taskServiceReducer(board, data, type) {
+    board = structuredClone(board)
     const newTask = getNewTask()
-    board = structuredClone(board)
-    board.groups[0].tasks.unshift(newTask)
 
-    return board
-}
+    switch (type) {
+        case ADD_TASK_FROM_HEADER:
+            console.log('newTask', newTask);
 
-function updateGroupTitle(board, groupToUpdate, idx) {
-    board = structuredClone(board)
-    board.groups.splice(idx, 1, groupToUpdate)
-    return board
-}
-
-function deleteGroup(board, groupToDelete, idx) {
-    board = structuredClone(board)
-    board.groups.splice(idx, 1)
-    return board
+            board.groups[0].tasks.unshift(newTask)
+            return board
+        default:
+            return board
+    }
 }
 
 function getEmptyBoard() {
