@@ -11,20 +11,17 @@ import { BoardIndex } from './pages/board-index'
 
 export function RootCmp() {
 
-    return (
-        <div>
-            <main>
-                <Routes>
-                    <Route element={<HomePage />} path="/" />
-                    {/* <Route element={<AboutUs />} path="/about" /> */}
-                    <Route element={<BoardIndex />} path="/board" />
-                    <Route element={<BoardDetails />} path="/board/:boardId" />
-                    <Route element={<UserDetails />} path="/user-details/:userId" />
-                    <Route element={<Login />} path="/login" />
-                    <Route element={<Signup />} path="/signup" />
-                </Routes>
-            </main>
-            <UserMsg />
-        </div>
-    )
+    return <div>
+        <main>
+            <Routes>
+                <Route element={<HomePage />} path="/" />
+                <Route element={<BoardIndex />} path="/board" />
+                <Route element={<BoardDetails />} path="/board/:boardId" />
+                <Route element={<UserDetails />} path="/user-details/:userId" />
+                <Route element={<Login />} path="/login" />
+                <Route element={<Signup />} path="/signup" />
+            </Routes>
+        </main>
+        <UserMsg />
+    </div>
 }
