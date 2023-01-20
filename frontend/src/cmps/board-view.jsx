@@ -31,7 +31,7 @@ export function BoardView({ board }) {
                                     onChange={handleChange}
                                     type={EditableHeading.types.h2}
                                     autoSize={true}
-                                    value={newTitle} brandFont={true} />
+                                    value={board.title} brandFont={true} />
                             </Tooltip>
                         </div>
 

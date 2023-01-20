@@ -83,6 +83,7 @@ async function save(board) {
 async function duplicate(board) {
     let newBoard = board
     newBoard._id = utilService.makeId()
+    newBoard.title = `Duplicate of ${board.title}`
     newBoard.groups.map(group => {
         group.id = utilService.makeId()
         group.tasks.map(task => task.id = utilService.makeId())
