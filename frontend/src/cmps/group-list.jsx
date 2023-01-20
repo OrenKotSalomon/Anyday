@@ -110,7 +110,7 @@ export function GroupList({ board, group }) {
             <div className='row-header-container'>
                 <div className='main-left-header'>
                     <div className='left-row-container'>
-                        <div className='left-border'></div>
+                        <div style={{ backgroundColor: group.style }} className='left-border'></div>
                         <div className='checkbox-row-container'>
                             <input className='row-checkbox' type="checkbox" />
                         </div>
