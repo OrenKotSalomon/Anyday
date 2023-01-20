@@ -62,11 +62,13 @@ export function TaskPreview({ task, board, group }) {
 
                 <div className="task-name-cell" >
                     <EditableHeading className='task-title' type={EditableHeading.types.h5} value={task.title} />
+
+                    {/*  NEED TO ADD THIS BUTTON AND IGURE STYLING WONT IMPACT TASK ROW */}
                     {/* <button onClick={() => setIsOpenDetails(!isOpenDetails)} className="open-item-page-btn">
                         <Icon iconType={Icon.type.SVG} icon={Open} iconLabel="Task Details" iconSize={16} /><span>Open</span>
                     </button> */}
                 </div>
-                <div className="msg-btn-container">
+                <div className="msg-btn-container" onClick={() => setIsOpenDetails(!isOpenDetails)}>
 
                     <button className="msg-btn" style={task.comments ? { paddingRight: '0px' } : { paddingRight: '16px', paddingLeft: '18px' }}>
 

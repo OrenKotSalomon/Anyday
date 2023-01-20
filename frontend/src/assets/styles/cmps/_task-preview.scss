@@ -151,11 +151,16 @@
 
 .task-title {
   @include line-elipsis;
-
   min-width: 32px;
   margin-top: 4px;
   padding-left: 20px;
+
   // align-self: center;
+  .element-type-h5 {
+    font-size: rem(14px);
+    font-family: figtree-regular;
+    font-weight: 400;
+  }
 }
 
 // display: flex;

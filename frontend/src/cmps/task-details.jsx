@@ -6,7 +6,7 @@ import { useState, useRef, useEffect } from "react"
 // import Box from '@mui/material/Box';
 
 import { TabList, Tab, EditableHeading, Icon, MenuButton, Menu, MenuItem, } from 'monday-ui-react-core'
-import { Home, Time, Delete, Gallery } from 'monday-ui-react-core/icons'
+import { Home, Time, Delete, Gallery, Emoji } from 'monday-ui-react-core/icons'
 
 import { utilService } from '../services/util.service.js';
 import { boardService } from '../services/board.service.js';
@@ -21,6 +21,8 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
     const [newTitle, setNewTitle] = useState(task.title)
     const [newCommentTxt, setComment] = useState('')
     const [imgSrc, setImg] = useState('')
+    const emojis = ['😀', '😁', '😂', '🤣', '😃', '😄', '😅', '😆', '😉', '😊', '😋', '😎', '😍', '😘', '🥰', '😗', '😙', '🥲', '🤔', '🤩', '🤗', '🙂', '😚', '🙄', '😶‍🌫️', '😶', '😑', '😐', '🤨', '😯', '🤐', '😮', '😥', '😣', '😏']
+    const [isEmojiPicker, SetEmojiPicker] = useState(false)
 
 
     function onSubmitNewComment(ev) {
@@ -80,6 +82,10 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
     //.....................................................
 
 
+    function toggleEmojiPicker() {
+        SetEmojiPicker(!isEmojiPicker)
+    }
+
     return <section className='task-details' style={{ width: `${isOpenDetails ? 100 : 1}vw` }}>
         <div className='task-main'>
 
@@ -116,11 +122,19 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                         placeholder='Add a task comment...'
                         onChange={handleInputChange}
                         value={newCommentTxt} />
+
+                    {isEmojiPicker && <div className="emojiPicker">
+                        {emojis.map(emoji => <span key={emoji} className='emoji' onClick={() => setComment(newCommentTxt + emoji)}>{emoji}</span>)}
+                    </div>}
+
                     <div className='task-details-input-footer'>
                         <span onClick={handleClick} className='task-details-input-upload'><Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Gallery} iconLabel="my svg icon" iconSize={18} />Add image</span>
+                        <span onClick={toggleEmojiPicker} className='task-details-input-upload emoji'><Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Emoji} iconLabel="my svg icon" iconSize={18} />Emoji</span>
                         <button className='btn task-details-input-btn'>Update</button>
 
                     </div>
+                    {imgSrc && <span className="task-details-img-preview-container" ><img className="task-details-img-preview" src={imgSrc} /><span>Uploaded</span></span>}
+
                     <div>
                         <input
                             style={{ display: 'none' }}
