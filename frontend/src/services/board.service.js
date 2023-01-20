@@ -57,11 +57,12 @@ function getEmptyBoard() {
     }
 }
 
-function getEmptyTaskComment(txt='') {
+function getEmptyTaskComment(txt='',imgUrl='') {
 
     return {
         id: utilService.makeId(),
         txt,
         createdAt: Date.now(),
+        imgUrl
     }
 }
