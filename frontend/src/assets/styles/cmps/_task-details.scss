@@ -58,6 +58,7 @@
 
 .task-details-open-input-btn {
     margin-top: 2em;
+    margin-bottom: .5em;
     text-align: left;
     background-color: #fff;
     border: 1px solid #0073ea;
@@ -134,9 +135,73 @@
 }
 
 .task-details-task-comment {
-    margin: 2em auto;
-    max-width: 35vw;
-    min-height: 30vh;
-    border: 1px solid black;
+    margin: .5em auto;
+    max-width: 90%;
+    min-height: rem(205px);
+    border: 1px solid $li-grey;
+    border-radius: rem(10px);
+    display: flex;
+    flex-direction: column;
 
+    .task-details-header {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        padding: 16px 16px 8px;
+
+        .task-details-by-user {
+            display: flex;
+        }
+
+        .task-details-by-user-img {
+            width: rem(40px);
+            height: rem(40px);
+        }
+
+        .task-details-by-user-name {
+            line-height: rem(20px);
+            padding: .5em;
+            font-size: rem(16px);
+            font-family: figtree-Regular;
+            font-weight: 500;
+        }
+
+        .task-details-header-tools {
+            display: flex;
+            justify-content: space-between;
+
+            .task-details-header-time-icon {
+                margin: .1em;
+            }
+
+            .task-details-created-at {
+                line-height: rem(20px);
+                font-size: rem(14px);
+                font-family: figtree-light;
+                font-weight: 550;
+            }
+
+            .task-details-menu-btn {
+                position: relative;
+                top: rem(-6px);
+
+            }
+        }
+
+
+    }
+
+    .task-details-comment-txt {
+        padding-left: rem(15px);
+        padding-top: 8px;
+        font-size: rem(16px);
+        font-family: figtree-Regular;
+        text-align: left;
+    }
+
+
+}
+
+.monday-style-dialog-content-wrapper {
+    z-index: 4;
 }
