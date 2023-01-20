@@ -128,10 +128,10 @@ export function GroupList({ board, group }) {
                     </div>
                 </div>
                 <div className="main-labels-container flex">
-                    <div className="person-label cell">Person L</div>
-                    <div className="person-label cell">Status L</div>
-                    <div className="person-label cell">Date L</div>
-                    <div className="person-label cell">Priority L</div>
+                    <div className="person-label cell">Person</div>
+                    <div className="person-label cell">Status</div>
+                    <div className="person-label cell">Date</div>
+                    <div className="person-label cell">Priority</div>
                 </div>
 
                 <div className='main-right-header flex'>

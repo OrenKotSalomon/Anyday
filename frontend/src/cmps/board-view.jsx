@@ -3,6 +3,7 @@ import { Activity, Favorite, Info } from "monday-ui-react-core/icons";
 import { useEffect, useRef, useState } from 'react';
 import { boardService, CHANGE_TITLE } from '../services/board.service.local';
 import { updateBoard } from '../store/board.actions';
+import Harel from '../assets/img/Harel.jpg'
 
 export function BoardView({ board }) {
     const [newTitle, setNewTitle] = useState(board.title)
@@ -75,13 +76,11 @@ export function BoardView({ board }) {
                         <button className='last-seen-action'>
                             <Flex direction={Flex.directions.ROW} >
                                 <div>Last seen</div>
-                                <AvatarGroup size={Avatar.sizes.SMALL} max={3} className='avatar-imgs'>
-                                    <Avatar type={Avatar.types.IMG} src={'https://robohash.org/8I.png?set=set1'} ariaLabel="Hadas Fahri" />
-                                    <Avatar type={Avatar.types.IMG} src={'https://robohash.org/8I2.png?set=set1'} ariaLabel="Sergey Roytman" />
-                                    <Avatar type={Avatar.types.IMG} src={'https://robohash.org/8I3.png?set=set1'} ariaLabel="Yonatan Lev Ari" />
-                                    <Avatar type={Avatar.types.IMG} src={'https://robohash.org/84I.png?set=set1'} ariaLabel="Hadas Fahri" />
-                                    <Avatar type={Avatar.types.IMG} src={'https://robohash.org/85I.png?set=set1'} ariaLabel="Sergey Roytman" />
-                                    <Avatar type={Avatar.types.IMG} src={'https://robohash.org/86I.png?set=set1'} ariaLabel="Yonatan Lev Ari" />
+                                <AvatarGroup size={Avatar.sizes.SMALL} max={2}>
+                                    <Avatar type={Avatar.types.IMG} src={Harel} ariaLabel="Harel Natan" />
+                                    <Avatar type={Avatar.types.IMG} src={Harel} ariaLabel="Oren Kot" />
+                                    <Avatar type={Avatar.types.IMG} src={Harel} ariaLabel="Yossi Karasik" />
+                                    <Avatar type={Avatar.types.IMG} src={Harel} ariaLabel="Another Me" />
                                 </AvatarGroup>
                             </Flex>
                         </button>

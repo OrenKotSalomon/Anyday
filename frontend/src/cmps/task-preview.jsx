@@ -6,6 +6,8 @@ import { Open, Duplicate, Delete, Bolt, AddUpdate, Update } from 'monday-ui-reac
 import { updateTask } from "../store/board.actions";
 import { DELETE_TASK, DUPLICATE_TASK } from "../services/board.service.local";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
+import { Avatar, AvatarGroup } from 'monday-ui-react-core';
+import Harel from '../assets/img/Harel.jpg'
 
 export function TaskPreview({ task, board, group }) {
 
@@ -79,7 +81,13 @@ export function TaskPreview({ task, board, group }) {
             </div>
             <div className="task-cells-row-container">
                 <div className="main-labels-container flex">
-                    <div className="person-label cell">Person C</div>
+                    <div className="person-label cell">
+                        <AvatarGroup size={Avatar.sizes.SMALL} max={2}>
+                            <Avatar type={Avatar.types.IMG} src={Harel} ariaLabel="Harel Natan" />
+                            <Avatar type={Avatar.types.IMG} src={Harel} ariaLabel="Oren Kot" />
+                            <Avatar type={Avatar.types.IMG} src={Harel} ariaLabel="Yossi Karasik" />
+                            <Avatar type={Avatar.types.IMG} src={Harel} ariaLabel="Another Me" />
+                        </AvatarGroup></div>
                     <div className="person-label cell">Status C</div>
                     <div className="person-label cell">Date C</div>
                     <div className="person-label cell">Priority C</div>
