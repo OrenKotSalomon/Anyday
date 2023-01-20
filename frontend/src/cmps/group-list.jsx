@@ -102,10 +102,13 @@ export function GroupList({ board, group }) {
                     <Tooltip
                         content="Click to Edit" animationType="expand">
                         <EditableHeading
+                            customColor={group.color}
                             onFinishEditing={onFinishEditing}
                             onChange={handleChange}
-                            brandFont
+                            brandFont={true}
                             value={group.title}
+                        // customColor={`${group.color}`}
+                        // type={EditableHeading.types.h4}
                         />
                     </Tooltip>
                 </div>
@@ -151,11 +154,16 @@ export function GroupList({ board, group }) {
             <section className="tasks-container">
                 {group.tasks.map(task => <TaskPreview key={task.id} task={task} board={board} group={group} />)}
                 <div className='add-task-container'>
+                    <div style={{ backgroundColor: group.style }} className='left-border-add-task'></div>
+                    <div className='checkbox-row-container'>
+                        <input className='row-checkbox' type="checkbox" disabled />
+                    </div>
                     <EditableHeading
+                        className='editable-add-task'
                         type={EditableHeading.types.h6}
                         onFinishEditing={onAddGroupTask}
                         onChange={handleChangeTask}
-                        placeholder={'Add Task'}
+                        placeholder={'+ Add Task'}
                         value={newTaskTitle}
                         brandFont
                     />

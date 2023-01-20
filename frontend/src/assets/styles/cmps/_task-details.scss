@@ -53,19 +53,58 @@
         margin-top: 2em;
         margin-bottom: .5em;
 
-
-        .task-details-input {
+        .task-details-form-tools {
+            border: 1px solid $blue;
+            border-bottom: none;
             align-self: center;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
             width: 90%;
         }
 
-        .task-details-input-btn {
-            margin-top:.3em;
-            margin-right:1.5em;
-            align-self: flex-end;
-            width: 30%;
+        .task-details-input {
+            align-self: center;
+            padding: rem(16px) rem(18px);
+            width: 90%;
+            border: 1px solid $blue;
+            border-top: 1px solid $li-grey;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+
+            &:focus {
+                outline: none;
+            }
         }
 
+        .task-details-input-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5em;
+
+            .task-details-input-btn {
+                font-size: rem(14px);
+                font-family: figtree-regular;
+                margin-top: .3em;
+                margin-right: 5%;
+                align-self: flex-end;
+                padding: 4px 8px;
+                width: rem(62.42px);
+                height: rem(32px);
+            }
+
+            .task-details-input-upload {
+                display: flex;
+                color: $blue;
+                font-size: rem(14px);
+                font-family: figtree-regular;
+                margin-top: .8em;
+                margin-left: 5%;
+                justify-items: center;
+
+
+            }
+
+        }
     }
 
 }

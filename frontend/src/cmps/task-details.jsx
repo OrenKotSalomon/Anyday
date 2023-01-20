@@ -1,12 +1,12 @@
 import * as React from 'react'
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 
 // import FormControl, { useFormControl } from '@mui/material/FormControl';
 // import OutlinedInput from '@mui/material/OutlinedInput';
 // import Box from '@mui/material/Box';
 
 import { TabList, Tab, EditableHeading, Icon, MenuButton, Menu, MenuItem, } from 'monday-ui-react-core'
-import { Home, Open, Time, Delete } from 'monday-ui-react-core/icons'
+import { Home, Time, Delete, Gallery } from 'monday-ui-react-core/icons'
 
 import { utilService } from '../services/util.service.js';
 import { boardService } from '../services/board.service.js';
@@ -20,11 +20,12 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
     const [isAddComment, setAddComment] = useState(false)
     const [newTitle, setNewTitle] = useState(task.title)
     const [newCommentTxt, setComment] = useState('')
-    // const [isOpenDetails, setIsOpenDetails] = useState(false)
+    const [imgSrc, setImg] = useState('')
+
 
     function onSubmitNewComment(ev) {
         ev.preventDefault()
-        let data = boardService.getEmptyTaskComment(newCommentTxt)
+        let data = boardService.getEmptyTaskComment(newCommentTxt, imgSrc)
         let taskChanges = { comment: data, id: task.id, groupId: group.id }
         updateTask(board, taskChanges, ADD_TASK_COMMENT)
         setComment('')
@@ -50,6 +51,34 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
         if (!value) return setNewTitle(task.title)
         setNewTitle(value)
     }
+
+
+    //...................imge upload
+    const inputRef = useRef(null);
+
+    const handleClick = () => {
+        inputRef.current.click();
+    }
+
+    const handleFileChange = event => {
+
+        const file = event.target.files[0];
+        getBase64(file).then(base64 => {
+            setImg(base64)
+            console.log(base64)
+        })
+    }
+
+    const getBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+            reader.readAsDataURL(file);
+        })
+    }
+    //.....................................................
+
 
     return <section className='task-details' style={{ width: `${isOpenDetails ? 100 : 1}vw` }}>
         <div className='task-main'>
@@ -81,8 +110,25 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
             {isAddComment &&
 
                 <form className='task-details-form' onSubmit={onSubmitNewComment}>
-                    <input className='task-details-input' type='text' name='' placeholder='Add a task comment...' onChange={handleInputChange} value={newCommentTxt} />
-                    <button className='btn task-details-input-btn'>Submit</button>
+                    <div className='task-details-form-tools'>tools bar here</div>
+                    <textarea className='task-details-input'
+                        type='text' name=''
+                        placeholder='Add a task comment...'
+                        onChange={handleInputChange}
+                        value={newCommentTxt} />
+                    <div className='task-details-input-footer'>
+                        <span onClick={handleClick} className='task-details-input-upload'><Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Gallery} iconLabel="my svg icon" iconSize={18} />Add image</span>
+                        <button className='btn task-details-input-btn'>Update</button>
+
+                    </div>
+                    <div>
+                        <input
+                            style={{ display: 'none' }}
+                            ref={inputRef}
+                            type="file"
+                            onChange={handleFileChange}
+                        />
+                    </div>
                 </form>
 
 
@@ -99,7 +145,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                         </div>
 
                         <div className='task-details-header-tools'>
-                        <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Time} iconLabel="my svg icon" iconSize={14} />
+                            <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Time} iconLabel="my svg icon" iconSize={14} />
                             <div className='task-details-created-at'>{utilService.time_ago(comment.createdAt)}</div>
                             <MenuButton className="task-details-menu-btn" >
                                 <Menu
@@ -111,13 +157,14 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                                         icon={Delete}
                                         title="Delete update for every one"
                                     />
-                                    
+
                                 </Menu>
                             </MenuButton>
                         </div>
                     </div>
 
                     <p className='task-details-comment-txt'>{comment.txt}</p>
+                    {comment.imgUrl && comment.imgUrl !== '' ? <img src={`${comment.imgUrl}`} alt="" /> : ''}
 
 
 
@@ -134,21 +181,3 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
     </section>
 }
 
-// function NoCommentsYet() {
-//     return <section>
-//         <div className='details-img-container'><img className="details-img" src="https://cdn.monday.com/images/pulse-page-empty-state.svg" alt="" /></div>
-
-//         <p className='details-p' ><span className="details-p-header">No updates yet for this item</span>
-//             <span className='details-p-txt'>Be the first one to update about progress, mention someone
-//                 or upload files to share with your team members</span></p>
-//     </section >
-// }
-
-
-{/* <Box className='task-details-add-comment' component="form" noValidate autoComplete="off">
-                <div className='task-details-add-comment-tools'>tool-bar here</div>
-                <FormControl sx={{ width: '25ch' }} onSubmit={(ev) => handleInputSubmit(ev)}>
-                    <OutlinedInput className='task-details-input' placeholder="Please enter text" />
-                    <button type='submit' className='btn'>Update</button>
-                </FormControl>
-            </Box> */}

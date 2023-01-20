@@ -1,6 +1,10 @@
 .task-preview {
   position: relative;
+
   // display: flex;
+  &:hover {
+    background-color: #f4f5f8;
+  }
 
   &:hover {
     .task-preview-menu-btn {
@@ -74,6 +78,11 @@
   align-items: center;
   text-align: left;
 
+  .task-name-cell {
+    // need to configure with resize
+    max-width: rem(245px);
+  }
+
   .left-border-task {
     @include left-border;
     border-top: none;
@@ -98,14 +107,20 @@
       .icon_component--clickable {
         color: #0073ea;
       }
-
     }
 
     .msg-btn {
-      padding-right: 16px;
+      // padding-right: 16px;
       padding-left: 16px;
       @include btn-no-style;
 
+      .monday-style-counter--size-small {
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
+        position: relative;
+        right: 12px;
+      }
     }
   }
 }
