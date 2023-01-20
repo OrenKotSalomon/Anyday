@@ -80,9 +80,9 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
             {!isAddComment && <button onClick={() => setAddComment(!isAddComment)} className='task-details-open-input-btn'>Write an update...</button>}
             {isAddComment &&
 
-                <form onSubmit={onSubmitNewComment}>
-                    <input type='text' name='' placeholder='Add a task comment...' onChange={handleInputChange} value={newCommentTxt} />
-                    <button className='btn'>Submit</button>
+                <form className='task-details-form' onSubmit={onSubmitNewComment}>
+                    <input className='task-details-input' type='text' name='' placeholder='Add a task comment...' onChange={handleInputChange} value={newCommentTxt} />
+                    <button className='btn task-details-input-btn'>Submit</button>
                 </form>
 
 
