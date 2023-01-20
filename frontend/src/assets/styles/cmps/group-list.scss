@@ -21,25 +21,29 @@
     .group-list-menu-btn {
       position: absolute;
       top: 20%;
-      left: -5%;
+      left: -33px;
       opacity: 0;
       transition: 0.3s;
+    }
+
+    .group-color-picker {
+      position: absolute;
+      top: 125%;
+      z-index: 5;
     }
   }
 
   .cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: rem(14px);
     text-align: center;
-    border: 0.7px solid #d0d4e4;
-    min-width: 9.375rem;
-
+    min-width: 130px;
+    height: $cell-height;
     &:hover {
       cursor: pointer;
     }
-  }
-
-  .group-color-picker {
-    position: absolute;
   }
 }
 
@@ -51,6 +55,7 @@
   display: flex;
 
   .main-right-header {
+    position: relative;
     align-items: center;
     justify-content: flex-start;
     height: rem(36px);
@@ -75,6 +80,14 @@
   }
 }
 
+.main-labels-container {
+  > * {
+    border-top: $border-cell;
+    border-left: $border-cell;
+    border-bottom: $border-cell;
+  }
+}
+
 .left-row-container {
   flex-basis: rem(351px);
   display: flex;
@@ -82,10 +95,9 @@
   flex-basis: 21.9375rem;
   height: 36px;
 
-  >* {
+  > * {
     border-top: $border-cell;
     border-bottom: $border-cell;
-
   }
 
   .task-main-container {

@@ -8,6 +8,11 @@
     right: 0;
     z-index: 3;
     transition: 2s;
+
+    img {
+        width: 90%;
+        margin: .5em auto;
+    }
 }
 
 .task-main {
@@ -101,9 +106,31 @@
                 margin-left: 5%;
                 justify-items: center;
 
+            }
+
+            .task-details-input-upload.emoji {
+                margin-right: auto;
+            }
+        }
+
+        .task-details-img-preview-container {
+            display: flex;
+            font-size: rem(14px);
+            font-family: figtree-regular;
+            position: relative;
+            top: -1.2em;
+            margin-left: 5%;
+
+            .task-details-img-preview {
+                width: 10%;
+                height: 10%;
 
             }
 
+            span {
+                margin-left: .2em;
+                align-self: center;
+            }
         }
     }
 

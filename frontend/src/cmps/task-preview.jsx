@@ -79,7 +79,14 @@ export function TaskPreview({ task, board, group }) {
                 </div>
 
             </div>
-            <div className="task-label"></div>
+            <div className="task-cells-row-container">
+                <div className="main-labels-container flex">
+                    <div className="person-label cell">Person C</div>
+                    <div className="person-label cell">Status C</div>
+                    <div className="person-label cell">Date C</div>
+                    <div className="person-label cell">Priority C</div>
+                </div>
+            </div>
             {isOpenDetails && <TaskDetails
                 board={board}
                 task={task}
@@ -87,16 +94,6 @@ export function TaskPreview({ task, board, group }) {
                 isOpenDetails={isOpenDetails}
                 setIsOpenDetails={setIsOpenDetails} />}
         </div>
-        {/* <div className="task-person cell">
-            <span>Task Members</span>
-        </div>
-        <div className="task-status cell">
-            <span>Task Status</span>
-        </div>
-        <div className="task-priority cell">
-            <span>Task Priority</span>
-        </div> */}
-        {/* <TaskDetails /> */}
     </section>
 
 }
