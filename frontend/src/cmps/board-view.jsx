@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import { boardService, CHANGE_TITLE } from '../services/board.service.local';
 import { updateBoard } from '../store/board.actions';
 import Harel from '../assets/img/Harel.jpg'
+import Oren from '../assets/img/Oren.jpg'
+import Yossi from '../assets/img/Yossi.jpg'
 
 export function BoardView({ board }) {
     const [newTitle, setNewTitle] = useState(board.title)
@@ -78,8 +80,8 @@ export function BoardView({ board }) {
                                 <div>Last seen</div>
                                 <AvatarGroup size={Avatar.sizes.SMALL} max={2}>
                                     <Avatar type={Avatar.types.IMG} src={Harel} ariaLabel="Harel Natan" />
-                                    <Avatar type={Avatar.types.IMG} src={Harel} ariaLabel="Oren Kot" />
-                                    <Avatar type={Avatar.types.IMG} src={Harel} ariaLabel="Yossi Karasik" />
+                                    <Avatar type={Avatar.types.IMG} src={Oren} ariaLabel="Oren Kot" />
+                                    <Avatar type={Avatar.types.IMG} src={Yossi} ariaLabel="Yossi Karasik" />
                                     <Avatar type={Avatar.types.IMG} src={Harel} ariaLabel="Another Me" />
                                 </AvatarGroup>
                             </Flex>
