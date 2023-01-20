@@ -1,6 +1,10 @@
 .task-preview {
   position: relative;
+
   // display: flex;
+  &:hover {
+    background-color: #f4f5f8;
+  }
 
   &:hover {
     .task-preview-menu-btn {
@@ -30,7 +34,7 @@
 
   .task-preview-menu-btn {
     position: absolute;
-    left: -5.3%;
+    left: -33px;
     transition: .3s;
     opacity: 0;
   }
@@ -49,12 +53,18 @@
 .task {
   display: flex;
 
-  .task-label {
+  .task-cells-row-container {
     border-bottom: $border-cell;
     height: rem(36px);
 
     flex: 1 1 auto;
     max-width: none;
+    & .cell {
+      border-right: $border-cell;
+      border-bottom: $border-cell;
+      border-top: 0;
+      border-left: 0;
+    }
   }
 }
 
@@ -67,6 +77,11 @@
   // flex-basis: rem(300px);
   align-items: center;
   text-align: left;
+
+  .task-name-cell {
+    // need to configure with resize
+    max-width: rem(245px);
+  }
 
   .left-border-task {
     @include left-border;
@@ -92,14 +107,20 @@
       .icon_component--clickable {
         color: #0073ea;
       }
-
     }
 
     .msg-btn {
-      padding-right: 16px;
+      // padding-right: 16px;
       padding-left: 16px;
       @include btn-no-style;
 
+      .monday-style-counter--size-small {
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
+        position: relative;
+        right: 12px;
+      }
     }
   }
 }

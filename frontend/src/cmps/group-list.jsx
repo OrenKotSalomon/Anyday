@@ -7,9 +7,11 @@ import { Delete, Bullet, Duplicate, Add } from 'monday-ui-react-core/icons'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service';
 import { ADD_GROUP, ADD_GROUP_TASK, boardService, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DELETE_GROUP, DUPLICATE_GROUP } from '../services/board.service.local';
 import { utilService } from '../services/util.service';
+import { AddLabelModal } from './add-label-modal';
 
 export function GroupList({ board, group }) {
 
+    const [isAddingLabel, setIsAddingLabel] = useState(false)
     const [isPickColor, setIsPickColor] = useState(false)
     const [groupToUpdate, setGroupToUpdate] = useState(group)
     const [newTaskTitle, setNewTaskTitle] = useState('')
@@ -54,6 +56,10 @@ export function GroupList({ board, group }) {
         setNewTaskTitle('')
     }
 
+    function toggleAddLabelModal() {
+        setIsAddingLabel(!isAddingLabel)
+    }
+
     return <section className='group-list'>
         <div className="group-header-container">
             <MenuButton className="group-list-menu-btn" >
@@ -96,10 +102,13 @@ export function GroupList({ board, group }) {
                     <Tooltip
                         content="Click to Edit" animationType="expand">
                         <EditableHeading
+                            customColor={group.color}
                             onFinishEditing={onFinishEditing}
                             onChange={handleChange}
-                            brandFont
+                            brandFont={true}
                             value={group.title}
+                        // customColor={`${group.color}`}
+                        // type={EditableHeading.types.h4}
                         />
                     </Tooltip>
                 </div>
@@ -118,8 +127,23 @@ export function GroupList({ board, group }) {
                         </div>
                     </div>
                 </div>
+                <div className="main-labels-container flex">
+                    <div className="person-label cell">Person L</div>
+                    <div className="person-label cell">Status L</div>
+                    <div className="person-label cell">Date L</div>
+                    <div className="person-label cell">Priority L</div>
+                </div>
 
-                <div className='main-right-header flex'> <button className='btn clean add-label-btn'>+</button> </div>
+                <div className='main-right-header flex'>
+                    <button onClick={toggleAddLabelModal} 
+                    className='btn clean add-label-btn'
+                    style={{
+                        color: isAddingLabel ? '#fff' : '',  
+                        backgroundColor: isAddingLabel ? 'gray' : ''  
+                        }} >+
+                    </button>
+                    {isAddingLabel && <AddLabelModal />}
+                </div>
             </div>
             {/* // style={{ backgroundColor: group.style }} */}
             {/* <div className="group-labels flex">
@@ -130,11 +154,16 @@ export function GroupList({ board, group }) {
             <section className="tasks-container">
                 {group.tasks.map(task => <TaskPreview key={task.id} task={task} board={board} group={group} />)}
                 <div className='add-task-container'>
+                    <div style={{ backgroundColor: group.style }} className='left-border-add-task'></div>
+                    <div className='checkbox-row-container'>
+                        <input className='row-checkbox' type="checkbox" disabled />
+                    </div>
                     <EditableHeading
+                        className='editable-add-task'
                         type={EditableHeading.types.h6}
                         onFinishEditing={onAddGroupTask}
                         onChange={handleChangeTask}
-                        placeholder={'Add Task'}
+                        placeholder={'+ Add Task'}
                         value={newTaskTitle}
                         brandFont
                     />
