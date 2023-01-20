@@ -207,3 +207,8 @@
   will-change: width;
   border: none;
 }
+
+@mixin triangle-animation($width) {
+  border-bottom: $width solid rgba(0, 0, 0, 0.4);
+  border-right: $width solid transparent;
+}

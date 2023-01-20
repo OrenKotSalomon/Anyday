@@ -74,7 +74,7 @@
   justify-content: center;
   height: 36px;
   border-bottom: $border-cell;
-  flex-basis: 21.9375rem;
+  min-width: 21.9375rem;
   // flex-basis: rem(300px);
   align-items: center;
   text-align: left;
@@ -164,11 +164,25 @@
   }
 }
 
-// display: flex;
-// min-width: 11.25rem;
-// flex-grow: 1;
-// flex-shrink: 1;
-// flex-basis: auto;
-// justify-content: center;
-// align-items: center;
-// font-size: 16px;
+.add-note {
+  position: absolute;
+  right: 0;
+  top: 0;
+  // border-width: 0 10px 10px 0;
+  // background-color: #0073ea;
+  transition: border-width .3s .2s ease;
+}
+
+.person-label {
+  position: relative;
+
+  &:hover .add-note {
+    background-color: #f4f5f8;
+    @include triangle-animation(10px);
+
+    &:hover {
+      @include triangle-animation(15px);
+    }
+
+  }
+}

@@ -299,11 +299,23 @@ const demoBoard = {
             tasks: [
                 {
                     id: utilService.makeId(),
-                    title: 'Task 1'
+                    title: 'Task 1',
+                    status: 'done',
+                    members: [{
+                        userName: 'Harel',
+                        imgUrl: '../assets/img/Oren.jpg'
+                    }],
+                    dueDate: 1589983468418
                 },
                 {
                     id: utilService.makeId(),
-                    title: 'Task 2'
+                    title: 'Task 2',
+                    status: 'done',
+                    members: [{
+                        userName: 'Yossi',
+                        imgUrl: '../assets/img/Oren.jpg'
+                    }],
+                    dueDate: 158993468418
                 }
             ],
             style: 'lightpink'
@@ -315,11 +327,24 @@ const demoBoard = {
             tasks: [
                 {
                     id: utilService.makeId(),
-                    title: 'Task 3'
+                    title: 'Task 3',
+                    status: 'stuck',
+                    members: [{
+                        userName: 'Yossi',
+                        imgUrl: '../assets/img/Oren.jpg'
+                    }],
+                    dueDate: 1589983468418
                 },
                 {
                     id: utilService.makeId(),
-                    title: 'Task 4'
+                    title: 'Task 4',
+                    status: 'working on it',
+                    members: [{
+                        userName: 'Yossi',
+                        imgUrl: '../assets/img/Oren.jpg'
+                    }],
+                    dueDate: 1589983468418
+
                 }
             ],
             style: 'gold'
@@ -331,16 +356,30 @@ const demoBoard = {
             tasks: [
                 {
                     id: utilService.makeId(),
-                    title: 'Task 5'
+                    title: 'Task 5',
+                    status: 'done',
+                    members: [{
+                        userName: 'Oren',
+                        imgUrl: '../assets/img/Oren.jpg'
+                    }],
+                    dueDate: 1589983468418
                 },
                 {
                     id: utilService.makeId(),
-                    title: 'Task 6'
+                    title: 'Task 6',
+                    status: '',
+                    members: {
+                        userName: 'KAKa',
+                        imgUrl: '../assets/img/Oren.jpg'
+                    },
+                    dueDate: 1589983468418
                 }
             ],
             style: 'lightblue'
         },
-    ]
+    ],
+    "cmpsOrder": ["status-picker", "member-picker", "date-picker"]
+
 }
 
 // const board = {

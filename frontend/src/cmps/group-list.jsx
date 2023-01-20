@@ -60,6 +60,17 @@ export function GroupList({ board, group }) {
         setIsAddingLabel(!isAddingLabel)
     }
 
+    function renderGroupLabels(cmp, idx) {
+        switch (cmp) {
+            case 'status-picker':
+                return <div key={idx} className="person-label cell">Status</div>
+            case 'member-picker':
+                return <div key={idx} className="person-label cell">Person</div>
+            case 'date-picker':
+                return <div key={idx} className="person-label cell">Date</div>
+        }
+    }
+
     return <section className='group-list'>
         <div className="group-header-container">
             <MenuButton className="group-list-menu-btn" >
@@ -128,29 +139,21 @@ export function GroupList({ board, group }) {
                     </div>
                 </div>
                 <div className="main-labels-container flex">
-                    <div className="person-label cell">Person</div>
-                    <div className="person-label cell">Status</div>
-                    <div className="person-label cell">Date</div>
-                    <div className="person-label cell">Priority</div>
+                    {board.cmpsOrder.map((cmp, idx) => renderGroupLabels(cmp, idx))}
                 </div>
 
                 <div className='main-right-header flex'>
-                    <button onClick={toggleAddLabelModal} 
-                    className='btn clean add-label-btn'
-                    style={{
-                        color: isAddingLabel ? '#fff' : '',  
-                        backgroundColor: isAddingLabel ? 'gray' : ''  
+                    <button onClick={toggleAddLabelModal}
+                        className='btn clean add-label-btn'
+                        style={{
+                            color: isAddingLabel ? '#fff' : '',
+                            backgroundColor: isAddingLabel ? 'gray' : ''
                         }} >+
                     </button>
                     {isAddingLabel && <AddLabelModal />}
                 </div>
             </div>
             {/* // style={{ backgroundColor: group.style }} */}
-            {/* <div className="group-labels flex">
-                <div className="task-person cell">Person</div>
-                <div className="task-status cell">Status</div>
-                <div className="task-priority cell">Priority</div>
-            </div> */}
             <section className="tasks-container">
                 {group.tasks.map(task => <TaskPreview key={task.id} task={task} board={board} group={group} />)}
                 <div className='add-task-container'>
