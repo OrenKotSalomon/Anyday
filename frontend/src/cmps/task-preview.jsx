@@ -10,10 +10,15 @@ import { Avatar, AvatarGroup } from 'monday-ui-react-core';
 import Harel from '../assets/img/Harel.jpg'
 import Oren from '../assets/img/Oren.jpg'
 import Yossi from '../assets/img/Yossi.jpg'
+import { StatusModal } from "./tasks-modals/status-modal";
+import { PriorityModal } from "./tasks-modals/priority-modal";
 
 export function TaskPreview({ task, board, group }) {
 
     const [isOpenDetails, setIsOpenDetails] = useState(false)
+    const [isSetStatus, setIsSetStatus] = useState(false)
+    const [isSetPriority, setIsSetPriority] = useState(false)
+
 
     function onDuplicateTask(taskToDuplicate) {
         const data = { taskToDuplicate, id: taskToDuplicate.id, groupId: group.id }

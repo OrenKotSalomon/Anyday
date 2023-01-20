@@ -211,7 +211,16 @@ const cmp1 = {
     type: 'status-picker',
     info: {
         selectedStatus: 'pending',
-        statuses: [{}, {}]
+        statuses: [
+            {
+                label: 'done',
+                bgColor: 'green'
+            },
+            {
+                label: 'pending',
+                bgColor: 'orange'
+            }
+        ]
     }
 }
 
