@@ -23,6 +23,24 @@
     border-inline-start: 12px solid $grey;
     transition: 2s;
 
+
+    // hidden scroll bar y
+    overflow-y: scroll;
+
+    &.task-main:-webkit-scrollbar {
+        display: none;
+    }
+
+    -ms-overflow-style: none;
+    /* for Internet Explorer, Edge */
+    scrollbar-width: none;
+
+    /* for Firefox */
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 8px;
+    }
+
     .close-task-btn {
         background-color: $main-bgc-white;
         border: none;
@@ -245,11 +263,13 @@
 
         .task-details-by-user {
             display: flex;
+            align-items: center;
         }
 
         .task-details-by-user-img {
             width: rem(40px);
             height: rem(40px);
+            margin: 0;
         }
 
         .task-details-by-user-name {

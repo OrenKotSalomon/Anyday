@@ -29,6 +29,7 @@ export function BoardList({ onDuplicateBoard, onRemoveBoard }) {
     return <section className='board-list'>
         {boards.map(board => <NavLink to={`/board/${board._id}`} key={board._id} className="board-list-a flex">
             {board.title}
+            <div onClick={(ev)=>ev.preventDefault()}>
             <MenuButton className="board-list-menu-btn"
             // onClick={ev => onMenuClick(ev)}
             >
@@ -55,6 +56,7 @@ export function BoardList({ onDuplicateBoard, onRemoveBoard }) {
                     />
                 </Menu>
             </MenuButton>
+            </div>
             {/* <div onClick={ev => onMenuClick(ev)} >X</div> */}
         </NavLink>)}
 
