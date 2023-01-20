@@ -10,10 +10,15 @@ import { Avatar, AvatarGroup } from 'monday-ui-react-core';
 import Harel from '../assets/img/Harel.jpg'
 import Oren from '../assets/img/Oren.jpg'
 import Yossi from '../assets/img/Yossi.jpg'
+import { StatusModal } from "./tasks-modals/status-modal";
+import { PriorityModal } from "./tasks-modals/priority-modal";
 
 export function TaskPreview({ task, board, group }) {
 
     const [isOpenDetails, setIsOpenDetails] = useState(false)
+    const [isSetStatus, setIsSetStatus] = useState(false)
+    const [isSetPriority, setIsSetPriority] = useState(false)
+
 
     function onDuplicateTask(taskToDuplicate) {
         const data = { taskToDuplicate, id: taskToDuplicate.id, groupId: group.id }
@@ -26,7 +31,7 @@ export function TaskPreview({ task, board, group }) {
         updateTask(board, data, DELETE_TASK)
         showSuccessMsg(`Task deleted successfully taskId:${data.id} `)
     }
-
+    console.log(board);
     return <section className='task-preview'>
         <MenuButton className="task-preview-menu-btn" >
             <Menu
@@ -85,7 +90,22 @@ export function TaskPreview({ task, board, group }) {
             </div>
             <div className="task-cells-row-container">
                 <div className="main-labels-container flex">
-                    <div className="person-label cell">
+
+                    {board.cmpsOrder.map((cmp, idx) => {
+                        return (
+                            <DynamicCmp
+                                key={idx}
+                                cmp={cmp}
+                                info={{
+                                    status: task?.status,
+                                    members: task?.members,
+                                    dueDate: task?.dueDate
+                                }}
+                            />
+                        )
+                    }
+                    )}
+                    {/* <div className="person-label cell">
                         <AvatarGroup size={Avatar.sizes.SMALL} max={3}>
                             <Avatar type={Avatar.types.IMG} src={Harel} ariaLabel="Harel Natan" />
                             <Avatar type={Avatar.types.IMG} src={Oren} ariaLabel="Oren Kot" />
@@ -94,7 +114,8 @@ export function TaskPreview({ task, board, group }) {
                         </AvatarGroup></div>
                     <div className="person-label cell">Status C</div>
                     <div className="person-label cell">Date C</div>
-                    <div className="person-label cell">Priority C</div>
+                    <div className="person-label cell">Priority C</div> */}
+
                 </div>
             </div>
             {isOpenDetails && <TaskDetails
@@ -104,6 +125,37 @@ export function TaskPreview({ task, board, group }) {
                 isOpenDetails={isOpenDetails}
                 setIsOpenDetails={setIsOpenDetails} />}
         </div>
-    </section>
 
+    </section>
+}
+
+export function DynamicCmp({ cmp, info }) {
+    console.log('info', info);
+    function getStatusColor(status) {
+
+        switch (status) {
+            case 'done':
+                return '#00c875'
+            case 'working on it':
+                return '#fdab3d'
+            case 'stuck':
+                return '#e2445c'
+            case '':
+                return '#c4c4c4'
+
+        }
+    }
+
+    switch (cmp) {
+        case 'status-picker':
+            return <div className="person-label cell" style={{ backgroundColor: getStatusColor(info.status) }} >{info.status}
+                <div className="add-note"></div>
+            </div>
+        case 'member-picker':
+            return <div className="person-label cell">{<AvatarGroup size={Avatar.sizes.SMALL} max={3}>
+                <Avatar type={Avatar.types.IMG} src={Oren} ariaLabel="Harel Natan" />
+            </AvatarGroup>}</div>
+        case 'date-picker':
+            return <div className="person-label cell">{info.dueDate}</div>
+    }
 }

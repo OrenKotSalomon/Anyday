@@ -34,6 +34,7 @@
   }
 
   .cell {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,6 +42,7 @@
     text-align: center;
     min-width: 130px;
     height: $cell-height;
+
     &:hover {
       cursor: pointer;
     }
@@ -53,6 +55,8 @@
 
 .row-header-container {
   display: flex;
+
+  // :nth-child(1) {}
 
   .main-right-header {
     position: relative;
@@ -81,7 +85,7 @@
 }
 
 .main-labels-container {
-  > * {
+  >* {
     border-top: $border-cell;
     border-left: $border-cell;
     border-bottom: $border-cell;
@@ -95,7 +99,7 @@
   flex-basis: 21.9375rem;
   height: 36px;
 
-  > * {
+  >* {
     border-top: $border-cell;
     border-bottom: $border-cell;
   }

@@ -16,14 +16,10 @@
 // state.board = board
 // Later, support switching a specific task
 
-
 // <BoardDetails> => <BoardGroup v-for / map>
 // <BoardGroup> => <TaskPreview v-for / map>
 // <TaskDetails> (supports edit) - initially can be loaded in seperate route 
 // (later on we can place it in a modal and nested route)
-
-
-
 
 const activity = {
     "id": makeId(),
@@ -35,7 +31,7 @@ const activity = {
 
 // Store - saveTask
 function storeSaveTask(task, activity) {
-    
+
     board = boardService.saveTask(boardId, groupId, task, activity)
     // commit(ACTION) // dispatch(ACTION)
 }
@@ -51,7 +47,6 @@ function saveTask(boardId, groupId, task, activity) {
     // return board
     // return task
 }
-
 
 const board = {
     "_id": "b101",
@@ -113,7 +108,7 @@ const board = {
                     "id": "c104",
                     "title": "Help me",
                     "status": "in-progress", // monday
-                    "priority": "high", 
+                    "priority": "high",
                     "description": "description",
                     "comments": [
                         {
@@ -195,7 +190,6 @@ const user = {
 
 // <DynamicPicker info={} onUpdate={} >
 
-
 // For Monday Mostly:
 // Dynamic Components: 
 
@@ -213,12 +207,20 @@ function updateTask(cmpType, data) {
     // dispatch to store: updateTask(task, activity)
 }
 
-
 const cmp1 = {
     type: 'status-picker',
     info: {
         selectedStatus: 'pending',
-        statuses: [{}, {}]
+        statuses: [
+            {
+                label: 'done',
+                bgColor: 'green'
+            },
+            {
+                label: 'pending',
+                bgColor: 'orange'
+            }
+        ]
     }
 }
 
@@ -237,46 +239,41 @@ const cmp3 = {
     }
 }
 
+export function TaskPreview({ task }) {
+    //GET FROM STORE
+    const cmpsOrder = [
+        "status-picker",
+        "member-picker",
+        "date-picker",
+        "priority-picker",
+    ];
+    return (
+        <section>
+            <h5>{task.txt}</h5>
+            {cmpsOrder.map((cmp, idx) => {
+                return (
+                    <DynamicCmp
+                        cmp={cmp}
+                        key={idx}
+                        onUpdate={(data) => {
+                            console.log("Updating: ", cmp, "with data:", data);
+                            // make a copy, update the task
+                            // Call action: updateTask(task)
+                        }}
+                    />
+                );
+            })}
+        </section>
+    );
+}
 
-
-
-
-
-// export function TaskPreview({ task }) {
-//     //GET FROM STORE
-//     const cmpsOrder = [
-//       "status-picker",
-//       "member-picker",
-//       "date-picker",
-//       "priority-picker",
-//     ];
-//     return (
-//       <section>
-//         <h5>{task.txt}</h5>
-//         {cmpsOrder.map((cmp, idx) => {
-//           return (
-//             <DynamicCmp
-//               cmp={cmp}
-//               key={idx}
-//               onUpdate={(data) => {
-//                 console.log("Updating: ", cmp, "with data:", data);
-//                 // make a copy, update the task
-//                 // Call action: updateTask(task)
-//               }}
-//             />
-//           );
-//         })}
-//       </section>
-//     );
-//   }
-
-// export function DynamicCmp({ cmp, info, onUpdate }) {
-//     switch (cmp) {
-//         case "status-picker":
-//             return <StatusCmp info={info} onUpdate={onUpdate} />;
-//         case "member-picker":
-//             return <MemberPicker info={info} onUpdate={onUpdate} />;
-//         default:
-//             return <p>UNKNOWN {cmp}</p>;
-//     }
-// }
+export function DynamicCmp({ cmp, info, onUpdate }) {
+    switch (cmp) {
+        case "status-picker":
+            return <StatusCmp info={info} onUpdate={onUpdate} />;
+        case "member-picker":
+            return <MemberPicker info={info} onUpdate={onUpdate} />;
+        default:
+            return <p>UNKNOWN {cmp}</p>;
+    }
+}
