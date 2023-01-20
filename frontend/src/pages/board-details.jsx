@@ -7,7 +7,7 @@ import { SideGroupBar } from "../cmps/side-group-bar";
 import { loadBoard, loadBoards, updateBoard } from "../store/board.actions";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Loader } from 'monday-ui-react-core'
+import { Loader } from 'monday-ui-react-core';
 
 export function BoardDetails() {
     const board = useSelector((storeState) => storeState.boardModule.board)
