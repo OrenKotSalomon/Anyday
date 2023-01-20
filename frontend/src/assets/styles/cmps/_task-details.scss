@@ -121,6 +121,10 @@
             top: -1.2em;
             margin-left: 5%;
 
+            img {
+                margin: 0
+            }
+
             .task-details-img-preview {
                 width: 10%;
                 height: 10%;
@@ -134,6 +138,11 @@
         }
     }
 
+}
+
+.emoji-picker {
+    align-self: center;
+    max-width: 90%;
 }
 
 .task-details-hr {

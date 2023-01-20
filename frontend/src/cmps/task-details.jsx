@@ -123,7 +123,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                         onChange={handleInputChange}
                         value={newCommentTxt} />
 
-                    {isEmojiPicker && <div className="emojiPicker">
+                    {isEmojiPicker && <div className="emoji-picker">
                         {emojis.map(emoji => <span key={emoji} className='emoji' onClick={() => setComment(newCommentTxt + emoji)}>{emoji}</span>)}
                     </div>}
 
