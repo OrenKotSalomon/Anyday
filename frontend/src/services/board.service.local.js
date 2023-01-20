@@ -112,7 +112,10 @@ async function addBoardMsg(boardId, txt) {
 function getNewTask() {
     return {
         id: utilService.makeId(),
-        title: 'New Task'
+        title: 'New Task',
+        status: '',
+        members: [],
+        dueDate: ''
     }
 
 }
@@ -239,11 +242,17 @@ function getEmptyBoard() {
                 tasks: [
                     {
                         id: utilService.makeId(),
-                        title: 'Task 1'
+                        title: 'Task 1',
+                        status: '',
+                        members: [],
+                        dueDate: ''
                     },
                     {
                         id: utilService.makeId(),
-                        title: 'Task 2'
+                        title: 'Task 2',
+                        status: '',
+                        members: [],
+                        dueDate: ''
                     }
                 ],
                 style: 'lightpink'
@@ -255,11 +264,17 @@ function getEmptyBoard() {
                 tasks: [
                     {
                         id: utilService.makeId(),
-                        title: 'Task 3'
+                        title: 'Task 3',
+                        status: '',
+                        members: [],
+                        dueDate: ''
                     },
                     {
                         id: utilService.makeId(),
-                        title: 'Task 4'
+                        title: 'Task 4',
+                        status: '',
+                        members: [],
+                        dueDate: ''
                     }
                 ],
                 style: 'gold'
@@ -271,16 +286,24 @@ function getEmptyBoard() {
                 tasks: [
                     {
                         id: utilService.makeId(),
-                        title: 'Task 5'
+                        title: 'Task 5',
+                        status: '',
+                        members: [],
+                        dueDate: ''
                     },
                     {
                         id: utilService.makeId(),
-                        title: 'Task 6'
+                        title: 'Task 6',
+                        status: '',
+                        members: [],
+                        dueDate: ''
                     }
                 ],
                 style: 'lightblue'
             },
-        ]
+        ],
+        cmpsOrder: ["status-picker", "member-picker", "date-picker"]
+
     }
 }
 

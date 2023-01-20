@@ -63,11 +63,11 @@ export function GroupList({ board, group }) {
     function renderGroupLabels(cmp, idx) {
         switch (cmp) {
             case 'status-picker':
-                return <div key={idx} className="person-label cell">Status</div>
+                return <div key={idx} className="status-label-header ">Status</div>
             case 'member-picker':
-                return <div key={idx} className="person-label cell">Person</div>
+                return <div key={idx} className="people-label-header ">People</div>
             case 'date-picker':
-                return <div key={idx} className="person-label cell">Date</div>
+                return <div key={idx} className="date-label-header ">Date</div>
         }
     }
 
@@ -134,11 +134,11 @@ export function GroupList({ board, group }) {
                             <input className='row-checkbox' type="checkbox" />
                         </div>
                         <div className='task-main-container'>
-                            <div className="task-row-container">Task</div>
+                            <div className="task-row-container">Item</div>
                         </div>
                     </div>
                 </div>
-                <div className="main-labels-container flex">
+                <div className="main-header-labels-container flex">
                     {board.cmpsOrder.map((cmp, idx) => renderGroupLabels(cmp, idx))}
                 </div>
 

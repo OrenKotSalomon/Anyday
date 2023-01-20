@@ -54,18 +54,11 @@
   display: flex;
 
   .task-cells-row-container {
-    border-bottom: $border-cell;
-    height: rem(36px);
 
+    height: rem(36px);
     flex: 1 1 auto;
     max-width: none;
 
-    & .cell {
-      border-right: $border-cell;
-      border-bottom: $border-cell;
-      border-top: 0;
-      border-left: 0;
-    }
   }
 }
 
@@ -74,14 +67,14 @@
   justify-content: center;
   height: 36px;
   border-bottom: $border-cell;
-  min-width: 21.9375rem;
-  // flex-basis: rem(300px);
+  min-width: rem(400px);
   align-items: center;
   text-align: left;
 
   .task-name-cell {
     // need to configure with resize
     max-width: rem(240px);
+    // border-left: $border-cell;
   }
 
   .left-border-task {
@@ -97,26 +90,32 @@
     align-items: center;
     margin-left: auto;
     border-left: $border-cell;
-    border-right: $border-cell;
     height: 100%;
 
     .icon_component--clickable {
       color: grey;
+
     }
 
     &:hover {
       .icon_component--clickable {
         color: #0073ea;
+
       }
     }
 
     .msg-btn {
-      // padding-right: 16px;
       padding-left: 16px;
       @include btn-no-style;
 
+      .storybook-counter_position {
+        position: relative;
+        right: -3px;
+        top: 1px;
+      }
+
       .monday-style-counter--size-small {
-        width: 16px;
+        width: 10px;
         height: 16px;
         font-size: 10px;
         position: relative;
@@ -132,21 +131,14 @@
 }
 
 .checkbox-row-container {
-
-  // border-bottom: $border-cell;
   display: flex;
-  // align-items: center;
   justify-content: center;
-  // width: 41px;
+  width: rem(33px);
   height: rem(36px);
-  width: rem(41px);
-  // border-left: solid 6px red;
-
   border-right: $border-cell;
 
   .row-checkbox {
-    margin: 0;
-    width: rem(18px);
+    width: 16px;
   }
 }
 
@@ -156,7 +148,6 @@
   margin-top: 4px;
   padding-left: 20px;
 
-  // align-self: center;
   .element-type-h5 {
     font-size: rem(14px);
     font-family: figtree-regular;
@@ -168,12 +159,10 @@
   position: absolute;
   right: 0;
   top: 0;
-  // border-width: 0 10px 10px 0;
-  // background-color: #0073ea;
   transition: border-width .3s .2s ease;
 }
 
-.person-label {
+.cell {
   position: relative;
 
   &:hover .add-note {
@@ -185,4 +174,36 @@
     }
 
   }
+}
+
+.main-labels-container {
+  border-bottom: $border-cell;
+  height: 36px;
+}
+
+.status-label {
+  @include status-layout;
+  text-align: center;
+  color: #ffffff;
+  height: 36px;
+  border-left: $border-cell;
+  border-bottom: $border-cell;
+
+  &::first-letter {
+    text-transform: capitalize;
+  }
+}
+
+.people-label {
+  @include people-layout;
+  border-left: $border-cell;
+  display: flex;
+  justify-content: center;
+}
+
+.date-label {
+  border-left: $border-cell;
+  border-right: $border-cell;
+  @include date-layout;
+
 }

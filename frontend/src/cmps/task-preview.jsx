@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { TaskDetails } from "./task-details";
 
-import { MenuButton, Menu, MenuItem, Icon, EditableHeading, Counter } from 'monday-ui-react-core'
+import { MenuButton, Menu, MenuItem, Icon, EditableHeading, Counter, DialogContentContainer, DatePicker } from 'monday-ui-react-core'
 import { Open, Duplicate, Delete, Bolt, AddUpdate, Update } from 'monday-ui-react-core/icons'
 import { updateTask } from "../store/board.actions";
 import { DELETE_TASK, DUPLICATE_TASK } from "../services/board.service.local";
@@ -18,7 +18,6 @@ export function TaskPreview({ task, board, group }) {
     const [isOpenDetails, setIsOpenDetails] = useState(false)
     const [isSetStatus, setIsSetStatus] = useState(false)
     const [isSetPriority, setIsSetPriority] = useState(false)
-
 
     function onDuplicateTask(taskToDuplicate) {
         const data = { taskToDuplicate, id: taskToDuplicate.id, groupId: group.id }
@@ -77,12 +76,13 @@ export function TaskPreview({ task, board, group }) {
                 </div>
                 <div className="msg-btn-container" onClick={() => setIsOpenDetails(!isOpenDetails)}>
 
-                    <button className="msg-btn" style={task.comments ? { paddingRight: '0px' } : { paddingRight: '16px', paddingLeft: '18px' }}>
+                    <button className="msg-btn" style={task.comments ? { paddingRight: '5px' } : { paddingRight: '19px', paddingLeft: '20px' }}>
 
                         {!task.comments && <Icon SVG="AddUpdate" iconType={Icon.type.SVG} icon={AddUpdate} iconLabel="Task Details" iconSize={24} />}
                         {task.comments && <div className="storybook-counter_position">
                             <Icon icon={Update} iconSize={24} />
                             <Counter count={task.comments.length} size={Counter.sizes.SMALL} className='counter-comments' />
+
                         </div>}
                     </button>
                 </div>
@@ -146,16 +146,27 @@ export function DynamicCmp({ cmp, info }) {
         }
     }
 
+    function temp(ev) {
+        console.log(ev);
+    }
+
     switch (cmp) {
         case 'status-picker':
-            return <div className="person-label cell" style={{ backgroundColor: getStatusColor(info.status) }} >{info.status}
+            return <div className="status-label" style={{ backgroundColor: getStatusColor(info.status) }} >{info.status}
                 <div className="add-note"></div>
             </div>
         case 'member-picker':
-            return <div className="person-label cell">{<AvatarGroup size={Avatar.sizes.SMALL} max={3}>
-                <Avatar type={Avatar.types.IMG} src={Oren} ariaLabel="Harel Natan" />
+            return <div className="people-label">{<AvatarGroup size={Avatar.sizes.SMALL} max={2}>
+                <Avatar type={Avatar.types.IMG} src={Oren} ariaLabel="Oren Kot" />
             </AvatarGroup>}</div>
         case 'date-picker':
-            return <div className="person-label cell">{info.dueDate}</div>
+            return <div className="date-label"><EditableHeading
+                type={EditableHeading.types.h6}
+                value={info.dueDate}
+                displayPlaceholderInTextMode={true}
+            /></div>
+        // return <div className="date-label"><DialogContentContainer >
+        //     <DatePicker data-testid="date-picker" onPickDate={temp} />
+        // </DialogContentContainer></div>
     }
 }
