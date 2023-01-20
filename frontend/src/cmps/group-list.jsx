@@ -7,7 +7,7 @@ import { Delete, Bullet, Duplicate, Add } from 'monday-ui-react-core/icons'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service';
 import { ADD_GROUP, ADD_GROUP_TASK, boardService, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DELETE_GROUP, DUPLICATE_GROUP } from '../services/board.service.local';
 import { utilService } from '../services/util.service';
-import { AddLabelModal } from './add-label-modal';
+import { AddLabelModal } from './tasks-modals/add-label-modal';
 
 export function GroupList({ board, group }) {
 

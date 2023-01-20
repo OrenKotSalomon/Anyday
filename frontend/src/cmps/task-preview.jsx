@@ -10,10 +10,15 @@ import { Avatar, AvatarGroup } from 'monday-ui-react-core';
 import Harel from '../assets/img/Harel.jpg'
 import Oren from '../assets/img/Oren.jpg'
 import Yossi from '../assets/img/Yossi.jpg'
+import { StatusModal } from "./tasks-modals/status-modal";
+import { PriorityModal } from "./tasks-modals/priority-modal";
 
 export function TaskPreview({ task, board, group }) {
 
     const [isOpenDetails, setIsOpenDetails] = useState(false)
+    const [isSetStatus, setIsSetStatus] = useState(false)
+    const [isSetPriority, setIsSetPriority] = useState(false)
+
 
     function onDuplicateTask(taskToDuplicate) {
         const data = { taskToDuplicate, id: taskToDuplicate.id, groupId: group.id }
@@ -25,6 +30,14 @@ export function TaskPreview({ task, board, group }) {
         const data = { id: taskToDelete.id, groupId: group.id }
         updateTask(board, data, DELETE_TASK)
         showSuccessMsg(`Task deleted successfully taskId:${data.id} `)
+    }
+
+    function toggleIsSetStatus() {
+        setIsSetStatus(!isSetStatus)
+    }
+
+    function toggleIsSetPriority() {
+        setIsSetPriority(!isSetPriority)
     }
 
     return <section className='task-preview'>
@@ -92,9 +105,9 @@ export function TaskPreview({ task, board, group }) {
                             <Avatar type={Avatar.types.IMG} src={Yossi} ariaLabel="Yossi Karasik" />
                             <Avatar type={Avatar.types.IMG} src={Harel} ariaLabel="Another Me" />
                         </AvatarGroup></div>
-                    <div className="person-label cell">Status C</div>
-                    <div className="person-label cell">Date C</div>
-                    <div className="person-label cell">Priority C</div>
+                    <div className="status-label cell" onClick={toggleIsSetStatus}>{isSetStatus && <StatusModal />}{task.status}</div>
+                    <div className="date-label cell">Date C</div>
+                    <div className="priority-label cell" onClick={toggleIsSetPriority}>{isSetPriority && <PriorityModal />}</div>
                 </div>
             </div>
             {isOpenDetails && <TaskDetails
