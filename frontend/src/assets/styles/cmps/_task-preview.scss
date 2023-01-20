@@ -59,6 +59,7 @@
 
     flex: 1 1 auto;
     max-width: none;
+
     & .cell {
       border-right: $border-cell;
       border-bottom: $border-cell;
@@ -80,7 +81,7 @@
 
   .task-name-cell {
     // need to configure with resize
-    max-width: rem(245px);
+    max-width: rem(240px);
   }
 
   .left-border-task {
