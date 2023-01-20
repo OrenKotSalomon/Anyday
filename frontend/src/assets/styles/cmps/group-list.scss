@@ -64,6 +64,7 @@
       font-size: rem(19px);
       color: #707181;
     }
+
     border-left: $border-cell;
   }
 
@@ -96,6 +97,7 @@
     justify-content: center;
     align-items: center;
     font-size: 16px;
+
   }
 
   .left-border {
@@ -116,5 +118,36 @@
       margin: 0;
       width: 18px;
     }
+  }
+}
+
+.add-task-container {
+  display: flex;
+  align-items: center;
+  height: $cell-height;
+  opacity: 0.6;
+  border-bottom: $border-cell;
+  border-bottom-left-radius: 6px;
+
+  &:hover {
+    background-color: #f4f5f8;
+    opacity: 1;
+  }
+
+  // need to find active style / focus
+  // &:hover {
+  //   background-color: #cce5ff;
+  // }
+  //
+  .editable-add-task {
+    width: rem(300px);
+    opacity: 1;
+  }
+
+  .checkbox-row-container {}
+
+  .left-border-add-task {
+    @include left-border;
+    border-bottom-left-radius: 6px;
   }
 }
