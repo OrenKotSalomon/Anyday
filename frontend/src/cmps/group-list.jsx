@@ -103,7 +103,6 @@ export function GroupList({ board, group }) {
                         />
                     </Tooltip>
                 </div>
-
             </div>
         </div>
         <div className="main-group-container">
@@ -120,7 +119,7 @@ export function GroupList({ board, group }) {
                     </div>
                 </div>
 
-                <div className='main-right-header'>+</div>
+                <div className='main-right-header flex'> <button className='btn clean add-label-btn'>+</button> </div>
             </div>
             {/* // style={{ backgroundColor: group.style }} */}
             {/* <div className="group-labels flex">

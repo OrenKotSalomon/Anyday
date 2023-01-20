@@ -23,7 +23,7 @@
       top: 20%;
       left: -5%;
       opacity: 0;
-      transition: .3s;
+      transition: 0.3s;
     }
   }
 
@@ -51,14 +51,19 @@
   display: flex;
 
   .main-right-header {
-
+    align-items: center;
+    justify-content: flex-start;
     height: rem(36px);
-
     flex: 1 1 auto;
     max-width: unset;
     // width: 100vw;
     border-top: $border-cell;
     border-bottom: $border-cell;
+
+    .add-label-btn {
+      font-size: rem(19px);
+      color: #707181;
+    }
     border-left: $border-cell;
   }
 
@@ -97,7 +102,6 @@
     @include left-border;
     border-top-left-radius: 6px;
     // border-bottom-left-radius: 6px;
-
   }
 
   .checkbox-row-container {
