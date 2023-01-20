@@ -46,6 +46,28 @@
     .task-main-nav {
         padding: 0;
     }
+
+    .task-details-form {
+        display: flex;
+        flex-direction: column;
+        margin-top: 2em;
+        margin-bottom: .5em;
+
+
+        .task-details-input {
+            align-self: center;
+            width: 90%;
+        }
+
+        .task-details-input-btn {
+            margin-top:.3em;
+            margin-right:1.5em;
+            align-self: flex-end;
+            width: 30%;
+        }
+
+    }
+
 }
 
 .task-details-hr {
@@ -113,10 +135,7 @@
         width: 50vw;
     }
 
-    .task-details-input {
-        align-self: center;
-        width: 50vw;
-    }
+
 }
 
 .task-main:hover {
