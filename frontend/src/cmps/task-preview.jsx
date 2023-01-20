@@ -53,7 +53,7 @@ export function TaskPreview({ task, board, group }) {
         <div className="task">
 
             <div className="task-edit-wrapper">
-                <div className='left-border-task'></div>
+                <div style={{ backgroundColor: group.style }} className='left-border-task'></div>
                 <div className='checkbox-row-container'>
                     <input className='row-checkbox' type="checkbox" />
                 </div>

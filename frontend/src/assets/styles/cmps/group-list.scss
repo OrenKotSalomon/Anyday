@@ -43,6 +43,10 @@
   }
 }
 
+.main-group-container {
+  min-width: 100vw;
+}
+
 .row-header-container {
   display: flex;
 
@@ -52,15 +56,16 @@
 
     flex: 1 1 auto;
     max-width: unset;
-    width: 100vw;
+    // width: 100vw;
     border-top: $border-cell;
     border-bottom: $border-cell;
+    border-left: $border-cell;
   }
 
   .main-left-header {
     display: flex;
     // flex-grow: 2 2 auto;
-    width: rem(351px);
+    width: rem(350px);
   }
 }
 
@@ -72,8 +77,9 @@
   height: 36px;
 
   >* {
-    border: 1px solid #d0d4e4;
-    // height: inherit;
+    border-top: $border-cell;
+    border-bottom: $border-cell;
+
   }
 
   .task-main-container {
