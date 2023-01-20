@@ -175,10 +175,6 @@ function taskServiceReducer(board, data, type) {
         groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
         taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.id)
     }
-    if (data) {
-        groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
-        taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.id)
-    }
 
     switch (type) {
         case DELETE_TASK:
@@ -201,8 +197,9 @@ function taskServiceReducer(board, data, type) {
             board.groups[groupIdx].tasks[taskIdx].comments.push(data.comment)
             return board
         case DELETE_TASK_COMMENT:
-            let deleteCommentIdx = board.groups[groupIdx].tasks[taskIdx].comments.findIndex(currComment => currComment.id === data.commentIdx)
-            board.groups[groupIdx].tasks[taskIdx].comments.splice(deleteCommentIdx, 1)
+            currTask = board.groups[groupIdx].tasks[taskIdx]
+            let deleteCommentIdx = currTask.comments.findIndex(currComment => currComment.id === data.commentIdx)
+            currTask.comments.splice(deleteCommentIdx, 1)
             return board
         default:
             return board

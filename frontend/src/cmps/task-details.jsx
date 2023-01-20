@@ -5,9 +5,10 @@ import { useState } from "react"
 // import OutlinedInput from '@mui/material/OutlinedInput';
 // import Box from '@mui/material/Box';
 
-import { TabList, Tab, EditableHeading, Icon } from 'monday-ui-react-core'
-import { Home } from 'monday-ui-react-core/icons'
+import { TabList, Tab, EditableHeading, Icon, MenuButton, Menu, MenuItem, } from 'monday-ui-react-core'
+import { Home, Open, Time, Delete } from 'monday-ui-react-core/icons'
 
+import { utilService } from '../services/util.service.js';
 import { boardService } from '../services/board.service.js';
 import { CHANGE_TASK_TITLE, ADD_TASK_COMMENT, DELETE_TASK_COMMENT } from '../services/board.service.local.js';
 import { updateTask } from '../store/board.actions';
@@ -19,6 +20,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
     const [isAddComment, setAddComment] = useState(false)
     const [newTitle, setNewTitle] = useState(task.title)
     const [newCommentTxt, setComment] = useState('')
+    // const [isOpenDetails, setIsOpenDetails] = useState(false)
 
     function onSubmitNewComment(ev) {
         ev.preventDefault()
@@ -26,6 +28,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
         let taskChanges = { comment: data, id: task.id, groupId: group.id }
         updateTask(board, taskChanges, ADD_TASK_COMMENT)
         setComment('')
+        setAddComment(!isAddComment)
     }
 
     function onDeleteComment(comment) {
@@ -88,11 +91,39 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
             {(Array.isArray(task.comments) && task.comments.length) ? <section>
                 {task.comments.map(comment => <div
                     key={comment.id} className='task-details-task-comment'>
-                    <button onClick={() => onDeleteComment(comment)}>X</button><h1>{comment.txt}</h1>
+
+                    <div className='task-details-header'>
+                        <div className='task-details-by-user'>
+                            <img className='task-details-by-user-img' src="https://files.monday.com/use1/photos/37922174/thumb_small/37922174-user_photo_2023_01_08_16_06_35.png?1673193996" alt="" />
+                            <h1 className='task-details-by-user-name' >User Name</h1>
+                        </div>
+
+                        <div className='task-details-header-tools'>
+                        <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Time} iconLabel="my svg icon" iconSize={14} />
+                            <div className='task-details-created-at'>{utilService.time_ago(comment.createdAt)}</div>
+                            <MenuButton className="task-details-menu-btn" >
+                                <Menu
+                                    id="task-details-menu"
+                                    size="medium"
+                                >
+                                    <MenuItem
+                                        onClick={() => onDeleteComment(comment)}
+                                        icon={Delete}
+                                        title="Delete update for every one"
+                                    />
+                                    
+                                </Menu>
+                            </MenuButton>
+                        </div>
+                    </div>
+
+                    <p className='task-details-comment-txt'>{comment.txt}</p>
+
+
+
                 </div>)}
             </section > : <section>
                 <div className='details-img-container'><img className="details-img" src="https://cdn.monday.com/images/pulse-page-empty-state.svg" alt="" /></div>
-
                 <p className='details-p' ><span className="details-p-header">No updates yet for this item</span>
                     <span className='details-p-txt'>Be the first one to update about progress, mention someone
                         or upload files to share with your team members</span></p>
