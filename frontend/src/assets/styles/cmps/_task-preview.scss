@@ -30,7 +30,7 @@
 
   .task-preview-menu-btn {
     position: absolute;
-    left: -5.3%;
+    left: -33px;
     transition: .3s;
     opacity: 0;
   }
@@ -49,12 +49,18 @@
 .task {
   display: flex;
 
-  .task-label {
+  .task-cells-row-container {
     border-bottom: $border-cell;
     height: rem(36px);
 
     flex: 1 1 auto;
     max-width: none;
+    & .cell {
+      border-right: $border-cell;
+      border-bottom: $border-cell;
+      border-top: 0;
+      border-left: 0;
+    }
   }
 }
 

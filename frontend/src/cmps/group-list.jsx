@@ -7,9 +7,11 @@ import { Delete, Bullet, Duplicate, Add } from 'monday-ui-react-core/icons'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service';
 import { ADD_GROUP, ADD_GROUP_TASK, boardService, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DELETE_GROUP, DUPLICATE_GROUP } from '../services/board.service.local';
 import { utilService } from '../services/util.service';
+import { AddLabelModal } from './add-label-modal';
 
 export function GroupList({ board, group }) {
 
+    const [isAddingLabel, setIsAddingLabel] = useState(false)
     const [isPickColor, setIsPickColor] = useState(false)
     const [groupToUpdate, setGroupToUpdate] = useState(group)
     const [newTaskTitle, setNewTaskTitle] = useState('')
@@ -52,6 +54,10 @@ export function GroupList({ board, group }) {
         if (!newTaskTitle) throw new Error('Task title is empty')
         updateGroup(board, { group, newTaskTitle }, ADD_GROUP_TASK)
         setNewTaskTitle('')
+    }
+
+    function toggleAddLabelModal() {
+        setIsAddingLabel(!isAddingLabel)
     }
 
     return <section className='group-list'>
@@ -118,8 +124,23 @@ export function GroupList({ board, group }) {
                         </div>
                     </div>
                 </div>
+                <div className="main-labels-container flex">
+                    <div className="person-label cell">Person L</div>
+                    <div className="person-label cell">Status L</div>
+                    <div className="person-label cell">Date L</div>
+                    <div className="person-label cell">Priority L</div>
+                </div>
 
-                <div className='main-right-header flex'> <button className='btn clean add-label-btn'>+</button> </div>
+                <div className='main-right-header flex'>
+                    <button onClick={toggleAddLabelModal} 
+                    className='btn clean add-label-btn'
+                    style={{
+                        color: isAddingLabel ? '#fff' : '',  
+                        backgroundColor: isAddingLabel ? 'gray' : ''  
+                        }} >+
+                    </button>
+                    {isAddingLabel && <AddLabelModal />}
+                </div>
             </div>
             {/* // style={{ backgroundColor: group.style }} */}
             {/* <div className="group-labels flex">
