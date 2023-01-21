@@ -14,7 +14,7 @@ import { StatusModal } from "./tasks-modals/status-modal";
 import { PriorityModal } from "./tasks-modals/priority-modal";
 import { DynamicCmp } from "./dynamic-cmp";
 
-export function TaskPreview({ task, board, group }) {
+export function TaskPreview({ task, board, group, openModal }) {
 
     const [isOpenDetails, setIsOpenDetails] = useState(false)
     const [isSetStatus, setIsSetStatus] = useState(false)
@@ -31,13 +31,6 @@ export function TaskPreview({ task, board, group }) {
         const data = { id: taskToDelete.id, groupId: group.id }
         updateTask(board, data, DELETE_TASK)
         showSuccessMsg(`Task deleted successfully taskId:${data.id} `)
-    }
-
-    function temp(ev) {
-        let ssss = ev.target.getBoundingClientRect()
-        console.log(ssss);
-        setlala(ssss)
-
     }
 
     return <section className='task-preview'>
@@ -103,14 +96,14 @@ export function TaskPreview({ task, board, group }) {
                     {board.cmpsOrder.map((cmp, idx) => {
                         return (
                             <DynamicCmp
-                                temp={temp}
                                 key={idx}
-                                cmp={cmp}
+                                cmp={{ cmp, task }}
                                 info={{
                                     status: task?.status,
                                     members: task?.members,
                                     dueDate: task?.dueDate
                                 }}
+                                openModal={openModal}
                             />
                         )
                     }

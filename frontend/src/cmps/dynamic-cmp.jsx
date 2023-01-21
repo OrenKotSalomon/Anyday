@@ -3,7 +3,7 @@ import Oren from '../assets/img/Oren.jpg'
 import { Avatar, AvatarGroup } from 'monday-ui-react-core';
 import { useState } from 'react';
 
-export function DynamicCmp({ temp, cmp, info }) {
+export function DynamicCmp({ temp, cmp, info, openModal }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     function getStatusColor(status) {
 
@@ -20,17 +20,17 @@ export function DynamicCmp({ temp, cmp, info }) {
         }
     }
 
-    switch (cmp) {
+    switch (cmp.cmp) {
         case 'status-picker':
-            return <div onClick={temp} className="status-label" style={{ backgroundColor: getStatusColor(info.status) }} >{info.status}
+            return <div onClick={(ev) => openModal(ev, cmp.task, 'status-picker')} className="status-label" style={{ backgroundColor: getStatusColor(info.status) }} >{info.status}
                 <div className="add-note"></div>
             </div>
         case 'member-picker':
-            return <div onClick={temp} className="people-label">{<AvatarGroup size={Avatar.sizes.SMALL} max={2}>
+            return <div onClick={(ev) => openModal(ev, cmp.task, 'member-picker')} className="people-label">{<AvatarGroup size={Avatar.sizes.SMALL} max={2}>
                 <Avatar type={Avatar.types.IMG} src={Oren} ariaLabel="Oren Kot" />
             </AvatarGroup>}</div>
         case 'date-picker':
-            return <div onClick={temp} className="date-label"><EditableHeading
+            return <div onClick={(ev) => openModal(ev, cmp.task, ' date-picker')} className="date-label"><EditableHeading
                 type={EditableHeading.types.h6}
                 value={info.dueDate}
                 displayPlaceholderInTextMode={true}

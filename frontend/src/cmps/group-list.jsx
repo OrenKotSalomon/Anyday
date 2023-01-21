@@ -9,7 +9,7 @@ import { ADD_GROUP, ADD_GROUP_TASK, boardService, CHANGE_GROUP_COLOR, CHANGE_GRO
 import { utilService } from '../services/util.service';
 import { AddLabelModal } from './tasks-modals/add-label-modal';
 
-export function GroupList({ board, group }) {
+export function GroupList({ board, group, openModal, }) {
 
     const [isAddingLabel, setIsAddingLabel] = useState(false)
     const [isPickColor, setIsPickColor] = useState(false)
@@ -118,8 +118,8 @@ export function GroupList({ board, group }) {
                             onChange={handleChange}
                             brandFont={true}
                             value={group.title}
-                        // customColor={`${group.color}`}
-                        type={EditableHeading.types.h4}
+                            // customColor={`${group.color}`}
+                            type={EditableHeading.types.h4}
                         />
                     </Tooltip>
                 </div>
@@ -155,7 +155,7 @@ export function GroupList({ board, group }) {
             </div>
             {/* // style={{ backgroundColor: group.style }} */}
             <section className="tasks-container">
-                {group.tasks.map(task => <TaskPreview key={task.id} task={task} board={board} group={group} />)}
+                {group.tasks.map(task => <TaskPreview key={task.id} task={task} board={board} group={group} openModal={openModal} />)}
                 <div className='add-task-container'>
                     <div style={{ backgroundColor: group.style }} className='left-border-add-task'></div>
                     <div className='checkbox-row-container'>
