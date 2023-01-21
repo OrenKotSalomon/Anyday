@@ -113,7 +113,7 @@ export function GroupList({ board, group }) {
                     <Tooltip
                         content="Click to Edit" animationType="expand">
                         <EditableHeading
-                            customColor={group.color}
+                            customColor={group.style}
                             onFinishEditing={onFinishEditing}
                             onChange={handleChange}
                             brandFont={true}

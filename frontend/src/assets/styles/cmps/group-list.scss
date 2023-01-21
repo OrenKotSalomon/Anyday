@@ -22,12 +22,17 @@
       margin-left: 15px;
       width: max-content;
       font-size: 2rem;
+
+      input{
+margin-top:10px;
+margin-left: 20px;
+      }
     }
 
 
     .group-list-menu-btn {
       position: absolute;
-      top: 52.5%;
+      top: 15.5%;
       left: -33px;
       opacity: 0;
       transition: 0.3s;
