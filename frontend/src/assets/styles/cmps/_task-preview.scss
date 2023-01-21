@@ -209,6 +209,27 @@
   border-right: $border-cell;
   @include date-layout;
 
+  .date-label-text {
+    text-align: center;
+    font-family: figtree-regular;
+    font-size: rem(13px);
+
+    .date-txt {
+      line-height: 36px;
+
+      padding: 4.5px;
+      padding-left: 50px;
+      padding-right: 38px;
+
+    }
+
+    &:hover {
+      .date-txt {
+        border: $border-cell;
+      }
+    }
+  }
+
 }
 
 .element-type-h6 {

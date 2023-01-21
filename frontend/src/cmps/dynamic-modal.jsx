@@ -1,34 +1,40 @@
 import { useState } from "react"
-
+import Harel from '../assets/img/Harel.jpg'
+import Yossi from '../assets/img/Yossi.jpg'
+import Oren from '../assets/img/Oren.jpg'
 import { DialogContentContainer, DatePicker, Flex, StoryDescription, Dropdown } from 'monday-ui-react-core'
 import dayjs from "dayjs"
-import { DATE_PICKER, MEMEBER_PICKER, STATUS_PICKER } from "../services/board.service.local"
+import { DATE_PICKER, MEMEBER_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_STATUS } from "../services/board.service.local"
 
 export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
-    const [date, setDate] = useState('')
     const optionsAvatar = [{
-        value: "Rotem",
-        label: "Rotem Dekel",
-        // leftAvatar: 
+        value: "Harel",
+        label: "Harel Natan",
+        leftAvatar: Harel
     }, {
-        value: "Hadas",
-        label: "Hadas Farhi",
-        // leftAvatar: 
+        value: "Yossi",
+        label: "Yossi Karasik",
+        leftAvatar: Yossi
     }, {
-        value: "Netta",
-        label: "Netta Muller",
-        // leftAvatar: 
+        value: "Oren",
+        label: "Oren Kot",
+        leftAvatar: Oren
     }]
     function getDate(date) {
         setIsModalOpen(false)
-
-        onUpdateTaskLabel(DATE_PICKER, cmp.data, dayjs(date).unix())
+        console.log('dayjs(date).unix()', dayjs(date).unix());
+        onUpdateTaskLabel(UPDATE_TASK_DATE, cmp.data, dayjs(date).unix())
     }
     console.log(cmp);
     function handleChange(ev) {
         // console.log(ev);
 
         setIsModalOpen(false)
+    }
+
+    function onStatusPick(status) {
+        onUpdateTaskLabel(UPDATE_TASK_STATUS, cmp.data, status)
+
     }
     // console.log(cmp);
     switch (cmp.type) {
@@ -38,7 +44,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
 
                 <div className="status-picker-view">
                     {cmp.statuses.map((status, idx) => {
-                        return <button key={idx}
+                        return <button onClick={() => onStatusPick(status.label)} key={idx}
                             style={{ background: status.bgColor }}
                             className="status-picker">
                             {status.label}
