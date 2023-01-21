@@ -25,6 +25,14 @@ export const CHANGE_TASK_TITLE = 'CHANGE_TASK_TITLE'
 export const ADD_TASK_FROM_HEADER = 'ADD_TASK_FROM_HEADER'
 export const ADD_TASK_COMMENT = 'ADD_TASK_COMMENT'
 export const DELETE_TASK_COMMENT = 'DELETE_TASK_COMMENT'
+export const UPDATE_TASK_STATUS = 'UPDATE_TASK_STATUS'
+export const UPDATE_TASK_DATE = 'UPDATE_TASK_DATE'
+export const UPDATE_TASK_MEMBERS = 'UPDATE_TASK_MEMBERS'
+
+// Dynamic modal/component
+export const DATE_PICKER = 'DATE_PICKER'
+export const STATUS_PICKER = 'STATUS_PICKER'
+export const MEMEBER_PICKER = 'STATUS_PICKER'
 
 export const boardService = {
     query,
@@ -181,12 +189,12 @@ function taskServiceReducer(board, data, type) {
 
     if (data) {
         groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
-        taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.id)
+        taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.taskId)
     }
 
     switch (type) {
         case DELETE_TASK:
-            board.groups[groupIdx].tasks = board.groups[groupIdx].tasks.filter(task => task.id !== data.id)
+            board.groups[groupIdx].tasks = board.groups[groupIdx].tasks.filter(task => task.id !== data.taskId)
             return board
         case DUPLICATE_TASK:
             data.taskToDuplicate.id = utilService.makeId()
@@ -249,14 +257,14 @@ function getEmptyBoard() {
                         title: 'Task 1',
                         status: '',
                         members: [],
-                        dueDate: ''
+                        dueDate: 1589983468418
                     },
                     {
                         id: utilService.makeId(),
                         title: 'Task 2',
                         status: '',
                         members: [],
-                        dueDate: ''
+                        dueDate: 1589983468418
                     }
                 ],
                 style: 'lightpink'
@@ -271,14 +279,14 @@ function getEmptyBoard() {
                         title: 'Task 3',
                         status: '',
                         members: [],
-                        dueDate: ''
+                        dueDate: 1589983468418
                     },
                     {
                         id: utilService.makeId(),
                         title: 'Task 4',
                         status: '',
                         members: [],
-                        dueDate: ''
+                        dueDate: 1589983468418
                     }
                 ],
                 style: 'gold'
@@ -293,20 +301,20 @@ function getEmptyBoard() {
                         title: 'Task 5',
                         status: '',
                         members: [],
-                        dueDate: ''
+                        dueDate: 1589983468418
                     },
                     {
                         id: utilService.makeId(),
                         title: 'Task 6',
                         status: '',
                         members: [],
-                        dueDate: ''
+                        dueDate: 1589983468418
                     }
                 ],
                 style: 'lightblue'
             },
         ],
-        cmpsOrder: ["status-picker", "member-picker", "date-picker"]
+        cmpsOrder: [STATUS_PICKER, MEMEBER_PICKER, DATE_PICKER]
     }
 }
 
@@ -404,7 +412,7 @@ const demoBoard = {
             style: 'lightblue'
         },
     ],
-    cmpsOrder: ["status-picker", "member-picker", "date-picker"]
+    cmpsOrder: [STATUS_PICKER, MEMEBER_PICKER, DATE_PICKER]
 
 }
 

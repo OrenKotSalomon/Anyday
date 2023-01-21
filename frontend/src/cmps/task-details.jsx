@@ -6,7 +6,7 @@ import { useState, useRef, useEffect } from "react"
 // import Box from '@mui/material/Box';
 
 import { TabList, Tab, EditableHeading, Icon, MenuButton, Menu, MenuItem, } from 'monday-ui-react-core'
-import { Home, Time, Delete, Gallery, Emoji } from 'monday-ui-react-core/icons'
+import { Home, Time, Delete, Gallery, Emoji, Underline, Bullets, Italic } from 'monday-ui-react-core/icons'
 
 import { utilService } from '../services/util.service.js';
 import { boardService } from '../services/board.service.js';
@@ -23,19 +23,19 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
     const [imgSrc, setImg] = useState('')
     const emojis = ['😀', '😁', '😂', '🤣', '😃', '😄', '😅', '😆', '😉', '😊', '😋', '😎', '😍', '😘', '🥰', '😗', '😙', '🥲', '🤔', '🤩', '🤗', '🙂', '😚', '🙄', '😶‍🌫️', '😶', '😑', '😐', '🤨', '😯', '🤐', '😮', '😥', '😣', '😏']
     const [isEmojiPicker, SetEmojiPicker] = useState(false)
-
+    const [taskCommentsSize, SetTaskCommentsSize] = useState(44)
 
     function onSubmitNewComment(ev) {
         ev.preventDefault()
         let data = boardService.getEmptyTaskComment(newCommentTxt, imgSrc)
-        let taskChanges = { comment: data, id: task.id, groupId: group.id }
+        let taskChanges = { comment: data, taskId: task.id, groupId: group.id }
         updateTask(board, taskChanges, ADD_TASK_COMMENT)
         setComment('')
         setAddComment(!isAddComment)
     }
 
     function onDeleteComment(comment) {
-        let taskChanges = { commentIdx: comment.id, id: task.id, groupId: group.id }
+        let taskChanges = { commentIdx: comment.id, taskId: task.id, groupId: group.id }
         updateTask(board, taskChanges, DELETE_TASK_COMMENT)
     }
 
@@ -45,7 +45,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
     }
 
     function onFinishEditing() {
-        let taskChanges = { title: newTitle, id: task.id, groupId: group.id }
+        let taskChanges = { title: newTitle, taskId: task.id, groupId: group.id }
         updateTask(board, taskChanges, CHANGE_TASK_TITLE)
     }
 
@@ -87,7 +87,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
     }
 
     return <section className='task-details' style={{ width: `${isOpenDetails ? 100 : 1}vw` }}>
-        <div className='task-main'>
+        <div className='task-main' style={{ width: `${taskCommentsSize}%` }}>
 
             <button className='close-task-btn' onClick={() => setIsOpenDetails(!isOpenDetails)}>X</button>
 
@@ -95,7 +95,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                 className='task-details-title'
                 onFinishEditing={onFinishEditing}
                 onChange={handleChange}
-                type={EditableHeading.types.h4}
+                type={EditableHeading.types.h2}
                 value={newTitle} />
 
             <TabList className='task-main-nav'>
@@ -116,7 +116,11 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
             {isAddComment &&
 
                 <form className='task-details-form' onSubmit={onSubmitNewComment}>
-                    <div className='task-details-form-tools'>tools bar here</div>
+                    <div className='task-details-form-tools'>
+                        <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Underline} iconLabel="my svg icon" iconSize={34} />
+                        <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Bullets} iconLabel="my svg icon" iconSize={34} />
+                        <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Italic} iconLabel="my svg icon" iconSize={34} />
+                    </div>
                     <textarea className='task-details-input'
                         type='text' name=''
                         placeholder='Add a task comment...'
@@ -190,8 +194,13 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                         or upload files to share with your team members</span></p>
             </section >}
 
+
+            {/* <div className="slide-panel-resizer" onClick={(ev) => console.log(ev)}
+            >Test-dragme to resize</div> */}
+
+
         </div >
-        <div className='close-task' onClick={() => setIsOpenDetails(!isOpenDetails)}>.</div>
+        <div className='close-task' style={{ width: `${100 - taskCommentsSize}%` }} onClick={() => setIsOpenDetails(!isOpenDetails)}>.</div>
     </section>
 }
 

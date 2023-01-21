@@ -5,7 +5,7 @@ import { TaskPreview } from "./task-preview";
 import { MenuButton, Menu, MenuItem, ColorPicker } from 'monday-ui-react-core'
 import { Delete, Bullet, Duplicate, Add } from 'monday-ui-react-core/icons'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service';
-import { ADD_GROUP, ADD_GROUP_TASK, boardService, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DELETE_GROUP, DUPLICATE_GROUP } from '../services/board.service.local';
+import { ADD_GROUP, ADD_GROUP_TASK, boardService, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, MEMEBER_PICKER, STATUS_PICKER } from '../services/board.service.local';
 import { utilService } from '../services/util.service';
 import { AddLabelModal } from './tasks-modals/add-label-modal';
 
@@ -62,11 +62,11 @@ export function GroupList({ board, group, openModal, }) {
 
     function renderGroupLabels(cmp, idx) {
         switch (cmp) {
-            case 'status-picker':
+            case STATUS_PICKER:
                 return <div key={idx} className="status-label-header ">Status</div>
-            case 'member-picker':
-                return <div key={idx} className="people-label-header ">People</div>
-            case 'date-picker':
+            case MEMEBER_PICKER:
+                return <div key={idx} className="person-label-header ">Person</div>
+            case DATE_PICKER:
                 return <div key={idx} className="date-label-header ">Date</div>
         }
     }

@@ -1,7 +1,10 @@
 import { useState } from "react"
-import { DialogContentContainer, DatePicker, Flex, StoryDescription, Dropdown } from 'monday-ui-react-core'
 
-export function DynamicModal({ cmp, setIsModalOpen }) {
+import { DialogContentContainer, DatePicker, Flex, StoryDescription, Dropdown } from 'monday-ui-react-core'
+import dayjs from "dayjs"
+import { DATE_PICKER, MEMEBER_PICKER, STATUS_PICKER } from "../services/board.service.local"
+
+export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
     const [date, setDate] = useState('')
     const optionsAvatar = [{
         value: "Rotem",
@@ -18,17 +21,19 @@ export function DynamicModal({ cmp, setIsModalOpen }) {
     }]
     function getDate(date) {
         setIsModalOpen(false)
-    }
 
+        onUpdateTaskLabel(DATE_PICKER, cmp.data, dayjs(date).unix())
+    }
+    console.log(cmp);
     function handleChange(ev) {
         // console.log(ev);
 
         setIsModalOpen(false)
     }
-
+    // console.log(cmp);
     switch (cmp.type) {
 
-        case 'status-picker':
+        case STATUS_PICKER:
             return <div onClick={() => setIsModalOpen(false)} className="status-picker-container" style={{ transform: `translate(-13%, 20%)`, left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
 
                 <div className="status-picker-view">
@@ -42,7 +47,7 @@ export function DynamicModal({ cmp, setIsModalOpen }) {
                     )}
                 </div>
             </div>
-        case 'member-picker':
+        case MEMEBER_PICKER:
             return <div className="member-picker-view" style={{ transform: `translate(-40%, 80%)`, left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
                 <div className="members-dropdown">
                     {/* read more on dropdown with avatar */}
@@ -52,13 +57,11 @@ export function DynamicModal({ cmp, setIsModalOpen }) {
                 </div>
             </div>
 
-        case 'date-picker':
-            // transform: `translate(-13%, 20%)` should be different
-            return <div className="date-picker-view" style={{ left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
-                {/* heres */}
-                <DialogContentContainer >
-                    <DatePicker data-testid="date-picker" onPickDate={getDate} />
-                </DialogContentContainer>
+        case DATE_PICKER:
+
+            return <div className="date-picker-view" style={{ transform: `translate(-70%, 15%)`, left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
+                <div className="arrow-up"></div>
+                <DatePicker data-testid="date-picker" onPickDate={getDate} />
 
             </div>
     }

@@ -2,9 +2,9 @@ import { GroupList } from "../cmps/group-list";
 import { BoardHeader } from "../cmps/board-header";
 import { NavBar } from "../cmps/nav-bar";
 import { Fragment, useEffect, useRef, useState } from "react";
-import { ADD_GROUP_FROM_BUTTOM, boardService } from "../services/board.service.local";
+import { ADD_GROUP_FROM_BUTTOM, boardService, DATE_PICKER, MEMEBER_PICKER, STATUS_PICKER, UPDATE_TASK_DATE } from "../services/board.service.local";
 import { SideGroupBar } from "../cmps/side-group-bar";
-import { loadBoard, loadBoards, updateBoard, updateGroup } from "../store/board.actions";
+import { loadBoard, loadBoards, updateBoard, updateGroup, updateTask } from "../store/board.actions";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Loader, Icon } from 'monday-ui-react-core';
@@ -23,21 +23,34 @@ export function BoardDetails() {
         loadBoard(boardId)
     }, [boardId])
 
-    function openModal(ev, task, info) {
-        let labelPos = ev.target.getBoundingClientRect()
-        let bbb = boardContainer.current.getBoundingClientRect()
-        console.log(labelPos);
-        console.log(bbb.top);
-        console.log(document.body.scrollLeft);
+    function onUpdateTaskLabel(type, data, labelPick) {
+        console.log(type);
+        console.log(labelPick);
+        data.labelPick = labelPick
+        console.log(data);
+        switch (type) {
+            case DATE_PICKER:
+            // updateTask(board, data, UPDATE_TASK_DATE)
+        }
 
+    }
+
+    function openModal(ev, data, info) {
+        let labelPos = ev.target.getBoundingClientRect()
+        // let bbb = boardContainer.current.getBoundingClientRect()
+        // console.log(labelPos);
+        // console.log(bbb.top);
+        // console.log(document.body.scrollLeft);
+        console.log(info);
         setIsModalOpen(true)
 
         // statuses memebers should go on board obj ?
         switch (info) {
-            case 'status-picker':
+            case STATUS_PICKER:
                 return setCmp(prev => {
                     return {
                         ...prev,
+                        data: { groupId: data.groupId, taskId: data.task.id },
                         pos: { top: labelPos.top, left: labelPos.left },
                         type: info,
                         statuses: [
@@ -60,20 +73,31 @@ export function BoardDetails() {
                         ]
                     }
                 })
-            case 'member-picker':
+            case MEMEBER_PICKER:
                 return setCmp(prev => {
                     return {
                         ...prev,
-                        type: 'member-picker',
+                        data: { groupId: data.groupId, taskId: data.task.id },
+                        type: info,
                         pos: { top: labelPos.top, left: labelPos.left },
                         info: {
                             selectedMembers: ['m1', 'm2'],
-                            members: task.members
+                            members: data.task.members
                         }
                     }
                 })
-            case 'date-picker':
-                return
+            case DATE_PICKER:
+                return setCmp(prev => {
+                    return {
+                        ...prev,
+                        data: { groupId: data.groupId, taskId: data.task.id },
+                        type: info,
+                        pos: { top: labelPos.top, left: labelPos.left },
+                        info: {
+                            selectedDate: data.task.dueDate
+                        }
+                    }
+                })
 
         }
     }
@@ -89,10 +113,12 @@ export function BoardDetails() {
             <section ref={boardContainer} className="groups-container">
                 {board.groups.map(group => <GroupList key={group.id} board={board} group={group} openModal={openModal} />)}
             </section>
-            {isModalOpen && <DynamicModal cmp={cmp} setIsModalOpen={setIsModalOpen} />}
+            {isModalOpen && <DynamicModal cmp={cmp} setIsModalOpen={setIsModalOpen} onUpdateTaskLabel={onUpdateTaskLabel} />}
             <button className="btn clean buttom-add-group-btn"
-            onClick={() => updateGroup(board, null, ADD_GROUP_FROM_BUTTOM)}>
-                <Icon iconType={Icon.type.SVG} icon={Add} iconSize={19} /> Add  new group</button>
-        </div>}
-    </section>
+                onClick={() => updateGroup(board, null, ADD_GROUP_FROM_BUTTOM)}>
+                <Icon iconType={Icon.type.SVG} icon={Add} iconSize={19} /> Add  new group
+            </button>
+        </div>
+        }
+    </section >
 }
