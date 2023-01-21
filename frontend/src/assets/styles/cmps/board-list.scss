@@ -35,9 +35,12 @@
 }
 
 .add-board-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
   text-align: left;
   font-size: rem(14px);
-  transition: .3s;
+  transition: 0.3s;
   padding-top: 11px;
   padding-left: 18px;
 
@@ -96,5 +99,33 @@
 
   & .btn {
     min-width: 100px;
+  }
+}
+
+.side-board-btn-container {
+  position: relative;
+  
+  .input-search-icon {
+    position: absolute;
+    bottom: 6%;
+    left: 8%;
+  }
+  .input-bolt-icon {
+    opacity: 0;
+    position: absolute;
+    bottom: 6%;
+    left: 86%;
+    
+  }
+  .search-board-input {
+    border: 0;
+    background-color: transparent;
+    padding-left: 40px;
+    &:hover {
+      background-color: #dcdfec;
+      .input-bolt-icon {
+        opacity: 1;
+      }
+    }
   }
 }

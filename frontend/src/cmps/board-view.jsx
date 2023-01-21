@@ -1,5 +1,5 @@
-import { EditableHeading, Flex, AvatarGroup, Avatar, Icon, Tooltip } from 'monday-ui-react-core'
-import { Activity, Favorite, Info } from "monday-ui-react-core/icons";
+import { EditableHeading, Flex, AvatarGroup, Avatar, Icon, Tooltip, TabList, Tab } from 'monday-ui-react-core'
+import { Activity, Favorite, Info, Home } from "monday-ui-react-core/icons";
 import { useEffect, useRef, useState } from 'react';
 import { boardService, CHANGE_TITLE } from '../services/board.service.local';
 import { updateBoard } from '../store/board.actions';
@@ -89,7 +89,20 @@ export function BoardView({ board }) {
                     </div>
                 </div>
             </div>
-            <div className='board-header-description'><div className='board-header-txt'>Here goes description</div> <div className='description-modal'>See More</div> </div>
+            <div className='board-header-description'>
+                <div className='board-header-txt'>Final Project For Coding Academy</div>
+                <div className='description-modal'>See More</div>
+            </div>
+            <div className="header-tablist">
+                <TabList>
+                    <Tab>
+                    <Icon iconType={Icon.type.SVG} icon={Home} iconSize={20} style={{marginRight: '5px'}} /> Main Table
+                    </Tab>
+                    <Tab>
+                        Kanban
+                    </Tab>
+                </TabList>
+            </div>
         </div>
     </section>
 

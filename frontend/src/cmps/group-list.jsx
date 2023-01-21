@@ -118,6 +118,7 @@ export function GroupList({ board, group, openModal, }) {
                             onChange={handleChange}
                             brandFont={true}
                             value={group.title}
+                            style={{fontWeight: 'bold'}}
                             // customColor={`${group.color}`}
                             type={EditableHeading.types.h4}
                         />

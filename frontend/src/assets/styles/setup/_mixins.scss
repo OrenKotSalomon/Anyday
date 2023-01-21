@@ -203,7 +203,6 @@
   flex-basis: 6px;
   height: 100%;
   overflow: hidden;
-  // background-color: red;
   will-change: width;
   border: none;
 }
@@ -243,4 +242,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@mixin side-bar-btn {
+  background-color: #fff;
+  border-radius: 50%;
+  border: 1px solid #d0d4e4;
+  transition: .3s;
+  cursor: pointer;
+}
+
+@mixin side-bar-btn-hover {
+  color: #fff;
+  background-color: #0073ea;
+  width: 35px;
+  border-radius: 20px;
 }

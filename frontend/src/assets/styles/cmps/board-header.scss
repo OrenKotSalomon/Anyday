@@ -61,7 +61,7 @@
     min-width: 100px;
     margin-right: 8px;
     margin-left: -5px;
-    margin-bottom: 41px;
+    margin-bottom: 10px;
 
     .board-info-toggle {
 
@@ -105,6 +105,7 @@
     align-items: center;
 
     .board-header-txt {
+        color: #676879;
         white-space: nowrap;
         max-width: 600px;
         overflow: hidden;
@@ -126,4 +127,9 @@
             text-decoration: underline;
         }
     }
+}
+
+.header-tablist {
+    font-size: rem(14px) !important;
+    font-family: figtree-regular !important;
 }
