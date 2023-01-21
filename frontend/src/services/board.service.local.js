@@ -191,7 +191,6 @@ function taskServiceReducer(board, data, type) {
         groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
         taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.taskId)
     }
-    console.log('data', data);
 
     switch (type) {
         case DELETE_TASK:

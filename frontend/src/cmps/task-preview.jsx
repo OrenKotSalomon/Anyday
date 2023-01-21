@@ -5,7 +5,7 @@ import { MenuButton, Menu, MenuItem, Icon, EditableHeading, Counter, DialogConte
 import Oren from '../assets/img/Oren.jpg'
 import { Open, Duplicate, Delete, Bolt, AddUpdate, Update } from 'monday-ui-react-core/icons'
 import { updateTask } from "../store/board.actions";
-import { DELETE_TASK, DUPLICATE_TASK } from "../services/board.service.local";
+import { CHANGE_TASK_TITLE, DELETE_TASK, DUPLICATE_TASK } from "../services/board.service.local";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
 import { Avatar, AvatarGroup } from 'monday-ui-react-core';
 
@@ -21,6 +21,11 @@ export function TaskPreview({ task, board, group, openModal }) {
         const data = { taskToDuplicate, id: taskToDuplicate.id, groupId: group.id }
         updateTask(board, data, DUPLICATE_TASK)
         showSuccessMsg(`Task duplicated successfully`)
+    }
+
+    function onFinishEditingInTask(value) {
+        let taskChanges = { title: value, taskId: task.id, groupId: group.id }
+        updateTask(board, taskChanges, CHANGE_TASK_TITLE)
     }
 
     function onDeleteTask(taskToDelete) {
@@ -65,7 +70,7 @@ export function TaskPreview({ task, board, group, openModal }) {
                 </div>
 
                 <div className="task-name-cell" >
-                    <EditableHeading className='task-title' type={EditableHeading.types.h5} value={task.title} />
+                    <EditableHeading className='task-title' onFinishEditing={onFinishEditingInTask} type={EditableHeading.types.h5} value={task.title} />
 
                     {/*  NEED TO ADD THIS BUTTON AND IGURE STYLING WONT IMPACT TASK ROW */}
                     {/* <button onClick={() => setIsOpenDetails(!isOpenDetails)} className="open-item-page-btn">
