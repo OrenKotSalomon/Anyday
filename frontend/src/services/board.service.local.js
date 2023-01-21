@@ -12,6 +12,7 @@ export const CHANGE_TITLE = 'CHANGE_TITLE'
 export const CHANGE_GROUP_TITLE = 'CHANGE_GROUP_TITLE'
 export const CHANGE_GROUP_COLOR = 'CHANGE_GROUP_COLOR'
 export const ADD_GROUP_FROM_HEADER = 'ADD_GROUP_FROM_HEADER'
+export const ADD_GROUP_FROM_BUTTOM = 'ADD_GROUP_FROM_BUTTOM'
 export const ADD_GROUP = 'ADD_GROUP'
 export const DUPLICATE_GROUP = 'DUPLICATE_GROUP'
 export const ADD_GROUP_TASK = 'ADD_GROUP_TASK'
@@ -147,6 +148,9 @@ function groupServiceReducer(board, data, type) {
             return board
         case ADD_GROUP_FROM_HEADER:
             board.groups.unshift(getEmptyGroup())
+            return board
+        case ADD_GROUP_FROM_BUTTOM:
+            board.groups.push(getEmptyGroup())
             return board
         case ADD_GROUP:
             groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.id)
@@ -303,7 +307,6 @@ function getEmptyBoard() {
             },
         ],
         cmpsOrder: ["status-picker", "member-picker", "date-picker"]
-
     }
 }
 
@@ -401,7 +404,7 @@ const demoBoard = {
             style: 'lightblue'
         },
     ],
-    "cmpsOrder": ["status-picker", "member-picker", "date-picker"]
+    cmpsOrder: ["status-picker", "member-picker", "date-picker"]
 
 }
 

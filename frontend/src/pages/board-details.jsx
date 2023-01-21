@@ -2,12 +2,13 @@ import { GroupList } from "../cmps/group-list";
 import { BoardHeader } from "../cmps/board-header";
 import { NavBar } from "../cmps/nav-bar";
 import { Fragment, useEffect, useRef, useState } from "react";
-import { boardService } from "../services/board.service.local";
+import { ADD_GROUP_FROM_BUTTOM, boardService } from "../services/board.service.local";
 import { SideGroupBar } from "../cmps/side-group-bar";
-import { loadBoard, loadBoards, updateBoard } from "../store/board.actions";
+import { loadBoard, loadBoards, updateBoard, updateGroup } from "../store/board.actions";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Loader } from 'monday-ui-react-core';
+import { Loader, Icon } from 'monday-ui-react-core';
+import { Add } from 'monday-ui-react-core/icons';
 import { DynamicModal } from "../cmps/dynamic-modal";
 
 export function BoardDetails() {
@@ -78,24 +79,20 @@ export function BoardDetails() {
     }
 
     if (!board) return <div className="loader"><Loader size={Loader.sizes.LARGE} /></div>
-    return (
-        <Fragment>
-            <section className="board-details">
-
-                <NavBar />
-
-                <SideGroupBar />
-
-                {board && <div className="board-container">
-                    <BoardHeader
-                        board={board}
-                    />
-                    <section ref={boardContainer} className="groups-container">
-                        {board.groups.map(group => <GroupList key={group.id} board={board} group={group} openModal={openModal} />)}
-                    </section>
-                    {isModalOpen && <DynamicModal cmp={cmp} setIsModalOpen={setIsModalOpen} />}
-                </div>}
+    return <section className="board-details">
+        <NavBar />
+        <SideGroupBar />
+        {board && <div className="board-container">
+            <BoardHeader
+                board={board}
+            />
+            <section ref={boardContainer} className="groups-container">
+                {board.groups.map(group => <GroupList key={group.id} board={board} group={group} openModal={openModal} />)}
             </section>
-        </Fragment>
-    )
+            {isModalOpen && <DynamicModal cmp={cmp} setIsModalOpen={setIsModalOpen} />}
+            <button className="btn clean buttom-add-group-btn"
+            onClick={() => updateGroup(board, null, ADD_GROUP_FROM_BUTTOM)}>
+                <Icon iconType={Icon.type.SVG} icon={Add} iconSize={19} /> Add  new group</button>
+        </div>}
+    </section>
 }

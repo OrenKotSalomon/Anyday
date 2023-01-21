@@ -3,8 +3,8 @@ import Oren from '../assets/img/Oren.jpg'
 import { Avatar, AvatarGroup } from 'monday-ui-react-core';
 import { useState } from 'react';
 
-export function DynamicCmp({ temp, cmp, info, openModal }) {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+export function DynamicCmp({ cmp, info, openModal }) {
+
     function getStatusColor(status) {
 
         switch (status) {
@@ -22,22 +22,26 @@ export function DynamicCmp({ temp, cmp, info, openModal }) {
 
     switch (cmp.cmp) {
         case 'status-picker':
-            return <div onClick={(ev) => openModal(ev, cmp.task, 'status-picker')} className="status-label" style={{ backgroundColor: getStatusColor(info.status) }} >{info.status}
+            return <div className="status-label"
+                onClick={(ev) => openModal(ev, cmp.task, 'status-picker')}
+                style={{ backgroundColor: getStatusColor(info.status) }} >
+                {info.status}
                 <div className="add-note"></div>
             </div>
         case 'member-picker':
-            return <div onClick={(ev) => openModal(ev, cmp.task, 'member-picker')} className="people-label">{<AvatarGroup size={Avatar.sizes.SMALL} max={2}>
-                <Avatar type={Avatar.types.IMG} src={Oren} ariaLabel="Oren Kot" />
-            </AvatarGroup>}</div>
+            return <div className="people-label"
+                onClick={(ev) => openModal(ev, cmp.task, 'member-picker')} >
+                {<AvatarGroup size={Avatar.sizes.SMALL} max={2}>
+                    <Avatar type={Avatar.types.IMG} src={Oren} ariaLabel="Oren Kot" />
+                </AvatarGroup>}</div>
         case 'date-picker':
-            return <div onClick={(ev) => openModal(ev, cmp.task, ' date-picker')} className="date-label"><EditableHeading
-                type={EditableHeading.types.h6}
-                value={info.dueDate}
-                displayPlaceholderInTextMode={true}
-            />
+            return <div className="date-label"
+                onClick={(ev) => openModal(ev, cmp.task, ' date-picker')} >
+                <EditableHeading
+                    type={EditableHeading.types.h6}
+                    value={info.dueDate}
+                    displayPlaceholderInTextMode={true}
+                />
             </div>
-        // return <div className="date-label"><DialogContentContainer >
-        //     <DatePicker data-testid="date-picker" onPickDate={temp} />
-        // </DialogContentContainer></div>
     }
 }

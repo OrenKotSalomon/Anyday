@@ -17,9 +17,6 @@ import { DynamicCmp } from "./dynamic-cmp";
 export function TaskPreview({ task, board, group, openModal }) {
 
     const [isOpenDetails, setIsOpenDetails] = useState(false)
-    const [isSetStatus, setIsSetStatus] = useState(false)
-    const [isSetPriority, setIsSetPriority] = useState(false)
-    const [lala, setlala] = useState({ left: '-150px', top: '-150px', bottom: '-150px', });
 
     function onDuplicateTask(taskToDuplicate) {
         const data = { taskToDuplicate, id: taskToDuplicate.id, groupId: group.id }

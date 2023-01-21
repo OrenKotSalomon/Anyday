@@ -238,3 +238,9 @@
   border-bottom: $border-cell;
   border-left: $border-cell;
 }
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
