@@ -1,4 +1,5 @@
-import { EditableHeading, Flex, AvatarGroup, Avatar, Icon, Tooltip, TabList, Tab } from 'monday-ui-react-core'
+import { EditableHeading, Flex, AvatarGroup,
+     Avatar, Icon, Tooltip, TabList, Tab } from 'monday-ui-react-core'
 import { Activity, Favorite, Info, Home } from "monday-ui-react-core/icons";
 import { useEffect, useRef, useState } from 'react';
 import { boardService, CHANGE_TITLE } from '../services/board.service.local';
@@ -6,6 +7,7 @@ import { updateBoard } from '../store/board.actions';
 import Harel from '../assets/img/Harel.jpg'
 import Oren from '../assets/img/Oren.jpg'
 import Yossi from '../assets/img/Yossi.jpg'
+import { NavLink } from 'react-router-dom';
 
 export function BoardView({ board }) {
     const [newTitle, setNewTitle] = useState(board.title)
@@ -94,14 +96,17 @@ export function BoardView({ board }) {
                 <div className='description-modal'>See More</div>
             </div>
             <div className="header-tablist">
-                <TabList>
+                {/* <TabList>
                     <Tab>
                     <Icon iconType={Icon.type.SVG} icon={Home} iconSize={20} style={{marginRight: '5px'}} /> Main Table
                     </Tab>
                     <Tab>
                         Kanban
                     </Tab>
-                </TabList>
+                </TabList> */}
+                {/* <NavLink className='main-table-a' ><Icon iconType={Icon.type.SVG} icon={Home} iconSize={20} style={{marginRight: '5px'}} /> Main Table</NavLink>
+                <span> | </span>
+                <NavLink>Kanban</NavLink> */}
             </div>
         </div>
     </section>

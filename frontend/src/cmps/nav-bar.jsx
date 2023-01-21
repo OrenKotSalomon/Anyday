@@ -14,7 +14,6 @@ export function NavBar() {
     const user = useSelector(storeState => storeState.userModule.user)
 
     async function onLogin(credentials) {
-        console.log('hi:')
         try {
             const user = await login(credentials)
             showSuccessMsg(`Welcome: ${user.fullname}`)
