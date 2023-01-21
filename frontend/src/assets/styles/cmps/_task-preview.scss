@@ -195,9 +195,9 @@
   }
 }
 
-.people-label {
+.person-label {
   position: relative;
-  @include people-layout;
+  @include person-layout;
   border-left: $border-cell;
   display: flex;
   justify-content: center;

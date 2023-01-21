@@ -23,12 +23,11 @@
       width: max-content;
       font-size: 2rem;
 
-      input{
-margin-top:10px;
-margin-left: 20px;
+      input {
+        margin-top: 10px;
+        margin-left: 20px;
       }
     }
-
 
     .group-list-menu-btn {
       position: absolute;
@@ -175,9 +174,9 @@ margin-left: 20px;
   @include left-bottom-border;
 }
 
-.people-label-header {
+.person-label-header {
   @include left-bottom-border;
-  @include people-layout;
+  @include person-layout;
   text-align: center;
 }
 
