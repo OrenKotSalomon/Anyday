@@ -5,7 +5,12 @@
   .group-header-container {
     position: relative;
     display: block;
-    height: rem(76px);
+    height: 2.75rem;
+
+    h4 {
+      margin-top: 0.625rem;
+      margin-left: rem(18px);
+    }
 
     &:hover {
       .group-list-menu-btn {
@@ -19,9 +24,10 @@
       font-size: 2rem;
     }
 
+
     .group-list-menu-btn {
       position: absolute;
-      top: 20%;
+      top: 52.5%;
       left: -33px;
       opacity: 0;
       transition: 0.3s;

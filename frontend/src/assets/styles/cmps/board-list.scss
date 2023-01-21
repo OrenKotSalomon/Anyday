@@ -9,7 +9,9 @@
     padding: 7px;
     z-index: 3;
   }
+
   position: a;
+
   .board-list-a {
     position: relative;
     align-items: center;
@@ -18,12 +20,15 @@
     border-radius: 4px;
     transition: 0.3s;
     color: $main-color;
+    margin-top: 95px;
 
     &.active {
       background-color: #cce5ff;
     }
+
     &:hover {
       background-color: #dcdfec;
+
       .board-list-menu-btn {
         opacity: 1;
       }
@@ -35,9 +40,13 @@
   text-align: left;
   font-size: rem(14px);
   transition: .3s;
+  padding-top: 11px;
+  padding-left: 18px;
+
   &:hover {
     background-color: #dcdfec;
   }
+
   span {
     font-size: rem(20px);
   }
@@ -69,6 +78,7 @@
     justify-content: space-between;
     align-items: center;
     font-size: rem(32px);
+
     .close-add-board-modal {
       font-size: rem(14px);
       font-weight: 400;
@@ -81,6 +91,7 @@
     width: 70%;
     min-width: 180px;
   }
+
   .btn-container {
     align-self: flex-end;
   }
