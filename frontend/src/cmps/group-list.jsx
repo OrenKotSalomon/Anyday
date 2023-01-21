@@ -109,7 +109,7 @@ export function GroupList({ board, group }) {
                 onSave={(value) => onColorPick(value)} />}
             <div className="group-header-name"
                 style={{ color: group.style }}>
-                <div className="monday-storybook-tooltip_bottom">
+                <div className="monday-storybook-tooltip_bottom group-list-editable-header">
                     <Tooltip
                         content="Click to Edit" animationType="expand">
                         <EditableHeading
@@ -119,7 +119,7 @@ export function GroupList({ board, group }) {
                             brandFont={true}
                             value={group.title}
                         // customColor={`${group.color}`}
-                        // type={EditableHeading.types.h4}
+                        type={EditableHeading.types.h4}
                         />
                     </Tooltip>
                 </div>
