@@ -14,7 +14,7 @@ export function SideGroupBar() {
     const [boardToEdit, setBoardToEdit] = useState(boardService.getEmptyBoard())
     const [isOpen, setIsOpen] = useState(false)
     const navigate = useNavigate()
-
+    console.log(boardToEdit);
     function handleChange({ target }) {
         let { value, name: field, type } = target
         setBoardToEdit(prevBoard => {

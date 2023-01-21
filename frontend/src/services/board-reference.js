@@ -240,12 +240,13 @@ const cmp3 = {
 }
 
 export function TaskPreview({ task }) {
-    //GET FROM STORE
+    //GET FROM STORE house
     const cmpsOrder = [
         "status-picker",
         "member-picker",
         "date-picker",
         "priority-picker",
+
     ];
     return (
         <section>

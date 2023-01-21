@@ -212,3 +212,29 @@
   border-bottom: $width solid rgba(0, 0, 0, 0.4);
   border-right: $width solid transparent;
 }
+
+@mixin status-layout {
+  line-height: 35px;
+  font-size: 14px;
+  height: 36px;
+  min-width: rem(139.33px);
+}
+
+@mixin people-layout {
+  line-height: 35px;
+  font-size: 14px;
+  height: 36px;
+  min-width: rem(97px);
+}
+
+@mixin date-layout {
+  line-height: 35px;
+  font-size: 14px;
+  height: 36px;
+  min-width: rem(139.33px);
+}
+
+@mixin left-bottom-border {
+  border-bottom: $border-cell;
+  border-left: $border-cell;
+}
