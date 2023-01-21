@@ -181,12 +181,12 @@ function taskServiceReducer(board, data, type) {
 
     if (data) {
         groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
-        taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.id)
+        taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.taskId)
     }
 
     switch (type) {
         case DELETE_TASK:
-            board.groups[groupIdx].tasks = board.groups[groupIdx].tasks.filter(task => task.id !== data.id)
+            board.groups[groupIdx].tasks = board.groups[groupIdx].tasks.filter(task => task.id !== data.taskId)
             return board
         case DUPLICATE_TASK:
             data.taskToDuplicate.id = utilService.makeId()
