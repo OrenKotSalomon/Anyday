@@ -1,5 +1,5 @@
 .nav-bar {
-  min-height: 98.2vh;
+  min-height: 100vh;
   background-color: $side-nav;
   text-align: center;
   width: 65px;
@@ -12,9 +12,6 @@
     flex-direction: column;
     justify-content: space-between;
     width: 65px;
-
-
-
 
     a {
       &:hover {
@@ -40,7 +37,7 @@
   padding: 13px;
   background-color: #f6f7fb;
   min-width: rem(255px);
-  min-height: 98.2vh;
+  min-height: 100vh;
   border-right: 1px solid #d0d4e4;
 
   hr {
@@ -77,7 +74,7 @@
 }
 
 .nav-bar-avatar {
-position: absolute;
+  position: absolute;
   left: 10px;
   bottom: 10px;
   width: 44px;

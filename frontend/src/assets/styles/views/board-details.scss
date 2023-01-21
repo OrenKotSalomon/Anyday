@@ -9,11 +9,18 @@
     display: grid;
     grid-template-columns: $layoutPadding 1fr $layoutPadding;
     gap: $layoutPadding;
+    overflow-x: scroll;
+    overscroll-behavior-inline: contain;
+    height: 100vh;
+
+    &::-webkit-scrollbar-track {
+        position: absolute;
+    }
 
     >* {
         grid-column: 2;
     }
- 
+
 }
 
 .board-header {
@@ -26,5 +33,5 @@
     gap: 60px;
     margin-top: 13px;
     margin-left: 7px;
-    
+
 }

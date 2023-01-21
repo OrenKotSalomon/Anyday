@@ -24,8 +24,8 @@ export function SideGroupBar() {
 
     async function onAddBoard() {
         if (!boardToEdit.title) return
-        const savedBoard = await addBoard(boardToEdit)
         try {
+            const savedBoard = await addBoard(boardToEdit)
             setBoardToEdit(boardService.getEmptyBoard())
             setIsOpen(!isOpen)
             navigate(`/board/${savedBoard._id}`)

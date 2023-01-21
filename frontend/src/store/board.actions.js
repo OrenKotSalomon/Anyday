@@ -67,7 +67,10 @@ export async function removeBoard(boardId) {
 
 export async function addBoard(board) {
     try {
+        console.log('board', board);
+
         const savedBoard = await boardService.save(board)
+        console.log('savedBoard', savedBoard);
         store.dispatch(getActionAddboard(savedBoard))
         return savedBoard
     } catch (err) {
