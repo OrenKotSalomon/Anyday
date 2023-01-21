@@ -8,8 +8,7 @@ import { updateTask } from "../store/board.actions";
 import { DELETE_TASK, DUPLICATE_TASK } from "../services/board.service.local";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
 import { Avatar, AvatarGroup } from 'monday-ui-react-core';
-import Harel from '../assets/img/Harel.jpg'
-import Yossi from '../assets/img/Yossi.jpg'
+
 import { StatusModal } from "./tasks-modals/status-modal";
 import { PriorityModal } from "./tasks-modals/priority-modal";
 import { DynamicCmp } from "./dynamic-cmp";
