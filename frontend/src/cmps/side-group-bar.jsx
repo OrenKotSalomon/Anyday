@@ -57,7 +57,7 @@ export function SideGroupBar() {
         setIsOpen(!isOpen)
     }
 
-    return <section className='side-group-bar flex'>
+    return <div className='side-group-bar-container'><section className='side-group-bar flex'>
         <div className="workspace-select flex">
             <h4>Workspace</h4>
             <span className="workspace">Main Workspace</span>
@@ -92,4 +92,5 @@ export function SideGroupBar() {
         </section>
 
     </section>
+    </div>
 }

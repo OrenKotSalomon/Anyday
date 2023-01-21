@@ -1,7 +1,6 @@
 .board-list {
   display: flex;
   flex-direction: column;
-  gap: 7px;
   font-size: rem(14px);
 
   .board-list-menu-btn {
@@ -20,7 +19,6 @@
     border-radius: 4px;
     transition: 0.3s;
     color: $main-color;
-    margin-top: 95px;
 
     &.active {
       background-color: #cce5ff;

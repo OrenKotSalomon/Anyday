@@ -1,5 +1,5 @@
 .nav-bar {
-  height: 100vh;
+  min-height: 98.2vh;
   background-color: $side-nav;
   text-align: center;
   width: 65px;
@@ -7,10 +7,14 @@
   top: 0;
 
   nav {
-    height: 100%;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 65px;
+
+
+
 
     a {
       &:hover {
@@ -25,15 +29,23 @@
   }
 }
 
+.side-group-bar-container {}
+
 .side-group-bar {
+  box-sizing: border-box;
   position: sticky;
   top: 0;
   flex-direction: column;
   gap: 10px;
-  height: 100vh;
   padding: 13px;
   background-color: #f6f7fb;
   min-width: rem(255px);
+  min-height: 98.2vh;
+  border-right: 1px solid #d0d4e4;
+
+  hr {
+    margin-bottom: 71px;
+  }
 }
 
 .workspace-select {
@@ -47,4 +59,27 @@
   border-radius: 4px;
   border: 1px solid #c3c6d4;
   margin-right: 5px;
+}
+
+.nav-bar-logo {
+  position: relative;
+  max-height: 44px;
+  min-width: 40.5px !important;
+  max-width: 40.5px;
+  object-fit: contain;
+  top: 6px;
+}
+
+.nav-bar-board-logo {
+  max-width: 32px;
+  position: relative;
+  top: 2px;
+}
+
+.nav-bar-avatar {
+position: absolute;
+  left: 10px;
+  bottom: 10px;
+  width: 44px;
+  height: 44px;
 }

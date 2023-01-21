@@ -39,16 +39,16 @@ export function NavBar() {
         }
     }
 
-    return <header className="nav-bar">
+    return <div className='side-bar-container'><header className="nav-bar">
 
         <nav>
             <div>
                 <div className="nav-a-container">
-                <NavLink to='/'><img src={logo} style={{ minWidth: '55px' }} /></NavLink>
+                    <NavLink to='/'><img className='nav-bar-logo' src={logo} style={{ minWidth: '55px' }} /></NavLink>
                 </div>
                 <hr style={{ width: '75%' }} />
                 <div className="nav-a-container">
-                <NavLink to='/board/'><img src={wm_icon} style={{ maxWidth: '30px' }} /></NavLink>
+                    <NavLink to='/board/'>< img className='nav-bar-board-logo' src={wm_icon} style={{ maxWidth: '30px' }} /></NavLink>
                 </div>
             </div>
             {/* <button>Notifications</button> */}
@@ -59,11 +59,13 @@ export function NavBar() {
             {/* <button>Search</button> */}
 
             <Link to='/login'><Avatar
+                className='nav-bar-avatar'
                 ariaLabel="Harel Natan"
                 size="large"
                 src={Harel}
                 type="img"
-                /></Link>
+            /></Link>
+
         </nav>
 
         {/* <nav>
@@ -86,4 +88,5 @@ export function NavBar() {
                 }
             </nav> */}
     </header>
+    </div>
 }
