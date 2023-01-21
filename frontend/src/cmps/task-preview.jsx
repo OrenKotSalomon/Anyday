@@ -2,22 +2,24 @@ import { useState } from "react";
 import { TaskDetails } from "./task-details";
 
 import { MenuButton, Menu, MenuItem, Icon, EditableHeading, Counter, DialogContentContainer, DatePicker } from 'monday-ui-react-core'
+import Oren from '../assets/img/Oren.jpg'
 import { Open, Duplicate, Delete, Bolt, AddUpdate, Update } from 'monday-ui-react-core/icons'
 import { updateTask } from "../store/board.actions";
 import { DELETE_TASK, DUPLICATE_TASK } from "../services/board.service.local";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
 import { Avatar, AvatarGroup } from 'monday-ui-react-core';
 import Harel from '../assets/img/Harel.jpg'
-import Oren from '../assets/img/Oren.jpg'
 import Yossi from '../assets/img/Yossi.jpg'
 import { StatusModal } from "./tasks-modals/status-modal";
 import { PriorityModal } from "./tasks-modals/priority-modal";
+import { DynamicCmp } from "./dynamic-cmp";
 
 export function TaskPreview({ task, board, group }) {
 
     const [isOpenDetails, setIsOpenDetails] = useState(false)
     const [isSetStatus, setIsSetStatus] = useState(false)
     const [isSetPriority, setIsSetPriority] = useState(false)
+    const [lala, setlala] = useState({ left: '-150px', top: '-150px', bottom: '-150px', });
 
     function onDuplicateTask(taskToDuplicate) {
         const data = { taskToDuplicate, id: taskToDuplicate.id, groupId: group.id }
@@ -30,7 +32,14 @@ export function TaskPreview({ task, board, group }) {
         updateTask(board, data, DELETE_TASK)
         showSuccessMsg(`Task deleted successfully taskId:${data.id} `)
     }
-    console.log(board);
+
+    function temp(ev) {
+        let ssss = ev.target.getBoundingClientRect()
+        console.log(ssss);
+        setlala(ssss)
+
+    }
+
     return <section className='task-preview'>
         <MenuButton className="task-preview-menu-btn" >
             <Menu
@@ -94,6 +103,7 @@ export function TaskPreview({ task, board, group }) {
                     {board.cmpsOrder.map((cmp, idx) => {
                         return (
                             <DynamicCmp
+                                temp={temp}
                                 key={idx}
                                 cmp={cmp}
                                 info={{
@@ -105,16 +115,6 @@ export function TaskPreview({ task, board, group }) {
                         )
                     }
                     )}
-                    {/* <div className="person-label cell">
-                        <AvatarGroup size={Avatar.sizes.SMALL} max={3}>
-                            <Avatar type={Avatar.types.IMG} src={Harel} ariaLabel="Harel Natan" />
-                            <Avatar type={Avatar.types.IMG} src={Oren} ariaLabel="Oren Kot" />
-                            <Avatar type={Avatar.types.IMG} src={Yossi} ariaLabel="Yossi Karasik" />
-                            <Avatar type={Avatar.types.IMG} src={Harel} ariaLabel="Another Me" />
-                        </AvatarGroup></div>
-                    <div className="person-label cell">Status C</div>
-                    <div className="person-label cell">Date C</div>
-                    <div className="person-label cell">Priority C</div> */}
 
                 </div>
             </div>
@@ -127,46 +127,4 @@ export function TaskPreview({ task, board, group }) {
         </div>
 
     </section>
-}
-
-export function DynamicCmp({ cmp, info }) {
-    console.log('info', info);
-    function getStatusColor(status) {
-
-        switch (status) {
-            case 'done':
-                return '#00c875'
-            case 'working on it':
-                return '#fdab3d'
-            case 'stuck':
-                return '#e2445c'
-            case '':
-                return '#c4c4c4'
-
-        }
-    }
-
-    function temp(ev) {
-        console.log(ev);
-    }
-
-    switch (cmp) {
-        case 'status-picker':
-            return <div className="status-label" style={{ backgroundColor: getStatusColor(info.status) }} >{info.status}
-                <div className="add-note"></div>
-            </div>
-        case 'member-picker':
-            return <div className="people-label">{<AvatarGroup size={Avatar.sizes.SMALL} max={2}>
-                <Avatar type={Avatar.types.IMG} src={Oren} ariaLabel="Oren Kot" />
-            </AvatarGroup>}</div>
-        case 'date-picker':
-            return <div className="date-label"><EditableHeading
-                type={EditableHeading.types.h6}
-                value={info.dueDate}
-                displayPlaceholderInTextMode={true}
-            /></div>
-        // return <div className="date-label"><DialogContentContainer >
-        //     <DatePicker data-testid="date-picker" onPickDate={temp} />
-        // </DialogContentContainer></div>
-    }
 }

@@ -162,7 +162,7 @@
   transition: border-width .3s .2s ease;
 }
 
-.cell {
+.status-label {
   position: relative;
 
   &:hover .add-note {
@@ -182,6 +182,7 @@
 }
 
 .status-label {
+  position: relative;
   @include status-layout;
   text-align: center;
   color: #ffffff;
@@ -195,6 +196,7 @@
 }
 
 .people-label {
+  position: relative;
   @include people-layout;
   border-left: $border-cell;
   display: flex;
@@ -202,6 +204,7 @@
 }
 
 .date-label {
+  position: relative;
   border-left: $border-cell;
   border-right: $border-cell;
   @include date-layout;
