@@ -13,15 +13,19 @@
     justify-content: space-between;
     width: 65px;
 
-    a {
+    img {
       &:hover {
         background-color: #131523;
+        border-radius: 6px;
         text-transform: none;
       }
     }
-
+    
     a.active {
-      background-color: rgb(128, 128, 128);
+      img {
+        border-radius: 6px;
+        background-color: rgb(128, 128, 128);
+      }
     }
   }
 }
