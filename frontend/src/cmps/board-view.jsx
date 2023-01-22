@@ -106,11 +106,18 @@ export function BoardView({ board }) {
                         Kanban
                     </Tab>
                 </TabList> */}
-                <NavLink className='main-table-a' ><Icon iconType={Icon.type.SVG} icon={Home} iconSize={20} style={{ marginRight: '5px' }} /> Main Table</NavLink>
-                <span> | </span>
-                <NavLink>Kanban</NavLink>
-                <span> | </span>
-                <NavLink>+</NavLink>
+                <div className='tablist-container'>
+
+                    <NavLink className='main-table-a' to={`/board/${board._id}`} ><Icon iconType={Icon.type.SVG} icon={Home} iconSize={16} style={{ marginRight: '5px' }} /> <div className='main-table-txt'>
+                        Main Table
+
+                    </div>  <div className='blue-line'></div></NavLink>|
+                    <div className='kanban'>
+                        <NavLink to={`/board/${board._id}/views/kanban`}>Kanban</NavLink>
+                    </div>
+                    |
+
+                </div>
             </div>
         </div>
     </section>
