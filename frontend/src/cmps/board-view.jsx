@@ -1,5 +1,7 @@
-import { EditableHeading, Flex, AvatarGroup,
-     Avatar, Icon, Tooltip, TabList, Tab } from 'monday-ui-react-core'
+import {
+    EditableHeading, Flex, AvatarGroup,
+    Avatar, Icon, Tooltip, TabList, Tab
+} from 'monday-ui-react-core'
 import { Activity, Favorite, Info, Home } from "monday-ui-react-core/icons";
 import { useEffect, useRef, useState } from 'react';
 import { boardService, CHANGE_TITLE } from '../services/board.service.local';
@@ -31,12 +33,12 @@ export function BoardView({ board }) {
                             <Tooltip
                                 content="Click to Edit" animationType="expand">
                                 <EditableHeading
-
+                                    className="board-title-heading"
                                     onFinishEditing={onFinishEditing}
                                     onChange={handleChange}
-                                    type={EditableHeading.types.h2}
+                                    type={EditableHeading.types.h1}
                                     autoSize={true}
-                                    value={board.title} brandFont={true} />
+                                    value={board.title} />
                             </Tooltip>
                         </div>
 
@@ -104,9 +106,11 @@ export function BoardView({ board }) {
                         Kanban
                     </Tab>
                 </TabList> */}
-                {/* <NavLink className='main-table-a' ><Icon iconType={Icon.type.SVG} icon={Home} iconSize={20} style={{marginRight: '5px'}} /> Main Table</NavLink>
+                <NavLink className='main-table-a' ><Icon iconType={Icon.type.SVG} icon={Home} iconSize={20} style={{ marginRight: '5px' }} /> Main Table</NavLink>
                 <span> | </span>
-                <NavLink>Kanban</NavLink> */}
+                <NavLink>Kanban</NavLink>
+                <span> | </span>
+                <NavLink>+</NavLink>
             </div>
         </div>
     </section>

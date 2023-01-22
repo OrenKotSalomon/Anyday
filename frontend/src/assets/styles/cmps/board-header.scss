@@ -1,16 +1,22 @@
 .board-header {
   background-color: rgb(255, 255, 255);
   font-family: roboto-regular;
-  padding-top: 21px;
+  padding-top: 12px;
   padding-right: 30px;
   padding-left: 5px;
-//   position: sticky;
-//   top: 0;
-//   left: 30px;
+  //   position: sticky;
+  //   top: 0;
+  //   left: 30px;
   width: 93vw;
   .board-header-top {
     display: flex;
     align-items: center;
+  }
+}
+
+.board-title-heading {
+  h1 {
+    font-family: poppins-semi-bold-600;
   }
 }
 
@@ -59,8 +65,9 @@
   min-width: 100px;
   margin-right: 8px;
   margin-left: -5px;
-  margin-bottom: 10px;
-
+  gap: 5px;
+  height: 50px;
+  
   .board-info-toggle {
     @include hover-supported-header {
       background-color: #dcdfec;
@@ -105,10 +112,9 @@
     max-width: 600px;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 22px;
     border: none;
     width: initial;
-    padding-left: 5px;
+    padding-left: 2.5px;
   }
 
   .description-modal {
@@ -117,7 +123,7 @@
     padding-inline: 2px;
     cursor: pointer;
     color: #1f76c2;
-
+    font-family: poppins-regular-400;
     &:hover {
       text-decoration: underline;
     }
@@ -127,11 +133,15 @@
 .header-tablist {
   display: flex;
   justify-content: flex-start;
-
+  padding-top: 7px;
   font-size: rem(14px) !important;
   font-family: figtree-regular !important;
   > * {
     padding: 7px;
+    padding-bottom: 3px;
+  }
+  a {
+    color: $main-color;
   }
   .main-table-a {
     @include flex-center;
@@ -140,6 +150,10 @@
 
 .board-filter {
   padding: 16px;
+  padding-left: 0;
+  button {
+    font-family: figtree-regular !important;
+  }
 }
 
 .board-header-main {

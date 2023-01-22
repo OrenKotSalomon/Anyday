@@ -75,7 +75,7 @@ export function SideGroupBar() {
 
                 </div>
                 <h4 className="workspace-header" style={{ display: `${isSideBarOpen ? '' : 'none'}` }}  >Workspace</h4>
-                <span className="workspace" style={{ display: `${isSideBarOpen ? '' : 'none'}` }} >Main Workspace</span>
+                <span className="workspace" style={{ display: `${isSideBarOpen ? '' : 'none'}` }} >Main workspace</span>
             </div>
             <div className="side-board-btn-container flex column" style={{ display: `${isSideBarOpen ? '' : 'none'}` }}>
                 <button className="add-board-btn btn clean"
@@ -84,7 +84,7 @@ export function SideGroupBar() {
                 </button>
                 <button className="add-board-btn btn clean"
                     onClick={handleOpen}>
-                    <Icon iconType={Icon.type.SVG} icon={Filter} iconSize={19} /> Filter
+                    <Icon iconType={Icon.type.SVG} icon={Filter} iconSize={19} /> Filters
                 </button>
                 <input
                     type="text"

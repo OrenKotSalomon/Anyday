@@ -329,7 +329,7 @@ function getEmptyBoard() {
                 style: 'lightblue'
             },
         ],
-        cmpsOrder: [STATUS_PICKER, MEMEBER_PICKER, DATE_PICKER]
+        cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER]
     }
 }
 
@@ -427,7 +427,7 @@ const demoBoard = {
             style: 'lightblue'
         },
     ],
-    cmpsOrder: [STATUS_PICKER, MEMEBER_PICKER, DATE_PICKER]
+    cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER]
 
 }
 
