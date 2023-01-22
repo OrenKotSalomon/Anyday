@@ -128,6 +128,7 @@ export function GroupList({ board, group, openModal, }) {
                     <Tooltip
                         content="Click to Edit" animationType="expand">
                         <EditableHeading
+                            insetFocus={true}
                             className="group-header-editable-name"
                             customColor={group.style}
                             onFinishEditing={onFinishEditing}
