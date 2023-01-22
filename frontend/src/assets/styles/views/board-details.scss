@@ -7,9 +7,9 @@
 
 .board-container {
   width: 100%;
-  display: grid;
-  grid-template-columns: $layoutPadding 1fr $layoutPadding;
-  gap: $layoutPadding;
+  // display: grid;
+  // grid-template-columns: $layoutPadding 1fr $layoutPadding;
+  // gap: $layoutPadding;
   overflow-x: scroll;
   overscroll-behavior-inline: contain;
   height: 100vh;
@@ -18,7 +18,7 @@
     position: absolute;
   }
 
-  > * {
+  >* {
     grid-column: 2;
   }
 }
@@ -55,6 +55,7 @@
   gap: 5px;
   height: 32px;
   width: 142px;
+
   &:hover {
     background-color: #dcdfec;
   }

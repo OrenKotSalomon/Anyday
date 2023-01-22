@@ -14,7 +14,6 @@
     width: 65px;
 
     img {
-      
 
       &:hover {
         background-color: #131523;
@@ -49,6 +48,7 @@
   min-height: 100vh;
   border-right: 1px solid #d0d4e4;
   transition: 0.1s, rotate 0.1s;
+  z-index: 10;
 
   &.closed {
     width: 30px;
@@ -85,6 +85,7 @@
   flex-direction: column;
   gap: 5px;
   padding-top: 3px;
+
   span {
     font-size: rem(16px);
     font-family: figtree-regular;
