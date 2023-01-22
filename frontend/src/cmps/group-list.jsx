@@ -130,6 +130,7 @@ export function GroupList({ board, group, openModal, provided }) {
                     <Tooltip
                         content="Click to Edit" animationType="expand">
                         <EditableHeading
+                            insetFocus={true}
                             className="group-header-editable-name"
                             customColor={group.style}
                             onFinishEditing={onFinishEditing}
@@ -142,8 +143,6 @@ export function GroupList({ board, group, openModal, provided }) {
                     </Tooltip>
                 </div>
             </div>
-        </div>
-        <div className="main-group-container">
             <div className='row-header-container'>
                 <div className='main-left-header'>
                     <div className='left-row-container'>
@@ -184,6 +183,9 @@ export function GroupList({ board, group, openModal, provided }) {
                     {isAddingLabel && <AddLabelModal />}
                 </div>
             </div>
+        </div>
+        <div className="main-group-container">
+
             {/* // style={{ backgroundColor: group.style }} */}
 
             <DragDropContext onDragEnd={handleOnDragEnd} >

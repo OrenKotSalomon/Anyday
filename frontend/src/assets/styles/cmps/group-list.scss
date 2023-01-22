@@ -6,10 +6,16 @@
     position: relative;
     display: block;
     height: 2.75rem;
+    height: 84px;
+    position: sticky;
+    top: 210px;
+    z-index: 6;
+    background-color: white;
 
     h4 {
-      margin-top: 0.625rem;
+      // margin-top: 0.625rem;
       margin-left: rem(18px);
+
     }
 
     &:hover {
@@ -19,11 +25,31 @@
     }
 
     .group-header-editable-name {
+
+      .monday-style-clickable {
+
+        height: 26px;
+
+        // color: #d5d8e4;
+        input {
+          margin-top: 0;
+          margin-left: 0;
+        }
+      }
+
       h4 {
+
         font-family: poppins-regular-400;
         font-weight: 600;
       }
+
+      input {
+        margin: 0;
+        outline: none;
+      }
+
     }
+
     .group-header-name {
       margin-left: 15px;
       width: max-content;
@@ -37,7 +63,7 @@
 
     .group-list-menu-btn {
       position: absolute;
-      top: 15.5%;
+      top: -1.5%;
       left: -33px;
       opacity: 0;
       transition: 0.3s;
@@ -45,8 +71,11 @@
 
     .group-color-picker {
       position: absolute;
-      top: 125%;
-      z-index: 5;
+      top: -35px;
+      left: 250px;
+      rotate: 90deg;
+      z-index: 3;
+
     }
   }
 
@@ -75,6 +104,8 @@
   border-top: $border-cell;
   border-top-left-radius: 6px;
 
+  margin-top: 19px;
+
   .main-right-header {
     position: relative;
     align-items: center;
@@ -93,14 +124,12 @@
       margin-left: 5px;
       transition: 0.3s;
       @include flex-center;
-      
+
       &:hover {
         background-color: #d5d8e4;
       }
     }
-    
-    
-    
+
     .add-label-btn {
       @include flex-center;
       font-size: rem(19px);
