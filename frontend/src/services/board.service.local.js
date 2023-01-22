@@ -32,7 +32,7 @@ export const UPDATE_TASK_MEMBERS = 'UPDATE_TASK_MEMBERS'
 // Dynamic modal/component
 export const DATE_PICKER = 'DATE_PICKER'
 export const STATUS_PICKER = 'STATUS_PICKER'
-export const MEMEBER_PICKER = 'STATUS_PICKER'
+export const MEMEBER_PICKER = 'MEMEBER_PICKER'
 
 export const boardService = {
     query,
@@ -217,6 +217,15 @@ function taskServiceReducer(board, data, type) {
             let deleteCommentIdx = currTask.comments.findIndex(currComment => currComment.id === data.commentIdx)
             currTask.comments.splice(deleteCommentIdx, 1)
             return board
+        case UPDATE_TASK_STATUS:
+            board.groups[groupIdx].tasks[taskIdx].status = data.labelPick
+            return board
+        case UPDATE_TASK_MEMBERS:
+            board.groups[groupIdx].tasks[taskIdx].members.push(data.labelPick)
+            return board
+        case UPDATE_TASK_DATE:
+            board.groups[groupIdx].tasks[taskIdx].dueDate = data.labelPick
+            return board
         default:
             return board
     }
@@ -374,7 +383,7 @@ const demoBoard = {
                     title: 'Task 4',
                     status: 'working on it',
                     members: [{
-                        userName: 'Yossi',
+                        userName: 'Oren',
                         imgUrl: '../assets/img/Oren.jpg'
                     }],
                     dueDate: 1589983468418

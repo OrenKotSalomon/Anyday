@@ -2,7 +2,7 @@ import { GroupList } from "../cmps/group-list";
 import { BoardHeader } from "../cmps/board-header";
 import { NavBar } from "../cmps/nav-bar";
 import { Fragment, useEffect, useRef, useState } from "react";
-import { ADD_GROUP_FROM_BUTTOM, boardService, DATE_PICKER, MEMEBER_PICKER, STATUS_PICKER, UPDATE_TASK_DATE } from "../services/board.service.local";
+import { ADD_GROUP_FROM_BUTTOM, boardService, DATE_PICKER, MEMEBER_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_STATUS } from "../services/board.service.local";
 import { SideGroupBar } from "../cmps/side-group-bar";
 import { loadBoard, loadBoards, updateBoard, updateGroup, updateTask } from "../store/board.actions";
 import { useSelector } from "react-redux";
@@ -24,13 +24,17 @@ export function BoardDetails() {
     }, [boardId])
 
     function onUpdateTaskLabel(type, data, labelPick) {
-        console.log(type);
+        console.log('TYPE', type);
         console.log(labelPick);
         data.labelPick = labelPick
         console.log(data);
         switch (type) {
-            case DATE_PICKER:
-            // updateTask(board, data, UPDATE_TASK_DATE)
+            case UPDATE_TASK_STATUS:
+                console.log('in status picker');
+                return updateTask(board, data, UPDATE_TASK_STATUS)
+            case UPDATE_TASK_DATE:
+                console.log('in date picker');
+                return updateTask(board, data, UPDATE_TASK_DATE)
         }
 
     }

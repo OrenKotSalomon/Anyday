@@ -13,7 +13,7 @@ export function BoardFilter({ board }) {
     return <section className='board-filter'>
         <Flex >
 
-            <SplitButton children='New Task' onClick={onAddNewTask} secondaryDialogContent={<HeaderMenu board={board} />} leftIcon={Add} size={Button.sizes.SMALL}  >
+            <SplitButton className="new-task-btn" children='New Task' size={Button.sizes.SMALL} onClick={onAddNewTask} secondaryDialogContent={<HeaderMenu board={board} />} >
 
             </SplitButton>
             <Button kind={Button.kinds.TERTIARY} size={Button.sizes.SMALL} leftIcon={Search}>

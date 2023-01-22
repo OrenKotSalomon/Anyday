@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { Navigate, useNavigate } from "react-router-dom"
 import { boardService } from "../services/board.service.local"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
@@ -15,6 +15,7 @@ export function SideGroupBar() {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isSideBarOpen, setIsSideBarOpen] = useState(false)
     const navigate = useNavigate()
+    const sideBar = useRef()
 
     function handleChange({ target }) {
         let { value, name: field, type } = target
@@ -60,6 +61,7 @@ export function SideGroupBar() {
 
     function toggleSideBar() {
         setIsSideBarOpen(!isSideBarOpen)
+        // sideBar.current.style.transition = '0.4s'
     }
 
     return <div>
