@@ -17,7 +17,8 @@
 
     a.tab-inner {
 
-        border-right: 1px solid #e6e6e6; ;
+        border-right: 1px solid #e6e6e6;
+        ;
 
         svg {
             margin-right: 2px;
@@ -86,7 +87,7 @@
     }
 
     .tabs-list {
-        padding-inline-start: 16px;
+        padding-inline-start: 21px;
 
         .tab-inner {
             margin-top: 0px;
@@ -108,15 +109,18 @@
             min-height: 104px;
         }
 
+        .task-details-textbox-container {
+            padding: 0 20px;
+        }
 
         .task-details-form-tools {
             border: 1px solid $blue;
             border-bottom: none;
-            align-self: center;
             border-top-left-radius: 8px;
             border-top-right-radius: 8px;
-            width: 90%;
+            width: 100%;
             text-align: left;
+            padding-left: 8px;
 
             svg {
                 padding: 10px 5px;
@@ -124,9 +128,8 @@
         }
 
         .task-details-input {
-            align-self: center;
             padding: rem(16px) rem(18px);
-            width: 90%;
+            width: 100%;
             border: 1px solid $blue;
             border-top: 1px solid $li-grey;
             border-bottom-left-radius: 8px;
@@ -150,18 +153,19 @@
                 font-size: rem(14px);
                 font-family: figtree-regular;
                 margin-top: .8em;
-                margin-left: 5%;
-                justify-items: center;
+                margin-left: 0px;
+                justify-items: left;
 
             }
 
             .task-details-input-upload.emoji {
                 margin-right: auto;
+                margin-left: 10px;
+
             }
 
             button {
                 margin-top: .5em;
-                margin-right: 5%;
             }
         }
 
@@ -219,9 +223,12 @@
     font-size: ren(16px);
     padding: 11.5px;
     padding-left: 20px;
-    margin-right: 3px;
     border-radius: 0.5em;
-    width: 92%;
+    margin-left: 20px;
+    width: 100%;
+
+    span {}
+
 }
 
 .task-details-open-input-btn:hover {

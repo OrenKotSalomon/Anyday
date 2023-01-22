@@ -131,10 +131,11 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
 
             <hr className="task-details-hr"></hr>
 
-            {!isAddComment && <button onClick={() => setAddComment(!isAddComment)} className='task-details-open-input-btn'>Write an update...</button>}
+            {!isAddComment && <button onClick={() => setAddComment(!isAddComment)} className='task-details-open-input-btn'><span>Write an update...</span></button>}
             {isAddComment &&
 
                 <form className='task-details-form' onSubmit={onSubmitNewComment}>
+                    <div className='task-details-textbox-container'>
                     <div className='task-details-form-tools'>
                         <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Underline} iconLabel="my svg icon" iconSize={34} />
                         <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Bullets} iconLabel="my svg icon" iconSize={34} />
@@ -155,6 +156,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                         <span onClick={toggleEmojiPicker} className='task-details-input-upload emoji'><Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Emoji} iconLabel="my svg icon" iconSize={18} />Emoji</span>
                         <button className='btn task-details-input-btn'>Update</button>
 
+                    </div>
                     </div>
                     {imgSrc && <span className="task-details-img-preview-container" ><img className="task-details-img-preview" src={imgSrc} /><span>Uploaded</span></span>}
 
