@@ -161,9 +161,11 @@
 .header-tablist {
   display: flex;
   justify-content: flex-start;
-  padding-top: 7px;
+  // padding-top: 7px;
   font-size: rem(14px) !important;
   font-family: figtree-regular !important;
+
+  height: 36px;
 
   >* {
     padding: 7px;
@@ -176,12 +178,53 @@
 
   .main-table-a {
     @include flex-center;
+    padding: 6px 8px 0 8px;
+    padding-right: 14px;
+    position: static;
+
+    .blue-line {
+      position: absolute;
+      top: 126px;
+      width: 113px;
+      left: 39px;
+      height: 3px;
+      background-color: #0073ea;
+      z-index: 555;
+    }
+
+    .main-table-txt {
+      padding-left: 3px;
+    }
+
+  }
+}
+
+.tablist-container {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  margin-right: 48px;
+  padding: 0;
+  // gap: 6px;
+  padding-top: 14px;
+  padding-bottom: 2px;
+
+  .kanban {
+    display: flex;
+    align-items: center;
+    width: 60.5px;
+    height: 26px;
+    padding: 8px;
+    margin-right: 6px;
+    margin-left: 6px;
   }
 }
 
 .board-filter {
-  padding: 16px;
+  padding: 16.5px;
   padding-left: 0;
+  color: grey;
+  padding-bottom: 31px;
 
   button {
     font-family: figtree-regular !important;
@@ -189,6 +232,24 @@
 }
 
 .board-header-main {
-  border-bottom: $border-cell;
-  padding-bottom: 7px;
+  // border-bottom: $border-cell;
+  // padding-bottom: 7px;
+}
+
+.monday-style-split-button--kind-primary:not(.monday-style-split-button--disabled).monday-style-split-button--color-primary .monday-style-split-button__secondary-button {
+  width: 28px;
+  padding: 10px;
+  color: white;
+}
+
+.monday-style-button--kind-tertiary {
+  color: #676879;
+  padding: 0;
+  // max-width: 92px;
+}
+
+.spacer-header {
+
+  @include spacer;
+  padding-top: 8px;
 }

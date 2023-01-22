@@ -18,10 +18,10 @@
     a.tab-inner {
 
         border-right: 1px solid #e6e6e6;
-        ;
+        
 
         svg {
-            margin-right: 2px;
+            margin-right: 6px;
         }
     }
 
@@ -69,6 +69,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-around;
+        margin-bottom: 25px;
     }
 
     .close-task-btn:hover {
@@ -87,7 +88,8 @@
     }
 
     .tabs-list {
-        padding-inline-start: 21px;
+        margin-top: 2px;
+        padding-inline-start: 16px;
 
         .tab-inner {
             margin-top: 0px;
@@ -95,6 +97,26 @@
         }
     }
 
+    .task-details-open-input-btn-container {
+        width: 100%;
+        padding-right: 42px;
+        .task-details-open-input-btn {
+            margin-top: 20px;
+            margin-left: 20px;
+            border-radius: 0.5em;
+            margin-bottom: .5em;
+            text-align: left;
+            background-color: #fff;
+            border: 1px solid #0073ea;
+            font-family: figtree-regular;
+            letter-spacing: 0.06em;
+            word-spacing: 2.5px;
+            font-size: ren(16px);
+            padding: 11.5px;
+            width: 100%;
+            padding-left: 22px;
+        }
+    }
 
 
     .task-details-form {
@@ -167,6 +189,7 @@
             button {
                 margin-top: .5em;
             }
+
         }
 
         .task-details-img-preview-container {
@@ -209,26 +232,6 @@
     padding: 0;
     margin: 0;
     top: 2px
-}
-
-.task-details-open-input-btn {
-    margin-top: 20px;
-    margin-bottom: .5em;
-    text-align: left;
-    background-color: #fff;
-    border: 1px solid #0073ea;
-    font-family: figtree-regular;
-    letter-spacing: 0.06em;
-    word-spacing: 2.5px;
-    font-size: ren(16px);
-    padding: 11.5px;
-    padding-left: 20px;
-    border-radius: 0.5em;
-    margin-left: 20px;
-    width: 100%;
-
-    span {}
-
 }
 
 .task-details-open-input-btn:hover {
