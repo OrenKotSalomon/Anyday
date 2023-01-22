@@ -152,6 +152,7 @@ export function GroupList({ board, group, openModal, }) {
                         <button onClick={toggleAddLabelModal} className='btn clean add-label-btn'>
                             {/* <span >+</span> */}
                             <Icon className="add-label-icon"
+                            ignoreFocusStyle={true}
                                 style={{
                                     position: 'absolute',
                                     top: '10%',

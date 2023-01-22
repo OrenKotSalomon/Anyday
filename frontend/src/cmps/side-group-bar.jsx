@@ -7,7 +7,7 @@ import { BoardList } from "./board-list"
 // import { Modal, ModalContent, ModalFooter, MenuItem, Button } from 'monday-ui-react-core'
 import { Modal, Box } from '@mui/material'
 import { Icon } from 'monday-ui-react-core'
-import { Add, Filter, Search, Bolt, DropdownChevronRight, DropdownChevronLeft } from 'monday-ui-react-core/icons'
+import { Add, Filter, Search, Bolt, DropdownChevronRight, DropdownChevronLeft, CloseSmall } from 'monday-ui-react-core/icons'
 
 export function SideGroupBar() {
 
@@ -61,7 +61,6 @@ export function SideGroupBar() {
 
     function toggleSideBar() {
         setIsSideBarOpen(!isSideBarOpen)
-        // sideBar.current.style.transition = '0.4s'
     }
 
     return <div>
@@ -102,15 +101,18 @@ export function SideGroupBar() {
                 aria-describedby="modal-modal-description"
             >
                 <Box className="add-board-modal">
-                    <div className="modal-header flex">Create Board <span onClick={handleOpen} className="close-add-board-modal">X</span></div>
-                    <label htmlFor="text">Board Name: </label>
-                    <input type="text"
-                        className="input"
-                        name="title"
-                        id="title"
-                        value={boardToEdit.title}
-                        onChange={handleChange}
-                        placeholder="New Board Name" />
+                <span onClick={handleOpen} className="close-add-board-modal"><Icon className="input-bolt-icon" iconType={Icon.type.SVG} icon={CloseSmall} iconSize={19} /></span>
+                    <div className="modal-header flex">Create Board </div>
+                    <div className="add-board-label-and-input-container flex column">
+                        <label htmlFor="text">Board Name </label>
+                        <input type="text"
+                            className="input"
+                            name="title"
+                            id="title"
+                            value={boardToEdit.title}
+                            onChange={handleChange}
+                            placeholder="New Board Name" />
+                    </div>
                     <div className="btn-container">
                         <button className="btn clean" onClick={handleOpen}>Cancel</button>
                         <button className="btn" onClick={onAddBoard}>Create Board</button>
@@ -118,7 +120,8 @@ export function SideGroupBar() {
                 </Box>
             </Modal>
 
-            <hr style={{ width: '90%', display: `${isSideBarOpen ? '' : 'none'}` }} />
+            {/* <hr style={{ width: '90%', display: `${isSideBarOpen ? '' : 'none'}` }} /> */}
+            <div className="spacer" style={{ display: `${isSideBarOpen ? '' : 'none'}` }} ></div>
             <section className="board-list" style={{ display: `${isSideBarOpen ? '' : 'none'}` }}>
                 <BoardList onDuplicateBoard={onDuplicateBoard} onRemoveBoard={onRemoveBoard} />
             </section>

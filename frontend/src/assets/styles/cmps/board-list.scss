@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   font-size: rem(14px);
+  padding-top: 5px;
 
   .board-list-menu-btn {
     opacity: 0;
@@ -63,7 +64,7 @@
   top: 40%;
   left: 50%;
   transform: translate(-40%, -50%);
-  height: 33%;
+  height: 27%;
   width: 30%;
   min-width: 240px;
   background-color: #fff;
@@ -73,11 +74,40 @@
   flex-direction: column;
   gap: 15px;
   justify-content: space-around;
-  align-items: center;
+  // align-items: center;
   box-shadow: $main-box-shadow;
-  font-family: figtree-regular;
   font-weight: 400;
   padding: 13px;
+  span {
+    position: absolute;
+    right: 1%;
+    top: 5%;
+  }
+  label {
+    text-align: left;
+    font-size: rem(14px);
+  }
+  button {
+    font-size: rem(16px);
+    padding: 8px 16px;
+    font-family: figtree-regular;
+  }
+  > * {
+    font-family: figtree-regular;
+    padding: 0 10px;
+  }
+
+  .add-board-label-and-input-container {
+    width: 100%;
+    gap: 7px;
+    label {
+      text-align: left;
+    }
+    & .input {
+      // width: 70%;
+      min-width: 180px;
+    }
+  }
 
   .modal-header {
     width: 90%;
@@ -93,11 +123,6 @@
     }
   }
 
-  & .input {
-    width: 70%;
-    min-width: 180px;
-  }
-
   .btn-container {
     align-self: flex-end;
   }
@@ -109,10 +134,10 @@
 
 .side-board-btn-container {
   position: relative;
-  
+
   .input-search-icon {
     position: absolute;
-    bottom: 6%;
+    bottom: -3%;
     left: 4%;
   }
   .input-bolt-icon {
@@ -120,7 +145,6 @@
     position: absolute;
     bottom: 6%;
     left: 86%;
-    
   }
   .search-board-input {
     border: 0;
