@@ -1,27 +1,39 @@
 import { GroupList } from "../cmps/group-list";
 import { BoardHeader } from "../cmps/board-header";
 import { NavBar } from "../cmps/nav-bar";
-import { Fragment, useEffect, useRef, useState } from "react";
-import { ADD_GROUP_FROM_BUTTOM, boardService, DATE_PICKER, MEMEBER_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_STATUS } from "../services/board.service.local";
+import { useEffect, useState } from "react";
+import { ADD_GROUP_FROM_BUTTOM, DATE_PICKER, MEMEBER_PICKER, ON_DRAG_GROUP, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_STATUS } from "../services/board.service.local";
 import { SideGroupBar } from "../cmps/side-group-bar";
-import { loadBoard, loadBoards, updateBoard, updateGroup, updateTask } from "../store/board.actions";
+import { loadBoard, updateBoard, updateGroup, updateTask } from "../store/board.actions";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Loader, Icon } from 'monday-ui-react-core';
 import { Add } from 'monday-ui-react-core/icons';
 import { DynamicModal } from "../cmps/dynamic-modal";
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 export function BoardDetails() {
+
     const board = useSelector((storeState) => storeState.boardModule.board)
     const { boardId } = useParams()
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [cmp, setCmp] = useState({})
+    const [groupToUpdate, setGroupToUpdate] = useState([])
 
-    const boardContainer = useRef()
+    // const boardContainer = useRef()
 
     useEffect(() => {
-        loadBoard(boardId)
+        setBoardAndGroups()
     }, [boardId])
+
+    async function setBoardAndGroups() {
+        try {
+            const board = await loadBoard(boardId)
+            setGroupToUpdate(board.groups)
+        } catch (err) {
+            console.log('err:', err)
+        }
+    }
 
     function onUpdateTaskLabel(type, data, labelPick) {
         console.log('TYPE', type);
@@ -102,11 +114,21 @@ export function BoardDetails() {
                         }
                     }
                 })
-
         }
     }
 
-    if (!board) return <div className="loader"><Loader size={Loader.sizes.LARGE} /></div>
+    function handleOnDragEnd(result) {
+        if (!result.destination) return
+        const newOrderedGroups = Array.from(board.groups)
+        const [reorderedGroup] = newOrderedGroups.splice(result.source.index, 1)
+        newOrderedGroups.splice(result.destination.index, 0, reorderedGroup)
+        // board.groups = newOrderedGroups
+        console.log('newOrderedGroups:', newOrderedGroups)
+        updateBoard(board, newOrderedGroups, ON_DRAG_GROUP)
+        setGroupToUpdate(board.groups)
+    }
+
+    if (!board.groups || !board) return <div className="loader"><Loader size={Loader.sizes.LARGE} /></div>
     return <section className="board-details">
         <NavBar />
         <SideGroupBar />
@@ -114,13 +136,35 @@ export function BoardDetails() {
             <BoardHeader
                 board={board}
             />
-            <section ref={boardContainer} className="groups-container">
-                {board.groups.map(group => <GroupList key={group.id} board={board} group={group} openModal={openModal} />)}
-                <button className="btn clean buttom-add-group-btn"
-                    onClick={() => updateGroup(board, null, ADD_GROUP_FROM_BUTTOM)}>
-                    <Icon iconType={Icon.type.SVG} icon={Add} iconSize={19} /> Add  new group
-                </button>
-            </section>
+            <DragDropContext onDragEnd={handleOnDragEnd}>
+                <Droppable droppableId='groups'>
+                    {(provided) => (
+
+                        <section className="groups-container"
+                            {...provided.droppableProps}
+                            ref={provided.innerRef}>
+
+                            {board.groups.map((group, index) =>
+                                <Draggable key={group.id} draggableId={group.id} index={index}>
+                                    {(provided) => (
+                                        <GroupList
+                                            provided={provided}
+                                            key={group.id}
+                                            board={board}
+                                            group={group}
+                                            openModal={openModal} />
+                                    )}
+                                </Draggable>
+                            )}
+                            {provided.placeholder}
+                            <button className="btn clean buttom-add-group-btn"
+                                onClick={() => updateGroup(board, null, ADD_GROUP_FROM_BUTTOM)}>
+                                <Icon iconType={Icon.type.SVG} icon={Add} iconSize={19} /> Add  new group
+                            </button>
+                        </section>
+                    )}
+                </Droppable>
+            </DragDropContext>
             {isModalOpen && <DynamicModal cmp={cmp} setIsModalOpen={setIsModalOpen} onUpdateTaskLabel={onUpdateTaskLabel} />}
             <div className="add-group-btn-container">
             </div>

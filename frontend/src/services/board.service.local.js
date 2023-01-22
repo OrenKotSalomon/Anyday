@@ -7,6 +7,7 @@ const BOARD_KEY = 'boardDB'
 
 //Board
 export const CHANGE_TITLE = 'CHANGE_TITLE'
+export const ON_DRAG_GROUP = 'ON_DRAG_GROUP'
 
 //Groups
 export const CHANGE_GROUP_TITLE = 'CHANGE_GROUP_TITLE'
@@ -135,6 +136,9 @@ function boardServiceReducer(board, data, type) {
     switch (type) {
         case CHANGE_TITLE:
             board.title = data
+            return board
+        case ON_DRAG_GROUP:
+            board.groups = data
             return board
         default:
             return board
