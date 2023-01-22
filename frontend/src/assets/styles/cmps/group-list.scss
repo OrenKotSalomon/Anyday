@@ -89,17 +89,20 @@
       height: 22px;
       width: 22px;
       border-radius: 4px;
+      margin: auto;
       margin-left: 5px;
       transition: 0.3s;
-
+      @include flex-center;
+      
       &:hover {
         background-color: #d5d8e4;
       }
     }
-
-
-
+    
+    
+    
     .add-label-btn {
+      @include flex-center;
       font-size: rem(19px);
       color: #707181;
       transition: 0.3s;
