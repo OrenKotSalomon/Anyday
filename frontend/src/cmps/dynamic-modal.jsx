@@ -40,7 +40,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
     switch (cmp.type) {
 
         case STATUS_PICKER:
-            return <div onClick={() => setIsModalOpen(false)} className="status-picker-container" style={{ transform: `translate(-13%, 20%)`, left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
+            return <div onClick={() => setIsModalOpen(false)} className="status-picker-container" style={{ transform: `translate(-60%, 20%)`, left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
 
                 <div className="status-picker-view">
                     {cmp.statuses.map((status, idx) => {

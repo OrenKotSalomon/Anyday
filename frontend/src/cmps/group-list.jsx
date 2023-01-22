@@ -209,20 +209,27 @@ export function GroupList({ board, group, openModal, }) {
                                 </Draggable>
                             )}
                             {provided.placeholder}
-                            <div className='add-task-container'>
-                                <div style={{ backgroundColor: group.style }} className='left-border-add-task'></div>
-                                <div className='checkbox-row-container'>
-                                    <input className='row-checkbox' type="checkbox" disabled />
+                            <div className='add-task-wrapper'>
+                                <div className='add-task-container'>
+                                    <div className='add-task-input-container'>
+
+                                        <div style={{ backgroundColor: group.style }} className='left-border-add-task'></div>
+                                        <div className='checkbox-row-container'>
+                                            <input className='row-checkbox' type="checkbox" disabled />
+                                        </div>
+                                        <EditableHeading
+                                            className='editable-add-task'
+                                            type={EditableHeading.types.h6}
+                                            onFinishEditing={onAddGroupTask}
+                                            onChange={handleChangeTask}
+                                            placeholder={'+ Add Task'}
+                                            value={newTaskTitle}
+                                            brandFont
+                                        />
+                                    </div>
+
+                                    <div className='white-box'></div>
                                 </div>
-                                <EditableHeading
-                                    className='editable-add-task'
-                                    type={EditableHeading.types.h6}
-                                    onFinishEditing={onAddGroupTask}
-                                    onChange={handleChangeTask}
-                                    placeholder={'+ Add Task'}
-                                    value={newTaskTitle}
-                                    brandFont
-                                />
                             </div>
 
                         </section>

@@ -54,6 +54,8 @@
       margin-left: 15px;
       width: max-content;
       font-size: 2rem;
+      @include left-sticky;
+      left: 55px;
 
       input {
         margin-top: 10px;
@@ -101,10 +103,10 @@
 
 .row-header-container {
   display: flex;
-  border-top: $border-cell;
+
   border-top-left-radius: 6px;
 
-  margin-top: 19px;
+  margin-top: 20px;
 
   .main-right-header {
     position: relative;
@@ -114,6 +116,7 @@
     flex: 1 1 auto;
     max-width: unset;
     border-bottom: $border-cell;
+    border-top: $border-cell;
 
     .add-label-btn-container {
       position: relative;
@@ -140,6 +143,9 @@
 
   .main-left-header {
     display: flex;
+    @include left-sticky;
+    z-index: 2;
+    background-color: white;
   }
 }
 
@@ -166,7 +172,7 @@
     justify-content: center;
     align-items: center;
     font-size: 14px;
-    // @include left-bottom-border;
+    border-top: $border-cell;
     border-bottom: $border-cell;
   }
 
@@ -184,6 +190,7 @@
     height: rem(36px);
     border-bottom: $border-cell;
     border-right: $border-cell;
+    border-top: $border-cell;
 
     .row-checkbox {
       margin: 0;
@@ -197,7 +204,7 @@
   align-items: center;
   height: $cell-height;
   opacity: 0.6;
-  border-bottom: $border-cell;
+
   border-bottom-left-radius: 6px;
 
   &:hover {
@@ -205,11 +212,35 @@
     opacity: 1;
   }
 
-  // need to find active style / focus
-  // &:hover {
-  //   background-color: #cce5ff;
-  // }
+  .checkbox-row-container {
+    display: flex;
+    justify-content: center;
+    width: rem(33.6px);
+    height: 2.25rem;
+
+    .row-checkbox {
+      margin: 4px 3px 3px 3px;
+      width: 18px;
+    }
+  }
+
   //
+  .white-box {
+    flex-grow: 1;
+    height: $cell-height;
+    border-bottom: $border-cell;
+  }
+
+}
+
+.add-task-input-container {
+  @include left-sticky;
+  border-bottom: $border-cell;
+  display: flex;
+  align-items: center;
+  height: $cell-height;
+  border-bottom-left-radius: 6px;
+
   .editable-add-task {
     width: rem(300px);
     opacity: 1;
@@ -225,17 +256,19 @@
   text-align: center;
   @include status-layout;
   @include left-bottom-border;
+  border-top: $border-cell;
 }
 
 .person-label-header {
   @include left-bottom-border;
   @include person-layout;
   text-align: center;
+  border-top: $border-cell;
 }
 
 .date-label-header {
   border-right: $border-cell;
-
+  border-top: $border-cell;
   @include date-layout;
   text-align: center;
   @include left-bottom-border;

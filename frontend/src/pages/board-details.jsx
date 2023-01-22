@@ -24,16 +24,14 @@ export function BoardDetails() {
     }, [boardId])
 
     function onUpdateTaskLabel(type, data, labelPick) {
-        console.log('TYPE', type);
-        console.log(labelPick);
+        // console.log('TYPE', type);
+        // console.log(labelPick);
         data.labelPick = labelPick
-        console.log(data);
+        // console.log(data);
         switch (type) {
             case UPDATE_TASK_STATUS:
-                console.log('in status picker');
                 return updateTask(board, data, UPDATE_TASK_STATUS)
             case UPDATE_TASK_DATE:
-                console.log('in date picker');
                 return updateTask(board, data, UPDATE_TASK_DATE)
         }
 
@@ -44,8 +42,8 @@ export function BoardDetails() {
         // let bbb = boardContainer.current.getBoundingClientRect()
         // console.log(labelPos);
         // console.log(bbb.top);
-        // console.log(document.body.scrollLeft);
-        console.log(info);
+        console.log(document.body);
+        console.log(labelPos);
         setIsModalOpen(true)
 
         // statuses memebers should go on board obj ?
