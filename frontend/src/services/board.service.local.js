@@ -239,11 +239,17 @@ function getEmptyGroup() {
         tasks: [
             {
                 id: utilService.makeId(),
-                title: 'Task 1'
+                title: 'Task 1',
+                status: '',
+                members: [],
+                dueDate: ''
             },
             {
                 id: utilService.makeId(),
-                title: 'Task 2'
+                title: 'Task 2',
+                status: '',
+                members: [],
+                dueDate: ''
             }
         ],
         style: '#808080'
@@ -323,7 +329,7 @@ function getEmptyBoard() {
                 style: 'lightblue'
             },
         ],
-        cmpsOrder: [STATUS_PICKER, MEMEBER_PICKER, DATE_PICKER]
+        cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER]
     }
 }
 
@@ -421,7 +427,7 @@ const demoBoard = {
             style: 'lightblue'
         },
     ],
-    cmpsOrder: [STATUS_PICKER, MEMEBER_PICKER, DATE_PICKER]
+    cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER]
 
 }
 

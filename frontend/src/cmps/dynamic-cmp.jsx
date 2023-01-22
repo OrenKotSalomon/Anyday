@@ -37,7 +37,7 @@ export function DynamicCmp({ cmp, info, openModal }) {
                 onClick={(ev) => openModal(ev, { task: cmp.task, groupId: cmp.groupId }, MEMEBER_PICKER)} >
                 {<AvatarGroup size={Avatar.sizes.SMALL} max={2}>
                     <Avatar type={Avatar.types.IMG} src={Oren} ariaLabel="Oren Kot" />
-                    <Avatar type={Avatar.types.IMG} src={Harel} ariaLabel="Oren Kot" />
+                    <Avatar type={Avatar.types.IMG} src={Harel} ariaLabel="Harel Natan" />
                 </AvatarGroup>}</div>
         case DATE_PICKER:
             return <div className="date-label"

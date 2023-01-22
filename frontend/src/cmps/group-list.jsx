@@ -2,7 +2,7 @@ import { EditableHeading, Tooltip } from 'monday-ui-react-core'
 import { useState } from 'react';
 import { updateBoard, updateGroup } from '../store/board.actions';
 import { TaskPreview } from "./task-preview";
-import { MenuButton, Menu, MenuItem, ColorPicker } from 'monday-ui-react-core'
+import { MenuButton, Menu, MenuItem, ColorPicker, Icon } from 'monday-ui-react-core'
 import { Delete, Bullet, Duplicate, Add } from 'monday-ui-react-core/icons'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service';
 import { ADD_GROUP, ADD_GROUP_TASK, boardService, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, MEMEBER_PICKER, STATUS_PICKER } from '../services/board.service.local';
@@ -113,13 +113,13 @@ export function GroupList({ board, group, openModal, }) {
                     <Tooltip
                         content="Click to Edit" animationType="expand">
                         <EditableHeading
+                        className="group-header-editable-name"
                             customColor={group.style}
                             onFinishEditing={onFinishEditing}
                             onChange={handleChange}
                             brandFont={true}
                             value={group.title}
-                            style={{fontWeight: 'bold'}}
-                            // customColor={`${group.color}`}
+                            style={{ fontWeight: 'bold' }}
                             type={EditableHeading.types.h4}
                         />
                     </Tooltip>
@@ -144,13 +144,25 @@ export function GroupList({ board, group, openModal, }) {
                 </div>
 
                 <div className='main-right-header flex'>
-                    <button onClick={toggleAddLabelModal}
-                        className='btn clean add-label-btn'
+                    <div className="add-label-btn-container"
                         style={{
-                            color: isAddingLabel ? '#fff' : '',
-                            backgroundColor: isAddingLabel ? 'gray' : ''
-                        }} >+
-                    </button>
+
+                            backgroundColor: isAddingLabel ? '#d5d8e4' : ''
+                        }}>
+                        <button onClick={toggleAddLabelModal} className='btn clean add-label-btn'>
+                            {/* <span >+</span> */}
+                            <Icon className="add-label-icon"
+                                style={{
+                                    position: 'absolute',
+                                    top: '10%',
+                                    left: '10%',
+                                    transform: 'translate(-50%, -50%)',
+                                    color: isAddingLabel ? '#005fb7' : '',
+                                    transition: '.2s',
+                                    transform: isAddingLabel ? 'rotate(45deg)' : ''
+                                }} iconType={Icon.type.SVG} icon={Add} iconSize={20} />
+                        </button>
+                    </div>
                     {isAddingLabel && <AddLabelModal />}
                 </div>
             </div>

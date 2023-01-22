@@ -18,6 +18,12 @@
       }
     }
 
+    .group-header-editable-name {
+      h4 {
+        font-family: poppins-regular-400;
+        font-weight: 600;
+      }
+    }
     .group-header-name {
       margin-left: 15px;
       width: max-content;
@@ -78,11 +84,26 @@
     max-width: unset;
     border-bottom: $border-cell;
 
+    .add-label-btn-container {
+      position: relative;
+      height: 22px;
+      width: 22px;
+      border-radius: 4px;
+      margin-left: 5px;
+      transition: 0.3s;
+
+      &:hover {
+        background-color: #d5d8e4;
+      }
+    }
+
+
+
     .add-label-btn {
       font-size: rem(19px);
       color: #707181;
+      transition: 0.3s;
     }
-
   }
 
   .main-left-header {
@@ -186,5 +207,4 @@
   @include date-layout;
   text-align: center;
   @include left-bottom-border;
-
 }
