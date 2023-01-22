@@ -48,7 +48,7 @@ export function BoardView({ board }) {
                             <Tooltip
                                 content="Show board description" animationType="expand">
                                 <button className='info-header'>
-                                    <Icon iconType={Icon.type.SVG} icon={Info} iconLabel="my bolt svg icon" iconSize={20} />
+                                    <Icon iconType={Icon.type.SVG} ignoreFocusStyle={true} icon={Info} iconLabel="my bolt svg icon" iconSize={20} />
 
                                 </button>
                             </Tooltip>
@@ -60,7 +60,7 @@ export function BoardView({ board }) {
                             <Tooltip
                                 content="Add to favorites" animationType="expand">
                                 <button className='star'>
-                                    <Icon iconType={Icon.type.SVG} icon={Favorite} iconLabel="my bolt svg icon" iconSize={20} />
+                                    <Icon iconType={Icon.type.SVG} ignoreFocusStyle={true} icon={Favorite} iconLabel="my bolt svg icon" iconSize={20} />
 
                                 </button>
                             </Tooltip>

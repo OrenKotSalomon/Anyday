@@ -6,10 +6,11 @@ import { BoardView } from "./board-view";
 export function BoardHeader({ board }) {
 
     return <section className="board-header">
-
-        <BoardView board={board}
-        />
-        <BoardFilter board={board}
-        />
+        <div className="board-header-main-container">
+            <BoardView board={board}
+            />
+            <BoardFilter board={board}
+            />
+        </div>
     </section>
 }
