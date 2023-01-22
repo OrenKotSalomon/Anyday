@@ -78,9 +78,6 @@ export function GroupList({ board, group, openModal, }) {
     function handleOnDragEnd(result) {
         if (!result.destination) return
 
-        console.log('result:', result)
-        console.log('group.tasks:', group.tasks)
-
         const newOrderedTasks = Array.from(listToUpdate)
         const [reorderedTask] = newOrderedTasks.splice(result.source.index, 1)
         newOrderedTasks.splice(result.destination.index, 0, reorderedTask)
