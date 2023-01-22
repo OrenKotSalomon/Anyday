@@ -4,9 +4,9 @@
   padding-top: 21px;
   padding-right: 30px;
   padding-left: 5px;
-//   position: sticky;
-//   top: 0;
-//   left: 30px;
+  //   position: sticky;
+  //   top: 0;
+  //   left: 30px;
   width: 93vw;
   .board-header-top {
     display: flex;
@@ -127,11 +127,15 @@
 .header-tablist {
   display: flex;
   justify-content: flex-start;
-
+  padding-top: 7px;
   font-size: rem(14px) !important;
   font-family: figtree-regular !important;
   > * {
     padding: 7px;
+    padding-bottom: 3px;
+  }
+  a {
+    color: $main-color;
   }
   .main-table-a {
     @include flex-center;
@@ -140,6 +144,7 @@
 
 .board-filter {
   padding: 16px;
+  padding-left: 0;
 }
 
 .board-header-main {

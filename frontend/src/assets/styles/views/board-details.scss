@@ -1,53 +1,54 @@
 .board-details {
-    position: relative;
-    display: flex;
-    height: min-content;
-    font-family: roboto-regular;
+  position: relative;
+  display: flex;
+  height: min-content;
+  font-family: roboto-regular;
 }
 
 .board-container {
-    width: 100%;
-    display: grid;
-    grid-template-columns: $layoutPadding 1fr $layoutPadding;
-    gap: $layoutPadding;
-    overflow-x: scroll;
-    overscroll-behavior-inline: contain;
-    height: 100vh;
+  width: 100%;
+  display: grid;
+  grid-template-columns: $layoutPadding 1fr $layoutPadding;
+  gap: $layoutPadding;
+  overflow-x: scroll;
+  overscroll-behavior-inline: contain;
+  height: 100vh;
 
-    &::-webkit-scrollbar-track {
-        position: absolute;
-    }
+  &::-webkit-scrollbar-track {
+    position: absolute;
+  }
 
-    >* {
-        grid-column: 2;
-    }
-
+  > * {
+    grid-column: 2;
+  }
 }
 
 .board-header {
-    height: min-content;
+  height: min-content;
 }
 
 .groups-container {
-    display: flex;
-    flex-direction: column;
-    gap: 60px;
-    margin-top: 13px;
-    margin-left: 7px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 13px;
+  margin-left: 7px;
+  position: relative;
+  top: -55px;
 }
 
 .buttom-add-group-btn {
-    @include flex-center;
-    justify-self: flex-start;
-    color: $main-color;
-    background-color: transparent;
-    border: 1px solid #c3c6d4;
-    padding: 6px 8px;
-    margin: 50px;
-    margin-left: 0;
-    font-size: rem(14px);
-    gap: 5px;
-    &:hover {
-        background-color: #dcdfec;
-    }
+  @include flex-center;
+  justify-self: flex-start;
+  color: $main-color;
+  background-color: transparent;
+  border: 1px solid #c3c6d4;
+  padding: 6px 8px;
+  margin: 50px;
+  margin-left: 0;
+  font-size: rem(14px);
+  gap: 5px;
+  &:hover {
+    background-color: #dcdfec;
+  }
 }
