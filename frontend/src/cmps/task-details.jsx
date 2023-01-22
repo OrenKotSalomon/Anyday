@@ -94,10 +94,10 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
 
     function dragstart(ev) {
         if (ev.clientX === 0) {
-            return;
+            return
         }
-
-        let diff = ((initX / 50 - ev.clientX / 50))
+        let diff = (initX - ev.clientX)/300
+        if(ev.clientX-taskCommentsSize + diff > ev.clientX) return
         SetTaskCommentsSize(taskCommentsSize + diff)
     }
 
