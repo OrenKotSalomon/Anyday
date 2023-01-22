@@ -143,8 +143,6 @@ export function GroupList({ board, group, openModal, }) {
                     </Tooltip>
                 </div>
             </div>
-        </div>
-        <div className="main-group-container">
             <div className='row-header-container'>
                 <div className='main-left-header'>
                     <div className='left-row-container'>
@@ -185,6 +183,9 @@ export function GroupList({ board, group, openModal, }) {
                     {isAddingLabel && <AddLabelModal />}
                 </div>
             </div>
+        </div>
+        <div className="main-group-container">
+
             {/* // style={{ backgroundColor: group.style }} */}
 
             <DragDropContext onDragEnd={handleOnDragEnd} >

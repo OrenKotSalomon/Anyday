@@ -126,5 +126,6 @@ export function BoardDetails() {
             </div>
         </div>
         }
+
     </section >
 }

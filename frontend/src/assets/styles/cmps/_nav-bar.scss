@@ -38,13 +38,16 @@
 .side-board-btn-container {
   padding-top: 9px;
   font-size: rem(14px);
+
   button,
   input {
     font-family: figtree-regular;
   }
-  > * {
+
+  >* {
     height: 32px;
   }
+
   .input {
     padding-top: 11px;
   }
@@ -62,7 +65,7 @@
   min-height: 100vh;
   border-right: 1px solid #d0d4e4;
   transition: 0.1s, rotate 0.1s;
-  z-index: 2;
+  z-index: 100;
 
   &.closed {
     width: 30px;
@@ -70,7 +73,6 @@
 
   .open-side-bar-btn {
     @include side-bar-btn;
-    z-index: 20;
 
     &:hover {
       @include side-bar-btn-hover;
