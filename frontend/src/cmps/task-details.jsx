@@ -114,7 +114,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                 className='task-details-title'
                 onFinishEditing={onFinishEditing}
                 onChange={handleChange}
-                type={EditableHeading.types.h2}
+                type={EditableHeading.types.h4}
                 value={newTitle} />
 
             <TabList className='task-main-nav'>
@@ -131,7 +131,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
 
             <hr className="task-details-hr"></hr>
 
-            {!isAddComment && <button onClick={() => setAddComment(!isAddComment)} className='task-details-open-input-btn'><span>Write an update...</span></button>}
+            {!isAddComment && <div className='task-details-open-input-btn-container'><button onClick={() => setAddComment(!isAddComment)} className='task-details-open-input-btn'>Write an update...</button></div>}
             {isAddComment &&
 
                 <form className='task-details-form' onSubmit={onSubmitNewComment}>
