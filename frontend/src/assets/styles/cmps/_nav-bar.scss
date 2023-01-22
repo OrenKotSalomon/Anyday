@@ -31,9 +31,7 @@
 }
 
 .spacer {
-  border-bottom: 1px solid #d0d4e4;
-  margin: 0 auto;
-  width: 100%;
+  @include spacer;
   padding-top: 10px;
 }
 
