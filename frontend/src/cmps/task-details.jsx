@@ -6,7 +6,7 @@ import { useState, useRef, useEffect } from "react"
 // import Box from '@mui/material/Box';
 
 import { TabList, Tab, EditableHeading, Icon, MenuButton, Menu, MenuItem, } from 'monday-ui-react-core'
-import { Home, Time, Delete, Gallery, Emoji, Underline, Bullets, Italic, Drag } from 'monday-ui-react-core/icons'
+import { Home, Time, Delete, Gallery, Emoji, Underline, Bullets, Italic, Drag, Close } from 'monday-ui-react-core/icons'
 
 import { utilService } from '../services/util.service.js';
 import { boardService } from '../services/board.service.js';
@@ -94,10 +94,10 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
 
     function dragstart(ev) {
         if (ev.clientX === 0) {
-            return;
+            return
         }
-
-        let diff = ((initX / 50 - ev.clientX / 50))
+        let diff = (initX - ev.clientX)/300
+        if(ev.clientX-taskCommentsSize + diff > ev.clientX) return
         SetTaskCommentsSize(taskCommentsSize + diff)
     }
 
@@ -106,7 +106,9 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
     return <section className='task-details' style={{ width: `${isOpenDetails ? 100 : 1}vw` }}>
         <div className='task-main' style={{ width: `${taskCommentsSize}%` }}>
 
-            <button className='close-task-btn' onClick={() => setIsOpenDetails(!isOpenDetails)}>X</button>
+            <button className='close-task-btn' onClick={() => setIsOpenDetails(!isOpenDetails)}>
+            <Icon iconType={Icon.type.SVG} icon={Close} iconLabel="my svg icon" iconSize={16} />
+            </button>
 
             <EditableHeading
                 className='task-details-title'
