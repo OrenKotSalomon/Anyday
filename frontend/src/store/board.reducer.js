@@ -6,7 +6,7 @@ export const UPDATE_BOARD = 'UPDATE_BOARD'
 export const UNDO_REMOVE_BOARD = 'UNDO_REMOVE_BOARD'
 
 const initialState = {
-    board: null,
+    board: {},
     boards: [],
     lastRemovedBoard: null
 }

@@ -10,9 +10,7 @@ import { utilService } from '../services/util.service';
 import { AddLabelModal } from './tasks-modals/add-label-modal';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-export function GroupList({ board, group, openModal, }) {
-
-    console.log('rendering');
+export function GroupList({ board, group, openModal, provided }) {
 
     const [isAddingLabel, setIsAddingLabel] = useState(false)
     const [isPickColor, setIsPickColor] = useState(false)
@@ -86,8 +84,12 @@ export function GroupList({ board, group, openModal, }) {
         setListToUpdate(newOrderedTasks)
     }
 
-    return <section className='group-list'>
-        <div className="group-header-container">
+    return <section className='group-list'
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+        ref={provided.innerRef}>
+        <div className="group-header-container"
+        >
             <MenuButton className="group-list-menu-btn" >
                 <Menu
                     id="menu"
