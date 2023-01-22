@@ -14,8 +14,6 @@
     width: 65px;
 
     img {
-      
-
       &:hover {
         background-color: #131523;
         border-radius: 6px;
@@ -32,9 +30,26 @@
   }
 }
 
+.spacer {
+  border-bottom: 1px solid #d0d4e4;
+  margin: 0 auto;
+  width: 100%;
+  padding-top: 10px;
+}
+
 .side-board-btn-container {
+  padding-top: 9px;
   font-size: rem(14px);
-  font-family: figtree-regular;
+  button,
+  input {
+    font-family: figtree-regular;
+  }
+  > * {
+    height: 32px;
+  }
+  .input {
+    padding-top: 11px;
+  }
 }
 
 .side-group-bar {
@@ -100,6 +115,8 @@
 }
 
 .workspace-header {
+  color: #676879;
+  font-weight: 400;
   font-size: rem(14px);
   font-family: figtree-light;
   line-height: 21px;
