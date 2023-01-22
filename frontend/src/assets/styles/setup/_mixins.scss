@@ -276,3 +276,9 @@
 
   // border-radius: 20px;
 }
+
+@mixin spacer {
+  border-bottom: 1px solid #d0d4e4;
+  margin: 0 auto;
+  width: 100%;
+}

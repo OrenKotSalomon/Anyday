@@ -180,8 +180,9 @@
 }
 
 .board-filter {
-  padding: 16px;
+  padding: 16.5px;
   padding-left: 0;
+  color: grey;
 
   button {
     font-family: figtree-regular !important;
@@ -191,4 +192,21 @@
 .board-header-main {
   border-bottom: $border-cell;
   padding-bottom: 7px;
+}
+
+.monday-style-split-button--kind-primary:not(.monday-style-split-button--disabled).monday-style-split-button--color-primary .monday-style-split-button__secondary-button {
+  width: 28px;
+  padding: 10px;
+  color: white;
+}
+
+.monday-style-button--kind-tertiary {
+  color: #676879;
+  padding: 0;
+  // max-width: 92px;
+}
+
+.spacer-header {
+
+  // @include spacer;
 }
