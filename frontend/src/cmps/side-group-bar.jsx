@@ -65,22 +65,19 @@ export function SideGroupBar() {
     }
 
     return <div>
-        {!isSideBarOpen && <div className="side-group-bar closed">
-            <button className="open-side-bar-btn"
-                onClick={() => toggleSideBar()} >
-                <Icon iconType={Icon.type.SVG} icon={DropdownChevronRight} iconSize={19} />
-            </button>
-        </div>}
-        {isSideBarOpen && <section className='side-group-bar flex'>
-            <div className="workspace-select flex">
-                <button className="close-side-bar-btn"
+
+        <section className={`side-group-bar ${isSideBarOpen ? '' : 'closed'} flex`}>
+            <div className="workspace-select flex" style={{ opacity: '1' }}>
+                <div className={`close-side-bar-btn ${isSideBarOpen ? '' : 'closed-btn'} `}
                     onClick={() => toggleSideBar()} >
-                    <Icon iconType={Icon.type.SVG} icon={DropdownChevronLeft} iconSize={19} />
-                </button>
-                <h4>Workspace</h4>
-                <span className="workspace">Main Workspace</span>
+
+                    <Icon iconType={Icon.type.SVG} ignoreFocusStyle={true} icon={DropdownChevronLeft} iconSize={19} />
+
+                </div>
+                <h4 className="workspace-header" style={{ display: `${isSideBarOpen ? '' : 'none'}` }}  >Workspace</h4>
+                <span className="workspace" style={{ display: `${isSideBarOpen ? '' : 'none'}` }} >Main Workspace</span>
             </div>
-            <div className="side-board-btn-container flex column">
+            <div className="side-board-btn-container flex column" style={{ display: `${isSideBarOpen ? '' : 'none'}` }}>
                 <button className="add-board-btn btn clean"
                     onClick={handleOpen}>
                     <Icon iconType={Icon.type.SVG} icon={Add} iconSize={19} /> Add
@@ -98,6 +95,7 @@ export function SideGroupBar() {
                 <Icon className="input-bolt-icon" iconType={Icon.type.SVG} icon={Bolt} iconSize={19} />
             </div>
             <Modal
+
                 open={isModalOpen}
                 onClose={handleOpen}
                 aria-labelledby="modal-modal-title"
@@ -120,11 +118,11 @@ export function SideGroupBar() {
                 </Box>
             </Modal>
 
-            <hr style={{ width: '90%' }} />
-            <section className="board-list">
+            <hr style={{ width: '90%', display: `${isSideBarOpen ? '' : 'none'}` }} />
+            <section className="board-list" style={{ display: `${isSideBarOpen ? '' : 'none'}` }}>
                 <BoardList onDuplicateBoard={onDuplicateBoard} onRemoveBoard={onRemoveBoard} />
             </section>
 
-        </section>}
+        </section>
     </div>
 }
