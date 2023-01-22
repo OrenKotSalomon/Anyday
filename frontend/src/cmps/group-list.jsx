@@ -113,13 +113,13 @@ export function GroupList({ board, group, openModal, }) {
                     <Tooltip
                         content="Click to Edit" animationType="expand">
                         <EditableHeading
+                        className="group-header-editable-name"
                             customColor={group.style}
                             onFinishEditing={onFinishEditing}
                             onChange={handleChange}
                             brandFont={true}
                             value={group.title}
                             style={{ fontWeight: 'bold' }}
-                            // customColor={`${group.color}`}
                             type={EditableHeading.types.h4}
                         />
                     </Tooltip>

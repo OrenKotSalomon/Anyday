@@ -1,7 +1,7 @@
 .board-header {
   background-color: rgb(255, 255, 255);
   font-family: roboto-regular;
-  padding-top: 21px;
+  padding-top: 12px;
   padding-right: 30px;
   padding-left: 5px;
   //   position: sticky;
@@ -11,6 +11,12 @@
   .board-header-top {
     display: flex;
     align-items: center;
+  }
+}
+
+.board-title-heading {
+  h1 {
+    font-family: poppins-semi-bold-600;
   }
 }
 
@@ -59,8 +65,9 @@
   min-width: 100px;
   margin-right: 8px;
   margin-left: -5px;
-  margin-bottom: 10px;
-
+  gap: 5px;
+  height: 50px;
+  
   .board-info-toggle {
     @include hover-supported-header {
       background-color: #dcdfec;
@@ -105,10 +112,9 @@
     max-width: 600px;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 22px;
     border: none;
     width: initial;
-    padding-left: 5px;
+    padding-left: 2.5px;
   }
 
   .description-modal {
@@ -117,7 +123,7 @@
     padding-inline: 2px;
     cursor: pointer;
     color: #1f76c2;
-
+    font-family: poppins-regular-400;
     &:hover {
       text-decoration: underline;
     }
@@ -145,6 +151,9 @@
 .board-filter {
   padding: 16px;
   padding-left: 0;
+  button {
+    font-family: figtree-regular !important;
+  }
 }
 
 .board-header-main {

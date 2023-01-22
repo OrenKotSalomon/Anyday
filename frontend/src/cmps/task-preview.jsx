@@ -83,7 +83,7 @@ export function TaskPreview({ task, board, group, openModal }) {
 
                         {!task.comments && <Icon SVG="AddUpdate" iconType={Icon.type.SVG} icon={AddUpdate} iconLabel="Task Details" iconSize={24} />}
                         {task.comments && <div className="storybook-counter_position">
-                            <Icon icon={Update} iconSize={24} />
+                            <Icon icon={Update} iconSize={24} style={{color: '#0073ea'}} />
                             <Counter count={task.comments.length} size={Counter.sizes.SMALL} className='counter-comments' />
 
                         </div>}

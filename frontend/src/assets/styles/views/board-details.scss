@@ -33,8 +33,16 @@
   gap: 40px;
   margin-top: 13px;
   margin-left: 7px;
-  position: relative;
-  top: -55px;
+  // position: relative;
+  // top: -87px;
+}
+
+.add-group-btn-container {
+  display: inline-block;
+  height: 32px;
+  width: 142px;
+  // position: relative;
+  // top: -91px;
 }
 
 .buttom-add-group-btn {
@@ -43,11 +51,10 @@
   color: $main-color;
   background-color: transparent;
   border: 1px solid #c3c6d4;
-  padding: 6px 8px;
-  margin: 50px;
-  margin-left: 0;
   font-size: rem(14px);
   gap: 5px;
+  height: 32px;
+  width: 142px;
   &:hover {
     background-color: #dcdfec;
   }

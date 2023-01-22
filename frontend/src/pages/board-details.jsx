@@ -118,10 +118,12 @@ export function BoardDetails() {
                 {board.groups.map(group => <GroupList key={group.id} board={board} group={group} openModal={openModal} />)}
             </section>
             {isModalOpen && <DynamicModal cmp={cmp} setIsModalOpen={setIsModalOpen} onUpdateTaskLabel={onUpdateTaskLabel} />}
-            <button className="btn clean buttom-add-group-btn"
-                onClick={() => updateGroup(board, null, ADD_GROUP_FROM_BUTTOM)}>
-                <Icon iconType={Icon.type.SVG} icon={Add} iconSize={19} /> Add  new group
-            </button>
+            <div className="add-group-btn-container">
+                <button className="btn clean buttom-add-group-btn"
+                    onClick={() => updateGroup(board, null, ADD_GROUP_FROM_BUTTOM)}>
+                    <Icon iconType={Icon.type.SVG} icon={Add} iconSize={19} /> Add  new group
+                </button>
+            </div>
         </div>
         }
     </section >

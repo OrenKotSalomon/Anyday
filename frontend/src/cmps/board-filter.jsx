@@ -1,6 +1,7 @@
 import { ThemeProvider } from '@emotion/react';
 import { Button, Flex, SplitButton, Tooltip, Icon, DialogContentContainer, Menu, MenuItem } from 'monday-ui-react-core'
-import { Add, Search, PersonRound, Filter, Sort, Group } from "monday-ui-react-core/icons";
+import { Add, Search, PersonRound, Filter, Sort, Group, Hide } from "monday-ui-react-core/icons";
+import { Menu as MenuIcon } from "monday-ui-react-core/icons";
 import { useEffect, useMemo, useState } from 'react';
 import { ADD_GROUP_FROM_HEADER, ADD_TASK_FROM_HEADER, boardService } from '../services/board.service.local';
 import { updateBoard, updateGroup, updateTask } from '../store/board.actions';
@@ -40,6 +41,22 @@ export function BoardFilter({ board }) {
                     content="Sort by any column" animationType="expand">
                     <Button kind={Button.kinds.TERTIARY} size={Button.sizes.SMALL} leftIcon={Sort}>
                         Sort
+                    </Button>
+                </Tooltip>
+            </div>
+            <div className="monday-storybook-tooltip_bottom">
+                <Tooltip
+                    content="Hidden columns" animationType="expand">
+                    <Button kind={Button.kinds.TERTIARY} size={Button.sizes.SMALL} leftIcon={Hide}>
+                        Hide
+                    </Button>
+                </Tooltip>
+            </div>
+            <div className="monday-storybook-tooltip_bottom">
+                <Tooltip
+                    content="Hidden columns" animationType="expand">
+                    <Button kind={Button.kinds.TERTIARY} size={Button.sizes.SMALL} leftIcon={MenuIcon}>
+                        
                     </Button>
                 </Tooltip>
             </div>
