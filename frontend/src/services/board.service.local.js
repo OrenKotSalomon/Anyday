@@ -179,7 +179,6 @@ function groupServiceReducer(board, data, type) {
             board.groups = board.groups.filter(group => group.id !== data.id)
             return board
         case ON_DRAG_TASK:
-            console.log('data:', data)
             groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.id)
             board.groups.splice(groupIdx, 1, data)
             return board
