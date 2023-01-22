@@ -86,6 +86,24 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
         SetEmojiPicker(!isEmojiPicker)
     }
 
+    function componentDidMount() {
+        document.addEventListener('mousedown', this.mousedown);
+    }
+    
+    function componentWillUnMount() {
+        document.addEventListener('mousedown', this.mousedown);
+    }
+    
+    const dragstart = (ev) => {
+       console.log(ev)
+    }
+    
+    const mousedown = e => {
+        console.log("mousedown"); 
+        document.addEventListener('dragstart', this.dragstart);
+    }
+
+
     return <section className='task-details' style={{ width: `${isOpenDetails ? 100 : 1}vw` }}>
         <div className='task-main' style={{ width: `${taskCommentsSize}%` }}>
 
@@ -195,8 +213,9 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
             </section >}
 
 
-            {/* <div className="slide-panel-resizer" onClick={(ev) => console.log(ev)}
-            >Test-dragme to resize</div> */}
+
+            <div className="slide-panel-resizer" draggable="true" onDrag={dragstart}
+            >Test-dragme to resize</div>
 
 
         </div >
