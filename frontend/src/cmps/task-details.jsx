@@ -6,7 +6,7 @@ import { useState, useRef, useEffect } from "react"
 // import Box from '@mui/material/Box';
 
 import { TabList, Tab, EditableHeading, Icon, MenuButton, Menu, MenuItem, } from 'monday-ui-react-core'
-import { Home, Time, Delete, Gallery, Emoji, Underline, Bullets, Italic } from 'monday-ui-react-core/icons'
+import { Home, Time, Delete, Gallery, Emoji, Underline, Bullets, Italic, Drag } from 'monday-ui-react-core/icons'
 
 import { utilService } from '../services/util.service.js';
 import { boardService } from '../services/board.service.js';
@@ -24,6 +24,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
     const emojis = ['😀', '😁', '😂', '🤣', '😃', '😄', '😅', '😆', '😉', '😊', '😋', '😎', '😍', '😘', '🥰', '😗', '😙', '🥲', '🤔', '🤩', '🤗', '🙂', '😚', '🙄', '😶‍🌫️', '😶', '😑', '😐', '🤨', '😯', '🤐', '😮', '😥', '😣', '😏']
     const [isEmojiPicker, SetEmojiPicker] = useState(false)
     const [taskCommentsSize, SetTaskCommentsSize] = useState(44)
+    const [initX, setX] = useState('')
 
     function onSubmitNewComment(ev) {
         ev.preventDefault()
@@ -86,22 +87,20 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
         SetEmojiPicker(!isEmojiPicker)
     }
 
-    function componentDidMount() {
-        document.addEventListener('mousedown', this.mousedown);
+    function getInitX(ev) {
+        // console.log('init-drag', ev.clientX)
+        setX(ev.clientX)
     }
-    
-    function componentWillUnMount() {
-        document.addEventListener('mousedown', this.mousedown);
+
+    function dragstart(ev) {
+        if (ev.clientX === 0) {
+            return;
+        }
+
+        let diff = ((initX / 50 - ev.clientX / 50))
+        SetTaskCommentsSize(taskCommentsSize + diff)
     }
-    
-    const dragstart = (ev) => {
-       console.log(ev)
-    }
-    
-    const mousedown = e => {
-        console.log("mousedown"); 
-        document.addEventListener('dragstart', this.dragstart);
-    }
+
 
 
     return <section className='task-details' style={{ width: `${isOpenDetails ? 100 : 1}vw` }}>
@@ -214,8 +213,10 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
 
 
 
-            <div className="slide-panel-resizer" draggable="true" onDrag={dragstart}
-            >Test-dragme to resize</div>
+            <div className="slide-panel-resizer" draggable="true" onDrag={dragstart} onMouseDown={getInitX}
+            >
+                <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Drag} iconLabel="my svg icon" iconSize={14} />
+            </div>
 
 
         </div >
