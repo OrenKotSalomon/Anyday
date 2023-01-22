@@ -13,7 +13,7 @@ import { StatusModal } from "./tasks-modals/status-modal";
 import { PriorityModal } from "./tasks-modals/priority-modal";
 import { DynamicCmp } from "./dynamic-cmp";
 
-export function TaskPreview({ task, board, group, openModal }) {
+export function TaskPreview({ task, board, group, openModal, provided }) {
 
     const [isOpenDetails, setIsOpenDetails] = useState(false)
 
@@ -34,7 +34,10 @@ export function TaskPreview({ task, board, group, openModal }) {
         showSuccessMsg(`Task deleted successfully taskId:${data.id} `)
     }
 
-    return <section className='task-preview'>
+    return <section className='task-preview'
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+        ref={provided.innerRef}>
         <MenuButton className="task-preview-menu-btn" >
             <Menu
                 id="menu"
@@ -83,7 +86,7 @@ export function TaskPreview({ task, board, group, openModal }) {
 
                         {!task.comments && <Icon SVG="AddUpdate" iconType={Icon.type.SVG} icon={AddUpdate} iconLabel="Task Details" iconSize={24} />}
                         {task.comments && <div className="storybook-counter_position">
-                            <Icon icon={Update} iconSize={24} style={{color: '#0073ea'}} />
+                            <Icon icon={Update} iconSize={24} style={{ color: '#0073ea' }} />
                             <Counter count={task.comments.length} size={Counter.sizes.SMALL} className='counter-comments' />
 
                         </div>}

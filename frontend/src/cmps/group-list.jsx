@@ -5,16 +5,20 @@ import { TaskPreview } from "./task-preview";
 import { MenuButton, Menu, MenuItem, ColorPicker, Icon } from 'monday-ui-react-core'
 import { Delete, Bullet, Duplicate, Add } from 'monday-ui-react-core/icons'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service';
-import { ADD_GROUP, ADD_GROUP_TASK, boardService, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, MEMEBER_PICKER, STATUS_PICKER } from '../services/board.service.local';
+import { ADD_GROUP, ADD_GROUP_TASK, boardService, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, MEMEBER_PICKER, ON_DRAG_TASK, STATUS_PICKER } from '../services/board.service.local';
 import { utilService } from '../services/util.service';
 import { AddLabelModal } from './tasks-modals/add-label-modal';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 export function GroupList({ board, group, openModal, }) {
+
+    console.log('rendering');
 
     const [isAddingLabel, setIsAddingLabel] = useState(false)
     const [isPickColor, setIsPickColor] = useState(false)
     const [groupToUpdate, setGroupToUpdate] = useState(group)
     const [newTaskTitle, setNewTaskTitle] = useState('')
+    const [listToUpdate, setListToUpdate] = useState(group.tasks)
 
     function onFinishEditing() {
         updateGroup(board, groupToUpdate, CHANGE_GROUP_TITLE)
@@ -71,6 +75,20 @@ export function GroupList({ board, group, openModal, }) {
         }
     }
 
+    function handleOnDragEnd(result) {
+        if (!result.destination) return
+
+        console.log('result:', result)
+        console.log('group.tasks:', group.tasks)
+
+        const newOrderedTasks = Array.from(listToUpdate)
+        const [reorderedTask] = newOrderedTasks.splice(result.source.index, 1)
+        newOrderedTasks.splice(result.destination.index, 0, reorderedTask)
+        group.tasks = newOrderedTasks
+        updateGroup(board, group, ON_DRAG_TASK)
+        setListToUpdate(newOrderedTasks)
+    }
+
     return <section className='group-list'>
         <div className="group-header-container">
             <MenuButton className="group-list-menu-btn" >
@@ -113,7 +131,7 @@ export function GroupList({ board, group, openModal, }) {
                     <Tooltip
                         content="Click to Edit" animationType="expand">
                         <EditableHeading
-                        className="group-header-editable-name"
+                            className="group-header-editable-name"
                             customColor={group.style}
                             onFinishEditing={onFinishEditing}
                             onChange={handleChange}
@@ -152,7 +170,7 @@ export function GroupList({ board, group, openModal, }) {
                         <button onClick={toggleAddLabelModal} className='btn clean add-label-btn'>
                             {/* <span >+</span> */}
                             <Icon className="add-label-icon"
-                            ignoreFocusStyle={true}
+                                ignoreFocusStyle={true}
                                 style={{
                                     position: 'absolute',
                                     top: '10%',
@@ -168,24 +186,51 @@ export function GroupList({ board, group, openModal, }) {
                 </div>
             </div>
             {/* // style={{ backgroundColor: group.style }} */}
-            <section className="tasks-container">
-                {group.tasks.map(task => <TaskPreview key={task.id} task={task} board={board} group={group} openModal={openModal} />)}
-                <div className='add-task-container'>
-                    <div style={{ backgroundColor: group.style }} className='left-border-add-task'></div>
-                    <div className='checkbox-row-container'>
-                        <input className='row-checkbox' type="checkbox" disabled />
-                    </div>
-                    <EditableHeading
-                        className='editable-add-task'
-                        type={EditableHeading.types.h6}
-                        onFinishEditing={onAddGroupTask}
-                        onChange={handleChangeTask}
-                        placeholder={'+ Add Task'}
-                        value={newTaskTitle}
-                        brandFont
-                    />
-                </div>
-            </section>
+
+            <DragDropContext onDragEnd={handleOnDragEnd} >
+                <Droppable droppableId='tasks'>
+                    {(provided) => (
+
+                        <section className="tasks-container"
+                            {...provided.droppableProps}
+                            ref={provided.innerRef}>
+
+                            {group.tasks.map((task, index) =>
+                                <Draggable key={task.id} draggableId={task.id} index={index}>
+                                    {(provided) => (
+
+                                        <TaskPreview
+                                            provided={provided}
+                                            key={task.id}
+                                            task={task}
+                                            board={board}
+                                            group={group}
+                                            openModal={openModal} />
+                                    )}
+                                </Draggable>
+                            )}
+                            {provided.placeholder}
+                            <div className='add-task-container'>
+                                <div style={{ backgroundColor: group.style }} className='left-border-add-task'></div>
+                                <div className='checkbox-row-container'>
+                                    <input className='row-checkbox' type="checkbox" disabled />
+                                </div>
+                                <EditableHeading
+                                    className='editable-add-task'
+                                    type={EditableHeading.types.h6}
+                                    onFinishEditing={onAddGroupTask}
+                                    onChange={handleChangeTask}
+                                    placeholder={'+ Add Task'}
+                                    value={newTaskTitle}
+                                    brandFont
+                                />
+                            </div>
+
+                        </section>
+
+                    )}
+                </Droppable>
+            </DragDropContext>
         </div>
     </section>
 

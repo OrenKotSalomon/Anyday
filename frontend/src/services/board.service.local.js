@@ -17,6 +17,7 @@ export const ADD_GROUP = 'ADD_GROUP'
 export const DUPLICATE_GROUP = 'DUPLICATE_GROUP'
 export const ADD_GROUP_TASK = 'ADD_GROUP_TASK'
 export const DELETE_GROUP = 'DELETE_GROUP'
+export const ON_DRAG_TASK = 'ON_DRAG_TASK'
 
 //Tasks
 export const DELETE_TASK = 'DELETE_TASK'
@@ -176,6 +177,11 @@ function groupServiceReducer(board, data, type) {
             return board
         case DELETE_GROUP:
             board.groups = board.groups.filter(group => group.id !== data.id)
+            return board
+        case ON_DRAG_TASK:
+            console.log('data:', data)
+            groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.id)
+            board.groups.splice(groupIdx, 1, data)
             return board
         default:
             return board
