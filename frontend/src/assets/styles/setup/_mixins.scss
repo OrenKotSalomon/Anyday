@@ -245,16 +245,34 @@
 }
 
 @mixin side-bar-btn {
+  // border: none;
+  position: relative;
   background-color: #fff;
-  border-radius: 50%;
-  border: 1px solid #d0d4e4;
-  transition: .3s;
-  cursor: pointer;
+  border-radius: 20px;
+  border: $border-cell;
+  line-height: 22.5px;
+  top: 21px;
+  transition: .1s;
+  // cursor: pointer;
+  // padding: 5px 7px 5px 5px;
+  width: 26px;
+  height: 24px;
+  // transition: ;
+
+  .icon_component {
+    font-family: figtree-regular;
+    top: 2px;
+    border: none;
+  }
+
+  &:hover {
+    color: #fff;
+    background-color: #0073ea;
+    width: 35px;
+  }
 }
 
 @mixin side-bar-btn-hover {
-  color: #fff;
-  background-color: #0073ea;
-  width: 35px;
-  border-radius: 20px;
+
+  // border-radius: 20px;
 }
