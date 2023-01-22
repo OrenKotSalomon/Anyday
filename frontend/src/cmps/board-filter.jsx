@@ -12,13 +12,21 @@ export function BoardFilter({ board }) {
         updateTask(board, undefined, ADD_TASK_FROM_HEADER)
     }
     return <section className='board-filter'>
-        <Flex gap='13' >
+        <Flex gap='27' align='End'
 
-            <SplitButton className="new-task-btn" children='New Item' size={Button.sizes.SMALL} onClick={onAddNewTask} secondaryDialogContent={<HeaderMenu board={board} />} >
+        >
+
+            <SplitButton className="new-task-btn"
+
+                children='New Item' size={Button.sizes.SMALL} onClick={onAddNewTask} secondaryDialogContent={<HeaderMenu board={board} />} >
 
             </SplitButton>
-            <Button kind={Button.kinds.TERTIARY} size={Button.sizes.SMALL} leftIcon={Search}>
-                <span style={{color: '#afafb2'}} >Search</span> 
+            <Button kind={Button.kinds.TERTIARY} size={Button.sizes.SMALL} >
+                {/* <span style={{ color: '#afafb2', width: '0px' }} >Search</span> */}
+                <Icon iconType={Icon.type.SVG} icon={Search} iconSize={19} />
+
+                <div> Search
+                </div>
             </Button>
             <div className="monday-storybook-tooltip_bottom">
                 <Tooltip
@@ -44,19 +52,11 @@ export function BoardFilter({ board }) {
                     </Button>
                 </Tooltip>
             </div>
-            <div className="monday-storybook-tooltip_bottom">
-                <Tooltip
-                    content="Hidden columns" animationType="expand">
-                    <Button kind={Button.kinds.TERTIARY} size={Button.sizes.SMALL} leftIcon={Hide}>
-                        Hide
-                    </Button>
-                </Tooltip>
-            </div>
-            <div className="monday-storybook-tooltip_bottom">
+            <div className="monday-storybook-tooltip_bottom" style={{ justifySelf: 'flex-end' }}>
                 <Tooltip
                     content="Hidden columns" animationType="expand">
                     <Button kind={Button.kinds.TERTIARY} size={Button.sizes.SMALL} leftIcon={MenuIcon}>
-                        
+
                     </Button>
                 </Tooltip>
             </div>

@@ -9,6 +9,7 @@ export function BoardHeader({ board }) {
         <div className="board-header-main-container">
             <BoardView board={board}
             />
+            <div className="spacer-header"></div>
             <BoardFilter board={board}
             />
         </div>
