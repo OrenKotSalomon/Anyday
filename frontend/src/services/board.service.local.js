@@ -239,11 +239,17 @@ function getEmptyGroup() {
         tasks: [
             {
                 id: utilService.makeId(),
-                title: 'Task 1'
+                title: 'Task 1',
+                status: '',
+                members: [],
+                dueDate: ''
             },
             {
                 id: utilService.makeId(),
-                title: 'Task 2'
+                title: 'Task 2',
+                status: '',
+                members: [],
+                dueDate: ''
             }
         ],
         style: '#808080'
