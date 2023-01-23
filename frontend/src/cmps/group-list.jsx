@@ -154,6 +154,8 @@ export function GroupList({ board, group, openModal, provided, setIsDadModeDisab
             </div>
             <div className='row-header-container'>
                 <div className='main-left-header'>
+                    <div className='floatin-white-box'></div>
+
                     <div className='left-row-container'>
                         <div style={{ backgroundColor: group.style }} className='left-border'></div>
                         <div className='checkbox-row-container'>
@@ -207,7 +209,6 @@ export function GroupList({ board, group, openModal, provided, setIsDadModeDisab
                             {group.tasks.map((task, index) =>
                                 <Draggable key={task.id} draggableId={task.id} index={index} isDragDisabled={isDadModeDisabled}
 
-
                                 >
                                     {(provided) => (
 
@@ -227,7 +228,7 @@ export function GroupList({ board, group, openModal, provided, setIsDadModeDisab
                             <div className='add-task-wrapper'>
                                 <div className='add-task-container'>
                                     <div className='add-task-input-container'>
-
+                                        <div className='floatin-white-box-under'></div>
                                         <div style={{ backgroundColor: group.style }} className='left-border-add-task'></div>
                                         <div className='checkbox-row-container'>
                                             <input className='row-checkbox' type="checkbox" disabled />
@@ -250,6 +251,7 @@ export function GroupList({ board, group, openModal, provided, setIsDadModeDisab
                             <div className='label-sum-container'>
 
                                 <div className='hidden-task-container'>
+                                    <div className='floatin-white-box'></div>
                                     <div className='hidden-task'></div>
                                 </div>
 

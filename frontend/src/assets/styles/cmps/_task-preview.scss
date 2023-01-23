@@ -38,7 +38,7 @@
 
   .task-preview-menu-btn {
     position: absolute;
-    left: -30px;
+    left: 10px;
     top: 7px;
     transition: 0.3s;
     opacity: 0;
@@ -75,6 +75,14 @@
   @include left-sticky;
 
   background-color: $main-bgc-white;
+
+  .menu-btn-container {
+    position: absolute;
+    width: 40px;
+    height: 36px;
+    background-color: $main-bgc-white;
+    left: -40px;
+  }
 
   .task-name-cell {
     // need to configure with resize

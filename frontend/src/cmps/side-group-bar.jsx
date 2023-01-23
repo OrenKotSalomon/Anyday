@@ -8,6 +8,10 @@ import { BoardList } from "./board-list"
 import { Modal, Box } from '@mui/material'
 import { Icon } from 'monday-ui-react-core'
 import { Add, Filter, Search, Bolt, DropdownChevronRight, DropdownChevronLeft, CloseSmall } from 'monday-ui-react-core/icons'
+import crownIcon from '../assets/img/crown-icon.png'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCrown } from '@fortawesome/free-solid-svg-icons'
+import { faHouse } from '@fortawesome/free-solid-svg-icons'
 
 export function SideGroupBar() {
 
@@ -74,7 +78,7 @@ export function SideGroupBar() {
 
                 </div>
                 <h4 className="workspace-header" style={{ display: `${isSideBarOpen ? '' : 'none'}` }}  >Workspace</h4>
-                <span className="workspace" style={{ display: `${isSideBarOpen ? '' : 'none'}` }} >Main workspace</span>
+                <span className="workspace" style={{ display: `${isSideBarOpen ? '' : 'none'}` }} > <div className="crown-container"><FontAwesomeIcon icon={faCrown} /><FontAwesomeIcon className="house-icon" icon={faHouse} /> </div> Main workspace</span>
             </div>
             <div className="side-board-btn-container flex column" style={{ display: `${isSideBarOpen ? '' : 'none'}` }}>
                 <button className="add-board-btn btn clean"
