@@ -135,11 +135,11 @@ const renderOptions = (formatData,idx)=>{
     const {className,options} = formatData;
     return (
         <select key={idx} className = {className}>
-            <option selected="selected"></option>
+            <option></option>
             {
                 options.map((value,idx) =>{
                     return (
-                        <option key={`${idx}+${value}`} value={value}></option>
+                        <option key={`${value}+${idx}`} value={value}></option>
                     )
                 })
             }
@@ -156,7 +156,7 @@ function CustomToolbar(){
     {return <div id="toolbar">
         {
             formats.map((classes,idx) => {
-                return <div key={`${idx}+${classes}`} className = "ql-formats">
+                return <div key={`${idx}`} className = "ql-formats">
                         {
                             classes.map((formatData,idx) => {
                                 return formatData.options?renderOptions(formatData,idx):renderSingle(formatData,idx)
@@ -168,7 +168,6 @@ function CustomToolbar(){
         }
     </div>}
   }
-
 
 
 
