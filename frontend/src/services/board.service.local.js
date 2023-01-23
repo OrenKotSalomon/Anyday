@@ -55,11 +55,15 @@ export const boardService = {
 window.bs = boardService
 
 async function query(filterBy = { txt: '', price: 0 }) {
-    var boards = await storageService.query(BOARD_KEY)
+    let boards = await storageService.query(BOARD_KEY)
+
     if (!boards.length) {
-        storageService.post(BOARD_KEY, demoBoard)
+        await storageService.post(BOARD_KEY, demoBoard)
+        boards = await storageService.query(BOARD_KEY)
+
         return boards
     }
+
     // Filters
     // if (filterBy.txt) {
     //     const regex = new RegExp(filterBy.txt, 'i')

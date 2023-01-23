@@ -3,27 +3,30 @@
   flex-direction: column;
   font-size: rem(14px);
   padding-top: 5px;
+  gap: 1px;
 
   .board-list-menu-btn {
+    // position: absolute;
+    // right: 0;
     opacity: 0;
     padding: 7px;
     z-index: 3;
   }
 
   a {
-    text-align: left;
+    // text-align: left;
     font-family: figtree-regular;
   }
 
   .board-list-a {
     position: relative;
+    display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 8px;
+    padding: 1px 8px;
     border-radius: 4px;
     transition: 0.3s;
     color: $main-color;
-    justify-content: flex-start;
     gap: 6px;
 
     &.active {
@@ -36,6 +39,9 @@
       .board-list-menu-btn {
         opacity: 1;
       }
+    }
+    .left-board-a-container {
+      gap: 6px;
     }
   }
 }
@@ -67,7 +73,7 @@
   height: 27%;
   width: 30%;
   min-width: 240px;
-  background-color: #fff;
+  background-color: $main-bgc-white;
   text-align: center;
   border-radius: 14px;
   display: flex;

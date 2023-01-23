@@ -33,7 +33,7 @@
 .task-main {
     text-align: center;
     color: $main-color;
-    background-color: #fff;
+    background-color: $main-bgc-white;
     // width: 44vw;
     border-inline-start: 12px solid $grey;
     // transition: .5s;
@@ -104,7 +104,7 @@
             border-radius: 0.5em;
             margin-bottom: .5em;
             text-align: left;
-            background-color: #fff;
+            background-color: $main-bgc-white;
             border: 1px solid #0073ea;
             font-family: figtree-regular;
             letter-spacing: 0.06em;

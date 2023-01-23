@@ -63,7 +63,7 @@
   background-color: #f6f7fb;
   width: rem(255px);
   min-height: 100vh;
-  border-right: 1px solid #d0d4e4;
+  border-right: 1px solid $cell-border-color;
   transition: 0.1s, rotate 0.1s;
   z-index: 100;
 
@@ -112,12 +112,12 @@
 .workspace {
   padding: 8px 16px;
   border-radius: 4px;
-  border: 1px solid #676879;
+  border: 1px solid $icon-color;
   margin-right: 5px;
 }
 
 .workspace-header {
-  color: #676879;
+  color: $icon-color;
   font-weight: 400;
   font-size: rem(14px);
   font-family: figtree-light;

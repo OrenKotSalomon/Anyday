@@ -10,7 +10,7 @@ import { utilService } from '../services/util.service';
 import { AddLabelModal } from './tasks-modals/add-label-modal';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-export function GroupList({ board, group, openModal, provided , setIsDadModeDisabled , isDadModeDisabled }) {
+export function GroupList({ board, group, openModal, provided, setIsDadModeDisabled, isDadModeDisabled }) {
 
     const [isAddingLabel, setIsAddingLabel] = useState(false)
     const [isPickColor, setIsPickColor] = useState(false)
@@ -18,12 +18,9 @@ export function GroupList({ board, group, openModal, provided , setIsDadModeDisa
     const [newTaskTitle, setNewTaskTitle] = useState('')
     const [listToUpdate, setListToUpdate] = useState(group.tasks)
 
-    // useEffect(() => {
-    //     board.groups.map((group) => {
-    //         console.log('group:', group)
-    //         setListToUpdate(group.tasks)
-    //     })
-    // }, [group.tasks])
+    useEffect(() => {
+        setListToUpdate(group.tasks)
+    }, [board])
 
     function onFinishEditing() {
         updateGroup(board, groupToUpdate, CHANGE_GROUP_TITLE)
@@ -85,15 +82,13 @@ export function GroupList({ board, group, openModal, provided , setIsDadModeDisa
     }
 
     function handleOnDragEnd(result) {
+
         if (!result.destination) return
-        console.log('listToUpdate:', listToUpdate)
+
         const newOrderedTasks = Array.from(listToUpdate)
-        console.log('newOrderedTasksBBB:', newOrderedTasks)
         const [reorderedTask] = newOrderedTasks.splice(result.source.index, 1)
-        console.log('reorderedTask:', reorderedTask)
         newOrderedTasks.splice(result.destination.index, 0, reorderedTask)
         group.tasks = newOrderedTasks
-        console.log('newOrderedTasks:', newOrderedTasks)
         updateGroup(board, group, ON_DRAG_TASK)
         setListToUpdate(newOrderedTasks)
     }
@@ -223,7 +218,7 @@ export function GroupList({ board, group, openModal, provided , setIsDadModeDisa
                                             board={board}
                                             group={group}
                                             openModal={openModal}
-                                            setIsDadModeDisabled = {setIsDadModeDisabled}
+                                            setIsDadModeDisabled={setIsDadModeDisabled}
                                         />
                                     )}
                                 </Draggable>

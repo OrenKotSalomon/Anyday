@@ -1,6 +1,6 @@
 .status-picker-container {
     max-width: rem(200px);
-    background-color: #fff;
+    background-color: $main-bgc-white;
     box-shadow: 0 8px 16px 0 rgb(0 0 0 / 32%);
     font-size: 14px;
     border-radius: 8px;
@@ -34,7 +34,7 @@
             }
 
             &:hover {
-                background-color: #fff;
+                background-color: $main-bgc-white;
                 opacity: .85;
             }
         }

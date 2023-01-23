@@ -49,3 +49,7 @@ a {
 .loader {
   @include absoluteCenter
 }
+
+.icon_component--clickable {
+  color: $icon-color;
+}

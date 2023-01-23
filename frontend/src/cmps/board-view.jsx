@@ -111,12 +111,11 @@ export function BoardView({ board }) {
                     <NavLink className='main-table-a' to={`/board/${board._id}`} ><Icon iconType={Icon.type.SVG} icon={Home} iconSize={16} style={{ marginRight: '5px' }} /> <div className='main-table-txt'>
                         Main Table
 
-                    </div>  <div className='blue-line'></div></NavLink>|
+                    </div>  <div className='blue-line'></div></NavLink><span>|</span>
                     <div className='kanban'>
                         <NavLink to={`/board/${board._id}/views/kanban`}>Kanban</NavLink>
                     </div>
-                    |
-
+                    <span>|</span>
                 </div>
             </div>
         </div>
