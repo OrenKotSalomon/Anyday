@@ -14,9 +14,7 @@ import { CHANGE_TASK_TITLE, ADD_TASK_COMMENT, DELETE_TASK_COMMENT } from '../ser
 import { updateTask } from '../store/board.actions';
 
 
-
-
-export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, group }) {
+export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, group, setIsDadModeDisabled }) {
     const [isAddComment, setAddComment] = useState(false)
     const [newTitle, setNewTitle] = useState(task.title)
     const [newCommentTxt, setComment] = useState('')
@@ -96,18 +94,22 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
         if (ev.clientX === 0) {
             return
         }
-        let diff = (initX - ev.clientX)/300
-        if(ev.clientX-taskCommentsSize + diff > ev.clientX) return
+        let diff = (initX - ev.clientX) / 300
+        if (ev.clientX - taskCommentsSize + diff > ev.clientX) return
         SetTaskCommentsSize(taskCommentsSize + diff)
     }
 
 
 
-    return <section className='task-details' style={{ width: `${isOpenDetails ? 100 : 1}vw` }}>
+    return <section
+        className='task-details' style={{ width: `${isOpenDetails ? 100 : 1}vw` }}>
         <div className='task-main' style={{ width: `${taskCommentsSize}%` }}>
 
-            <button className='close-task-btn' onClick={() => setIsOpenDetails(!isOpenDetails)}>
-            <Icon iconType={Icon.type.SVG} icon={Close} iconLabel="my svg icon" iconSize={16} />
+            <button className='close-task-btn' onClick={() => {
+                setIsOpenDetails(!isOpenDetails)
+                setIsDadModeDisabled(false)
+            }}>
+                <Icon iconType={Icon.type.SVG} icon={Close} iconLabel="my svg icon" iconSize={16} />
             </button>
 
             <EditableHeading
@@ -136,27 +138,27 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
 
                 <form className='task-details-form' onSubmit={onSubmitNewComment}>
                     <div className='task-details-textbox-container'>
-                    <div className='task-details-form-tools'>
-                        <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Underline} iconLabel="my svg icon" iconSize={34} />
-                        <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Bullets} iconLabel="my svg icon" iconSize={34} />
-                        <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Italic} iconLabel="my svg icon" iconSize={34} />
-                    </div>
-                    <textarea className='task-details-input'
-                        type='text' name=''
-                        placeholder='Add a task comment...'
-                        onChange={handleInputChange}
-                        value={newCommentTxt} />
+                        <div className='task-details-form-tools'>
+                            <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Underline} iconLabel="my svg icon" iconSize={34} />
+                            <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Bullets} iconLabel="my svg icon" iconSize={34} />
+                            <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Italic} iconLabel="my svg icon" iconSize={34} />
+                        </div>
+                        <textarea className='task-details-input'
+                            type='text' name=''
+                            placeholder='Add a task comment...'
+                            onChange={handleInputChange}
+                            value={newCommentTxt} />
 
-                    {isEmojiPicker && <div className="emoji-picker">
-                        {emojis.map(emoji => <span key={emoji} className='emoji' onClick={() => setComment(newCommentTxt + emoji)}>{emoji}</span>)}
-                    </div>}
+                        {isEmojiPicker && <div className="emoji-picker">
+                            {emojis.map(emoji => <span key={emoji} className='emoji' onClick={() => setComment(newCommentTxt + emoji)}>{emoji}</span>)}
+                        </div>}
 
-                    <div className='task-details-input-footer'>
-                        <span onClick={handleClick} className='task-details-input-upload'><Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Gallery} iconLabel="my svg icon" iconSize={18} />Add image</span>
-                        <span onClick={toggleEmojiPicker} className='task-details-input-upload emoji'><Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Emoji} iconLabel="my svg icon" iconSize={18} />Emoji</span>
-                        <button className='btn task-details-input-btn'>Update</button>
+                        <div className='task-details-input-footer'>
+                            <span onClick={handleClick} className='task-details-input-upload'><Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Gallery} iconLabel="my svg icon" iconSize={18} />Add image</span>
+                            <span onClick={toggleEmojiPicker} className='task-details-input-upload emoji'><Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Emoji} iconLabel="my svg icon" iconSize={18} />Emoji</span>
+                            <button className='btn task-details-input-btn'>Update</button>
 
-                    </div>
+                        </div>
                     </div>
                     {imgSrc && <span className="task-details-img-preview-container" ><img className="task-details-img-preview" src={imgSrc} /><span>Uploaded</span></span>}
 
@@ -207,6 +209,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
 
 
 
+
                 </div>)}
             </section > : <section>
                 <div className='details-img-container'><img className="details-img" src="https://cdn.monday.com/images/pulse-page-empty-state.svg" alt="" /></div>
@@ -224,7 +227,10 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
 
 
         </div >
-        <div className='close-task' style={{ width: `${100 - taskCommentsSize}%` }} onClick={() => setIsOpenDetails(!isOpenDetails)}>.</div>
+        <div className='close-task' style={{ width: `${100 - taskCommentsSize}%` }} onClick={() => {
+            setIsOpenDetails(!isOpenDetails)
+            setIsDadModeDisabled(false)
+        }}>.</div>
     </section>
 }
 

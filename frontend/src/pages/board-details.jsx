@@ -19,6 +19,8 @@ export function BoardDetails() {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [cmp, setCmp] = useState({})
     const [groupToUpdate, setGroupToUpdate] = useState([])
+    const [isDadModeDisabled, setIsDadModeDisabled] = useState(false)
+
 
     const boardContainer = useRef()
 
@@ -178,14 +180,17 @@ export function BoardDetails() {
                             ref={provided.innerRef}>
 
                             {board.groups.map((group, index) =>
-                                <Draggable key={group.id} draggableId={group.id} index={index}>
+                                <Draggable key={group.id} draggableId={group.id} index={index} isDragDisabled={isDadModeDisabled}>
                                     {(provided) => (
                                         <GroupList
                                             provided={provided}
                                             key={group.id}
                                             board={board}
                                             group={group}
-                                            openModal={openModal} />
+                                            openModal={openModal}
+                                            isDadModeDisabled = {isDadModeDisabled}
+                                            setIsDadModeDisabled = {setIsDadModeDisabled}
+                                            />
                                     )}
                                 </Draggable>
                             )}

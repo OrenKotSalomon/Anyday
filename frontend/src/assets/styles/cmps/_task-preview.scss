@@ -252,7 +252,7 @@
 .person-label {
   position: relative;
   @include person-layout;
-  border-left: $border-cell;
+  // border-left: $border-cell;
   display: flex;
   justify-content: center;
 }

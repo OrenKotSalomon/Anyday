@@ -98,7 +98,7 @@
             font-size: rem(18px);
 
             .home-page-sub-header-span {
-                background: linear-gradient(to right, rgb(15, 16, 72),$main-bgc-white 100%);
+                background: linear-gradient(to right, rgb(15, 16, 72), $main-bgc-white 100%);
                 background-position: 0 100%;
                 background-size: 100% 1px;
                 background-repeat: repeat-x;
@@ -150,9 +150,14 @@
                 .btn-get-started-arrow {
                     padding-inline-start: 5px;
                     font-size: rem(16px);
-                    font-weight: 600;
                     transition: all .5s ease-in-out;
+
+                    svg{
+                        position: relative;
+                        top:3px;
+                    }
                 }
+          
 
             }
         }
@@ -174,12 +179,24 @@
             font-weight: 600;
             letter-spacing: .2em;
             flex-wrap: nowrap;
+            
+
+            @include for-narrow-layout {
+                margin-right: 73px;
+            }
 
             .home-page-promo1 {
                 letter-spacing: .1em;
+                width: 120px;
+                text-align: center;
                 margin-inline-end: 1.5em;
-                width: 200px;
-                text-align: end;
+
+                @include for-narrow-layout {
+                    text-align: end;
+                    width: 200px;
+                    margin-inline-end: 1.5em;
+                }
+
             }
 
             .home-page-promo2 {

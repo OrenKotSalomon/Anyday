@@ -10,7 +10,7 @@ import { utilService } from '../services/util.service';
 import { AddLabelModal } from './tasks-modals/add-label-modal';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-export function GroupList({ board, group, openModal, provided }) {
+export function GroupList({ board, group, openModal, provided , setIsDadModeDisabled , isDadModeDisabled }) {
 
     const [isAddingLabel, setIsAddingLabel] = useState(false)
     const [isPickColor, setIsPickColor] = useState(false)
@@ -200,7 +200,10 @@ export function GroupList({ board, group, openModal, provided }) {
                             ref={provided.innerRef}>
 
                             {group.tasks.map((task, index) =>
-                                <Draggable key={task.id} draggableId={task.id} index={index}>
+                                <Draggable key={task.id} draggableId={task.id} index={index} isDragDisabled={isDadModeDisabled}
+
+
+                                >
                                     {(provided) => (
 
                                         <TaskPreview
@@ -209,7 +212,9 @@ export function GroupList({ board, group, openModal, provided }) {
                                             task={task}
                                             board={board}
                                             group={group}
-                                            openModal={openModal} />
+                                            openModal={openModal}
+                                            setIsDadModeDisabled = {setIsDadModeDisabled}
+                                        />
                                     )}
                                 </Draggable>
                             )}
