@@ -9,12 +9,13 @@ import 'react-quill/dist/quill.snow.css';
 // window.katex = katex;
 
 // Quill.register('modules/ImageResize',ImageResize);
-export function TextEditor(){
+export function TextEditor({handleInputChange}){
 
     const [text, setText] = useState('');
 
     const handleChange = (html) => {
         setText(html);
+        handleInputChange(html)
     }
     const modules = {
         toolbar: {
@@ -49,12 +50,8 @@ const colors = ["red","green","blue","orange","violet"]
 const formats = [
     [
         {
-            className:"ql-font",
-            options:['serif','monospace']
-        },
-        {
-            className:"ql-size",
-            options:["small","large","huge"]
+            className:'ql-direction',
+            value:'rtl'
         }
     ],
     [
@@ -72,25 +69,12 @@ const formats = [
     ],
     [
         {
-            className:"ql-script",
-            value:"sub"
-        },
-        {
-            className:"ql-script",
-            value:"super"
-        }
-    ],
-    [
-        {
             className:"ql-header",
             value:"1"
         },
         {
             className:"ql-header",
             value:"2"
-        },
-        {
-            className:"ql-blockquote"
         },
         {
             className:"ql-code-block"
@@ -105,27 +89,10 @@ const formats = [
             className:"ql-list",
             value:"bullet"
         },
-        {
-            className:"ql-indent",
-            value:"-1"
-        },
-        {
-            className:"ql-indent",
-            value:"+1"
-        }
+
     ],
     [
-        {
-            className:'ql-direction',
-            value:'rtl'
-        },
-        {
-            className:'ql-align',
-            options:['right','center','justify']
-        }
-    ],
-    [
-        {className:'ql-link'},{className:'ql-image'},{className:'ql-video'},{className:'ql-formula'}
+        {className:'ql-link'},{className:'ql-video'},{className:'ql-formula'}
     ],
 
 ]
