@@ -86,22 +86,25 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
 
             return <div className="date-picker-view" style={{ transform: `translate(-100%, 15%)`, left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
                 <div className="arrow-up"></div>
-                <DatePicker data-testid="date-picker" onPickDate={getDate} />
+                <DialogContentContainer className={'styles.datepickerDialogContentContainer'}>
+
+                    <DatePicker data-testid="date-picker" onPickDate={getDate} />
+                </DialogContentContainer>
 
             </div>
-             case PRIORITY_PICKER:
-                return <div onClick={() => setIsModalOpen(false)} className="status-picker-container" style={{ transform: `translate(-60%, 20%)`, left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
-    
-                    <div className="status-picker-view">
-                        {cmp.priorities.map((priority, idx) => {
-                            return <button onClick={() => onPriorityPick(priority.label)} key={idx}
-                                style={{ background: priority.bgColor }}
-                                className="status-picker">
-                                {priority.label}
-                            </button>
-                        }
-                        )}
-                    </div>
+        case PRIORITY_PICKER:
+            return <div onClick={() => setIsModalOpen(false)} className="status-picker-container" style={{ transform: `translate(-60%, 20%)`, left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
+
+                <div className="status-picker-view">
+                    {cmp.priorities.map((priority, idx) => {
+                        return <button onClick={() => onPriorityPick(priority.label)} key={idx}
+                            style={{ background: priority.bgColor }}
+                            className="status-picker">
+                            {priority.label}
+                        </button>
+                    }
+                    )}
                 </div>
+            </div>
     }
 }

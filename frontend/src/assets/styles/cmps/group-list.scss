@@ -11,7 +11,7 @@
     position: sticky;
     top: 210px;
     z-index: 6;
-    background-color: white;
+    background-color: $main-bgc-white;
 
     h4 {
       // margin-top: 0.625rem;
@@ -147,6 +147,15 @@
     @include left-sticky;
     z-index: 2;
     background-color: white;
+
+    .floatin-white-box {
+      position: absolute;
+      width: 40px;
+      height: 36px;
+      background-color: $main-bgc-white;
+      left: -40px;
+    }
+
   }
 }
 
@@ -237,11 +246,21 @@
 
 .add-task-input-container {
   @include left-sticky;
+  left: 40px;
+  min-width: rem(400px);
   border-bottom: $border-cell;
   display: flex;
   align-items: center;
   height: $cell-height;
   border-bottom-left-radius: 6px;
+
+  .floatin-white-box-under {
+    position: absolute;
+    width: 44px;
+    height: 36px;
+    background-color: $main-bgc-white;
+    left: -40px;
+  }
 
   .editable-add-task {
     width: rem(362px);

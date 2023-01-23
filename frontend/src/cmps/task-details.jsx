@@ -40,9 +40,9 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
         updateTask(board, taskChanges, DELETE_TASK_COMMENT)
     }
 
-    function handleInputChange(ev) {
-        ev.preventDefault()
-        setComment(ev.target.value)
+    function handleInputChange(txt) {
+        // ev.preventDefault()
+        setComment(txt)
     }
 
     function onFinishEditing() {
@@ -140,7 +140,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
 
                 <form className='task-details-form' onSubmit={onSubmitNewComment}>
                     <div className='task-details-textbox-container'>
-                        <div className='task-details-form-tools'>
+                        {/* <div className='task-details-form-tools'>
                             <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Underline} iconLabel="my svg icon" iconSize={34} />
                             <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Bullets} iconLabel="my svg icon" iconSize={34} />
                             <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Italic} iconLabel="my svg icon" iconSize={34} />
@@ -149,7 +149,8 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                             type='text' name=''
                             placeholder='Add a task comment...'
                             onChange={handleInputChange}
-                            value={newCommentTxt} />
+                            value={newCommentTxt} /> */}
+                            <TextEditor handleInputChange={handleInputChange} />
 
                         {isEmojiPicker && <div className="emoji-picker">
                             {emojis.map(emoji => <span key={emoji} className='emoji' onClick={() => setComment(newCommentTxt + emoji)}>{emoji}</span>)}
@@ -206,7 +207,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                         </div>
                     </div>
 
-                    <p className='task-details-comment-txt'>{comment.txt}</p>
+                    <div dangerouslySetInnerHTML={{__html:comment.txt }}></div>
                     {comment.imgUrl && comment.imgUrl !== '' ? <img src={`${comment.imgUrl}`} alt="" /> : ''}
 
 
@@ -227,7 +228,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                 <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Drag} iconLabel="my svg icon" iconSize={14} />
             </div>
 
-            <TextEditor />
+            
 
 
         </div >

@@ -47,38 +47,43 @@ export function TaskPreview({ task, board, group, openModal, provided, setIsDadM
         {...provided.draggableProps}
         {...provided.dragHandleProps}
         ref={provided.innerRef}>
-        <MenuButton className="task-preview-menu-btn" >
-            <Menu
-                id="menu"
-                size="medium"
-                style={{
-                    backgroundColor: 'red',
-                    color: 'red'
-                }}
-            >
-                <MenuItem
-                    onClick={() => {
-                        setIsOpenDetails(!isOpenDetails);
-                        setIsDadModeDisabled(true);
-                    }}
-                    icon={Open}
-                    title="Open"
-                />
-                <MenuItem
-                    onClick={() => onDuplicateTask(task)}
-                    icon={Duplicate}
-                    title="Duplicate Task"
-                />
-                <MenuItem
-                    onClick={() => onDeleteTask(task)}
-                    icon={Delete}
-                    title="Delete"
-                />
-            </Menu>
-        </MenuButton>
+
         <div className="task">
 
             <div className="task-edit-wrapper">
+                <div className="menu-btn-container">
+
+                    <MenuButton className="task-preview-menu-btn" >
+                        <Menu
+                            id="menu"
+                            size="medium"
+                            style={{
+                                backgroundColor: 'red',
+                                color: 'red'
+                            }}
+                        >
+                            <MenuItem
+                                onClick={() => {
+                                    setIsOpenDetails(!isOpenDetails);
+                                    setIsDadModeDisabled(true);
+                                }}
+                                icon={Open}
+                                title="Open"
+                            />
+                            <MenuItem
+                                onClick={() => onDuplicateTask(task)}
+                                icon={Duplicate}
+                                title="Duplicate Task"
+                            />
+                            <MenuItem
+                                onClick={() => onDeleteTask(task)}
+                                icon={Delete}
+                                title="Delete"
+                            />
+                        </Menu>
+                    </MenuButton>
+                </div>
+
                 <div style={{ backgroundColor: group.style }} className='left-border-task'></div>
                 <div className='checkbox-row-container'>
                     <input className='row-checkbox' type="checkbox" />
@@ -95,8 +100,8 @@ export function TaskPreview({ task, board, group, openModal, provided, setIsDadM
                 <div className="msg-btn-container" onClick={() => {
                     setIsOpenDetails(!isOpenDetails)
                     setIsDadModeDisabled(true)
-                    }}
-                    >
+                }}
+                >
 
                     <button className="msg-btn" style={task.comments ? { paddingRight: '5px' } : { paddingRight: '19px', paddingLeft: '20px' }}>
 
