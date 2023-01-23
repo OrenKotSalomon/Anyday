@@ -7,6 +7,10 @@
     // inset: 0px auto auto 0px;
     z-index: 100;
 
+    .arrow-up {
+        @include arrow-up-modal(50%)
+    }
+
     .status-picker-view {
         display: grid;
         grid-template-rows: repeat(5, auto);
@@ -41,10 +45,19 @@
 .date-picker-view {
     box-shadow: 0 8px 16px 0 rgb(0 0 0 / 32%);
     z-index: 1000;
+
+    .arrow-up {
+        @include arrow-up-modal(89%)
+    }
+
 }
 
 .members-dropdown {
     width: 150px;
+}
+
+.member-picker-view {
+    z-index: 10;
 }
 
 // header labels 

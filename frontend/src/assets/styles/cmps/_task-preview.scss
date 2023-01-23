@@ -88,6 +88,7 @@
     align-items: center;
     margin-left: auto;
     border-left: $border-cell;
+    border-right: $border-cell;
     height: 100%;
 
     .icon_component--clickable {
@@ -182,7 +183,7 @@
   text-align: center;
   color: #ffffff;
   height: 36px;
-  border-left: $border-cell;
+
   border-bottom: $border-cell;
 
   &::first-letter {
@@ -246,7 +247,7 @@
       line-height: 36px;
 
       padding: 4.5px;
-      padding-left: 50px;
+      padding-left: 44px;
       padding-right: 38px;
     }
 

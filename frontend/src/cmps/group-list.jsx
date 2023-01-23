@@ -237,6 +237,19 @@ export function GroupList({ board, group, openModal, provided }) {
                                 </div>
                             </div>
 
+                            <div className='label-sum-container'>
+
+                                <div className='hidden-task-container'>
+                                    <div className='hidden-task'></div>
+                                </div>
+
+                                <div className='sum-labels-container'>
+                                    {/* Here goes group map */}
+
+                                </div>
+
+                            </div>
+
                         </section>
 
                     )}
