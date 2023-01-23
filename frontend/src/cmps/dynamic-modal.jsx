@@ -4,7 +4,7 @@ import Yossi from '../assets/img/Yossi.jpg'
 import Oren from '../assets/img/Oren.jpg'
 import { DialogContentContainer, DatePicker, Flex, StoryDescription, Dropdown } from 'monday-ui-react-core'
 import dayjs from "dayjs"
-import { DATE_PICKER, MEMEBER_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_STATUS } from "../services/board.service.local"
+import { DATE_PICKER, MEMEBER_PICKER, PRIORITY_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../services/board.service.local"
 
 export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
     const optionsAvatar = [{
@@ -22,19 +22,19 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
     }]
     function getDate(date) {
         setIsModalOpen(false)
-        console.log('dayjs(date).unix()', dayjs(date).unix());
         onUpdateTaskLabel(UPDATE_TASK_DATE, cmp.data, dayjs(date).unix())
     }
-    console.log(cmp);
     function handleChange(ev) {
-        // console.log(ev);
-
         setIsModalOpen(false)
     }
 
     function onStatusPick(status) {
         onUpdateTaskLabel(UPDATE_TASK_STATUS, cmp.data, status)
+    }
 
+    function onPriorityPick(priority) {
+        console.log('priority:', priority)
+        onUpdateTaskLabel(UPDATE_TASK_PRIORITY, cmp.data, priority)
     }
     // console.log(cmp);
     switch (cmp.type) {
@@ -70,5 +70,19 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
                 <DatePicker data-testid="date-picker" onPickDate={getDate} />
 
             </div>
+             case PRIORITY_PICKER:
+                return <div onClick={() => setIsModalOpen(false)} className="status-picker-container" style={{ transform: `translate(-60%, 20%)`, left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
+    
+                    <div className="status-picker-view">
+                        {cmp.priorities.map((priority, idx) => {
+                            return <button onClick={() => onPriorityPick(priority.label)} key={idx}
+                                style={{ background: priority.bgColor }}
+                                className="status-picker">
+                                {priority.label}
+                            </button>
+                        }
+                        )}
+                    </div>
+                </div>
     }
 }

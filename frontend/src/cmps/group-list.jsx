@@ -5,7 +5,7 @@ import { TaskPreview } from "./task-preview";
 import { MenuButton, Menu, MenuItem, ColorPicker, Icon } from 'monday-ui-react-core'
 import { Delete, Bullet, Duplicate, Add } from 'monday-ui-react-core/icons'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service';
-import { ADD_GROUP, ADD_GROUP_TASK, boardService, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, MEMEBER_PICKER, ON_DRAG_TASK, STATUS_PICKER } from '../services/board.service.local';
+import { ADD_GROUP, ADD_GROUP_TASK, boardService, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, MEMEBER_PICKER, ON_DRAG_TASK, PRIORITY_PICKER, STATUS_PICKER, TEXT_PICKER } from '../services/board.service.local';
 import { utilService } from '../services/util.service';
 import { AddLabelModal } from './tasks-modals/add-label-modal';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
@@ -70,6 +70,10 @@ export function GroupList({ board, group, openModal, provided }) {
                 return <div key={idx} className="person-label-header ">Person</div>
             case DATE_PICKER:
                 return <div key={idx} className="date-label-header ">Date</div>
+            case PRIORITY_PICKER:
+                return <div key={idx} className="priority-label-header ">Priority</div>
+            case TEXT_PICKER:
+                return <div key={idx} className="priority-label-header ">Text</div>
         }
     }
 
@@ -162,7 +166,6 @@ export function GroupList({ board, group, openModal, provided }) {
                 <div className='main-right-header flex'>
                     <div className="add-label-btn-container"
                         style={{
-
                             backgroundColor: isAddingLabel ? '#d5d8e4' : ''
                         }}>
                         <button onClick={toggleAddLabelModal} className='btn clean add-label-btn'>

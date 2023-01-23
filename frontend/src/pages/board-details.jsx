@@ -2,7 +2,7 @@ import { GroupList } from "../cmps/group-list";
 import { BoardHeader } from "../cmps/board-header";
 import { NavBar } from "../cmps/nav-bar";
 import { useEffect, useState } from "react";
-import { ADD_GROUP_FROM_BUTTOM, DATE_PICKER, MEMEBER_PICKER, ON_DRAG_GROUP, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_STATUS } from "../services/board.service.local";
+import { ADD_GROUP_FROM_BUTTOM, DATE_PICKER, MEMEBER_PICKER, ON_DRAG_GROUP, PRIORITY_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../services/board.service.local";
 import { SideGroupBar } from "../cmps/side-group-bar";
 import { loadBoard, updateBoard, updateGroup, updateTask } from "../store/board.actions";
 import { useSelector } from "react-redux";
@@ -45,6 +45,8 @@ export function BoardDetails() {
                 return updateTask(board, data, UPDATE_TASK_STATUS)
             case UPDATE_TASK_DATE:
                 return updateTask(board, data, UPDATE_TASK_DATE)
+            case UPDATE_TASK_PRIORITY:
+                return updateTask(board, data, UPDATE_TASK_PRIORITY)
         }
 
     }
@@ -112,10 +114,42 @@ export function BoardDetails() {
                         }
                     }
                 })
+            case PRIORITY_PICKER:
+                return setCmp(prev => {
+                    return {
+                        ...prev,
+                        data: { groupId: data.groupId, taskId: data.task.id },
+                        pos: { top: labelPos.top, left: labelPos.left },
+                        type: info,
+                        priorities: [
+                            {
+                                label: 'critical ⚠️',
+                                bgColor: '#333333'
+                            },
+                            {
+                                label: 'high',
+                                bgColor: '#401694'
+                            },
+                            {
+                                label: 'medium',
+                                bgColor: '#5559df'
+                            },
+                            {
+                                label: 'low',
+                                bgColor: '#579bfc'
+                            },
+                            {
+                                label: '',
+                                bgColor: '#c4c4c4'
+                            },
+                        ]
+                    }
+                })
         }
     }
 
     function handleOnDragEnd(result) {
+        
         if (!result.destination) return
         const newOrderedGroups = Array.from(board.groups)
         const [reorderedGroup] = newOrderedGroups.splice(result.source.index, 1)

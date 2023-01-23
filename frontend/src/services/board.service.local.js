@@ -30,11 +30,14 @@ export const DELETE_TASK_COMMENT = 'DELETE_TASK_COMMENT'
 export const UPDATE_TASK_STATUS = 'UPDATE_TASK_STATUS'
 export const UPDATE_TASK_DATE = 'UPDATE_TASK_DATE'
 export const UPDATE_TASK_MEMBERS = 'UPDATE_TASK_MEMBERS'
+export const UPDATE_TASK_PRIORITY = 'UPDATE_TASK_PRIORITY'
 
 // Dynamic modal/component
 export const DATE_PICKER = 'DATE_PICKER'
 export const STATUS_PICKER = 'STATUS_PICKER'
 export const MEMEBER_PICKER = 'MEMEBER_PICKER'
+export const PRIORITY_PICKER = 'PRIORITY_PICKER'
+export const TEXT_PICKER = 'TEXT_PICKER'
 
 export const boardService = {
     query,
@@ -235,6 +238,9 @@ function taskServiceReducer(board, data, type) {
         case UPDATE_TASK_DATE:
             board.groups[groupIdx].tasks[taskIdx].dueDate = data.labelPick
             return board
+        case UPDATE_TASK_PRIORITY:
+            board.groups[groupIdx].tasks[taskIdx].priority = data.labelPick
+            return board
         default:
             return board
     }
@@ -250,15 +256,19 @@ function getEmptyGroup() {
                 id: utilService.makeId(),
                 title: 'Task 1',
                 status: '',
+                priority: '',
                 members: [],
-                dueDate: ''
+                dueDate: '',
+                txt: ''
             },
             {
                 id: utilService.makeId(),
                 title: 'Task 2',
                 status: '',
+                priority: '',
                 members: [],
-                dueDate: ''
+                dueDate: '',
+                txt: ''
             }
         ],
         style: '#808080'
@@ -280,15 +290,19 @@ function getEmptyBoard() {
                         id: utilService.makeId(),
                         title: 'Task 1',
                         status: '',
+                        priority: '',
                         members: [],
-                        dueDate: 1589983468418
+                        dueDate: 1589983468418,
+                        txt: ''
                     },
                     {
                         id: utilService.makeId(),
                         title: 'Task 2',
                         status: '',
+                        priority: '',
                         members: [],
-                        dueDate: 1589983468418
+                        dueDate: 1589983468418,
+                        txt: ''
                     }
                 ],
                 style: 'lightpink'
@@ -302,15 +316,19 @@ function getEmptyBoard() {
                         id: utilService.makeId(),
                         title: 'Task 3',
                         status: '',
+                        priority: '',
                         members: [],
-                        dueDate: 1589983468418
+                        dueDate: 1589983468418,
+                        txt: ''
                     },
                     {
                         id: utilService.makeId(),
                         title: 'Task 4',
                         status: '',
+                        priority: '',
                         members: [],
-                        dueDate: 1589983468418
+                        dueDate: 1589983468418,
+                        txt: ''
                     }
                 ],
                 style: 'gold'
@@ -324,21 +342,25 @@ function getEmptyBoard() {
                         id: utilService.makeId(),
                         title: 'Task 5',
                         status: '',
+                        priority: '',
                         members: [],
-                        dueDate: 1589983468418
+                        dueDate: 1589983468418,
+                        txt: ''
                     },
                     {
                         id: utilService.makeId(),
                         title: 'Task 6',
                         status: '',
+                        priority: '',
                         members: [],
-                        dueDate: 1589983468418
+                        dueDate: 1589983468418,
+                        txt: ''
                     }
                 ],
                 style: 'lightblue'
             },
         ],
-        cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER]
+        cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER, PRIORITY_PICKER, TEXT_PICKER]
     }
 }
 
@@ -359,6 +381,7 @@ const demoBoard = {
                     id: utilService.makeId(),
                     title: 'Task 1',
                     status: 'done',
+                    priority: 'critical ⚠️',
                     members: [{
                         userName: 'Harel',
                         imgUrl: '../assets/img/Oren.jpg'
@@ -369,6 +392,7 @@ const demoBoard = {
                     id: utilService.makeId(),
                     title: 'Task 2',
                     status: 'done',
+                    priority: 'medium',
                     members: [{
                         userName: 'Yossi',
                         imgUrl: '../assets/img/Oren.jpg'
@@ -387,6 +411,7 @@ const demoBoard = {
                     id: utilService.makeId(),
                     title: 'Task 3',
                     status: 'stuck',
+                    priority: '',
                     members: [{
                         userName: 'Yossi',
                         imgUrl: '../assets/img/Oren.jpg'
@@ -397,6 +422,7 @@ const demoBoard = {
                     id: utilService.makeId(),
                     title: 'Task 4',
                     status: 'working on it',
+                    priority: 'low',
                     members: [{
                         userName: 'Oren',
                         imgUrl: '../assets/img/Oren.jpg'
@@ -416,6 +442,7 @@ const demoBoard = {
                     id: utilService.makeId(),
                     title: 'Task 5',
                     status: 'done',
+                    priority: '',
                     members: [{
                         userName: 'Oren',
                         imgUrl: '../assets/img/Oren.jpg'
@@ -426,6 +453,7 @@ const demoBoard = {
                     id: utilService.makeId(),
                     title: 'Task 6',
                     status: '',
+                    priority: '',
                     members: {
                         userName: 'KAKa',
                         imgUrl: '../assets/img/Oren.jpg'
@@ -436,7 +464,7 @@ const demoBoard = {
             style: 'lightblue'
         },
     ],
-    cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER]
+    cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER, PRIORITY_PICKER, TEXT_PICKER]
 
 }
 

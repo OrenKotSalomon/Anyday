@@ -259,6 +259,14 @@
   border-top: $border-cell;
 }
 
+.priority-label-header {
+  border-right: $border-cell;
+  border-bottom: $border-cell;
+  border-top: $border-cell;
+  @include status-layout;
+  text-align: center;
+}
+
 .person-label-header {
   @include left-bottom-border;
   @include person-layout;

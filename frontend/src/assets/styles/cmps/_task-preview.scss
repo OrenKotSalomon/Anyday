@@ -34,30 +34,27 @@
   .task-preview-menu-btn {
     position: absolute;
     left: -33px;
-    transition: .3s;
+    transition: 0.3s;
     opacity: 0;
   }
 
   span:hover {
     cursor: pointer;
   }
-
 }
 
 .task-name {
   height: $cell-height;
 }
 
-//temp class name 
+//temp class name
 .task {
   display: flex;
 
   .task-cells-row-container {
-
     height: rem(36px);
     flex: 1 1 auto;
     max-width: none;
-
   }
 }
 
@@ -84,7 +81,6 @@
     border-top: none;
     border-bottom: none;
     height: 38px;
-
   }
 
   .msg-btn-container {
@@ -96,13 +92,11 @@
 
     .icon_component--clickable {
       color: rgb(197, 199, 208);
-
     }
 
     &:hover {
       .icon_component--clickable {
         color: #0073ea;
-
       }
     }
 
@@ -161,7 +155,7 @@
   position: absolute;
   right: 0;
   top: 0;
-  transition: border-width .3s .2s ease;
+  transition: border-width 0.3s 0.2s ease;
 }
 
 .status-label {
@@ -174,7 +168,6 @@
     &:hover {
       @include triangle-animation(15px);
     }
-
   }
 }
 
@@ -194,6 +187,39 @@
 
   &::first-letter {
     text-transform: capitalize;
+  }
+}
+
+.txt-label {
+  position: relative;
+  @include status-layout;
+  width: rem(139.33px);
+  text-align: center;
+  border-right: $border-cell;
+  &:hover {
+    .txt-label-placeholder, input {
+      opacity: 1 !important;
+    }
+  }
+  
+  input {
+    opacity: 0;
+    width: 50%;
+    height: 24px;
+    width: 129px;
+    border: 1px solid #d0d4e4;
+  }
+  
+  .input-txt-label-container {
+    position: relative;
+    .txt-label-placeholder {
+      opacity: 0;
+      @include absoluteCenter;
+      top: 60%;
+      >* {
+        cursor: text;
+      }
+    }
   }
 }
 
@@ -222,7 +248,6 @@
       padding: 4.5px;
       padding-left: 50px;
       padding-right: 38px;
-
     }
 
     &:hover {
@@ -231,7 +256,6 @@
       }
     }
   }
-
 }
 
 .element-type-h6 {

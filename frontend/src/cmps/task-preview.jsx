@@ -34,6 +34,13 @@ export function TaskPreview({ task, board, group, openModal, provided }) {
         showSuccessMsg(`Task deleted successfully taskId:${data.id} `)
     }
 
+///////////////////// TODO ////////////////////////
+    function handleChange({target}) {
+        // const {value} = target
+        // console.log('value:', value)
+        // updateTask(board, value, HANDLE_TXT_CHANGE)
+    }
+
     return <section className='task-preview'
         {...provided.draggableProps}
         {...provided.dragHandleProps}
@@ -105,9 +112,11 @@ export function TaskPreview({ task, board, group, openModal, provided }) {
                                 info={{
                                     status: task?.status,
                                     members: task?.members,
-                                    dueDate: task?.dueDate
+                                    dueDate: task?.dueDate,
+                                    priority: task?.priority
                                 }}
                                 openModal={openModal}
+                                handleChange={handleChange}
                             />
                         )
                     }
