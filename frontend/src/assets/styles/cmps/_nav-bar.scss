@@ -13,6 +13,18 @@
     justify-content: space-between;
     width: 65px;
 
+    .spacer-nav {
+
+      width: rem(50px);
+      border-top: 0.5px solid #676879;
+      position: relative;
+      left: 8px;
+      top: 5px;
+      margin-bottom: 20px;
+      background-color: #676879;
+
+    }
+
     img {
       &:hover {
         background-color: #131523;
@@ -21,11 +33,23 @@
       }
     }
 
+    .main-board-link-container {
+      position: relative;
+      left: 15px;
+      width: 36px;
+      height: 36px;
+      bottom: 2px;
+      background-color: rgba(173, 171, 171, 0.3);
+      border-radius: 6px;
+      margin: 0;
+
+    }
+
     a.active {
-      img {
-        border-radius: 6px;
-        background-color: rgb(128, 128, 128);
-      }
+      position: relative;
+      bottom: 37px;
+
+      img {}
     }
   }
 }
@@ -44,7 +68,7 @@
     font-family: figtree-regular;
   }
 
-  > * {
+  >* {
     height: 32px;
   }
 
@@ -91,6 +115,7 @@
   position: absolute;
   right: -6%;
   cursor: pointer;
+
   &:hover {
     @include side-bar-btn-hover;
     padding-right: 10px;
@@ -159,6 +184,7 @@
   background-color: #f279f2;
   border-radius: 8px;
   @include flex-center;
+
   .house-icon {
     position: absolute;
     color: #323338;
@@ -166,7 +192,16 @@
     bottom: -3px;
     right: -7px;
   }
+
   svg {
     color: $main-bgc-white;
   }
+}
+
+.arrow-left {
+  @include arrow-up-modal(-13px);
+  rotate: -90deg;
+  // right: 120px;
+  top: rem(69px);
+
 }

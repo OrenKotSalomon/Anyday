@@ -89,7 +89,7 @@ export function GroupList({ board, group, openModal, provided, setIsDadModeDisab
         newOrderedTasks.splice(result.destination.index, 0, reorderedTask)
         group.tasks = newOrderedTasks
         updateGroup(board, group, ON_DRAG_TASK)
-        setListToUpdate(newOrderedTasks)
+        // setListToUpdate(newOrderedTasks)
     }
 
     return <section className='group-list'

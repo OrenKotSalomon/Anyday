@@ -1,18 +1,15 @@
-import { useState } from "react";
 import { TaskDetails } from "./task-details";
 
 import { MenuButton, Menu, MenuItem, Icon, EditableHeading, Counter, DialogContentContainer, DatePicker } from 'monday-ui-react-core'
-import Oren from '../assets/img/Oren.jpg'
 import { Open, Duplicate, Delete, Bolt, AddUpdate, Update } from 'monday-ui-react-core/icons'
+
 import { updateTask } from "../store/board.actions";
 import { CHANGE_TASK_TITLE, DELETE_TASK, DUPLICATE_TASK } from "../services/board.service.local";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
-import { Avatar, AvatarGroup } from 'monday-ui-react-core';
 
-import { StatusModal } from "./tasks-modals/status-modal";
-import { PriorityModal } from "./tasks-modals/priority-modal";
 import { DynamicCmp } from "./dynamic-cmp";
 
+import { useState } from "react";
 export function TaskPreview({ task, board, group, openModal, provided, setIsDadModeDisabled }) {
 
     const [isOpenDetails, setIsOpenDetails] = useState(false)
