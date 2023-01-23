@@ -12,7 +12,7 @@ export function BoardFilter({ board }) {
         updateTask(board, undefined, ADD_TASK_FROM_HEADER)
     }
     return <section className='board-filter'>
-        <Flex gap='27' align='End'
+        <Flex gap='18' align='End'
 
         >
 

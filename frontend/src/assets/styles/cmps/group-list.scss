@@ -7,7 +7,7 @@
     position: relative;
     display: block;
     height: 2.75rem;
-    height: rem(78px);
+    height: rem(70px);
     position: sticky;
     top: 210px;
     z-index: 6;
@@ -107,7 +107,7 @@
 
   border-top-left-radius: 6px;
 
-  margin-top: 14px;
+  margin-top: 6px;
 
   .main-right-header {
     position: relative;
@@ -303,8 +303,7 @@
   display: flex;
   align-items: center;
   height: 36px;
-  // opacity: 0.6;
-  // border-bottom-left-radius: 6px;
+  margin-bottom: 26px;
 
   .hidden-task-container {
     position: sticky;

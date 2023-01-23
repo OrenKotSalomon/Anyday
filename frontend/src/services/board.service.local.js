@@ -207,6 +207,8 @@ function taskServiceReducer(board, data, type) {
     switch (type) {
         case DELETE_TASK:
             board.groups[groupIdx].tasks = board.groups[groupIdx].tasks.filter(task => task.id !== data.taskId)
+            console.log('boarssssssssssssd', board);
+
             return board
         case DUPLICATE_TASK:
             data.taskToDuplicate.id = utilService.makeId()
