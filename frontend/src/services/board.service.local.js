@@ -136,11 +136,12 @@ function getNewTask() {
         status: '',
         priority: '',
         members: [],
-        dueDate: '',
+        dueDate: (Date.now() / 1000),
         txt: ''
     }
 
 }
+console.log('new',);
 
 function boardServiceReducer(board, data, type) {
     board = structuredClone(board)
@@ -215,7 +216,6 @@ function taskServiceReducer(board, data, type) {
     switch (type) {
         case DELETE_TASK:
             board.groups[groupIdx].tasks = board.groups[groupIdx].tasks.filter(task => task.id !== data.taskId)
-            console.log('boarssssssssssssd', board);
 
             return board
         case DUPLICATE_TASK:

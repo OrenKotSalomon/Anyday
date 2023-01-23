@@ -4,14 +4,20 @@
   padding-top: 7px;
 
   .group-header-container {
+
     position: relative;
     display: block;
     height: 2.75rem;
     height: rem(70px);
     position: sticky;
-    top: 210px;
     z-index: 6;
     background-color: $main-bgc-white;
+    top: 53px;
+
+    @include for-narrow-layout {
+
+      top: 210px;
+    }
 
     h4 {
       // margin-top: 0.625rem;
@@ -27,6 +33,7 @@
     .group-header-editable-name {
       .monday-style-clickable {
         height: 26px;
+
         input {
           margin-top: 0;
           margin-left: 22px;
@@ -90,6 +97,7 @@
 .main-group-container {
   min-width: 100vw;
 }
+
 .row-collapsed-group-container {
   display: flex;
   margin-top: 6px;
@@ -218,6 +226,7 @@
   .left-border {
     @include left-border;
     border-top-left-radius: 6px;
+
     &.collapsed {
       border-bottom-left-radius: 6px;
     }
@@ -356,7 +365,6 @@
   align-items: center;
   height: $cell-height;
   margin-bottom: 26px;
-  
 
   .hidden-task-container {
     position: sticky;
