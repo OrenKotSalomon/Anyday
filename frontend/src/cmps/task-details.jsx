@@ -10,8 +10,6 @@ import { updateTask } from '../store/board.actions';
 import { TextEditor } from './text-editor.jsx';
 import { CHANGE_TASK_TITLE, ADD_TASK_COMMENT, DELETE_TASK_COMMENT } from '../services/board.service.local.js';
 
-import { useState, useRef } from "react"
-
 export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, group, setIsDndModeDisabled: setIsDndModeDisabled }) {
     
     const [isAddComment, setAddComment] = useState(false)
