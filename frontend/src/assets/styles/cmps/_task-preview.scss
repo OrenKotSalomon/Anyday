@@ -1,6 +1,11 @@
 .task-preview {
   position: relative;
 
+  .menu-button--wrapper--size-32 {
+    width: 21px;
+    height: 21px;
+  }
+
   // display: flex;
   &:hover {
     background-color: #f4f5f8;
@@ -33,7 +38,8 @@
 
   .task-preview-menu-btn {
     position: absolute;
-    left: -33px;
+    left: -30px;
+    top: 7px;
     transition: 0.3s;
     opacity: 0;
   }

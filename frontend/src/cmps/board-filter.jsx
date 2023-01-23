@@ -13,7 +13,7 @@ export function BoardFilter({ board }) {
     }
     
     return <section className='board-filter'>
-        <Flex gap='27' align='End'
+        <Flex gap='18' align='End'
 
         >
 
