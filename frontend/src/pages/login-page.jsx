@@ -8,7 +8,7 @@ import { LoginStepOne } from "../cmps/login-steps/login-step-one";
 
 export function Login() {
     const [loginPaging, setLoginPaging] = useState("login-step-1")
-    const [credentials, setCredentials] = useState({ email: '', username: '', password: '', fullname: '', imgUrl: '' })
+    const [credentials, setCredentials] = useState({ email: '', username: '', password: '', fullname: '', imgUrl: 'https://filestore.community.support.microsoft.com/api/images/39da0bc2-ad7d-434d-bc10-fb80d3a85b7c?upload=true' })
     const [users, setUsers] = useState([])
 
     useEffect(() => {

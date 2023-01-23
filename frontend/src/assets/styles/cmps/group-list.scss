@@ -4,14 +4,20 @@
   padding-top: 7px;
 
   .group-header-container {
+
     position: relative;
     display: block;
     height: 2.75rem;
     height: rem(70px);
     position: sticky;
-    top: 210px;
     z-index: 6;
     background-color: $main-bgc-white;
+    top: 53px;
+
+    @include for-narrow-layout {
+
+      top: 210px;
+    }
 
     h4 {
       // margin-top: 0.625rem;
@@ -27,6 +33,7 @@
     .group-header-editable-name {
       .monday-style-clickable {
         height: 26px;
+
         input {
           margin-top: 0;
           margin-left: 22px;
@@ -77,6 +84,7 @@
         background-color: transparent;
       }
     }
+
     .group-color-picker {
       position: absolute;
       top: -35px;
@@ -188,7 +196,7 @@
     .floatin-white-box {
       position: absolute;
       width: 40px;
-      height: 36px;
+      height: $cell-height;
       background-color: $main-bgc-white;
       left: -40px;
     }
@@ -236,6 +244,7 @@
   .left-border {
     @include left-border;
     border-top-left-radius: 6px;
+
     &.collapsed {
       border-bottom-left-radius: 6px;
     }
@@ -301,7 +310,7 @@
   .floatin-white-box-under {
     position: absolute;
     width: 44px;
-    height: 36px;
+    height: $cell-height;
     background-color: $main-bgc-white;
     left: -40px;
   }
@@ -330,11 +339,19 @@
 }
 
 .status-label-header {
-  text-align: center;
+
   @include status-layout;
   border-bottom: $border-cell;
   border-top: $border-cell;
   border-left: $border-cell;
+}
+
+.label-statuses-header {
+  @include status-layout;
+  border-top: $border-cell;
+  border-right: $border-cell;
+  border-bottom: $border-cell;
+
 }
 
 .priority-label-header {
@@ -342,12 +359,13 @@
   border-bottom: $border-cell;
   border-top: $border-cell;
   @include status-layout;
-  text-align: center;
+
 }
 
 .person-label-header {
   @include person-layout;
   text-align: center;
+
   border-bottom: $border-cell;
   border-top: $border-cell;
 }
@@ -363,7 +381,7 @@
 .label-sum-container {
   display: flex;
   align-items: center;
-  height: 36px;
+  height: $cell-height;
   margin-bottom: 26px;
 
   .hidden-task-container {
@@ -372,7 +390,7 @@
     left: 40px;
     display: flex;
     align-items: center;
-    height: 36px;
+    height: $cell-height;
 
     .hidden-task {
       min-width: rem(400px);

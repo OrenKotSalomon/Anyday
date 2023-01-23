@@ -1,18 +1,29 @@
 import { Link, NavLink } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { Avatar } from 'monday-ui-react-core'
+import { useState } from 'react'
 
-import logo from '../assets/img/logo.png'
-import Harel from '../assets/img/Harel.jpg'
-import wm_icon from '../assets/img/wm_icon.avif'
-
-import { login, logout, signup } from '../store/user.actions.js'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import { userService } from '../services/user.service.js'
+import { login, logout, signup } from '../store/user.actions.js'
+
+import { useSelector } from 'react-redux'
+
+// import routes from '../routes'
+// import { LoginSignup } from './login-signupReference.jsx'
+import logo from '../assets/img/logo.png'
+// import Harel from '../assets/img/Harel.jpg'
+import wm_icon from '../assets/img/wm_icon.avif'
+import { UserMsg } from './user-msg'
+import { useNavigate } from 'react-router'
+// import { Avatar } from 'monday-ui-react-core'
 
 export function NavBar() {
-
-    const user = useSelector(storeState => storeState.userModule.user)
+    const [toggleUserModal, setToggleUserModal] = useState('none')
     const board = useSelector(storeState => storeState.boardModule.board)
+    const loggedInUser = userService.getLoggedinUser()
+    const guestImgUrl = 'https://filestore.community.support.microsoft.com/api/images/39da0bc2-ad7d-434d-bc10-fb80d3a85b7c?upload=true'
+    const navigate = useNavigate()
+
+    // const user = useSelector(storeState => storeState.userModule.user)
 
     async function onLogin(credentials) {
         try {
@@ -33,9 +44,19 @@ export function NavBar() {
     async function onLogout() {
         try {
             await logout()
-            showSuccessMsg(`Bye now`)
+            showSuccessMsg(`Good bye`)
+            setToggleUserModal('none')
         } catch (err) {
             showErrorMsg('Cannot logout')
+        }
+    }
+
+    function onClickUserAvatar() {
+        if (loggedInUser) {
+            setToggleUserModal(((toggleUserModal === 'none') ? 'flex' : 'none'))
+
+        } else {
+            navigate(`/login`)
         }
     }
 
@@ -46,10 +67,9 @@ export function NavBar() {
                 <div className="nav-a-container">
                     <NavLink to='/'><img className='nav-bar-logo' src={logo} style={{ minWidth: '55px' }} /></NavLink>
                 </div>
-                <div className='spacer-nav'></div>
+                <hr style={{ width: '75%' }} />
                 <div className="nav-a-container">
-                    <div className='main-board-link-container'></div>
-                    <NavLink to={`/board/${board._id}`}>< img className='nav-bar-board-logo' src={wm_icon} style={{ maxWidth: '30px' }} /></NavLink>
+                    <NavLink to='/board/'>< img className='nav-bar-board-logo' src={wm_icon} style={{ maxWidth: '30px' }} /></NavLink>
                 </div>
             </div>
             {/* <button>Notifications</button> */}
@@ -59,13 +79,22 @@ export function NavBar() {
 
             {/* <button>Search</button> */}
 
-            <Link to='/login'><Avatar
+            {/* <Link to='/login'><Avatar
                 className='nav-bar-avatar'
                 ariaLabel="Harel Natan"
                 size="large"
                 src={Harel}
                 type="img"
-            /></Link>
+            /></Link> */}
+
+            <img className='nav-bar-avatar-img' onClick={onClickUserAvatar} src={`${loggedInUser?.imgUrl ? loggedInUser.imgUrl : guestImgUrl}`} alt="" />
+
+            {loggedInUser && <div className='miniUserPanel' style={{ display: `${toggleUserModal}` }}>
+                wellcome {loggedInUser.fullname}
+
+                <button className='btn nav-bar-logout-btn' onClick={onLogout}>Log Out</button>
+            </div>}
+            <UserMsg />
 
         </nav>
 
@@ -89,5 +118,5 @@ export function NavBar() {
                 }
             </nav> */}
     </header>
-    </div>
+    </div >
 }

@@ -5,7 +5,7 @@ import Harel from '../assets/img/Harel.jpg'
 import Yossi from '../assets/img/Yossi.jpg'
 import Oren from '../assets/img/Oren.jpg'
 
-import { DATE_PICKER, MEMEBER_PICKER, PRIORITY_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../services/board.service.local"
+import { DATE_PICKER, LABEL_STATUS_PICKER, MEMEBER_PICKER, PRIORITY_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_LABEL_STATUS, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../services/board.service.local"
 
 import { useState } from "react"
 export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
@@ -38,7 +38,11 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
         console.log('priority:', priority)
         onUpdateTaskLabel(UPDATE_TASK_PRIORITY, cmp.data, priority)
     }
-    // console.log(cmp);
+    function onLabelStatusPick(labelStatus) {
+
+        onUpdateTaskLabel(UPDATE_TASK_LABEL_STATUS, cmp.data, labelStatus)
+    }
+    console.log(cmp);
     switch (cmp.type) {
 
         case STATUS_PICKER:
@@ -51,6 +55,22 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
                             style={{ background: status.bgColor }}
                             className="status-picker">
                             {status.label}
+                        </button>
+                    }
+                    )}
+                </div>
+            </div>
+        case LABEL_STATUS_PICKER:
+            return <div onClick={() => setIsModalOpen(false)} className="status-picker-container" style={{ transform: `translate(-63%, 20%)`, left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
+
+                <div className="arrow-up"></div>
+                <div className="status-picker-view">
+                    {cmp.labelStatuses.map((labelStatus, idx) => {
+                        console.log(labelStatus);
+                        return <button onClick={() => onLabelStatusPick(labelStatus.label)} key={idx}
+                            style={{ background: labelStatus.bgColor }}
+                            className="status-picker">
+                            {labelStatus.label}
                         </button>
                     }
                     )}
@@ -94,8 +114,8 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
 
             </div>
         case PRIORITY_PICKER:
-            return <div onClick={() => setIsModalOpen(false)} className="status-picker-container" style={{ transform: `translate(-60%, 20%)`, left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
-
+            return <div onClick={() => setIsModalOpen(false)} className="status-picker-container" style={{ transform: `translate(-63%, 17%)`, left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
+                <div className="arrow-up"></div>
                 <div className="status-picker-view">
                     {cmp.priorities.map((priority, idx) => {
                         return <button onClick={() => onPriorityPick(priority.label)} key={idx}
