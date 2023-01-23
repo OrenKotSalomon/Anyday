@@ -1,17 +1,20 @@
-import { useRef, useState } from "react"
+import { Add, Filter, Search, Bolt, DropdownChevronRight, DropdownChevronLeft, CloseSmall } from 'monday-ui-react-core/icons'
+
+import { Modal, Box } from '@mui/material'
+import { Icon } from 'monday-ui-react-core'
 import { Navigate, useNavigate } from "react-router-dom"
+import crownIcon from '../assets/img/crown-icon.png'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCrown } from '@fortawesome/free-solid-svg-icons'
+import { faHouse } from '@fortawesome/free-solid-svg-icons'
+
 import { boardService } from "../services/board.service.local"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import { addBoard, duplicateBoard, removeBoard } from "../store/board.actions"
 import { BoardList } from "./board-list"
-// import { Modal, ModalContent, ModalFooter, MenuItem, Button } from 'monday-ui-react-core'
-import { Modal, Box } from '@mui/material'
-import { Icon } from 'monday-ui-react-core'
-import { Add, Filter, Search, Bolt, DropdownChevronRight, DropdownChevronLeft, CloseSmall } from 'monday-ui-react-core/icons'
-import crownIcon from '../assets/img/crown-icon.png'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCrown } from '@fortawesome/free-solid-svg-icons'
-import { faHouse } from '@fortawesome/free-solid-svg-icons'
+
+import { useRef, useState } from "react"
 
 export function SideGroupBar() {
 
@@ -68,8 +71,8 @@ export function SideGroupBar() {
     }
 
     return <div>
-
         <section className={`side-group-bar ${isSideBarOpen ? '' : 'closed'} flex`}>
+            <div className='arrow-left'></div>
             <div className="workspace-select flex" style={{ opacity: '1' }}>
                 <div className={`close-side-bar-btn ${isSideBarOpen ? '' : 'closed-btn'} `}
                     onClick={() => toggleSideBar()} >
@@ -105,7 +108,7 @@ export function SideGroupBar() {
                 aria-describedby="modal-modal-description"
             >
                 <Box className="add-board-modal">
-                <span onClick={handleOpen} className="close-add-board-modal"><Icon className="input-bolt-icon" iconType={Icon.type.SVG} icon={CloseSmall} iconSize={19} /></span>
+                    <span onClick={handleOpen} className="close-add-board-modal"><Icon className="input-bolt-icon" iconType={Icon.type.SVG} icon={CloseSmall} iconSize={19} /></span>
                     <div className="modal-header flex">Create Board </div>
                     <div className="add-board-label-and-input-container flex column">
                         <label htmlFor="text">Board Name </label>

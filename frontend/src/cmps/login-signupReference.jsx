@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
-import { userService } from '../services/user.service'
 import { ImgUploader } from './img-uploader'
 
+import { userService } from '../services/user.service'
+
+import { useState, useEffect } from 'react'
 export function LoginSignup(props) {
     const [credentials, setCredentials] = useState({ username: '', password: '', fullname: '' })
     const [isSignup, setIsSignup] = useState(false)

@@ -2,14 +2,15 @@ import * as React from 'react'
 import { useState, useRef, useEffect } from "react"
 
 import { TabList, Tab, EditableHeading, Icon, MenuButton, Menu, MenuItem, } from 'monday-ui-react-core'
-import { Home, Time, Delete, Gallery, Emoji, Underline, Bullets, Italic, Drag, Close } from 'monday-ui-react-core/icons'
+import { Home, Time, Delete, Gallery, Emoji, Drag, Close } from 'monday-ui-react-core/icons'
 
 import { utilService } from '../services/util.service.js';
 import { boardService } from '../services/board.service.js';
-import { CHANGE_TASK_TITLE, ADD_TASK_COMMENT, DELETE_TASK_COMMENT } from '../services/board.service.local.js';
 import { updateTask } from '../store/board.actions';
 import { TextEditor } from './text-editor.jsx';
+import { CHANGE_TASK_TITLE, ADD_TASK_COMMENT, DELETE_TASK_COMMENT } from '../services/board.service.local.js';
 
+import { useState, useRef } from "react"
 
 export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, group, setIsDndModeDisabled: setIsDndModeDisabled }) {
     
@@ -51,7 +52,6 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
         setNewTitle(value)
     }
 
-
     //...................imge upload
     const inputRef = useRef(null);
 
@@ -78,7 +78,6 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
     }
     //.....................................................
 
-
     function toggleEmojiPicker() {
         SetEmojiPicker(!isEmojiPicker)
     }
@@ -96,8 +95,6 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
         if (ev.clientX - taskCommentsSize + diff > ev.clientX) return
         SetTaskCommentsSize(taskCommentsSize + diff)
     }
-
-
 
     return <section
         className='task-details' style={{ width: `${isOpenDetails ? 100 : 1}vw` }}>
@@ -146,7 +143,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                             placeholder='Add a task comment...'
                             onChange={handleInputChange}
                             value={newCommentTxt} /> */}
-                            <TextEditor handleInputChange={handleInputChange} />
+                        <TextEditor handleInputChange={handleInputChange} />
 
                         {isEmojiPicker && <div className="emoji-picker">
                             {emojis.map(emoji => <span key={emoji} className='emoji' onClick={() => setComment(newCommentTxt + emoji)}>{emoji}</span>)}
@@ -201,7 +198,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                         </div>
                     </div>
 
-                    <p dangerouslySetInnerHTML={{__html:comment.txt }}></p>
+                    <p dangerouslySetInnerHTML={{ __html: comment.txt }}></p>
                     {comment.imgUrl && comment.imgUrl !== '' ? <img src={`${comment.imgUrl}`} alt="" /> : ''}
 
                 </div>)}
@@ -224,4 +221,3 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
         }}>.</div>
     </section>
 }
-

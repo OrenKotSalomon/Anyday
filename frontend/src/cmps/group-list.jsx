@@ -1,13 +1,12 @@
-import { EditableHeading, Tooltip } from 'monday-ui-react-core'
 import { useEffect, useState } from 'react';
 import { updateBoard, updateGroup } from '../store/board.actions';
-import { TaskPreview } from "./task-preview";
-import { MenuButton, Menu, MenuItem, ColorPicker, Icon } from 'monday-ui-react-core'
-import { Delete, Bullet, Duplicate, Add } from 'monday-ui-react-core/icons'
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service';
 import { ADD_GROUP, ADD_GROUP_TASK, boardService, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, MEMEBER_PICKER, ON_DRAG_TASK, PRIORITY_PICKER, STATUS_PICKER, TEXT_PICKER } from '../services/board.service.local';
+import { TaskPreview } from "./task-preview";
 import { utilService } from '../services/util.service';
 import { AddLabelModal } from './tasks-modals/add-label-modal';
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service';
+import { EditableHeading, Tooltip, MenuButton, Menu, MenuItem, ColorPicker, Icon } from 'monday-ui-react-core'
+import { Delete, Bullet, Duplicate, Add, DropdownChevronDown } from 'monday-ui-react-core/icons'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 export function GroupList({ board, group, openModal, provided, setIsDndModeDisabled, isDndModeDisabled }) {
@@ -90,7 +89,7 @@ export function GroupList({ board, group, openModal, provided, setIsDndModeDisab
         newOrderedTasks.splice(result.destination.index, 0, reorderedTask)
         group.tasks = newOrderedTasks
         updateGroup(board, group, ON_DRAG_TASK)
-        setListToUpdate(newOrderedTasks)
+        // setListToUpdate(newOrderedTasks)
     }
 
     return <section className='group-list'
@@ -133,6 +132,11 @@ export function GroupList({ board, group, openModal, provided, setIsDndModeDisab
             {isPickColor && <ColorPicker className="group-color-picker"
                 colorSize={ColorPicker.sizes.SMALL}
                 onSave={(value) => onColorPick(value)} />}
+            <div className="group-collapse-btn-container">
+                <Tooltip content="Collapse group" animationType="expand">
+                    <button><Icon style={{ color: group.style }} iconType={Icon.type.SVG} icon={DropdownChevronDown} iconSize={19} /></button>
+                </Tooltip>
+            </div>
             <div className="group-header-name"
                 style={{ color: group.style }}>
                 <div className="monday-storybook-tooltip_bottom group-list-editable-header">
@@ -211,7 +215,6 @@ export function GroupList({ board, group, openModal, provided, setIsDndModeDisab
 
                                 >
                                     {(provided) => (
-
                                         <TaskPreview
                                             provided={provided}
                                             key={task.id}

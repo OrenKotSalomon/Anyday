@@ -3,13 +3,15 @@ import {
     Avatar, Icon, Tooltip, TabList, Tab
 } from 'monday-ui-react-core'
 import { Activity, Favorite, Info, Home } from "monday-ui-react-core/icons";
-import { useEffect, useRef, useState } from 'react';
-import { boardService, CHANGE_TITLE } from '../services/board.service.local';
-import { updateBoard } from '../store/board.actions';
+
 import Harel from '../assets/img/Harel.jpg'
 import Oren from '../assets/img/Oren.jpg'
 import Yossi from '../assets/img/Yossi.jpg'
+
+import { boardService, CHANGE_TITLE } from '../services/board.service.local';
+import { updateBoard } from '../store/board.actions';
 import { NavLink } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
 
 export function BoardView({ board }) {
     const [newTitle, setNewTitle] = useState(board.title)

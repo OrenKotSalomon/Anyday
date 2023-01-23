@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom'
 import logo from '../assets/img/logo.png'
 import hero from '../assets/img/home-page-hero.jpg'
 
-import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux';
-
 import { loadBoards } from '../store/board.actions'
+
+import React, { useState, useEffect } from 'react'
 export function HomePage() {
     const baseImgUrl = `https://i.pinimg.com/236x/`
     const logoImgUrls = ['a5/57/4a/a5574a2d7a158993b62d844a7500e8a9', 'c7/6b/fc/c76bfc66677d34cb2c0cca5644372b86', 'f8/82/d1/f882d1f7cd6b351ba225b2b758103109', '11/ed/46/11ed4612dfffa5e87dd5159bb0c58cf1', '4f/28/85/4f2885b60d604d07e7392f65e9a1dce4', 'ee/e1/0f/eee10f79d31d14797555188723dae124', '44/fa/33/44fa335b8d59303e196d06dde6434ef0', '63/d2/9e/63d29ead9c56d2a6bb0e3eff5bb7e3eb', 'f2/91/49/f29149ddb0616e30aa2f704fb27379ab']

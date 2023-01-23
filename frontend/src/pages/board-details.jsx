@@ -1,16 +1,19 @@
-import { GroupList } from "../cmps/group-list";
-import { BoardHeader } from "../cmps/board-header";
-import { NavBar } from "../cmps/nav-bar";
 import { useEffect, useRef, useState } from "react";
-import { ADD_GROUP_FROM_BUTTOM, DATE_PICKER, MEMEBER_PICKER, ON_DRAG_GROUP, PRIORITY_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../services/board.service.local";
-import { SideGroupBar } from "../cmps/side-group-bar";
-import { loadBoard, updateBoard, updateGroup, updateTask } from "../store/board.actions";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+import { NavBar } from "../cmps/nav-bar";
+import { BoardHeader } from "../cmps/board-header";
+import { DynamicModal } from "../cmps/dynamic-modal";
+import { GroupList } from "../cmps/group-list";
+import { SideGroupBar } from "../cmps/side-group-bar";
+
+import { ADD_GROUP_FROM_BUTTOM, DATE_PICKER, MEMEBER_PICKER, ON_DRAG_GROUP, PRIORITY_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../services/board.service.local";
+import { loadBoard, updateBoard, updateGroup, updateTask } from "../store/board.actions";
+
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Loader, Icon } from 'monday-ui-react-core';
 import { Add } from 'monday-ui-react-core/icons';
-import { DynamicModal } from "../cmps/dynamic-modal";
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 export function BoardDetails() {
 
@@ -152,7 +155,7 @@ export function BoardDetails() {
     }
 
     function handleOnDragEnd(result) {
-        
+
         if (!result.destination) return
         const newOrderedGroups = Array.from(board.groups)
         const [reorderedGroup] = newOrderedGroups.splice(result.source.index, 1)
