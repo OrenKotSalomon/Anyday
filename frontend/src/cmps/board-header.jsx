@@ -40,7 +40,7 @@ export function BoardHeader({ board }) {
         </div>
 
         <div className="mobile-header-filter">
-            <div className="mobile-view-select">
+            <div className="mobile-view-select" style={{ display: isFilterOn ? `none` : `block` }}>
                 <select name="view" id="view">
                     <option value="main">
 
@@ -54,19 +54,26 @@ export function BoardHeader({ board }) {
                 </select>
             </div>
 
-            <div className="mobile-fitler-container">
+            <div className="mobile-fitler-container" style={{ display: isFilterOn ? `none` : `block` }}>
 
                 <Icon iconType={Icon.type.SVG} icon={Filter} iconLabel="my bolt svg icon" iconSize={16} />
+                Filter
             </div>
             <div className="search-mobile-container">
+                <div className="icon-container " style={{ display: isFilterOn ? `none` : `block` }}>
 
-                <Icon iconType={Icon.type.SVG} icon={Search} iconLabel="my bolt svg icon" iconSize={16} />
-                <div className="input-slider-mobile">
-                    <button className="cancel-filter"
-                        onClick={() => setIsFilterOn(!isFilterOn)}
+                    <Icon onClick={() => setIsFilterOn(!isFilterOn)}
+
+                        iconType={Icon.type.SVG} icon={Search} iconLabel="my bolt svg icon" iconSize={20} />
+                </div>
+                <div className="input-slider-mobile" style={{ left: isFilterOn ? `0px` : `400px` }}>
+                    <button onClick={() => setIsFilterOn(false)} className="cancel-filter"
+
                         style={{ display: isFilterOn ? `block` : `none` }}>Cancel</button>
 
-                    <input className="mobile-input-filter" type="text" name="txt" id="txt" />
+                    <input className="mobile-input-filter"
+                        placeholder="Search Board"
+                        type="text" name="txt" id="txt" />
                 </div>
 
             </div>

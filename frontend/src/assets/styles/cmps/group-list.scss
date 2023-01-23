@@ -123,6 +123,7 @@
 }
 
 .row-collapsed-group-container {
+
   display: flex;
   margin-top: 6px;
   border-bottom-left-radius: 6px;
@@ -130,17 +131,10 @@
 
   .main-left-header {
     display: flex;
-    @include left-sticky;
     z-index: 2;
     background-color: $main-bgc-white;
-
-    .floatin-white-box {
-      position: absolute;
-      width: 40px;
-      height: 36px;
-      background-color: $main-bgc-white;
-      left: -40px;
-    }
+    position: sticky;
+    left: 0px;
   }
 
   .monday-style-clickable {
@@ -151,6 +145,7 @@
       margin-left: 22px;
       width: 365px;
     }
+
     h4 {
       font-family: poppins-regular-400;
       font-weight: 600;
@@ -161,6 +156,30 @@
   input {
     // margin: 0;
     // outline: none;
+  }
+}
+
+.main-left-header {
+  display: flex;
+  z-index: 2;
+  background-color: $main-bgc-white;
+  position: sticky;
+  left: 2px;
+
+  @include for-narrow-layout {
+
+    @include left-sticky;
+
+    .floatin-white-box {
+
+      display: block;
+      position: absolute;
+      width: 40px;
+      height: 36px;
+      background-color: $main-bgc-white;
+      left: -40px;
+
+    }
   }
 }
 
@@ -179,41 +198,44 @@
     border-bottom: $border-cell;
     border-top: $border-cell;
 
-    .add-label-btn-container {
-      position: relative;
-      height: 22px;
-      width: 22px;
-      border-radius: 4px;
-      margin: auto;
-      margin-left: 5px;
-      transition: 0.3s;
-      @include flex-center;
+    @include for-narrow-layout {
 
-      &:hover {
-        background-color: #d5d8e4;
+      .add-label-btn-container {
+        position: relative;
+        height: 22px;
+        width: 22px;
+        border-radius: 4px;
+        margin: auto;
+        margin-left: 5px;
+        transition: 0.3s;
+        @include flex-center;
+
+        &:hover {
+          background-color: #d5d8e4;
+        }
+      }
+
+      .add-label-btn {
+        @include flex-center;
+        font-size: rem(19px);
+        color: #707181;
+        transition: 0.3s;
       }
     }
 
-    .add-label-btn {
-      @include flex-center;
-      font-size: rem(19px);
-      color: #707181;
-      transition: 0.3s;
-    }
-  }
-
-  .main-left-header {
-    display: flex;
-    @include left-sticky;
-    z-index: 2;
-    background-color: $main-bgc-white;
-
-    .floatin-white-box {
-      position: absolute;
-      width: 40px;
-      height: $cell-height;
+    .main-left-header {
+      display: flex;
+      @include left-sticky;
+      z-index: 2;
       background-color: $main-bgc-white;
-      left: -40px;
+
+      .floatin-white-box {
+        position: absolute;
+        width: 40px;
+        height: $cell-height;
+        background-color: $main-bgc-white;
+        left: -40px;
+      }
     }
   }
 }
@@ -225,14 +247,17 @@
   justify-content: center;
   line-height: rem(24px);
   height: 36px;
+
   &.collapsed {
     height: 60px;
   }
+
   .collapsed-group-header {
     position: relative;
     border: $border-cell;
     border-left: 0;
     flex-grow: 1;
+
     .tasks-count-container {
       white-space: nowrap;
       font-size: 14px;
