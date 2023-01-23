@@ -31,6 +31,7 @@ export const UPDATE_TASK_STATUS = 'UPDATE_TASK_STATUS'
 export const UPDATE_TASK_DATE = 'UPDATE_TASK_DATE'
 export const UPDATE_TASK_MEMBERS = 'UPDATE_TASK_MEMBERS'
 export const UPDATE_TASK_PRIORITY = 'UPDATE_TASK_PRIORITY'
+export const UPDATE_TASK_LABEL_STATUS = 'UPDATE_TASK_LABEL_STATUS'
 
 // Dynamic modal/component
 export const DATE_PICKER = 'DATE_PICKER'
@@ -38,6 +39,7 @@ export const STATUS_PICKER = 'STATUS_PICKER'
 export const MEMEBER_PICKER = 'MEMEBER_PICKER'
 export const PRIORITY_PICKER = 'PRIORITY_PICKER'
 export const TEXT_PICKER = 'TEXT_PICKER'
+export const LABEL_STATUS_PICKER = 'LABEL_STATUS_PICKER'
 
 export const boardService = {
     query,
@@ -240,6 +242,9 @@ function taskServiceReducer(board, data, type) {
         case UPDATE_TASK_STATUS:
             board.groups[groupIdx].tasks[taskIdx].status = data.labelPick
             return board
+        case UPDATE_TASK_LABEL_STATUS:
+            board.groups[groupIdx].tasks[taskIdx].labelStatus = data.labelPick
+            return board
         case UPDATE_TASK_MEMBERS:
             board.groups[groupIdx].tasks[taskIdx].members.push(data.labelPick)
             return board
@@ -267,6 +272,7 @@ function getEmptyGroup() {
                 priority: '',
                 members: [],
                 dueDate: '',
+                labelStatus: '',
                 txt: ''
             },
             {
@@ -276,6 +282,7 @@ function getEmptyGroup() {
                 priority: '',
                 members: [],
                 dueDate: '',
+                labelStatus: '',
                 txt: ''
             }
         ],
@@ -288,6 +295,64 @@ function getEmptyBoard() {
         title: '',
         isStarred: false,
         archivedAt: 1589983468418,
+        statuses: [
+            {
+                label: 'done',
+                bgColor: '#00c875'
+            },
+            {
+                label: 'working on it',
+                bgColor: '#fdab3d'
+            },
+            {
+                label: 'stuck',
+                bgColor: '#e2445c'
+            },
+            {
+                label: '',
+                bgColor: '#c4c4c4'
+            },
+        ],
+        priorities: [
+            {
+                label: 'critical ⚠️',
+                bgColor: '#333333'
+            },
+            {
+                label: 'high',
+                bgColor: '#401694'
+            },
+            {
+                label: 'medium',
+                bgColor: '#5559df'
+            },
+            {
+                label: 'low',
+                bgColor: '#579bfc'
+            },
+            {
+                label: '',
+                bgColor: '#c4c4c4'
+            },
+        ],
+        labelStatuses: [
+            {
+                label: 'label 1',
+                bgColor: '#9aadbd'
+            },
+            {
+                label: 'label 2',
+                bgColor: '#0086c0'
+            },
+            {
+                label: 'label 3',
+                bgColor: '#9d99b9'
+            },
+            {
+                label: '',
+                bgColor: '#c4c4c4'
+            }
+        ],
         groups: [
             {
                 id: utilService.makeId(),
@@ -300,6 +365,7 @@ function getEmptyBoard() {
                         status: '',
                         priority: '',
                         members: [],
+                        labelStatus: 'label 1',
                         dueDate: 1589983468418,
                         txt: ''
                     },
@@ -309,6 +375,7 @@ function getEmptyBoard() {
                         status: '',
                         priority: '',
                         members: [],
+                        labelStatus: 'label 2',
                         dueDate: 1589983468418,
                         txt: ''
                     }
@@ -326,7 +393,9 @@ function getEmptyBoard() {
                         status: '',
                         priority: '',
                         members: [],
+                        labelStatus: 'label 3',
                         dueDate: 1589983468418,
+
                         txt: ''
                     },
                     {
@@ -335,6 +404,7 @@ function getEmptyBoard() {
                         status: '',
                         priority: '',
                         members: [],
+                        labelStatus: '',
                         dueDate: 1589983468418,
                         txt: ''
                     }
@@ -352,6 +422,7 @@ function getEmptyBoard() {
                         status: '',
                         priority: '',
                         members: [],
+                        labelStatus: 'label 1',
                         dueDate: 1589983468418,
                         txt: ''
                     },
@@ -361,6 +432,7 @@ function getEmptyBoard() {
                         status: '',
                         priority: '',
                         members: [],
+                        labelStatus: 'label 2',
                         dueDate: 1589983468418,
                         txt: ''
                     }
@@ -368,7 +440,7 @@ function getEmptyBoard() {
                 style: 'lightblue'
             },
         ],
-        cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER, PRIORITY_PICKER, TEXT_PICKER]
+        cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER, PRIORITY_PICKER, TEXT_PICKER, LABEL_STATUS_PICKER]
     }
 }
 
@@ -379,6 +451,63 @@ const demoBoard = {
     title: 'Demo Board',
     isStarred: false,
     archivedAt: 1589983468418,
+    statuses: [
+        {
+            label: 'done',
+            bgColor: '#00c875'
+        },
+        {
+            label: 'working on it',
+            bgColor: '#fdab3d'
+        },
+        {
+            label: 'stuck',
+            bgColor: '#e2445c'
+        },
+        {
+            label: '',
+            bgColor: '#c4c4c4'
+        },
+    ],
+    priorities: [
+        {
+            label: 'critical ⚠️',
+            bgColor: '#333333'
+        },
+        {
+            label: 'high',
+            bgColor: '#401694'
+        },
+        {
+            label: 'medium',
+            bgColor: '#5559df'
+        },
+        {
+            label: 'low',
+            bgColor: '#579bfc'
+        },
+        {
+            label: '',
+            bgColor: '#c4c4c4'
+        },
+    ], labelStatuses: [
+        {
+            label: 'label 1',
+            bgColor: '#9aadbd'
+        },
+        {
+            label: 'label 2',
+            bgColor: '#0086c0'
+        },
+        {
+            label: 'label 3',
+            bgColor: '#9d99b9'
+        },
+        {
+            label: '',
+            bgColor: '#c4c4c4'
+        }
+    ],
     groups: [
         {
             id: utilService.makeId(),
@@ -394,6 +523,7 @@ const demoBoard = {
                         userName: 'Harel',
                         imgUrl: '../assets/img/Oren.jpg'
                     }],
+                    labelStatus: 'label 2',
                     dueDate: 1589983468418
                 },
                 {
@@ -405,6 +535,7 @@ const demoBoard = {
                         userName: 'Yossi',
                         imgUrl: '../assets/img/Oren.jpg'
                     }],
+                    labelStatus: '',
                     dueDate: 158993468418
                 }
             ],
@@ -424,6 +555,7 @@ const demoBoard = {
                         userName: 'Yossi',
                         imgUrl: '../assets/img/Oren.jpg'
                     }],
+                    labelStatus: 'label 2',
                     dueDate: 1589983468418
                 },
                 {
@@ -435,6 +567,7 @@ const demoBoard = {
                         userName: 'Oren',
                         imgUrl: '../assets/img/Oren.jpg'
                     }],
+                    labelStatus: 'label 1',
                     dueDate: 1589983468418
 
                 }
@@ -455,6 +588,7 @@ const demoBoard = {
                         userName: 'Oren',
                         imgUrl: '../assets/img/Oren.jpg'
                     }],
+                    labelStatus: 'label 1',
                     dueDate: 1589983468418
                 },
                 {
@@ -466,13 +600,14 @@ const demoBoard = {
                         userName: 'KAKa',
                         imgUrl: '../assets/img/Oren.jpg'
                     },
+                    labelStatus: 'label 3',
                     dueDate: 1589983468418
                 }
             ],
             style: 'lightblue'
         },
     ],
-    cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER, PRIORITY_PICKER, TEXT_PICKER]
+    cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER, PRIORITY_PICKER, TEXT_PICKER, LABEL_STATUS_PICKER]
 
 }
 

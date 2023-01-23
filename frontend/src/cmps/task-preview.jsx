@@ -125,7 +125,8 @@ export function TaskPreview({ task, board, group, openModal, provided, setIsDndM
                                     status: task?.status,
                                     members: task?.members,
                                     dueDate: task?.dueDate,
-                                    priority: task?.priority
+                                    priority: task?.priority,
+                                    labelStatus: task?.labelStatus,
                                 }}
                                 openModal={openModal}
                                 handleChange={handleChange}
