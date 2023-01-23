@@ -178,16 +178,16 @@
 
   .main-table-a {
     @include flex-center;
-    padding: 6px 8px 0 8px;
+    padding: 0px 8px 0 8px;
     padding-right: 14px;
     position: static;
 
     .blue-line {
       position: absolute;
       top: 126px;
-      width: 113px;
-      left: 39px;
-      height: 3px;
+      width: 115px;
+      left: 38px;
+      height: 2px;
       background-color: #0073ea;
       // z-index: 555;
     }
@@ -245,8 +245,10 @@
 
 .monday-style-button--kind-tertiary {
   color: #676879;
-  padding: 0;
-  // max-width: 92px;
+  padding: 5px;
+  padding-left: 5px;
+  padding-right: 10px;
+  padding-bottom: 10px // max-width: 92px;
 }
 
 .spacer-header {
