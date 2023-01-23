@@ -1,10 +1,6 @@
 import * as React from 'react'
 import { useState, useRef, useEffect } from "react"
 
-// import FormControl, { useFormControl } from '@mui/material/FormControl';
-// import OutlinedInput from '@mui/material/OutlinedInput';
-// import Box from '@mui/material/Box';
-
 import { TabList, Tab, EditableHeading, Icon, MenuButton, Menu, MenuItem, } from 'monday-ui-react-core'
 import { Home, Time, Delete, Gallery, Emoji, Underline, Bullets, Italic, Drag, Close } from 'monday-ui-react-core/icons'
 
@@ -15,7 +11,7 @@ import { updateTask } from '../store/board.actions';
 import { TextEditor } from './text-editor.jsx';
 
 
-export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, group, setIsDadModeDisabled }) {
+export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, group, setIsDndModeDisabled: setIsDndModeDisabled }) {
     
     const [isAddComment, setAddComment] = useState(false)
     const [newTitle, setNewTitle] = useState(task.title)
@@ -109,7 +105,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
 
             <button className='close-task-btn' onClick={() => {
                 setIsOpenDetails(!isOpenDetails)
-                setIsDadModeDisabled(false)
+                setIsDndModeDisabled(false)
             }}>
                 <Icon iconType={Icon.type.SVG} icon={Close} iconLabel="my svg icon" iconSize={16} />
             </button>
@@ -174,8 +170,6 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                         />
                     </div>
                 </form>
-
-
             }
 
             {(Array.isArray(task.comments) && task.comments.length) ? <section>
@@ -210,9 +204,6 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                     <p dangerouslySetInnerHTML={{__html:comment.txt }}></p>
                     {comment.imgUrl && comment.imgUrl !== '' ? <img src={`${comment.imgUrl}`} alt="" /> : ''}
 
-
-
-
                 </div>)}
             </section > : <section>
                 <div className='details-img-container'><img className="details-img" src="https://cdn.monday.com/images/pulse-page-empty-state.svg" alt="" /></div>
@@ -221,20 +212,15 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                         or upload files to share with your team members</span></p>
             </section >}
 
-
-
             <div className="slide-panel-resizer" draggable="true" onDrag={dragstart} onMouseDown={getInitX}
             >
                 <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Drag} iconLabel="my svg icon" iconSize={14} />
             </div>
 
-            
-
-
         </div >
         <div className='close-task' style={{ width: `${100 - taskCommentsSize}%` }} onClick={() => {
             setIsOpenDetails(!isOpenDetails)
-            setIsDadModeDisabled(false)
+            setIsDndModeDisabled(false)
         }}>.</div>
     </section>
 }

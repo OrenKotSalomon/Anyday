@@ -1,7 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+import { userService } from '../../services/user.service.js'
+import { showErrorMsg, showSuccessMsg } from '../../services/event-bus.service.js';
+
+
 export function LoginStepOne({ props }) {
+    const [credentials, setCredentials] = useState({ email: '', username: '', password: '', fullname: '', imgUrl: ''  })
+    const [users, setUsers] = useState([])
+
+    useEffect(() => {
+        loadUsers()
+    }, [])
+
+    async function loadUsers() {
+        try {
+            const users = await userService.getUsers()
+            setUsers(users)
+        }
+        catch (err) {
+            console.error('Error:', err)
+        }
+    }
+
+    function clearState() {
+        setCredentials({ email: '', username: '', password: '', fullname: '', imgUrl: ''  })
+    }
+
+
+    function onValidateEmail(ev = null) {
+        if (ev) ev.preventDefault()
+        if (!credentials.email) return
+        props.validateEmail(credentials)
+        clearState()
+    }
 
     function handleChange({ target }) {
         let { value, name: field } = target
@@ -12,8 +44,11 @@ export function LoginStepOne({ props }) {
         ev.preventDefault()
         const valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
         if (props.cardentials.email.match(valid)) {
+            onValidateEmail(credentials.email)
             props.setLoginPaging("login-step-2")
-        } else alert('Please enter a valid email address')
+        } else {
+            showErrorMsg('Please enter a valid email address')
+        }
     }
 
     return (

@@ -13,7 +13,7 @@ import { StatusModal } from "./tasks-modals/status-modal";
 import { PriorityModal } from "./tasks-modals/priority-modal";
 import { DynamicCmp } from "./dynamic-cmp";
 
-export function TaskPreview({ task, board, group, openModal, provided, setIsDadModeDisabled }) {
+export function TaskPreview({ task, board, group, openModal, provided, setIsDndModeDisabled }) {
 
     const [isOpenDetails, setIsOpenDetails] = useState(false)
 
@@ -65,7 +65,7 @@ export function TaskPreview({ task, board, group, openModal, provided, setIsDadM
                             <MenuItem
                                 onClick={() => {
                                     setIsOpenDetails(!isOpenDetails);
-                                    setIsDadModeDisabled(true);
+                                    setIsDndModeDisabled(true);
                                 }}
                                 icon={Open}
                                 title="Open"
@@ -99,7 +99,7 @@ export function TaskPreview({ task, board, group, openModal, provided, setIsDadM
                 </div>
                 <div className="msg-btn-container" onClick={() => {
                     setIsOpenDetails(!isOpenDetails)
-                    setIsDadModeDisabled(true)
+                    setIsDndModeDisabled(true)
                 }}
                 >
 
@@ -144,7 +144,7 @@ export function TaskPreview({ task, board, group, openModal, provided, setIsDadM
                 group={group}
                 isOpenDetails={isOpenDetails}
                 setIsOpenDetails={setIsOpenDetails}
-                setIsDadModeDisabled={setIsDadModeDisabled} />}
+                setIsDndModeDisabled={setIsDndModeDisabled} />}
         </div>
 
     </section>
