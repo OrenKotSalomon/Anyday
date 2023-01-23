@@ -1,12 +1,13 @@
-import { useState } from "react"
+import { DialogContentContainer, DatePicker, Avatar, Flex, Search, StoryDescription, Dropdown } from 'monday-ui-react-core'
+import dayjs from "dayjs"
+
 import Harel from '../assets/img/Harel.jpg'
 import Yossi from '../assets/img/Yossi.jpg'
 import Oren from '../assets/img/Oren.jpg'
-import { DialogContentContainer, DatePicker, Avatar, Flex, Search, StoryDescription, Dropdown } from 'monday-ui-react-core'
-import { } from 'monday-ui-react-core/icons'
-import dayjs from "dayjs"
+
 import { DATE_PICKER, MEMEBER_PICKER, PRIORITY_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../services/board.service.local"
 
+import { useState } from "react"
 export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
     const optionsAvatar = [{
         value: "Harel",

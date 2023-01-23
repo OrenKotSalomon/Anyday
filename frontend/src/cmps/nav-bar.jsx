@@ -1,13 +1,13 @@
 import { Link, NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import routes from '../routes'
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
-import { login, logout, signup } from '../store/user.actions.js'
-import { LoginSignup } from './login-signupReference.jsx'
+import { Avatar } from 'monday-ui-react-core'
+
 import logo from '../assets/img/logo.png'
 import Harel from '../assets/img/Harel.jpg'
 import wm_icon from '../assets/img/wm_icon.avif'
-import { Avatar } from 'monday-ui-react-core'
+
+import { login, logout, signup } from '../store/user.actions.js'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 
 export function NavBar() {
 
@@ -46,8 +46,9 @@ export function NavBar() {
                 <div className="nav-a-container">
                     <NavLink to='/'><img className='nav-bar-logo' src={logo} style={{ minWidth: '55px' }} /></NavLink>
                 </div>
-                <hr style={{ width: '75%' }} />
+                <div className='spacer-nav'></div>
                 <div className="nav-a-container">
+                    <div className='main-board-link-container'></div>
                     <NavLink to={`/board/${board._id}`}>< img className='nav-bar-board-logo' src={wm_icon} style={{ maxWidth: '30px' }} /></NavLink>
                 </div>
             </div>

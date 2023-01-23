@@ -1,10 +1,9 @@
-import Oren from '../assets/img/Oren.jpg'
-import Harel from '../assets/img/Harel.jpg'
-
+import dayjs from 'dayjs';
 import { Avatar, AvatarGroup, Icon, EditableHeading } from 'monday-ui-react-core';
 import { TextCopy } from 'monday-ui-react-core/icons';
-import { useState } from 'react';
-import dayjs from 'dayjs';
+
+import Oren from '../assets/img/Oren.jpg'
+import Harel from '../assets/img/Harel.jpg'
 import { DATE_PICKER, MEMEBER_PICKER, STATUS_PICKER, PRIORITY_PICKER, TEXT_PICKER } from '../services/board.service.local';
 
 export function DynamicCmp({ cmp, info, openModal, handleChange }) {

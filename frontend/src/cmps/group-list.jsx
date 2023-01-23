@@ -1,14 +1,16 @@
 import { EditableHeading, Tooltip } from 'monday-ui-react-core'
-import { useEffect, useState } from 'react';
-import { updateBoard, updateGroup } from '../store/board.actions';
-import { TaskPreview } from "./task-preview";
+
 import { MenuButton, Menu, MenuItem, ColorPicker, Icon } from 'monday-ui-react-core'
 import { Delete, Bullet, Duplicate, Add } from 'monday-ui-react-core/icons'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+
+import { updateBoard, updateGroup } from '../store/board.actions';
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service';
+import { TaskPreview } from "./task-preview";
 import { ADD_GROUP, ADD_GROUP_TASK, boardService, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, MEMEBER_PICKER, ON_DRAG_TASK, PRIORITY_PICKER, STATUS_PICKER, TEXT_PICKER } from '../services/board.service.local';
 import { utilService } from '../services/util.service';
 import { AddLabelModal } from './tasks-modals/add-label-modal';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { useEffect, useState } from 'react';
 
 export function GroupList({ board, group, openModal, provided, setIsDadModeDisabled, isDadModeDisabled }) {
 
@@ -90,7 +92,7 @@ export function GroupList({ board, group, openModal, provided, setIsDadModeDisab
         newOrderedTasks.splice(result.destination.index, 0, reorderedTask)
         group.tasks = newOrderedTasks
         updateGroup(board, group, ON_DRAG_TASK)
-        setListToUpdate(newOrderedTasks)
+        // setListToUpdate(newOrderedTasks)
     }
 
     return <section className='group-list'
