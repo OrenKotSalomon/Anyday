@@ -121,7 +121,7 @@
   line-height: 28px;
   border: none;
   font-size: 18px;
-  color: #fff;
+  color: $main-bgc-white;
   background-color: $btn-blue;
   margin: 0;
   margin-top: 20px;
@@ -164,7 +164,7 @@
 }
 
 @mixin btn {
-  color: #fff;
+  color: $main-bgc-white;
   background-color: $btn-blue;
   border: 0;
   padding: 7px;
@@ -248,7 +248,7 @@
 @mixin side-bar-btn {
   // border: none;
   position: relative;
-  background-color: #fff;
+  background-color: $main-bgc-white;
   border-radius: 20px;
   border: $border-cell;
   line-height: 22.5px;
@@ -267,7 +267,7 @@
   }
 
   &:hover {
-    color: #fff;
+    color: $main-bgc-white;
     background-color: #0073ea;
     width: 35px;
   }
@@ -279,7 +279,7 @@
 }
 
 @mixin spacer {
-  border-bottom: 1px solid #d0d4e4;
+  border-bottom: 1px solid $cell-border-color;
   margin: 0 auto;
   width: 100%;
 }

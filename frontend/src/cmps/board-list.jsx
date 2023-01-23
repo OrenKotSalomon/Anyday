@@ -27,9 +27,11 @@ export function BoardList({ onDuplicateBoard, onRemoveBoard }) {
 
     if (!boards) return <div>Loading...</div>
     return <section className='board-list'>
-        {boards.map(board => <NavLink to={`/board/${board._id}`} key={board._id} className="board-list-a flex">
-            <Icon iconType={Icon.type.SVG} icon={Board} iconLabel="my bolt svg icon" iconSize={20} />
-            <span>{board.title}</span> 
+        {boards.map(board => <NavLink to={`/board/${board._id}`} key={board._id} className="board-list-a">
+            <div className="left-board-a-container flex align-center">
+                <Icon iconType={Icon.type.SVG} icon={Board} iconLabel="my bolt svg icon" iconSize={20} />
+                <span>{board.title}</span>
+            </div>
             <div className="board-menu-btn" onClick={(ev) => ev.preventDefault()}>
                 <MenuButton className="board-list-menu-btn"
                 // onClick={ev => onMenuClick(ev)}

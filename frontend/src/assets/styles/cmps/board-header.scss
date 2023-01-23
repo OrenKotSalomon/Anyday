@@ -23,8 +23,11 @@
       height: 42px;
       vertical-align: baseline;
       letter-spacing: 0px;
-
       font-family: poppins-medium;
+      
+      @include for-wide-layout {
+        font-size: 32px;
+      }
     }
 
   }
@@ -99,7 +102,7 @@
     .info-header {
       margin-top: 5px;
       @include btn-no-style;
-      color: #676879;
+      color: $icon-color;
     }
   }
 
@@ -112,7 +115,7 @@
     .star {
       @include btn-no-style;
       margin-top: 5px;
-      color: #676879;
+      color: $icon-color;
     }
   }
 }
@@ -131,7 +134,7 @@
   line-height: 22px;
 
   .board-header-txt {
-    color: #676879;
+    color: $icon-color;
     white-space: nowrap;
     max-width: 600px;
     overflow: hidden;
@@ -244,7 +247,7 @@
 }
 
 .monday-style-button--kind-tertiary {
-  color: #676879;
+  color: $icon-color;
   padding: 5px;
   padding-left: 5px;
   padding-right: 10px;

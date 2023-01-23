@@ -74,7 +74,7 @@
   text-align: left;
   @include left-sticky;
 
-  background-color: #ffffff;
+  background-color: $main-bgc-white;
 
   .task-name-cell {
     // need to configure with resize
@@ -201,7 +201,7 @@
   position: relative;
   @include status-layout;
   text-align: center;
-  color: #ffffff;
+  color: $main-bgc-white;
   height: 36px;
 
   border-bottom: $border-cell;
@@ -231,7 +231,7 @@
     width: 50%;
     height: 24px;
     width: 129px;
-    border: 1px solid #d0d4e4;
+    border: 1px solid $cell-border-color;
   }
 
   .input-txt-label-container {
