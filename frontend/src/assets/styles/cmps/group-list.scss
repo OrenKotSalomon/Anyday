@@ -16,7 +16,6 @@
     h4 {
       // margin-top: 0.625rem;
       margin-left: rem(18px);
-
     }
 
     &:hover {
@@ -26,9 +25,7 @@
     }
 
     .group-header-editable-name {
-
       .monday-style-clickable {
-
         height: 26px;
 
         // color: #d5d8e4;
@@ -39,7 +36,6 @@
       }
 
       h4 {
-
         font-family: poppins-regular-400;
         font-weight: 600;
       }
@@ -48,7 +44,6 @@
         margin: 0;
         outline: none;
       }
-
     }
 
     .group-header-name {
@@ -72,13 +67,23 @@
       transition: 0.3s;
     }
 
+    .group-collapse-btn-container {
+      position: absolute;
+      top: 5.5%;
+      left: 7px;
+      transition: 0.3s;
+      
+      button {
+        border: 0;
+        background-color: transparent;
+      }
+    }
     .group-color-picker {
       position: absolute;
       top: -35px;
       left: 250px;
       rotate: 90deg;
       z-index: 3;
-
     }
   }
 
@@ -155,7 +160,6 @@
       background-color: $main-bgc-white;
       left: -40px;
     }
-
   }
 }
 
@@ -241,7 +245,6 @@
     height: $cell-height;
     border-bottom: $border-cell;
   }
-
 }
 
 .add-task-input-container {
@@ -269,7 +272,6 @@
   }
 
   .monday-style-clickable {
-
     h6 {
       height: 24px;
       line-height: revert;
@@ -277,7 +279,7 @@
 
     // color: #d5d8e4;
     input {
-      height: 24px
+      height: 24px;
     }
   }
 
@@ -308,7 +310,6 @@
   text-align: center;
   border-bottom: $border-cell;
   border-top: $border-cell;
-
 }
 
 .date-label-header {
@@ -338,9 +339,6 @@
 
     .hidden-task {
       min-width: rem(400px);
-
     }
-
   }
-
 }
