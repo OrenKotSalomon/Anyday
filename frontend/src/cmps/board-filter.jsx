@@ -11,6 +11,7 @@ export function BoardFilter({ board }) {
     function onAddNewTask() {
         updateTask(board, undefined, ADD_TASK_FROM_HEADER)
     }
+    
     return <section className='board-filter'>
         <Flex gap='18' align='End'
 

@@ -12,6 +12,7 @@ import { utilService } from '../services/util.service.js';
 import { boardService } from '../services/board.service.js';
 import { CHANGE_TASK_TITLE, ADD_TASK_COMMENT, DELETE_TASK_COMMENT } from '../services/board.service.local.js';
 import { updateTask } from '../store/board.actions';
+import { TextEditor } from './text-editor.jsx';
 
 
 export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, group, setIsDadModeDisabled }) {
@@ -224,6 +225,8 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
             >
                 <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Drag} iconLabel="my svg icon" iconSize={14} />
             </div>
+
+            <TextEditor />
 
 
         </div >

@@ -128,8 +128,10 @@ function getNewTask() {
         id: utilService.makeId(),
         title: 'New Task',
         status: '',
+        priority: '',
         members: [],
-        dueDate: ''
+        dueDate: '',
+        txt: ''
     }
 
 }
