@@ -1,5 +1,5 @@
 import { EditableHeading, Tooltip } from 'monday-ui-react-core'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { updateBoard, updateGroup } from '../store/board.actions';
 import { TaskPreview } from "./task-preview";
 import { MenuButton, Menu, MenuItem, ColorPicker, Icon } from 'monday-ui-react-core'
@@ -17,6 +17,13 @@ export function GroupList({ board, group, openModal, provided , setIsDadModeDisa
     const [groupToUpdate, setGroupToUpdate] = useState(group)
     const [newTaskTitle, setNewTaskTitle] = useState('')
     const [listToUpdate, setListToUpdate] = useState(group.tasks)
+
+    // useEffect(() => {
+    //     board.groups.map((group) => {
+    //         console.log('group:', group)
+    //         setListToUpdate(group.tasks)
+    //     })
+    // }, [group.tasks])
 
     function onFinishEditing() {
         updateGroup(board, groupToUpdate, CHANGE_GROUP_TITLE)
@@ -79,11 +86,14 @@ export function GroupList({ board, group, openModal, provided , setIsDadModeDisa
 
     function handleOnDragEnd(result) {
         if (!result.destination) return
-
+        console.log('listToUpdate:', listToUpdate)
         const newOrderedTasks = Array.from(listToUpdate)
+        console.log('newOrderedTasksBBB:', newOrderedTasks)
         const [reorderedTask] = newOrderedTasks.splice(result.source.index, 1)
+        console.log('reorderedTask:', reorderedTask)
         newOrderedTasks.splice(result.destination.index, 0, reorderedTask)
         group.tasks = newOrderedTasks
+        console.log('newOrderedTasks:', newOrderedTasks)
         updateGroup(board, group, ON_DRAG_TASK)
         setListToUpdate(newOrderedTasks)
     }
