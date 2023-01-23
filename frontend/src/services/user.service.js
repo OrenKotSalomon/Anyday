@@ -37,7 +37,7 @@ function remove(userId) {
     // return httpService.delete(`user/${userId}`)
 }
 
-async function update({_id, score}) {
+async function update({ _id, score }) {
     const user = await storageService.get('user', _id)
     user.score = score
     await storageService.put('user', user)
@@ -49,12 +49,18 @@ async function update({_id, score}) {
 }
 
 async function login(userCred) {
-    const users = await storageService.query('user')
-    const user = users.find(user => user.username === userCred.username)
-    // const user = await httpService.post('auth/login', userCred)
-    if (user) {
+    try {
+        const users = await storageService.query('user')
+        const user = users.find(user => user.email === userCred.email)
+        if (user) {
+            return saveLocalUser(user)
+        } else {
+            console.log('wrong pw or email')
+        }
+        // const user = await httpService.post('auth/login', userCred)
         // socketService.login(user._id)
-        return saveLocalUser(user)
+    } catch (err) {
+        console.error(err)
     }
 }
 async function signup(userCred) {
@@ -80,7 +86,7 @@ async function changeScore(by) {
 
 
 function saveLocalUser(user) {
-    user = {_id: user._id, fullname: user.fullname, imgUrl: user.imgUrl, score: user.score}
+    user = { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl, score: user.score }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user
 }

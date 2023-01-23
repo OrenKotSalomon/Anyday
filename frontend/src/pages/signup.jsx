@@ -1,14 +1,19 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
+
+import { useSelector } from 'react-redux';
 
 import {userService} from '../services/user.service.js'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js';
 
 export function Signup() {
-    const [credentials, setCredentials] = useState({ email: '', username: '', password: '', fullname: '', imgUrl: '' })
+    const boards = useSelector((storeState) => storeState.boardModule.boards)
+    const [credentials, setCredentials] = useState({ email: '', username: '', password: '', fullname: '', imgUrl: 'https://filestore.community.support.microsoft.com/api/images/39da0bc2-ad7d-434d-bc10-fb80d3a85b7c?upload=true' })
+    const navigate = useNavigate()
 
     function clearState() {
-        setCredentials({ email: '', username: '', password: '', fullname: '', imgUrl: ''  })
+        setCredentials({ email: '', username: '', password: '', fullname: '', imgUrl: 'https://filestore.community.support.microsoft.com/api/images/39da0bc2-ad7d-434d-bc10-fb80d3a85b7c?upload=true'  })
     }
 
     function handleChange(ev) {
@@ -20,12 +25,11 @@ export function Signup() {
     async function onSignup(ev = null) {
         if (ev) ev.preventDefault()
         if (!credentials.email || !credentials.password || !credentials.fullname) return
-        console.log('here??')
         try {
             const user = await userService.signup(credentials)
             showSuccessMsg(`Welcome ${user.fullname}`)
-            console.log('user onSignup -',user)
             clearState()
+            navigate(`/board/${boards[0]._id}`)
         }
         catch (err) {
             showErrorMsg('OOps try again', err)
