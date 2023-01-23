@@ -10,7 +10,7 @@
     width: 65px;
     position: sticky;
     top: 0;
-    z-index: 555;
+    z-index: 3;
 
     nav {
       min-height: 100%;
@@ -60,12 +60,12 @@
     }
   }
 
-  .spacer {
-    @include spacer;
-    padding-top: 10px;
-  }
 }
 
+.side-bar-spacer {
+  @include spacer;
+  padding-top: 10px;
+}
 .side-board-btn-container {
   display: none;
 

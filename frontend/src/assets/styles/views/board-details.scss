@@ -19,7 +19,7 @@
     position: absolute;
   }
 
-  >* {
+  > * {
     grid-column: 2;
   }
 }
@@ -36,7 +36,7 @@
   // top: -91px;
 }
 
-.buttom-add-group-btn {
+.bottom-add-group-btn {
   @include flex-center;
   justify-self: flex-start;
   color: $main-color;
@@ -46,7 +46,9 @@
   gap: 5px;
   height: 32px;
   width: 142px;
-
+  margin-top: 20px;
+  position: sticky;
+  left: 40px;
   &:hover {
     background-color: #dcdfec;
   }

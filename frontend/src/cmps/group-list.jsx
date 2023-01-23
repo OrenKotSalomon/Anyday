@@ -161,8 +161,7 @@ export function GroupList({ board, group, openModal, provided, setIsDndModeDisab
                             <div style={{ backgroundColor: group.style }} className='left-border collapsed'></div>
                             <div className='collapsed-group-header'>
                                 <div className="monday-storybook-tooltip_bottom group-list-editable-header flex column">
-                                    <Tooltip
-                                        content="Click to Edit" animationType="expand">
+                                    <Tooltip>
                                         <EditableHeading
                                             insetFocus={true}
                                             className="group-header-editable-name"
@@ -180,11 +179,11 @@ export function GroupList({ board, group, openModal, provided, setIsDndModeDisab
                             </div>
                         </div>
                     </div>
-                    {/* <div className="main-header-labels-container flex">
+                    <div className="main-header-labels-container collapsed flex">
                         {board.cmpsOrder.map((cmp, idx) => renderGroupLabels(cmp, idx))}
-                    </div> */}
+                    </div>
 
-                    {/* <div className='main-right-header flex'>
+                    <div className='main-right-header flex'>
                         <div className="add-label-btn-container"
                             style={{
                                 backgroundColor: isAddingLabel ? '#d5d8e4' : ''
@@ -204,7 +203,7 @@ export function GroupList({ board, group, openModal, provided, setIsDndModeDisab
                             </button>
                         </div>
                         {isAddingLabel && <AddLabelModal />}
-                    </div> */}
+                    </div>
                 </div>
             </div>
 
@@ -261,8 +260,7 @@ export function GroupList({ board, group, openModal, provided, setIsDndModeDisab
                     </div>
                     <div className="monday-storybook-tooltip_bottom group-list-editable-header">
 
-                        <Tooltip
-                            content="Click to Edit" animationType="expand">
+                        <Tooltip>
                             <EditableHeading
                                 insetFocus={true}
                                 className="group-header-editable-name"

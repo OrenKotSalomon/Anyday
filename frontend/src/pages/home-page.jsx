@@ -17,8 +17,7 @@ export function HomePage() {
 
     useEffect(() => {
         loadBoards()
-
-    }, []);
+    }, [])
 
     function scrollTop() {
         window.scrollTo({ top: 0, behavior: 'smooth' })
