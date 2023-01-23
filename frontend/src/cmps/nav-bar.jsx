@@ -12,6 +12,7 @@ import { Avatar } from 'monday-ui-react-core'
 export function NavBar() {
 
     const user = useSelector(storeState => storeState.userModule.user)
+    const board = useSelector(storeState => storeState.boardModule.board)
 
     async function onLogin(credentials) {
         try {
@@ -47,7 +48,7 @@ export function NavBar() {
                 </div>
                 <hr style={{ width: '75%' }} />
                 <div className="nav-a-container">
-                    <NavLink to='/board/'>< img className='nav-bar-board-logo' src={wm_icon} style={{ maxWidth: '30px' }} /></NavLink>
+                    <NavLink to={`/board/${board._id}`}>< img className='nav-bar-board-logo' src={wm_icon} style={{ maxWidth: '30px' }} /></NavLink>
                 </div>
             </div>
             {/* <button>Notifications</button> */}

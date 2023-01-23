@@ -273,7 +273,7 @@
   @include status-layout;
   border-bottom: $border-cell;
   border-top: $border-cell;
-  border-left: $border-cell;
+
 }
 
 .priority-label-header {
@@ -289,6 +289,7 @@
   text-align: center;
   border-bottom: $border-cell;
   border-top: $border-cell;
+  border-left: $border-cell;
 }
 
 .date-label-header {
@@ -304,6 +305,8 @@
   align-items: center;
   height: 36px;
   margin-bottom: 26px;
+  // opacity: 0.6;
+  // border-bottom-left-radius: 6px;
 
   .hidden-task-container {
     position: sticky;
