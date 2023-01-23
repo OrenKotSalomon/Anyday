@@ -106,22 +106,47 @@ export function GroupList({ board, group, openModal, provided, setIsDndModeDisab
             {...provided.dragHandleProps}
             ref={provided.innerRef}>
 
-            <div className="group-header-container">
+            <div className="group-header-container collapsed">
                 <div className="group-header-name"
                     style={{ color: group.style }}>
 
-                    <GroupHeaderMenuBtn
-                        group={group}
-                        onAddGroup={onAddGroup}
-                        onSetColorGroup={onSetColorGroup}
-                        onDuplicateGroup={onDuplicateGroup}
-                        onDeleteGroup={onDeleteGroup} />
+                    <MenuButton className="group-list-menu-btn" >
+                        <Menu
+                            id="menu"
+                            size="medium"
+                            style={{
+                                backgroundColor: 'red',
+                                color: 'red'
+                            }}
+                        >
+                            <MenuItem
+                                onClick={() => onAddGroup(group)}
+                                icon={Add}
+                                title="Add Group"
+                            />
+                            <MenuItem
+                                onClick={() => onSetColorGroup()}
+                                icon={Bullet}
+                                title="Change Color"
+                            />
+                            <MenuItem
+                                onClick={() => onDuplicateGroup(group)}
+                                icon={Duplicate}
+                                title="Duplicate Group"
+                            />
+                            <MenuItem
+                                onClick={() => onDeleteGroup(group)}
+                                icon={Delete}
+                                title="Delete"
+                            />
+                        </Menu>
+                    </MenuButton>
 
                     {isPickColor && <ColorPicker className="group-color-picker"
                         colorSize={ColorPicker.sizes.SMALL}
                         onSave={(value) => onColorPick(value)} />}
                     <div className="group-collapse-btn-container">
-                        <Tooltip content="Collapse group" animationType="expand">
+                        <Tooltip content="Expand group" animationType="expand">
                             <button onClick={() => onCollapseGroup(group)}><Icon style={{ color: group.style }} iconType={Icon.type.SVG} icon={DropdownChevronRight} iconSize={19} /></button>
                         </Tooltip>
                     </div>
@@ -130,10 +155,10 @@ export function GroupList({ board, group, openModal, provided, setIsDndModeDisab
                     <div className='main-left-header'>
                         <div className='floatin-white-box'></div>
 
-                        <div className='left-row-container '>
+                        <div className='left-row-container collapsed '>
                             <div style={{ backgroundColor: group.style }} className='left-border collapsed'></div>
                             <div className='collapsed-group-header'>
-                                <div className="monday-storybook-tooltip_bottom group-list-editable-header">
+                                <div className="monday-storybook-tooltip_bottom group-list-editable-header flex column">
                                     <Tooltip
                                         content="Click to Edit" animationType="expand">
                                         <EditableHeading
@@ -148,13 +173,14 @@ export function GroupList({ board, group, openModal, provided, setIsDndModeDisab
                                             type={EditableHeading.types.h4}
                                         />
                                     </Tooltip>
+                                    <div className='tasks-count-container'>{group.tasks.length + ' '} Tasks</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="main-header-labels-container flex">
+                    {/* <div className="main-header-labels-container flex">
                         {board.cmpsOrder.map((cmp, idx) => renderGroupLabels(cmp, idx))}
-                    </div>
+                    </div> */}
 
                     {/* <div className='main-right-header flex'>
                         <div className="add-label-btn-container"
@@ -191,12 +217,37 @@ export function GroupList({ board, group, openModal, provided, setIsDndModeDisab
                 <div className="group-header-name"
                     style={{ color: group.style }}>
 
-                    <GroupHeaderMenuBtn
-                        group={group}
-                        onAddGroup={onAddGroup}
-                        onSetColorGroup={onSetColorGroup}
-                        onDuplicateGroup={onDuplicateGroup}
-                        onDeleteGroup={onDeleteGroup} />
+                    <MenuButton className="group-list-menu-btn" >
+                        <Menu
+                            id="menu"
+                            size="medium"
+                            style={{
+                                backgroundColor: 'red',
+                                color: 'red'
+                            }}
+                        >
+                            <MenuItem
+                                onClick={() => onAddGroup(group)}
+                                icon={Add}
+                                title="Add Group"
+                            />
+                            <MenuItem
+                                onClick={() => onSetColorGroup()}
+                                icon={Bullet}
+                                title="Change Color"
+                            />
+                            <MenuItem
+                                onClick={() => onDuplicateGroup(group)}
+                                icon={Duplicate}
+                                title="Duplicate Group"
+                            />
+                            <MenuItem
+                                onClick={() => onDeleteGroup(group)}
+                                icon={Delete}
+                                title="Delete"
+                            />
+                        </Menu>
+                    </MenuButton>
 
                     {isPickColor && <ColorPicker className="group-color-picker"
                         colorSize={ColorPicker.sizes.SMALL}
