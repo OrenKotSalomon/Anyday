@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { updateBoard, updateGroup } from '../store/board.actions';
-import { ADD_GROUP, ADD_GROUP_TASK, boardService, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, MEMEBER_PICKER, ON_DRAG_TASK, PRIORITY_PICKER, STATUS_PICKER, TEXT_PICKER } from '../services/board.service.local';
+import { ADD_GROUP, ADD_GROUP_TASK, boardService, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, LABEL_STATUS_PICKER, MEMEBER_PICKER, ON_DRAG_TASK, PRIORITY_PICKER, STATUS_PICKER, TEXT_PICKER } from '../services/board.service.local';
 import { TaskPreview } from "./task-preview";
 import { utilService } from '../services/util.service';
 import { AddLabelModal } from './tasks-modals/add-label-modal';
@@ -70,6 +70,8 @@ export function GroupList({ board, group, openModal, provided, setIsDndModeDisab
         switch (cmp) {
             case STATUS_PICKER:
                 return <div key={idx} className="status-label-header ">Status</div>
+            case LABEL_STATUS_PICKER:
+                return <div key={idx} className="label-statuses-header">Label</div>
             case MEMEBER_PICKER:
                 return <div key={idx} className="person-label-header ">Person</div>
             case DATE_PICKER:

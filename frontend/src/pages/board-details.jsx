@@ -8,7 +8,7 @@ import { DynamicModal } from "../cmps/dynamic-modal";
 import { GroupList } from "../cmps/group-list";
 import { SideGroupBar } from "../cmps/side-group-bar";
 
-import { ADD_GROUP_FROM_BUTTOM, DATE_PICKER, MEMEBER_PICKER, ON_DRAG_GROUP, PRIORITY_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../services/board.service.local";
+import { ADD_GROUP_FROM_BUTTOM, DATE_PICKER, LABEL_STATUS_PICKER, MEMEBER_PICKER, ON_DRAG_GROUP, PRIORITY_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_LABEL_STATUS, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../services/board.service.local";
 import { loadBoard, updateBoard, updateGroup, updateTask } from "../store/board.actions";
 
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
@@ -23,7 +23,6 @@ export function BoardDetails() {
     const [cmp, setCmp] = useState({})
     const [groupToUpdate, setGroupToUpdate] = useState([])
     const [isDndModeDisabled, setIsDndModeDisabled] = useState(false)
-
 
     const boardContainer = useRef()
 
@@ -44,10 +43,12 @@ export function BoardDetails() {
         // console.log('TYPE', type);
         // console.log(labelPick);
         data.labelPick = labelPick
-        // console.log(data);
+        console.log(data);
         switch (type) {
             case UPDATE_TASK_STATUS:
                 return updateTask(board, data, UPDATE_TASK_STATUS)
+            case UPDATE_TASK_LABEL_STATUS:
+                return updateTask(board, data, UPDATE_TASK_LABEL_STATUS)
             case UPDATE_TASK_DATE:
                 return updateTask(board, data, UPDATE_TASK_DATE)
             case UPDATE_TASK_PRIORITY:
@@ -66,6 +67,8 @@ export function BoardDetails() {
         console.log(labelPos);
         setIsModalOpen(true)
 
+        // short switch case , maybe swtich case only on info
+
         // statuses memebers should go on board obj ?
         switch (info) {
             case STATUS_PICKER:
@@ -75,24 +78,17 @@ export function BoardDetails() {
                         data: { groupId: data.groupId, taskId: data.task.id },
                         pos: { top: labelPos.top + boardScrollTop, left: labelPos.left + boardScrollLeft },
                         type: info,
-                        statuses: [
-                            {
-                                label: 'done',
-                                bgColor: '#00c875'
-                            },
-                            {
-                                label: 'working on it',
-                                bgColor: '#fdab3d'
-                            },
-                            {
-                                label: 'stuck',
-                                bgColor: '#e2445c'
-                            },
-                            {
-                                label: '',
-                                bgColor: '#c4c4c4'
-                            },
-                        ]
+                        statuses: board.statuses
+                    }
+                })
+            case LABEL_STATUS_PICKER:
+                return setCmp(prev => {
+                    return {
+                        ...prev,
+                        data: { groupId: data.groupId, taskId: data.task.id },
+                        pos: { top: labelPos.top + boardScrollTop, left: labelPos.left + boardScrollLeft },
+                        type: info,
+                        labelStatuses: board.labelStatuses
                     }
                 })
             case MEMEBER_PICKER:
@@ -125,30 +121,9 @@ export function BoardDetails() {
                     return {
                         ...prev,
                         data: { groupId: data.groupId, taskId: data.task.id },
-                        pos: { top: labelPos.top, left: labelPos.left },
+                        pos: { top: labelPos.top + boardScrollTop, left: labelPos.left + boardScrollLeft },
                         type: info,
-                        priorities: [
-                            {
-                                label: 'critical ⚠️',
-                                bgColor: '#333333'
-                            },
-                            {
-                                label: 'high',
-                                bgColor: '#401694'
-                            },
-                            {
-                                label: 'medium',
-                                bgColor: '#5559df'
-                            },
-                            {
-                                label: 'low',
-                                bgColor: '#579bfc'
-                            },
-                            {
-                                label: '',
-                                bgColor: '#c4c4c4'
-                            },
-                        ]
+                        priorities: board.priorities
                     }
                 })
         }
@@ -191,9 +166,9 @@ export function BoardDetails() {
                                             board={board}
                                             group={group}
                                             openModal={openModal}
-                                            isDndModeDisabled = {isDndModeDisabled}
-                                            setIsDndModeDisabled = {setIsDndModeDisabled}
-                                            />
+                                            isDndModeDisabled={isDndModeDisabled}
+                                            setIsDndModeDisabled={setIsDndModeDisabled}
+                                        />
                                     )}
                                 </Draggable>
                             )}

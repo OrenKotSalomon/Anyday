@@ -58,7 +58,7 @@
   display: flex;
 
   .task-cells-row-container {
-    height: rem(36px);
+    height: $cell-height;
     flex: 1 1 auto;
     max-width: none;
   }
@@ -67,7 +67,7 @@
 .task-edit-wrapper {
   display: flex;
   justify-content: center;
-  height: 36px;
+  height: $cell-height;
   border-bottom: $border-cell;
   min-width: rem(400px);
   align-items: center;
@@ -79,7 +79,7 @@
   .menu-btn-container {
     position: absolute;
     width: 40px;
-    height: 36px;
+    height: $cell-height;
     background-color: $main-bgc-white;
     left: -40px;
   }
@@ -94,7 +94,7 @@
     @include left-border;
     border-top: none;
     border-bottom: none;
-    height: 38px;
+    height: $cell-height;
   }
 
   .msg-btn-container {
@@ -145,7 +145,7 @@
   display: flex;
   justify-content: center;
   width: rem(33px);
-  height: rem(36px);
+  height: rem($cell-height);
   border-right: $border-cell;
 
   .row-checkbox {
@@ -202,7 +202,7 @@
 
 .main-labels-container {
   border-bottom: $border-cell;
-  height: 36px;
+  height: $cell-height;
 }
 
 .status-label {
@@ -210,7 +210,7 @@
   @include status-layout;
   text-align: center;
   color: $main-bgc-white;
-  height: 36px;
+  height: $cell-height;
 
   border-bottom: $border-cell;
 
@@ -277,7 +277,7 @@
     font-size: rem(13px);
 
     .date-txt {
-      line-height: 36px;
+      line-height: $cell-height;
 
       padding: 4.5px;
       padding-left: 44px;

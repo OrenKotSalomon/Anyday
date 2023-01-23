@@ -4,7 +4,7 @@ import { TextCopy } from 'monday-ui-react-core/icons';
 
 import Oren from '../assets/img/Oren.jpg'
 import Harel from '../assets/img/Harel.jpg'
-import { DATE_PICKER, MEMEBER_PICKER, STATUS_PICKER, PRIORITY_PICKER, TEXT_PICKER } from '../services/board.service.local';
+import { DATE_PICKER, MEMEBER_PICKER, STATUS_PICKER, PRIORITY_PICKER, TEXT_PICKER, LABEL_STATUS_PICKER } from '../services/board.service.local';
 
 export function DynamicCmp({ cmp, info, openModal, handleChange }) {
 
@@ -19,8 +19,6 @@ export function DynamicCmp({ cmp, info, openModal, handleChange }) {
                 return '#fdab3d'
             case 'stuck':
                 return '#e2445c'
-            case '':
-                return '#c4c4c4'
             case 'critical ⚠️':
                 return '#333333'
             case 'high':
@@ -29,6 +27,14 @@ export function DynamicCmp({ cmp, info, openModal, handleChange }) {
                 return '#5559df'
             case 'low':
                 return '#579bfc'
+            case 'label 1':
+                return '#9aadbd'
+            case 'label 2':
+                return '#0086c0'
+            case 'label 3':
+                return '#9d99b9'
+            case '':
+                return '#c4c4c4'
         }
     }
 
@@ -38,6 +44,13 @@ export function DynamicCmp({ cmp, info, openModal, handleChange }) {
                 onClick={(ev) => openModal(ev, { task: cmp.task, groupId: cmp.groupId }, STATUS_PICKER)}
                 style={{ backgroundColor: getLabelColor(info.status) }} >
                 {info.status}
+                <div className="add-note"></div>
+            </div>
+        case LABEL_STATUS_PICKER:
+            return <div className="status-label"
+                onClick={(ev) => openModal(ev, { task: cmp.task, groupId: cmp.groupId }, LABEL_STATUS_PICKER)}
+                style={{ backgroundColor: getLabelColor(info.labelStatus) }} >
+                {info.labelStatus}
                 <div className="add-note"></div>
             </div>
         case MEMEBER_PICKER:
