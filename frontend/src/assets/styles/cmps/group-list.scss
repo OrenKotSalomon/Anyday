@@ -1,12 +1,13 @@
 .group-list {
   width: max-content;
   font-family: figtree-regular;
+  padding-top: 7px;
 
   .group-header-container {
     position: relative;
     display: block;
     height: 2.75rem;
-    height: 84px;
+    height: rem(78px);
     position: sticky;
     top: 210px;
     z-index: 6;
@@ -106,7 +107,7 @@
 
   border-top-left-radius: 6px;
 
-  margin-top: 20px;
+  margin-top: 14px;
 
   .main-right-header {
     position: relative;

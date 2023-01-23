@@ -141,14 +141,28 @@
 
 .task-title {
   @include line-elipsis;
-  min-width: 32px;
+  min-width: rem(290px);
   margin-top: 4px;
   padding-left: 20px;
 
-  .element-type-h5 {
-    font-size: rem(14px);
-    font-family: figtree-regular;
-    font-weight: 400;
+  .monday-style-clickable {
+
+    h5 {
+      height: 22px;
+      line-height: revert;
+      font-size: rem(14px);
+      font-family: figtree-regular;
+      font-weight: 400;
+    }
+
+    // color: #d5d8e4;
+    input {
+      height: 22px;
+      font-size: rem(14px);
+      font-family: figtree-regular;
+      font-weight: 400;
+    }
+
   }
 }
 
@@ -197,12 +211,15 @@
   width: rem(139.33px);
   text-align: center;
   border-right: $border-cell;
+
   &:hover {
-    .txt-label-placeholder, input {
+
+    .txt-label-placeholder,
+    input {
       opacity: 1 !important;
     }
   }
-  
+
   input {
     opacity: 0;
     width: 50%;
@@ -210,13 +227,15 @@
     width: 129px;
     border: 1px solid #d0d4e4;
   }
-  
+
   .input-txt-label-container {
     position: relative;
+
     .txt-label-placeholder {
       opacity: 0;
       @include absoluteCenter;
       top: 60%;
+
       >* {
         cursor: text;
       }
