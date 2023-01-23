@@ -13,7 +13,7 @@ import { StatusModal } from "./tasks-modals/status-modal";
 import { PriorityModal } from "./tasks-modals/priority-modal";
 import { DynamicCmp } from "./dynamic-cmp";
 
-export function TaskPreview({ task, board, group, openModal, provided }) {
+export function TaskPreview({ task, board, group, openModal, provided, setIsDadModeDisabled }) {
 
     const [isOpenDetails, setIsOpenDetails] = useState(false)
 
@@ -34,8 +34,8 @@ export function TaskPreview({ task, board, group, openModal, provided }) {
         showSuccessMsg(`Task deleted successfully taskId:${data.id} `)
     }
 
-///////////////////// TODO ////////////////////////
-    function handleChange({target}) {
+    ///////////////////// TODO ////////////////////////
+    function handleChange({ target }) {
         // const {value} = target
         // console.log('value:', value)
         // updateTask(board, value, HANDLE_TXT_CHANGE)
@@ -55,7 +55,10 @@ export function TaskPreview({ task, board, group, openModal, provided }) {
                 }}
             >
                 <MenuItem
-                    onClick={() => setIsOpenDetails(!isOpenDetails)}
+                    onClick={() => {
+                        setIsOpenDetails(!isOpenDetails);
+                        setIsDadModeDisabled(true);
+                    }}
                     icon={Open}
                     title="Open"
                 />
@@ -87,7 +90,11 @@ export function TaskPreview({ task, board, group, openModal, provided }) {
                         <Icon iconType={Icon.type.SVG} icon={Open} iconLabel="Task Details" iconSize={16} /><span>Open</span>
                     </button> */}
                 </div>
-                <div className="msg-btn-container" onClick={() => setIsOpenDetails(!isOpenDetails)}>
+                <div className="msg-btn-container" onClick={() => {
+                    setIsOpenDetails(!isOpenDetails)
+                    setIsDadModeDisabled(true)
+                    }}
+                    >
 
                     <button className="msg-btn" style={task.comments ? { paddingRight: '5px' } : { paddingRight: '19px', paddingLeft: '20px' }}>
 
@@ -129,7 +136,8 @@ export function TaskPreview({ task, board, group, openModal, provided }) {
                 task={task}
                 group={group}
                 isOpenDetails={isOpenDetails}
-                setIsOpenDetails={setIsOpenDetails} />}
+                setIsOpenDetails={setIsOpenDetails}
+                setIsDadModeDisabled={setIsDadModeDisabled} />}
         </div>
 
     </section>

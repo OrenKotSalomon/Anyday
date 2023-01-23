@@ -51,7 +51,7 @@ export function HomePage() {
 
             <div className='home-page-link'>
                 <Link className='btn-get-started' to='/board'>Get Started <div className='btn-get-started-arrow-container'><span className='btn-get-started-arrow'>
-                    <Icon iconType={Icon.type.SVG} icon={MoveArrowRight} iconSize={16} />
+                    <Icon iconType={Icon.type.SVG} icon={MoveArrowRight} iconSize={18} />
                 </span></div> </Link>
                 <div className='home-page-promo'><span className='home-page-promo1'>No credit needed</span>✦<span className='home-page-promo2'>Unlimited time on Free plan</span></div>
             </div>
