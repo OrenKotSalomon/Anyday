@@ -29,13 +29,15 @@ export function TaskPreview({ task, board, group, openModal, provided }) {
     }
 
     function onDeleteTask(taskToDelete) {
-        const data = { id: taskToDelete.id, groupId: group.id }
+        const data = { taskId: taskToDelete.id, groupId: group.id }
+
         updateTask(board, data, DELETE_TASK)
         showSuccessMsg(`Task deleted successfully taskId:${data.id} `)
+        console.log('data', data);
     }
 
-///////////////////// TODO ////////////////////////
-    function handleChange({target}) {
+    ///////////////////// TODO ////////////////////////
+    function handleChange({ target }) {
         // const {value} = target
         // console.log('value:', value)
         // updateTask(board, value, HANDLE_TXT_CHANGE)
