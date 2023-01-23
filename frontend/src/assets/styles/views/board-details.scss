@@ -25,7 +25,11 @@
 }
 
 .groups-container {
-  padding-left: 40px !important;
+
+  @include for-narrow-layout {
+
+    padding-left: 40px !important;
+  }
 }
 
 .add-group-btn-container {

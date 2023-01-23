@@ -32,6 +32,29 @@
 
 .mobile-header-filter {
   display: flex;
+  position: sticky;
+  left: 0px;
+  padding-top: 10px;
+
+  .mobile-view-select {
+    margin-left: 20px;
+  }
+
+  .mobile-fitler-container {
+    display: flex;
+    font-size: 14px;
+    min-width: 60px;
+    // padding-left: 30px;
+    margin-left: 30px;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      position: relative;
+      top: 3px;
+      margin-right: 3px;
+    }
+  }
 
   .search-mobile-container {
     min-width: rem(375px);
@@ -39,22 +62,27 @@
 
     .input-slider-mobile {
       display: flex;
+      position: relative;
+      transition: 0.3s ease-in;
 
       .cancel-filter {
         border: none;
-        font-family: poppins-regular;
+        font-family: figtree-regular;
         background-color: $main-bgc-white;
         color: rgb(31, 30, 30);
-        font-size: 18px;
+        font-size: 16px;
 
       }
 
       .mobile-input-filter {
         min-width: rem(300px);
-        position: relative;
-        left: 400px;
-        transition: 0.3s ease-in;
+
       }
+
+    }
+
+    .icon-container {
+      padding-left: 150px;
 
     }
 
