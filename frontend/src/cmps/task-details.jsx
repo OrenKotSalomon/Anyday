@@ -202,7 +202,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                         </div>
                     </div>
 
-                    <div dangerouslySetInnerHTML={{ __html: comment.txt }}></div>
+                    <p dangerouslySetInnerHTML={{ __html: comment.txt }}></p>
                     {comment.imgUrl && comment.imgUrl !== '' ? <img src={`${comment.imgUrl}`} alt="" /> : ''}
 
                 </div>)}
