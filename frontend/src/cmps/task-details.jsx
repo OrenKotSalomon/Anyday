@@ -16,6 +16,7 @@ import { TextEditor } from './text-editor.jsx';
 
 
 export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, group, setIsDadModeDisabled }) {
+    
     const [isAddComment, setAddComment] = useState(false)
     const [newTitle, setNewTitle] = useState(task.title)
     const [newCommentTxt, setComment] = useState('')
