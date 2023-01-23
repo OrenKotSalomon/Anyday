@@ -165,7 +165,7 @@
 
   .task-main-container {
     display: flex;
-    min-width: rem(180px);
+
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: auto;
@@ -174,6 +174,7 @@
     font-size: 14px;
     border-top: $border-cell;
     border-bottom: $border-cell;
+    border-right: $border-cell;
   }
 
   .left-border {
@@ -242,8 +243,22 @@
   border-bottom-left-radius: 6px;
 
   .editable-add-task {
-    width: rem(300px);
+    width: rem(362px);
+
     opacity: 1;
+  }
+
+  .monday-style-clickable {
+
+    h6 {
+      height: 24px;
+      line-height: revert;
+    }
+
+    // color: #d5d8e4;
+    input {
+      height: 24px
+    }
   }
 
   .left-border-add-task {
@@ -255,15 +270,17 @@
 .status-label-header {
   text-align: center;
   @include status-layout;
-  @include left-bottom-border;
+  border-bottom: $border-cell;
   border-top: $border-cell;
+
 }
 
 .person-label-header {
-  @include left-bottom-border;
   @include person-layout;
   text-align: center;
+  border-bottom: $border-cell;
   border-top: $border-cell;
+  border-left: $border-cell;
 }
 
 .date-label-header {
@@ -272,4 +289,29 @@
   @include date-layout;
   text-align: center;
   @include left-bottom-border;
+}
+
+.label-sum-container {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  // opacity: 0.6;
+  // border-bottom-left-radius: 6px;
+
+  .hidden-task-container {
+    position: sticky;
+    z-index: 4;
+    left: 40px;
+    // border-bottom: 0.7px solid #d0d4e4;
+    display: flex;
+    align-items: center;
+    height: 36px;
+
+    .hidden-task {
+      min-width: rem(400px);
+
+    }
+
+  }
+
 }

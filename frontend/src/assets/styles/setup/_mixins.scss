@@ -227,7 +227,8 @@
 }
 
 @mixin date-layout {
-  line-height: 35px;
+  line-height: 38px;
+
   font-size: 14px;
   height: 36px;
   min-width: rem(139.33px);
@@ -287,4 +288,19 @@
   position: sticky;
   z-index: 4;
   left: 40px;
+}
+
+@mixin arrow-up-modal($num) {
+
+  position: absolute;
+  width: 0;
+  height: 0;
+  transform: translate(-50%, 0);
+  top: -10px;
+  left: $num;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid rgb(255, 255, 255);
+  border-color: $border-cell;
+
 }

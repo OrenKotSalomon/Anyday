@@ -1,7 +1,7 @@
 import { GroupList } from "../cmps/group-list";
 import { BoardHeader } from "../cmps/board-header";
 import { NavBar } from "../cmps/nav-bar";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ADD_GROUP_FROM_BUTTOM, DATE_PICKER, MEMEBER_PICKER, ON_DRAG_GROUP, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_STATUS } from "../services/board.service.local";
 import { SideGroupBar } from "../cmps/side-group-bar";
 import { loadBoard, updateBoard, updateGroup, updateTask } from "../store/board.actions";
@@ -20,7 +20,7 @@ export function BoardDetails() {
     const [cmp, setCmp] = useState({})
     const [groupToUpdate, setGroupToUpdate] = useState([])
 
-    // const boardContainer = useRef()
+    const boardContainer = useRef()
 
     useEffect(() => {
         setBoardAndGroups()
@@ -51,10 +51,11 @@ export function BoardDetails() {
 
     function openModal(ev, data, info) {
         let labelPos = ev.target.getBoundingClientRect()
-        // let bbb = boardContainer.current.getBoundingClientRect()
+        let boardScrollTop = boardContainer.current.scrollTop
+        let boardScrollLeft = boardContainer.current.scrollLeft
         // console.log(labelPos);
         // console.log(bbb.top);
-        console.log(document.body);
+        console.log(boardContainer.current.scrollTop);
         console.log(labelPos);
         setIsModalOpen(true)
 
@@ -65,7 +66,7 @@ export function BoardDetails() {
                     return {
                         ...prev,
                         data: { groupId: data.groupId, taskId: data.task.id },
-                        pos: { top: labelPos.top, left: labelPos.left },
+                        pos: { top: labelPos.top + boardScrollTop, left: labelPos.left + boardScrollLeft },
                         type: info,
                         statuses: [
                             {
@@ -93,7 +94,7 @@ export function BoardDetails() {
                         ...prev,
                         data: { groupId: data.groupId, taskId: data.task.id },
                         type: info,
-                        pos: { top: labelPos.top, left: labelPos.left },
+                        pos: { top: labelPos.top + boardScrollTop, left: labelPos.left + boardScrollLeft },
                         info: {
                             selectedMembers: ['m1', 'm2'],
                             members: data.task.members
@@ -106,7 +107,7 @@ export function BoardDetails() {
                         ...prev,
                         data: { groupId: data.groupId, taskId: data.task.id },
                         type: info,
-                        pos: { top: labelPos.top, left: labelPos.left },
+                        pos: { top: labelPos.top + boardScrollTop, left: labelPos.left + boardScrollLeft },
                         info: {
                             selectedDate: data.task.dueDate
                         }
@@ -130,7 +131,7 @@ export function BoardDetails() {
     return <section className="board-details">
         <NavBar />
         <SideGroupBar />
-        {board && <div className="board-container">
+        {board && <div ref={boardContainer} className="board-container">
             <BoardHeader
                 board={board}
             />
