@@ -119,6 +119,9 @@
   &:hover {
     @include side-bar-btn-hover;
     padding-right: 10px;
+    svg {
+      color: $main-bgc-white;
+    }
   }
 }
 

@@ -1,11 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
-import { LoginStepTwo } from "../cmps/login-steps/logi-step-two";
+
+import { userService } from '../services/user.service.js'
+
+import { LoginStepTwo } from "../cmps/login-steps/login-step-two";
 import { LoginStepOne } from "../cmps/login-steps/login-step-one";
 
 export function Login() {
     const [loginPaging, setLoginPaging] = useState("login-step-1")
-    const [cardentials, setCardentials] = useState({ email: '', password: '' })
+    const [credentials, setCredentials] = useState({ email: '', username: '', password: '', fullname: '', imgUrl: '' })
+    const [users, setUsers] = useState([])
+
+    useEffect(() => {
+        loadUsers()
+    }, [])
+
+    async function loadUsers() {
+        try {
+            const users = await userService.getUsers()
+            setUsers(users)
+            console.log('users',users)
+        }
+        catch (err) {
+            console.error('Error:', err)
+        }
+    }
+
+
+
 
     return (
         <section className='login-page'>
@@ -16,10 +38,10 @@ export function Login() {
             {/* <LoginStepOne cardentials={cardentials} setCardentials={setCardentials} /> */}
 
             <LoginDynamicCmp
-
-                cardentials={cardentials}
+                users={users}
+                credentials={credentials}
                 setLoginPaging={setLoginPaging}
-                setCardentials={setCardentials}
+                setCredentials={setCredentials}
                 loginPaging={loginPaging} />
 
         </section>

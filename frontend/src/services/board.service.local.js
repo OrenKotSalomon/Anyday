@@ -264,6 +264,7 @@ function getEmptyGroup() {
         id: utilService.makeId(),
         title: 'New Group',
         archivedAt: 1589983468418,
+        isCollapsed: false,
         tasks: [
             {
                 id: utilService.makeId(),
@@ -358,6 +359,7 @@ function getEmptyBoard() {
                 id: utilService.makeId(),
                 title: 'Group 1',
                 archivedAt: 1589983468418,
+                isCollapsed: false,
                 tasks: [
                     {
                         id: utilService.makeId(),
@@ -386,6 +388,7 @@ function getEmptyBoard() {
                 id: utilService.makeId(),
                 title: 'Group 2',
                 archivedAt: 1589983468418,
+                isCollapsed: false,
                 tasks: [
                     {
                         id: utilService.makeId(),
@@ -415,6 +418,7 @@ function getEmptyBoard() {
                 id: utilService.makeId(),
                 title: 'Group 3',
                 archivedAt: 1589983468418,
+                isCollapsed: false,
                 tasks: [
                     {
                         id: utilService.makeId(),
@@ -513,6 +517,7 @@ const demoBoard = {
             id: utilService.makeId(),
             title: 'Group 1',
             archivedAt: 1589983468418,
+            isCollapsed: false,
             tasks: [
                 {
                     id: utilService.makeId(),
@@ -545,6 +550,7 @@ const demoBoard = {
             id: utilService.makeId(),
             title: 'Group 2',
             archivedAt: 1589983468418,
+            isCollapsed: false,
             tasks: [
                 {
                     id: utilService.makeId(),
@@ -578,6 +584,7 @@ const demoBoard = {
             id: utilService.makeId(),
             title: 'Group 3',
             archivedAt: 1589983468418,
+            isCollapsed: false,
             tasks: [
                 {
                     id: utilService.makeId(),

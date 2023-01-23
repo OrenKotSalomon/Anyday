@@ -27,11 +27,9 @@
     .group-header-editable-name {
       .monday-style-clickable {
         height: 26px;
-
-        // color: #d5d8e4;
         input {
           margin-top: 0;
-          margin-left: 0;
+          margin-left: 22px;
         }
       }
 
@@ -61,16 +59,16 @@
 
     .group-list-menu-btn {
       position: absolute;
-      top: -1.5%;
-      left: -33px;
+      top: -3.5%;
+      left: -49%;
       opacity: 0;
       transition: 0.3s;
     }
 
     .group-collapse-btn-container {
       position: absolute;
-      top: 5.5%;
-      left: 7px;
+      top: -4px;
+      left: -7px;
       transition: 0.3s;
 
       button {
@@ -87,34 +85,57 @@
       z-index: 3;
     }
   }
-
-  // .cell {
-  //   position: relative;
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: center;
-  //   font-size: rem(14px);
-  //   text-align: center;
-  //   min-width: 130px;
-  //   height: $cell-height;
-
-  //   &:hover {
-  //     cursor: pointer;
-  //   }
-  // }
 }
-
-.group-header {}
 
 .main-group-container {
   min-width: 100vw;
 }
+.row-collapsed-group-container {
+  display: flex;
+  margin-top: 6px;
+  border-bottom-left-radius: 6px;
+  border-top-left-radius: 6px;
+
+  .main-left-header {
+    display: flex;
+    @include left-sticky;
+    z-index: 2;
+    background-color: $main-bgc-white;
+
+    .floatin-white-box {
+      position: absolute;
+      width: 40px;
+      height: 36px;
+      background-color: $main-bgc-white;
+      left: -40px;
+    }
+  }
+
+  .monday-style-clickable {
+
+    height: 26px;
+
+    input {
+      margin-top: 0;
+      margin-left: 22px;
+    }
+  }
+
+  h4 {
+    font-family: poppins-regular-400;
+    font-weight: 600;
+  }
+
+  input {
+    margin: 0;
+    outline: none;
+  }
+
+}
 
 .row-header-container {
   display: flex;
-
   border-top-left-radius: 6px;
-
   margin-top: 6px;
 
   .main-right-header {
@@ -154,7 +175,7 @@
     display: flex;
     @include left-sticky;
     z-index: 2;
-    background-color: white;
+    background-color: $main-bgc-white;
 
     .floatin-white-box {
       position: absolute;
@@ -173,12 +194,12 @@
   justify-content: center;
   line-height: rem(24px);
   height: 36px;
-  // @include left-row-border;
 
-  // >* {
-  //   // border-top: $border-cell;
-  //   // border-bottom: $border-cell;
-  // }
+  .collapsed-group-header {
+    border: $border-cell;
+    border-left: 0;
+    flex-grow: 1;
+  }
 
   .task-main-container {
     display: flex;
@@ -197,12 +218,13 @@
   .left-border {
     @include left-border;
     border-top-left-radius: 6px;
-    // border-bottom-left-radius: 6px;
+    &.collapsed {
+      border-bottom-left-radius: 6px;
+    }
   }
 
   .checkbox-row-container {
     display: flex;
-    // align-items: center;
     justify-content: center;
     width: 33px;
     height: rem(36px);
@@ -222,7 +244,6 @@
   align-items: center;
   height: $cell-height;
   opacity: 0.6;
-
   border-bottom-left-radius: 6px;
 
   &:hover {
@@ -242,7 +263,6 @@
     }
   }
 
-  //
   .white-box {
     flex-grow: 1;
     height: $cell-height;
@@ -280,7 +300,6 @@
       line-height: revert;
     }
 
-    // color: #d5d8e4;
     input {
       height: 24px;
     }
@@ -337,14 +356,12 @@
   align-items: center;
   height: $cell-height;
   margin-bottom: 26px;
-  // opacity: 0.6;
-  // border-bottom-left-radius: 6px;
+  
 
   .hidden-task-container {
     position: sticky;
     z-index: 4;
     left: 40px;
-    // border-bottom: 0.7px solid $cell-border-color;
     display: flex;
     align-items: center;
     height: $cell-height;
