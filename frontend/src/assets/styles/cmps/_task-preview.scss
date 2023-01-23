@@ -69,12 +69,19 @@
   justify-content: center;
   height: $cell-height;
   border-bottom: $border-cell;
-  min-width: rem(400px);
   align-items: center;
   text-align: left;
-  @include left-sticky;
-
   background-color: $main-bgc-white;
+  min-width: rem(200px);
+  position: sticky;
+  left: 0;
+  z-index: 5;
+
+  @include for-narrow-layout {
+
+    min-width: rem(400px);
+    @include left-sticky;
+  }
 
   .menu-btn-container {
     position: absolute;
@@ -88,13 +95,6 @@
     // need to configure with resize
     max-width: rem(240px);
     // border-left: $border-cell;
-  }
-
-  .left-border-task {
-    @include left-border;
-    border-top: none;
-    border-bottom: none;
-    height: $cell-height;
   }
 
   .msg-btn-container {
@@ -136,28 +136,53 @@
   }
 }
 
+.left-border-task {
+
+  padding-right: 6px;
+  width: 6px;
+  @include left-border;
+  border-top: none;
+  border-bottom: none;
+  height: $cell-height;
+}
+
 .AddUpdate {
   font-weight: 100;
   font-family: roboto-thin;
 }
 
-.checkbox-row-container {
-  display: flex;
-  justify-content: center;
-  width: rem(33px);
-  height: rem($cell-height);
-  border-right: $border-cell;
+.checkbox-row-container-task {
+  display: none;
 
-  .row-checkbox {
-    width: 16px;
+  @include for-narrow-layout {
+
+    display: flex;
+    justify-content: center;
+    height: rem(36px);
+    width: rem(33px);
+
+    border-right: $border-cell;
+
+    .row-checkbox-task {
+      margin: 0;
+      width: 16px;
+    }
   }
+
 }
+
+.mobile-container-sticky {}
 
 .task-title {
   @include line-elipsis;
-  min-width: rem(290px);
   margin-top: 4px;
   padding-left: 20px;
+  min-width: rem(160px);
+
+  @include for-narrow-layout {
+
+    min-width: rem(290px);
+  }
 
   .monday-style-clickable {
 
@@ -167,14 +192,28 @@
       font-size: rem(14px);
       font-family: figtree-regular;
       font-weight: 400;
+      width: 130px;
+
+      @include for-narrow-layout {
+        width: unset;
+
+      }
+
     }
 
     // color: #d5d8e4;
     input {
+
       height: 22px;
       font-size: rem(14px);
       font-family: figtree-regular;
       font-weight: 400;
+      width: 130px;
+
+      @include for-narrow-layout {
+        width: 268px;
+
+      }
     }
 
   }

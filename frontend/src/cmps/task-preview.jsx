@@ -83,8 +83,10 @@ export function TaskPreview({ task, board, group, openModal, provided, setIsDndM
                 </div>
 
                 <div style={{ backgroundColor: group.style }} className='left-border-task'></div>
-                <div className='checkbox-row-container'>
-                    <input className='row-checkbox' type="checkbox" />
+
+                <div className='checkbox-row-container-task'>
+                    <input className='row-checkbox-task' type="checkbox" />
+
                 </div>
 
                 <div className="task-name-cell" >

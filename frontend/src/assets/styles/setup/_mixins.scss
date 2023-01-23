@@ -197,7 +197,7 @@
 }
 
 @mixin left-border {
-  position: relative;
+  // position: relative;
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: 6px;

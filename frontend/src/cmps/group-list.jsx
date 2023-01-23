@@ -351,8 +351,8 @@ export function GroupList({ board, group, openModal, provided, setIsDndModeDisab
                                         <div className='add-task-input-container'>
                                             <div className='floatin-white-box-under'></div>
                                             <div style={{ backgroundColor: group.style }} className='left-border-add-task'></div>
-                                            <div className='checkbox-row-container'>
-                                                <input className='row-checkbox' type="checkbox" disabled />
+                                            <div className='checkbox-row-container-add-task'>
+                                                <input className='row-checkbox-add-task' type="checkbox" disabled />
                                             </div>
                                             <EditableHeading
                                                 className='editable-add-task'
