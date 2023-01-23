@@ -2,15 +2,15 @@ export function LoginStepTwo({ props }) {
 
     function handleChange({ target }) {
         let { value, name: field, type } = target
-        props.setCardentials(prevMail => ({ ...prevMail, [field]: value }))
+        props.setCredentials(prevMail => ({ ...prevMail, [field]: value }))
     }
 
     function submitLogin(ev) {
-        ev.prventDefault()
+        ev.preventDefault()
         const valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-        if (props.cardentials.email.match(valid)) {
+        // if (props.credentials.email.match(valid)) {
 
-        } else alert('Please enter a valid email address')
+        // } else alert('Please enter a valid email address')
     }
     return (
         <section className='login-step-two'>
@@ -24,10 +24,12 @@ export function LoginStepTwo({ props }) {
                     <div className="email-page-two">
                         <form className="email-password-input-and-button-container">
 
+{/* {value={props.cardentials.email}} */}
+
                             <div className="form-input-container">
                                 <span className="email-password-label">Email</span>
                                 <div className="email-input-container">
-                                    <input onChange={handleChange} id="user_email" value={props.cardentials.email} placeholder="Example@company.com" type="email" name="email"
+                                    <input onChange={handleChange} id="user_email"  placeholder="Example@company.com" type="email" name="email"
                                         className="email-input" aria-label="Enter your work email address" required />
                                 </div>
                             </div>

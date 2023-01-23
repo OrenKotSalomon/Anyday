@@ -1,18 +1,35 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 
-export function Signup() {
-    const [cardentials, setCardentials] = useState({ email: '', password: '', fullname: '' })
+import {userService} from '../services/user.service.js'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js';
 
-    function handleChange({ target }) {
-        let { value, name: field, type } = target
-        // props.setCardentials(prevMail => ({ ...prevMail, [field]: value }))
+export function Signup() {
+    const [credentials, setCredentials] = useState({ email: '', username: '', password: '', fullname: '', imgUrl: '' })
+
+    function clearState() {
+        setCredentials({ email: '', username: '', password: '', fullname: '', imgUrl: ''  })
     }
 
-    function submitLogin(ev) {
-        ev.prventDefault()
-        const valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+    function handleChange(ev) {
+        const field = ev.target.name
+        const value = ev.target.value
+        setCredentials({ ...credentials, [field]: value })
+    }
 
+    async function onSignup(ev = null) {
+        if (ev) ev.preventDefault()
+        if (!credentials.email || !credentials.password || !credentials.fullname) return
+        console.log('here??')
+        try {
+            const user = await userService.signup(credentials)
+            showSuccessMsg(`Welcome ${user.fullname}`)
+            console.log('user onSignup -',user)
+            clearState()
+        }
+        catch (err) {
+            showErrorMsg('OOps try again', err)
+        }
     }
 
     return (
@@ -29,33 +46,49 @@ export function Signup() {
                     </h1>
 
                     <div className="email-page-two">
-                        <form className="email-password-input-and-button-container">
-
+                        <form className="email-password-input-and-button-container"
+                            onSubmit={onSignup}>
                             <div className="form-input-container">
                                 <span className="email-password-label">Email</span>
                                 <div className="email-input-container">
-                                    <input onChange={handleChange} id="user_email" placeholder="Example@company.com" type="email" name="email"
-                                        className="email-input" aria-label="Enter your work email address" required />
+                                    <input
+                                        onChange={handleChange}
+                                        id="email"
+                                        placeholder="Example@company.com"
+                                        type="email"
+                                        name="email"
+                                        className="email-input"
+                                        aria-label="Enter your work email address" required />
                                 </div>
                             </div>
                             <div className="form-input-container">
                                 <span className="email-password-label">Name</span>
                                 <div className="password-input-container">
-                                    <input onChange={handleChange} className="name-input" id="user_name" type="text" name="name"
+                                    <input
+                                        onChange={handleChange}
+                                        id="fullname"
+                                        type="text"
+                                        name="fullname"
+                                        className="name-input"
                                         placeholder="Full name" required />
                                 </div>
                             </div>
                             <div className="form-input-container">
                                 <span className="email-password-label">Password</span>
                                 <div className="password-input-container">
-                                    <input onChange={handleChange} className="password-input" id="user_password" type="password" name="password"
+                                    <input
+                                        onChange={handleChange}
+                                        id="password"
+                                        type="password"
+                                        name="password"
+                                        className="password-input"
                                         placeholder="Password" required />
                                 </div>
                             </div>
                             <div className="next-btn-wrapper">
                                 <div className="next-btn-container">
 
-                                    <button onClick={submitLogin} type="submit" className="next-btn">
+                                    <button type="submit" className="next-btn">
                                         <div className="next-wrapper">Sign up</div>
                                         <div className="right-arrow-icon">{'->'}</div>
                                     </button>
