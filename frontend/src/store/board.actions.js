@@ -1,8 +1,8 @@
-import { boardService, ON_DRAG_TASK } from "../services/board.service.local.js";
+import { boardService, ON_DRAG_GROUP, ON_DRAG_TASK } from "../services/board.service.local.js";
 import { userService } from "../services/user.service.js";
 import { store } from './store.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { ADD_BOARD, REMOVE_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UPDATE_BOARD, SET_BOARD } from "./board.reducer.js";
+import { ADD_BOARD, REMOVE_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UPDATE_BOARD, SET_BOARD, SET_PREV_BOARD } from "./board.reducer.js";
 
 // Action Creators:
 export function getActionRemoveboard(boardId) {
@@ -28,6 +28,7 @@ export async function loadBoard(boardId) {
     try {
         const board = await boardService.getById(boardId)
         store.dispatch({ type: SET_BOARD, board })
+        // store.dispatch({ type: SET_PREV_BOARD, prevBoard: board })
         // return board
     } catch (err) {
         console.log('Cannot load board', err)
@@ -38,7 +39,6 @@ export async function loadBoard(boardId) {
 export async function loadBoards() {
     try {
         const boards = await boardService.query()
-        console.log('boards from DB:', boards)
         store.dispatch({ type: SET_BOARDS, boards })
     } catch (err) {
         console.log('Cannot load boards', err)
@@ -116,34 +116,45 @@ export async function updateTask(board, data, type) {
     }
 }
 
-export function handleOnDragEnd(result, type, data) {
+export function setPrevBoard(board) {
+    store.dispatch({ type: SET_PREV_BOARD, prevBoard: board })
+}
 
-    if (!result.destination) return
+export function onGroupDragStart(board) {
+
+    const newBoard = structuredClone(board)
+    // console.log('newBoardFIRST:', newBoard)
+    // store.dispatch({ type: SET_PREV_BOARD, prevBoard: newBoard })
+
+    newBoard.groups.map(group => group.isCollapsed = true)
+    store.dispatch({ type: SET_BOARD, board: newBoard })
+}
+
+export function handleOnDragEnd(res, type, data) {
+
+    const board = data.prevBoard
+    if (!res.destination) return
 
     switch (type) {
-        
+
         case 'group':
             const groupsToUpdate = data.grouplist
-            const [reorderedGroup] = groupsToUpdate.splice(result.source.index, 1)
-            groupsToUpdate.splice(result.destination.index, 0, reorderedGroup)
-            return updateBoard(data.board, groupsToUpdate, ON_DRAG_TASK)
+            const [reorderedGroup] = groupsToUpdate.splice(res.source.index, 1)
+            groupsToUpdate.splice(res.destination.index, 0, reorderedGroup)
+            store.dispatch({ type: SET_BOARD, board })
+            return updateBoard(board, groupsToUpdate, ON_DRAG_GROUP)
 
         case 'task':
             const newOrderedTasks = data.listToUpdate
-            const [reorderedTask] = newOrderedTasks.splice(result.source.index, 1)
-            newOrderedTasks.splice(result.destination.index, 0, reorderedTask)
+            const [reorderedTask] = newOrderedTasks.splice(res.source.index, 1)
+            newOrderedTasks.splice(res.destination.index, 0, reorderedTask)
             data.group.tasks = newOrderedTasks
             return updateGroup(data.board, data.group, ON_DRAG_TASK)
 
         default:
             return updateGroup(data.board, data.group, ON_DRAG_TASK)
     }
-    // const newOrderedTasks = Array.from(listToUpdate)
-    // const [reorderedTask] = newOrderedTasks.splice(result.source.index, 1)
-    // newOrderedTasks.splice(result.destination.index, 0, reorderedTask)
-    // group.tasks = newOrderedTasks
-    // updateGroup(board, group, ON_DRAG_TASK)
-    // setListToUpdate(newOrderedTasks)
+
 }
 
 // Demo for Optimistic Mutation

@@ -9,15 +9,17 @@ import { GroupList } from "../cmps/group-list";
 import { SideGroupBar } from "../cmps/side-group-bar";
 
 import { ADD_GROUP_FROM_BUTTOM, ADD_GROUP_FROM_HEADER, ADD_TASK_FROM_HEADER, DATE_PICKER, LABEL_STATUS_PICKER, MEMEBER_PICKER, ON_DRAG_GROUP, PRIORITY_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_LABEL_STATUS, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../services/board.service.local";
-import { handleOnDragEnd, loadBoard, updateBoard, updateGroup, updateTask } from "../store/board.actions";
+import { handleOnDragEnd, loadBoard, onGroupDragStart, setPrevBoard, updateBoard, updateGroup, updateTask } from "../store/board.actions";
 
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Loader, Icon, DialogContentContainer, MenuItem, Menu, MenuDivider } from 'monday-ui-react-core';
 import { Add, Group, Item } from 'monday-ui-react-core/icons';
+import { async } from "q";
 
 export function BoardDetails() {
 
     const board = useSelector((storeState) => storeState.boardModule.board)
+    const prevBoard = useSelector((storeState) => storeState.boardModule.prevBoard)
     const { boardId } = useParams()
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [cmp, setCmp] = useState({})
@@ -130,8 +132,12 @@ export function BoardDetails() {
                 return updateGroup(board, null, ADD_GROUP_FROM_HEADER)
 
         }
-
     }
+
+   function onDragGroup() {
+    setPrevBoard(board)
+    onGroupDragStart(board)
+   }
 
     if (!board.groups || !board) return <div className="loader"><Loader size={Loader.sizes.LARGE} /></div>
     return <section className="board-details">
@@ -141,7 +147,7 @@ export function BoardDetails() {
             <BoardHeader
                 board={board}
             />
-            <DragDropContext onDragEnd={(result) => handleOnDragEnd(result, 'group', { board, grouplist: board.groups })}>
+            <DragDropContext onDragStart={onDragGroup} onDragEnd={(res) => handleOnDragEnd(res, 'group', { prevBoard, grouplist: prevBoard.groups })}>
                 <Droppable droppableId='groups'>
                     {(provided) => (
 
@@ -150,19 +156,21 @@ export function BoardDetails() {
                             ref={provided.innerRef}>
 
                             {board.groups.map((group, index) =>
-                                <Draggable key={group.id} draggableId={group.id} index={index} isDragDisabled={isDndModeDisabled}>
-                                    {(provided) => (
-                                        <GroupList
-                                            provided={provided}
-                                            key={group.id}
-                                            board={board}
-                                            group={group}
-                                            openModal={openModal}
-                                            isDndModeDisabled={isDndModeDisabled}
-                                            setIsDndModeDisabled={setIsDndModeDisabled}
-                                        />
-                                    )}
-                                </Draggable>
+                                // <Draggable key={group.id} draggableId={group.id} index={index} isDragDisabled={isDndModeDisabled}>
+                                //     {(provided) => (
+                                    
+                                <GroupList
+                                    index={index}
+                                    // provided={provided}
+                                    key={group.id}
+                                    board={board}
+                                    group={group}
+                                    openModal={openModal}
+                                    isDndModeDisabled={isDndModeDisabled}
+                                    setIsDndModeDisabled={setIsDndModeDisabled}
+                                />
+                                //     )}
+                                // </Draggable>
                             )}
                             {provided.placeholder}
                             <div className="bottom-add-group-btn-container">
