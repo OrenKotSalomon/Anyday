@@ -85,7 +85,7 @@ export function GroupList({ board, group, openModal, provided, setIsDndModeDisab
 
     function handleOnDragEnd(result) {
 
-        if (!result.destination) return
+        // if (!result.destination) return
 
         const newOrderedTasks = Array.from(listToUpdate)
         const [reorderedTask] = newOrderedTasks.splice(result.source.index, 1)
