@@ -5,7 +5,7 @@ import { handleOnDragEnd, updateGroup } from '../store/board.actions';
 import { ADD_GROUP, ADD_GROUP_TASK, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, LABEL_STATUS_PICKER, MEMEBER_PICKER, ON_DRAG_TASK, PRIORITY_PICKER, STATUS_PICKER, TEXT_LABEL } from '../services/board.service.local';
 
 import { TaskPreview } from "./task-preview";
-import { AddLabelModal } from './tasks-modals/add-label-modal';
+import { AddLabelModal } from './task-labels-dropdown/add-label-modal';
 import { DynamicSummaryCmp } from './dynamicCmps/dynamic-summary-cmp';
 
 import { EditableHeading, Tooltip, MenuButton, Menu, MenuItem, ColorPicker, Icon } from 'monday-ui-react-core'
