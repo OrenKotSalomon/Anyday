@@ -3,30 +3,44 @@ import { DATE_PICKER, LABEL_STATUS_PICKER, MEMEBER_PICKER, PRIORITY_PICKER, STAT
 
 export function DynamicSummaryCmp({ cmp, board, group }) {
     const [tempstate, setTempstate] = useState([])
+
+    let ffff = [{ done: { bgColor: 'sss', vlaue: 2 } },
+    { done: { bgColor: 'sss', precents: 40 } },
+    { done: { bgColor: 'sss', precents: 40 } },
+    { done: { bgColor: 'sss', precents: 40 } },
+    { done: { bgColor: 'sss', precents: 40 } }
+
+    ]
+
+    ffff.map(d => {
+        <div></div>
+
+    })
     temp()
     function temp() {
         switch (cmp) {
             case STATUS_PICKER:
 
+                let f = []
                 let t = group.tasks.reduce((acc, task) => {
                     if (!acc[task.status]) acc[task.status] = 0
                     acc[task.status]++
-                    board.statuses.map(status => {
-                        acc[task.status] = status.bgColor
-                    })
 
                     return acc
                 }, {})
-                let temp2 = Object.values(t).map(value => value / group.tasks.length * 100)
-                console.log(t);
-                return <div className="status-sum">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
 
-                </div>
+                // console.log(t);
+                for (const key in t) {
+
+
+                    console.log(t[key]);
+                    console.log(key);
+                }
+
+                let temp2 = Object.values(t).map(value => value / group.tasks.length * 100)
+                // console.log(temp2);
+                return temp2
+
             case LABEL_STATUS_PICKER:
                 return
             case PRIORITY_PICKER:
@@ -44,7 +58,10 @@ export function DynamicSummaryCmp({ cmp, board, group }) {
 
     switch (cmp) {
         case STATUS_PICKER:
-            return <div className="status-picker-sum-container">
+            return <div className="status-picker-sum-container" >
+                <div className="status-sum">
+
+                </div>
 
             </div>
         case LABEL_STATUS_PICKER:
