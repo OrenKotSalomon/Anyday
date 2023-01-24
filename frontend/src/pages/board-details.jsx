@@ -173,10 +173,13 @@ export function BoardDetails() {
                                 </Draggable>
                             )}
                             {provided.placeholder}
-                            <button className="btn clean bottom-add-group-btn"
-                                onClick={() => updateGroup(board, null, ADD_GROUP_FROM_BUTTOM)}>
-                                <Icon iconType={Icon.type.SVG} icon={Add} iconSize={19} /> Add  new group
-                            </button>
+                            <div className="bottom-add-group-btn-container">
+
+                                <button className="btn clean bottom-add-group-btn"
+                                    onClick={() => updateGroup(board, null, ADD_GROUP_FROM_BUTTOM)}>
+                                    <Icon iconType={Icon.type.SVG} icon={Add} iconSize={19} /> Add  new group
+                                </button>
+                            </div>
                         </section>
                     )}
                 </Droppable>

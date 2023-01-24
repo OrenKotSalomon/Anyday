@@ -1,19 +1,25 @@
 .status-picker-container {
-    max-width: rem(200px);
     background-color: $main-bgc-white;
     box-shadow: 0 8px 16px 0 rgb(0 0 0 / 32%);
     font-size: 14px;
     border-radius: 8px;
     // inset: 0px auto auto 0px;
+    max-width: rem(200px);
     z-index: 100;
 
     .arrow-up {
-        @include arrow-up-modal(50%)
+        @include arrow-up-modal(85%);
+
+        @include for-narrow-layout {
+
+            @include arrow-up-modal(50%);
+        }
     }
 
     .status-picker-view {
         display: grid;
         grid-template-rows: repeat(5, auto);
+        justify-content: center;
         gap: 8px;
         padding: 16px 24px 8px;
 
@@ -21,8 +27,6 @@
             font-family: figtree-regular;
             border-radius: 2px;
             color: white;
-            width: rem(152px);
-            height: rem(32px);
             text-align: center;
             cursor: pointer;
             border: none;
@@ -37,6 +41,10 @@
                 background-color: $main-bgc-white;
                 opacity: .85;
             }
+
+            width: rem(152px);
+            height: rem(32px);
+
         }
     }
 
@@ -45,6 +53,7 @@
 .date-picker-view {
     box-shadow: 0 8px 16px 0 rgb(0 0 0 / 32%);
     z-index: 1000;
+    transform: translate(-73%, 15%);
 
     td {
         vertical-align: middle;
@@ -52,6 +61,10 @@
 
     .arrow-up {
         @include arrow-up-modal(89%)
+    }
+
+    @include for-narrow-layout {
+        transform: translate(-100%, 15%);
     }
 
 }
@@ -62,6 +75,15 @@
 
 .member-picker-view {
     z-index: 10;
+
+    @include for-narrow-layout {
+
+        transform: translate(-100%, 80%);
+    }
+}
+
+.status-picker-container {
+    transform: translate(-63%, 17%);
 }
 
 // header labels 
