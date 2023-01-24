@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { userService } from '../../services/user.service.js'
 import { showErrorMsg, showSuccessMsg } from '../../services/event-bus.service.js';
 
-export function LoginStepTwo({ props , boardId}) {
+export function LoginStepTwo({ props }) {
     const boards = useSelector((storeState) => storeState.boardModule.boards)
     const [loginCredentials, setLoginCredentials] = useState({ email: props.credentials.email, username: '', password: '', fullname: '', imgUrl: '' })
     const navigate = useNavigate()
