@@ -44,7 +44,7 @@ export function BoardHeader({ board }) {
                 <select name="view" id="view">
                     <option value="main">
 
-                        <Icon iconType={Icon.type.SVG} icon={Home} iconSize={12} />
+                        {/* <Icon iconType={Icon.type.SVG} icon={Home} iconSize={12} /> */}
                         Main table
                     </option>
                     <option value="kanban">

@@ -8,12 +8,12 @@ import { DynamicModal } from "../cmps/dynamic-modal";
 import { GroupList } from "../cmps/group-list";
 import { SideGroupBar } from "../cmps/side-group-bar";
 
-import { ADD_GROUP_FROM_BUTTOM, DATE_PICKER, LABEL_STATUS_PICKER, MEMEBER_PICKER, ON_DRAG_GROUP, PRIORITY_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_LABEL_STATUS, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../services/board.service.local";
+import { ADD_GROUP_FROM_BUTTOM, ADD_GROUP_FROM_HEADER, ADD_TASK_FROM_HEADER, DATE_PICKER, LABEL_STATUS_PICKER, MEMEBER_PICKER, ON_DRAG_GROUP, PRIORITY_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_LABEL_STATUS, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../services/board.service.local";
 import { handleOnDragEnd, loadBoard, updateBoard, updateGroup, updateTask } from "../store/board.actions";
 
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { Loader, Icon } from 'monday-ui-react-core';
-import { Add } from 'monday-ui-react-core/icons';
+import { Loader, Icon, DialogContentContainer, MenuItem, Menu, MenuDivider } from 'monday-ui-react-core';
+import { Add, Group, Item } from 'monday-ui-react-core/icons';
 
 export function BoardDetails() {
 
@@ -22,7 +22,7 @@ export function BoardDetails() {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [cmp, setCmp] = useState({})
     const [isDndModeDisabled, setIsDndModeDisabled] = useState(false)
-    // const [groupToUpdate, setGroupToUpdate] = useState([])
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
     const boardContainer = useRef()
 
@@ -118,6 +118,21 @@ export function BoardDetails() {
         }
     }
 
+    function onAddFromMobile(ev, type) {
+        // console.log('ev', ev);
+        ev.preventDefault()
+        switch (type) {
+            case 'task':
+                setIsMobileMenuOpen(false)
+                return updateTask(board, undefined, ADD_TASK_FROM_HEADER)
+            case 'group':
+                setIsMobileMenuOpen(false)
+                return updateGroup(board, null, ADD_GROUP_FROM_HEADER)
+
+        }
+
+    }
+
     if (!board.groups || !board) return <div className="loader"><Loader size={Loader.sizes.LARGE} /></div>
     return <section className="board-details">
         <NavBar />
@@ -166,6 +181,46 @@ export function BoardDetails() {
             </div>
         </div>
         }
+
+        {isMobileMenuOpen &&
+            <div className="mobile-add-menu-container">
+
+                <DialogContentContainer >
+                    <Menu
+                        size='xxs'
+                        className='mobile-menu-add-bottom'
+                        focusOnMount={true}
+                    >
+                        <MenuItem
+                            icon={Item}
+                            title="Add Task"
+                            onClick={(ev) => onAddFromMobile(ev, 'task')}
+                        />
+                        <MenuDivider />
+                        {/* <MenuItem
+                    //// NEED TO ADD STATUS PICKER AND ADD IT.
+                            //   icon={}
+                            title="Delete"
+                        /> */}
+                        <MenuItem
+                            icon={Group}
+                            title="Add Group"
+                            onClick={(ev) => onAddFromMobile(ev, 'group')}
+                        />
+                    </Menu>
+                </DialogContentContainer>
+
+            </div>
+
+        }
+
+        <div className="btn-add-mobile-container">
+            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="btn-add-mobile">
+                <Icon className='icon-mobile-add'
+                    ignoreFocusStyle={true}
+                    style={{ rotate: isMobileMenuOpen ? '405deg' : '0deg' }} iconType={Icon.type.SVG} icon={Add} iconSize={22} />
+            </button>
+        </div>
 
     </section >
 }

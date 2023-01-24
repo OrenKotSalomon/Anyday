@@ -134,16 +134,16 @@ export function GroupList({ board, group, openModal, provided, setIsDndModeDisab
                     {isPickColor && <ColorPicker className="group-color-picker"
                         colorSize={ColorPicker.sizes.SMALL}
                         onSave={(value) => onColorPick(value)} />}
-                    <div className="group-collapse-btn-container">
-                        <Tooltip content="Expand group" animationType="expand">
-                            <button onClick={() => onCollapseGroup(group)}><Icon style={{ color: group.style }} iconType={Icon.type.SVG} icon={DropdownChevronRight} iconSize={19} /></button>
-                        </Tooltip>
-                    </div>
+
                 </div>
                 <div className='row-collapsed-group-container'>
                     <div className='main-left-header'>
                         <div className='floatin-white-box'></div>
-
+                        <div className="group-collapse-btn-container">
+                            <Tooltip content="Expand group" animationType="expand">
+                                <button onClick={() => onCollapseGroup(group)}><Icon style={{ color: group.style }} iconType={Icon.type.SVG} icon={DropdownChevronRight} iconSize={19} /></button>
+                            </Tooltip>
+                        </div>
                         <div className='left-row-container collapsed '>
                             <div style={{ backgroundColor: group.style }} className='left-border collapsed'></div>
                             <div className='collapsed-group-header'>

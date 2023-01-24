@@ -137,6 +137,7 @@ function getNewTask() {
         priority: '',
         members: [],
         dueDate: (Date.now() / 1000),
+        labelStatus: '',
         txt: ''
     }
 
