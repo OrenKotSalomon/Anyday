@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { handleOnDragEnd, updateBoard, updateGroup } from '../store/board.actions';
-import { ADD_GROUP, ADD_GROUP_TASK, boardService, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, LABEL_STATUS_PICKER, MEMEBER_PICKER, ON_DRAG_TASK, PRIORITY_PICKER, STATUS_PICKER, TEXT_LABEL } from '../services/board.service.local';
+import { ADD_GROUP, ADD_GROUP_TASK, boardService, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, LABEL_STATUS_PICKER, MEMEBER_PICKER, ON_DRAG_TASK, PRIORITY_PICKER, STATUS_PICKER, TEXT_PICKER } from '../services/board.service.local';
 import { TaskPreview } from "./task-preview";
 import { utilService } from '../services/util.service';
 import { AddLabelModal } from './task-labels-dropdown/add-label-modal';
@@ -11,7 +11,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { GroupHeaderMenuBtn } from './group-header-menu-btn';
 import { DynamicSummaryCmp } from './dynamicCmps/dynamic-summary-cmp';
 
-export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, isDndModeDisabled, index }) {
+export function GroupList({ board, group, openModal, setIsDndModeDisabled, isDndModeDisabled, index }) {
 
     const [isAddingLabel, setIsAddingLabel] = useState(false)
     const [isPickColor, setIsPickColor] = useState(false)
@@ -67,20 +67,20 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
         setIsAddingLabel(!isAddingLabel)
     }
 
-    function renderGroupLabels(cmp) {
+    function renderGroupLabels(cmp, idx) {
         switch (cmp) {
             case STATUS_PICKER:
-                return <div className="status-label-header ">Status</div>
+                return <div key={idx} className="status-label-header ">Status</div>
             case LABEL_STATUS_PICKER:
-                return <div className="label-statuses-header">Label</div>
+                return <div key={idx} className="label-statuses-header">Label</div>
             case MEMEBER_PICKER:
-                return <div className="person-label-header ">Person</div>
+                return <div key={idx} className="person-label-header ">Person</div>
             case DATE_PICKER:
-                return <div className="date-label-header ">Date</div>
+                return <div key={idx} className="date-label-header ">Date</div>
             case PRIORITY_PICKER:
-                return <div className="priority-label-header ">Priority</div>
-            case TEXT_LABEL:
-                return <div className="priority-label-header ">Text</div>
+                return <div key={idx} className="priority-label-header ">Priority</div>
+            case TEXT_PICKER:
+                return <div key={idx} className="priority-label-header ">Text</div>
         }
     }
 
@@ -203,18 +203,18 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
             </Draggable>
         }
 
-        {!group.isCollapsed && <section className='expand-group-container'>
-            <div className="group-header-container"
-            >
-                {/* Drag Here */}
+        {!group.isCollapsed && <section className='expand-group-container'
+        >
+            <Draggable key={group.id} draggableId={group.id} index={index} isDragDisabled={isDndModeDisabled}>
+                {(provided) => (
+                    <div className="group-header-container"
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        ref={provided.innerRef}>
+                        {/* Drag Here */}
 
-                <Draggable key={group.id} draggableId={group.id} index={index} isDragDisabled={isDndModeDisabled}>
-                    {(provided) => (
                         <div className="group-header-name"
                             style={{ color: group.style }}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            ref={provided.innerRef}
                         >
 
                             <MenuButton className="group-list-menu-btn" >
@@ -274,88 +274,65 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                                 </Tooltip>
                             </div>
                         </div>
-                    )}
-                </Draggable>
-                {/* Drag Here */}
-                <div className='row-header-container'>
-                    <div className='main-left-header'>
-                        <div className='floatin-white-box'></div>
 
-                        <div className='left-row-container'>
-                            <div style={{ backgroundColor: group.style }} className='left-border'></div>
-                            <div className='checkbox-row-container'>
-                                <input className='row-checkbox' type="checkbox" />
-                            </div>
-                            <div className='task-main-container'>
-                                <div className="task-row-container">Item</div>
-                            </div>
-                        </div>
-                    </div>
-                    <DragDropContext onDragEnd={(res) => handleOnDragEnd(res, 'label', { board, cmpsOrder: board.cmpsOrder })}>
-                        <Droppable droppableId="label" direction="horizontal">
-                            {(provided) => (
-                                <div className="main-header-labels-container flex"
-                                    {...provided.droppableProps}
-                                    ref={provided.innerRef}>
-                                    {board.cmpsOrder.map((cmp, idx) => {
-                                        return <Draggable key={cmp} draggableId={cmp} index={idx} >
-                                            {(provided, snapshot) => (
-                                                <div key={idx}
-                                                    className={snapshot.isDragging ? 'dragged-label' : ''}
-                                                    {...provided.draggableProps}
-                                                    {...provided.dragHandleProps}
-                                                    ref={provided.innerRef} >
-                                                    {renderGroupLabels(cmp)}
-                                                    <div className={snapshot.isDragging ? 'label-white-bgc-on-drag' : ''}></div>
-                                                </div>
-                                            )}
-                                        </Draggable>
-                                    }
-                                    )}
-                                    {provided.placeholder}
+                        {/* Drag Here */}
+                        <div className='row-header-container'>
+                            <div className='main-left-header'>
+                                <div className='floatin-white-box'></div>
+
+                                <div className='left-row-container'>
+                                    <div style={{ backgroundColor: group.style }} className='left-border'></div>
+                                    <div className='checkbox-row-container'>
+                                        <input className='row-checkbox' type="checkbox" />
+                                    </div>
+                                    <div className='task-main-container'>
+                                        <div className="task-row-container">Item</div>
+                                    </div>
                                 </div>
-                            )}
-                        </Droppable>
-                    </DragDropContext>
-                    <div className='main-right-header flex'>
-                        <div className="add-label-btn-container"
-                            style={{
-                                backgroundColor: isAddingLabel ? '#d5d8e4' : ''
-                            }}>
-                            <button onClick={toggleAddLabelModal} className='btn clean add-label-btn'>
-                                <Icon className="add-label-icon"
-                                    ignoreFocusStyle={true}
-                                    style={{
-                                        position: 'absolute',
-                                        top: '10%',
-                                        left: '10%',
-                                        transform: 'translate(-50%, -50%)',
-                                        color: isAddingLabel ? '#005fb7' : '',
-                                        transition: '.2s',
-                                        transform: isAddingLabel ? 'rotate(45deg)' : ''
-                                    }} iconType={Icon.type.SVG} icon={Add} iconSize={20} />
-                            </button>
-                        </div>
-                        {isAddingLabel && <AddLabelModal />}
-                    </div>
-                </div>
-            </div>
+                            </div>
+                            <div className="main-header-labels-container flex">
+                                {board.cmpsOrder.map((cmp, idx) => renderGroupLabels(cmp, idx))}
+                            </div>
 
+                            <div className='main-right-header flex'>
+                                <div className="add-label-btn-container"
+                                    style={{
+                                        backgroundColor: isAddingLabel ? '#d5d8e4' : ''
+                                    }}>
+                                    <button onClick={toggleAddLabelModal} className='btn clean add-label-btn'>
+                                        <Icon className="add-label-icon"
+                                            ignoreFocusStyle={true}
+                                            style={{
+                                                position: 'absolute',
+                                                top: '10%',
+                                                left: '10%',
+                                                transform: 'translate(-50%, -50%)',
+                                                color: isAddingLabel ? '#005fb7' : '',
+                                                transition: '.2s',
+                                                transform: isAddingLabel ? 'rotate(45deg)' : ''
+                                            }} iconType={Icon.type.SVG} icon={Add} iconSize={20} />
+                                    </button>
+                                </div>
+                                {isAddingLabel && <AddLabelModal />}
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </Draggable>
             <div className="main-group-container">
 
                 <DragDropContext onDragEnd={(result) => handleOnDragEnd(result, 'task', { board, group, listToUpdate })} >
                     <Droppable droppableId='tasks'>
-                        {(provided, snapshot) => (
+                        {(provided) => (
 
-                            <section className={`tasks-container`}
+                            <section className="tasks-container"
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}>
 
                                 {group.tasks.map((task, index) =>
                                     <Draggable key={task.id} draggableId={task.id} index={index} isDragDisabled={isDndModeDisabled} >
-                                        {(provided, snapshot) => (
+                                        {(provided) => (
                                             <TaskPreview
-                                                snapshot={snapshot}
                                                 provided={provided}
                                                 key={task.id}
                                                 task={task}

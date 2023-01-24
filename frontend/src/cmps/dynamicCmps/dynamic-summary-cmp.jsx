@@ -1,21 +1,7 @@
-import { useState } from "react";
+
 import { DATE_PICKER, LABEL_STATUS_PICKER, MEMEBER_PICKER, PRIORITY_PICKER, STATUS_PICKER, TEXT_LABEL } from "../../services/board.service.local";
 
 export function DynamicSummaryCmp({ cmp, board, group }) {
-    const [tempstate, setTempstate] = useState([])
-
-    let ffff = [{ done: { bgColor: 'sss', vlaue: 2 } },
-    { done: { bgColor: 'sss', precents: 40 } },
-    { done: { bgColor: 'sss', precents: 40 } },
-    { done: { bgColor: 'sss', precents: 40 } },
-    { done: { bgColor: 'sss', precents: 40 } }
-
-    ]
-
-    ffff.map(d => {
-        <div></div>
-
-    })
 
     function temp() {
         board = structuredClone(board)
@@ -95,7 +81,4 @@ export function DynamicSummaryCmp({ cmp, board, group }) {
 
     }
 
-    // return (
-
-    // )
 }

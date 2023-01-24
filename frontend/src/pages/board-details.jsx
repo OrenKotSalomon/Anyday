@@ -14,7 +14,6 @@ import { handleOnDragEnd, loadBoard, onGroupDragStart, setPrevBoard, updateBoard
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Loader, Icon, DialogContentContainer, MenuItem, Menu, MenuDivider } from 'monday-ui-react-core';
 import { Add, Group, Item } from 'monday-ui-react-core/icons';
-import { async } from "q";
 
 export function BoardDetails() {
 
@@ -114,7 +113,6 @@ export function BoardDetails() {
     }
 
     function onAddFromMobile(ev, type) {
-        // console.log('ev', ev);
         ev.preventDefault()
         switch (type) {
             case 'task':

@@ -11,7 +11,7 @@ export function BoardFilter({ board }) {
     function onAddNewTask() {
         updateTask(board, undefined, ADD_TASK_FROM_HEADER)
     }
-    
+
     return <section className='board-filter'>
         <Flex gap='18' align='End'
 
@@ -23,7 +23,6 @@ export function BoardFilter({ board }) {
 
             </SplitButton>
             <Button kind={Button.kinds.TERTIARY} size={Button.sizes.SMALL} >
-                {/* <span style={{ color: '#afafb2', width: '0px' }} >Search</span> */}
                 <Icon iconType={Icon.type.SVG} icon={Search} iconSize={19} />
 
                 <div> Search

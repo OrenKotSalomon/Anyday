@@ -126,8 +126,6 @@ export function SideGroupBar() {
                     </div>
                 </Box>
             </Modal>
-
-            {/* <hr style={{ width: '100%', display: `${isSideBarOpen ? '' : 'none'}` }} /> */}
             <div className="side-bar-spacer" style={{ display: `${isSideBarOpen ? '' : 'none'}` }} ></div>
             <section className="board-list" style={{ display: `${isSideBarOpen ? '' : 'none'}` }}>
                 <BoardList onDuplicateBoard={onDuplicateBoard} onRemoveBoard={onRemoveBoard} />

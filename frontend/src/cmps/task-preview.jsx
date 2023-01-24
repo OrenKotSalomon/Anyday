@@ -45,7 +45,7 @@ export function TaskPreview({ task, board, group, openModal, provided, snapshot,
         {...provided.draggableProps}
         {...provided.dragHandleProps}
         ref={provided.innerRef}>
-        
+
         <div className="task">
 
             <div className="task-edit-wrapper">
@@ -94,10 +94,11 @@ export function TaskPreview({ task, board, group, openModal, provided, snapshot,
                 <div className="task-name-cell" >
                     <EditableHeading className='task-title' onFinishEditing={onFinishEditingInTask} type={EditableHeading.types.h5} value={task.title} />
 
-                    {/*  NEED TO ADD THIS BUTTON AND IGURE STYLING WONT IMPACT TASK ROW */}
+                    {/*  NEED TO ADD THIS BUTTON AND CONFIGURE STYLING WONT IMPACT TASK ROW */}
                     {/* <button onClick={() => setIsOpenDetails(!isOpenDetails)} className="open-item-page-btn">
                         <Icon iconType={Icon.type.SVG} icon={Open} iconLabel="Task Details" iconSize={16} /><span>Open</span>
                     </button> */}
+
                 </div>
                 <div className="msg-btn-container" onClick={() => {
                     setIsOpenDetails(!isOpenDetails)
@@ -110,7 +111,7 @@ export function TaskPreview({ task, board, group, openModal, provided, snapshot,
                         {!task.comments && <Icon SVG="AddUpdate" iconType={Icon.type.SVG} icon={AddUpdate} iconLabel="Task Details" iconSize={24} />}
                         {task.comments && <div className="storybook-counter_position">
                             <Icon icon={Update} iconSize={24} style={{ color: '#0073ea' }} />
-                            <Counter count={task.comments.length+task.pinedComments.length} size={Counter.sizes.SMALL} className='counter-comments' />
+                            <Counter count={task.comments.length + task.pinedComments.length} size={Counter.sizes.SMALL} className='counter-comments' />
 
                         </div>}
                     </button>

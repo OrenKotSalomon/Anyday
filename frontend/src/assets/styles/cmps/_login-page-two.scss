@@ -37,7 +37,7 @@
 
     .email-input-container {
         height: auto;
-        width: 360px;
+        width: $button-width;
         margin-left: 12px;
 
         .email-input {
@@ -48,7 +48,7 @@
 
     .password-input-container {
         height: auto;
-        width: 360px;
+        width: $button-width;
         margin-left: 12px;
 
         .password-input {
@@ -64,12 +64,15 @@
     font-size: rem(16px);
     line-height: rem(16px);
     padding: 8px;
+
     svg {
         font-size: rem(24px);
     }
+
     span {
         vertical-align: text-top;
     }
+
     &:hover {
         cursor: pointer;
         padding: 9px;
@@ -81,7 +84,19 @@
     justify-content: center;
 
     .next-btn-container {
-        width: 360px;
+        width: $button-width;
+    }
+}
+
+.next-btn-wrapper-sign-up {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    right: 9.8px;
+    // max-width:$button-width;
+
+    .next-btn-container {
+        width: $button-width;
     }
 }
 
