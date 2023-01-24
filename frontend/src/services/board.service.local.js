@@ -134,11 +134,11 @@ function getNewTask() {
     return {
         id: utilService.makeId(),
         title: 'New Task',
-        status: '',
-        priority: '',
+        status: 'default',
+        priority: 'default',
         members: [],
         dueDate: (Date.now() / 1000),
-        labelStatus: '',
+        labelStatus: 'default',
         txt: ''
     }
 
@@ -280,21 +280,21 @@ function getEmptyGroup() {
             {
                 id: utilService.makeId(),
                 title: 'Task 1',
-                status: '',
-                priority: '',
+                status: 'default',
+                priority: 'default',
                 members: [],
                 dueDate: '',
-                labelStatus: '',
+                labelStatus: 'default',
                 txt: ''
             },
             {
                 id: utilService.makeId(),
                 title: 'Task 2',
-                status: '',
-                priority: '',
+                status: 'default',
+                priority: 'default',
                 members: [],
                 dueDate: '',
-                labelStatus: '',
+                labelStatus: 'default',
                 txt: ''
             }
         ],
@@ -321,7 +321,7 @@ function getEmptyBoard() {
                 bgColor: '#e2445c'
             },
             {
-                label: '',
+                label: 'default',
                 bgColor: '#c4c4c4'
             },
         ],
@@ -343,7 +343,7 @@ function getEmptyBoard() {
                 bgColor: '#579bfc'
             },
             {
-                label: '',
+                label: 'default',
                 bgColor: '#c4c4c4'
             },
         ],
@@ -361,7 +361,7 @@ function getEmptyBoard() {
                 bgColor: '#9d99b9'
             },
             {
-                label: '',
+                label: 'default',
                 bgColor: '#c4c4c4'
             }
         ],
@@ -375,8 +375,8 @@ function getEmptyBoard() {
                     {
                         id: utilService.makeId(),
                         title: 'Task 1',
-                        status: '',
-                        priority: '',
+                        status: 'default',
+                        priority: 'default',
                         members: [],
                         labelStatus: 'label 1',
                         dueDate: 1589983468418,
@@ -385,8 +385,8 @@ function getEmptyBoard() {
                     {
                         id: utilService.makeId(),
                         title: 'Task 2',
-                        status: '',
-                        priority: '',
+                        status: 'default',
+                        priority: 'default',
                         members: [],
                         labelStatus: 'label 2',
                         dueDate: 1589983468418,
@@ -404,8 +404,8 @@ function getEmptyBoard() {
                     {
                         id: utilService.makeId(),
                         title: 'Task 3',
-                        status: '',
-                        priority: '',
+                        status: 'default',
+                        priority: 'default',
                         members: [],
                         labelStatus: 'label 3',
                         dueDate: 1589983468418,
@@ -415,10 +415,10 @@ function getEmptyBoard() {
                     {
                         id: utilService.makeId(),
                         title: 'Task 4',
-                        status: '',
-                        priority: '',
+                        status: 'default',
+                        priority: 'default',
                         members: [],
-                        labelStatus: '',
+                        labelStatus: 'default',
                         dueDate: 1589983468418,
                         txt: ''
                     }
@@ -434,8 +434,8 @@ function getEmptyBoard() {
                     {
                         id: utilService.makeId(),
                         title: 'Task 5',
-                        status: '',
-                        priority: '',
+                        status: 'default',
+                        priority: 'default',
                         members: [],
                         labelStatus: 'label 1',
                         dueDate: 1589983468418,
@@ -444,8 +444,8 @@ function getEmptyBoard() {
                     {
                         id: utilService.makeId(),
                         title: 'Task 6',
-                        status: '',
-                        priority: '',
+                        status: 'default',
+                        priority: 'default',
                         members: [],
                         labelStatus: 'label 2',
                         dueDate: 1589983468418,
@@ -480,7 +480,7 @@ const demoBoard = {
             bgColor: '#e2445c'
         },
         {
-            label: '',
+            label: 'default',
             bgColor: '#c4c4c4'
         },
     ],
@@ -502,7 +502,7 @@ const demoBoard = {
             bgColor: '#579bfc'
         },
         {
-            label: '',
+            label: 'default',
             bgColor: '#c4c4c4'
         },
     ], labelStatuses: [
@@ -519,7 +519,7 @@ const demoBoard = {
             bgColor: '#9d99b9'
         },
         {
-            label: '',
+            label: 'default',
             bgColor: '#c4c4c4'
         }
     ],
@@ -551,7 +551,7 @@ const demoBoard = {
                         userName: 'Yossi',
                         imgUrl: '../assets/img/Oren.jpg'
                     }],
-                    labelStatus: '',
+                    labelStatus: 'default',
                     dueDate: 158993468418
                 }
             ],
@@ -567,7 +567,7 @@ const demoBoard = {
                     id: utilService.makeId(),
                     title: 'Task 3',
                     status: 'stuck',
-                    priority: '',
+                    priority: 'default',
                     members: [{
                         userName: 'Yossi',
                         imgUrl: '../assets/img/Oren.jpg'
@@ -601,7 +601,7 @@ const demoBoard = {
                     id: utilService.makeId(),
                     title: 'Task 5',
                     status: 'done',
-                    priority: '',
+                    priority: 'default',
                     members: [{
                         userName: 'Oren',
                         imgUrl: '../assets/img/Oren.jpg'
@@ -612,8 +612,8 @@ const demoBoard = {
                 {
                     id: utilService.makeId(),
                     title: 'Task 6',
-                    status: '',
-                    priority: '',
+                    status: 'default',
+                    priority: 'default',
                     members: {
                         userName: 'KAKa',
                         imgUrl: '../assets/img/Oren.jpg'

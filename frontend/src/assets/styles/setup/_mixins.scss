@@ -240,6 +240,11 @@
   border-left: $border-cell;
 }
 
+@mixin right-bottom-border {
+  border-bottom: $border-cell;
+  border-right: $border-cell;
+}
+
 @mixin flex-center {
   display: flex;
   align-items: center;

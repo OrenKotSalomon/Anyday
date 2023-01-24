@@ -1,0 +1,81 @@
+.label-sum-container {
+    display: flex;
+    align-items: center;
+    height: $cell-height;
+    margin-bottom: 26px;
+
+    .hidden-task-container {
+        position: sticky;
+        z-index: 4;
+        left: 40px;
+        display: flex;
+        align-items: center;
+        height: $cell-height;
+        background-color: $main-bgc-white;
+
+        border-left: $border-cell;
+        border-top-left-radius: 6px;
+
+        .hidden-task {
+            min-width: rem(396px);
+        }
+    }
+
+}
+
+.right-floating-border {
+    // background-color: aqua;
+    height: $cell-height;
+    border-left: 1px solid $cell-border-color;
+    // border-left: $border-cell;
+    border-bottom-left-radius: 6px;
+    width: 4px;
+}
+
+.floatin-white-box-sum {
+    width: 40px;
+    height: $cell-height;
+    background-color: $main-bgc-white;
+    z-index: 6;
+    position: absolute;
+    left: -40px;
+}
+
+.sum-labels-container {
+    display: flex;
+
+    box-shadow: 0px 2px black 0.2;
+}
+
+.status-picker-sum-container {
+    @include status-layout;
+    @include right-bottom-border;
+
+}
+
+.label-status-picker-sum-container {
+    @include status-layout;
+    @include right-bottom-border;
+
+}
+
+.priority-picker-sum-container {
+    @include status-layout;
+    @include right-bottom-border;
+}
+
+.text-picker-sum-container {
+    @include status-layout;
+    @include right-bottom-border;
+
+}
+
+.date-picker-sum-container {
+    @include date-layout;
+    @include right-bottom-border;
+}
+
+.member-picker-sum-container {
+    @include person-layout;
+    @include right-bottom-border;
+}

@@ -84,11 +84,17 @@
   }
 
   .menu-btn-container {
-    position: absolute;
-    width: 40px;
-    height: $cell-height;
-    background-color: $main-bgc-white;
-    left: -40px;
+    display: none;
+
+    @include for-narrow-layout {
+
+      display: block;
+      position: absolute;
+      width: 40px;
+      height: $cell-height;
+      background-color: $main-bgc-white;
+      left: -40px;
+    }
   }
 
   .task-name-cell {
@@ -252,11 +258,24 @@
   height: $cell-height;
 
   border-bottom: $border-cell;
-  border-right: $border-cell;
 
   &::first-letter {
     text-transform: capitalize;
   }
+}
+
+.label-status-level {
+  @include status-layout;
+  text-align: center;
+
+  border-bottom: $border-cell;
+  border-right: $border-cell;
+  color: $main-bgc-white;
+
+  &::first-letter {
+    text-transform: capitalize;
+  }
+
 }
 
 .txt-label {

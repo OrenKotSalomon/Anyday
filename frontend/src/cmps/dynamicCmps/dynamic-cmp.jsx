@@ -2,9 +2,9 @@ import dayjs from 'dayjs';
 import { Avatar, AvatarGroup, Icon, EditableHeading } from 'monday-ui-react-core';
 import { TextCopy } from 'monday-ui-react-core/icons';
 
-import Oren from '../assets/img/Oren.jpg'
-import Harel from '../assets/img/Harel.jpg'
-import { DATE_PICKER, MEMEBER_PICKER, STATUS_PICKER, PRIORITY_PICKER, TEXT_PICKER, LABEL_STATUS_PICKER } from '../services/board.service.local';
+import Oren from '../../assets/img/Oren.jpg'
+import Harel from '../../assets/img/Harel.jpg'
+import { DATE_PICKER, MEMEBER_PICKER, STATUS_PICKER, PRIORITY_PICKER, TEXT_PICKER, LABEL_STATUS_PICKER } from '../../services/board.service.local';
 
 export function DynamicCmp({ cmp, info, openModal, handleChange }) {
 
@@ -33,7 +33,7 @@ export function DynamicCmp({ cmp, info, openModal, handleChange }) {
                 return '#0086c0'
             case 'label 3':
                 return '#9d99b9'
-            case '':
+            case 'default':
                 return '#c4c4c4'
         }
     }
@@ -43,14 +43,14 @@ export function DynamicCmp({ cmp, info, openModal, handleChange }) {
             return <div className="status-label"
                 onClick={(ev) => openModal(ev, { task: cmp.task, groupId: cmp.groupId }, STATUS_PICKER)}
                 style={{ backgroundColor: getLabelColor(info.status) }} >
-                {info.status}
+                {info.status === 'default' ? '' : info.status}
                 <div className="add-note"></div>
             </div>
         case LABEL_STATUS_PICKER:
-            return <div className="status-label"
+            return <div className="label-status-level"
                 onClick={(ev) => openModal(ev, { task: cmp.task, groupId: cmp.groupId }, LABEL_STATUS_PICKER)}
                 style={{ backgroundColor: getLabelColor(info.labelStatus) }} >
-                {info.labelStatus}
+                {info.labelStatus === 'default' ? '' : info.labelStatus}
                 <div className="add-note"></div>
             </div>
         case MEMEBER_PICKER:
@@ -73,7 +73,7 @@ export function DynamicCmp({ cmp, info, openModal, handleChange }) {
             return <div className="status-label"
                 onClick={(ev) => openModal(ev, { task: cmp.task, groupId: cmp.groupId }, PRIORITY_PICKER)}
                 style={{ backgroundColor: getLabelColor(info.priority) }} >
-                {info.priority}
+                {info.priority === 'default' ? '' : info.priority}
                 <div className="add-note"></div>
             </div>
         case TEXT_PICKER:
