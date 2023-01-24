@@ -83,7 +83,6 @@ export function DynamicCmp({ cmp, info, openModal, handleChange }) {
                 {!info.txt && <section className="input-txt-label-container">
                     <span className='txt-label-placeholder' ><Icon iconType={Icon.type.SVG} icon={TextCopy} iconSize={19} /></span>
                     <input onChange={handleChange} type="text" />
-                    {/* <EditableHeading type={EditableHeading.types.h6} value={info.txt} /> */}
                 </section>}
             </div>
     }

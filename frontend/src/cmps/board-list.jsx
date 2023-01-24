@@ -35,12 +35,12 @@ export function BoardList({ onDuplicateBoard, onRemoveBoard }) {
             </div>
             <div className="board-menu-btn" onClick={(ev) => ev.preventDefault()}>
                 <MenuButton className="board-list-menu-btn"
-                // onClick={ev => onMenuClick(ev)}
+
                 >
                     <Menu
                         id="menu"
                         size="medium"
-                    // onClick={ev => onMenuClick(ev)}
+
                     >
                         <MenuItem
                             onClick={(ev) => {
@@ -61,7 +61,6 @@ export function BoardList({ onDuplicateBoard, onRemoveBoard }) {
                     </Menu>
                 </MenuButton>
             </div>
-            {/* <div onClick={ev => onMenuClick(ev)} >X</div> */}
         </NavLink>)}
 
     </section>

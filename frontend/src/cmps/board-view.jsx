@@ -98,14 +98,7 @@ export function BoardView({ board }) {
                 <div className='description-modal'>See More</div>
             </div>
             <div className="header-tablist">
-                {/* <TabList>
-                    <Tab>
-                    <Icon iconType={Icon.type.SVG} icon={Home} iconSize={20} style={{marginRight: '5px'}} /> Main Table
-                    </Tab>
-                    <Tab>
-                        Kanban
-                    </Tab>
-                </TabList> */}
+
                 <div className='tablist-container'>
 
                     <NavLink className='main-table-a' to={`/board/${board._id}`} ><Icon iconType={Icon.type.SVG} icon={Home} iconSize={16} style={{ marginRight: '5px' }} /> <div className='main-table-txt'>

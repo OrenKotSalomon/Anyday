@@ -47,8 +47,6 @@ export function BoardHeader({ board }) {
             <div className="mobile-view-select" style={{ display: isFilterOn ? `none` : `block` }}>
                 <select name="view" id="view">
                     <option value="main">
-
-                        {/* <Icon iconType={Icon.type.SVG} icon={Home} iconSize={12} /> */}
                         Main table
                     </option>
                     <option value="kanban">
