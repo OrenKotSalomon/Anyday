@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 import { NavBar } from "../cmps/nav-bar";
 import { BoardHeader } from "../cmps/board-header";
-import { DynamicModal } from "../cmps/dynamic-modal";
+import { DynamicModal } from "../cmps/dynamicCmps/dynamic-modal.jsx";
 import { GroupList } from "../cmps/group-list";
 import { SideGroupBar } from "../cmps/side-group-bar";
 

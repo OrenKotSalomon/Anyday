@@ -74,7 +74,7 @@
       h4 {
         width: max-content;
       }
-      
+
       input {
         width: max-content;
         margin-top: 10px;
@@ -153,11 +153,12 @@
 
 .main-header-labels-container {
   &.collapsed {
-    > * {
+    >* {
       height: 60px;
     }
   }
 }
+
 .main-group-container {
   min-width: 100vw;
 }
@@ -267,7 +268,7 @@
   .main-left-header {
     display: flex;
     z-index: 2;
-    background-color: $main-bgc-white;
+    background-color: rgba(255, 255, 255, 0.9);
 
     @include for-narrow-layout {
 
@@ -486,24 +487,4 @@
   @include date-layout;
   text-align: center;
   @include left-bottom-border;
-}
-
-.label-sum-container {
-  display: flex;
-  align-items: center;
-  height: $cell-height;
-  margin-bottom: 26px;
-
-  .hidden-task-container {
-    position: sticky;
-    z-index: 4;
-    left: 40px;
-    display: flex;
-    align-items: center;
-    height: $cell-height;
-
-    .hidden-task {
-      min-width: rem(400px);
-    }
-  }
 }
