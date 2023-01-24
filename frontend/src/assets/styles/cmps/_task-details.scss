@@ -116,6 +116,7 @@
             width: 100%;
             padding-left: 22px;
             margin-bottom: 42px;
+
         }
     }
 
@@ -239,8 +240,8 @@
 
 .task-details-open-input-btn:hover {
     cursor: text;
-    background-color: #c8e3ff;
-    opacity: 70%;
+    background-color: #dcdfec !important;
+    color: #676879;
 }
 
 .details-img-container {

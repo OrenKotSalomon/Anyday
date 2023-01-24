@@ -41,14 +41,12 @@ export function Signup() {
             <Link to='/' className="top-header">
                 <img className="login-logo" src="" alt="logo" />
             </Link>
-
             <div className="router-wrapper">
                 <div className="email-password-container">
                     <h1 className="signup-header">
                         <b>Sign</b>
                         {" Up"}
                     </h1>
-
                     <div className="email-page-two">
                         <form className="email-password-input-and-button-container"
                             onSubmit={onSignup}>
