@@ -35,8 +35,8 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
         console.log(data)
     }
 
-    function onDeleteComment(comment) {
-        let taskChanges = { commentIdx: comment.id, taskId: task.id, groupId: group.id }
+    function onDeleteComment(comment,isPined = false) {
+        let taskChanges = { commentIdx: comment.id, taskId: task.id, groupId: group.id, isPined: isPined }
         updateTask(board, taskChanges, DELETE_TASK_COMMENT)
     }
 
@@ -151,7 +151,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                                         title={isPined ? "Unpin from top" : "Pin to top"}
                                     />
                                     <MenuItem
-                                        onClick={() => onDeleteComment(comment)}
+                                        onClick={() => onDeleteComment(comment,isPined)}
                                         icon={Delete}
                                         title="Delete update for every one"
                                     />

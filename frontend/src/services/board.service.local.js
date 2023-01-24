@@ -238,8 +238,13 @@ function taskServiceReducer(board, data, type) {
             return board
         case DELETE_TASK_COMMENT:
             currTask = board.groups[groupIdx].tasks[taskIdx]
-            let deleteCommentIdx = currTask.comments.findIndex(currComment => currComment.id === data.commentIdx)
-            currTask.comments.splice(deleteCommentIdx, 1)
+            if (!data.isPined) {
+                let deleteCommentIdx = currTask.comments.findIndex(currComment => currComment.id === data.commentIdx)
+                currTask.comments.splice(deleteCommentIdx, 1)
+            } else {
+                let deleteCommentIdx = currTask.pinedComments.findIndex(currComment => currComment.id === data.commentIdx)
+                currTask.pinedComments.splice(deleteCommentIdx, 1)
+            }
             return board
         case PIN_TASK_COMMENT:
             currTask = board.groups[groupIdx].tasks[taskIdx]
