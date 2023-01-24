@@ -8,7 +8,8 @@ import { showErrorMsg, showSuccessMsg } from '../../services/event-bus.service.j
 
 export function LoginStepTwo({ props }) {
     const boards = useSelector((storeState) => storeState.boardModule.boards)
-    const [loginCredentials, setLoginCredentials] = useState({ email: props.credentials.email, username: '', password: '', fullname: '', imgUrl: '' })
+    const [loginCredentials, setLoginCredentials] = useState({ email: props.credentials.email,
+           username: '', password: '', fullname: '', imgUrl: '' })
     const navigate = useNavigate()
 
     function clearState() {
@@ -46,9 +47,6 @@ export function LoginStepTwo({ props }) {
 
                         <div className="email-page-two">
                             <form className="email-password-input-and-button-container">
-
-                                {/* {value={props.cardentials.email}} */}
-
                                 <div className="form-input-container">
                                     <span className="email-password-label">Email</span>
                                     <div className="email-input-container">

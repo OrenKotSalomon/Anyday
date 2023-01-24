@@ -51,7 +51,6 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
     }
 
     function handleInputChange(txt) {
-        // ev.preventDefault()
         setComment(txt)
     }
 
@@ -65,7 +64,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
         setNewTitle(value)
     }
 
-    //...................imge upload
+    //.......imge upload
     const inputRef = useRef(null);
 
     const handleClick = () => {
@@ -95,7 +94,6 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
     }
 
     function getInitX(ev) {
-        // console.log('init-drag', ev.clientX)
         setX(ev.clientX)
     }
 
@@ -118,44 +116,39 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
         }
     }
 
-
-
     function renderComments(taskComments, isPined = false) {
         if (taskComments && taskComments.length)
             return <section>
                 {taskComments.map(comment => <div
                     key={comment.id} className='task-details-task-comment'>
-
                     {isPined && <div className='pinedComment'>
-                        <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Pin} iconLabel="my svg icon" iconSize={14} />Pinned
+                        <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG}
+                         icon={Pin} iconLabel="my svg icon" iconSize={14} />Pinned
                     </div>}
 
                     <div className='task-details-header'>
                         <div className='task-details-by-user'>
                             {getAvatarImg(comment)}
-                            <h1 className='task-details-by-user-name' >{comment.byMember?.fullname || 'Guest User'}</h1>
+                            <h1 className='task-details-by-user-name' >
+                            {comment.byMember?.fullname || 'Guest User'}</h1>
                         </div>
 
                         <div className='task-details-header-tools'>
-                            <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Time} iconLabel="my svg icon" iconSize={14} />
+                            <Icon className='task-details-header-time-icon' 
+                            iconType={Icon.type.SVG} icon={Time} iconLabel="my svg icon" iconSize={14} />
                             <div className='task-details-created-at'>{utilService.time_ago(comment.createdAt)}</div>
                             <MenuButton className="task-details-menu-btn" >
                                 <Menu
                                     id="task-details-menu"
-                                    size="medium"
-                                >
-
+                                    size="medium">
                                     <MenuItem
                                         onClick={() => { isPined ? onUnpinFromTop(comment) : onPinToTop(comment) }}
                                         icon={Pin}
-                                        title={isPined ? "Unpin from top" : "Pin to top"}
-                                    />
+                                        title={isPined ? "Unpin from top" : "Pin to top"}/>
                                     <MenuItem
                                         onClick={() => onDeleteComment(comment,isPined)}
                                         icon={Delete}
-                                        title="Delete update for every one"
-                                    />
-
+                                        title="Delete update for every one"/>
                                 </Menu>
                             </MenuButton>
                         </div>
