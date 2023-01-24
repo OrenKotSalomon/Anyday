@@ -19,7 +19,7 @@
     position: absolute;
   }
 
-  > * {
+  >* {
     grid-column: 2;
   }
 }
@@ -32,28 +32,26 @@
   }
 }
 
-.add-group-btn-container {
-  display: inline-block;
-  height: 32px;
-  width: 142px;
-  // position: relative;
-  // top: -91px;
-}
+.bottom-add-group-btn-container {
+  width: 110vw;
+  padding-bottom: 50px;
 
-.bottom-add-group-btn {
-  @include flex-center;
-  justify-self: flex-start;
-  color: $main-color;
-  background-color: transparent;
-  border: 1px solid #c3c6d4;
-  font-size: rem(14px);
-  gap: 5px;
-  height: 32px;
-  width: 142px;
-  margin-top: 20px;
-  position: sticky;
-  left: 40px;
-  &:hover {
-    background-color: #dcdfec;
+  .bottom-add-group-btn {
+    @include flex-center;
+    justify-self: flex-start;
+    color: $main-color;
+    background-color: transparent;
+    border: 1px solid #c3c6d4;
+    font-size: rem(14px);
+    gap: 5px;
+    height: 32px;
+    width: 142px;
+    margin-top: 20px;
+    position: sticky;
+    left: 40px;
+
+    &:hover {
+      background-color: #dcdfec;
+    }
   }
 }

@@ -46,7 +46,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
     switch (cmp.type) {
 
         case STATUS_PICKER:
-            return <div onClick={() => setIsModalOpen(false)} className="status-picker-container" style={{ transform: `translate(-63%, 20%)`, left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
+            return <div onClick={() => setIsModalOpen(false)} className="status-picker-container" style={{ left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
 
                 <div className="arrow-up"></div>
                 <div className="status-picker-view">
@@ -61,7 +61,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
                 </div>
             </div>
         case LABEL_STATUS_PICKER:
-            return <div onClick={() => setIsModalOpen(false)} className="status-picker-container" style={{ transform: `translate(-63%, 20%)`, left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
+            return <div onClick={() => setIsModalOpen(false)} className="status-picker-container" style={{ left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
 
                 <div className="arrow-up"></div>
                 <div className="status-picker-view">
@@ -77,7 +77,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
                 </div>
             </div>
         case MEMEBER_PICKER:
-            return <div className="member-picker-view" style={{ transform: `translate(-100%, 80%)`, left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
+            return <div className="member-picker-view" style={{ left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
                 <div className="members-dropdown">
                     {/* read more on dropdown with avatar */}
                     {/* defaultValue={[optionsAvatar[0]]} */}
@@ -105,7 +105,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
 
         case DATE_PICKER:
 
-            return <div className="date-picker-view" style={{ transform: `translate(-100%, 15%)`, left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
+            return <div className="date-picker-view" style={{ left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
                 <div className="arrow-up"></div>
                 <DialogContentContainer className={'styles.datepickerDialogContentContainer'}>
 
@@ -114,7 +114,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
 
             </div>
         case PRIORITY_PICKER:
-            return <div onClick={() => setIsModalOpen(false)} className="status-picker-container" style={{ transform: `translate(-63%, 17%)`, left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
+            return <div onClick={() => setIsModalOpen(false)} className="status-picker-container" style={{ left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
                 <div className="arrow-up"></div>
                 <div className="status-picker-view">
                     {cmp.priorities.map((priority, idx) => {
