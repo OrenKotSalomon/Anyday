@@ -11,7 +11,7 @@ import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
 
 import { DynamicCmp } from "./dynamicCmps/dynamic-cmp.jsx";
 
-export function TaskPreview({ task, board, group, openModal, provided, setIsDndModeDisabled }) {
+export function TaskPreview({ task, board, group, openModal, provided, snapshot, setIsDndModeDisabled }) {
 
     const [isOpenDetails, setIsOpenDetails] = useState(false)
 
@@ -41,17 +41,19 @@ export function TaskPreview({ task, board, group, openModal, provided, setIsDndM
         // updateTask(board, value, HANDLE_TXT_CHANGE)
     }
 
-    return <section className='task-preview'
+    return <section className={`task-preview ${snapshot.isDragging ? 'dragged-task' : ''} `}
         {...provided.draggableProps}
         {...provided.dragHandleProps}
         ref={provided.innerRef}>
-
+        
         <div className="task">
 
             <div className="task-edit-wrapper">
-                <div className="menu-btn-container">
+                <div className="menu-btn-container"
+                    style={{ display: snapshot.isDragging ? 'none' : '' }}>
 
-                    <MenuButton className="task-preview-menu-btn" >
+                    <MenuButton className="task-preview-menu-btn"
+                    >
                         <Menu
                             id="menu"
                             size="medium"

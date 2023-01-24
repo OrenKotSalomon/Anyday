@@ -78,7 +78,6 @@
   z-index: 5;
 
   @include for-narrow-layout {
-
     min-width: rem(400px);
     @include left-sticky;
   }
@@ -87,7 +86,6 @@
     display: none;
 
     @include for-narrow-layout {
-
       display: block;
       position: absolute;
       width: 40px;
@@ -143,7 +141,6 @@
 }
 
 .left-border-task {
-
   padding-right: 6px;
   width: 6px;
   @include left-border;
@@ -161,7 +158,6 @@
   display: none;
 
   @include for-narrow-layout {
-
     display: flex;
     justify-content: center;
     height: rem(36px);
@@ -174,10 +170,10 @@
       width: 16px;
     }
   }
-
 }
 
-.mobile-container-sticky {}
+.mobile-container-sticky {
+}
 
 .task-title {
   @include line-elipsis;
@@ -186,12 +182,10 @@
   min-width: rem(160px);
 
   @include for-narrow-layout {
-
     min-width: rem(290px);
   }
 
   .monday-style-clickable {
-
     h5 {
       height: 22px;
       line-height: revert;
@@ -202,14 +196,11 @@
 
       @include for-narrow-layout {
         width: unset;
-
       }
-
     }
 
     // color: #d5d8e4;
     input {
-
       height: 22px;
       font-size: rem(14px);
       font-family: figtree-regular;
@@ -218,10 +209,8 @@
 
       @include for-narrow-layout {
         width: 268px;
-
       }
     }
-
   }
 }
 
@@ -275,7 +264,6 @@
   &::first-letter {
     text-transform: capitalize;
   }
-
 }
 
 .txt-label {
@@ -286,7 +274,6 @@
   border-right: $border-cell;
 
   &:hover {
-
     .txt-label-placeholder,
     input {
       opacity: 1 !important;
@@ -309,7 +296,7 @@
       @include absoluteCenter;
       top: 60%;
 
-      >* {
+      > * {
         cursor: text;
       }
     }
@@ -355,4 +342,38 @@
 .element-type-h6 {
   margin: 6px;
   padding: 2px 0px 3px 16px;
+}
+
+.dragged-task {
+  scale: 1.1;
+  opacity: 0.7;
+}
+
+.task-dragover-placeholder {
+// border: 1px dotted black;
+}
+
+.dragged-label {
+  position: relative;
+  opacity: 0.9;
+  scale: 1.1;
+  background-color: #fff;
+
+  :first-child {
+    border:1px solid $cell-border-color !important;
+    border-bottom: 0 !important;
+  }
+  // border: none !important;
+}
+
+.label-white-bgc-on-drag {
+  position: absolute;
+  opacity: 0.8;
+  height: 107px;
+  width: 100%;
+  background-color: #fff;
+  box-shadow:  0px 4px 4px rgb(128, 128, 128);
+  border:0 1px 1px solid $cell-border-color; 
+  border-bottom-left-radius: 4px; 
+  border-bottom-right-radius: 4px; 
 }

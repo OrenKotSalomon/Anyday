@@ -299,17 +299,20 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                                     ref={provided.innerRef}>
                                     {board.cmpsOrder.map((cmp, idx) => {
                                         return <Draggable key={cmp} draggableId={cmp} index={idx} >
-                                            {(provided) => (
+                                            {(provided, snapshot) => (
                                                 <div key={idx}
+                                                    className={snapshot.isDragging ? 'dragged-label' : ''}
                                                     {...provided.draggableProps}
                                                     {...provided.dragHandleProps}
-                                                    ref={provided.innerRef}>
+                                                    ref={provided.innerRef} >
                                                     {renderGroupLabels(cmp)}
+                                                    <div className={snapshot.isDragging ? 'label-white-bgc-on-drag' : ''}></div>
                                                 </div>
                                             )}
                                         </Draggable>
                                     }
                                     )}
+                                    {provided.placeholder}
                                 </div>
                             )}
                         </Droppable>
@@ -342,26 +345,29 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
 
                 <DragDropContext onDragEnd={(result) => handleOnDragEnd(result, 'task', { board, group, listToUpdate })} >
                     <Droppable droppableId='tasks'>
-                        {(provided) => (
+                        {(provided, snapshot) => (
 
-                            <section className="tasks-container"
+                            <section className={`tasks-container`}
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}>
 
                                 {group.tasks.map((task, index) =>
-                                    <Draggable key={task.id} draggableId={task.id} index={index} isDragDisabled={isDndModeDisabled} >
-                                        {(provided) => (
-                                            <TaskPreview
-                                                provided={provided}
-                                                key={task.id}
-                                                task={task}
-                                                board={board}
-                                                group={group}
-                                                openModal={openModal}
-                                                setIsDndModeDisabled={setIsDndModeDisabled}
-                                            />
-                                        )}
-                                    </Draggable>
+                                    // <div className={`task-placeholder ${snapshot.isDraggingOver ? 'task-dragover-placeholder' : ''}`}>
+                                        <Draggable key={task.id} draggableId={task.id} index={index} isDragDisabled={isDndModeDisabled} >
+                                            {(provided, snapshot) => (
+                                                <TaskPreview
+                                                    snapshot={snapshot}
+                                                    provided={provided}
+                                                    key={task.id}
+                                                    task={task}
+                                                    board={board}
+                                                    group={group}
+                                                    openModal={openModal}
+                                                    setIsDndModeDisabled={setIsDndModeDisabled}
+                                                />
+                                            )}
+                                        </Draggable>
+                                    // </div>
                                 )}
                                 {provided.placeholder}
                                 <div className='add-task-wrapper'>
