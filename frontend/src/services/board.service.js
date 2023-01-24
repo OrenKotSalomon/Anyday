@@ -57,12 +57,16 @@ function getEmptyBoard() {
     }
 }
 
-function getEmptyTaskComment(txt='',imgUrl='') {
+function getEmptyTaskComment(txt='',imgUrl='',byMember = {}) {
 
     return {
         id: utilService.makeId(),
         txt,
         createdAt: Date.now(),
-        imgUrl
+        imgUrl,
+        byMember
+            // _id, ........user ex
+            // fullname,
+            // imgUrl
     }
 }

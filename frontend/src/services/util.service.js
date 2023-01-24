@@ -123,11 +123,11 @@ function time_ago(time) {
         time = +new Date();
     }
     var time_formats = [
-      [60, 'seconds', 1], // 60
-      [120, '1 minute ago', '1 minute from now'], // 60*2
-      [3600, 'minutes', 60], // 60*60, 60
-      [7200, '1 hour ago', '1 hour from now'], // 60*60*2
-      [86400, 'hours', 3600], // 60*60*24, 60*60
+      [60, 's', 1], // 60
+      [120, '1 m', '1 m'], // 60*2
+      [3600, 'm', 60], // 60*60, 60
+      [7200, '1 h', '1 h'], // 60*60*2
+      [86400, 'h', 3600], // 60*60*24, 60*60
       [172800, 'Yesterday', 'Tomorrow'], // 60*60*24*2
       [604800, 'days', 86400], // 60*60*24*7, 60*60*24
       [1209600, 'Last week', 'Next week'], // 60*60*24*7*4*2
@@ -140,9 +140,9 @@ function time_ago(time) {
       [58060800000, 'centuries', 2903040000] // 60*60*24*7*4*12*100*20, 60*60*24*7*4*12*100
     ];
     var seconds = (+new Date() - time) / 1000,
-      token = 'ago',
+      token = '',
       list_choice = 1;
-    if (seconds == 0) {
+    if (seconds < 30) {
       return 'Just now'
     }
     if (seconds < 0) {

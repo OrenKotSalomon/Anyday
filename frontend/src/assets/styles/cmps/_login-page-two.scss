@@ -58,6 +58,24 @@
     }
 }
 
+.login-fb {
+    display: block;
+    margin: 0 auto;
+    font-size: rem(16px);
+    line-height: rem(16px);
+    padding: 8px;
+    svg {
+        font-size: rem(24px);
+    }
+    span {
+        vertical-align: text-top;
+    }
+    &:hover {
+        cursor: pointer;
+        padding: 9px;
+    }
+}
+
 .next-btn-wrapper {
     display: flex;
     justify-content: center;
