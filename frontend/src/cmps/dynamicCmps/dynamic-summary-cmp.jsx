@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { DATE_PICKER, LABEL_STATUS_PICKER, MEMEBER_PICKER, PRIORITY_PICKER, STATUS_PICKER, TEXT_PICKER } from "../../services/board.service.local";
+import { DATE_PICKER, LABEL_STATUS_PICKER, MEMEBER_PICKER, PRIORITY_PICKER, STATUS_PICKER, TEXT_LABEL } from "../../services/board.service.local";
 
 export function DynamicSummaryCmp({ cmp, board, group }) {
     const [tempstate, setTempstate] = useState([])
@@ -35,7 +35,7 @@ export function DynamicSummaryCmp({ cmp, board, group }) {
                 return
             case MEMEBER_PICKER:
                 return
-            case TEXT_PICKER:
+            case TEXT_LABEL:
                 return
 
         }
@@ -63,7 +63,7 @@ export function DynamicSummaryCmp({ cmp, board, group }) {
             return <div className="member-picker-sum-container">
                 <div className="member-picker-sum"></div>
             </div>
-        case TEXT_PICKER:
+        case TEXT_LABEL:
             return <div className="text-picker-sum-container">
                 <div className="text-picker-sum"></div>
             </div>

@@ -8,6 +8,7 @@ const BOARD_KEY = 'boardDB'
 //Board
 export const CHANGE_TITLE = 'CHANGE_TITLE'
 export const ON_DRAG_GROUP = 'ON_DRAG_GROUP'
+export const ON_DRAG_LABEL = 'ON_DRAG_LABEL'
 
 //Groups
 export const CHANGE_GROUP_TITLE = 'CHANGE_GROUP_TITLE'
@@ -39,7 +40,7 @@ export const DATE_PICKER = 'DATE_PICKER'
 export const STATUS_PICKER = 'STATUS_PICKER'
 export const MEMEBER_PICKER = 'MEMEBER_PICKER'
 export const PRIORITY_PICKER = 'PRIORITY_PICKER'
-export const TEXT_PICKER = 'TEXT_PICKER'
+export const TEXT_LABEL = 'TEXT_LABEL'
 export const LABEL_STATUS_PICKER = 'LABEL_STATUS_PICKER'
 
 export const boardService = {
@@ -152,6 +153,9 @@ function boardServiceReducer(board, data, type) {
             return board
         case ON_DRAG_GROUP:
             board.groups = data
+            return board
+        case ON_DRAG_LABEL:
+            board.cmpsOrder = data
             return board
         default:
             return board
@@ -454,7 +458,7 @@ function getEmptyBoard() {
                 style: 'lightblue'
             },
         ],
-        cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER, PRIORITY_PICKER, TEXT_PICKER, LABEL_STATUS_PICKER]
+        cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER, PRIORITY_PICKER, TEXT_LABEL, LABEL_STATUS_PICKER]
     }
 }
 
@@ -624,7 +628,7 @@ const demoBoard = {
             style: 'lightblue'
         },
     ],
-    cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER, PRIORITY_PICKER, TEXT_PICKER, LABEL_STATUS_PICKER]
+    cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER, PRIORITY_PICKER, TEXT_LABEL, LABEL_STATUS_PICKER]
 
 }
 
