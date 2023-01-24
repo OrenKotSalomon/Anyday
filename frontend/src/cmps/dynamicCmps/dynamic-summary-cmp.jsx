@@ -11,11 +11,22 @@ export function DynamicSummaryCmp({ cmp, board, group }) {
                 let t = group.tasks.reduce((acc, task) => {
                     if (!acc[task.status]) acc[task.status] = 0
                     acc[task.status]++
+                    board.statuses.map(status => {
+                        acc[task.status] = status.bgColor
+                    })
+
                     return acc
                 }, {})
                 let temp2 = Object.values(t).map(value => value / group.tasks.length * 100)
                 console.log(t);
-                return
+                return <div className="status-sum">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+
+                </div>
             case LABEL_STATUS_PICKER:
                 return
             case PRIORITY_PICKER:
@@ -34,7 +45,7 @@ export function DynamicSummaryCmp({ cmp, board, group }) {
     switch (cmp) {
         case STATUS_PICKER:
             return <div className="status-picker-sum-container">
-                <div className="status-sum"></div>
+
             </div>
         case LABEL_STATUS_PICKER:
             return <div className="label-status-picker-sum-container">

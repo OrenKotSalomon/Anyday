@@ -365,9 +365,10 @@ export function GroupList({ board, group, openModal, provided, setIsDndModeDisab
 
                                     <div className='sum-labels-container'>
                                         {
-                                            board.cmpsOrder.map(cmp => {
+                                            board.cmpsOrder.map((cmp, idx) => {
 
                                                 return <DynamicSummaryCmp
+                                                    key={idx}
                                                     cmp={cmp}
                                                     board={board}
                                                     group={group}
