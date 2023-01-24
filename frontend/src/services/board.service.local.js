@@ -144,7 +144,6 @@ function getNewTask() {
     }
 
 }
-console.log('new',);
 
 function boardServiceReducer(board, data, type) {
     board = structuredClone(board)

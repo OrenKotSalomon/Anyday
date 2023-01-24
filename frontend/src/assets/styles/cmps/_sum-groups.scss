@@ -3,6 +3,7 @@
     align-items: center;
     height: $cell-height;
     margin-bottom: 26px;
+    position: relative;
 
     .hidden-task-container {
         position: sticky;
@@ -25,6 +26,8 @@
 
 .right-floating-border {
     // background-color: aqua;
+    position: relative;
+    left: 2px;
     height: $cell-height;
     border-left: 1px solid $cell-border-color;
     // border-left: $border-cell;
@@ -49,33 +52,39 @@
 
 .status-picker-sum-container {
     @include status-layout;
-    @include right-bottom-border;
+    border-bottom: $border-cell;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+    .status-sum {
+        width: rem(124px);
+        display: flex;
+    }
 }
 
 .label-status-picker-sum-container {
     @include status-layout;
-    @include right-bottom-border;
-
+    border-bottom: $border-cell;
 }
 
 .priority-picker-sum-container {
     @include status-layout;
-    @include right-bottom-border;
+    border-bottom: $border-cell;
 }
 
 .text-picker-sum-container {
     @include status-layout;
-    @include right-bottom-border;
-
+    border-bottom: $border-cell;
 }
 
 .date-picker-sum-container {
     @include date-layout;
-    @include right-bottom-border;
+    border-bottom: $border-cell;
 }
 
 .member-picker-sum-container {
     @include person-layout;
-    @include right-bottom-border;
+    border-bottom: $border-cell;
+
 }
