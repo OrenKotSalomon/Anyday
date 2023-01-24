@@ -16,30 +16,27 @@ export function DynamicSummaryCmp({ cmp, board, group }) {
         <div></div>
 
     })
-    temp()
+
     function temp() {
+        board = structuredClone(board)
         switch (cmp) {
             case STATUS_PICKER:
-
-                let f = []
+                let statuses = []
                 let t = group.tasks.reduce((acc, task) => {
                     if (!acc[task.status]) acc[task.status] = 0
                     acc[task.status]++
-
-                    return acc
+                    return { ...acc }
                 }, {})
-
-                // console.log(t);
                 for (const key in t) {
-
-
-                    console.log(t[key]);
-                    console.log(key);
+                    board.statuses.find(status => {
+                        if (status.label === key) {
+                            status.value = t[key]
+                            statuses.push(status)
+                        }
+                    })
                 }
 
-                let temp2 = Object.values(t).map(value => value / group.tasks.length * 100)
-                // console.log(temp2);
-                return temp2
+                return statuses
 
             case LABEL_STATUS_PICKER:
                 return
@@ -59,8 +56,19 @@ export function DynamicSummaryCmp({ cmp, board, group }) {
     switch (cmp) {
         case STATUS_PICKER:
             return <div className="status-picker-sum-container" >
-                <div className="status-sum">
+                <div className="status-sum-container">
+                    {
+                        temp().map((statusSum, idx) => {
 
+                            return <div key={idx} className="status-sum"
+                                style={{
+                                    backgroundColor: statusSum.bgColor,
+                                    height: '24px',
+                                    width: `${statusSum.value / group.tasks.length * 100}%`
+                                }}
+                            ></div>
+                        })
+                    }
                 </div>
 
             </div>

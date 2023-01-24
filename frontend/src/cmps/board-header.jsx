@@ -5,16 +5,20 @@ import { BoardView } from "./board-view";
 
 import { MenuButton, Menu, Icon } from 'monday-ui-react-core'
 import { MoveArrowLeft, Search, Filter, Home } from 'monday-ui-react-core/icons'
+import { useNavigate } from "react-router";
 
 export function BoardHeader({ board }) {
     const [isFilterOn, setIsFilterOn] = useState(false)
+    const navigate = useNavigate()
 
     return <Fragment>
 
         <div className="header-mobile">
 
             <button className="home-mobile-btn">
-                <Icon iconType={Icon.type.SVG} icon={MoveArrowLeft} iconLabel="my bolt svg icon" iconSize={16} />
+                <Icon iconType={Icon.type.SVG}
+                    onClick={() => navigate('/')}
+                    icon={MoveArrowLeft} iconLabel="my bolt svg icon" iconSize={16} />
             </button>
             <div className="board-title-mobile">
                 <div className="title-mobile-txt">

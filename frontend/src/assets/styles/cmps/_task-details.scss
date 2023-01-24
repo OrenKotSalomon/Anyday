@@ -97,10 +97,9 @@
     .task-details-open-input-btn-container {
         width: 100%;
         padding-right: 42px;
-        
 
         .task-details-open-input-btn {
-            color:#323338;
+            color: #323338;
             margin-top: 20px;
             margin-left: 20px;
             border-radius: 0.5em;
@@ -177,7 +176,7 @@
                 margin-left: 0px;
                 justify-items: left;
 
-                svg{
+                svg {
                     color: $blue;
                 }
 
@@ -361,8 +360,9 @@
                 position: relative;
                 bottom: rem(1px);
                 font-size: 12px;
-                color:#676879;
-                svg{
+                color: #676879;
+
+                svg {
                     width: 16px;
                     height: 16px;
                 }
