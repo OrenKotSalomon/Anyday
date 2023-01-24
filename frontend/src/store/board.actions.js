@@ -1,4 +1,4 @@
-import { boardService } from "../services/board.service.local.js";
+import { boardService, ON_DRAG_TASK } from "../services/board.service.local.js";
 import { userService } from "../services/user.service.js";
 import { store } from './store.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
@@ -28,7 +28,7 @@ export async function loadBoard(boardId) {
     try {
         const board = await boardService.getById(boardId)
         store.dispatch({ type: SET_BOARD, board })
-        return board
+        // return board
     } catch (err) {
         console.log('Cannot load board', err)
         throw err
@@ -114,6 +114,36 @@ export async function updateTask(board, data, type) {
         console.log('Cannot save board', err)
         throw err
     }
+}
+
+export function handleOnDragEnd(result, type, data) {
+
+    if (!result.destination) return
+
+    switch (type) {
+        
+        case 'group':
+            const groupsToUpdate = data.grouplist
+            const [reorderedGroup] = groupsToUpdate.splice(result.source.index, 1)
+            groupsToUpdate.splice(result.destination.index, 0, reorderedGroup)
+            return updateBoard(data.board, groupsToUpdate, ON_DRAG_TASK)
+
+        case 'task':
+            const newOrderedTasks = data.listToUpdate
+            const [reorderedTask] = newOrderedTasks.splice(result.source.index, 1)
+            newOrderedTasks.splice(result.destination.index, 0, reorderedTask)
+            data.group.tasks = newOrderedTasks
+            return updateGroup(data.board, data.group, ON_DRAG_TASK)
+
+        default:
+            return updateGroup(data.board, data.group, ON_DRAG_TASK)
+    }
+    // const newOrderedTasks = Array.from(listToUpdate)
+    // const [reorderedTask] = newOrderedTasks.splice(result.source.index, 1)
+    // newOrderedTasks.splice(result.destination.index, 0, reorderedTask)
+    // group.tasks = newOrderedTasks
+    // updateGroup(board, group, ON_DRAG_TASK)
+    // setListToUpdate(newOrderedTasks)
 }
 
 // Demo for Optimistic Mutation

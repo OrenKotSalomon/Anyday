@@ -4,7 +4,6 @@
   padding-top: 7px;
 
   .group-header-container {
-
     display: block;
     height: 2.75rem;
     height: rem(70px);
@@ -14,7 +13,6 @@
     top: 53px;
 
     @include for-narrow-layout {
-
       top: 210px;
     }
 
@@ -53,12 +51,16 @@
     .group-header-name {
       position: relative;
       margin-left: 15px;
-      width: max-content;
       font-size: 2rem;
       @include left-sticky;
       left: 55px;
 
+      h4 {
+        width: max-content;
+      }
+      
       input {
+        width: max-content;
         margin-top: 10px;
         margin-left: 20px;
       }
@@ -93,7 +95,6 @@
     }
 
     &.collapsed {
-
       .group-collapse-btn-container {
         position: absolute;
         top: 1px;
@@ -108,12 +109,18 @@
   }
 }
 
+.main-header-labels-container {
+  &.collapsed {
+    > * {
+      height: 60px;
+    }
+  }
+}
 .main-group-container {
   min-width: 100vw;
 }
 
 .row-collapsed-group-container {
-
   display: flex;
   margin-top: 6px;
   border-bottom-left-radius: 6px;
@@ -158,14 +165,12 @@
     @include left-sticky;
 
     .floatin-white-box {
-
       display: block;
       position: absolute;
       width: 40px;
       height: 36px;
       background-color: $main-bgc-white;
       left: -40px;
-
     }
   }
 }
@@ -186,7 +191,6 @@
     border-top: $border-cell;
 
     @include for-narrow-layout {
-
       .add-label-btn-container {
         position: relative;
         height: 22px;
@@ -234,7 +238,6 @@
   justify-content: center;
 
   @include for-narrow-layout {
-
     min-width: rem(400px);
     flex-basis: rem(351px);
     line-height: rem(24px);
@@ -281,14 +284,12 @@
       border-bottom-left-radius: 6px;
     }
   }
-
 }
 
 .checkbox-row-container {
   display: none;
 
   @include for-narrow-layout {
-
     display: flex;
     justify-content: center;
     height: rem(36px);
@@ -320,7 +321,6 @@
     display: none;
 
     @include for-narrow-layout {
-
       display: flex;
       justify-content: center;
       width: rem(33.6px);
@@ -342,7 +342,6 @@
 }
 
 .add-task-input-container {
-
   border-bottom-left-radius: 6px;
   border-bottom: $border-cell;
   display: flex;
@@ -352,7 +351,6 @@
   left: 0px;
 
   @include for-narrow-layout {
-
     @include left-sticky;
     left: 40px;
     min-width: rem(400px);
@@ -370,7 +368,6 @@
     width: rem(220px);
 
     @include for-narrow-layout {
-
       width: rem(362px);
     }
 
@@ -402,7 +399,6 @@
 }
 
 .status-label-header {
-
   @include status-layout;
   border-bottom: $border-cell;
   border-top: $border-cell;
@@ -414,7 +410,6 @@
   border-top: $border-cell;
   border-right: $border-cell;
   border-bottom: $border-cell;
-
 }
 
 .priority-label-header {
@@ -422,7 +417,6 @@
   border-bottom: $border-cell;
   border-top: $border-cell;
   @include status-layout;
-
 }
 
 .person-label-header {

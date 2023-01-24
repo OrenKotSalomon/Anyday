@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { updateBoard, updateGroup } from '../store/board.actions';
+import { handleOnDragEnd, updateBoard, updateGroup } from '../store/board.actions';
 import { ADD_GROUP, ADD_GROUP_TASK, boardService, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, LABEL_STATUS_PICKER, MEMEBER_PICKER, ON_DRAG_TASK, PRIORITY_PICKER, STATUS_PICKER, TEXT_PICKER } from '../services/board.service.local';
 import { TaskPreview } from "./task-preview";
 import { utilService } from '../services/util.service';
@@ -83,22 +83,9 @@ export function GroupList({ board, group, openModal, provided, setIsDndModeDisab
         }
     }
 
-    function handleOnDragEnd(result) {
-
-        if (!result.destination) return
-
-        const newOrderedTasks = Array.from(listToUpdate)
-        const [reorderedTask] = newOrderedTasks.splice(result.source.index, 1)
-        newOrderedTasks.splice(result.destination.index, 0, reorderedTask)
-        group.tasks = newOrderedTasks
-        updateGroup(board, group, ON_DRAG_TASK)
-        // setListToUpdate(newOrderedTasks)
-    }
-
     function onCollapseGroup(group) {
         group.isCollapsed = !group.isCollapsed
         updateGroup(board, group, ON_DRAG_TASK)
-
     }
 
     return <div className="group-list">
@@ -318,9 +305,7 @@ export function GroupList({ board, group, openModal, provided, setIsDndModeDisab
             </div>
             <div className="main-group-container">
 
-                {/* // style={{ backgroundColor: group.style }} */}
-
-                <DragDropContext onDragEnd={handleOnDragEnd} >
+                <DragDropContext onDragEnd={(result) => handleOnDragEnd(result, 'task', { board, group, listToUpdate })} >
                     <Droppable droppableId='tasks'>
                         {(provided) => (
 
@@ -329,9 +314,7 @@ export function GroupList({ board, group, openModal, provided, setIsDndModeDisab
                                 ref={provided.innerRef}>
 
                                 {group.tasks.map((task, index) =>
-                                    <Draggable key={task.id} draggableId={task.id} index={index} isDragDisabled={isDndModeDisabled}
-
-                                    >
+                                    <Draggable key={task.id} draggableId={task.id} index={index} isDragDisabled={isDndModeDisabled} >
                                         {(provided) => (
                                             <TaskPreview
                                                 provided={provided}

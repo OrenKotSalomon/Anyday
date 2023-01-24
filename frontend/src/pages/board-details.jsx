@@ -9,7 +9,7 @@ import { GroupList } from "../cmps/group-list";
 import { SideGroupBar } from "../cmps/side-group-bar";
 
 import { ADD_GROUP_FROM_BUTTOM, DATE_PICKER, LABEL_STATUS_PICKER, MEMEBER_PICKER, ON_DRAG_GROUP, PRIORITY_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_LABEL_STATUS, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../services/board.service.local";
-import { loadBoard, updateBoard, updateGroup, updateTask } from "../store/board.actions";
+import { handleOnDragEnd, loadBoard, updateBoard, updateGroup, updateTask } from "../store/board.actions";
 
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Loader, Icon } from 'monday-ui-react-core';
@@ -21,27 +21,16 @@ export function BoardDetails() {
     const { boardId } = useParams()
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [cmp, setCmp] = useState({})
-    const [groupToUpdate, setGroupToUpdate] = useState([])
     const [isDndModeDisabled, setIsDndModeDisabled] = useState(false)
+    // const [groupToUpdate, setGroupToUpdate] = useState([])
 
     const boardContainer = useRef()
 
     useEffect(() => {
-        setBoardAndGroups()
+        loadBoard(boardId)
     }, [boardId])
 
-    async function setBoardAndGroups() {
-        try {
-            const board = await loadBoard(boardId)
-            setGroupToUpdate(board.groups)
-        } catch (err) {
-            console.log('err:', err)
-        }
-    }
-
     function onUpdateTaskLabel(type, data, labelPick) {
-        // console.log('TYPE', type);
-        // console.log(labelPick);
         data.labelPick = labelPick
         console.log(data);
         switch (type) {
@@ -129,18 +118,6 @@ export function BoardDetails() {
         }
     }
 
-    function handleOnDragEnd(result) {
-
-        if (!result.destination) return
-        const newOrderedGroups = Array.from(board.groups)
-        const [reorderedGroup] = newOrderedGroups.splice(result.source.index, 1)
-        newOrderedGroups.splice(result.destination.index, 0, reorderedGroup)
-        // board.groups = newOrderedGroups
-        console.log('newOrderedGroups:', newOrderedGroups)
-        updateBoard(board, newOrderedGroups, ON_DRAG_GROUP)
-        setGroupToUpdate(board.groups)
-    }
-
     if (!board.groups || !board) return <div className="loader"><Loader size={Loader.sizes.LARGE} /></div>
     return <section className="board-details">
         <NavBar />
@@ -149,7 +126,7 @@ export function BoardDetails() {
             <BoardHeader
                 board={board}
             />
-            <DragDropContext onDragEnd={handleOnDragEnd}>
+            <DragDropContext onDragEnd={(result) => handleOnDragEnd(result, 'group', { board, grouplist: board.groups })}>
                 <Droppable droppableId='groups'>
                     {(provided) => (
 
