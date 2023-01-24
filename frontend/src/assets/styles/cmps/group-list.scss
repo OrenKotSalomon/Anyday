@@ -58,7 +58,7 @@
 
     .group-header-name {
       position: relative;
-      margin-left: 15px;
+      width: max-content;
       font-size: 2rem;
       @include left-sticky;
 
