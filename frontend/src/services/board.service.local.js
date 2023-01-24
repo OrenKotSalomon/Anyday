@@ -27,7 +27,8 @@ export const CHANGE_TASK_TITLE = 'CHANGE_TASK_TITLE'
 export const ADD_TASK_FROM_HEADER = 'ADD_TASK_FROM_HEADER'
 export const ADD_TASK_COMMENT = 'ADD_TASK_COMMENT'
 export const DELETE_TASK_COMMENT = 'DELETE_TASK_COMMENT'
-export const PIN_TASK_COMMENT = 'DELETE_TASK_COMMENT'
+export const PIN_TASK_COMMENT = 'PIN_TASK_COMMENT'
+export const UNPIN_TASK_COMMENT = 'UNPIN_TASK_COMMENT'
 export const UPDATE_TASK_STATUS = 'UPDATE_TASK_STATUS'
 export const UPDATE_TASK_DATE = 'UPDATE_TASK_DATE'
 export const UPDATE_TASK_MEMBERS = 'UPDATE_TASK_MEMBERS'
@@ -244,11 +245,20 @@ function taskServiceReducer(board, data, type) {
         case PIN_TASK_COMMENT:
             currTask = board.groups[groupIdx].tasks[taskIdx]
             let PinCommentIdx = currTask.comments.findIndex(currComment => currComment.id === data.commentIdx)
-            if(!Array.isArray(board.groups[groupIdx].tasks[taskIdx].pinedComments)){
+            if (!Array.isArray(board.groups[groupIdx].tasks[taskIdx].pinedComments)) {
                 board.groups[groupIdx].tasks[taskIdx].pinedComments = []
             }
             board.groups[groupIdx].tasks[taskIdx].pinedComments.unshift(board.groups[groupIdx].tasks[taskIdx].comments[PinCommentIdx])
             currTask.comments.splice(PinCommentIdx, 1)
+            return board
+        case UNPIN_TASK_COMMENT:
+            currTask = board.groups[groupIdx].tasks[taskIdx]
+            let UnpinCommentIdx = currTask.pinedComments.findIndex(currComment => currComment.id === data.commentIdx)
+            if (!Array.isArray(board.groups[groupIdx].tasks[taskIdx].comments)) {
+                board.groups[groupIdx].tasks[taskIdx].comments = []
+            }
+            board.groups[groupIdx].tasks[taskIdx].comments.unshift(board.groups[groupIdx].tasks[taskIdx].pinedComments[UnpinCommentIdx])
+            currTask.pinedComments.splice(UnpinCommentIdx, 1)
             return board
         case UPDATE_TASK_STATUS:
             board.groups[groupIdx].tasks[taskIdx].status = data.labelPick

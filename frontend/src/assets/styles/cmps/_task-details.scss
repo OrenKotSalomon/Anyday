@@ -97,11 +97,11 @@
     .task-details-open-input-btn-container {
         width: 100%;
         padding-right: 42px;
-        
+
 
         .task-details-open-input-btn {
-            color:#323338;
-            margin-top: 20px;
+            color: #323338;
+            margin-top: 12px;
             margin-left: 20px;
             border-radius: 0.5em;
             margin-bottom: .5em;
@@ -177,7 +177,7 @@
                 margin-left: 0px;
                 justify-items: left;
 
-                svg{
+                svg {
                     color: $blue;
                 }
 
@@ -301,13 +301,35 @@
 }
 
 .task-details-task-comment {
-    margin: .5em auto;
+    margin: 1.5em auto;
     max-width: 90%;
     min-height: rem(205px);
     border: 1px solid $li-grey;
     border-radius: rem(10px);
     display: flex;
     flex-direction: column;
+
+    .pinedComment {
+        background-color: #323338;
+        color: $main-bgc-white;
+        padding: 3px 8px;
+        font-size: rem(14px);
+        height: 24px;
+        width: 78px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        display: flex;
+        justify-content: center;
+        top: -22px;
+        margin-inline-end: 1px;
+        align-self: flex-end;
+        position: relative;
+
+        svg {
+            color: $main-bgc-white;
+            margin-inline-end: 5px;
+        }
+    }
 
     .task-details-header {
         display: flex;
@@ -361,8 +383,9 @@
                 position: relative;
                 bottom: rem(1px);
                 font-size: 12px;
-                color:#676879;
-                svg{
+                color: #676879;
+
+                svg {
                     width: 16px;
                     height: 16px;
                 }
