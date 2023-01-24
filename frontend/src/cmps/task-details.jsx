@@ -8,7 +8,7 @@ import { utilService } from '../services/util.service.js';
 import { boardService } from '../services/board.service.js';
 import { updateTask } from '../store/board.actions';
 import { TextEditor } from './text-editor.jsx';
-import { CHANGE_TASK_TITLE, ADD_TASK_COMMENT, DELETE_TASK_COMMENT , PIN_TASK_COMMENT } from '../services/board.service.local.js';
+import { CHANGE_TASK_TITLE, ADD_TASK_COMMENT, DELETE_TASK_COMMENT, PIN_TASK_COMMENT, UNPIN_TASK_COMMENT } from '../services/board.service.local.js';
 import { userService } from '../services/user.service.js'
 
 export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, group, setIsDndModeDisabled: setIsDndModeDisabled }) {
@@ -18,7 +18,6 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
     const [newTitle, setNewTitle] = useState(task.title)
     const [newCommentTxt, setComment] = useState('')
     const [imgSrc, setImg] = useState('')
-    const [byMember, setMember] = useState({})
     const emojis = ['😀', '😁', '😂', '🤣', '😃', '😄', '😅', '😆', '😉', '😊', '😋', '😎', '😍', '😘', '🥰', '😗', '😙', '🥲', '🤔', '🤩', '🤗', '🙂', '😚', '🙄', '😶‍🌫️', '😶', '😑', '😐', '🤨', '😯', '🤐', '😮', '😥', '😣', '😏']
     const [isEmojiPicker, SetEmojiPicker] = useState(false)
     const [taskCommentsSize, SetTaskCommentsSize] = useState(44)
@@ -36,18 +35,22 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
         console.log(data)
     }
 
-    function onDeleteComment(comment) {
-        let taskChanges = { commentIdx: comment.id, taskId: task.id, groupId: group.id }
+    function onDeleteComment(comment,isPined = false) {
+        let taskChanges = { commentIdx: comment.id, taskId: task.id, groupId: group.id, isPined: isPined }
         updateTask(board, taskChanges, DELETE_TASK_COMMENT)
     }
 
-    function onPinToTop(comment){
+    function onPinToTop(comment) {
         let taskChanges = { commentIdx: comment.id, taskId: task.id, groupId: group.id }
         updateTask(board, taskChanges, PIN_TASK_COMMENT)
     }
 
+    function onUnpinFromTop(comment) {
+        let taskChanges = { commentIdx: comment.id, taskId: task.id, groupId: group.id }
+        updateTask(board, taskChanges, UNPIN_TASK_COMMENT)
+    }
+
     function handleInputChange(txt) {
-        // ev.preventDefault()
         setComment(txt)
     }
 
@@ -61,7 +64,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
         setNewTitle(value)
     }
 
-    //...................imge upload
+    //.......imge upload
     const inputRef = useRef(null);
 
     const handleClick = () => {
@@ -91,7 +94,6 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
     }
 
     function getInitX(ev) {
-        // console.log('init-drag', ev.clientX)
         setX(ev.clientX)
     }
 
@@ -114,125 +116,138 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
         }
     }
 
-
-return <section
-    className='task-details' style={{ width: `${isOpenDetails ? 100 : 1}vw` }}>
-    <div className='task-main' style={{ width: `${taskCommentsSize}%` }}>
-
-        <button className='close-task-btn' onClick={() => {
-            setIsOpenDetails(!isOpenDetails)
-            setIsDndModeDisabled(false)
-        }}>
-            <Icon iconType={Icon.type.SVG} icon={Close} iconLabel="my svg icon" iconSize={16} />
-        </button>
-
-        <EditableHeading
-            className='task-details-title'
-            onFinishEditing={onFinishEditing}
-            onChange={handleChange}
-            type={EditableHeading.types.h4}
-            value={newTitle} />
-
-        <TabList className='task-main-nav'>
-            <Tab>
-                <Icon iconType={Icon.type.SVG} icon={Home} iconLabel="my svg icon" iconSize={16} /> Updates
-            </Tab>
-            <Tab>
-                Files
-            </Tab>
-            <Tab>
-                Activity Log
-            </Tab>
-        </TabList>
-
-        <hr className="task-details-hr"></hr>
-
-        {!isAddComment && <div className='task-details-open-input-btn-container'><button onClick={() => setAddComment(!isAddComment)} className='task-details-open-input-btn'>Write an update...</button></div>}
-        {isAddComment &&
-
-            <form className='task-details-form' onSubmit={onSubmitNewComment}>
-                <div className='task-details-textbox-container'>
-                    <TextEditor handleInputChange={handleInputChange} />
-
-                    {isEmojiPicker && <div className="emoji-picker">
-                        {emojis.map(emoji => <span key={emoji} className='emoji' onClick={() => setComment(newCommentTxt + emoji)}>{emoji}</span>)}
+    function renderComments(taskComments, isPined = false) {
+        if (taskComments && taskComments.length)
+            return <section>
+                {taskComments.map(comment => <div
+                    key={comment.id} className='task-details-task-comment'>
+                    {isPined && <div className='pinedComment'>
+                        <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG}
+                         icon={Pin} iconLabel="my svg icon" iconSize={14} />Pinned
                     </div>}
 
-                    <div className='task-details-input-footer'>
-                        <span onClick={handleClick} className='task-details-input-upload'><Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Gallery} iconLabel="my svg icon" iconSize={18} />Add image</span>
-                        <span onClick={toggleEmojiPicker} className='task-details-input-upload emoji'><Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Emoji} iconLabel="my svg icon" iconSize={18} />Emoji</span>
-                        <button className='btn task-details-input-btn'>Update</button>
+                    <div className='task-details-header'>
+                        <div className='task-details-by-user'>
+                            {getAvatarImg(comment)}
+                            <h1 className='task-details-by-user-name' >
+                            {comment.byMember?.fullname || 'Guest User'}</h1>
+                        </div>
 
-                    </div>
-                </div>
-                {imgSrc && <span className="task-details-img-preview-container" ><img className="task-details-img-preview" src={imgSrc} /><span>Uploaded</span></span>}
-
-                <div>
-                    <input
-                        style={{ display: 'none' }}
-                        ref={inputRef}
-                        type="file"
-                        onChange={handleFileChange}
-                    />
-                </div>
-            </form>
-        }
-{/* pinedComments */}
-        {(Array.isArray(task.comments) && task.comments.length) ? <section>
-            {task.comments.map(comment => <div
-                key={comment.id} className='task-details-task-comment'>
-
-                <div className='task-details-header'>
-                    <div className='task-details-by-user'>
-                        {getAvatarImg(comment)}
-                        <h1 className='task-details-by-user-name' >{comment.byMember?.fullname || 'Guest User'}</h1>
+                        <div className='task-details-header-tools'>
+                            <Icon className='task-details-header-time-icon' 
+                            iconType={Icon.type.SVG} icon={Time} iconLabel="my svg icon" iconSize={14} />
+                            <div className='task-details-created-at'>{utilService.time_ago(comment.createdAt)}</div>
+                            <MenuButton className="task-details-menu-btn" >
+                                <Menu
+                                    id="task-details-menu"
+                                    size="medium">
+                                    <MenuItem
+                                        onClick={() => { isPined ? onUnpinFromTop(comment) : onPinToTop(comment) }}
+                                        icon={Pin}
+                                        title={isPined ? "Unpin from top" : "Pin to top"}/>
+                                    <MenuItem
+                                        onClick={() => onDeleteComment(comment,isPined)}
+                                        icon={Delete}
+                                        title="Delete update for every one"/>
+                                </Menu>
+                            </MenuButton>
+                        </div>
                     </div>
 
-                    <div className='task-details-header-tools'>
-                        <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Time} iconLabel="my svg icon" iconSize={14} />
-                        <div className='task-details-created-at'>{utilService.time_ago(comment.createdAt)}</div>
-                        <MenuButton className="task-details-menu-btn" >
-                            <Menu
-                                id="task-details-menu"
-                                size="medium"
-                            >
+                    <p dangerouslySetInnerHTML={{ __html: comment.txt }}></p>
+                    {comment.imgUrl && comment.imgUrl !== '' ? <img src={`${comment.imgUrl}`} alt="" /> : ''}
 
-                                <MenuItem
-                                    onClick={() => onPinToTop(comment)}
-                                    icon={Pin}
-                                    title="Pin to top"
-                                />
-                                <MenuItem
-                                    onClick={() => onDeleteComment(comment)}
-                                    icon={Delete}
-                                    title="Delete update for every one"
-                                />
+                </div>)}
+            </section >
+    }
 
-                            </Menu>
-                        </MenuButton>
+
+
+
+
+    return <section
+        className='task-details' style={{ width: `${isOpenDetails ? 100 : 1}vw` }}>
+        <div className='task-main' style={{ width: `${taskCommentsSize}%` }}>
+
+            <button className='close-task-btn' onClick={() => {
+                setIsOpenDetails(!isOpenDetails)
+                setIsDndModeDisabled(false)
+            }}>
+                <Icon iconType={Icon.type.SVG} icon={Close} iconLabel="my svg icon" iconSize={16} />
+            </button>
+
+            <EditableHeading
+                className='task-details-title'
+                onFinishEditing={onFinishEditing}
+                onChange={handleChange}
+                type={EditableHeading.types.h4}
+                value={newTitle} />
+
+            <TabList className='task-main-nav'>
+                <Tab>
+                    <Icon iconType={Icon.type.SVG} icon={Home} iconLabel="my svg icon" iconSize={16} /> Updates
+                </Tab>
+                <Tab>
+                    Files
+                </Tab>
+                <Tab>
+                    Activity Log
+                </Tab>
+            </TabList>
+
+            <hr className="task-details-hr"></hr>
+
+            {!isAddComment && <div className='task-details-open-input-btn-container'><button onClick={() => setAddComment(!isAddComment)} className='task-details-open-input-btn'>Write an update...</button></div>}
+            {isAddComment &&
+
+                <form className='task-details-form' onSubmit={onSubmitNewComment}>
+                    <div className='task-details-textbox-container'>
+                        <TextEditor handleInputChange={handleInputChange} />
+
+                        {isEmojiPicker && <div className="emoji-picker">
+                            {emojis.map(emoji => <span key={emoji} className='emoji' onClick={() => setComment(newCommentTxt + emoji)}>{emoji}</span>)}
+                        </div>}
+
+                        <div className='task-details-input-footer'>
+                            <span onClick={handleClick} className='task-details-input-upload'><Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Gallery} iconLabel="my svg icon" iconSize={18} />Add image</span>
+                            <span onClick={toggleEmojiPicker} className='task-details-input-upload emoji'><Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Emoji} iconLabel="my svg icon" iconSize={18} />Emoji</span>
+                            <button className='btn task-details-input-btn'>Update</button>
+
+                        </div>
                     </div>
-                </div>
+                    {imgSrc && <span className="task-details-img-preview-container" ><img className="task-details-img-preview" src={imgSrc} /><span>Uploaded</span></span>}
 
-                <p dangerouslySetInnerHTML={{ __html: comment.txt }}></p>
-                {comment.imgUrl && comment.imgUrl !== '' ? <img src={`${comment.imgUrl}`} alt="" /> : ''}
+                    <div>
+                        <input
+                            style={{ display: 'none' }}
+                            ref={inputRef}
+                            type="file"
+                            onChange={handleFileChange}
+                        />
+                    </div>
+                </form>
+            }
+            {/* pinedComments */}
 
-            </div>)}
-        </section > : <section>
-            <div className='details-img-container'><img className="details-img" src="https://cdn.monday.com/images/pulse-page-empty-state.svg" alt="" /></div>
-            <p className='details-p' ><span className="details-p-header">No updates yet for this item</span>
-                <span className='details-p-txt'>Be the first one to update about progress, mention someone
-                    or upload files to share with your team members</span></p>
-        </section >}
+            {renderComments(task.pinedComments, true)}
+            {renderComments(task.comments)}
 
-        <div className="slide-panel-resizer" draggable="true" onDrag={dragstart} onMouseDown={getInitX}
-        >
-            <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Drag} iconLabel="my svg icon" iconSize={14} />
-        </div>
+            {(task.pinedComments&&task.comments)?'':<section>
+                <div className='details-img-container'><img className="details-img" src="https://cdn.monday.com/images/pulse-page-empty-state.svg" alt="" /></div>
+                <p className='details-p' ><span className="details-p-header">No updates yet for this item</span>
+                    <span className='details-p-txt'>Be the first one to update about progress, mention someone
+                        or upload files to share with your team members</span></p>
+            </section >}
 
-    </div >
-    <div className='close-task' style={{ width: `${100 - taskCommentsSize}%` }} onClick={() => {
-        setIsOpenDetails(!isOpenDetails)
-        setIsDndModeDisabled(false)
-    }}>.</div>
-</section>
+
+            <div className="slide-panel-resizer" draggable="true" onDrag={dragstart} onMouseDown={getInitX}>
+                <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Drag} iconLabel="my svg icon" iconSize={14} />
+            </div>
+
+        </div >
+        <div className='close-task' style={{ width: `${100 - taskCommentsSize}%` }} onClick={() => {
+            setIsOpenDetails(!isOpenDetails)
+            setIsDndModeDisabled(false)
+        }}>.</div>
+    </section>
 }

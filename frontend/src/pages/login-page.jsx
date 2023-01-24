@@ -26,24 +26,17 @@ export function Login() {
         }
     }
 
-
-
-
     return (
         <section className='login-page'>
             <Link to='/' className="top-header">
                 <img className="login-logo" src="" alt="logo" />
             </Link>
-
-            {/* <LoginStepOne cardentials={cardentials} setCardentials={setCardentials} /> */}
-
             <LoginDynamicCmp
                 users={users}
                 credentials={credentials}
                 setLoginPaging={setLoginPaging}
                 setCredentials={setCredentials}
                 loginPaging={loginPaging} />
-
         </section>
     )
 }
@@ -54,8 +47,5 @@ export function LoginDynamicCmp(props , users) {
             return <LoginStepOne props={{ ...props }} users={users}/>;
         case "login-step-2":
             return <LoginStepTwo props={{ ...props }} />;
-
-        // default:
-        //     return <p>UNKNOWN {cmp}</p>;
     }
 }

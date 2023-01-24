@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import ReactDOM from 'react-dom';
+
 import { LoginFaceBook } from "../facebook-login";
 
 export function LoginStepOne({ props , users}) {
@@ -51,13 +52,8 @@ export function LoginStepOne({ props , users}) {
                 <div className="suggest-signup-container">
                     <span className="signup-quest">Don't you have an account yet?</span> <div ><Link className="sign-up" to="/signup">Sign up</Link></div>
                 </div>
-
             </div>
-
-
-
             <LoginFaceBook users={users} />
-
         </section>
     )
 }

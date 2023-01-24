@@ -1,4 +1,4 @@
-import { boardService, ON_DRAG_GROUP, ON_DRAG_TASK } from "../services/board.service.local.js";
+import { boardService, ON_DRAG_GROUP, ON_DRAG_LABEL, ON_DRAG_TASK } from "../services/board.service.local.js";
 import { userService } from "../services/user.service.js";
 import { store } from './store.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
@@ -150,6 +150,12 @@ export function handleOnDragEnd(res, type, data) {
             newOrderedTasks.splice(res.destination.index, 0, reorderedTask)
             data.group.tasks = newOrderedTasks
             return updateGroup(data.board, data.group, ON_DRAG_TASK)
+
+        case 'label':
+            const newOrderedLabels = data.cmpsOrder
+            const [reorderedLabel] = newOrderedLabels.splice(res.source.index, 1)
+            newOrderedLabels.splice(res.destination.index, 0, reorderedLabel)
+            return updateBoard(data.board, newOrderedLabels, ON_DRAG_LABEL)
 
         default:
             return updateGroup(data.board, data.group, ON_DRAG_TASK)
