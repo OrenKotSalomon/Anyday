@@ -8,7 +8,7 @@ import { LoginStepOne } from "../cmps/login-steps/login-step-one";
 
 export function Login() {
     const [loginPaging, setLoginPaging] = useState("login-step-1")
-    const [credentials, setCredentials] = useState({ email: '', username: '', password: '', fullname: '', imgUrl: 'https://filestore.community.support.microsoft.com/api/images/39da0bc2-ad7d-434d-bc10-fb80d3a85b7c?upload=true' })
+    const [credentials, setCredentials] = useState({ email: '', username: '', password: '', fullname: '', imgUrl: '' })
     const [users, setUsers] = useState([])
 
     useEffect(() => {
@@ -48,10 +48,10 @@ export function Login() {
     )
 }
 
-export function LoginDynamicCmp(props) {
+export function LoginDynamicCmp(props , users) {
     switch (props.loginPaging) {
         case "login-step-1":
-            return <LoginStepOne props={{ ...props }} />;
+            return <LoginStepOne props={{ ...props }} users={users}/>;
         case "login-step-2":
             return <LoginStepTwo props={{ ...props }} />;
 

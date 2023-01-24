@@ -20,7 +20,6 @@ export function NavBar() {
     const [toggleUserModal, setToggleUserModal] = useState('none')
     const board = useSelector(storeState => storeState.boardModule.board)
     const loggedInUser = userService.getLoggedinUser()
-    const guestImgUrl = 'https://filestore.community.support.microsoft.com/api/images/39da0bc2-ad7d-434d-bc10-fb80d3a85b7c?upload=true'
     const navigate = useNavigate()
 
     // const user = useSelector(storeState => storeState.userModule.user)
@@ -60,6 +59,19 @@ export function NavBar() {
         }
     }
 
+
+    function getAvatarImg(loggedInUser) {
+        {
+            if (loggedInUser?.imgUrl) {
+                return (<img className='nav-bar-avatar-img' onClick={onClickUserAvatar} src={loggedInUser.imgUrl} alt="" />)
+            } else if (loggedInUser?.fullname) {
+                return <div className='nav-bar-avatar-img' onClick={onClickUserAvatar}>{(loggedInUser.fullname).charAt(0).toUpperCase()}</div>
+            } else {
+                return <div className='nav-bar-avatar-img' onClick={onClickUserAvatar}>{'G'}</div>
+            }
+        }
+    }
+
     return <div className='side-bar-container'><header className="nav-bar">
 
         <nav>
@@ -87,7 +99,7 @@ export function NavBar() {
                 type="img"
             /></Link> */}
 
-            <img className='nav-bar-avatar-img' onClick={onClickUserAvatar} src={`${loggedInUser?.imgUrl ? loggedInUser.imgUrl : guestImgUrl}`} alt="" />
+            {getAvatarImg(loggedInUser)}
 
             {loggedInUser && <div className='miniUserPanel' style={{ display: `${toggleUserModal}` }}>
                 wellcome {loggedInUser.fullname}

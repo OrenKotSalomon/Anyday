@@ -9,11 +9,11 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js';
 
 export function Signup() {
     const boards = useSelector((storeState) => storeState.boardModule.boards)
-    const [credentials, setCredentials] = useState({ email: '', username: '', password: '', fullname: '', imgUrl: 'https://filestore.community.support.microsoft.com/api/images/39da0bc2-ad7d-434d-bc10-fb80d3a85b7c?upload=true' })
+    const [credentials, setCredentials] = useState({ email: '', username: '', password: '', fullname: '', imgUrl: '' })
     const navigate = useNavigate()
 
     function clearState() {
-        setCredentials({ email: '', username: '', password: '', fullname: '', imgUrl: 'https://filestore.community.support.microsoft.com/api/images/39da0bc2-ad7d-434d-bc10-fb80d3a85b7c?upload=true'  })
+        setCredentials({ email: '', username: '', password: '', fullname: '', imgUrl: ''  })
     }
 
     function handleChange(ev) {
