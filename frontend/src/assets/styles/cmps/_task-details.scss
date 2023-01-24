@@ -97,8 +97,10 @@
     .task-details-open-input-btn-container {
         width: 100%;
         padding-right: 42px;
+        
 
         .task-details-open-input-btn {
+            color:#323338;
             margin-top: 20px;
             margin-left: 20px;
             border-radius: 0.5em;
@@ -107,12 +109,13 @@
             background-color: $main-bgc-white;
             border: 1px solid #0073ea;
             font-family: figtree-regular;
-            letter-spacing: 0.06em;
+            letter-spacing: 0em;
             word-spacing: 2.5px;
-            font-size: ren(16px);
+            font-size: rem(16px);
             padding: 11.5px;
             width: 100%;
             padding-left: 22px;
+            margin-bottom: 42px;
         }
     }
 
@@ -321,6 +324,11 @@
             width: rem(40px);
             height: rem(40px);
             margin: 0;
+            border-radius: 25em;
+            color: $main-bgc-white;
+            background-color: #1c4f92;
+            line-height: 40px;
+            font-size: rem(18px);
         }
 
         .task-details-by-user-name {
@@ -344,12 +352,20 @@
                 font-size: rem(14px);
                 font-family: figtree-light;
                 font-weight: 550;
+                word-spacing: -3px;
+                padding-inline-end: 5px;
+
             }
 
             .task-details-menu-btn {
                 position: relative;
-                top: rem(-6px);
-
+                bottom: rem(1px);
+                font-size: 12px;
+                color:#676879;
+                svg{
+                    width: 16px;
+                    height: 16px;
+                }
             }
         }
 

@@ -27,6 +27,7 @@ export const CHANGE_TASK_TITLE = 'CHANGE_TASK_TITLE'
 export const ADD_TASK_FROM_HEADER = 'ADD_TASK_FROM_HEADER'
 export const ADD_TASK_COMMENT = 'ADD_TASK_COMMENT'
 export const DELETE_TASK_COMMENT = 'DELETE_TASK_COMMENT'
+export const PIN_TASK_COMMENT = 'DELETE_TASK_COMMENT'
 export const UPDATE_TASK_STATUS = 'UPDATE_TASK_STATUS'
 export const UPDATE_TASK_DATE = 'UPDATE_TASK_DATE'
 export const UPDATE_TASK_MEMBERS = 'UPDATE_TASK_MEMBERS'
@@ -133,11 +134,11 @@ function getNewTask() {
     return {
         id: utilService.makeId(),
         title: 'New Task',
-        status: '',
-        priority: '',
+        status: 'default',
+        priority: 'default',
         members: [],
         dueDate: (Date.now() / 1000),
-        labelStatus: '',
+        labelStatus: 'default',
         txt: ''
     }
 
@@ -232,12 +233,21 @@ function taskServiceReducer(board, data, type) {
             if (!board.groups[groupIdx].tasks[taskIdx].comments) {
                 board.groups[groupIdx].tasks[taskIdx].comments = []
             }
-            board.groups[groupIdx].tasks[taskIdx].comments.push(data.comment)
+            board.groups[groupIdx].tasks[taskIdx].comments.unshift(data.comment)
             return board
         case DELETE_TASK_COMMENT:
             currTask = board.groups[groupIdx].tasks[taskIdx]
             let deleteCommentIdx = currTask.comments.findIndex(currComment => currComment.id === data.commentIdx)
             currTask.comments.splice(deleteCommentIdx, 1)
+            return board
+        case PIN_TASK_COMMENT:
+            currTask = board.groups[groupIdx].tasks[taskIdx]
+            let PinCommentIdx = currTask.comments.findIndex(currComment => currComment.id === data.commentIdx)
+            if(!Array.isArray(board.groups[groupIdx].tasks[taskIdx].pinedComments)){
+                board.groups[groupIdx].tasks[taskIdx].pinedComments = []
+            }
+            board.groups[groupIdx].tasks[taskIdx].pinedComments.unshift(board.groups[groupIdx].tasks[taskIdx].comments[PinCommentIdx])
+            currTask.comments.splice(PinCommentIdx, 1)
             return board
         case UPDATE_TASK_STATUS:
             board.groups[groupIdx].tasks[taskIdx].status = data.labelPick
@@ -269,21 +279,21 @@ function getEmptyGroup() {
             {
                 id: utilService.makeId(),
                 title: 'Task 1',
-                status: '',
-                priority: '',
+                status: 'default',
+                priority: 'default',
                 members: [],
                 dueDate: '',
-                labelStatus: '',
+                labelStatus: 'default',
                 txt: ''
             },
             {
                 id: utilService.makeId(),
                 title: 'Task 2',
-                status: '',
-                priority: '',
+                status: 'default',
+                priority: 'default',
                 members: [],
                 dueDate: '',
-                labelStatus: '',
+                labelStatus: 'default',
                 txt: ''
             }
         ],
@@ -310,7 +320,7 @@ function getEmptyBoard() {
                 bgColor: '#e2445c'
             },
             {
-                label: '',
+                label: 'default',
                 bgColor: '#c4c4c4'
             },
         ],
@@ -332,7 +342,7 @@ function getEmptyBoard() {
                 bgColor: '#579bfc'
             },
             {
-                label: '',
+                label: 'default',
                 bgColor: '#c4c4c4'
             },
         ],
@@ -350,7 +360,7 @@ function getEmptyBoard() {
                 bgColor: '#9d99b9'
             },
             {
-                label: '',
+                label: 'default',
                 bgColor: '#c4c4c4'
             }
         ],
@@ -364,8 +374,8 @@ function getEmptyBoard() {
                     {
                         id: utilService.makeId(),
                         title: 'Task 1',
-                        status: '',
-                        priority: '',
+                        status: 'default',
+                        priority: 'default',
                         members: [],
                         labelStatus: 'label 1',
                         dueDate: 1589983468418,
@@ -374,8 +384,8 @@ function getEmptyBoard() {
                     {
                         id: utilService.makeId(),
                         title: 'Task 2',
-                        status: '',
-                        priority: '',
+                        status: 'default',
+                        priority: 'default',
                         members: [],
                         labelStatus: 'label 2',
                         dueDate: 1589983468418,
@@ -393,8 +403,8 @@ function getEmptyBoard() {
                     {
                         id: utilService.makeId(),
                         title: 'Task 3',
-                        status: '',
-                        priority: '',
+                        status: 'default',
+                        priority: 'default',
                         members: [],
                         labelStatus: 'label 3',
                         dueDate: 1589983468418,
@@ -404,10 +414,10 @@ function getEmptyBoard() {
                     {
                         id: utilService.makeId(),
                         title: 'Task 4',
-                        status: '',
-                        priority: '',
+                        status: 'default',
+                        priority: 'default',
                         members: [],
-                        labelStatus: '',
+                        labelStatus: 'default',
                         dueDate: 1589983468418,
                         txt: ''
                     }
@@ -423,8 +433,8 @@ function getEmptyBoard() {
                     {
                         id: utilService.makeId(),
                         title: 'Task 5',
-                        status: '',
-                        priority: '',
+                        status: 'default',
+                        priority: 'default',
                         members: [],
                         labelStatus: 'label 1',
                         dueDate: 1589983468418,
@@ -433,8 +443,8 @@ function getEmptyBoard() {
                     {
                         id: utilService.makeId(),
                         title: 'Task 6',
-                        status: '',
-                        priority: '',
+                        status: 'default',
+                        priority: 'default',
                         members: [],
                         labelStatus: 'label 2',
                         dueDate: 1589983468418,
@@ -469,7 +479,7 @@ const demoBoard = {
             bgColor: '#e2445c'
         },
         {
-            label: '',
+            label: 'default',
             bgColor: '#c4c4c4'
         },
     ],
@@ -491,7 +501,7 @@ const demoBoard = {
             bgColor: '#579bfc'
         },
         {
-            label: '',
+            label: 'default',
             bgColor: '#c4c4c4'
         },
     ], labelStatuses: [
@@ -508,7 +518,7 @@ const demoBoard = {
             bgColor: '#9d99b9'
         },
         {
-            label: '',
+            label: 'default',
             bgColor: '#c4c4c4'
         }
     ],
@@ -540,7 +550,7 @@ const demoBoard = {
                         userName: 'Yossi',
                         imgUrl: '../assets/img/Oren.jpg'
                     }],
-                    labelStatus: '',
+                    labelStatus: 'default',
                     dueDate: 158993468418
                 }
             ],
@@ -556,7 +566,7 @@ const demoBoard = {
                     id: utilService.makeId(),
                     title: 'Task 3',
                     status: 'stuck',
-                    priority: '',
+                    priority: 'default',
                     members: [{
                         userName: 'Yossi',
                         imgUrl: '../assets/img/Oren.jpg'
@@ -590,7 +600,7 @@ const demoBoard = {
                     id: utilService.makeId(),
                     title: 'Task 5',
                     status: 'done',
-                    priority: '',
+                    priority: 'default',
                     members: [{
                         userName: 'Oren',
                         imgUrl: '../assets/img/Oren.jpg'
@@ -601,8 +611,8 @@ const demoBoard = {
                 {
                     id: utilService.makeId(),
                     title: 'Task 6',
-                    status: '',
-                    priority: '',
+                    status: 'default',
+                    priority: 'default',
                     members: {
                         userName: 'KAKa',
                         imgUrl: '../assets/img/Oren.jpg'

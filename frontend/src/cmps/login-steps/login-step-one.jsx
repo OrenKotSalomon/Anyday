@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ReactDOM from 'react-dom';
 import { LoginFaceBook } from "../facebook-login";
 
-export function LoginStepOne({ props }) {
+export function LoginStepOne({ props , users}) {
 
     function handleChange({ target }) {
         let { value, name: field } = target
@@ -56,7 +56,7 @@ export function LoginStepOne({ props }) {
 
 
 
-            <LoginFaceBook />
+            <LoginFaceBook users={users} />
 
         </section>
     )

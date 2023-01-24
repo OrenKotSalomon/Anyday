@@ -9,6 +9,7 @@ import { EditableHeading, Tooltip, MenuButton, Menu, MenuItem, ColorPicker, Icon
 import { Delete, Bullet, Duplicate, Add, DropdownChevronDown, DropdownChevronRight } from 'monday-ui-react-core/icons'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { GroupHeaderMenuBtn } from './group-header-menu-btn';
+import { DynamicSummaryCmp } from './dynamicCmps/dynamic-summary-cmp';
 
 export function GroupList({ board, group, openModal, setIsDndModeDisabled, isDndModeDisabled, index }) {
 
@@ -367,15 +368,28 @@ export function GroupList({ board, group, openModal, setIsDndModeDisabled, isDnd
                                     </div>
                                 </div>
 
+                                {/* TAHTIT */}
                                 <div className='label-sum-container'>
 
                                     <div className='hidden-task-container'>
-                                        <div className='floatin-white-box'></div>
+
+                                        <div className='floatin-white-box-sum'></div>
                                         <div className='hidden-task'></div>
+                                        <div className='right-floating-border'></div>
                                     </div>
 
                                     <div className='sum-labels-container'>
-                                        {/* Here goes group map */}
+                                        {
+                                            board.cmpsOrder.map(cmp => {
+
+                                                return <DynamicSummaryCmp
+                                                    cmp={cmp}
+                                                    board={board}
+                                                    group={group}
+
+                                                />
+                                            })
+                                        }
                                     </div>
 
                                 </div>

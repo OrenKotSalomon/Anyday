@@ -66,6 +66,7 @@
   @include spacer;
   padding-top: 10px;
 }
+
 .side-board-btn-container {
   display: none;
 
@@ -208,6 +209,11 @@
 }
 
 .nav-bar-avatar-img {
+  color: $main-bgc-white;
+  background-color: #1c4f92;
+  border: 2px solid $main-bgc-white;
+  line-height: 40px;
+  font-size: rem(22px);
   position: absolute;
   left: 10px;
   bottom: 10px;
