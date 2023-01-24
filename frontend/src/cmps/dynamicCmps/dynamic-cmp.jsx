@@ -4,7 +4,7 @@ import { TextCopy } from 'monday-ui-react-core/icons';
 
 import Oren from '../../assets/img/Oren.jpg'
 import Harel from '../../assets/img/Harel.jpg'
-import { DATE_PICKER, MEMEBER_PICKER, STATUS_PICKER, PRIORITY_PICKER, TEXT_PICKER, LABEL_STATUS_PICKER } from '../../services/board.service.local';
+import { DATE_PICKER, MEMEBER_PICKER, STATUS_PICKER, PRIORITY_PICKER, TEXT_LABEL, LABEL_STATUS_PICKER } from '../../services/board.service.local';
 
 export function DynamicCmp({ cmp, info, openModal, handleChange }) {
 
@@ -76,7 +76,7 @@ export function DynamicCmp({ cmp, info, openModal, handleChange }) {
                 {info.priority === 'default' ? '' : info.priority}
                 <div className="add-note"></div>
             </div>
-        case TEXT_PICKER:
+        case TEXT_LABEL:
             return <div className="txt-label">
                 {info.txt && info.txt}
                 {!info.txt && <section className="input-txt-label-container">

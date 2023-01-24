@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { NavBar } from "../cmps/nav-bar";
 import { BoardHeader } from "../cmps/board-header";
 import { DynamicModal } from "../cmps/dynamicCmps/dynamic-modal.jsx";
-import { GroupList } from "../cmps/group-list";
+import { GroupPreview } from "../cmps/group-preview";
 import { SideGroupBar } from "../cmps/side-group-bar";
 
 import { ADD_GROUP_FROM_BUTTOM, ADD_GROUP_FROM_HEADER, ADD_TASK_FROM_HEADER, DATE_PICKER, LABEL_STATUS_PICKER, MEMEBER_PICKER, ON_DRAG_GROUP, PRIORITY_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_LABEL_STATUS, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../services/board.service.local";
@@ -156,10 +156,7 @@ export function BoardDetails() {
                             ref={provided.innerRef}>
 
                             {board.groups.map((group, index) =>
-                                // <Draggable key={group.id} draggableId={group.id} index={index} isDragDisabled={isDndModeDisabled}>
-                                //     {(provided) => (
-                                    
-                                <GroupList
+                                <GroupPreview
                                     index={index}
                                     // provided={provided}
                                     key={group.id}
@@ -169,8 +166,6 @@ export function BoardDetails() {
                                     isDndModeDisabled={isDndModeDisabled}
                                     setIsDndModeDisabled={setIsDndModeDisabled}
                                 />
-                                //     )}
-                                // </Draggable>
                             )}
                             {provided.placeholder}
                             <div className="bottom-add-group-btn-container">
