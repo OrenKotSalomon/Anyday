@@ -5,7 +5,7 @@
     display: block;
 
     min-height: 100vh;
-    background-color: $side-nav;
+    background-color: $side-nav-bgc;
     text-align: center;
     width: 65px;
     position: sticky;
@@ -98,18 +98,14 @@
 
   @include for-narrow-layout {
     display: block;
-
-    box-sizing: border-box;
     position: sticky;
     top: 0;
-    flex-direction: column;
-    gap: 10px;
     padding: 13px;
-    background-color: #f6f7fb;
-    width: rem(255px);
+    background-color: $main-side-bar-bgc;
+    width: 255px;
     min-height: 100vh;
     border-right: 1px solid $cell-border-color;
-    transition: 0.1s, rotate 0.1s;
+    transition: .1s, rotate .1s;
     z-index: 100;
 
     &.closed {

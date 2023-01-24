@@ -1,15 +1,14 @@
 import { useState } from "react";
 
-import { TaskDetails } from "./task-details";
-
-import { MenuButton, Menu, MenuItem, Icon, EditableHeading, Counter, DialogContentContainer, DatePicker } from 'monday-ui-react-core'
-import { Open, Duplicate, Delete, Bolt, AddUpdate, Update } from 'monday-ui-react-core/icons'
 
 import { updateTask } from "../store/board.actions";
-import { CHANGE_TASK_TITLE, DELETE_TASK, DUPLICATE_TASK } from "../services/board.service.local";
-import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
-
+import { showSuccessMsg } from "../services/event-bus.service";
+import { TaskDetails } from "./task-details";
 import { DynamicCmp } from "./dynamicCmps/dynamic-cmp.jsx";
+import { CHANGE_TASK_TITLE, DELETE_TASK, DUPLICATE_TASK } from "../services/board.service.local";
+
+import { MenuButton, Menu, MenuItem, Icon, EditableHeading, Counter } from 'monday-ui-react-core'
+import { Open, Duplicate, Delete, AddUpdate, Update } from 'monday-ui-react-core/icons'
 
 export function TaskPreview({ task, board, group, openModal, provided, snapshot, setIsDndModeDisabled }) {
 

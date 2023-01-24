@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { DATE_PICKER, LABEL_STATUS_PICKER, MEMEBER_PICKER, PRIORITY_PICKER, STATUS_PICKER, TEXT_LABEL } from "../../services/board.service.local";
 
 export function DynamicSummaryCmp({ cmp, board, group }) {

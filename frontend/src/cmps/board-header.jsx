@@ -1,11 +1,11 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
+import { useNavigate } from "react-router";
 
 import { BoardFilter } from "./board-filter";
 import { BoardView } from "./board-view";
 
 import { MenuButton, Menu, Icon } from 'monday-ui-react-core'
-import { MoveArrowLeft, Search, Filter, Home } from 'monday-ui-react-core/icons'
-import { useNavigate } from "react-router";
+import { MoveArrowLeft, Search, Filter } from 'monday-ui-react-core/icons'
 
 export function BoardHeader({ board }) {
     const [isFilterOn, setIsFilterOn] = useState(false)

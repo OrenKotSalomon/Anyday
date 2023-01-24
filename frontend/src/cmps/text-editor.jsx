@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import ReactQuill, { Quill, editor } from 'react-quill';
 // import ImageResize  from 'quill-image-resize-module';

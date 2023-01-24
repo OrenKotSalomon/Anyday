@@ -1,11 +1,12 @@
+import { DATE_PICKER, LABEL_STATUS_PICKER, MEMEBER_PICKER, PRIORITY_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_LABEL_STATUS, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../../services/board.service.local"
+
+import { DialogContentContainer, DatePicker, Avatar, Search } from 'monday-ui-react-core'
 
 import Harel from '../../assets/img/Harel.jpg'
 import Yossi from '../../assets/img/Yossi.jpg'
 import Oren from '../../assets/img/Oren.jpg'
 
-import { DATE_PICKER, LABEL_STATUS_PICKER, MEMEBER_PICKER, PRIORITY_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_LABEL_STATUS, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../../services/board.service.local"
 
-import { DialogContentContainer, DatePicker, Avatar, Flex, Search, StoryDescription, Dropdown } from 'monday-ui-react-core'
 import dayjs from "dayjs"
 
 export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {

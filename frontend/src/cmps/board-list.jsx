@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux"
-import { Duplicate, Delete, Board } from 'monday-ui-react-core/icons'
+import { NavLink, useNavigate } from "react-router-dom"
 
 import { loadBoards } from "../store/board.actions"
 
 import { MenuButton, Menu, MenuItem, Icon } from 'monday-ui-react-core'
-import { Link, NavLink, Navigate, useNavigate } from "react-router-dom"
+import { Duplicate, Delete, Board } from 'monday-ui-react-core/icons'
 
 import { useEffect } from "react"
 export function BoardList({ onDuplicateBoard, onRemoveBoard }) {

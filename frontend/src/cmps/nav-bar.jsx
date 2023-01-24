@@ -1,20 +1,15 @@
-import { Link, NavLink } from 'react-router-dom'
 import { useState } from 'react'
+import { useNavigate } from 'react-router'
+import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { userService } from '../services/user.service.js'
 import { login, logout, signup } from '../store/user.actions.js'
 
-import { useSelector } from 'react-redux'
-
-// import routes from '../routes'
-// import { LoginSignup } from './login-signupReference.jsx'
 import logo from '../assets/img/logo.png'
-// import Harel from '../assets/img/Harel.jpg'
 import wm_icon from '../assets/img/wm_icon.avif'
 import { UserMsg } from './user-msg'
-import { useNavigate } from 'react-router'
-// import { Avatar } from 'monday-ui-react-core'
 
 export function NavBar() {
     const [toggleUserModal, setToggleUserModal] = useState('none')

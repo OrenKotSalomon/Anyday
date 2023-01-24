@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
-
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom'
+
 import { loadBoards } from '../store/board.actions'
 
 import { Icon, Loader } from 'monday-ui-react-core';
 import { MoveArrowRight } from 'monday-ui-react-core/icons';
-import { Link } from 'react-router-dom'
 
 import logo from '../assets/img/logo.png'
 import hero from '../assets/img/home-page-hero.jpg'

@@ -1,20 +1,20 @@
-import { Add, Filter, Search, Bolt, DropdownChevronRight, DropdownChevronLeft, CloseSmall } from 'monday-ui-react-core/icons'
-
-import { Modal, Box } from '@mui/material'
-import { Icon } from 'monday-ui-react-core'
-import { Navigate, useNavigate } from "react-router-dom"
-import crownIcon from '../assets/img/crown-icon.png'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCrown } from '@fortawesome/free-solid-svg-icons'
-import { faHouse } from '@fortawesome/free-solid-svg-icons'
+import { useRef, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 import { boardService } from "../services/board.service.local"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 import { addBoard, duplicateBoard, removeBoard } from "../store/board.actions"
 import { BoardList } from "./board-list"
 
-import { useRef, useState } from "react"
+import { Icon } from 'monday-ui-react-core'
+import { Add, Filter, Search, Bolt, DropdownChevronLeft, CloseSmall } from 'monday-ui-react-core/icons'
+import { Modal, Box } from '@mui/material'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCrown } from '@fortawesome/free-solid-svg-icons'
+import { faHouse } from '@fortawesome/free-solid-svg-icons'
+
+
+
 
 export function SideGroupBar() {
 
