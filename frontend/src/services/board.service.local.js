@@ -35,6 +35,8 @@ export const UPDATE_TASK_DATE = 'UPDATE_TASK_DATE'
 export const UPDATE_TASK_MEMBERS = 'UPDATE_TASK_MEMBERS'
 export const UPDATE_TASK_PRIORITY = 'UPDATE_TASK_PRIORITY'
 export const UPDATE_TASK_LABEL_STATUS = 'UPDATE_TASK_LABEL_STATUS'
+export const UPDATE_TASK_LABEL_NUMBER = 'UPDATE_TASK_LABEL_NUMBER'
+export const UPDATE_TASK_LABEL_TEXT = 'UPDATE_TASK_LABEL_TEXT'
 
 // Dynamic modal/component
 export const DATE_PICKER = 'DATE_PICKER'
@@ -43,6 +45,7 @@ export const MEMEBER_PICKER = 'MEMEBER_PICKER'
 export const PRIORITY_PICKER = 'PRIORITY_PICKER'
 export const TEXT_LABEL = 'TEXT_LABEL'
 export const LABEL_STATUS_PICKER = 'LABEL_STATUS_PICKER'
+export const NUMBER_PICKER = 'NUMBER_PICKER'
 
 export const boardService = {
     query,
@@ -141,6 +144,7 @@ function getNewTask() {
         members: [],
         dueDate: (Date.now() / 1000),
         labelStatus: 'default',
+        number: 0,
         txt: ''
     }
 
@@ -268,7 +272,7 @@ function updateTaskService(board, data, type) {
             board.groups[groupIdx].tasks[taskIdx].comments.unshift(board.groups[groupIdx].tasks[taskIdx].pinedComments[UnpinCommentIdx])
             currTask.pinedComments.splice(UnpinCommentIdx, 1)
             return board
-            // Need to make it Dynamic for each label
+        // Need to make it Dynamic for each label
         case UPDATE_TASK_STATUS:
             board.groups[groupIdx].tasks[taskIdx].status = data.labelPick
             return board
@@ -283,6 +287,12 @@ function updateTaskService(board, data, type) {
             return board
         case UPDATE_TASK_PRIORITY:
             board.groups[groupIdx].tasks[taskIdx].priority = data.labelPick
+            return board
+        case UPDATE_TASK_LABEL_NUMBER:
+            board.groups[groupIdx].tasks[taskIdx].number = data.labelPick
+            return board
+        case UPDATE_TASK_LABEL_TEXT:
+            board.groups[groupIdx].tasks[taskIdx].txt = data.labelPick
             return board
         default:
             return board
@@ -304,6 +314,7 @@ function getEmptyGroup() {
                 members: [],
                 dueDate: '',
                 labelStatus: 'default',
+                number: 0,
                 txt: ''
             },
             {
@@ -314,6 +325,7 @@ function getEmptyGroup() {
                 members: [],
                 dueDate: '',
                 labelStatus: 'default',
+                number: 0,
                 txt: ''
             }
         ],
@@ -399,6 +411,7 @@ function getEmptyBoard() {
                         members: [],
                         labelStatus: 'label 1',
                         dueDate: 1589983468418,
+                        number: 0,
                         txt: ''
                     },
                     {
@@ -406,6 +419,7 @@ function getEmptyBoard() {
                         title: 'Task 2',
                         status: 'default',
                         priority: 'default',
+                        number: 0,
                         members: [],
                         labelStatus: 'label 2',
                         dueDate: 1589983468418,
@@ -427,6 +441,7 @@ function getEmptyBoard() {
                         priority: 'default',
                         members: [],
                         labelStatus: 'label 3',
+                        number: 0,
                         dueDate: 1589983468418,
 
                         txt: ''
@@ -439,6 +454,7 @@ function getEmptyBoard() {
                         members: [],
                         labelStatus: 'default',
                         dueDate: 1589983468418,
+                        number: 0,
                         txt: ''
                     }
                 ],
@@ -458,6 +474,7 @@ function getEmptyBoard() {
                         members: [],
                         labelStatus: 'label 1',
                         dueDate: 1589983468418,
+                        number: 0,
                         txt: ''
                     },
                     {
@@ -468,13 +485,14 @@ function getEmptyBoard() {
                         members: [],
                         labelStatus: 'label 2',
                         dueDate: 1589983468418,
+                        number: 0,
                         txt: ''
                     }
                 ],
                 style: 'lightblue'
             },
         ],
-        cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER, PRIORITY_PICKER, TEXT_LABEL, LABEL_STATUS_PICKER]
+        cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER, PRIORITY_PICKER, TEXT_LABEL, LABEL_STATUS_PICKER, NUMBER_PICKER]
     }
 }
 
@@ -644,7 +662,7 @@ const demoBoard = {
             style: 'lightblue'
         },
     ],
-    cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER, PRIORITY_PICKER, TEXT_LABEL, LABEL_STATUS_PICKER]
+    cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER, PRIORITY_PICKER, TEXT_LABEL, LABEL_STATUS_PICKER, NUMBER_PICKER]
 
 }
 

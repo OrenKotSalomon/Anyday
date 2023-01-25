@@ -110,10 +110,11 @@
 
 .status-sum {
 
-    transition: 0.3s;
+    transition: 0.1s ease-in-out;
 
     &:hover {
-        transform: scale(1, 1.2);
+        transform: scale(1.01, 1.2);
+        border-radius: 3px;
     }
 }
 

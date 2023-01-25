@@ -6,7 +6,6 @@ import Harel from '../../assets/img/Harel.jpg'
 import Yossi from '../../assets/img/Yossi.jpg'
 import Oren from '../../assets/img/Oren.jpg'
 
-
 import dayjs from "dayjs"
 
 export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
@@ -43,7 +42,6 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
 
         onUpdateTaskLabel(UPDATE_TASK_LABEL_STATUS, cmp.data, labelStatus)
     }
-    console.log(cmp);
     switch (cmp.type) {
 
         case STATUS_PICKER:
@@ -67,7 +65,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
                 <div className="arrow-up"></div>
                 <div className="status-picker-view">
                     {cmp.labelStatuses.map((labelStatus, idx) => {
-                        console.log(labelStatus);
+
                         return <button onClick={() => onLabelStatusPick(labelStatus.label)} key={idx}
                             style={{ background: labelStatus.bgColor }}
                             className="status-picker">

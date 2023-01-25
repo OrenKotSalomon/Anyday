@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { utilService } from '../services/util.service';
 import { handleOnDragEnd, updateGroup } from '../store/board.actions';
-import { ADD_GROUP, ADD_GROUP_TASK, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, LABEL_STATUS_PICKER, MEMEBER_PICKER, ON_DRAG_TASK, PRIORITY_PICKER, STATUS_PICKER, TEXT_LABEL } from '../services/board.service.local';
+import { ADD_GROUP, ADD_GROUP_TASK, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, LABEL_STATUS_PICKER, MEMEBER_PICKER, NUMBER_PICKER, ON_DRAG_TASK, PRIORITY_PICKER, STATUS_PICKER, TEXT_LABEL } from '../services/board.service.local';
 
 import { TaskPreview } from "./task-preview";
 import { AddLabelModal } from './task-labels-dropdown/add-label-modal';
@@ -82,6 +82,8 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                 return <div className="priority-label-header ">Priority</div>
             case TEXT_LABEL:
                 return <div className="priority-label-header ">Text</div>
+            case NUMBER_PICKER:
+                return <div className="date-label-header ">Number</div>
         }
     }
 
@@ -215,7 +217,6 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                             ref={provided.innerRef}>
-
 
                             <div className="group-header-name"
                                 style={{ color: group.style }}>
@@ -408,7 +409,6 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                                     <div className='sum-labels-container'>
                                         {
                                             board.cmpsOrder.map((cmp, idx) => {
-
                                                 return <DynamicSummaryCmp
                                                     key={idx}
                                                     cmp={cmp}
