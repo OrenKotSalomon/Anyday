@@ -3,47 +3,47 @@ import { httpService } from './http.service.js'
 import { utilService } from './util.service.js'
 
 
-const STORAGE_KEY = 'car'
+const STORAGE_KEY = 'board'
 
-export const carService = {
+export const boardService = {
     query,
     getById,
     save,
     remove,
-    getEmptyCar,
-    addCarMsg
+    getEmptyBoard,
+    addBoardMsg
 }
-window.cs = carService
+window.cs = boardService
 
 
 async function query(filterBy = { txt: '', price: 0 }) {
     return httpService.get(STORAGE_KEY, filterBy)
 }
-function getById(carId) {
-    return httpService.get(`car/${carId}`)
+function getById(boardId) {
+    return httpService.get(`board/${boardId}`)
 }
 
-async function remove(carId) {
-    return httpService.delete(`car/${carId}`)
+async function remove(boardId) {
+    return httpService.delete(`board/${boardId}`)
 }
-async function save(car) {
-    var savedCar
-    if (car._id) {
-        savedCar = await httpService.put(`car/${car._id}`, car)
+async function save(board) {
+    var savedBoard
+    if (board._id) {
+        savedBoard = await httpService.put(`board/${board._id}`, board)
 
     } else {
-        savedCar = await httpService.post('car', car)
+        savedBoard = await httpService.post('board', board)
     }
-    return savedCar
+    return savedBoard
 }
 
-async function addCarMsg(carId, txt) {
-    const savedMsg = await httpService.post(`car/${carId}/msg`, {txt})
+async function addBoardMsg(boardId, txt) {
+    const savedMsg = await httpService.post(`board/${boardId}/msg`, {txt})
     return savedMsg
 }
 
 
-function getEmptyCar() {
+function getEmptyBoard() {
     return {
         vendor: 'Susita-' + (Date.now() % 1000),
         price: utilService.getRandomIntInclusive(1000, 9000),

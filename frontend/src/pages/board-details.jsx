@@ -125,7 +125,9 @@ export function BoardDetails() {
         }
     }
 
-    function onDragGroup() {
+    function onDragGroup(e) {
+        console.log('e:', e)
+        // if (task) return
         setPrevBoard(board)
         onGroupDragStart(board)
     }
@@ -137,16 +139,15 @@ export function BoardDetails() {
         {board && <div ref={boardContainer} className="board-container">
             <BoardHeader board={board} />
 
-            <DragDropContext onDragStart={onDragGroup} onDragEnd={(res) => handleOnDragEnd(res, 'group', { prevBoard, grouplist: prevBoard.groups })}>
-                <Droppable droppableId='groups'>
+            <DragDropContext onDragStart={(e) => onDragGroup(e)} onDragEnd={(res) => handleOnDragEnd(res, 'group', { prevBoard, grouplist: prevBoard.groups })}>
+                <Droppable droppableId='groups' >
                     {(provided) => (
 
                         <section className="groups-container"
                             {...provided.droppableProps}
-                            ref={provided.innerRef}>
-
-                            {/* Drag Here */}
-                            <DragDropContext onDragEnd={(result) => handleOnDragEnd(result, 'task', { board })} >
+                            ref={provided.innerRef}
+                        >
+                            
                                 {board.groups.map((group, index) =>
                                     <GroupPreview
                                         index={index}
@@ -159,9 +160,7 @@ export function BoardDetails() {
                                         setIsDndModeDisabled={setIsDndModeDisabled}
                                     />
                                 )}
-                            </DragDropContext>
-                            {/* Drag Here */}
-
+                            
                             {provided.placeholder}
                             <div className="bottom-add-group-btn-container">
 

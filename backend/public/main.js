@@ -1,51 +1,51 @@
-import { carService } from './services/car.service.js'
+import { boardService } from './services/board.service.js'
 import { userService } from './services/user.service.js'
 import { utilService } from './services/util.service.js'
 
 console.log('Simple driver to test some API calls')
 
-window.onLoadCars = onLoadCars
+window.onLoadBoards = onLoadBoards
 window.onLoadUsers = onLoadUsers
-window.onAddCar = onAddCar
-window.onGetCarById = onGetCarById
-window.onRemoveCar = onRemoveCar
-window.onAddCarMsg = onAddCarMsg
+window.onAddBoard = onAddBoard
+window.onGetBoardById = onGetBoardById
+window.onRemoveBoard = onRemoveBoard
+window.onAddBoardMsg = onAddBoardMsg
 
-async function onLoadCars() {
-    const cars = await carService.query()
-    render('Cars', cars)
+async function onLoadBoards() {
+    const boards = await boardService.query()
+    render('Boards', boards)
 }
 async function onLoadUsers() {
     const users = await userService.query()
     render('Users', users)
 }
 
-async function onGetCarById() {
-    const id = prompt('Car id?')
+async function onGetBoardById() {
+    const id = prompt('Board id?')
     if (!id) return
-    const car = await carService.getById(id)
-    render('Car', car)
+    const board = await boardService.getById(id)
+    render('Board', board)
 }
 
-async function onRemoveCar() {
-    const id = prompt('Car id?')
+async function onRemoveBoard() {
+    const id = prompt('Board id?')
     if (!id) return
-    await carService.remove(id)
-    render('Removed Car')
+    await boardService.remove(id)
+    render('Removed Board')
 }
 
-async function onAddCar() {
-    await userService.login({ username: 'muki', password: '123' })
-    const savedCar = await carService.save(carService.getEmptyCar())
-    render('Saved Car', savedCar)
+async function onAddBoard() {
+    await userService.login({ email: 'muki', password: '123' })
+    const savedBoard = await boardService.save(boardService.getEmptyBoard())
+    render('Saved Board', savedBoard)
 }
 
-async function onAddCarMsg() {
-    await userService.login({ username: 'muki', password: '123' })
-    const id = prompt('Car id?')
+async function onAddBoardMsg() {
+    await userService.login({ email: 'muki', password: '123' })
+    const id = prompt('Board id?')
     if (!id) return
 
-    const savedMsg = await carService.addCarMsg(id, 'some msg')
+    const savedMsg = await boardService.addBoardMsg(id, 'some msg')
     render('Saved Msg', savedMsg)
 }
 

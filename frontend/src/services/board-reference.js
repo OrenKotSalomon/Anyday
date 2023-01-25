@@ -49,7 +49,6 @@ function saveTask(boardId, groupId, task, activity) {
 }
 
 const board = {
-    "_id": "b101",
     "title": "Robot dev proj",
     "isStarred": false,
     "archivedAt": 1589983468418,

@@ -11,14 +11,14 @@ module.exports = {
     validateToken
 }
 
-async function login(username, password) {
-    logger.debug(`auth.service - login with username: ${username}`)
+async function login(email, password) {
+    logger.debug(`auth.service - login with email: ${email}`)
 
-    const user = await userService.getByUsername(username)
-    if (!user) return Promise.reject('Invalid username or password')
+    const user = await userService.getByUsername(email)
+    if (!user) return Promise.reject('Invalid email or password')
     // TODO: un-comment for real login
     // const match = await bcrypt.compare(password, user.password)
-    // if (!match) return Promise.reject('Invalid username or password')
+    // if (!match) return Promise.reject('Invalid email or password')
 
     delete user.password
     user._id = user._id.toString()
@@ -26,17 +26,17 @@ async function login(username, password) {
 }
    
 
-async function signup({username, password, fullname, imgUrl}) {
+async function signup({email, password, fullname, imgUrl}) {
     const saltRounds = 10
 
-    logger.debug(`auth.service - signup with username: ${username}, fullname: ${fullname}`)
-    if (!username || !password || !fullname) return Promise.reject('Missing required signup information')
+    logger.debug(`auth.service - signup with email: ${email}, fullname: ${fullname}`)
+    if (!email || !password || !fullname) return Promise.reject('Missing required signup information')
 
-    const userExist = await userService.getByUsername(username)
+    const userExist = await userService.getByUsername(email)
     if (userExist) return Promise.reject('Username already taken')
 
     const hash = await bcrypt.hash(password, saltRounds)
-    return userService.add({ username, password: hash, fullname, imgUrl })
+    return userService.add({ email, password: hash, fullname, imgUrl })
 }
 
 
