@@ -110,7 +110,10 @@ export function TaskPreview({ task, board, group, openModal, provided, snapshot,
                         {!task.comments && <Icon SVG="AddUpdate" iconType={Icon.type.SVG} icon={AddUpdate} iconLabel="Task Details" iconSize={24} />}
                         {task.comments && <div className="storybook-counter_position">
                             <Icon icon={Update} iconSize={24} style={{ color: '#0073ea' }} />
-                            <Counter count={task.comments?.length+task.pinedComments?.length} size={Counter.sizes.SMALL} className='counter-comments' />
+                            <Counter count={
+                                Array.isArray(task.comments)?task.comments.length:0+
+                                Array.isArray(task.pinedComments)?task.pinedComments.length:0
+                                } size={Counter.sizes.SMALL} className='counter-comments' />
 
                         </div>}
                     </button>
