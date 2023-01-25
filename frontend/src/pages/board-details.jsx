@@ -24,7 +24,6 @@ export function BoardDetails() {
     const [cmp, setCmp] = useState({})
     const [isDndModeDisabled, setIsDndModeDisabled] = useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-
     const boardContainer = useRef()
 
     useEffect(() => {

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { utilService } from '../services/util.service';
 import { handleOnDragEnd, updateGroup } from '../store/board.actions';
-import { ADD_GROUP, ADD_GROUP_TASK, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, LABEL_STATUS_PICKER, MEMEBER_PICKER, NUMBER_PICKER, ON_DRAG_TASK, PRIORITY_PICKER, STATUS_PICKER, TEXT_LABEL } from '../services/board.service.local';
+import { ADD_GROUP, ADD_GROUP_TASK, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, LABEL_STATUS_PICKER, MEMEBER_PICKER, NUMBER_PICKER, ON_DRAG_TASK, PRIORITY_PICKER, STATUS_PICKER, TEXT_LABEL, UPDATE_GROUP_CHECKED } from '../services/board.service.local';
 
 import { TaskPreview } from "./task-preview";
 import { AddLabelModal } from './task-labels-dropdown/add-label-modal';
@@ -66,6 +66,13 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
 
     function toggleAddLabelModal() {
         setIsAddingLabel(!isAddingLabel)
+    }
+
+    function handleChangeCheckbox({ target }, groupId) {
+
+        //need to support blocking other groups cannot be checked
+
+        updateGroup(board, { id: groupId, checked: target.checked }, UPDATE_GROUP_CHECKED)
     }
 
     function renderGroupLabels(cmp) {
@@ -289,7 +296,9 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                         <div className='left-row-container'>
                             <div style={{ backgroundColor: group.style }} className='left-border'></div>
                             <div className='checkbox-row-container'>
-                                <input className='row-checkbox' type="checkbox" />
+                                <input className='row-checkbox'
+                                    onChange={(ev) => handleChangeCheckbox(ev, group.id)}
+                                    type="checkbox" />
                             </div>
                             <div className='task-main-container'>
                                 <div className="task-row-container">Item</div>
@@ -348,7 +357,6 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
 
             <div className="main-group-container">
 
-
                 <Droppable droppableId={group.id}>
                     {(provided, snapshot) => (
 
@@ -368,6 +376,7 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                                             group={group}
                                             openModal={openModal}
                                             setIsDndModeDisabled={setIsDndModeDisabled}
+
                                         />
                                     )}
                                 </Draggable>
@@ -391,7 +400,21 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                                             brandFont
                                         />
                                     </div>
+                                    <div className='summary-for-mobile'>
 
+                                        {
+                                            board.cmpsOrder.map((cmp, idx) => {
+
+                                                return <DynamicSummaryCmp
+                                                    key={idx}
+                                                    cmp={cmp}
+                                                    board={board}
+                                                    group={group}
+
+                                                />
+                                            })
+                                        }
+                                    </div>
                                     <div className='white-box'></div>
                                 </div>
                             </div>

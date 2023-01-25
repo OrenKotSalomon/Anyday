@@ -45,7 +45,7 @@ export function BoardHeader({ board }) {
 
         <div className="mobile-header-filter">
             <div className="mobile-view-select" style={{ display: isFilterOn ? `none` : `block` }}>
-                <select name="view" id="view">
+                <select className="mobile-select-header" name="view" id="view">
                     <option value="main">
                         Main table
                     </option>
@@ -58,7 +58,7 @@ export function BoardHeader({ board }) {
 
             <div className="mobile-fitler-container" style={{ display: isFilterOn ? `none` : `block` }}>
 
-                <Icon iconType={Icon.type.SVG} icon={Filter} iconLabel="my bolt svg icon" iconSize={16} />
+                <Icon iconType={Icon.type.SVG} ignoreFocusStyle={true} icon={Filter} iconLabel="my bolt svg icon" iconSize={16} />
                 Filter
             </div>
             <div className="search-mobile-container">

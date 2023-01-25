@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { updateTask } from "../store/board.actions";
 import { showSuccessMsg } from "../services/event-bus.service";
 import { TaskDetails } from "./task-details";
 import { DynamicCmp } from "./dynamicCmps/dynamic-cmp.jsx";
-import { CHANGE_TASK_TITLE, DELETE_TASK, DUPLICATE_TASK, UPDATE_TASK_LABEL_NUMBER, UPDATE_TASK_LABEL_TEXT } from "../services/board.service.local";
+import { CHANGE_TASK_TITLE, DELETE_TASK, DUPLICATE_TASK, UPDATE_TASK_CHECKED, UPDATE_TASK_LABEL_NUMBER, UPDATE_TASK_LABEL_TEXT } from "../services/board.service.local";
 
 import { MenuButton, Menu, MenuItem, Icon, EditableHeading, Counter } from 'monday-ui-react-core'
 import { Open, Duplicate, Delete, AddUpdate, Update } from 'monday-ui-react-core/icons'
@@ -13,6 +13,12 @@ import { utilService } from "../services/util.service";
 export function TaskPreview({ task, board, group, openModal, provided, snapshot, setIsDndModeDisabled }) {
 
     const [isOpenDetails, setIsOpenDetails] = useState(false)
+    const [isTaskChecked, setIsTaskChecked] = useState(false)
+
+    useEffect(() => {
+        setIsTaskChecked(group.isChecked)
+
+    }, [group.isChecked]);
 
     function onDuplicateTask(taskToDuplicate) {
         const data = { taskToDuplicate, id: taskToDuplicate.id, groupId: group.id }
@@ -37,10 +43,17 @@ export function TaskPreview({ task, board, group, openModal, provided, snapshot,
     function handleChange({ target }) {
         let { value, name: field, type } = target
         value = type === 'number' ? +value : value
+
         const data = { taskId: task.id, groupId: group.id, labelPick: value }
         let updateType = type === 'number' ? UPDATE_TASK_LABEL_NUMBER : UPDATE_TASK_LABEL_TEXT
 
         updateTask(board, data, updateType)
+    }
+
+    function handleChangeTaskChecked({ target }, taskId) {
+
+        updateTask(board, { taskId, checked: target.checked, groupId: group.id }, UPDATE_TASK_CHECKED)
+
     }
 
     return <section className={`task-preview ${snapshot.isDragging ? 'dragged-task' : ''} `}
@@ -89,7 +102,10 @@ export function TaskPreview({ task, board, group, openModal, provided, snapshot,
                 <div style={{ backgroundColor: group.style }} className='left-border-task'></div>
 
                 <div className='checkbox-row-container-task'>
-                    <input className='row-checkbox-task' type="checkbox" />
+                    <input className='row-checkbox-task'
+                        onClick={() => setIsTaskChecked(!isTaskChecked)}
+                        onChange={(ev) => handleChangeTaskChecked(ev, task.id)}
+                        type="checkbox" checked={task.isChecked} />
 
                 </div>
 
