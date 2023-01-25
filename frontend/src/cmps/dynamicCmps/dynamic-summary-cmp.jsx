@@ -5,29 +5,60 @@ export function DynamicSummaryCmp({ cmp, board, group }) {
 
     function temp() {
         board = structuredClone(board)
+        let labels
         switch (cmp) {
             case STATUS_PICKER:
-                let statuses = []
-                let t = group.tasks.reduce((acc, task) => {
+                labels = []
+
+                let GroupStatuses = group.tasks.reduce((acc, task) => {
                     if (!acc[task.status]) acc[task.status] = 0
                     acc[task.status]++
                     return { ...acc }
                 }, {})
-                for (const key in t) {
+                for (const key in GroupStatuses) {
                     board.statuses.find(status => {
                         if (status.label === key) {
-                            status.value = t[key]
-                            statuses.push(status)
+                            status.value = GroupStatuses[key]
+                            labels.push(status)
                         }
                     })
                 }
 
-                return statuses
+                return labels
 
             case LABEL_STATUS_PICKER:
+                labels = []
+                let GroupLabelsStatuses = group.tasks.reduce((acc, task) => {
+                    if (!acc[task.labelStatus]) acc[task.labelStatus] = 0
+                    acc[task.labelStatus]++
+                    return { ...acc }
+                }, {})
+                for (const key in GroupLabelsStatuses) {
+                    board.labelStatuses.find(status => {
+                        if (status.label === key) {
+                            status.value = GroupLabelsStatuses[key]
+                            labels.push(status)
+                        }
+                    })
+                }
+                return labels
                 return
             case PRIORITY_PICKER:
-                return
+                labels = []
+                let GroupPriorities = group.tasks.reduce((acc, task) => {
+                    if (!acc[task.priority]) acc[task.priority] = 0
+                    acc[task.priority]++
+                    return { ...acc }
+                }, {})
+                for (const key in GroupPriorities) {
+                    board.priorities.find(status => {
+                        if (status.label === key) {
+                            status.value = GroupPriorities[key]
+                            labels.push(status)
+                        }
+                    })
+                }
+                return labels
             case DATE_PICKER:
                 return
             case MEMEBER_PICKER:
@@ -60,11 +91,37 @@ export function DynamicSummaryCmp({ cmp, board, group }) {
             </div>
         case LABEL_STATUS_PICKER:
             return <div className="label-status-picker-sum-container">
-                <div className="label-status-picker-sum"></div>
+                <div className="label-status-picker-sum">
+                    {
+                        temp().map((labelStatusSum, idx) => {
+
+                            return <div key={idx} className="status-sum"
+                                style={{
+                                    backgroundColor: labelStatusSum.bgColor,
+                                    height: '24px',
+                                    width: `${labelStatusSum.value / group.tasks.length * 100}%`
+                                }}
+                            ></div>
+                        })
+                    }
+                </div>
             </div>
         case PRIORITY_PICKER:
             return <div className="priority-picker-sum-container">
-                <div className="priority-picker-sum"></div>
+                <div className="priority-picker-sum">
+                    {
+                        temp().map((prioritySum, idx) => {
+
+                            return <div key={idx} className="status-sum"
+                                style={{
+                                    backgroundColor: prioritySum.bgColor,
+                                    height: '24px',
+                                    width: `${prioritySum.value / group.tasks.length * 100}%`
+                                }}
+                            ></div>
+                        })
+                    }
+                </div>
             </div>
         case DATE_PICKER:
             return <div className="date-picker-sum-container">

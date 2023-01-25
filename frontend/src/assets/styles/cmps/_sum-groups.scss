@@ -57,6 +57,39 @@
     box-shadow: 0px 2px black 0.2;
 }
 
+.status-sum-container {
+    display: flex;
+
+    box-shadow: 0px 2px black 0.2;
+}
+
+.priority-picker-sum-container {
+    @include status-layout;
+    border-bottom: $border-cell;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .priority-picker-sum {
+        width: rem(124px);
+        display: flex;
+    }
+}
+
+.label-status-picker-sum-container {
+    @include status-layout;
+    border-bottom: $border-cell;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .label-status-picker-sum {
+        width: rem(124px);
+        display: flex;
+    }
+
+}
+
 .status-picker-sum-container {
     @include status-layout;
     border-bottom: $border-cell;
