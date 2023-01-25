@@ -93,6 +93,7 @@
       left: -4px;
       top: -4px;
       z-index: 1;
+
       button {
         border: 0;
         transition: 0.3s;
@@ -139,7 +140,7 @@
 
 .main-header-labels-container {
   &.collapsed {
-    > * {
+    >* {
       height: 60px;
     }
   }
@@ -291,6 +292,7 @@
       color: $icon-color;
       margin-left: 22px;
     }
+
     input {
       width: 94%;
     }
@@ -434,37 +436,28 @@
 
 .status-label-header {
   @include status-layout;
-  border-bottom: $border-cell;
-  border-top: $border-cell;
-  border-left: $border-cell;
+  @include left-bottom-right-border;
 }
 
 .label-statuses-header {
   @include status-layout;
-  border-top: $border-cell;
-  border-right: $border-cell;
-  border-bottom: $border-cell;
+  @include left-bottom-right-border;
 }
 
 .priority-label-header {
-  border-right: $border-cell;
-  border-bottom: $border-cell;
-  border-top: $border-cell;
+  @include left-bottom-right-border;
   @include status-layout;
 }
 
 .person-label-header {
   @include person-layout;
   text-align: center;
-
-  border-bottom: $border-cell;
-  border-top: $border-cell;
+  @include left-bottom-right-border;
 }
 
 .date-label-header {
-  border-right: $border-cell;
-  border-top: $border-cell;
+  @include left-bottom-right-border;
   @include date-layout;
   text-align: center;
-  @include left-bottom-border;
+  // @include left-bottom-border;
 }

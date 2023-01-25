@@ -235,9 +235,10 @@
   min-width: rem(139.33px);
 }
 
-@mixin left-bottom-border {
+@mixin left-bottom-right-border {
+  border-right: $border-cell;
+  border-top: $border-cell;
   border-bottom: $border-cell;
-  border-left: $border-cell;
 }
 
 @mixin right-bottom-border {
