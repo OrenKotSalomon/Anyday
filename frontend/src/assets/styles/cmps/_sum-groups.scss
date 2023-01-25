@@ -29,6 +29,13 @@
         }
     }
 
+    .white-box {
+        width: fit-content;
+        flex-grow: 1;
+        height: $cell-height;
+        border-bottom: $border-cell;
+    }
+
 }
 
 .sum-labels-container {
