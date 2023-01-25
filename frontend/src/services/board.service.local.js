@@ -246,31 +246,31 @@ function updateTaskService(board, data, type) {
             return board
         case DELETE_TASK_COMMENT:
             currTask = board.groups[groupIdx].tasks[taskIdx]
-            if (!data.isPined) {
+            if (!data.isPinned) {
                 let deleteCommentIdx = currTask.comments.findIndex(currComment => currComment.id === data.commentIdx)
                 currTask.comments.splice(deleteCommentIdx, 1)
             } else {
-                let deleteCommentIdx = currTask.pinedComments.findIndex(currComment => currComment.id === data.commentIdx)
-                currTask.pinedComments.splice(deleteCommentIdx, 1)
+                let deleteCommentIdx = currTask.pinnedComments.findIndex(currComment => currComment.id === data.commentIdx)
+                currTask.pinnedComments.splice(deleteCommentIdx, 1)
             }
             return board
         case PIN_TASK_COMMENT:
             currTask = board.groups[groupIdx].tasks[taskIdx]
             let PinCommentIdx = currTask.comments.findIndex(currComment => currComment.id === data.commentIdx)
-            if (!Array.isArray(board.groups[groupIdx].tasks[taskIdx].pinedComments)) {
-                board.groups[groupIdx].tasks[taskIdx].pinedComments = []
+            if (!Array.isArray(board.groups[groupIdx].tasks[taskIdx].pinnedComments)) {
+                board.groups[groupIdx].tasks[taskIdx].pinnedComments = []
             }
-            board.groups[groupIdx].tasks[taskIdx].pinedComments.unshift(board.groups[groupIdx].tasks[taskIdx].comments[PinCommentIdx])
+            board.groups[groupIdx].tasks[taskIdx].pinnedComments.unshift(board.groups[groupIdx].tasks[taskIdx].comments[PinCommentIdx])
             currTask.comments.splice(PinCommentIdx, 1)
             return board
         case UNPIN_TASK_COMMENT:
             currTask = board.groups[groupIdx].tasks[taskIdx]
-            let UnpinCommentIdx = currTask.pinedComments.findIndex(currComment => currComment.id === data.commentIdx)
+            let UnpinCommentIdx = currTask.pinnedComments.findIndex(currComment => currComment.id === data.commentIdx)
             if (!Array.isArray(board.groups[groupIdx].tasks[taskIdx].comments)) {
                 board.groups[groupIdx].tasks[taskIdx].comments = []
             }
-            board.groups[groupIdx].tasks[taskIdx].comments.unshift(board.groups[groupIdx].tasks[taskIdx].pinedComments[UnpinCommentIdx])
-            currTask.pinedComments.splice(UnpinCommentIdx, 1)
+            board.groups[groupIdx].tasks[taskIdx].comments.unshift(board.groups[groupIdx].tasks[taskIdx].pinnedComments[UnpinCommentIdx])
+            currTask.pinnedComments.splice(UnpinCommentIdx, 1)
             return board
         // Need to make it Dynamic for each label
         case UPDATE_TASK_STATUS:
