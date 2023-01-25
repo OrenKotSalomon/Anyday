@@ -5,7 +5,7 @@ import { UserDetails } from './pages/user-details'
 import { HomePage } from './pages/home-page'
 import { BoardDetails } from './pages/board-details'
 import { Login } from './pages/login-page'
-import { Signup } from './pages/signup'
+import { SignUp } from './pages/sign-up'
 import { UserMsg } from './cmps/user-msg'
 
 export function RootCmp() {
@@ -17,7 +17,7 @@ export function RootCmp() {
                 <Route element={<BoardDetails />} path="/board/:boardId" />
                 <Route element={<UserDetails />} path="/user-details/:userId" />
                 <Route element={<Login />} path="/login" />
-                <Route element={<Signup />} path="/signup" />
+                <Route element={<SignUp />} path="/signup" />
             </Routes>
         </main>
         <UserMsg />

@@ -1,10 +1,11 @@
-import dayjs from 'dayjs';
-import { Avatar, AvatarGroup, Icon, EditableHeading } from 'monday-ui-react-core';
+import { DATE_PICKER, MEMEBER_PICKER, STATUS_PICKER, PRIORITY_PICKER, TEXT_LABEL, LABEL_STATUS_PICKER } from '../../services/board.service.local';
+
+import { Avatar, AvatarGroup, Icon } from 'monday-ui-react-core';
 import { TextCopy } from 'monday-ui-react-core/icons';
+import dayjs from 'dayjs';
 
 import Oren from '../../assets/img/Oren.jpg'
 import Harel from '../../assets/img/Harel.jpg'
-import { DATE_PICKER, MEMEBER_PICKER, STATUS_PICKER, PRIORITY_PICKER, TEXT_LABEL, LABEL_STATUS_PICKER } from '../../services/board.service.local';
 
 export function DynamicCmp({ cmp, info, openModal, handleChange }) {
 
@@ -82,7 +83,6 @@ export function DynamicCmp({ cmp, info, openModal, handleChange }) {
                 {!info.txt && <section className="input-txt-label-container">
                     <span className='txt-label-placeholder' ><Icon iconType={Icon.type.SVG} icon={TextCopy} iconSize={19} /></span>
                     <input onChange={handleChange} type="text" />
-                    {/* <EditableHeading type={EditableHeading.types.h6} value={info.txt} /> */}
                 </section>}
             </div>
     }

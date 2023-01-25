@@ -1,10 +1,9 @@
-import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from 'react'
+import { useNavigate } from "react-router-dom"
+import { useSelector } from 'react-redux';
 
 import { userService } from '../services/user.service.js'
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js';
 
-import { useSelector } from 'react-redux';
 import { FacebookProvider, LoginButton } from 'react-facebook';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookF } from '@fortawesome/free-brands-svg-icons'

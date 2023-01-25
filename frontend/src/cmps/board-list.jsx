@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux"
-import { Duplicate, Delete, Board } from 'monday-ui-react-core/icons'
+import { NavLink, useNavigate } from "react-router-dom"
 
 import { loadBoards } from "../store/board.actions"
 
 import { MenuButton, Menu, MenuItem, Icon } from 'monday-ui-react-core'
-import { Link, NavLink, Navigate, useNavigate } from "react-router-dom"
+import { Duplicate, Delete, Board } from 'monday-ui-react-core/icons'
 
 import { useEffect } from "react"
 export function BoardList({ onDuplicateBoard, onRemoveBoard }) {
@@ -35,12 +35,12 @@ export function BoardList({ onDuplicateBoard, onRemoveBoard }) {
             </div>
             <div className="board-menu-btn" onClick={(ev) => ev.preventDefault()}>
                 <MenuButton className="board-list-menu-btn"
-                // onClick={ev => onMenuClick(ev)}
+
                 >
                     <Menu
                         id="menu"
                         size="medium"
-                    // onClick={ev => onMenuClick(ev)}
+
                     >
                         <MenuItem
                             onClick={(ev) => {
@@ -61,7 +61,6 @@ export function BoardList({ onDuplicateBoard, onRemoveBoard }) {
                     </Menu>
                 </MenuButton>
             </div>
-            {/* <div onClick={ev => onMenuClick(ev)} >X</div> */}
         </NavLink>)}
 
     </section>

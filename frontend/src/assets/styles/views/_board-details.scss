@@ -8,11 +8,7 @@
 .board-container {
   width: 100%;
   position: relative;
-  // display: grid;
-  // grid-template-columns: $layoutPadding 1fr $layoutPadding;
-  // gap: $layoutPadding;
-  overflow-y: scroll;
-  overscroll-behavior-inline: contain;
+  overflow-y: auto;
   height: 100vh;
 
   &::-webkit-scrollbar-track {
@@ -25,7 +21,7 @@
 }
 
 .groups-container {
-
+min-width: min-content;
   @include for-narrow-layout {
 
     padding-left: 40px !important;

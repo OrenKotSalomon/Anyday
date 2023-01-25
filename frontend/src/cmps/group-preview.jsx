@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
-import { handleOnDragEnd, updateBoard, updateGroup } from '../store/board.actions';
-import { ADD_GROUP, ADD_GROUP_TASK, boardService, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, LABEL_STATUS_PICKER, MEMEBER_PICKER, ON_DRAG_TASK, PRIORITY_PICKER, STATUS_PICKER, TEXT_LABEL } from '../services/board.service.local';
-import { TaskPreview } from "./task-preview";
+
 import { utilService } from '../services/util.service';
-import { AddLabelModal } from './tasks-modals/add-label-modal';
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service';
+import { handleOnDragEnd, updateGroup } from '../store/board.actions';
+import { ADD_GROUP, ADD_GROUP_TASK, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, LABEL_STATUS_PICKER, MEMEBER_PICKER, ON_DRAG_TASK, PRIORITY_PICKER, STATUS_PICKER, TEXT_LABEL } from '../services/board.service.local';
+
+import { TaskPreview } from "./task-preview";
+import { AddLabelModal } from './task-labels-dropdown/add-label-modal';
+import { DynamicSummaryCmp } from './dynamicCmps/dynamic-summary-cmp';
+
 import { EditableHeading, Tooltip, MenuButton, Menu, MenuItem, ColorPicker, Icon } from 'monday-ui-react-core'
 import { Delete, Bullet, Duplicate, Add, DropdownChevronDown, DropdownChevronRight } from 'monday-ui-react-core/icons'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { GroupHeaderMenuBtn } from './group-header-menu-btn';
-import { DynamicSummaryCmp } from './dynamicCmps/dynamic-summary-cmp';
 
 export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, isDndModeDisabled, index }) {
 
@@ -294,22 +295,25 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                     <DragDropContext onDragEnd={(res) => handleOnDragEnd(res, 'label', { board, cmpsOrder: board.cmpsOrder })}>
                         <Droppable droppableId="label" direction="horizontal">
                             {(provided) => (
-                                <div className="main-header-labels-container flex"
+                                <div className={`main-header-labels-container flex`}
                                     {...provided.droppableProps}
                                     ref={provided.innerRef}>
                                     {board.cmpsOrder.map((cmp, idx) => {
                                         return <Draggable key={cmp} draggableId={cmp} index={idx} >
-                                            {(provided) => (
+                                            {(provided, snapshot) => (
                                                 <div key={idx}
+                                                    className={snapshot.isDragging ? 'dragged-label ' : ''}
                                                     {...provided.draggableProps}
                                                     {...provided.dragHandleProps}
-                                                    ref={provided.innerRef}>
+                                                    ref={provided.innerRef} >
                                                     {renderGroupLabels(cmp)}
+                                                    <div className={snapshot.isDragging ? 'label-white-bgc-on-drag' : ''}></div>
                                                 </div>
                                             )}
                                         </Draggable>
                                     }
                                     )}
+                                    {provided.placeholder}
                                 </div>
                             )}
                         </Droppable>
@@ -342,16 +346,17 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
 
                 <DragDropContext onDragEnd={(result) => handleOnDragEnd(result, 'task', { board, group, listToUpdate })} >
                     <Droppable droppableId='tasks'>
-                        {(provided) => (
+                        {(provided, snapshot) => (
 
-                            <section className="tasks-container"
+                            <section className={`tasks-container`}
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}>
 
                                 {group.tasks.map((task, index) =>
                                     <Draggable key={task.id} draggableId={task.id} index={index} isDragDisabled={isDndModeDisabled} >
-                                        {(provided) => (
+                                        {(provided, snapshot) => (
                                             <TaskPreview
+                                                snapshot={snapshot}
                                                 provided={provided}
                                                 key={task.id}
                                                 task={task}

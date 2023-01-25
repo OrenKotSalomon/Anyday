@@ -1,9 +1,16 @@
 .label-sum-container {
-    display: flex;
-    align-items: center;
-    height: $cell-height;
-    margin-bottom: 26px;
-    position: relative;
+
+    visibility: hidden;
+
+    @include for-narrow-layout {
+        visibility: visible;
+        display: flex;
+        align-items: center;
+        height: $cell-height;
+        margin-bottom: 26px;
+        position: relative;
+
+    }
 
     .hidden-task-container {
         position: sticky;
@@ -36,12 +43,12 @@
 }
 
 .floatin-white-box-sum {
-    width: 40px;
-    height: $cell-height;
-    background-color: $main-bgc-white;
+    width: 45px;
+    height: 36px;
+    background-color: #fff;
     z-index: 6;
     position: absolute;
-    left: -40px;
+    left: -41px;
 }
 
 .sum-labels-container {
@@ -57,9 +64,19 @@
     align-items: center;
     justify-content: center;
 
-    .status-sum {
+    .status-sum-container {
         width: rem(124px);
         display: flex;
+
+    }
+}
+
+.status-sum {
+
+    transition: 0.3s;
+
+    &:hover {
+        transform: scale(1, 1.2);
     }
 }
 

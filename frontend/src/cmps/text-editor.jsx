@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import ReactQuill, { Quill, editor } from 'react-quill';
 // import ImageResize  from 'quill-image-resize-module';
@@ -9,7 +9,9 @@ import 'react-quill/dist/quill.snow.css';
 // window.katex = katex;
 
 // Quill.register('modules/ImageResize',ImageResize);
-export function TextEditor({handleInputChange}){
+
+
+export function TextEditor({ handleInputChange }) {
 
     const [text, setText] = useState('');
 
@@ -41,70 +43,70 @@ export function TextEditor({handleInputChange}){
             modules={modules}
             formats={formats}
         />
-        </div>
+    </div>
 
 }
 
 
-const colors = ["red","green","blue","orange","violet"]
+const colors = ["red", "green", "blue", "orange", "violet"]
 const formats = [
     [
         {
-            className:'ql-direction',
-            value:'rtl'
+            className: 'ql-direction',
+            value: 'rtl'
         }
     ],
     [
-        {className:"ql-bold"},{className:"ql-italic"},{className:"ql-underline"},{className:"ql-strike"}
+        { className: "ql-bold" }, { className: "ql-italic" }, { className: "ql-underline" }, { className: "ql-strike" }
     ],
     [
         {
-            className:"ql-color",
-            options:colors
+            className: "ql-color",
+            options: colors
         },
         {
-            className:"ql-background",
-            options:colors
-        }
-    ],
-    [
-        {
-            className:"ql-header",
-            value:"1"
-        },
-        {
-            className:"ql-header",
-            value:"2"
-        },
-        {
-            className:"ql-code-block"
+            className: "ql-background",
+            options: colors
         }
     ],
     [
         {
-            className:"ql-list",
-            value:"ordered"
+            className: "ql-header",
+            value: "1"
         },
         {
-            className:"ql-list",
-            value:"bullet"
+            className: "ql-header",
+            value: "2"
+        },
+        {
+            className: "ql-code-block"
+        }
+    ],
+    [
+        {
+            className: "ql-list",
+            value: "ordered"
+        },
+        {
+            className: "ql-list",
+            value: "bullet"
         },
 
     ],
     [
-        {className:'ql-link'},{className:'ql-video'},{className:'ql-formula'}
+        { className: 'ql-link' }, { className: 'ql-video' }, { className: 'ql-formula' }
     ],
 
 ]
 
 
-const renderOptions = (formatData,idx)=>{
-    const {className,options} = formatData;
+const renderOptions = (formatData, idx) => {
+    const { className, options } = formatData;
     return (
-        <select key={idx} className = {className}>
+        <select key={idx} className={className}>
             <option></option>
             {
-                options.map((value,idx) =>{
+                options.map((value, idx) => {
                     return (
                         <option key={`${value}+${idx}`} value={value}></option>
                     )
@@ -113,28 +115,30 @@ const renderOptions = (formatData,idx)=>{
         </select>
     )
 }
-const renderSingle = (formatData,idx)=>{
-    const {className,value} = formatData;
+const renderSingle = (formatData, idx) => {
+    const { className, value } = formatData;
     return (
-        <button key={idx} className = {className} value = {value}></button>
+        <button key={idx} className={className} value={value}></button>
     )
 }
-function CustomToolbar(){
-    {return <div id="toolbar">
-        {
-            formats.map((classes,idx) => {
-                return <div key={`${idx}`} className = "ql-formats">
+function CustomToolbar() {
+    {
+        return <div id="toolbar">
+            {
+                formats.map((classes, idx) => {
+                    return <div key={`${idx}`} className="ql-formats">
                         {
-                            classes.map((formatData,idx) => {
-                                return formatData.options?renderOptions(formatData,idx):renderSingle(formatData,idx)
+                            classes.map((formatData, idx) => {
+                                return formatData.options ? renderOptions(formatData, idx) : renderSingle(formatData, idx)
                             })
                         }
                     </div>
-                
-            })
-        }
-    </div>}
-  }
+
+                })
+            }
+        </div>
+    }
+}
 
 
 

@@ -5,7 +5,9 @@ $main-bgc-white: #fff;
 //Main Box Shadow
 $main-box-shadow: 0 1px 7px 0 rgb(128, 128, 128);
 //Side Nav
-$side-nav: rgb(41, 47, 76);
+$side-nav-bgc: rgb(41, 47, 76);
+//Side Bar
+$main-side-bar-bgc: #f6f7fb;
 
 // icons color
 $icon-color: #676879;
@@ -48,6 +50,9 @@ $login-main-clr: #333;
 
 //height 
 $cell-height: 36px;
+
+//width
+$button-width: 360px;
 
 // Layout
 $layoutPadding: 17px;

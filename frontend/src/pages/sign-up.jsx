@@ -1,19 +1,19 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { Navigate, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 import { useSelector } from 'react-redux';
 
-import {userService} from '../services/user.service.js'
+import { userService } from '../services/user.service.js'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js';
 
-export function Signup() {
+export function SignUp() {
     const boards = useSelector((storeState) => storeState.boardModule.boards)
     const [credentials, setCredentials] = useState({ email: '', username: '', password: '', fullname: '', imgUrl: '' })
     const navigate = useNavigate()
 
     function clearState() {
-        setCredentials({ email: '', username: '', password: '', fullname: '', imgUrl: ''  })
+        setCredentials({ email: '', username: '', password: '', fullname: '', imgUrl: '' })
     }
 
     function handleChange(ev) {

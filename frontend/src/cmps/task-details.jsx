@@ -1,8 +1,4 @@
-import * as React from 'react'
 import { useState, useRef } from "react"
-
-import { TabList, Tab, EditableHeading, Icon, MenuButton, Menu, MenuItem, } from 'monday-ui-react-core'
-import { Home, Time, Delete, Gallery, Emoji, Drag, Close, Pin } from 'monday-ui-react-core/icons'
 
 import { utilService } from '../services/util.service.js';
 import { boardService } from '../services/board.service.js';
@@ -11,7 +7,10 @@ import { TextEditor } from './text-editor.jsx';
 import { CHANGE_TASK_TITLE, ADD_TASK_COMMENT, DELETE_TASK_COMMENT, PIN_TASK_COMMENT, UNPIN_TASK_COMMENT } from '../services/board.service.local.js';
 import { userService } from '../services/user.service.js'
 
-export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, group, setIsDndModeDisabled: setIsDndModeDisabled }) {
+import { TabList, Tab, EditableHeading, Icon, MenuButton, Menu, MenuItem, } from 'monday-ui-react-core'
+import { Home, Time, Delete, Gallery, Emoji, Drag, Close, Pin } from 'monday-ui-react-core/icons'
+
+export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, group, setIsDndModeDisabled }) {
 
     const [loggedInUser, setLoggedInUser] = useState(userService.getLoggedinUser())
     const [isAddComment, setAddComment] = useState(false)

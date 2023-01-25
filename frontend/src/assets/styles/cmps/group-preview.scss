@@ -1,8 +1,8 @@
 .group-list {
-  width: max-content;
+  // width: max-content;
   font-family: figtree-regular;
   padding-top: 7px;
-  margin-left: 20px;
+  // margin-left: 20px;
 
   @include for-narrow-layout {
     margin-left: 0px;
@@ -22,7 +22,6 @@
     }
 
     h4 {
-      // margin-top: 0.625rem;
       margin-left: rem(18px);
     }
 
@@ -33,9 +32,6 @@
     }
 
     .group-header-editable-name {
-      // position: relative;
-      // left: -35px;
-
       .monday-style-clickable {
         height: 26px;
 
@@ -68,8 +64,6 @@
 
         left: 48px;
       }
-
-      // margin-left: 15px;
 
       h4 {
         width: max-content;
@@ -125,8 +119,6 @@
       .group-collapse-btn-container {
         transition: 0.3s;
         position: absolute;
-        // top: 1px;
-        // left: -30px;
         left: 4px;
         top: 5px;
 
@@ -190,17 +182,11 @@
     }
 
     h4 {
-      // margin-left: 0px;
-
       font-family: poppins-regular-400;
       font-weight: 600;
     }
   }
 
-  input {
-    // margin: 0;
-    // outline: none;
-  }
 }
 
 .main-left-header {

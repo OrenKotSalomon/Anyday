@@ -1,5 +1,4 @@
 .task-details {
-    box-sizing: border-box;
     position: fixed;
     display: flex;
     flex-direction: row-reverse;
@@ -241,7 +240,7 @@
 .task-details-open-input-btn:hover {
     cursor: text;
     background-color: #dcdfec !important;
-    color:#676879;
+    color: #676879;
 }
 
 .details-img-container {

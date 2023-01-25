@@ -1,17 +1,16 @@
 import { useState } from "react";
 
-import { TaskDetails } from "./task-details";
-
-import { MenuButton, Menu, MenuItem, Icon, EditableHeading, Counter, DialogContentContainer, DatePicker } from 'monday-ui-react-core'
-import { Open, Duplicate, Delete, Bolt, AddUpdate, Update } from 'monday-ui-react-core/icons'
 
 import { updateTask } from "../store/board.actions";
-import { CHANGE_TASK_TITLE, DELETE_TASK, DUPLICATE_TASK } from "../services/board.service.local";
-import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
-
+import { showSuccessMsg } from "../services/event-bus.service";
+import { TaskDetails } from "./task-details";
 import { DynamicCmp } from "./dynamicCmps/dynamic-cmp.jsx";
+import { CHANGE_TASK_TITLE, DELETE_TASK, DUPLICATE_TASK } from "../services/board.service.local";
 
-export function TaskPreview({ task, board, group, openModal, provided, setIsDndModeDisabled }) {
+import { MenuButton, Menu, MenuItem, Icon, EditableHeading, Counter } from 'monday-ui-react-core'
+import { Open, Duplicate, Delete, AddUpdate, Update } from 'monday-ui-react-core/icons'
+
+export function TaskPreview({ task, board, group, openModal, provided, snapshot, setIsDndModeDisabled }) {
 
     const [isOpenDetails, setIsOpenDetails] = useState(false)
 
@@ -41,7 +40,7 @@ export function TaskPreview({ task, board, group, openModal, provided, setIsDndM
         // updateTask(board, value, HANDLE_TXT_CHANGE)
     }
 
-    return <section className='task-preview'
+    return <section className={`task-preview ${snapshot.isDragging ? 'dragged-task' : ''} `}
         {...provided.draggableProps}
         {...provided.dragHandleProps}
         ref={provided.innerRef}>
@@ -49,9 +48,11 @@ export function TaskPreview({ task, board, group, openModal, provided, setIsDndM
         <div className="task">
 
             <div className="task-edit-wrapper">
-                <div className="menu-btn-container">
+                <div className="menu-btn-container"
+                    style={{ display: snapshot.isDragging ? 'none' : '' }}>
 
-                    <MenuButton className="task-preview-menu-btn" >
+                    <MenuButton className="task-preview-menu-btn"
+                    >
                         <Menu
                             id="menu"
                             size="medium"
@@ -92,10 +93,11 @@ export function TaskPreview({ task, board, group, openModal, provided, setIsDndM
                 <div className="task-name-cell" >
                     <EditableHeading className='task-title' onFinishEditing={onFinishEditingInTask} type={EditableHeading.types.h5} value={task.title} />
 
-                    {/*  NEED TO ADD THIS BUTTON AND IGURE STYLING WONT IMPACT TASK ROW */}
+                    {/*  NEED TO ADD THIS BUTTON AND CONFIGURE STYLING WONT IMPACT TASK ROW */}
                     {/* <button onClick={() => setIsOpenDetails(!isOpenDetails)} className="open-item-page-btn">
                         <Icon iconType={Icon.type.SVG} icon={Open} iconLabel="Task Details" iconSize={16} /><span>Open</span>
                     </button> */}
+
                 </div>
                 <div className="msg-btn-container" onClick={() => {
                     setIsOpenDetails(!isOpenDetails)

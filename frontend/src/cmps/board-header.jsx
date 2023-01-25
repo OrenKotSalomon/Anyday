@@ -1,20 +1,24 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
+import { useNavigate } from "react-router";
 
 import { BoardFilter } from "./board-filter";
 import { BoardView } from "./board-view";
 
 import { MenuButton, Menu, Icon } from 'monday-ui-react-core'
-import { MoveArrowLeft, Search, Filter, Home } from 'monday-ui-react-core/icons'
+import { MoveArrowLeft, Search, Filter } from 'monday-ui-react-core/icons'
 
 export function BoardHeader({ board }) {
     const [isFilterOn, setIsFilterOn] = useState(false)
+    const navigate = useNavigate()
 
     return <Fragment>
 
         <div className="header-mobile">
 
             <button className="home-mobile-btn">
-                <Icon iconType={Icon.type.SVG} icon={MoveArrowLeft} iconLabel="my bolt svg icon" iconSize={16} />
+                <Icon iconType={Icon.type.SVG}
+                    onClick={() => navigate('/')}
+                    icon={MoveArrowLeft} iconLabel="my bolt svg icon" iconSize={16} />
             </button>
             <div className="board-title-mobile">
                 <div className="title-mobile-txt">
@@ -43,8 +47,6 @@ export function BoardHeader({ board }) {
             <div className="mobile-view-select" style={{ display: isFilterOn ? `none` : `block` }}>
                 <select name="view" id="view">
                     <option value="main">
-
-                        {/* <Icon iconType={Icon.type.SVG} icon={Home} iconSize={12} /> */}
                         Main table
                     </option>
                     <option value="kanban">

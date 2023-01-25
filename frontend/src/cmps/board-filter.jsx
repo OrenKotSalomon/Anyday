@@ -1,17 +1,16 @@
-import { ThemeProvider } from '@emotion/react';
-import { Button, Flex, SplitButton, Tooltip, Icon, DialogContentContainer, Menu, MenuItem } from 'monday-ui-react-core'
-import { Add, Search, PersonRound, Filter, Sort, Group, Hide } from "monday-ui-react-core/icons";
+import { updateGroup, updateTask } from '../store/board.actions';
+import { ADD_GROUP_FROM_HEADER, ADD_TASK_FROM_HEADER } from '../services/board.service.local';
+
+import { Button, Flex, SplitButton, Tooltip, Icon, Menu, MenuItem } from 'monday-ui-react-core'
+import { Search, PersonRound, Filter, Sort, Group } from "monday-ui-react-core/icons";
 import { Menu as MenuIcon } from "monday-ui-react-core/icons";
-import { useEffect, useMemo, useState } from 'react';
-import { ADD_GROUP_FROM_HEADER, ADD_TASK_FROM_HEADER, boardService } from '../services/board.service.local';
-import { updateBoard, updateGroup, updateTask } from '../store/board.actions';
 
 export function BoardFilter({ board }) {
 
     function onAddNewTask() {
         updateTask(board, undefined, ADD_TASK_FROM_HEADER)
     }
-    
+
     return <section className='board-filter'>
         <Flex gap='18' align='End'
 
@@ -23,7 +22,6 @@ export function BoardFilter({ board }) {
 
             </SplitButton>
             <Button kind={Button.kinds.TERTIARY} size={Button.sizes.SMALL} >
-                {/* <span style={{ color: '#afafb2', width: '0px' }} >Search</span> */}
                 <Icon iconType={Icon.type.SVG} icon={Search} iconSize={19} />
 
                 <div> Search

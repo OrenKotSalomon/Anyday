@@ -14,7 +14,6 @@ import { handleOnDragEnd, loadBoard, onGroupDragStart, setPrevBoard, updateBoard
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Loader, Icon, DialogContentContainer, MenuItem, Menu, MenuDivider } from 'monday-ui-react-core';
 import { Add, Group, Item } from 'monday-ui-react-core/icons';
-import { async } from "q";
 
 export function BoardDetails() {
 
@@ -52,15 +51,8 @@ export function BoardDetails() {
         let labelPos = ev.target.getBoundingClientRect()
         let boardScrollTop = boardContainer.current.scrollTop
         let boardScrollLeft = boardContainer.current.scrollLeft
-        // console.log(labelPos);
-        // console.log(bbb.top);
-        console.log(boardContainer.current.scrollTop);
-        console.log(labelPos);
         setIsModalOpen(true)
 
-        // short switch case , maybe swtich case only on info
-
-        // statuses memebers should go on board obj ?
         switch (info) {
             case STATUS_PICKER:
                 return setCmp(prev => {
@@ -121,7 +113,6 @@ export function BoardDetails() {
     }
 
     function onAddFromMobile(ev, type) {
-        // console.log('ev', ev);
         ev.preventDefault()
         switch (type) {
             case 'task':
@@ -134,10 +125,10 @@ export function BoardDetails() {
         }
     }
 
-   function onDragGroup() {
-    setPrevBoard(board)
-    onGroupDragStart(board)
-   }
+    function onDragGroup() {
+        setPrevBoard(board)
+        onGroupDragStart(board)
+    }
 
     if (!board.groups || !board) return <div className="loader"><Loader size={Loader.sizes.LARGE} /></div>
     return <section className="board-details">
