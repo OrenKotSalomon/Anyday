@@ -121,22 +121,36 @@ export function setPrevBoard(board) {
 }
 
 export function onGroupDragStart(board) {
-
     const newBoard = structuredClone(board)
-    // console.log('newBoardFIRST:', newBoard)
-    // store.dispatch({ type: SET_PREV_BOARD, prevBoard: newBoard })
-
     newBoard.groups.map(group => group.isCollapsed = true)
     store.dispatch({ type: SET_BOARD, board: newBoard })
 }
 
 export function handleOnDragEnd(res, type, data) {
-
-    const board = data.prevBoard
     if (!res.destination) return
 
-    switch (type) {
+    let board
+    if (data.board) board = data.board
+    if (data.prevBoard) board = data.prevBoard
 
+    const { source, destination } = res
+    const draggedFromId = source.droppableId
+    const draggedToId = destination.droppableId
+
+    switch (type) {
+        case 'task':
+            if (source.droppableId !== destination.droppableId) {
+                const sourceGroup = board.groups.find(group => group.id === draggedFromId)
+                const destGroup = board.groups.find(group => group.id === draggedToId)
+                const sourceTasks = sourceGroup.tasks
+                const destTasks = destGroup.tasks
+                const [removed] = sourceTasks.splice(source.index, 1)
+                destTasks.splice(destination.index, 0, removed)
+            } else {
+                const group = board.groups.find(group => group.id === draggedFromId)
+                const [removed] = group.tasks.splice(source.index, 1)
+                group.tasks.splice(destination.index, 0, removed)
+            } return updateBoard(board, board.groups, ON_DRAG_GROUP)
         case 'group':
             const groupsToUpdate = data.grouplist
             const [reorderedGroup] = groupsToUpdate.splice(res.source.index, 1)
@@ -144,21 +158,14 @@ export function handleOnDragEnd(res, type, data) {
             store.dispatch({ type: SET_BOARD, board })
             return updateBoard(board, groupsToUpdate, ON_DRAG_GROUP)
 
-        case 'task':
-            const newOrderedTasks = data.listToUpdate
-            const [reorderedTask] = newOrderedTasks.splice(res.source.index, 1)
-            newOrderedTasks.splice(res.destination.index, 0, reorderedTask)
-            data.group.tasks = newOrderedTasks
-            return updateGroup(data.board, data.group, ON_DRAG_TASK)
-
         case 'label':
             const newOrderedLabels = data.cmpsOrder
             const [reorderedLabel] = newOrderedLabels.splice(res.source.index, 1)
             newOrderedLabels.splice(res.destination.index, 0, reorderedLabel)
-            return updateBoard(data.board, newOrderedLabels, ON_DRAG_LABEL)
+            return updateBoard(board, newOrderedLabels, ON_DRAG_LABEL)
 
         default:
-            return updateGroup(data.board, data.group, ON_DRAG_TASK)
+            return updateGroup(board, data.group, ON_DRAG_TASK)
     }
 
 }

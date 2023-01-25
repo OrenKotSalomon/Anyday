@@ -147,6 +147,7 @@ function getNewTask() {
 }
 
 function updateBoardService(board, data, type) {
+    console.log('data:', data)
     board = structuredClone(board)
     switch (type) {
         case CHANGE_TITLE:
