@@ -4,7 +4,8 @@ import { httpService } from './http.service.js'
 import { utilService } from './util.service.js'
 import { userService } from './user.service.js'
 
-const STORAGE_KEY = 'board'
+// const STORAGE_KEY = 'board'
+const BASE_URL = 'board/'
 
 export const boardService = {
     query,
@@ -15,10 +16,12 @@ export const boardService = {
     addBoardMsg, 
     getEmptyTaskComment
 }
+
 window.bs = boardService
 
-async function query(filterBy = { txt: '', price: 0 }) {
-    return httpService.get(STORAGE_KEY, filterBy)
+async function query(filterBy = getDefaultFilter()) {
+    const queryParams = `?title=${filterBy.title}&sortBy=${filterBy.sortBy}&desc=${filterBy.desc}`
+    return httpService.get(BASE_URL + queryParams)
 }
 
 function getById(boardId) {
@@ -30,6 +33,7 @@ async function remove(boardId) {
     // await storageService.remove(STORAGE_KEY, boardId)
     return httpService.delete(`board/${boardId}`)
 }
+
 async function save(board) {
     var savedBoard
     if (board._id) {
@@ -55,6 +59,10 @@ function getEmptyBoard() {
         vendor: 'Susita-' + (Date.now() % 1000),
         price: utilService.getRandomIntInclusive(1000, 9000),
     }
+}
+
+function getDefaultFilter() {
+    return { title: '', sortBy: '', desc: 1 }
 }
 
 function getEmptyTaskComment(txt='',imgUrl='',byMember = {}) {

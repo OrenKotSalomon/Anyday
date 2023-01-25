@@ -12,7 +12,7 @@ import { EditableHeading, Tooltip, MenuButton, Menu, MenuItem, ColorPicker, Icon
 import { Delete, Bullet, Duplicate, Add, DropdownChevronDown, DropdownChevronRight } from 'monday-ui-react-core/icons'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, isDndModeDisabled, index }) {
+export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, isDndModeDisabled, index, setIsCheckedShow }) {
 
     const [isAddingLabel, setIsAddingLabel] = useState(false)
     const [isPickColor, setIsPickColor] = useState(false)
@@ -214,10 +214,7 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
         }
 
         {!group.isCollapsed && <section className='expand-group-container'>
-            <div className="group-header-container"
-            >
-                {/* Drag Here */}
-
+            <div className="group-header-container">
                 <Draggable key={group.id} draggableId={group.id} index={index} isDragDisabled={isDndModeDisabled}>
                     {(provided) => (
                         <div className="group-name-wrapper"
@@ -288,15 +285,17 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                         </div>
                     )}
                 </Draggable>
-                {/* Drag Here */}
                 <div className='row-header-container'>
                     <div className='main-left-header'>
                         <div className='floatin-white-box'></div>
 
                         <div className='left-row-container'>
                             <div style={{ backgroundColor: group.style }} className='left-border'></div>
-                            <div className='checkbox-row-container'>
+                            <div className='checkbox-row-container'
+                                onClick={() => setIsCheckedShow(true)}
+                            >
                                 <input className='row-checkbox'
+
                                     onChange={(ev) => handleChangeCheckbox(ev, group.id)}
                                     type="checkbox" />
                             </div>
@@ -356,13 +355,12 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
             </div>
 
             <div className="main-group-container">
-
-                <Droppable droppableId={group.id}>
-                    {(provided) => (
-
-                        <section className={`tasks-container`}
-                            {...provided.droppableProps}
-                            ref={provided.innerRef}>
+                <DragDropContext onDragEnd={(result) => handleOnDragEnd(result, 'task', { board })} >
+                    <Droppable droppableId={group.id}>
+                        {(provided) => (
+                            <section className={`tasks-container`}
+                                {...provided.droppableProps}
+                                ref={provided.innerRef}>
 
                             {group.tasks.map((task, index) =>
                                 <Draggable key={task.id} draggableId={task.id} index={index} isDragDisabled={isDndModeDisabled} >
@@ -376,7 +374,7 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                                             group={group}
                                             openModal={openModal}
                                             setIsDndModeDisabled={setIsDndModeDisabled}
-
+                                            setIsCheckedShow={setIsCheckedShow}
                                         />
                                     )}
                                 </Draggable>
@@ -417,42 +415,39 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                                     </div>
                                     <div className='white-box'></div>
                                 </div>
-                            </div>
 
-                            {/* TAHTIT */}
-                            <div className='label-sum-container'>
+                                {/* TAHTIT */}
+                                <div className='label-sum-container'>
 
-                                <div className='hidden-task-container'>
+                                    <div className='hidden-task-container'>
 
-                                    <div className='floatin-white-box-sum'></div>
-                                    <div className='hidden-task'></div>
-                                    <div className='right-floating-border'></div>
+                                        <div className='floatin-white-box-sum'></div>
+                                        <div className='hidden-task'></div>
+                                        <div className='right-floating-border'></div>
+                                    </div>
+
+                                    <div className='sum-labels-container'>
+                                        {
+                                            board.cmpsOrder.map((cmp, idx) => {
+                                                return <DynamicSummaryCmp
+                                                    key={idx}
+                                                    cmp={cmp}
+                                                    board={board}
+                                                    group={group}
+                                                />
+                                            })
+                                        }
+
+                                    </div>
+                                    <div className='white-box'></div>
+
                                 </div>
 
-                                <div className='sum-labels-container'>
-                                    {
-                                        board.cmpsOrder.map((cmp, idx) => {
+                            </section>
 
-                                            return <DynamicSummaryCmp
-                                                key={idx}
-                                                cmp={cmp}
-                                                board={board}
-                                                group={group}
-
-                                            />
-                                        })
-                                    }
-
-                                </div>
-                                <div className='white-box'></div>
-
-                            </div>
-
-                        </section>
-
-                    )}
-                </Droppable>
-
+                        )}
+                    </Droppable>
+                </DragDropContext>
             </div>
         </section>}
 

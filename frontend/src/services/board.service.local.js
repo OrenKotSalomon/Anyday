@@ -2,8 +2,10 @@
 import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 import { userService } from './user.service.js'
+import { httpService } from './http.service.js'
 
 const BOARD_KEY = 'boardDB'
+const BASE_URL = 'board/'
 
 //Board
 export const CHANGE_TITLE = 'CHANGE_TITLE'
@@ -60,18 +62,22 @@ export const boardService = {
     addBoardMsg,
     updateBoardService,
     updateGroupsService,
-    updateTaskService
+    updateTaskService,
+    getDefaultFilter
 }
 
 window.bs = boardService
 
-async function query(filterBy = { txt: '', price: 0 }) {
-    let boards = await storageService.query(BOARD_KEY)
+async function query(filterBy = getDefaultFilter()) {
+    const queryParams = `?title=${filterBy.title}&sortBy=${filterBy.sortBy}&desc=${filterBy.desc}`
+    // let boards = await storageService.query(BOARD_KEY)
+    let boards = await httpService.get(BASE_URL + queryParams)
 
     if (!boards.length) {
-        await storageService.post(BOARD_KEY, demoBoard)
-        boards = await storageService.query(BOARD_KEY)
-
+        // await storageService.post(BOARD_KEY, demoBoard)
+        await httpService.post('board', demoBoard)
+        // boards = await storageService.query(BOARD_KEY)
+        boards = await httpService.get(BASE_URL + queryParams)
         return boards
     }
 
@@ -87,38 +93,43 @@ async function query(filterBy = { txt: '', price: 0 }) {
 }
 
 function getById(boardId) {
-    return storageService.get(BOARD_KEY, boardId)
+    // return storageService.get(BOARD_KEY, boardId)
+    return httpService.get(`board/${boardId}`)
 }
 
 async function remove(boardId) {
     // throw new Error('Nope')
-    await storageService.remove(BOARD_KEY, boardId)
+    // await storageService.remove(BOARD_KEY, boardId)
+    return httpService.delete(`board/${boardId}`)
 }
 
 async function save(board) {
     var savedBoard
     if (board._id) {
-        savedBoard = await storageService.put(BOARD_KEY, board)
+        // savedBoard = await storageService.put(BOARD_KEY, board)
+        savedBoard = await httpService.put(`board/${board._id}`, board)
         return savedBoard
     } else {
         // Later, owner is set by the backend
         board.owner = userService.getLoggedinUser()
-        savedBoard = await storageService.post(BOARD_KEY, board)
+        // savedBoard = await storageService.post(BOARD_KEY, board)
+        savedBoard = await httpService.post('board', board)
     }
-    console.log('savedBoard:', savedBoard)
     return savedBoard
 }
 
 async function duplicate(board) {
-    let newBoard = board
-    newBoard._id = utilService.makeId()
+    let newBoard = structuredClone(board)
+    // newBoard._id = utilService.makeId()
+    delete newBoard._id
     newBoard.title = `Duplicate of ${board.title}`
     newBoard.groups.map(group => {
         group.id = utilService.makeId()
         group.tasks.map(task => task.id = utilService.makeId())
         return group
     })
-    await storageService.post(BOARD_KEY, newBoard)
+    // await storageService.post(BOARD_KEY, newBoard)
+    newBoard = await httpService.post('board', newBoard)
     return newBoard
 }
 
@@ -155,7 +166,6 @@ function getNewTask() {
 }
 
 function updateBoardService(board, data, type) {
-    console.log('data:', data)
     board = structuredClone(board)
     switch (type) {
         case CHANGE_TITLE:
@@ -320,6 +330,10 @@ function updateTaskService(board, data, type) {
         default:
             return board
     }
+}
+
+function getDefaultFilter() {
+    return { title: '', sortBy: '', desc: 1 }
 }
 
 function getEmptyGroup() {

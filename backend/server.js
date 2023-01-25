@@ -10,6 +10,15 @@ const http = require('http').createServer(app)
 app.use(cookieParser())
 app.use(express.json())
 
+// initFB()
+// function initFB() {
+// window.fbAsyncInit = function () {
+//     FB.init({
+//         appId: "731484244948295",
+//         version: 'v2.1' // use version 2.1
+//     });
+// }
+// }
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.resolve(__dirname, 'public')))
@@ -23,9 +32,9 @@ if (process.env.NODE_ENV === 'production') {
 
 const authRoutes = require('./api/auth/auth.routes')
 const userRoutes = require('./api/user/user.routes')
-const reviewRoutes = require('./api/review/review.routes')
-const carRoutes = require('./api/car/car.routes')
-const {setupSocketAPI} = require('./services/socket.service')
+const boardRoutes = require('./api/board/board.routes')
+// const reviewRoutes = require('./api/review/review.routes')
+const { setupSocketAPI } = require('./services/socket.service')
 
 // routes
 const setupAsyncLocalStorage = require('./middlewares/setupAls.middleware')
@@ -33,12 +42,12 @@ app.all('*', setupAsyncLocalStorage)
 
 app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
-app.use('/api/review', reviewRoutes)
-app.use('/api/car', carRoutes)
+app.use('/api/board', boardRoutes)
+// app.use('/api/review', reviewRoutes)
 setupSocketAPI(http)
 
 // Make every server-side-route to match the index.html
-// so when requesting http://localhost:3030/index.html/car/123 it will still respond with
+// so when requesting http://localhost:3030/index.html/board/123 it will still respond with
 // our SPA (single page app) (the index.html file) and allow vue/react-router to take it from there
 app.get('/**', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'))

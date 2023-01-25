@@ -1,0 +1,110 @@
+.checkbox-modal-wrapper {
+    display: none;
+
+    @include for-normal-layout {
+        color: #323338;
+        display: flex;
+
+        height: rem(63px);
+        // background-color: aqua;
+        position: sticky;
+        right: 0;
+        left: 0;
+        bottom: 35px;
+        justify-content: center;
+        z-index: 120;
+
+        .checkbox-modal-container {
+            width: rem(800px);
+            display: flex;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 1px 1px 5px rgb(22, 21, 21);
+            border-radius: 8px;
+        }
+    }
+}
+
+.number-of-checked {
+    display: flex;
+    width: rem(83px);
+    height: rem(63px);
+    background-color: #0073ea;
+    display: flex;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-size: rem(24px);
+    color: white;
+}
+
+.item-select-container {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 300px;
+    font-size: 20px;
+    line-height: 22.5px;
+    font-family: figtree-regular;
+    // padding-left: 20px;
+}
+
+.btns-container {
+    display: flex;
+
+}
+
+.checknox-delete-btn-container-temp {
+    visibility: hidden;
+}
+
+.close-checked-modal {
+
+    button {
+        width: 63px;
+        height: 63px;
+        background-color: $main-bgc-white;
+        border: none;
+        cursor: pointer;
+        transition: 0.3 ease;
+
+        &:hover {
+            color: #535353;
+        }
+
+    }
+
+    border-left: 2px solid $cell-border-color;
+
+}
+
+.checknox-delete-btn-container {
+    align-self: flex-end;
+    padding-bottom: 10px;
+    margin-right: 10px;
+
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: 0.3 ease;
+
+        &:hover {
+            color: #5a5a5a;
+        }
+    }
+
+    span {
+        font-size: 12px;
+    }
+}
+
+.icon-delete {
+    font-size: 18px;
+
+}

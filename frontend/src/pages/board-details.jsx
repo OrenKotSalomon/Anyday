@@ -13,7 +13,10 @@ import { handleOnDragEnd, loadBoard, onGroupDragStart, setPrevBoard, updateBoard
 
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Loader, Icon, DialogContentContainer, MenuItem, Menu, MenuDivider } from 'monday-ui-react-core';
-import { Add, Group, Item } from 'monday-ui-react-core/icons';
+import { Add, Group, Item, Close } from 'monday-ui-react-core/icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { utilService } from "../services/util.service";
 
 export function BoardDetails() {
 
@@ -24,10 +27,13 @@ export function BoardDetails() {
     const [cmp, setCmp] = useState({})
     const [isDndModeDisabled, setIsDndModeDisabled] = useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+    const [isCheckedShow, setIsCheckedShow] = useState(false)
+
     const boardContainer = useRef()
 
     useEffect(() => {
         loadBoard(boardId)
+
     }, [boardId])
 
     function onUpdateTaskLabel(type, data, labelPick) {
@@ -48,6 +54,16 @@ export function BoardDetails() {
         }
 
     }
+
+    // function checkIfTaskChecked() {
+
+    //     let isOneChecked = board.groups.some(group => {
+    //         return group.tasks.some(task => task.isChecked === true)
+
+    //     })
+    //     setIsCheckedShow(isOneChecked)
+
+    // }
 
     function openModal(ev, data, info) {
         let labelPos = ev.target.getBoundingClientRect()
@@ -127,7 +143,9 @@ export function BoardDetails() {
         }
     }
 
-    function onDragGroup() {
+    function onDragGroup(e) {
+        console.log('e:', e)
+        // if (task) return
         setPrevBoard(board)
         onGroupDragStart(board)
     }
@@ -139,19 +157,19 @@ export function BoardDetails() {
         {board && <div ref={boardContainer} className="board-container">
             <BoardHeader board={board} />
 
-            <DragDropContext onDragStart={onDragGroup} onDragEnd={(res) => handleOnDragEnd(res, 'group', { prevBoard, grouplist: prevBoard.groups })}>
-                <Droppable droppableId='groups'>
+            <DragDropContext onDragStart={(e) => onDragGroup(e)} onDragEnd={(res) => handleOnDragEnd(res, 'group', { prevBoard, grouplist: prevBoard.groups })}>
+                <Droppable droppableId='groups' >
                     {(provided) => (
 
                         <section className="groups-container"
                             {...provided.droppableProps}
-                            ref={provided.innerRef}>
-
-                            {/* Drag Here */}
-                            <DragDropContext onDragEnd={(result) => handleOnDragEnd(result, 'task', { board })} >
+                            ref={provided.innerRef}
+                        >
+                            
                                 {board.groups.map((group, index) =>
                                     <GroupPreview
                                         index={index}
+
                                         // provided={provided}
                                         key={group.id}
                                         board={board}
@@ -159,11 +177,10 @@ export function BoardDetails() {
                                         openModal={openModal}
                                         isDndModeDisabled={isDndModeDisabled}
                                         setIsDndModeDisabled={setIsDndModeDisabled}
+                                        setIsCheckedShow={setIsCheckedShow}
                                     />
                                 )}
-                            </DragDropContext>
-                            {/* Drag Here */}
-
+                            
                             {provided.placeholder}
                             <div className="bottom-add-group-btn-container">
 
@@ -179,6 +196,59 @@ export function BoardDetails() {
             {isModalOpen && <DynamicModal cmp={cmp} setIsModalOpen={setIsModalOpen} onUpdateTaskLabel={onUpdateTaskLabel} />}
             <div className="add-group-btn-container">
             </div>
+
+            {isCheckedShow && <div className="checkbox-modal-wrapper">
+                <div className="checkbox-modal-container">
+                    <div className="number-of-checked">
+                        <div className="checked-num">1</div>
+                    </div>
+                    <div className="item-select-container">
+
+                        <div className="selected-txt">
+                            Item selected
+                        </div>
+                    </div>
+                    <div className="btns-container">
+                        <div className="checknox-delete-btn-container-temp">
+                            <button>
+
+                            </button>
+                            <span>delete</span>
+                        </div>
+                        <div className="checknox-delete-btn-container-temp">
+                            <button>delete</button>
+                            <span>delete</span>
+                        </div>
+                        <div className="checknox-delete-btn-container-temp">
+                            <button>delete</button>
+                            <span>delete</span>
+                        </div>
+                        <div className="checknox-delete-btn-container-temp">
+                            <button>delete</button>
+                            <span>delete</span>
+                        </div>
+                        <div className="checknox-delete-btn-container-temp">
+                            <button>delete</button>
+                            <span>delete</span>
+                        </div>
+                        <div className="checknox-delete-btn-container">
+                            <button>
+                                <FontAwesomeIcon
+                                    className="icon-delete"
+                                    icon={faTrash} />
+                            </button>
+                            <span>delete</span>
+                        </div>
+                    </div>
+                    <div className="close-checked-modal">
+                        <button onClick={() => setIsCheckedShow(false)}>
+                            <Icon iconType={Icon.type.SVG} icon={Close} iconSize={18} customColor={'#323338'} />
+
+                        </button>
+                    </div>
+                </div>
+            </div>}
+
         </div>
         }
 
