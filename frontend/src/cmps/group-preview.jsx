@@ -418,7 +418,9 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                                                 />
                                             })
                                         }
+
                                     </div>
+                                    <div className='white-box'></div>
 
                                 </div>
 
