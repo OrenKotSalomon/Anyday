@@ -135,9 +135,8 @@ export function BoardDetails() {
         <NavBar />
         <SideGroupBar />
         {board && <div ref={boardContainer} className="board-container">
-            <BoardHeader
-                board={board}
-            />
+            <BoardHeader board={board} />
+
             <DragDropContext onDragStart={onDragGroup} onDragEnd={(res) => handleOnDragEnd(res, 'group', { prevBoard, grouplist: prevBoard.groups })}>
                 <Droppable droppableId='groups'>
                     {(provided) => (
@@ -146,18 +145,23 @@ export function BoardDetails() {
                             {...provided.droppableProps}
                             ref={provided.innerRef}>
 
-                            {board.groups.map((group, index) =>
-                                <GroupPreview
-                                    index={index}
-                                    // provided={provided}
-                                    key={group.id}
-                                    board={board}
-                                    group={group}
-                                    openModal={openModal}
-                                    isDndModeDisabled={isDndModeDisabled}
-                                    setIsDndModeDisabled={setIsDndModeDisabled}
-                                />
-                            )}
+                            {/* Drag Here */}
+                            <DragDropContext onDragEnd={(result) => handleOnDragEnd(result, 'task', { board })} >
+                                {board.groups.map((group, index) =>
+                                    <GroupPreview
+                                        index={index}
+                                        // provided={provided}
+                                        key={group.id}
+                                        board={board}
+                                        group={group}
+                                        openModal={openModal}
+                                        isDndModeDisabled={isDndModeDisabled}
+                                        setIsDndModeDisabled={setIsDndModeDisabled}
+                                    />
+                                )}
+                            </DragDropContext>
+                            {/* Drag Here */}
+
                             {provided.placeholder}
                             <div className="bottom-add-group-btn-container">
 
