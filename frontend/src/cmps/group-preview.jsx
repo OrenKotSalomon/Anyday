@@ -350,7 +350,7 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
 
 
                 <Droppable droppableId={group.id}>
-                    {(provided, snapshot) => (
+                    {(provided) => (
 
                         <section className={`tasks-container`}
                             {...provided.droppableProps}
