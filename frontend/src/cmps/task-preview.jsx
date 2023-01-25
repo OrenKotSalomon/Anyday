@@ -112,7 +112,7 @@ export function TaskPreview({ task, board, group, openModal, provided, snapshot,
                             <Icon icon={Update} iconSize={24} style={{ color: '#0073ea' }} />
                             <Counter count={
                                 (Array.isArray(task.comments)?task.comments.length:0)
-                                +(Array.isArray(task.pinedComments)?task.pinedComments.length:0)
+                                +(Array.isArray(task.pinnedComments)?task.pinnedComments.length:0)
                                 } size={Counter.sizes.SMALL} className='counter-comments' />
 
                         </div>}
