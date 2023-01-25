@@ -61,7 +61,6 @@
       left: 25px;
 
       @include for-narrow-layout {
-
         left: 48px;
       }
 
@@ -80,7 +79,6 @@
       display: none;
 
       @include for-narrow-layout {
-
         display: block;
         position: absolute;
         top: 1px;
@@ -94,7 +92,7 @@
       position: absolute;
       left: -4px;
       top: -4px;
-
+      z-index: 1;
       button {
         border: 0;
         transition: 0.3s;
@@ -103,7 +101,6 @@
 
       @include for-narrow-layout {
         left: -3px;
-
       }
     }
 
@@ -121,7 +118,6 @@
         position: absolute;
         left: 4px;
         top: 5px;
-
       }
 
       .group-list-menu-btn {
@@ -134,18 +130,16 @@
 .monday-storybook-tooltip_bottom .group-list-editable-header {
   position: relative;
   left: -20px;
-
 }
 
 .monday-storybook-tooltip_bottom .group-list-editable-header {
   position: relative;
   left: -20px;
-
 }
 
 .main-header-labels-container {
   &.collapsed {
-    >* {
+    > * {
       height: 60px;
     }
   }
@@ -186,7 +180,6 @@
       font-weight: 600;
     }
   }
-
 }
 
 .main-left-header {
@@ -240,7 +233,6 @@
           background-color: #d5d8e4;
         }
       }
-
     }
 
     .add-label-btn {
@@ -257,7 +249,6 @@
     background-color: rgba(255, 255, 255, 0.9);
 
     @include for-narrow-layout {
-
       @include left-sticky;
 
       .floatin-white-box {
@@ -299,6 +290,9 @@
       line-height: 22px;
       color: $icon-color;
       margin-left: 22px;
+    }
+    input {
+      width: 94%;
     }
   }
 

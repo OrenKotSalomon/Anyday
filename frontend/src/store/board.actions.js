@@ -82,7 +82,7 @@ export async function addBoard(board) {
 
 export async function updateBoard(board, data, type) {
     try {
-        const boardToUpdate = boardService.boardServiceReducer(board, data, type)
+        const boardToUpdate = boardService.updateBoardService(board, data, type)
         const savedBoard = await boardService.save(boardToUpdate)
         store.dispatch(getActionUpdateboard(savedBoard))
         return savedBoard
@@ -94,7 +94,7 @@ export async function updateBoard(board, data, type) {
 
 export async function updateGroup(board, data, type) {
     try {
-        const boardToUpdate = boardService.groupServiceReducer(board, data, type)
+        const boardToUpdate = boardService.updateGroupsService(board, data, type)
         const savedBoard = await boardService.save(boardToUpdate)
         store.dispatch(getActionUpdateboard(savedBoard))
         return savedBoard
@@ -106,7 +106,7 @@ export async function updateGroup(board, data, type) {
 
 export async function updateTask(board, data, type) {
     try {
-        const boardToUpdate = boardService.taskServiceReducer(board, data, type)
+        const boardToUpdate = boardService.updateTaskService(board, data, type)
         const savedBoard = await boardService.save(boardToUpdate)
         store.dispatch(getActionUpdateboard(savedBoard))
         return savedBoard

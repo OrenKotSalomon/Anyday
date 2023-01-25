@@ -140,7 +140,9 @@
 
 .side-board-btn-container {
   position: relative;
-
+>*:not(svg) {
+  width: 100%;
+}
   .input-search-icon {
     position: absolute;
     bottom: -3%;

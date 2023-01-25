@@ -52,9 +52,9 @@ export const boardService = {
     remove,
     getEmptyBoard,
     addBoardMsg,
-    boardServiceReducer,
-    groupServiceReducer,
-    taskServiceReducer
+    updateBoardService,
+    updateGroupsService,
+    updateTaskService
 }
 
 window.bs = boardService
@@ -146,7 +146,7 @@ function getNewTask() {
 
 }
 
-function boardServiceReducer(board, data, type) {
+function updateBoardService(board, data, type) {
     board = structuredClone(board)
     switch (type) {
         case CHANGE_TITLE:
@@ -163,7 +163,7 @@ function boardServiceReducer(board, data, type) {
     }
 }
 
-function groupServiceReducer(board, data, type) {
+function updateGroupsService(board, data, type) {
     board = structuredClone(board)
     let groupToUpdate
     let newTask = getNewTask()
@@ -209,7 +209,7 @@ function groupServiceReducer(board, data, type) {
     }
 }
 
-function taskServiceReducer(board, data, type) {
+function updateTaskService(board, data, type) {
     board = structuredClone(board)
     const newTask = getNewTask()
     let currTask, groupIdx, taskIdx
@@ -268,6 +268,7 @@ function taskServiceReducer(board, data, type) {
             board.groups[groupIdx].tasks[taskIdx].comments.unshift(board.groups[groupIdx].tasks[taskIdx].pinedComments[UnpinCommentIdx])
             currTask.pinedComments.splice(UnpinCommentIdx, 1)
             return board
+            // Need to make it Dynamic for each label
         case UPDATE_TASK_STATUS:
             board.groups[groupIdx].tasks[taskIdx].status = data.labelPick
             return board

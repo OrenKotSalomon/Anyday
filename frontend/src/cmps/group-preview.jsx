@@ -211,68 +211,71 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
 
                 <Draggable key={group.id} draggableId={group.id} index={index} isDragDisabled={isDndModeDisabled}>
                     {(provided) => (
-                        <div className="group-header-name"
-                            style={{ color: group.style }}
+                        <div className="group-name-wrapper"
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
-                            ref={provided.innerRef}
-                        >
+                            ref={provided.innerRef}>
 
-                            <MenuButton className="group-list-menu-btn" >
-                                <Menu
-                                    id="menu"
-                                    size="medium"
-                                    style={{
-                                        backgroundColor: 'red',
-                                        color: 'red'
-                                    }}
-                                >
-                                    <MenuItem
-                                        onClick={() => onAddGroup(group)}
-                                        icon={Add}
-                                        title="Add Group"
-                                    />
-                                    <MenuItem
-                                        onClick={() => onSetColorGroup()}
-                                        icon={Bullet}
-                                        title="Change Color"
-                                    />
-                                    <MenuItem
-                                        onClick={() => onDuplicateGroup(group)}
-                                        icon={Duplicate}
-                                        title="Duplicate Group"
-                                    />
-                                    <MenuItem
-                                        onClick={() => onDeleteGroup(group)}
-                                        icon={Delete}
-                                        title="Delete"
-                                    />
-                                </Menu>
-                            </MenuButton>
 
-                            {isPickColor && <ColorPicker className="group-color-picker"
-                                colorSize={ColorPicker.sizes.SMALL}
-                                onSave={(value) => onColorPick(value)} />}
-                            <div className="group-collapse-btn-container">
-                                <Tooltip content="Collapse group" animationType="expand">
-                                    <button onClick={() => onCollapseGroup(group)}><Icon style={{ color: group.style }} iconType={Icon.type.SVG} icon={DropdownChevronDown} iconSize={19} /></button>
-                                </Tooltip>
-                            </div>
-                            <div className="monday-storybook-tooltip_bottom group-list-editable-header">
+                            <div className="group-header-name"
+                                style={{ color: group.style }}>
 
-                                <Tooltip>
-                                    <EditableHeading
-                                        insetFocus={true}
-                                        className="group-header-editable-name"
-                                        customColor={group.style}
-                                        onFinishEditing={onFinishEditing}
-                                        onChange={handleChange}
-                                        brandFont={true}
-                                        value={group.title}
-                                        style={{ fontWeight: 'bold' }}
-                                        type={EditableHeading.types.h4}
-                                    />
-                                </Tooltip>
+                                <MenuButton className="group-list-menu-btn" >
+                                    <Menu
+                                        id="menu"
+                                        size="medium"
+                                        style={{
+                                            backgroundColor: 'red',
+                                            color: 'red'
+                                        }}
+                                    >
+                                        <MenuItem
+                                            onClick={() => onAddGroup(group)}
+                                            icon={Add}
+                                            title="Add Group"
+                                        />
+                                        <MenuItem
+                                            onClick={() => onSetColorGroup()}
+                                            icon={Bullet}
+                                            title="Change Color"
+                                        />
+                                        <MenuItem
+                                            onClick={() => onDuplicateGroup(group)}
+                                            icon={Duplicate}
+                                            title="Duplicate Group"
+                                        />
+                                        <MenuItem
+                                            onClick={() => onDeleteGroup(group)}
+                                            icon={Delete}
+                                            title="Delete"
+                                        />
+                                    </Menu>
+                                </MenuButton>
+
+                                {isPickColor && <ColorPicker className="group-color-picker"
+                                    colorSize={ColorPicker.sizes.SMALL}
+                                    onSave={(value) => onColorPick(value)} />}
+                                <div className="group-collapse-btn-container">
+                                    <Tooltip content="Collapse group" animationType="expand">
+                                        <button onClick={() => onCollapseGroup(group)}><Icon style={{ color: group.style }} iconType={Icon.type.SVG} icon={DropdownChevronDown} iconSize={19} /></button>
+                                    </Tooltip>
+                                </div>
+                                <div className="monday-storybook-tooltip_bottom group-list-editable-header">
+
+                                    <Tooltip>
+                                        <EditableHeading
+                                            insetFocus={true}
+                                            className="group-header-editable-name"
+                                            customColor={group.style}
+                                            onFinishEditing={onFinishEditing}
+                                            onChange={handleChange}
+                                            brandFont={true}
+                                            value={group.title}
+                                            style={{ fontWeight: 'bold' }}
+                                            type={EditableHeading.types.h4}
+                                        />
+                                    </Tooltip>
+                                </div>
                             </div>
                         </div>
                     )}
