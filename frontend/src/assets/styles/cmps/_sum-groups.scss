@@ -1,3 +1,16 @@
+.summary-for-mobile {
+    display: flex;
+    align-items: center;
+    height: $cell-height;
+    // margin-bottom: 26px;
+    position: relative;
+
+    @include for-narrow-layout {
+        display: none;
+    }
+
+}
+
 .label-sum-container {
 
     visibility: hidden;
@@ -27,6 +40,13 @@
         .hidden-task {
             min-width: rem(396px);
         }
+    }
+
+    .white-box {
+        width: fit-content;
+        flex-grow: 1;
+        height: $cell-height;
+        border-bottom: $border-cell;
     }
 
 }
@@ -110,10 +130,11 @@
 
 .status-sum {
 
-    transition: 0.3s;
+    transition: 0.1s ease-in-out;
 
     &:hover {
-        transform: scale(1, 1.2);
+        transform: scale(1.01, 1.2);
+        border-radius: 3px;
     }
 }
 

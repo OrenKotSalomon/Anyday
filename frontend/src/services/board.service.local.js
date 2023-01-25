@@ -20,6 +20,8 @@ export const DUPLICATE_GROUP = 'DUPLICATE_GROUP'
 export const ADD_GROUP_TASK = 'ADD_GROUP_TASK'
 export const DELETE_GROUP = 'DELETE_GROUP'
 export const ON_DRAG_TASK = 'ON_DRAG_TASK'
+export const UPDATE_GROUP_CHECKED = 'UPDATE_GROUP_CHECKED'
+export const REMOVE_TASKS_FROM_GROUP = 'REMOVE_TASKS_FROM_GROUP'
 
 //Tasks
 export const DELETE_TASK = 'DELETE_TASK'
@@ -35,6 +37,9 @@ export const UPDATE_TASK_DATE = 'UPDATE_TASK_DATE'
 export const UPDATE_TASK_MEMBERS = 'UPDATE_TASK_MEMBERS'
 export const UPDATE_TASK_PRIORITY = 'UPDATE_TASK_PRIORITY'
 export const UPDATE_TASK_LABEL_STATUS = 'UPDATE_TASK_LABEL_STATUS'
+export const UPDATE_TASK_LABEL_NUMBER = 'UPDATE_TASK_LABEL_NUMBER'
+export const UPDATE_TASK_LABEL_TEXT = 'UPDATE_TASK_LABEL_TEXT'
+export const UPDATE_TASK_CHECKED = 'UPDATE_TASK_CHECKED'
 
 // Dynamic modal/component
 export const DATE_PICKER = 'DATE_PICKER'
@@ -43,6 +48,7 @@ export const MEMEBER_PICKER = 'MEMEBER_PICKER'
 export const PRIORITY_PICKER = 'PRIORITY_PICKER'
 export const TEXT_LABEL = 'TEXT_LABEL'
 export const LABEL_STATUS_PICKER = 'LABEL_STATUS_PICKER'
+export const NUMBER_PICKER = 'NUMBER_PICKER'
 
 export const boardService = {
     query,
@@ -139,14 +145,17 @@ function getNewTask() {
         status: 'default',
         priority: 'default',
         members: [],
+        isChecked: false,
         dueDate: (Date.now() / 1000),
         labelStatus: 'default',
+        number: 0,
         txt: ''
     }
 
 }
 
 function updateBoardService(board, data, type) {
+    console.log('data:', data)
     board = structuredClone(board)
     switch (type) {
         case CHANGE_TITLE:
@@ -203,6 +212,19 @@ function updateGroupsService(board, data, type) {
         case ON_DRAG_TASK:
             groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.id)
             board.groups.splice(groupIdx, 1, data)
+            return board
+        case UPDATE_GROUP_CHECKED:
+            groupToUpdate = board.groups.find(currGroup => currGroup.id === data.id)
+            groupToUpdate.tasks.forEach(task => task.isChecked = data.checked)
+            groupToUpdate.isChecked = data.checked
+            return board
+        case REMOVE_TASKS_FROM_GROUP:
+            groupToUpdate = board.groups.find(currGroup => currGroup.id === data.id)
+            groupToUpdate.tasks.filter(task => {
+                data.forEach(taskId => {
+                    if (task.id === taskId) return task
+                })
+            })
             return board
         default:
             return board
@@ -268,7 +290,7 @@ function updateTaskService(board, data, type) {
             board.groups[groupIdx].tasks[taskIdx].comments.unshift(board.groups[groupIdx].tasks[taskIdx].pinnedComments[UnpinCommentIdx])
             currTask.pinnedComments.splice(UnpinCommentIdx, 1)
             return board
-            // Need to make it Dynamic for each label
+        // Need to make it Dynamic for each label
         case UPDATE_TASK_STATUS:
             board.groups[groupIdx].tasks[taskIdx].status = data.labelPick
             return board
@@ -286,6 +308,15 @@ function updateTaskService(board, data, type) {
         case UPDATE_TASK_PRIORITY:
             board.groups[groupIdx].tasks[taskIdx].priority = data.labelPick
             return board
+        case UPDATE_TASK_LABEL_NUMBER:
+            board.groups[groupIdx].tasks[taskIdx].number = data.labelPick
+            return board
+        case UPDATE_TASK_LABEL_TEXT:
+            board.groups[groupIdx].tasks[taskIdx].txt = data.labelPick
+            return board
+        case UPDATE_TASK_CHECKED:
+            board.groups[groupIdx].tasks[taskIdx].isChecked = data.checked
+            return board
         default:
             return board
     }
@@ -297,25 +328,30 @@ function getEmptyGroup() {
         title: 'New Group',
         archivedAt: 1589983468418,
         isCollapsed: false,
+        isChecked: false,
         tasks: [
             {
                 id: utilService.makeId(),
+                isChecked: false,
                 title: 'Task 1',
                 status: 'default',
                 priority: 'default',
                 members: [],
                 dueDate: '',
                 labelStatus: 'default',
+                number: 0,
                 txt: ''
             },
             {
                 id: utilService.makeId(),
+                isChecked: false,
                 title: 'Task 2',
                 status: 'default',
                 priority: 'default',
                 members: [],
                 dueDate: '',
                 labelStatus: 'default',
+                number: 0,
                 txt: ''
             }
         ],
@@ -392,22 +428,27 @@ function getEmptyBoard() {
                 title: 'Group 1',
                 archivedAt: 1589983468418,
                 isCollapsed: false,
+                isChecked: false,
                 tasks: [
                     {
                         id: utilService.makeId(),
+                        isChecked: false,
                         title: 'Task 1',
                         status: 'default',
                         priority: 'default',
                         members: [],
                         labelStatus: 'label 1',
                         dueDate: 1589983468418,
+                        number: 0,
                         txt: ''
                     },
                     {
                         id: utilService.makeId(),
+                        isChecked: false,
                         title: 'Task 2',
                         status: 'default',
                         priority: 'default',
+                        number: 0,
                         members: [],
                         labelStatus: 'label 2',
                         dueDate: 1589983468418,
@@ -421,26 +462,31 @@ function getEmptyBoard() {
                 title: 'Group 2',
                 archivedAt: 1589983468418,
                 isCollapsed: false,
+                isChecked: false,
                 tasks: [
                     {
                         id: utilService.makeId(),
+                        isChecked: false,
                         title: 'Task 3',
                         status: 'default',
                         priority: 'default',
                         members: [],
                         labelStatus: 'label 3',
+                        number: 0,
                         dueDate: 1589983468418,
 
                         txt: ''
                     },
                     {
                         id: utilService.makeId(),
+                        isChecked: false,
                         title: 'Task 4',
                         status: 'default',
                         priority: 'default',
                         members: [],
                         labelStatus: 'default',
                         dueDate: 1589983468418,
+                        number: 0,
                         txt: ''
                     }
                 ],
@@ -451,32 +497,37 @@ function getEmptyBoard() {
                 title: 'Group 3',
                 archivedAt: 1589983468418,
                 isCollapsed: false,
+                isChecked: false,
                 tasks: [
                     {
                         id: utilService.makeId(),
+                        isChecked: false,
                         title: 'Task 5',
                         status: 'default',
                         priority: 'default',
                         members: [],
                         labelStatus: 'label 1',
                         dueDate: 1589983468418,
+                        number: 0,
                         txt: ''
                     },
                     {
                         id: utilService.makeId(),
+                        isChecked: false,
                         title: 'Task 6',
                         status: 'default',
                         priority: 'default',
                         members: [],
                         labelStatus: 'label 2',
                         dueDate: 1589983468418,
+                        number: 0,
                         txt: ''
                     }
                 ],
                 style: 'lightblue'
             },
         ],
-        cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER, PRIORITY_PICKER, TEXT_LABEL, LABEL_STATUS_PICKER]
+        cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER, PRIORITY_PICKER, TEXT_LABEL, LABEL_STATUS_PICKER, NUMBER_PICKER]
     }
 }
 
@@ -550,9 +601,11 @@ const demoBoard = {
             title: 'Group 1',
             archivedAt: 1589983468418,
             isCollapsed: false,
+            isChecked: false,
             tasks: [
                 {
                     id: utilService.makeId(),
+                    isChecked: false,
                     title: 'Task 1',
                     status: 'done',
                     priority: 'critical ⚠️',
@@ -565,6 +618,7 @@ const demoBoard = {
                 },
                 {
                     id: utilService.makeId(),
+                    isChecked: false,
                     title: 'Task 2',
                     status: 'done',
                     priority: 'medium',
@@ -583,9 +637,11 @@ const demoBoard = {
             title: 'Group 2',
             archivedAt: 1589983468418,
             isCollapsed: false,
+            isChecked: false,
             tasks: [
                 {
                     id: utilService.makeId(),
+                    isChecked: false,
                     title: 'Task 3',
                     status: 'stuck',
                     priority: 'default',
@@ -598,6 +654,7 @@ const demoBoard = {
                 },
                 {
                     id: utilService.makeId(),
+                    isChecked: false,
                     title: 'Task 4',
                     status: 'working on it',
                     priority: 'low',
@@ -617,9 +674,11 @@ const demoBoard = {
             title: 'Group 3',
             archivedAt: 1589983468418,
             isCollapsed: false,
+            isChecked: false,
             tasks: [
                 {
                     id: utilService.makeId(),
+                    isChecked: false,
                     title: 'Task 5',
                     status: 'done',
                     priority: 'default',
@@ -632,6 +691,7 @@ const demoBoard = {
                 },
                 {
                     id: utilService.makeId(),
+                    isChecked: false,
                     title: 'Task 6',
                     status: 'default',
                     priority: 'default',
@@ -646,7 +706,7 @@ const demoBoard = {
             style: 'lightblue'
         },
     ],
-    cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER, PRIORITY_PICKER, TEXT_LABEL, LABEL_STATUS_PICKER]
+    cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER, PRIORITY_PICKER, TEXT_LABEL, LABEL_STATUS_PICKER, NUMBER_PICKER]
 
 }
 

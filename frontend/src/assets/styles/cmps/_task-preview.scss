@@ -282,16 +282,24 @@
 
     .txt-label-placeholder,
     input {
-      opacity: 1 !important;
+      opacity: 0.5;
     }
   }
 
   input {
-    opacity: 0;
+    opacity: 1;
     width: 50%;
     height: 24px;
     width: 129px;
     border: 1px solid $cell-border-color;
+    text-align: center;
+    @include line-elipsis;
+  }
+
+  input:focus {
+    opacity: 1;
+    outline: #0073ea;
+
   }
 
   .input-txt-label-container {
@@ -312,7 +320,6 @@
 .person-label {
   position: relative;
   @include person-layout;
-  // border-left: $border-cell;
   display: flex;
   justify-content: center;
   // border-right: $border-cell;
@@ -370,8 +377,6 @@
 
 .date-label {
   position: relative;
-  // border-left: $border-cell;
-  // border-right: $border-cell;
   @include date-layout;
 
   .date-label-text {
@@ -390,6 +395,65 @@
     &:hover {
       .date-txt {
         border: $border-cell;
+      }
+    }
+  }
+}
+
+.input-number-label-container {
+  position: relative;
+  @include status-layout;
+  width: rem(139.33px);
+  text-align: center;
+
+  &:hover {
+
+    .number-label-placeholder,
+    input {
+      opacity: 0.5;
+      border: 1px solid #0073ea;
+    }
+
+  }
+
+  input {
+    opacity: 1;
+    width: 50%;
+    height: 24px;
+    width: 129px;
+    border: none;
+    text-align: center;
+  }
+
+  // input {
+
+  // }
+
+  input:focus {
+    opacity: 1;
+    outline: #0073ea;
+
+    input::placeholder {
+      display: none;
+    }
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    // margin: 0;
+  }
+
+  .input-number-label-container {
+    position: relative;
+
+    .number-label-placeholder {
+      opacity: 0.5;
+      @include absoluteCenter;
+      top: 60%;
+
+      >* {
+        cursor: text;
       }
     }
   }

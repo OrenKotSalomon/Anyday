@@ -87,7 +87,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
                 <div className="arrow-up"></div>
                 <div className="status-picker-view">
                     {cmp.labelStatuses.map((labelStatus, idx) => {
-                        console.log(labelStatus);
+
                         return <button onClick={() => onLabelStatusPick(labelStatus.label)} key={idx}
                             style={{ background: labelStatus.bgColor }}
                             className="status-picker">
