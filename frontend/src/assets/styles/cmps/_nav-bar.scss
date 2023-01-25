@@ -105,7 +105,7 @@
     width: 255px;
     min-height: 100vh;
     border-right: 1px solid $cell-border-color;
-    transition: .1s, rotate .1s;
+    // transition: .1s, rotate .1s;
     z-index: 100;
 
     &.closed {

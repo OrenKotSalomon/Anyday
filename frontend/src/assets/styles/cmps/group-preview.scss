@@ -345,6 +345,7 @@
   display: flex;
   align-items: center;
   height: $cell-height;
+
   opacity: 0.6;
   border-bottom-left-radius: 6px;
 
@@ -385,11 +386,16 @@
   height: $cell-height;
   position: sticky;
   left: 0px;
+  z-index: 4;
+  background-color: $main-bgc-white;
+  width: rem(231px);
+  opacity: 0.9;
 
   @include for-narrow-layout {
     @include left-sticky;
     left: 40px;
     min-width: rem(400px);
+    background: none;
 
     .floatin-white-box-under {
       position: absolute;

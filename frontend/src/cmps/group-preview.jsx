@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { utilService } from '../services/util.service';
 import { handleOnDragEnd, updateGroup } from '../store/board.actions';
-import { ADD_GROUP, ADD_GROUP_TASK, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, LABEL_STATUS_PICKER, MEMEBER_PICKER, NUMBER_PICKER, ON_DRAG_TASK, PRIORITY_PICKER, STATUS_PICKER, TEXT_LABEL } from '../services/board.service.local';
+import { ADD_GROUP, ADD_GROUP_TASK, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, LABEL_STATUS_PICKER, MEMEBER_PICKER, NUMBER_PICKER, ON_DRAG_TASK, PRIORITY_PICKER, STATUS_PICKER, TEXT_LABEL, UPDATE_GROUP_CHECKED } from '../services/board.service.local';
 
 import { TaskPreview } from "./task-preview";
 import { AddLabelModal } from './task-labels-dropdown/add-label-modal';
@@ -12,7 +12,7 @@ import { EditableHeading, Tooltip, MenuButton, Menu, MenuItem, ColorPicker, Icon
 import { Delete, Bullet, Duplicate, Add, DropdownChevronDown, DropdownChevronRight } from 'monday-ui-react-core/icons'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, isDndModeDisabled, index }) {
+export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, isDndModeDisabled, index, setIsCheckedShow }) {
 
     const [isAddingLabel, setIsAddingLabel] = useState(false)
     const [isPickColor, setIsPickColor] = useState(false)
@@ -66,6 +66,13 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
 
     function toggleAddLabelModal() {
         setIsAddingLabel(!isAddingLabel)
+    }
+
+    function handleChangeCheckbox({ target }, groupId) {
+
+        //need to support blocking other groups cannot be checked
+
+        updateGroup(board, { id: groupId, checked: target.checked }, UPDATE_GROUP_CHECKED)
     }
 
     function renderGroupLabels(cmp) {
@@ -284,8 +291,13 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
 
                         <div className='left-row-container'>
                             <div style={{ backgroundColor: group.style }} className='left-border'></div>
-                            <div className='checkbox-row-container'>
-                                <input className='row-checkbox' type="checkbox" />
+                            <div className='checkbox-row-container'
+                                onClick={() => setIsCheckedShow(true)}
+                            >
+                                <input className='row-checkbox'
+
+                                    onChange={(ev) => handleChangeCheckbox(ev, group.id)}
+                                    type="checkbox" />
                             </div>
                             <div className='task-main-container'>
                                 <div className="task-row-container">Item</div>
@@ -350,44 +362,58 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}>
 
-                                {group.tasks.map((task, index) =>
-                                    <Draggable key={task.id} draggableId={task.id} index={index} isDragDisabled={isDndModeDisabled} >
-                                        {(provided, snapshot) => (
-                                            <TaskPreview
-                                                snapshot={snapshot}
-                                                provided={provided}
-                                                key={task.id}
-                                                task={task}
-                                                board={board}
-                                                group={group}
-                                                openModal={openModal}
-                                                setIsDndModeDisabled={setIsDndModeDisabled}
-                                            />
-                                        )}
-                                    </Draggable>
-                                )}
-                                {provided.placeholder}
-                                <div className='add-task-wrapper'>
-                                    <div className='add-task-container'>
-                                        <div className='add-task-input-container'>
-                                            <div className='floatin-white-box-under'></div>
-                                            <div style={{ backgroundColor: group.style }} className='left-border-add-task'></div>
-                                            <div className='checkbox-row-container-add-task'>
-                                                <input className='row-checkbox-add-task' type="checkbox" disabled />
-                                            </div>
-                                            <EditableHeading
-                                                className='editable-add-task'
-                                                type={EditableHeading.types.h6}
-                                                onFinishEditing={onAddGroupTask}
-                                                onChange={handleChangeTask}
-                                                placeholder={'+ Add Task'}
-                                                value={newTaskTitle}
-                                                brandFont
-                                            />
+                            {group.tasks.map((task, index) =>
+                                <Draggable key={task.id} draggableId={task.id} index={index} isDragDisabled={isDndModeDisabled} >
+                                    {(provided, snapshot) => (
+                                        <TaskPreview
+                                            snapshot={snapshot}
+                                            provided={provided}
+                                            key={task.id}
+                                            task={task}
+                                            board={board}
+                                            group={group}
+                                            openModal={openModal}
+                                            setIsDndModeDisabled={setIsDndModeDisabled}
+                                            setIsCheckedShow={setIsCheckedShow}
+                                        />
+                                    )}
+                                </Draggable>
+                            )}
+                            {provided.placeholder}
+                            <div className='add-task-wrapper'>
+                                <div className='add-task-container'>
+                                    <div className='add-task-input-container'>
+                                        <div className='floatin-white-box-under'></div>
+                                        <div style={{ backgroundColor: group.style }} className='left-border-add-task'></div>
+                                        <div className='checkbox-row-container-add-task'>
+                                            <input className='row-checkbox-add-task' type="checkbox" disabled />
                                         </div>
-
-                                        <div className='white-box'></div>
+                                        <EditableHeading
+                                            className='editable-add-task'
+                                            type={EditableHeading.types.h6}
+                                            onFinishEditing={onAddGroupTask}
+                                            onChange={handleChangeTask}
+                                            placeholder={'+ Add Task'}
+                                            value={newTaskTitle}
+                                            brandFont
+                                        />
                                     </div>
+                                    <div className='summary-for-mobile'>
+
+                                        {
+                                            board.cmpsOrder.map((cmp, idx) => {
+
+                                                return <DynamicSummaryCmp
+                                                    key={idx}
+                                                    cmp={cmp}
+                                                    board={board}
+                                                    group={group}
+
+                                                />
+                                            })
+                                        }
+                                    </div>
+                                    <div className='white-box'></div>
                                 </div>
 
                                 {/* TAHTIT */}

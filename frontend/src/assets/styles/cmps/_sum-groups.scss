@@ -1,3 +1,16 @@
+.summary-for-mobile {
+    display: flex;
+    align-items: center;
+    height: $cell-height;
+    // margin-bottom: 26px;
+    position: relative;
+
+    @include for-narrow-layout {
+        display: none;
+    }
+
+}
+
 .label-sum-container {
 
     visibility: hidden;
