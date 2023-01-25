@@ -1,14 +1,14 @@
 import { useState } from "react";
 
-
 import { updateTask } from "../store/board.actions";
 import { showSuccessMsg } from "../services/event-bus.service";
 import { TaskDetails } from "./task-details";
 import { DynamicCmp } from "./dynamicCmps/dynamic-cmp.jsx";
-import { CHANGE_TASK_TITLE, DELETE_TASK, DUPLICATE_TASK } from "../services/board.service.local";
+import { CHANGE_TASK_TITLE, DELETE_TASK, DUPLICATE_TASK, UPDATE_TASK_LABEL_NUMBER, UPDATE_TASK_LABEL_TEXT } from "../services/board.service.local";
 
 import { MenuButton, Menu, MenuItem, Icon, EditableHeading, Counter } from 'monday-ui-react-core'
 import { Open, Duplicate, Delete, AddUpdate, Update } from 'monday-ui-react-core/icons'
+import { utilService } from "../services/util.service";
 
 export function TaskPreview({ task, board, group, openModal, provided, snapshot, setIsDndModeDisabled }) {
 
@@ -35,9 +35,12 @@ export function TaskPreview({ task, board, group, openModal, provided, snapshot,
 
     ///////////////////// TODO ////////////////////////
     function handleChange({ target }) {
-        // const {value} = target
-        // console.log('value:', value)
-        // updateTask(board, value, HANDLE_TXT_CHANGE)
+        let { value, name: field, type } = target
+        value = type === 'number' ? +value : value
+        const data = { taskId: task.id, groupId: group.id, labelPick: value }
+        let updateType = type === 'number' ? UPDATE_TASK_LABEL_NUMBER : UPDATE_TASK_LABEL_TEXT
+
+        updateTask(board, data, updateType)
     }
 
     return <section className={`task-preview ${snapshot.isDragging ? 'dragged-task' : ''} `}
@@ -111,9 +114,9 @@ export function TaskPreview({ task, board, group, openModal, provided, snapshot,
                         {task.comments && <div className="storybook-counter_position">
                             <Icon icon={Update} iconSize={24} style={{ color: '#0073ea' }} />
                             <Counter count={
-                                (Array.isArray(task.comments)?task.comments.length:0)
-                                +(Array.isArray(task.pinedComments)?task.pinedComments.length:0)
-                                } size={Counter.sizes.SMALL} className='counter-comments' />
+                                (Array.isArray(task.comments) ? task.comments.length : 0)
+                                + (Array.isArray(task.pinnedComments) ? task.pinnedComments.length : 0)
+                            } size={Counter.sizes.SMALL} className='counter-comments' />
 
                         </div>}
                     </button>
@@ -124,6 +127,7 @@ export function TaskPreview({ task, board, group, openModal, provided, snapshot,
                 <div className="main-labels-container flex">
 
                     {board.cmpsOrder.map((cmp, idx) => {
+
                         return (
                             <DynamicCmp
                                 key={idx}
@@ -134,6 +138,7 @@ export function TaskPreview({ task, board, group, openModal, provided, snapshot,
                                     dueDate: task?.dueDate,
                                     priority: task?.priority,
                                     labelStatus: task?.labelStatus,
+                                    number: task?.number,
                                 }}
                                 openModal={openModal}
                                 handleChange={handleChange}

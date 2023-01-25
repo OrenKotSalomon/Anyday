@@ -1,4 +1,4 @@
-import { DATE_PICKER, MEMEBER_PICKER, STATUS_PICKER, PRIORITY_PICKER, TEXT_LABEL, LABEL_STATUS_PICKER } from '../../services/board.service.local';
+import { DATE_PICKER, MEMEBER_PICKER, STATUS_PICKER, PRIORITY_PICKER, TEXT_LABEL, LABEL_STATUS_PICKER, NUMBER_PICKER } from '../../services/board.service.local';
 
 import { Avatar, AvatarGroup, Icon } from 'monday-ui-react-core';
 import { TextCopy } from 'monday-ui-react-core/icons';
@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 
 import Oren from '../../assets/img/Oren.jpg'
 import Harel from '../../assets/img/Harel.jpg'
+import { utilService } from '../../services/util.service';
 
 export function DynamicCmp({ cmp, info, openModal, handleChange }) {
 
@@ -66,9 +67,7 @@ export function DynamicCmp({ cmp, info, openModal, handleChange }) {
                 onClick={(ev) => openModal(ev, { task: cmp.task, groupId: cmp.groupId }, DATE_PICKER)} >
                 <div className='date-label-text'>
                     <span className='date-txt'> {dayjs(info.dueDate * 1000).format('MMM DD')} </span>
-
                 </div>
-
             </div>
         case PRIORITY_PICKER:
             return <div className="status-label"
@@ -84,6 +83,16 @@ export function DynamicCmp({ cmp, info, openModal, handleChange }) {
                     <span className='txt-label-placeholder' ><Icon iconType={Icon.type.SVG} icon={TextCopy} iconSize={19} /></span>
                     <input onChange={handleChange} type="text" />
                 </section>}
+            </div>
+        case NUMBER_PICKER:
+            return <div className="input-number-label-container" >
+                <div className='number-label-container'>
+
+                    <input onChange={utilService.debounce(handleChange)}
+                        onFocus={(e) => e.target.placeholder = ""}
+                        onBlur={(e) => e.target.placeholder = info.number === 0 ? '' : info.number}
+                        type="number" name="number" id="number" placeholder={info.number} />
+                </div>
             </div>
     }
 }

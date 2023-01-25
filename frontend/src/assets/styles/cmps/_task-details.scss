@@ -27,6 +27,22 @@
         border: none;
     }
 
+
+    .task-details-title {
+        text-align: left;
+        margin-top: 23.5px;
+        padding-inline-start: 16.8px;
+
+        h4 {
+            font-family: poppins-medium-500;
+
+            @include for-wide-layout {
+                font-size: rem(24px);
+            }
+        }
+    }
+
+
 }
 
 .task-main {
@@ -72,12 +88,7 @@
         cursor: pointer;
     }
 
-    .task-details-title {
-        text-align: left;
-        margin-top: 23.5px;
-        padding-inline-start: 16.8px;
-        font-family: roboto-regular;
-    }
+
 
     .task-main-nav {
         padding: 0;
@@ -309,7 +320,7 @@
     display: flex;
     flex-direction: column;
 
-    .pinedComment {
+    .pinnedComment {
         background-color: #323338;
         color: $main-bgc-white;
         padding: 3px 8px;

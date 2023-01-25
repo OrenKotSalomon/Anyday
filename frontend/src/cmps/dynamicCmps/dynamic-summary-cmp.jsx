@@ -1,16 +1,17 @@
 
-import { DATE_PICKER, LABEL_STATUS_PICKER, MEMEBER_PICKER, PRIORITY_PICKER, STATUS_PICKER, TEXT_LABEL } from "../../services/board.service.local";
+import { DATE_PICKER, LABEL_STATUS_PICKER, MEMEBER_PICKER, NUMBER_PICKER, PRIORITY_PICKER, STATUS_PICKER, TEXT_LABEL } from "../../services/board.service.local";
 
 export function DynamicSummaryCmp({ cmp, board, group }) {
 
-    function temp() {
+    function gruoupSummaryCalc(cmp) {
         board = structuredClone(board)
         let labels
+
         switch (cmp) {
             case STATUS_PICKER:
                 labels = []
 
-                let GroupStatuses = group.tasks.reduce((acc, task) => {
+                const GroupStatuses = group.tasks.reduce((acc, task) => {
                     if (!acc[task.status]) acc[task.status] = 0
                     acc[task.status]++
                     return { ...acc }
@@ -28,7 +29,7 @@ export function DynamicSummaryCmp({ cmp, board, group }) {
 
             case LABEL_STATUS_PICKER:
                 labels = []
-                let GroupLabelsStatuses = group.tasks.reduce((acc, task) => {
+                const GroupLabelsStatuses = group.tasks.reduce((acc, task) => {
                     if (!acc[task.labelStatus]) acc[task.labelStatus] = 0
                     acc[task.labelStatus]++
                     return { ...acc }
@@ -42,10 +43,9 @@ export function DynamicSummaryCmp({ cmp, board, group }) {
                     })
                 }
                 return labels
-                return
             case PRIORITY_PICKER:
                 labels = []
-                let GroupPriorities = group.tasks.reduce((acc, task) => {
+                const GroupPriorities = group.tasks.reduce((acc, task) => {
                     if (!acc[task.priority]) acc[task.priority] = 0
                     acc[task.priority]++
                     return { ...acc }
@@ -59,12 +59,20 @@ export function DynamicSummaryCmp({ cmp, board, group }) {
                     })
                 }
                 return labels
-            case DATE_PICKER:
-                return
-            case MEMEBER_PICKER:
-                return
-            case TEXT_LABEL:
-                return
+            case NUMBER_PICKER:
+                let sum = 0
+                group.tasks.forEach((task) => {
+                    if (!task.number) return
+                    sum += task.number
+                })
+                if (!sum) return ''
+                return sum
+            // case DATE_PICKER:
+            //     return
+            // case MEMEBER_PICKER:
+            //     return
+            // case TEXT_LABEL:
+            //     return
 
         }
 
@@ -75,7 +83,7 @@ export function DynamicSummaryCmp({ cmp, board, group }) {
             return <div className="status-picker-sum-container" >
                 <div className="status-sum-container">
                     {
-                        temp().map((statusSum, idx) => {
+                        gruoupSummaryCalc(cmp).map((statusSum, idx) => {
 
                             return <div key={idx} className="status-sum"
                                 style={{
@@ -93,7 +101,7 @@ export function DynamicSummaryCmp({ cmp, board, group }) {
             return <div className="label-status-picker-sum-container">
                 <div className="label-status-picker-sum">
                     {
-                        temp().map((labelStatusSum, idx) => {
+                        gruoupSummaryCalc(cmp).map((labelStatusSum, idx) => {
 
                             return <div key={idx} className="status-sum"
                                 style={{
@@ -110,7 +118,7 @@ export function DynamicSummaryCmp({ cmp, board, group }) {
             return <div className="priority-picker-sum-container">
                 <div className="priority-picker-sum">
                     {
-                        temp().map((prioritySum, idx) => {
+                        gruoupSummaryCalc(cmp).map((prioritySum, idx) => {
 
                             return <div key={idx} className="status-sum"
                                 style={{
@@ -134,6 +142,10 @@ export function DynamicSummaryCmp({ cmp, board, group }) {
         case TEXT_LABEL:
             return <div className="text-picker-sum-container">
                 <div className="text-picker-sum"></div>
+            </div>
+        case NUMBER_PICKER:
+            return <div className="text-picker-sum-container">
+                <div className="text-picker-sum"> {gruoupSummaryCalc(cmp)}</div>
             </div>
 
     }

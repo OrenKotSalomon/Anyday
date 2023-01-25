@@ -5,6 +5,7 @@
         top: 0;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         background-color: $main-bgc-white;
         height: 40px;
         font-size: rem(26px);
@@ -13,6 +14,20 @@
         letter-spacing: -.06em;
         z-index: 555;
 
+        .home-page-login-signup-container {
+            font-size: rem(14px);
+            letter-spacing: .5px;
+            line-height: rem(14px);
+            padding-inline-end: .5em;
+
+            @include for-wide-layout {
+                padding-inline-end: 10vw;
+            }
+
+            .home-page-login-signup-link {
+                font-size: rem(14px);
+            }
+        }
 
         @include for-narrow-layout {
             height: 42px;
@@ -24,19 +39,27 @@
 
         @include for-wide-layout {
             height: 72px;
-            ;
         }
 
-        span {
-            font-family: poppins-regular-400;
-            font-size: rem(12px);
-            padding-top: rem(8px);
-            letter-spacing: 0em;
-        }
-
-        .header-logo {
+        .home-page-logo-container {
+            display: flex;
+            align-items: center;
             padding-inline-start: .5em;
-            max-width: rem(46px);
+
+            @include for-wide-layout {
+                padding-inline-start: 10vw;
+            }
+
+            span {
+                font-family: poppins-regular-400;
+                font-size: rem(12px);
+                padding-top: rem(8px);
+                letter-spacing: 0em;
+            }
+
+            .header-logo {
+                max-width: rem(46px);
+            }
         }
     }
 
@@ -152,13 +175,13 @@
                     font-size: rem(16px);
                     transition: all .5s ease-in-out;
 
-                    svg{
+                    svg {
                         position: relative;
-                        top:3px;
+                        top: 3px;
                         color: $main-bgc-white;
                     }
                 }
-          
+
 
             }
         }
@@ -182,7 +205,7 @@
             font-weight: 600;
             letter-spacing: .2em;
             flex-wrap: nowrap;
-            
+
 
             @include for-narrow-layout {
                 margin-right: 73px;
@@ -332,10 +355,10 @@
 
 }
 
-.next-btn-container{
-    svg{
+.next-btn-container {
+    svg {
         position: relative;
-        top:3px;
+        top: 3px;
         color: $main-bgc-white;
-    }  
+    }
 }

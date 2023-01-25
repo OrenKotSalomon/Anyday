@@ -35,8 +35,8 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
         console.log(data)
     }
 
-    function onDeleteComment(comment,isPined = false) {
-        let taskChanges = { commentIdx: comment.id, taskId: task.id, groupId: group.id, isPined: isPined }
+    function onDeleteComment(comment,isPinned = false) {
+        let taskChanges = { commentIdx: comment.id, taskId: task.id, groupId: group.id, isPinned: isPinned }
         updateTask(board, taskChanges, DELETE_TASK_COMMENT)
     }
 
@@ -116,12 +116,12 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
         }
     }
 
-    function renderComments(taskComments, isPined = false) {
+    function renderComments(taskComments, isPinned = false) {
         if (taskComments && taskComments.length)
             return <section>
                 {taskComments.map(comment => <div
                     key={comment.id} className='task-details-task-comment'>
-                    {isPined && <div className='pinedComment'>
+                    {isPinned && <div className='pinnedComment'>
                         <Icon className='task-details-header-time-icon' iconType={Icon.type.SVG}
                          icon={Pin} iconLabel="my svg icon" iconSize={14} />Pinned
                     </div>}
@@ -142,11 +142,11 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                                     id="task-details-menu"
                                     size="medium">
                                     <MenuItem
-                                        onClick={() => { isPined ? onUnpinFromTop(comment) : onPinToTop(comment) }}
+                                        onClick={() => { isPinned ? onUnpinFromTop(comment) : onPinToTop(comment) }}
                                         icon={Pin}
-                                        title={isPined ? "Unpin from top" : "Pin to top"}/>
+                                        title={isPinned ? "Unpin from top" : "Pin to top"}/>
                                     <MenuItem
-                                        onClick={() => onDeleteComment(comment,isPined)}
+                                        onClick={() => onDeleteComment(comment,isPinned)}
                                         icon={Delete}
                                         title="Delete update for every one"/>
                                 </Menu>
@@ -227,12 +227,12 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                     </div>
                 </form>
             }
-            {/* pinedComments */}
+            {/* pinnedComments */}
 
-            {renderComments(task.pinedComments, true)}
+            {renderComments(task.pinnedComments, true)}
             {renderComments(task.comments)}
 
-            {(task.pinedComments&&task.comments)?'':<section>
+            {(task.pinnedComments&&task.comments)?'':<section>
                 <div className='details-img-container'><img className="details-img" src="https://cdn.monday.com/images/pulse-page-empty-state.svg" alt="" /></div>
                 <p className='details-p' ><span className="details-p-header">No updates yet for this item</span>
                     <span className='details-p-txt'>Be the first one to update about progress, mention someone

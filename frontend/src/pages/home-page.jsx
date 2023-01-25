@@ -1,16 +1,19 @@
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import { logout } from '../store/user.actions.js'
+import { userService } from '../services/user.service.js'
 import { loadBoards } from '../store/board.actions'
 
-import { Icon, Loader } from 'monday-ui-react-core';
-import { MoveArrowRight } from 'monday-ui-react-core/icons';
+import { Icon, Loader } from 'monday-ui-react-core'
+import { MoveArrowRight } from 'monday-ui-react-core/icons'
 
 import logo from '../assets/img/logo.png'
 import hero from '../assets/img/home-page-hero.jpg'
 
 export function HomePage() {
+    const loggedInUser = userService.getLoggedinUser()
     const boards = useSelector((storeState) => storeState.boardModule.boards)
 
     useEffect(() => {
@@ -21,13 +24,30 @@ export function HomePage() {
         window.scrollTo({ top: 0, behavior: 'smooth' })
     }
 
+    async function onLogout() {
+        try {
+            await logout()
+        } catch (err) {
+            console.error('Have a problem on log-out',err)
+        }
+    }
+
     if (!boards.length) return <div className="loader"><Loader size={Loader.sizes.LARGE} /></div>
     return (
         <section className='home-page'>
 
             <header className="home-page-top-header"
                 onClick={scrollTop}>
-                <img className="header-logo" src={logo} alt="logo" />Anyday<span>.com</span>
+                <div className='home-page-logo-container'><img className="header-logo" src={logo} alt="logo" />Anyday<span>.com</span></div>
+                {loggedInUser ?
+                    <div className='home-page-login-signup-container'>
+                        Welcome {loggedInUser.fullname} | <Link className='home-page-login-signup-link' to={`/user-details/:userId`}> Profile </Link>
+                        | <a href="#" onClick={onLogout}>LogOut</a>
+                    </div>
+                    : <div className='home-page-login-signup-container'>
+                        Welcome Guest <Link className='home-page-login-signup-link' to={`/login`}> LogIn </Link> |
+                        <Link className='home-page-login-signup-link' to={`/signup`}> SignUp </Link>
+                    </div>}
             </header>
 
             <div className='home-page-hero'>
