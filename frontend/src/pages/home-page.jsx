@@ -27,7 +27,7 @@ export function HomePage() {
 
             <header className="home-page-top-header"
                 onClick={scrollTop}>
-                <img className="header-logo" src={logo} alt="logo" />monday<span>.com</span>
+                <img className="header-logo" src={logo} alt="logo" />Anyday<span>.com</span>
             </header>
 
             <div className='home-page-hero'>

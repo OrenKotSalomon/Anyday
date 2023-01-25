@@ -7,6 +7,9 @@ import { useSelector } from 'react-redux';
 import { userService } from '../services/user.service.js'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js';
 
+import { Icon } from 'monday-ui-react-core';
+import { MoveArrowRight } from 'monday-ui-react-core/icons';
+
 export function SignUp() {
     const boards = useSelector((storeState) => storeState.boardModule.boards)
     const [credentials, setCredentials] = useState({ email: '', username: '', password: '', fullname: '', imgUrl: '' })
@@ -92,7 +95,9 @@ export function SignUp() {
 
                                     <button type="submit" className="next-btn">
                                         <div className="next-wrapper">Sign up</div>
-                                        <div className="right-arrow-icon">{'->'}</div>
+                                        <div className="right-arrow-icon">
+                                        <Icon iconType={Icon.type.SVG} icon={MoveArrowRight} iconSize={18} />
+                                        </div>
                                     </button>
                                 </div>
                             </div>

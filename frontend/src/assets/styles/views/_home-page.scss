@@ -155,12 +155,15 @@
                     svg{
                         position: relative;
                         top:3px;
+                        color: $main-bgc-white;
                     }
                 }
           
 
             }
         }
+
+
 
         .btn-get-started:hover .btn-get-started-arrow {
             padding-inline-start: 15px;
@@ -327,4 +330,12 @@
         }
     }
 
+}
+
+.next-btn-container{
+    svg{
+        position: relative;
+        top:3px;
+        color: $main-bgc-white;
+    }  
 }
