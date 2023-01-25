@@ -53,7 +53,6 @@ export function NavBar() {
     function onClickUserAvatar() {
         if (loggedInUser) {
             setToggleUserModal(((toggleUserModal === 'none') ? 'flex' : 'none'))
-
         } else {
             navigate(`/login`)
         }
@@ -73,7 +72,6 @@ export function NavBar() {
     }
 
     return <div className='side-bar-container'><header className="nav-bar">
-
         <nav>
             <div>
                 <div className="nav-a-container">
@@ -84,51 +82,14 @@ export function NavBar() {
                     <NavLink to='/board/'>< img className='nav-bar-board-logo' src={wm_icon} style={{ maxWidth: '30px' }} /></NavLink>
                 </div>
             </div>
-            {/* <button>Notifications</button> */}
-            {/* <NavLink to='/inbox'>Inbox</NavLink> */}
-            {/* <NavLink to='/my_work'>My Work</NavLink> */}
-            {/* <button>Favorites</button> */}
-
-            {/* <button>Search</button> */}
-
-            {/* <Link to='/login'><Avatar
-                className='nav-bar-avatar'
-                ariaLabel="Harel Natan"
-                size="large"
-                src={Harel}
-                type="img"
-            /></Link> */}
-
             {getAvatarImg(loggedInUser)}
-
             {loggedInUser && <div className='miniUserPanel' style={{ display: `${toggleUserModal}` }}>
                 wellcome {loggedInUser.fullname}
 
                 <button className='btn nav-bar-logout-btn' onClick={onLogout}>Log Out</button>
             </div>}
             <UserMsg />
-
         </nav>
-
-        {/* <nav>
-                {routes.map(route => <NavLink key={route.path} to={route.path}>{route.label}</NavLink>)}
-
-                {user &&
-                    <span className="user-info">
-                        <Link to={`user/${user._id}`}>
-                            {user.imgUrl && <img src={user.imgUrl} />}
-                            {user.fullname}
-                        </Link>
-                        <span className="score">{user.score?.toLocaleString()}</span>
-                        <button onClick={onLogout}>Logout</button>
-                    </span>
-                }
-                {!user &&
-                    <section className="user-info">
-                        <LoginSignup onLogin={onLogin} onSignup={onSignup} />
-                    </section>
-                }
-            </nav> */}
     </header>
     </div >
 }

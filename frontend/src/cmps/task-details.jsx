@@ -25,6 +25,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
 
     function onSubmitNewComment(ev) {
         ev.preventDefault()
+        if(!newCommentTxt) return
         let data = boardService.getEmptyTaskComment(newCommentTxt, imgSrc, loggedInUser)
         let taskChanges = { comment: data, taskId: task.id, groupId: group.id }
         updateTask(board, taskChanges, ADD_TASK_COMMENT)
