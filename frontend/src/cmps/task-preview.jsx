@@ -10,15 +10,9 @@ import { MenuButton, Menu, MenuItem, Icon, EditableHeading, Counter } from 'mond
 import { Open, Duplicate, Delete, AddUpdate, Update } from 'monday-ui-react-core/icons'
 import { utilService } from "../services/util.service";
 
-export function TaskPreview({ task, board, group, openModal, provided, snapshot, setIsDndModeDisabled }) {
+export function TaskPreview({ task, board, group, openModal, provided, snapshot, setIsDndModeDisabled, setIsCheckedShow }) {
 
     const [isOpenDetails, setIsOpenDetails] = useState(false)
-    const [isTaskChecked, setIsTaskChecked] = useState(false)
-
-    useEffect(() => {
-        setIsTaskChecked(group.isChecked)
-
-    }, [group.isChecked]);
 
     function onDuplicateTask(taskToDuplicate) {
         const data = { taskToDuplicate, id: taskToDuplicate.id, groupId: group.id }
@@ -59,11 +53,17 @@ export function TaskPreview({ task, board, group, openModal, provided, snapshot,
     return <section className={`task-preview ${snapshot.isDragging ? 'dragged-task' : ''} `}
         {...provided.draggableProps}
         {...provided.dragHandleProps}
-        ref={provided.innerRef}>
+        ref={provided.innerRef}
+    >
 
-        <div className="task">
+        <div className="task"
+            style={{ backgroundColor: task.isChecked ? '#cce5ff' : 'white' }}
 
-            <div className="task-edit-wrapper">
+        >
+
+            <div className="task-edit-wrapper"
+                style={{ backgroundColor: task.isChecked ? '#cce5ff' : 'white' }}
+            >
                 <div className="menu-btn-container"
                     style={{ display: snapshot.isDragging ? 'none' : '' }}>
 
@@ -101,9 +101,9 @@ export function TaskPreview({ task, board, group, openModal, provided, snapshot,
 
                 <div style={{ backgroundColor: group.style }} className='left-border-task'></div>
 
-                <div className='checkbox-row-container-task'>
+                <div className='checkbox-row-container-task'
+                    onClick={() => setIsCheckedShow(true)}>
                     <input className='row-checkbox-task'
-                        onClick={() => setIsTaskChecked(!isTaskChecked)}
                         onChange={(ev) => handleChangeTaskChecked(ev, task.id)}
                         type="checkbox" checked={task.isChecked} />
 

@@ -12,7 +12,7 @@ import { EditableHeading, Tooltip, MenuButton, Menu, MenuItem, ColorPicker, Icon
 import { Delete, Bullet, Duplicate, Add, DropdownChevronDown, DropdownChevronRight } from 'monday-ui-react-core/icons'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, isDndModeDisabled, index }) {
+export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, isDndModeDisabled, index, setIsCheckedShow }) {
 
     const [isAddingLabel, setIsAddingLabel] = useState(false)
     const [isPickColor, setIsPickColor] = useState(false)
@@ -295,8 +295,11 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
 
                         <div className='left-row-container'>
                             <div style={{ backgroundColor: group.style }} className='left-border'></div>
-                            <div className='checkbox-row-container'>
+                            <div className='checkbox-row-container'
+                                onClick={() => setIsCheckedShow(true)}
+                            >
                                 <input className='row-checkbox'
+
                                     onChange={(ev) => handleChangeCheckbox(ev, group.id)}
                                     type="checkbox" />
                             </div>
@@ -376,7 +379,7 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                                             group={group}
                                             openModal={openModal}
                                             setIsDndModeDisabled={setIsDndModeDisabled}
-
+                                            setIsCheckedShow={setIsCheckedShow}
                                         />
                                     )}
                                 </Draggable>
