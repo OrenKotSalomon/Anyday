@@ -31,6 +31,16 @@
 
 }
 
+.sum-labels-container {
+    display: flex;
+    box-shadow: 0px 2px black 0.2;
+
+    >* {
+        border-right: $border-cell;
+    }
+
+}
+
 .right-floating-border {
     // background-color: aqua;
     position: relative;
@@ -49,12 +59,6 @@
     z-index: 6;
     position: absolute;
     left: -41px;
-}
-
-.sum-labels-container {
-    display: flex;
-
-    box-shadow: 0px 2px black 0.2;
 }
 
 .status-sum-container {
