@@ -362,87 +362,87 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}>
 
-                            {group.tasks.map((task, index) =>
-                                <Draggable key={task.id} draggableId={task.id} index={index} isDragDisabled={isDndModeDisabled} >
-                                    {(provided, snapshot) => (
-                                        <TaskPreview
-                                            snapshot={snapshot}
-                                            provided={provided}
-                                            key={task.id}
-                                            task={task}
-                                            board={board}
-                                            group={group}
-                                            openModal={openModal}
-                                            setIsDndModeDisabled={setIsDndModeDisabled}
-                                            setIsCheckedShow={setIsCheckedShow}
-                                        />
-                                    )}
-                                </Draggable>
-                            )}
-                            {provided.placeholder}
-                            <div className='add-task-wrapper'>
-                                <div className='add-task-container'>
-                                    <div className='add-task-input-container'>
-                                        <div className='floatin-white-box-under'></div>
-                                        <div style={{ backgroundColor: group.style }} className='left-border-add-task'></div>
-                                        <div className='checkbox-row-container-add-task'>
-                                            <input className='row-checkbox-add-task' type="checkbox" disabled />
+                                {group.tasks.map((task, index) =>
+                                    <Draggable key={task.id} draggableId={task.id} index={index} isDragDisabled={isDndModeDisabled} >
+                                        {(provided, snapshot) => (
+                                            <TaskPreview
+                                                snapshot={snapshot}
+                                                provided={provided}
+                                                key={task.id}
+                                                task={task}
+                                                board={board}
+                                                group={group}
+                                                openModal={openModal}
+                                                setIsDndModeDisabled={setIsDndModeDisabled}
+                                                setIsCheckedShow={setIsCheckedShow}
+                                            />
+                                        )}
+                                    </Draggable>
+                                )}
+                                {provided.placeholder}
+                                <div className='add-task-wrapper'>
+                                    <div className='add-task-container'>
+                                        <div className='add-task-input-container'>
+                                            <div className='floatin-white-box-under'></div>
+                                            <div style={{ backgroundColor: group.style }} className='left-border-add-task'></div>
+                                            <div className='checkbox-row-container-add-task'>
+                                                <input className='row-checkbox-add-task' type="checkbox" disabled />
+                                            </div>
+                                            <EditableHeading
+                                                className='editable-add-task'
+                                                type={EditableHeading.types.h6}
+                                                onFinishEditing={onAddGroupTask}
+                                                onChange={handleChangeTask}
+                                                placeholder={'+ Add Task'}
+                                                value={newTaskTitle}
+                                                brandFont
+                                            />
                                         </div>
-                                        <EditableHeading
-                                            className='editable-add-task'
-                                            type={EditableHeading.types.h6}
-                                            onFinishEditing={onAddGroupTask}
-                                            onChange={handleChangeTask}
-                                            placeholder={'+ Add Task'}
-                                            value={newTaskTitle}
-                                            brandFont
-                                        />
+                                        <div className='summary-for-mobile'>
+
+                                            {
+                                                board.cmpsOrder.map((cmp, idx) => {
+
+                                                    return <DynamicSummaryCmp
+                                                        key={idx}
+                                                        cmp={cmp}
+                                                        board={board}
+                                                        group={group}
+
+                                                    />
+                                                })
+                                            }
+                                        </div>
+                                        <div className='white-box'></div>
                                     </div>
-                                    <div className='summary-for-mobile'>
 
-                                        {
-                                            board.cmpsOrder.map((cmp, idx) => {
+                                    {/* TAHTIT */}
+                                    <div className='label-sum-container'>
 
-                                                return <DynamicSummaryCmp
-                                                    key={idx}
-                                                    cmp={cmp}
-                                                    board={board}
-                                                    group={group}
+                                        <div className='hidden-task-container'>
 
-                                                />
-                                            })
-                                        }
+                                            <div className='floatin-white-box-sum'></div>
+                                            <div className='hidden-task'></div>
+                                            <div className='right-floating-border'></div>
+                                        </div>
+
+                                        <div className='sum-labels-container'>
+                                            {
+                                                board.cmpsOrder.map((cmp, idx) => {
+                                                    return <DynamicSummaryCmp
+                                                        key={idx}
+                                                        cmp={cmp}
+                                                        board={board}
+                                                        group={group}
+                                                    />
+                                                })
+                                            }
+
+                                        </div>
+                                        <div className='white-box'></div>
+
                                     </div>
-                                    <div className='white-box'></div>
                                 </div>
-
-                                {/* TAHTIT */}
-                                <div className='label-sum-container'>
-
-                                    <div className='hidden-task-container'>
-
-                                        <div className='floatin-white-box-sum'></div>
-                                        <div className='hidden-task'></div>
-                                        <div className='right-floating-border'></div>
-                                    </div>
-
-                                    <div className='sum-labels-container'>
-                                        {
-                                            board.cmpsOrder.map((cmp, idx) => {
-                                                return <DynamicSummaryCmp
-                                                    key={idx}
-                                                    cmp={cmp}
-                                                    board={board}
-                                                    group={group}
-                                                />
-                                            })
-                                        }
-
-                                    </div>
-                                    <div className='white-box'></div>
-
-                                </div>
-
                             </section>
 
                         )}
