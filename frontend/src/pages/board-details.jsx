@@ -8,7 +8,7 @@ import { DynamicModal } from "../cmps/dynamicCmps/dynamic-modal.jsx";
 import { GroupPreview } from "../cmps/group-preview";
 import { SideGroupBar } from "../cmps/side-group-bar";
 
-import { ADD_GROUP_FROM_BUTTOM, ADD_GROUP_FROM_HEADER, ADD_TASK_FROM_HEADER, DATE_PICKER, LABEL_STATUS_PICKER, MEMEBER_PICKER, ON_DRAG_GROUP, PRIORITY_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_LABEL_STATUS, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../services/board.service.local";
+import { ADD_GROUP_FROM_BUTTOM, ADD_GROUP_FROM_HEADER, ADD_TASK_FROM_HEADER, DATE_PICKER, LABEL_STATUS_PICKER, MEMEBER_PICKER, ON_DRAG_GROUP, PRIORITY_PICKER, REMOVE_CHECKED_VALUE_GROUPS, REMOVE_TASKS_FROM_GROUP, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_LABEL_STATUS, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../services/board.service.local";
 import { handleOnDragEnd, loadBoard, onGroupDragStart, setPrevBoard, updateBoard, updateGroup, updateTask } from "../store/board.actions";
 
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
@@ -51,16 +51,16 @@ export function BoardDetails() {
         }
 
     }
+    // 
+    function checkIfTaskChecked() {
+        let copyBoard = structuredClone(board)
+        let tasksChecked = copyBoard.groups.map(group => {
+            return group.tasks.filter(task => task.isChecked)
 
-    // function checkIfTaskChecked() {
+        })
 
-    //     let isOneChecked = board.groups.some(group => {
-    //         return group.tasks.some(task => task.isChecked === true)
-
-    //     })
-    //     setIsCheckedShow(isOneChecked)
-
-    // }
+        return tasksChecked.flat(1).length
+    }
 
     function openModal(ev, data, info) {
         let labelPos = ev.target.getBoundingClientRect()
@@ -140,6 +140,25 @@ export function BoardDetails() {
         }
     }
 
+    function onCloseCheckedModal() {
+
+        updateGroup(board, false, REMOVE_CHECKED_VALUE_GROUPS)
+        setIsCheckedShow(false)
+
+    }
+    function onDeleteTasks() {
+        // let boardToUpdate = structuredClone(board)
+
+        let boardToUpdate = structuredClone(board)
+        let remainingTasks = boardToUpdate.groups.map(group => {
+            return group.tasks.filter(task => !task.isChecked)
+
+        })
+
+        updateGroup(boardToUpdate, remainingTasks, REMOVE_TASKS_FROM_GROUP)
+
+    }
+
     function onDragGroup(e) {
         console.log('e:', e)
         // if (task) return
@@ -162,22 +181,22 @@ export function BoardDetails() {
                             {...provided.droppableProps}
                             ref={provided.innerRef}
                         >
-                            
-                                {board.groups.map((group, index) =>
-                                    <GroupPreview
-                                        index={index}
 
-                                        // provided={provided}
-                                        key={group.id}
-                                        board={board}
-                                        group={group}
-                                        openModal={openModal}
-                                        isDndModeDisabled={isDndModeDisabled}
-                                        setIsDndModeDisabled={setIsDndModeDisabled}
-                                        setIsCheckedShow={setIsCheckedShow}
-                                    />
-                                )}
-                            
+                            {board.groups.map((group, index) =>
+                                <GroupPreview
+                                    index={index}
+
+                                    // provided={provided}
+                                    key={group.id}
+                                    board={board}
+                                    group={group}
+                                    openModal={openModal}
+                                    isDndModeDisabled={isDndModeDisabled}
+                                    setIsDndModeDisabled={setIsDndModeDisabled}
+                                    setIsCheckedShow={setIsCheckedShow}
+                                />
+                            )}
+
                             {provided.placeholder}
                             <div className="bottom-add-group-btn-container">
 
@@ -197,7 +216,7 @@ export function BoardDetails() {
             {isCheckedShow && <div className="checkbox-modal-wrapper">
                 <div className="checkbox-modal-container">
                     <div className="number-of-checked">
-                        <div className="checked-num">1</div>
+                        <div className="checked-num">{checkIfTaskChecked()}</div>
                     </div>
                     <div className="item-select-container">
 
@@ -229,7 +248,7 @@ export function BoardDetails() {
                             <span>delete</span>
                         </div>
                         <div className="checknox-delete-btn-container">
-                            <button>
+                            <button onClick={onDeleteTasks}>
                                 <FontAwesomeIcon
                                     className="icon-delete"
                                     icon={faTrash} />
@@ -238,7 +257,7 @@ export function BoardDetails() {
                         </div>
                     </div>
                     <div className="close-checked-modal">
-                        <button onClick={() => setIsCheckedShow(false)}>
+                        <button onClick={onCloseCheckedModal}>
                             <Icon iconType={Icon.type.SVG} icon={Close} iconSize={18} customColor={'#323338'} />
 
                         </button>
