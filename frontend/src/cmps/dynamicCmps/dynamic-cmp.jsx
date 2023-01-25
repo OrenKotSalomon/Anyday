@@ -1,11 +1,10 @@
 import { DATE_PICKER, MEMEBER_PICKER, STATUS_PICKER, PRIORITY_PICKER, TEXT_LABEL, LABEL_STATUS_PICKER, NUMBER_PICKER } from '../../services/board.service.local';
 
 import { Avatar, AvatarGroup, Icon } from 'monday-ui-react-core';
-import { TextCopy } from 'monday-ui-react-core/icons';
+import { TextCopy, PersonRound } from 'monday-ui-react-core/icons';
 import dayjs from 'dayjs';
-
-import Oren from '../../assets/img/Oren.jpg'
-import Harel from '../../assets/img/Harel.jpg'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
 import { utilService } from '../../services/util.service';
 
 export function DynamicCmp({ cmp, info, openModal, handleChange }) {
@@ -58,10 +57,16 @@ export function DynamicCmp({ cmp, info, openModal, handleChange }) {
         case MEMEBER_PICKER:
             return <div className="person-label"
                 onClick={(ev) => openModal(ev, { task: cmp.task, groupId: cmp.groupId }, MEMEBER_PICKER)} >
-                {<AvatarGroup size={Avatar.sizes.SMALL} max={2}>
-                    <Avatar type={Avatar.types.IMG} src={Oren} ariaLabel="Oren Kot" />
-                    <Avatar type={Avatar.types.IMG} src={Harel} ariaLabel="Harel Natan" />
-                </AvatarGroup>}</div>
+                {Array.isArray(cmp.task.members) ?
+                    (<div className='member-avatar-container'>
+                        {cmp.task.members.map((member, idx) => <div key={member._id+''+Math.random()}><span className='member-hover-info'>{member.fullname}</span>
+                            {member.imgUrl !== '' ? <img className="member-avatar-img" style={{ right: `${(idx * 24)}%`,position: `${cmp.task.members.length===1?'unset':'absolute'}` }} src={`${member.imgUrl}`} alt="" />
+                                : <div className='member-avatar-img' style={{ right: `${(idx * 24)}%` ,position: `${cmp.task.members.length===1?'relative':'absolute'}` }}><span className='member-avatar-name-char'> {member.fullname.charAt(0).toUpperCase()}</span></div>}
+                        </div>)}</div>) :<div className='member-empty-avatar'>
+                        <FontAwesomeIcon icon={faCircleUser}/>
+                            {/* <Icon iconType={Icon.type.SVG} icon={PersonRound} iconSize={36} /> */}
+                            </div>}
+            </div>
         case DATE_PICKER:
             return <div className="date-label"
                 onClick={(ev) => openModal(ev, { task: cmp.task, groupId: cmp.groupId }, DATE_PICKER)} >

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import { DATE_PICKER, LABEL_STATUS_PICKER, MEMEBER_PICKER, PRIORITY_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_LABEL_STATUS, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../../services/board.service.local"
+import { DATE_PICKER, LABEL_STATUS_PICKER, MEMEBER_PICKER, PRIORITY_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_LABEL_STATUS, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS , UPDATE_TASK_MEMBERS} from "../../services/board.service.local"
 
 import { DialogContentContainer, DatePicker, Avatar, Search } from 'monday-ui-react-core'
 
@@ -56,6 +56,14 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
 
         onUpdateTaskLabel(UPDATE_TASK_LABEL_STATUS, cmp.data, labelStatus)
     }
+
+    function onMemberPick(user) {
+        console.log(user)
+        onUpdateTaskLabel(UPDATE_TASK_MEMBERS, cmp.data, user)
+        setIsModalOpen(false)
+    }
+
+    console.log(cmp);
     switch (cmp.type) {
 
         case STATUS_PICKER:
@@ -99,7 +107,8 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
                         <div className='member-picker-user-container'>
                             <Search placeholder="Search names, positions, or a team" />
                             <div className='member-picker-suggested'>Suggested people</div>
-                            {users && users.map(user => <div key={user._id} className="member-picker-user">
+                            {users && users.map(user => <div key={user._id} className="member-picker-user"
+                                onClick={() => onMemberPick(user)}>
                                 <div className='member-picker-fullname'>{user.fullname}</div>
                                 {user.imgUrl !== '' ? <img className="member-picker-img" src={`${user.imgUrl}`} alt="" />
                                     : <div className='member-picker-img'><span className='member-picker-name-char'>{user.fullname.charAt(0).toUpperCase()}</span></div>}

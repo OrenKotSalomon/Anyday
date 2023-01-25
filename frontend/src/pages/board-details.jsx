@@ -48,6 +48,9 @@ export function BoardDetails() {
                 return updateTask(board, data, UPDATE_TASK_DATE)
             case UPDATE_TASK_PRIORITY:
                 return updateTask(board, data, UPDATE_TASK_PRIORITY)
+            case UPDATE_TASK_MEMBERS:
+                return updateTask(board, data, UPDATE_TASK_MEMBERS)
+
         }
 
     }

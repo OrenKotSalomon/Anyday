@@ -41,7 +41,7 @@ async function update({ _id, score }) {
     // user.score = score
     // await storageService.put('user', user)
 
-    const user = await httpService.put(`user/${_id}`, {_id, score})
+    const user = await httpService.put(`user/${_id}`, { _id, score })
     // Handle case in which admin updates other user's details
     if (getLoggedinUser()._id === user._id) saveLocalUser(user)
     return user
@@ -65,9 +65,12 @@ async function login(userCred) {
 async function signup(userCred) {
     // if (!userCred.imgUrl) userCred.imgUrl = 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
     // const user = await storageService.post('user', userCred)
-    const user = await httpService.post('auth/signup', userCred)
-    // socketService.login(user._id)
-    return saveLocalUser(user)
+    try {
+        const user = await httpService.post('auth/signup', userCred)
+        // socketService.login(user._id)
+        return saveLocalUser(user)
+    }
+    catch (err) { console.error(err) }
 }
 async function logout() {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
