@@ -10,6 +10,9 @@ const http = require('http').createServer(app)
 app.use(cookieParser())
 app.use(express.json())
 
+
+// window.FB
+
 // initFB()
 // function initFB() {
 // window.fbAsyncInit = function () {

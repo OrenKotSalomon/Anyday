@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
 import { utilService } from '../../services/util.service';
+import guestAvatar from '../../assets/img/guest-avatar.png'
 
 export function DynamicCmp({ cmp, info, openModal, handleChange }) {
 
@@ -63,7 +64,8 @@ export function DynamicCmp({ cmp, info, openModal, handleChange }) {
                             {member.imgUrl !== '' ? <img className="member-avatar-img" style={{ right: `${(idx * 24)}%`,position: `${cmp.task.members.length===1?'unset':'absolute'}` }} src={`${member.imgUrl}`} alt="" />
                                 : <div className='member-avatar-img' style={{ right: `${(idx * 24)}%` ,position: `${cmp.task.members.length===1?'relative':'absolute'}` }}><span className='member-avatar-name-char'> {member.fullname.charAt(0).toUpperCase()}</span></div>}
                         </div>)}</div>) :<div className='member-empty-avatar'>
-                        <FontAwesomeIcon icon={faCircleUser}/>
+                        <img className='guestAvatar' src={`${guestAvatar}`} alt="" />
+                        {/* <FontAwesomeIcon icon={faCircleUser}/> */}
                             {/* <Icon iconType={Icon.type.SVG} icon={PersonRound} iconSize={36} /> */}
                             </div>}
             </div>
