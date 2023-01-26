@@ -1,5 +1,6 @@
 .checkbox-modal-wrapper {
     display: none;
+    position: relative;
 
     @include for-narrow-layout {
         color: #323338;
@@ -28,7 +29,7 @@
     @include for-normal-layout {
         color: #323338;
         display: flex;
-
+        z-index: 120;
         height: rem(63px);
         // background-color: aqua;
         position: sticky;
@@ -49,25 +50,28 @@
 }
 
 .number-of-checked {
+    display: flex;
+    background-color: #0073ea;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-size: rem(24px);
+    color: white;
+    width: rem(45px);
+    height: rem(63px);
 
-    @include for-narrow-layout {
+    @include for-normal-layout {
 
-        display: flex;
         width: rem(83px);
         height: rem(63px);
-        background-color: #0073ea;
-        display: flex;
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
-        align-items: center;
-        text-align: center;
-        justify-content: center;
-        font-size: rem(24px);
-        color: white;
+
     }
 }
 
 .item-select-container {
+
     display: flex;
     align-items: center;
     text-align: center;
@@ -75,23 +79,36 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    min-width: 300px;
     font-size: 20px;
     line-height: 22.5px;
     font-family: figtree-regular;
     // padding-left: 20px;
+    min-width: 150px;
+
+    @include for-normal-layout {
+
+        min-width: 300px;
+    }
 }
 
 .btns-container {
     display: flex;
-
+    margin-left: auto;
 }
 
 .checknox-delete-btn-container-temp {
-    visibility: hidden;
+    display: none;
+
+    @include for-normal-layout {
+
+        visibility: hidden;
+    }
+
 }
 
 .close-checked-modal {
+
+    // margin-left: auto;
 
     button {
         width: 63px;
@@ -115,10 +132,15 @@
 .checknox-delete-btn-container {
     align-self: flex-end;
     padding-bottom: 10px;
-    margin-right: 20px;
+    margin-right: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    @include for-normal-layout {
+        margin-right: 20px;
+
+    }
 
     button {
         background: none;
@@ -136,6 +158,41 @@
     }
 }
 
+.checknox-move-btn-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 63px;
+    margin-right: 15px;
+
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: 0.3 ease;
+
+        &:hover {
+            color: #5a5a5a;
+        }
+    }
+
+    span {
+        font-size: 12px;
+    }
+
+    .icon-delete {
+        font-size: 20px;
+        color: #323338;
+        transition: color .3s ease;
+
+        &:hover {
+            color: #5a5a5a;
+        }
+    }
+}
+
 .icon-delete {
     font-size: 20px;
     color: #323338;
@@ -143,5 +200,38 @@
 
     &:hover {
         color: #5a5a5a;
+    }
+}
+
+.move-to-wrapper {
+    position: absolute;
+    background-color: white;
+    z-index: 55;
+    transform: translate(80%, -120%);
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 8px;
+
+    border-radius: 5px;
+
+    @include for-normal-layout {
+
+        transform: translate(150%, -120%);
+    }
+}
+
+.menu-checkbox-controls {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0px;
+    align-items: flex-end;
+
+    .choose-group-txt {
+        font-size: 16px;
+        padding-left: 10px;
+    }
+
+    .choose-back {
+        font-size: 12px;
+        padding-right: 10px;
+        cursor: pointer;
     }
 }

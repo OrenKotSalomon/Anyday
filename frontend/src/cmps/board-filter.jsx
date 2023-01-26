@@ -1,68 +1,120 @@
 import { updateGroup, updateTask } from '../store/board.actions';
-import { ADD_GROUP_FROM_HEADER, ADD_TASK_FROM_HEADER } from '../services/board.service.local';
+import { ADD_GROUP_FROM_HEADER, ADD_TASK_FROM_HEADER, boardService } from '../services/board.service.local';
 
 import { Button, Flex, SplitButton, Tooltip, Icon, Menu, MenuItem } from 'monday-ui-react-core'
 import { Search, PersonRound, Filter, Sort, Group } from "monday-ui-react-core/icons";
 import { Menu as MenuIcon } from "monday-ui-react-core/icons";
+import { Fragment, useEffect, useRef, useState } from 'react';
+import { utilService } from '../services/util.service';
+import { StatusModal } from './filter-modals/status-filter';
 
-export function BoardFilter({ board }) {
+export function BoardFilter({ board, onSetFilterBy }) {
+
+    const [filterBy, setfilterBy] = useState(boardService.getDefaultFilter())
+    const [isFilterModalOpen, setIsFilterModalOpen] = useState()
+    const [isInputFocused, setIsInputFocused] = useState(false)
+
+    onSetFilterBy = useRef(utilService.debounce(onSetFilterBy))
+
+    useEffect(() => {
+
+        onSetFilterBy.current(filterBy)
+    }, [filterBy]);
 
     function onAddNewTask() {
         updateTask(board, undefined, ADD_TASK_FROM_HEADER)
     }
 
-    return <section className='board-filter'>
-        <Flex gap='18' align='End'
+    function handleChange({ target }) {
+        let { value, name: field, type } = target
 
-        >
+        setfilterBy(prev => ({ ...prev, [field]: value }))
+    }
+    return <Fragment>
 
-            <SplitButton className="new-task-btn"
+        <section className='board-filter'>
+            <Flex gap='10' align='End'
 
-                children='New Item' size={Button.sizes.SMALL} onClick={onAddNewTask} secondaryDialogContent={<HeaderMenu board={board} />} >
+            >
 
-            </SplitButton>
-            <Button kind={Button.kinds.TERTIARY} size={Button.sizes.SMALL} >
-                <Icon iconType={Icon.type.SVG} icon={Search} iconSize={19} />
+                <SplitButton className="new-task-btn"
 
-                <div> Search
+                    children='New Item' size={Button.sizes.SMALL} onClick={onAddNewTask} secondaryDialogContent={<HeaderMenu board={board} />} >
+
+                </SplitButton>
+                <div className='search-filter'
+                    style={{ border: isInputFocused ? '1px solid #cce5ff' : 'none' }}
+                    onClick={() => setIsInputFocused(!isInputFocused)}>
+                    <Icon
+                        ignoreFocusStyle={true}
+                        className="input-search-icon" iconType={Icon.type.SVG} icon={Search} iconSize={19} />
+
+                    <input
+                        onChange={handleChange}
+                        type="text"
+                        name='title'
+                        className="input-search-board-input"
+                        style={{ width: isInputFocused ? '210px' : '48px' }}
+                        placeholder="Search"
+                    />
                 </div>
-            </Button>
-            <div className="monday-storybook-tooltip_bottom">
-                <Tooltip
-                    content="Filter by person" animationType="expand">
-                    <Button kind={Button.kinds.TERTIARY} size={Button.sizes.SMALL} leftIcon={PersonRound}>
-                        Person
-                    </Button>
-                </Tooltip>
-            </div>
-            <div className="monday-storybook-tooltip_bottom">
-                <Tooltip
-                    content="Filter by anything" animationType="expand">
-                    <Button kind={Button.kinds.TERTIARY} size={Button.sizes.SMALL} leftIcon={Filter}>
-                        Filter
-                    </Button>
-                </Tooltip>
-            </div>
-            <div className="monday-storybook-tooltip_bottom">
-                <Tooltip
-                    content="Sort by any column" animationType="expand">
-                    <Button kind={Button.kinds.TERTIARY} size={Button.sizes.SMALL} leftIcon={Sort}>
-                        Sort
-                    </Button>
-                </Tooltip>
-            </div>
-            <div className="monday-storybook-tooltip_bottom" style={{ justifySelf: 'flex-end' }}>
-                <Tooltip
-                    content="Hidden columns" animationType="expand">
-                    <Button kind={Button.kinds.TERTIARY} size={Button.sizes.SMALL} leftIcon={MenuIcon}>
+                <div className="monday-storybook-tooltip_bottom">
+                    <Tooltip
+                        content="Filter by person" animationType="expand">
+                        <Button kind={Button.kinds.TERTIARY} size={Button.sizes.SMALL} leftIcon={PersonRound}>
+                            Person
+                        </Button>
+                    </Tooltip>
+                </div>
+                <div className="monday-storybook-tooltip_bottom">
+                    <Tooltip
+                        content="Filter by anything" animationType="expand">
+                        <Button
+                            onClick={() => setIsFilterModalOpen(!isFilterModalOpen)}
+                            kind={Button.kinds.TERTIARY} size={Button.sizes.SMALL} leftIcon={Filter}>
+                            Filter
+                        </Button>
+                    </Tooltip>
+                </div>
+                <div className="monday-storybook-tooltip_bottom">
+                    <Tooltip
+                        content="Sort by any column" animationType="expand">
+                        <Button kind={Button.kinds.TERTIARY} size={Button.sizes.SMALL} leftIcon={Sort}>
+                            Sort
+                        </Button>
+                    </Tooltip>
+                </div>
+                <div className="monday-storybook-tooltip_bottom" style={{ justifySelf: 'flex-end' }}>
+                    <Tooltip
+                        content="Hidden columns" animationType="expand">
+                        <Button kind={Button.kinds.TERTIARY} size={Button.sizes.SMALL} leftIcon={MenuIcon}>
 
-                    </Button>
-                </Tooltip>
+                        </Button>
+                    </Tooltip>
+                </div>
+
+            </Flex>
+        </section >
+
+        {isFilterModalOpen &&
+            <div className='modal-filter'>
+                <div className='modal-filter-wrapper'>
+                    <div className='modal-filter-container'>
+                        <div className='statuses-wrapper'>
+                            <StatusModal
+                                board={board}
+                            />
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
 
-        </Flex>
-    </section >
+        }
 
+    </Fragment>
 }
 
 export function HeaderMenu({ board }) {

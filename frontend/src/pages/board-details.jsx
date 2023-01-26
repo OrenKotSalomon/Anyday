@@ -8,22 +8,26 @@ import { DynamicModal } from "../cmps/dynamicCmps/dynamic-modal.jsx";
 import { GroupPreview } from "../cmps/group-preview";
 import { SideGroupBar } from "../cmps/side-group-bar";
 
-import { ADD_GROUP_FROM_BUTTOM, ADD_GROUP_FROM_HEADER, ADD_TASK_FROM_HEADER, DATE_PICKER, DUPLICATE_CHECKED_TASKS, LABEL_STATUS_PICKER, MEMEBER_PICKER, ON_DRAG_GROUP, PRIORITY_PICKER, REMOVE_CHECKED_VALUE_GROUPS, REMOVE_TASKS_FROM_GROUP, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_LABEL_STATUS, UPDATE_TASK_MEMBERS, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../services/board.service.local";
+import { ADD_GROUP_FROM_BUTTOM, ADD_GROUP_FROM_HEADER, ADD_TASK_FROM_HEADER, DATE_PICKER, DUPLICATE_CHECKED_TASKS, LABEL_STATUS_PICKER, MEMEBER_PICKER, MOVE_TASK_TO_GROUP, ON_DRAG_GROUP, PRIORITY_PICKER, REMOVE_CHECKED_VALUE_GROUPS, REMOVE_TASKS_FROM_GROUP, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_LABEL_STATUS, UPDATE_TASK_MEMBERS, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../services/board.service.local";
 import { handleOnDragEnd, loadBoard, onGroupDragStart, setPrevBoard, updateBoard, updateGroup, updateTask } from "../store/board.actions";
 
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Loader, Icon, DialogContentContainer, MenuItem, Menu, MenuDivider } from 'monday-ui-react-core';
-import { Add, Group, Item, Close } from 'monday-ui-react-core/icons';
+import { Add, Group, Item, Close, MoveArrowRight } from 'monday-ui-react-core/icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faCircleArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { faCopy } from '@fortawesome/free-regular-svg-icons'
 import { utilService } from "../services/util.service";
 import { socketService, SOCKET_EMIT_SET_TOPIC, SOCKET_EVENT_UPDATE_BOARD } from "../services/socket.service";
 import { Kanban } from "./kanban";
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
+import { useDispatch } from "react-redux";
+import { SET_FILTERBY } from "../store/board.reducer";
 
 export function BoardDetails() {
 
     const board = useSelector((storeState) => storeState.boardModule.board)
+    const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
     const prevBoard = useSelector((storeState) => storeState.boardModule.prevBoard)
     const { boardId } = useParams()
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -31,19 +35,21 @@ export function BoardDetails() {
     const [isDndModeDisabled, setIsDndModeDisabled] = useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [isCheckedShow, setIsCheckedShow] = useState(false)
+    const [isMoveToShow, setisMoveToShow] = useState(false)
 
     const boardContainer = useRef()
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        loadBoard(boardId)
+        loadBoard(boardId, filterBy)
         socketService.on(SOCKET_EVENT_UPDATE_BOARD, loadBoard)
         socketService.emit(SOCKET_EMIT_SET_TOPIC, boardId)
         return () => {
             socketService.off(SOCKET_EVENT_UPDATE_BOARD, loadBoard)
         }
-    }, [boardId])
+    }, [boardId, filterBy])
 
-    function onUpdateTaskLabel(type, data, labelPick) {
+    function onUpdateTaskLabel(type, data, labelPick, isDelete) {
         data.labelPick = labelPick
         console.log(data);
         switch (type) {
@@ -56,12 +62,17 @@ export function BoardDetails() {
             case UPDATE_TASK_PRIORITY:
                 return updateTask(board, data, UPDATE_TASK_PRIORITY)
             case UPDATE_TASK_MEMBERS:
-                return updateTask(board, data, UPDATE_TASK_MEMBERS)
+                return updateTask(board, data, UPDATE_TASK_MEMBERS , isDelete)
 
         }
 
     }
-    // 
+
+    function onSetFilterBy(filterBy) {
+        dispatch({ type: SET_FILTERBY, filterBy })
+
+    }
+
     function checkIfTaskChecked() {
         let copyBoard = structuredClone(board)
         let tasksChecked = copyBoard.groups.map(group => {
@@ -164,9 +175,28 @@ export function BoardDetails() {
             return group.tasks.filter(task => !task.isChecked)
 
         })
+        try {
+            updateGroup(boardToUpdate, remainingTasks, REMOVE_TASKS_FROM_GROUP)
+            showSuccessMsg(`successfully deleted ${checkIfTaskChecked()} tasks`)
+        } catch (error) {
+            showErrorMsg('Couldn\'t delete tasks')
+            console.log(error);
+        }
 
-        updateGroup(boardToUpdate, remainingTasks, REMOVE_TASKS_FROM_GROUP)
+    }
 
+    function onMoveTasks(ev, groupId) {
+        console.log(groupId);
+        let boardToUpdate = structuredClone(board)
+        let checkedTasks = boardToUpdate.groups.map(group => {
+            return group.tasks.filter(task => task.isChecked)
+
+        })
+        console.log(checkedTasks);
+        console.log('boardToUpdate', boardToUpdate);
+        console.log('board', board);
+        // if (!checkedTasks[0].length) return
+        updateGroup(board, { groupId, tasks: checkedTasks.flat(1) }, MOVE_TASK_TO_GROUP)
     }
 
     function onDuplicateTasks() {
@@ -182,8 +212,13 @@ export function BoardDetails() {
             })
 
         })
+        try {
+            updateGroup(board, CheckedTasks, DUPLICATE_CHECKED_TASKS)
+            showSuccessMsg('Successfully duplicated tasks')
+        } catch (error) {
 
-        updateGroup(board, CheckedTasks, DUPLICATE_CHECKED_TASKS)
+            showErrorMsg('Cannot duplicated tasks')
+        }
     }
 
     function onDragGroup(e) {
@@ -198,7 +233,9 @@ export function BoardDetails() {
         <NavBar />
         <SideGroupBar />
         {board && <div ref={boardContainer} className="board-container">
-            <BoardHeader board={board} />
+            <BoardHeader board={board}
+                onSetFilterBy={onSetFilterBy}
+            />
 
             <DragDropContext onDragStart={(e) => onDragGroup(e)} onDragEnd={(res) => handleOnDragEnd(res, { prevBoard, grouplist: prevBoard.groups })}>
                 <Droppable droppableId='groups' type="group-list" >
@@ -266,10 +303,7 @@ export function BoardDetails() {
                             <button>delete</button>
                             <span>delete</span>
                         </div>
-                        <div className="checknox-delete-btn-container-temp">
-                            <button>delete</button>
-                            <span>delete</span>
-                        </div>
+
                         <div className="checknox-delete-btn-container">
                             <button onClick={onDuplicateTasks}>
                                 <FontAwesomeIcon
@@ -283,8 +317,15 @@ export function BoardDetails() {
                                 <FontAwesomeIcon
                                     className="icon-delete"
                                     icon={faTrash} />
+
                             </button>
                             <span>Delete</span>
+                        </div>
+                        <div className="checknox-move-btn-container">
+                            <button onClick={() => setisMoveToShow(!isMoveToShow)}>      <FontAwesomeIcon
+                                className="icon-delete"
+                                icon={faCircleArrowRight} /></button>
+                            <span>Move to</span>
                         </div>
                     </div>
                     <div className="close-checked-modal">
@@ -293,7 +334,34 @@ export function BoardDetails() {
 
                         </button>
                     </div>
+
                 </div>
+                {isMoveToShow &&
+                    <div className="move-to-wrapper">
+                        <div className="menu-checkbox-controls">
+                            <div className="choose-group-txt">
+                                Choose group
+                            </div>
+                            <div className="choose-back" onClick={() => setisMoveToShow(false)}>Back</div>
+                        </div>
+                        <Menu size="small">
+                            {board.groups.map((group, idx) => {
+
+                                return <MenuItem
+                                    onClick={(ev) => onMoveTasks(ev, group.id)}
+                                    key={idx}
+                                    icon={MoveArrowRight}
+                                    iconBackgroundColor={group.style}
+                                    iconColor={group.style}
+                                    iconType="SVG"
+                                    title={group.title}
+                                />
+
+                            })}
+                        </Menu>
+                    </div>
+
+                }
             </div>}
 
         </div>

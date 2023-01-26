@@ -1,12 +1,16 @@
 import { DATE_PICKER, MEMEBER_PICKER, STATUS_PICKER, PRIORITY_PICKER, TEXT_LABEL, LABEL_STATUS_PICKER, NUMBER_PICKER } from '../../services/board.service.local';
 
 import { Avatar, AvatarGroup, Icon } from 'monday-ui-react-core';
-import { TextCopy, PersonRound } from 'monday-ui-react-core/icons';
+import { TextCopy, PersonRound, AddSmall } from 'monday-ui-react-core/icons';
 import dayjs from 'dayjs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
 import { utilService } from '../../services/util.service';
 import guestAvatar from '../../assets/img/guest-avatar.png'
+
+// import { Avatar, AvatarGroup, StoryDescription } from 'monday-ui-react-core'
+
+
 
 export function DynamicCmp({ cmp, info, openModal, handleChange }) {
 
@@ -58,17 +62,21 @@ export function DynamicCmp({ cmp, info, openModal, handleChange }) {
         case MEMEBER_PICKER:
             return <div className="person-label"
                 onClick={(ev) => openModal(ev, { task: cmp.task, groupId: cmp.groupId }, MEMEBER_PICKER)} >
-                {(Array.isArray(cmp.task.members)&&cmp.task.members.length) ?
-                    (<div className='member-avatar-container'>
-                        {cmp.task.members.map((member, idx) => <div key={member._id+''+Math.random()}><span className='member-hover-info'>{member.fullname}</span>
-                            {member.imgUrl !== '' ? <img className="member-avatar-img" style={{ right: `${(idx * 24)}%`,position: `${cmp.task.members.length===1?'unset':'absolute'}` }} src={`${member.imgUrl}`} alt="" />
-                                : <div className='member-avatar-img' style={{ right: `${(idx * 24)}%` ,position: `${cmp.task.members.length===1?'relative':'absolute'}` }}><span className='member-avatar-name-char'> {member.fullname.charAt(0).toUpperCase()}</span></div>}
-                        </div>)}</div>) :<div className='member-empty-avatar'>
-                        <img className='guestAvatar' src={`${guestAvatar}`} alt="" />
-                        {/* <FontAwesomeIcon icon={faCircleUser}/> */}
-                            {/* <Icon iconType={Icon.type.SVG} icon={PersonRound} iconSize={36} /> */}
-                            </div>}
+                {cmp.task.members.length > 0 ? <AvatarGroup size={Avatar.sizes.SMALL} type={Avatar.types.IMG} max={2}>
+                    {cmp.task.members.map((member) =>
+                        <Avatar key={member._id + '' + Math.random(9)} type={Avatar.types.IMG} src={member.imgUrl !== '' ? member.imgUrl : `https://robohash.org/${Math.random(9)}`} ariaLabel={member?.fullname} />
+                    )}
+                </AvatarGroup>
+                    : <span className='empty-member-container' >
+                        <img className='guest-avatar-icon' src={`${guestAvatar}`} alt="" />
+                        <span className='guest-avatar-plus'>
+                        <Icon iconType={Icon.type.SVG} ignoreFocusStyle={true} icon={AddSmall} iconLabel="my bolt svg icon" iconSize={20} />
+ 
+                        </span>
+                    </span>
+                }
             </div>
+
         case DATE_PICKER:
             return <div className="date-label"
                 onClick={(ev) => openModal(ev, { task: cmp.task, groupId: cmp.groupId }, DATE_PICKER)} >

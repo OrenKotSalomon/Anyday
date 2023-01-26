@@ -3,7 +3,7 @@ import { store } from '../store/store.js'
 
 import { showErrorMsg } from '../services/event-bus.service.js'
 import { LOADING_DONE, LOADING_START } from "./system.reducer.js";
-import { REMOVE_USER, SET_USER, SET_USERS, SET_WATCHED_USER } from "./user.reducer.js";
+import { REMOVE_USER, SET_USER, SET_USERS, SET_WATCHED_USER, UPDATE_USER_IMG } from "./user.reducer.js";
 
 export async function loadUsers() {
     try {
@@ -74,5 +74,17 @@ export async function loadUser(userId) {
     } catch (err) {
         showErrorMsg('Cannot load user')
         console.log('Cannot load user', err)
+    }
+}
+
+export async function updateUserImg(imgUrl) {
+    try {
+        const newImgUrl = await userService.changeImage(imgUrl)
+        store.dispatch({ type: UPDATE_USER_IMG, imgUrl: newImgUrl })
+        return newImgUrl
+    }
+    catch (err) {
+        console.error('Cannot update image:', err)
+        throw err
     }
 }

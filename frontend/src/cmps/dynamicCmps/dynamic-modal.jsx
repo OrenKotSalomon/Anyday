@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 
-import { DATE_PICKER, LABEL_STATUS_PICKER, MEMEBER_PICKER, PRIORITY_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_LABEL_STATUS, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS , UPDATE_TASK_MEMBERS} from "../../services/board.service.local"
+import { DATE_PICKER, LABEL_STATUS_PICKER, MEMEBER_PICKER, PRIORITY_PICKER, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_LABEL_STATUS, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS, UPDATE_TASK_MEMBERS } from "../../services/board.service.local"
 
-import { DialogContentContainer, DatePicker, Avatar, Search } from 'monday-ui-react-core'
+import { DialogContentContainer, DatePicker, Avatar, Search, Icon } from 'monday-ui-react-core'
+import { CloseSmall } from 'monday-ui-react-core/icons';
 
 import Harel from '../../assets/img/Harel.jpg'
 import Yossi from '../../assets/img/Yossi.jpg'
@@ -11,6 +12,7 @@ import Oren from '../../assets/img/Oren.jpg'
 import { userService } from '../../services/user.service.js'
 
 import dayjs from "dayjs"
+import { TaskDetails } from '../task-details'
 
 export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
     const [users, setUsers] = useState([])
@@ -57,13 +59,12 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
         onUpdateTaskLabel(UPDATE_TASK_LABEL_STATUS, cmp.data, labelStatus)
     }
 
-    function onMemberPick(user) {
-        console.log(user)
-        onUpdateTaskLabel(UPDATE_TASK_MEMBERS, cmp.data, user)
+    function onMemberPick(user, isDelete = false) {
+        onUpdateTaskLabel(UPDATE_TASK_MEMBERS, cmp.data, user , isDelete )
         setIsModalOpen(false)
     }
 
-    console.log(cmp);
+    console.log('cmp', cmp);
     switch (cmp.type) {
 
         case STATUS_PICKER:
@@ -105,9 +106,17 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
                     {/* here goes amount of users connected to board  */}
                     <DialogContentContainer className="monday-style-story-chips_search-bar">
                         <div className='member-picker-user-container'>
+                            <div className='member-picker-user-delete-container'>
+                                {cmp.info?.members.map(member =>
+                                    <div className='member-picker-user-delete' key={member._id+''+Math.random(9)}>
+                                        <Avatar size={Avatar.sizes.SMALL} src={member.imgUrl} type={Avatar.types.IMG} ariaLabel={member.fullname} />
+                                        <span className='member-picker-user-delete-fullname' >{member.fullname}</span>
+                                        <Icon onClick={() => onMemberPick(member, true)} className='member-picker-user-delete-btn' iconType={Icon.type.SVG} icon={CloseSmall} iconLabel="my bolt svg icon" iconSize={12} />
+                                    </div>)}
+                            </div>
                             <Search placeholder="Search names, positions, or a team" />
                             <div className='member-picker-suggested'>Suggested people</div>
-                            {users && users.map(user => <div key={user._id} className="member-picker-user"
+                            {users && users.map(user => <div key={user._id+''+Math.random(9)} className="member-picker-user"
                                 onClick={() => onMemberPick(user)}>
                                 <div className='member-picker-fullname'>{user.fullname}</div>
                                 {user.imgUrl !== '' ? <img className="member-picker-img" src={`${user.imgUrl}`} alt="" />
