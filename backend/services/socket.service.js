@@ -20,6 +20,7 @@ function setupSocketAPI(http) {
                 logger.info(`Socket is leaving topic ${socket.myTopic} [id: ${socket.id}]`)
             }
             socket.join(topic)
+            logger.info(`Socket connected to topic ${socket.myTopic} [id: ${socket.id}]`)
             socket.myTopic = topic
         })
         socket.on('chat-send-msg', msg => {
@@ -30,7 +31,7 @@ function setupSocketAPI(http) {
             gIo.to(socket.myTopic).emit('chat-add-msg', msg)
         })
         socket.on('emit-update-board', board => {
-            logger.info(`New chat msg from socket [id: ${socket.id}], emitting to topic ${socket.myTopic}`)
+            logger.info(`New chat msg from socket [id: ${socket.id}], UPDATED emitting to topic ${socket.myTopic}`)
             // emits to all sockets:
             // gIo.emit('chat addMsg', msg)
             // emits only to sockets in the same room
