@@ -2,10 +2,10 @@
   // width: max-content;
   font-family: figtree-regular;
   padding-top: 7px;
-  // margin-left: 20px;
+  padding-left: 20px;
 
   @include for-narrow-layout {
-    margin-left: 0px;
+    padding-left: 0px;
   }
 
   .group-header-container {
