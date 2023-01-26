@@ -15,11 +15,12 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Loader, Icon, DialogContentContainer, MenuItem, Menu, MenuDivider } from 'monday-ui-react-core';
 import { Add, Group, Item, Close } from 'monday-ui-react-core/icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faCircleArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { faCopy } from '@fortawesome/free-regular-svg-icons'
 import { utilService } from "../services/util.service";
 import { socketService, SOCKET_EMIT_SET_TOPIC, SOCKET_EVENT_UPDATE_BOARD } from "../services/socket.service";
 import { Kanban } from "./kanban";
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
 
 export function BoardDetails() {
 
@@ -31,6 +32,7 @@ export function BoardDetails() {
     const [isDndModeDisabled, setIsDndModeDisabled] = useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [isCheckedShow, setIsCheckedShow] = useState(false)
+    const [isMoveToShow, setisMoveToShow] = useState(false)
 
     const boardContainer = useRef()
 
@@ -164,8 +166,13 @@ export function BoardDetails() {
             return group.tasks.filter(task => !task.isChecked)
 
         })
-
-        updateGroup(boardToUpdate, remainingTasks, REMOVE_TASKS_FROM_GROUP)
+        try {
+            updateGroup(boardToUpdate, remainingTasks, REMOVE_TASKS_FROM_GROUP)
+            showSuccessMsg(`successfully deleted ${checkIfTaskChecked()} tasks`)
+        } catch (error) {
+            showErrorMsg('Couldn\'t delete tasks')
+            console.log(error);
+        }
 
     }
 
@@ -182,8 +189,13 @@ export function BoardDetails() {
             })
 
         })
+        try {
+            updateGroup(board, CheckedTasks, DUPLICATE_CHECKED_TASKS)
+            showSuccessMsg('Successfully duplicated tasks')
+        } catch (error) {
 
-        updateGroup(board, CheckedTasks, DUPLICATE_CHECKED_TASKS)
+            showErrorMsg('Cannot duplicated tasks')
+        }
     }
 
     function onDragGroup(e) {
@@ -266,10 +278,7 @@ export function BoardDetails() {
                             <button>delete</button>
                             <span>delete</span>
                         </div>
-                        <div className="checknox-delete-btn-container-temp">
-                            <button>delete</button>
-                            <span>delete</span>
-                        </div>
+
                         <div className="checknox-delete-btn-container">
                             <button onClick={onDuplicateTasks}>
                                 <FontAwesomeIcon
@@ -283,8 +292,15 @@ export function BoardDetails() {
                                 <FontAwesomeIcon
                                     className="icon-delete"
                                     icon={faTrash} />
+
                             </button>
                             <span>Delete</span>
+                        </div>
+                        <div className="checknox-move-btn-container">
+                            <button onClick={() => setisMoveToShow(!isMoveToShow)}>      <FontAwesomeIcon
+                                className="icon-delete"
+                                icon={faCircleArrowRight} /></button>
+                            <span>Move to</span>
                         </div>
                     </div>
                     <div className="close-checked-modal">
@@ -293,7 +309,9 @@ export function BoardDetails() {
 
                         </button>
                     </div>
+
                 </div>
+
             </div>}
 
         </div>

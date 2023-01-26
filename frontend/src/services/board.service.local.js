@@ -252,8 +252,8 @@ function updateGroupsService(board, data, type) {
             groupToUpdate = board.groups.forEach((group, Groupidx) => {
                 group.isChecked = false
                 group.tasks.forEach((task, taskIdx) => {
-                    task.isChecked = false
                     if (data[Groupidx][taskIdx]) group.tasks.splice(taskIdx, 0, data[Groupidx][taskIdx])
+                    task.isChecked = false
 
                 })
             })
