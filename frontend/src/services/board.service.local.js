@@ -111,12 +111,18 @@ async function getById(boardId, filterBy = getDefaultFilter()) {
                     return regex.test(group.title)
                 }
                 else {
-                    return group.tasks = group.tasks.filter(task => {
+                    let filteredGroups = group.tasks.filter(task => {
                         return regex.test(task.title)
                     })
+                    console.log('filteredGroups', filteredGroups);
+
+                    if (filteredGroups.length) return filteredGroups
                 }
             })
+            console.log('filteredBoard', filteredBoard.groups);
+
         }
+
         return filteredBoard
     } catch (error) {
         throw new Error('cant load board from service front', error)
