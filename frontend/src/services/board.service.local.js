@@ -264,7 +264,7 @@ function updateGroupsService(board, data, type) {
     }
 }
 
-function updateTaskService(board, data, type) {
+function updateTaskService(board, data, type, isDelete) {
     board = structuredClone(board)
     const newTask = getNewTask()
     let currTask, groupIdx, taskIdx
@@ -331,9 +331,13 @@ function updateTaskService(board, data, type) {
             board.groups[groupIdx].tasks[taskIdx].labelStatus = data.labelPick
             return board
         case UPDATE_TASK_MEMBERS:
-            if (board.groups[groupIdx].tasks[taskIdx].members.some((member) => member._id === data.labelPick._id)) return
-            board.groups[groupIdx].tasks[taskIdx].members.push(data.labelPick)
-            console.log(board)
+            if (isDelete) {
+                let memberToDeleteIdx = board.groups[groupIdx].tasks[taskIdx].members.findIndex(member => member._id === data.labelPick._id)
+                board.groups[groupIdx].tasks[taskIdx].members.splice(memberToDeleteIdx, 1)
+            } else {
+                if (board.groups[groupIdx].tasks[taskIdx].members.some((member) => member._id === data.labelPick._id)) return
+                board.groups[groupIdx].tasks[taskIdx].members.push(data.labelPick)
+            }
             return board
         case UPDATE_TASK_DATE:
             board.groups[groupIdx].tasks[taskIdx].dueDate = data.labelPick

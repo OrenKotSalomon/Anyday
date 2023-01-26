@@ -107,9 +107,9 @@ export async function updateGroup(board, data, type) {
     }
 }
 
-export async function updateTask(board, data, type) {
+export async function updateTask(board, data, type , isDelete) {
     try {
-        const boardToUpdate = boardService.updateTaskService(board, data, type)
+        const boardToUpdate = boardService.updateTaskService(board, data, type, isDelete)
         const savedBoard = await boardService.save(boardToUpdate)
         socketService.emit(SOCKET_EMIT_UPDATE_BOARD, savedBoard._id)
         store.dispatch(getActionUpdateboard(savedBoard))

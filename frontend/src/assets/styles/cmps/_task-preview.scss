@@ -325,6 +325,7 @@
   // border-right: $border-cell;
   max-width: 97px;
 
+
   .member-avatar-container {
 
     .member-hover-info {
@@ -366,12 +367,47 @@
     }
   }
 
-  .member-empty-avatar {
-    .guestAvatar {
-      margin-top: 4px;
+}
+
+.empty-member-container {
+  .guest-avatar-icon {
+    height: 28px;
+    width: 28px;
+    margin-top: 4px;
+
+    &:hover+.guest-avatar-plus {
+      opacity: 100%;
     }
   }
+
+
+  .guest-avatar-plus {
+    opacity: 0;
+    display: block;
+    position: absolute;
+    left: 50px;
+    background-color: $btn-blue;
+    border-radius: 25em;
+    width: 14px;
+    height: 14px;
+    top: 11px;
+    left: 9px;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 100%;
+    }
+
+    svg {
+      color: $main-bgc-white;
+      position: absolute;
+      right: -2.5px;
+      bottom: -3px;
+    }
+  }
+
 }
+
 
 .date-label {
   position: relative;

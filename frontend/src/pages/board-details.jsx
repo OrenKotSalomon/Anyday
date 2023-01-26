@@ -45,7 +45,7 @@ export function BoardDetails() {
         }
     }, [boardId])
 
-    function onUpdateTaskLabel(type, data, labelPick) {
+    function onUpdateTaskLabel(type, data, labelPick, isDelete) {
         data.labelPick = labelPick
         console.log(data);
         switch (type) {
@@ -58,7 +58,7 @@ export function BoardDetails() {
             case UPDATE_TASK_PRIORITY:
                 return updateTask(board, data, UPDATE_TASK_PRIORITY)
             case UPDATE_TASK_MEMBERS:
-                return updateTask(board, data, UPDATE_TASK_MEMBERS)
+                return updateTask(board, data, UPDATE_TASK_MEMBERS , isDelete)
 
         }
 
