@@ -9,8 +9,19 @@ import { loadBoards } from '../store/board.actions'
 import { Icon, Loader } from 'monday-ui-react-core'
 import { MoveArrowRight } from 'monday-ui-react-core/icons'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFacebookF, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
+
 import logo from '../assets/img/logo.png'
 import hero from '../assets/img/home-page-hero.jpg'
+
+import Yossi from '../assets/img/Yossi.jpg'
+import Oren from '../assets/img/Oren.jpg'
+import Harel from '../assets/img/Harel.jpg'
+import heroOne from '../assets/img/hero-1.jpg'
+import heroTwo from '../assets/img/hero-2.jpg'
+import heroThree from '../assets/img/hero-3.jpg'
+
 
 export function HomePage() {
     const loggedInUser = userService.getLoggedinUser()
@@ -28,7 +39,7 @@ export function HomePage() {
         try {
             await logout()
         } catch (err) {
-            console.error('Have a problem on log-out',err)
+            console.error('Have a problem on log-out', err)
         }
     }
 
@@ -76,15 +87,87 @@ export function HomePage() {
                 <div className='home-page-promo'><span className='home-page-promo1'>No credit needed</span>✦<span className='home-page-promo2'>Unlimited time on Free plan</span></div>
             </div>
 
+            <div className='animation-container'>
+                <div className="carousel__container">
+                    <div className="carousel__item">
+                        <img src={`${heroOne}`} class="carousel__image" />
+                    </div>
+                    <div className="carousel__item">
+                        <img src={`${heroTwo}`} class="carousel__image" />
+                    </div>
+                    <div className="carousel__item">
+                        <img src={`${heroThree}`} class="carousel__image" />
+                    </div>
+                </div>
+            </div>
             <div className='home-page-bottom-container'>
-                <img className='home-page-image' src={hero} alt="" />
+
+                {/* <img className='home-page-image' src={hero} alt="" /> */}
                 <h3>Trusted by 152,000+ customers worldwide</h3>
                 <h2>The Work OS that lets you
                     shape workflows, <span className='home-page-span-bold'>your way</span></h2>
                 <p className='home-page-p'>Boost your team’s alignment, efficiency, and productivity by customizing any workflow to fit your needs.
                 </p>
 
+                {/* ******************team******************** */}
+
+                <h2>Our Team:</h2>
+
+                <div className="team-container">
+
+                    <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div className="our-team">
+                            <div className="picture">
+                                <img className="img-fluid" src={`${Yossi}`} />
+                            </div>
+                            <div className="team-content">
+                                <h3 className="name">Yossi Karasik</h3>
+                                <h4 className="title">FullStuck Developer</h4>
+                            </div>
+                            <ul className="social">
+                                <li><a href="https://www.facebook.com/yossi.karasik/" class="fa fa-facebook" aria-hidden="true"><FontAwesomeIcon icon={faFacebookF} /></a></li>
+                                <li><a href="https://github.com/yosikari/" class="fa fa-twitter" aria-hidden="true"><FontAwesomeIcon icon={faGithub} /></a></li>
+                                <li><a href="https://www.linkedin.com/in/yossi-karasik-a033561a5/" class="fa fa-google-plus" aria-hidden="true"><FontAwesomeIcon icon={faLinkedin} /></a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div className="our-team">
+                            <div className="picture">
+                            <img className="img-fluid" src={`${Oren}`} />
+                            </div>
+                            <div className="team-content">
+                                <h3 className="name">Oren Kot</h3>
+                                <h4 className="title">FullStuck Developer</h4>
+                            </div>
+                            <ul className="social">
+                                <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-facebook" aria-hidden="true"><FontAwesomeIcon icon={faFacebookF} /></a></li>
+                                <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-twitter" aria-hidden="true"><FontAwesomeIcon icon={faGithub} /></a></li>
+                                <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-google-plus" aria-hidden="true"><FontAwesomeIcon icon={faLinkedin} /></a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div className="our-team">
+                            <div className="picture">
+                            <img className="img-fluid" src={`${Harel}`} />
+                            </div>
+                            <div className="team-content">
+                                <h3 className="name">Harel Natan</h3>
+                                <h4 className="title">FullStuck Developer</h4>
+                            </div>
+                            <ul className="social">
+                                <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-facebook" aria-hidden="true"><FontAwesomeIcon icon={faFacebookF} /></a></li>
+                                <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-twitter" aria-hidden="true"><FontAwesomeIcon icon={faGithub} /></a></li>
+                                <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-google-plus" aria-hidden="true"><FontAwesomeIcon icon={faLinkedin} /></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section >
+
     )
 }
