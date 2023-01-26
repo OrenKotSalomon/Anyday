@@ -7,6 +7,7 @@ import { BoardDetails } from './pages/board-details'
 import { Login } from './pages/login-page'
 import { SignUp } from './pages/sign-up'
 import { UserMsg } from './cmps/user-msg'
+import { Kanban } from './pages/kanban'
 
 export function RootCmp() {
 
@@ -15,6 +16,7 @@ export function RootCmp() {
             <Routes>
                 <Route element={<HomePage />} path="/" />
                 <Route element={<BoardDetails />} path="/board/:boardId" />
+                <Route element={<Kanban />} path="/:boardId/views/kanban" />
                 <Route element={<UserDetails />} path="/user-details/:userId" />
                 <Route element={<Login />} path="/login" />
                 <Route element={<SignUp />} path="/signup" />

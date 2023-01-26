@@ -8,16 +8,19 @@ import { DynamicModal } from "../cmps/dynamicCmps/dynamic-modal.jsx";
 import { GroupPreview } from "../cmps/group-preview";
 import { SideGroupBar } from "../cmps/side-group-bar";
 
-import { ADD_GROUP_FROM_BUTTOM, ADD_GROUP_FROM_HEADER, ADD_TASK_FROM_HEADER, DATE_PICKER, LABEL_STATUS_PICKER, MEMEBER_PICKER, ON_DRAG_GROUP, PRIORITY_PICKER, REMOVE_CHECKED_VALUE_GROUPS, REMOVE_TASKS_FROM_GROUP, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_LABEL_STATUS, UPDATE_TASK_MEMBERS, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../services/board.service.local";
+import { ADD_GROUP_FROM_BUTTOM, ADD_GROUP_FROM_HEADER, ADD_TASK_FROM_HEADER, DATE_PICKER, DUPLICATE_CHECKED_TASKS, LABEL_STATUS_PICKER, MEMEBER_PICKER, ON_DRAG_GROUP, PRIORITY_PICKER, REMOVE_CHECKED_VALUE_GROUPS, REMOVE_TASKS_FROM_GROUP, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_LABEL_STATUS, UPDATE_TASK_MEMBERS, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../services/board.service.local";
 import { handleOnDragEnd, loadBoard, onGroupDragStart, setPrevBoard, updateBoard, updateGroup, updateTask } from "../store/board.actions";
 
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Loader, Icon, DialogContentContainer, MenuItem, Menu, MenuDivider } from 'monday-ui-react-core';
 import { Add, Group, Item, Close } from 'monday-ui-react-core/icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faCircleArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { faCopy } from '@fortawesome/free-regular-svg-icons'
 import { utilService } from "../services/util.service";
 import { socketService, SOCKET_EMIT_SET_TOPIC, SOCKET_EVENT_UPDATE_BOARD } from "../services/socket.service";
+import { Kanban } from "./kanban";
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
 
 export function BoardDetails() {
 
@@ -29,6 +32,7 @@ export function BoardDetails() {
     const [isDndModeDisabled, setIsDndModeDisabled] = useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [isCheckedShow, setIsCheckedShow] = useState(false)
+    const [isMoveToShow, setisMoveToShow] = useState(false)
 
     const boardContainer = useRef()
 
@@ -162,9 +166,36 @@ export function BoardDetails() {
             return group.tasks.filter(task => !task.isChecked)
 
         })
+        try {
+            updateGroup(boardToUpdate, remainingTasks, REMOVE_TASKS_FROM_GROUP)
+            showSuccessMsg(`successfully deleted ${checkIfTaskChecked()} tasks`)
+        } catch (error) {
+            showErrorMsg('Couldn\'t delete tasks')
+            console.log(error);
+        }
 
-        updateGroup(boardToUpdate, remainingTasks, REMOVE_TASKS_FROM_GROUP)
+    }
 
+    function onDuplicateTasks() {
+        let boardToUpdate = structuredClone(board)
+        let CheckedTasks = boardToUpdate.groups.map(group => {
+            return group.tasks.filter(task => {
+                if (task.isChecked) {
+                    task.title = task.title + ' Copy'
+                    task.isChecked = false
+                    task.id = utilService.makeId()
+                    return task
+                }
+            })
+
+        })
+        try {
+            updateGroup(board, CheckedTasks, DUPLICATE_CHECKED_TASKS)
+            showSuccessMsg('Successfully duplicated tasks')
+        } catch (error) {
+
+            showErrorMsg('Cannot duplicated tasks')
+        }
     }
 
     function onDragGroup(e) {
@@ -229,7 +260,7 @@ export function BoardDetails() {
                     <div className="item-select-container">
 
                         <div className="selected-txt">
-                            Item selected
+                            {checkIfTaskChecked() === 1 ? 'Item selected' : 'Items selected'}
                         </div>
                     </div>
                     <div className="btns-container">
@@ -247,21 +278,29 @@ export function BoardDetails() {
                             <button>delete</button>
                             <span>delete</span>
                         </div>
-                        <div className="checknox-delete-btn-container-temp">
-                            <button>delete</button>
-                            <span>delete</span>
-                        </div>
-                        <div className="checknox-delete-btn-container-temp">
-                            <button>delete</button>
-                            <span>delete</span>
+
+                        <div className="checknox-delete-btn-container">
+                            <button onClick={onDuplicateTasks}>
+                                <FontAwesomeIcon
+                                    className="icon-delete"
+                                    icon={faCopy} />
+                            </button>
+                            <span>Duplicate</span>
                         </div>
                         <div className="checknox-delete-btn-container">
                             <button onClick={onDeleteTasks}>
                                 <FontAwesomeIcon
                                     className="icon-delete"
                                     icon={faTrash} />
+
                             </button>
-                            <span>delete</span>
+                            <span>Delete</span>
+                        </div>
+                        <div className="checknox-move-btn-container">
+                            <button onClick={() => setisMoveToShow(!isMoveToShow)}>      <FontAwesomeIcon
+                                className="icon-delete"
+                                icon={faCircleArrowRight} /></button>
+                            <span>Move to</span>
                         </div>
                     </div>
                     <div className="close-checked-modal">
@@ -270,7 +309,9 @@ export function BoardDetails() {
 
                         </button>
                     </div>
+
                 </div>
+
             </div>}
 
         </div>

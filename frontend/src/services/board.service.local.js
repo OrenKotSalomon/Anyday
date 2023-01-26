@@ -44,6 +44,7 @@ export const UPDATE_TASK_LABEL_STATUS = 'UPDATE_TASK_LABEL_STATUS'
 export const UPDATE_TASK_LABEL_NUMBER = 'UPDATE_TASK_LABEL_NUMBER'
 export const UPDATE_TASK_LABEL_TEXT = 'UPDATE_TASK_LABEL_TEXT'
 export const UPDATE_TASK_CHECKED = 'UPDATE_TASK_CHECKED'
+export const DUPLICATE_CHECKED_TASKS = 'DUPLICATE_CHECKED_TASKS'
 
 // Dynamic modal/component
 export const DATE_PICKER = 'DATE_PICKER'
@@ -108,6 +109,7 @@ async function remove(boardId) {
 async function save(board) {
     var savedBoard
     if (board._id) {
+
         // savedBoard = await storageService.put(BOARD_KEY, board)
         savedBoard = await httpService.put(`board/${board._id}`, board)
         return savedBoard
@@ -246,6 +248,17 @@ function updateGroupsService(board, data, type) {
                 })
             })
             return board
+        case DUPLICATE_CHECKED_TASKS:
+            groupToUpdate = board.groups.forEach((group, Groupidx) => {
+                group.isChecked = false
+                group.tasks.forEach((task, taskIdx) => {
+                    if (data[Groupidx][taskIdx]) group.tasks.splice(taskIdx, 0, data[Groupidx][taskIdx])
+                    task.isChecked = false
+
+                })
+            })
+
+            return board
         default:
             return board
     }
@@ -318,7 +331,7 @@ function updateTaskService(board, data, type) {
             board.groups[groupIdx].tasks[taskIdx].labelStatus = data.labelPick
             return board
         case UPDATE_TASK_MEMBERS:
-            if(board.groups[groupIdx].tasks[taskIdx].members.some((member) => member._id === data.labelPick._id))return
+            if (board.groups[groupIdx].tasks[taskIdx].members.some((member) => member._id === data.labelPick._id)) return
             board.groups[groupIdx].tasks[taskIdx].members.push(data.labelPick)
             console.log(board)
             return board
