@@ -13,6 +13,7 @@ export const userService = {
     getById,
     remove,
     update,
+    changeImage
 }
 
 window.userService = userService
@@ -36,12 +37,13 @@ function remove(userId) {
     return httpService.delete(`user/${userId}`)
 }
 
-async function update({ _id, score }) {
+async function update({ _id, imgUrl }) {
+    console.log('update user?',_id, imgUrl)
     // const user = await storageService.get('user', _id)
     // user.score = score
     // await storageService.put('user', user)
 
-    const user = await httpService.put(`user/${_id}`, { _id, score })
+    const user = await httpService.put(`user/${_id}`, { _id, imgUrl })
     // Handle case in which admin updates other user's details
     if (getLoggedinUser()._id === user._id) saveLocalUser(user)
     return user
@@ -78,13 +80,13 @@ async function logout() {
     return await httpService.post('auth/logout')
 }
 
-// async function changeScore(by) {
-//     const user = getLoggedinUser()
-//     if (!user) throw new Error('Not loggedin')
-//     user.score = user.score + by || by
-//     await update(user)
-//     return user.score
-// }
+async function changeImage(img) {
+    const user = getLoggedinUser()
+    if (!user) throw new Error('Not loggedin')
+    user.imgUrl = img
+    await update(user)
+    return user.imgUrl
+}
 
 
 function saveLocalUser(user) {
