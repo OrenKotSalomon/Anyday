@@ -17,6 +17,7 @@ import { Add, Group, Item, Close } from 'monday-ui-react-core/icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { utilService } from "../services/util.service";
+import { socketService, SOCKET_EMIT_SET_TOPIC, SOCKET_EVENT_UPDATE_BOARD } from "../services/socket.service";
 
 export function BoardDetails() {
 
@@ -33,7 +34,11 @@ export function BoardDetails() {
 
     useEffect(() => {
         loadBoard(boardId)
-
+        socketService.on(SOCKET_EVENT_UPDATE_BOARD, loadBoard)
+        socketService.emit(SOCKET_EMIT_SET_TOPIC, boardId)
+        return () => {
+            socketService.off(SOCKET_EVENT_UPDATE_BOARD, loadBoard)
+        }
     }, [boardId])
 
     function onUpdateTaskLabel(type, data, labelPick) {

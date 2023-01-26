@@ -3,6 +3,7 @@ import { userService } from "../services/user.service.js";
 import { store } from './store.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { ADD_BOARD, REMOVE_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UPDATE_BOARD, SET_BOARD, SET_PREV_BOARD } from "./board.reducer.js";
+import { socketService, SOCKET_EMIT_UPDATE_BOARD } from "../services/socket.service.js";
 
 // Action Creators:
 export function getActionRemoveboard(boardId) {
@@ -28,8 +29,7 @@ export async function loadBoard(boardId) {
     try {
         const board = await boardService.getById(boardId)
         store.dispatch({ type: SET_BOARD, board })
-        // store.dispatch({ type: SET_PREV_BOARD, prevBoard: board })
-        // return board
+        return board
     } catch (err) {
         console.log('Cannot load board', err)
         throw err
@@ -84,18 +84,20 @@ export async function updateBoard(board, data, type) {
     try {
         const boardToUpdate = boardService.updateBoardService(board, data, type)
         const savedBoard = await boardService.save(boardToUpdate)
+        socketService.emit(SOCKET_EMIT_UPDATE_BOARD, savedBoard._id)
         store.dispatch(getActionUpdateboard(savedBoard))
         return savedBoard
     } catch (err) {
         throw err
     }
-
+    
 }
 
 export async function updateGroup(board, data, type) {
     try {
         const boardToUpdate = boardService.updateGroupsService(board, data, type)
         const savedBoard = await boardService.save(boardToUpdate)
+        socketService.emit(SOCKET_EMIT_UPDATE_BOARD, savedBoard._id)
         store.dispatch(getActionUpdateboard(savedBoard))
         return savedBoard
     } catch (err) {
@@ -108,6 +110,7 @@ export async function updateTask(board, data, type) {
     try {
         const boardToUpdate = boardService.updateTaskService(board, data, type)
         const savedBoard = await boardService.save(boardToUpdate)
+        socketService.emit(SOCKET_EMIT_UPDATE_BOARD, savedBoard._id)
         store.dispatch(getActionUpdateboard(savedBoard))
         return savedBoard
     } catch (err) {
