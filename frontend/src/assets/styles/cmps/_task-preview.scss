@@ -367,10 +367,8 @@
   }
 
   .member-empty-avatar {
-    svg {
-      color: rgb(197, 199, 208);
-      font-size: 30px;
-      margin-top: 3px;
+    .guestAvatar {
+      margin-top: 4px;
     }
   }
 }

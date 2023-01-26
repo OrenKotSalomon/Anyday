@@ -90,13 +90,14 @@ export async function updateBoard(board, data, type) {
     } catch (err) {
         throw err
     }
-    
+
 }
 
 export async function updateGroup(board, data, type) {
     try {
         const boardToUpdate = boardService.updateGroupsService(board, data, type)
         const savedBoard = await boardService.save(boardToUpdate)
+
         socketService.emit(SOCKET_EMIT_UPDATE_BOARD, savedBoard._id)
         store.dispatch(getActionUpdateboard(savedBoard))
         return savedBoard
