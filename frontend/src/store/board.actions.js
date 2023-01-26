@@ -25,9 +25,9 @@ export function getActionUpdateboard(board) {
     }
 }
 
-export async function loadBoard(boardId) {
+export async function loadBoard(boardId, filterBy) {
     try {
-        const board = await boardService.getById(boardId)
+        const board = await boardService.getById(boardId, filterBy)
         store.dispatch({ type: SET_BOARD, board })
         return board
     } catch (err) {
@@ -96,6 +96,8 @@ export async function updateBoard(board, data, type) {
 export async function updateGroup(board, data, type) {
     try {
         const boardToUpdate = boardService.updateGroupsService(board, data, type)
+        console.log('boardToUpdate', boardToUpdate);
+
         const savedBoard = await boardService.save(boardToUpdate)
 
         socketService.emit(SOCKET_EMIT_UPDATE_BOARD, savedBoard._id)

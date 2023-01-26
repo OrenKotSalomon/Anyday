@@ -26,6 +26,7 @@ import heroThree from '../assets/img/hero-3.jpg'
 export function HomePage() {
     const loggedInUser = userService.getLoggedinUser()
     const boards = useSelector((storeState) => storeState.boardModule.boards)
+    const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
 
     useEffect(() => {
         loadBoards()

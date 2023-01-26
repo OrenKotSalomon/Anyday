@@ -7,7 +7,7 @@ import { BoardView } from "./board-view";
 import { MenuButton, Menu, Icon } from 'monday-ui-react-core'
 import { MoveArrowLeft, Search, Filter } from 'monday-ui-react-core/icons'
 
-export function BoardHeader({ board }) {
+export function BoardHeader({ board, onSetFilterBy }) {
     const [isFilterOn, setIsFilterOn] = useState(false)
     const navigate = useNavigate()
 
@@ -88,7 +88,9 @@ export function BoardHeader({ board }) {
                 <BoardView board={board}
                 />
                 <div className="spacer-header"></div>
-                <BoardFilter board={board}
+                <BoardFilter
+                    onSetFilterBy={onSetFilterBy}
+                    board={board}
                 />
             </div>
         </section>
