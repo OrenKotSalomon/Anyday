@@ -18,16 +18,13 @@
   }
 
   .menu-btn-mobile-header {
-
     rotate: 90deg;
     margin-right: 8px;
-
   }
 
   @include for-narrow-layout {
     display: none;
   }
-
 }
 
 .mobile-header-filter {
@@ -78,28 +75,21 @@
         background-color: $main-bgc-white;
         color: rgb(31, 30, 30);
         font-size: 16px;
-
       }
 
       .mobile-input-filter {
         min-width: rem(300px);
-
       }
-
     }
 
     .icon-container {
       padding-left: 140px;
-
     }
-
   }
 
   @include for-narrow-layout {
     display: none;
-
   }
-
 }
 
 .board-header {
@@ -267,7 +257,7 @@
 
   height: 36px;
 
-  >* {
+  > * {
     padding: 7px;
     padding-bottom: 3px;
   }
@@ -308,12 +298,25 @@
     color: $cell-border-color;
   }
 
-  .kanban {
+  .main-table-txt {
+    & a.active {
+      border-bottom: 1px solid blue;
+      padding: 10px;
+    }
+  }
+
+  .kanban-a {
     display: flex;
     align-items: center;
-    padding: 8px;
+    padding: 10px;
     margin-right: 6px;
     margin-left: 6px;
+    & a.active {
+      
+        border-bottom: 1px solid blue;
+        padding: 10px 0 10px;
+      
+    }
   }
 }
 
@@ -328,7 +331,10 @@
   }
 }
 
-.monday-style-split-button--kind-primary:not(.monday-style-split-button--disabled).monday-style-split-button--color-primary .monday-style-split-button__secondary-button {
+.monday-style-split-button--kind-primary:not(
+    .monday-style-split-button--disabled
+  ).monday-style-split-button--color-primary
+  .monday-style-split-button__secondary-button {
   width: 28px;
   padding: 10px;
   color: white;
