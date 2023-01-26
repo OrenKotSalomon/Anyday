@@ -57,7 +57,7 @@ export function DynamicCmp({ cmp, info, openModal, handleChange }) {
         case MEMEBER_PICKER:
             return <div className="person-label"
                 onClick={(ev) => openModal(ev, { task: cmp.task, groupId: cmp.groupId }, MEMEBER_PICKER)} >
-                {Array.isArray(cmp.task.members) ?
+                {(Array.isArray(cmp.task.members)&&cmp.task.members.length) ?
                     (<div className='member-avatar-container'>
                         {cmp.task.members.map((member, idx) => <div key={member._id+''+Math.random()}><span className='member-hover-info'>{member.fullname}</span>
                             {member.imgUrl !== '' ? <img className="member-avatar-img" style={{ right: `${(idx * 24)}%`,position: `${cmp.task.members.length===1?'unset':'absolute'}` }} src={`${member.imgUrl}`} alt="" />
