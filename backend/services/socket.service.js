@@ -29,11 +29,19 @@ function setupSocketAPI(http) {
             // emits only to sockets in the same room
             gIo.to(socket.myTopic).emit('chat-add-msg', msg)
         })
-        socket.on('user-watch', userId => {
-            logger.info(`user-watch from socket [id: ${socket.id}], on user ${userId}`)
-            socket.join('watching:' + userId)
-            
+        socket.on('emit-update-board', board => {
+            logger.info(`New chat msg from socket [id: ${socket.id}], emitting to topic ${socket.myTopic}`)
+            // emits to all sockets:
+            // gIo.emit('chat addMsg', msg)
+            // emits only to sockets in the same room
+            gIo.to(socket.myTopic).emit('event-update-board', board)
         })
+
+        // socket.on('user-watch', userId => {
+        //     logger.info(`user-watch from socket [id: ${socket.id}], on user ${userId}`)
+        //     socket.join('watching:' + userId)
+            
+        // })
         socket.on('set-user-socket', userId => {
             logger.info(`Setting socket.userId = ${userId} for socket [id: ${socket.id}]`)
             socket.userId = userId
