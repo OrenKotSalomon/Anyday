@@ -15,6 +15,7 @@ import hero from '../assets/img/home-page-hero.jpg'
 export function HomePage() {
     const loggedInUser = userService.getLoggedinUser()
     const boards = useSelector((storeState) => storeState.boardModule.boards)
+    const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
 
     useEffect(() => {
         loadBoards()
@@ -28,7 +29,7 @@ export function HomePage() {
         try {
             await logout()
         } catch (err) {
-            console.error('Have a problem on log-out',err)
+            console.error('Have a problem on log-out', err)
         }
     }
 

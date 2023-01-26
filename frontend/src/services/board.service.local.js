@@ -26,6 +26,7 @@ export const UPDATE_GROUP_CHECKED = 'UPDATE_GROUP_CHECKED'
 export const REMOVE_TASKS_FROM_GROUP = 'REMOVE_TASKS_FROM_GROUP'
 export const DELETE_SELECTED_TASKS = 'REMOVE_TASKS_FROM_GROUP'
 export const REMOVE_CHECKED_VALUE_GROUPS = 'REMOVE_CHECKED_VALUE_GROUPS'
+export const MOVE_TASK_TO_GROUP = 'MOVE_TASK_TO_GROUP'
 
 //Tasks
 export const DELETE_TASK = 'DELETE_TASK'
@@ -74,7 +75,7 @@ window.bs = boardService
 async function query(filterBy = getDefaultFilter()) {
     const queryParams = `?title=${filterBy.title}&sortBy=${filterBy.sortBy}&desc=${filterBy.desc}`
     // let boards = await storageService.query(BOARD_KEY)
-    let boards = await httpService.get(BASE_URL + queryParams)
+    let boards = await httpService.get(BASE_URL)
 
     if (!boards.length) {
         // await storageService.post(BOARD_KEY, demoBoard)
@@ -87,7 +88,10 @@ async function query(filterBy = getDefaultFilter()) {
     // Filters
     // if (filterBy.txt) {
     //     const regex = new RegExp(filterBy.txt, 'i')
-    //     boards = boards.filter(board => regex.test(board.vendor) || regex.test(board.description))
+    //     regex.test(board.vendor) || regex.test(board.description)
+    //     boards = boards.filter(board => {
+    //         board.groups.
+    //     })
     // }
     // if (filterBy.price) {
     //     boards = boards.filter(board => board.price <= filterBy.price)
@@ -95,15 +99,35 @@ async function query(filterBy = getDefaultFilter()) {
     return boards
 }
 
-function getById(boardId) {
-    // return storageService.get(BOARD_KEY, boardId)
-    return httpService.get(`board/${boardId}`)
+async function getById(boardId, filterBy = getDefaultFilter()) {
+    try {
+        const board = await httpService.get(`board/${boardId}`)
+        let filteredBoard = structuredClone(board)
+
+        if (filterBy.title) {
+            const regex = new RegExp(filterBy.title, 'i')
+            filteredBoard.groups = filteredBoard.groups.filter(group => {
+                if (regex.test(group.title)) {
+                    return regex.test(group.title)
+                }
+                else {
+                    return group.tasks = group.tasks.filter(task => {
+                        return regex.test(task.title)
+                    })
+                }
+            })
+        }
+        return filteredBoard
+    } catch (error) {
+        throw new Error('cant load board from service front', error)
+    }
 }
 
-async function remove(boardId) {
+async function remove(boardId,) {
     // throw new Error('Nope')
     // await storageService.remove(BOARD_KEY, boardId)
     return httpService.delete(`board/${boardId}`)
+
 }
 
 async function save(board) {
@@ -228,6 +252,8 @@ function updateGroupsService(board, data, type) {
             board.groups.splice(groupIdx, 1, data)
             return board
         case UPDATE_GROUP_CHECKED:
+            console.log('hhhh');
+
             groupToUpdate = board.groups.find(currGroup => currGroup.id === data.id)
             groupToUpdate.tasks.forEach(task => task.isChecked = data.checked)
             groupToUpdate.isChecked = data.checked
@@ -256,6 +282,23 @@ function updateGroupsService(board, data, type) {
                     task.isChecked = false
 
                 })
+            })
+
+            return board
+        case MOVE_TASK_TO_GROUP:
+            groupToUpdate = board.groups.findIndex(group => group.id === data.groupId)
+            data.tasks.forEach((dTask, dTaskIdx) => {
+                board.groups.forEach((group, groupIdx) => {
+                    group.tasks.forEach((task, taskIdx) => {
+                        if (dTask.id === task.id) {
+                            group.tasks.splice(taskIdx, 1)
+                            board.groups[groupToUpdate].tasks.push(task)
+                        }
+                        task.isChecked = false
+                    })
+                    group.isChecked = false
+                });
+
             })
 
             return board
