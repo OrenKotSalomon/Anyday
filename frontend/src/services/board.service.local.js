@@ -24,6 +24,8 @@ export const DELETE_GROUP = 'DELETE_GROUP'
 export const ON_DRAG_TASK = 'ON_DRAG_TASK'
 export const UPDATE_GROUP_CHECKED = 'UPDATE_GROUP_CHECKED'
 export const REMOVE_TASKS_FROM_GROUP = 'REMOVE_TASKS_FROM_GROUP'
+export const DELETE_SELECTED_TASKS = 'REMOVE_TASKS_FROM_GROUP'
+export const REMOVE_CHECKED_VALUE_GROUPS = 'REMOVE_CHECKED_VALUE_GROUPS'
 
 //Tasks
 export const DELETE_TASK = 'DELETE_TASK'
@@ -229,10 +231,18 @@ function updateGroupsService(board, data, type) {
             groupToUpdate.isChecked = data.checked
             return board
         case REMOVE_TASKS_FROM_GROUP:
-            groupToUpdate = board.groups.find(currGroup => currGroup.id === data.id)
-            groupToUpdate.tasks.filter(task => {
-                data.forEach(taskId => {
-                    if (task.id === taskId) return task
+            groupToUpdate = board.groups.map((group, idx) => {
+                group.isChecked = false
+                return group.tasks = data[idx]
+            })
+
+            return board
+        case REMOVE_CHECKED_VALUE_GROUPS:
+            groupToUpdate = board.groups.forEach((group, idx) => {
+                group.isChecked = data
+                group.tasks.forEach(task => {
+
+                    task.isChecked = data
                 })
             })
             return board
@@ -308,7 +318,9 @@ function updateTaskService(board, data, type) {
             board.groups[groupIdx].tasks[taskIdx].labelStatus = data.labelPick
             return board
         case UPDATE_TASK_MEMBERS:
+            if(board.groups[groupIdx].tasks[taskIdx].members.some((member) => member._id === data.labelPick._id))return
             board.groups[groupIdx].tasks[taskIdx].members.push(data.labelPick)
+            console.log(board)
             return board
         case UPDATE_TASK_DATE:
             board.groups[groupIdx].tasks[taskIdx].dueDate = data.labelPick
@@ -622,8 +634,8 @@ const demoBoard = {
                     status: 'done',
                     priority: 'critical ⚠️',
                     members: [{
-                        userName: 'Harel',
-                        imgUrl: '../assets/img/Oren.jpg'
+                        fullname: 'Harel',
+                        imgUrl: ''
                     }],
                     labelStatus: 'label 2',
                     dueDate: 1589983468418
@@ -635,8 +647,8 @@ const demoBoard = {
                     status: 'done',
                     priority: 'medium',
                     members: [{
-                        userName: 'Yossi',
-                        imgUrl: '../assets/img/Oren.jpg'
+                        fullname: 'Yossi',
+                        imgUrl: ''
                     }],
                     labelStatus: 'default',
                     dueDate: 158993468418
@@ -658,8 +670,8 @@ const demoBoard = {
                     status: 'stuck',
                     priority: 'default',
                     members: [{
-                        userName: 'Yossi',
-                        imgUrl: '../assets/img/Oren.jpg'
+                        fullname: 'Yossi',
+                        imgUrl: ''
                     }],
                     labelStatus: 'label 2',
                     dueDate: 1589983468418
@@ -671,8 +683,8 @@ const demoBoard = {
                     status: 'working on it',
                     priority: 'low',
                     members: [{
-                        userName: 'Oren',
-                        imgUrl: '../assets/img/Oren.jpg'
+                        fullname: 'Oren',
+                        imgUrl: ''
                     }],
                     labelStatus: 'label 1',
                     dueDate: 1589983468418
@@ -695,8 +707,8 @@ const demoBoard = {
                     status: 'done',
                     priority: 'default',
                     members: [{
-                        userName: 'Oren',
-                        imgUrl: '../assets/img/Oren.jpg'
+                        fullname: 'Oren',
+                        imgUrl: ''
                     }],
                     labelStatus: 'label 1',
                     dueDate: 1589983468418
@@ -708,8 +720,8 @@ const demoBoard = {
                     status: 'default',
                     priority: 'default',
                     members: {
-                        userName: 'KAKa',
-                        imgUrl: '../assets/img/Oren.jpg'
+                        fullname: 'KAKa',
+                        imgUrl: ''
                     },
                     labelStatus: 'label 3',
                     dueDate: 1589983468418
