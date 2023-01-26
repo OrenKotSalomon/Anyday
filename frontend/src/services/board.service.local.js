@@ -11,6 +11,8 @@ const BASE_URL = 'board/'
 export const CHANGE_TITLE = 'CHANGE_TITLE'
 export const ON_DRAG_GROUP = 'ON_DRAG_GROUP'
 export const ON_DRAG_LABEL = 'ON_DRAG_LABEL'
+export const ON_DRAG_STATUS = 'ON_DRAG_STATUS'
+export const ON_DRAG_CARD = 'ON_DRAG_CARD'
 
 //Groups
 export const CHANGE_GROUP_TITLE = 'CHANGE_GROUP_TITLE'
@@ -181,6 +183,12 @@ function updateBoardService(board, data, type) {
         case ON_DRAG_LABEL:
             board.cmpsOrder = data
             return board
+        case ON_DRAG_STATUS:
+            board.statuses = data
+            return board
+        case ON_DRAG_CARD:
+            board.groups = data
+            return board
         default:
             return board
     }
@@ -218,6 +226,7 @@ function updateGroupsService(board, data, type) {
         case ADD_GROUP_TASK:
             groupToUpdate = board.groups.find(group => group.id === data.group.id)
             newTask.title = data.newTaskTitle
+            if (data.status) newTask.status = data.status
             groupToUpdate.tasks.push(newTask)
             return board
         case DELETE_GROUP:
@@ -403,18 +412,22 @@ function getEmptyBoard() {
         archivedAt: 1589983468418,
         statuses: [
             {
+                id: utilService.makeId(),
                 label: 'done',
                 bgColor: '#00c875'
             },
             {
+                id: utilService.makeId(),
                 label: 'working on it',
                 bgColor: '#fdab3d'
             },
             {
+                id: utilService.makeId(),
                 label: 'stuck',
                 bgColor: '#e2445c'
             },
             {
+                id: utilService.makeId(),
                 label: 'default',
                 bgColor: '#c4c4c4'
             },
@@ -577,18 +590,22 @@ const demoBoard = {
     archivedAt: 1589983468418,
     statuses: [
         {
+            id: utilService.makeId(),
             label: 'done',
             bgColor: '#00c875'
         },
         {
+            id: utilService.makeId(),
             label: 'working on it',
             bgColor: '#fdab3d'
         },
         {
+            id: utilService.makeId(),
             label: 'stuck',
             bgColor: '#e2445c'
         },
         {
+            id: utilService.makeId(),
             label: 'default',
             bgColor: '#c4c4c4'
         },

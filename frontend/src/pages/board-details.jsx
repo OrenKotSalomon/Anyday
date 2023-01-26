@@ -200,8 +200,8 @@ export function BoardDetails() {
         {board && <div ref={boardContainer} className="board-container">
             <BoardHeader board={board} />
 
-            <DragDropContext onDragStart={(e) => onDragGroup(e)} onDragEnd={(res) => handleOnDragEnd(res, 'group', { prevBoard, grouplist: prevBoard.groups })}>
-                <Droppable droppableId='groups' >
+            <DragDropContext onDragStart={(e) => onDragGroup(e)} onDragEnd={(res) => handleOnDragEnd(res, { prevBoard, grouplist: prevBoard.groups })}>
+                <Droppable droppableId='groups' type="group-list" >
                     {(provided) => (
 
                         <section className="groups-container"

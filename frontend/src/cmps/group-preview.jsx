@@ -304,8 +304,8 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                             </div>
                         </div>
                     </div>
-                    <DragDropContext onDragEnd={(res) => handleOnDragEnd(res, 'label', { board, cmpsOrder: board.cmpsOrder })}>
-                        <Droppable droppableId="label" direction="horizontal">
+                    <DragDropContext onDragEnd={(res) => handleOnDragEnd(res, { board, cmpsOrder: board.cmpsOrder })}>
+                        <Droppable droppableId="label" direction="horizontal" type='label-list'>
                             {(provided) => (
                                 <div className={`main-header-labels-container flex`}
                                     {...provided.droppableProps}
@@ -355,8 +355,8 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
             </div>
 
             <div className="main-group-container">
-                <DragDropContext onDragEnd={(result) => handleOnDragEnd(result, 'task', { board })} >
-                    <Droppable droppableId={group.id}>
+                <DragDropContext onDragEnd={(result) => handleOnDragEnd(result, { board })} >
+                    <Droppable droppableId={group.id} type='task-list' >
                         {(provided) => (
                             <section className={`tasks-container`}
                                 {...provided.droppableProps}

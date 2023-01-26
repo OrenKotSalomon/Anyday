@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 import { NavBar } from "../cmps/nav-bar";
 import { SideGroupBar } from "../cmps/side-group-bar";
 import { BoardHeader } from "../cmps/board-header";
-import { loadBoard } from "../store/board.actions";
+import { handleOnDragEnd, loadBoard } from "../store/board.actions";
 import { socketService, SOCKET_EMIT_SET_TOPIC, SOCKET_EVENT_UPDATE_BOARD } from "../services/socket.service";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { LabelList } from "../cmps/kanban/label-list";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { StatusesList } from "../cmps/kanban/statuses-list";
 import { Loader } from 'monday-ui-react-core';
 
 
@@ -32,19 +32,43 @@ export function Kanban() {
         <SideGroupBar />
         <div className="board-container">
             <BoardHeader board={board} />
-        {board && <section className='main-kanban-container flex'>
+            {board &&
+                <DragDropContext onDragEnd={(res) => handleOnDragEnd(res, {board, statuses: board.statuses})}>
+                    <Droppable droppableId={board._id} direction='horizontal' type='statuses-list' >
+                        {provided =>
 
-            <DragDropContext>
+                            <section className='main-kanban-container flex'
+                                // {...provided.droppableProps}
+                                ref={provided.innerRef}>
 
-                {/* <Droppable> */}
-                    {board.statuses.map(status => <LabelList key={status.label} status={status} />)}
+                                {/* DragHere */}
+                                {board.statuses.map((status, idx) =>
+                                    <Draggable
+                                        draggableId={status.id}
+                                        key={status.id}
+                                        index={idx}
+                                    >
+                                        {provided =>
 
-                {/* </Droppable> */}
+                                            <div
+                                                ref={provided.innerRef}
+                                                {...provided.draggableProps}>
 
-            </DragDropContext>
+                                                <StatusesList key={status.label} status={status} board={board} provided={provided} />
+                                            </div>
+                                        }
+                                    </Draggable>
+                                )}
+                                {/* DragHere */}
+                                
+                                {provided.placeholder}
+                            </section>
+                        }
 
 
-        </section>}
+                    </Droppable>
+                </DragDropContext>
+            }
 
         </div>
     </section>
