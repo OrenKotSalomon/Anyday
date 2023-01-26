@@ -90,13 +90,13 @@ export function HomePage() {
             <div className='animation-container'>
                 <div className="carousel__container">
                     <div className="carousel__item">
-                        <img src={`${heroOne}`} class="carousel__image" />
+                        <img src={`${heroOne}`} className="carousel__image" />
                     </div>
                     <div className="carousel__item">
-                        <img src={`${heroTwo}`} class="carousel__image" />
+                        <img src={`${heroTwo}`} className="carousel__image" />
                     </div>
                     <div className="carousel__item">
-                        <img src={`${heroThree}`} class="carousel__image" />
+                        <img src={`${heroThree}`} className="carousel__image" />
                     </div>
                 </div>
             </div>
@@ -125,9 +125,9 @@ export function HomePage() {
                                 <h4 className="title">FullStuck Developer</h4>
                             </div>
                             <ul className="social">
-                                <li><a href="https://www.facebook.com/yossi.karasik/" class="fa fa-facebook" aria-hidden="true"><FontAwesomeIcon icon={faFacebookF} /></a></li>
-                                <li><a href="https://github.com/yosikari/" class="fa fa-twitter" aria-hidden="true"><FontAwesomeIcon icon={faGithub} /></a></li>
-                                <li><a href="https://www.linkedin.com/in/yossi-karasik-a033561a5/" class="fa fa-google-plus" aria-hidden="true"><FontAwesomeIcon icon={faLinkedin} /></a></li>
+                                <li><a href="https://www.facebook.com/yossi.karasik/" className="fa fa-facebook" aria-hidden="true"><FontAwesomeIcon icon={faFacebookF} /></a></li>
+                                <li><a href="https://github.com/yosikari/" className="fa fa-twitter" aria-hidden="true"><FontAwesomeIcon icon={faGithub} /></a></li>
+                                <li><a href="https://www.linkedin.com/in/yossi-karasik-a033561a5/" className="fa fa-google-plus" aria-hidden="true"><FontAwesomeIcon icon={faLinkedin} /></a></li>
                             </ul>
                         </div>
                     </div>
@@ -142,9 +142,9 @@ export function HomePage() {
                                 <h4 className="title">FullStuck Developer</h4>
                             </div>
                             <ul className="social">
-                                <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-facebook" aria-hidden="true"><FontAwesomeIcon icon={faFacebookF} /></a></li>
-                                <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-twitter" aria-hidden="true"><FontAwesomeIcon icon={faGithub} /></a></li>
-                                <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-google-plus" aria-hidden="true"><FontAwesomeIcon icon={faLinkedin} /></a></li>
+                                <li><a href="https://codepen.io/collection/XdWJOQ/" className="fa fa-facebook" aria-hidden="true"><FontAwesomeIcon icon={faFacebookF} /></a></li>
+                                <li><a href="https://codepen.io/collection/XdWJOQ/" className="fa fa-twitter" aria-hidden="true"><FontAwesomeIcon icon={faGithub} /></a></li>
+                                <li><a href="https://codepen.io/collection/XdWJOQ/" className="fa fa-google-plus" aria-hidden="true"><FontAwesomeIcon icon={faLinkedin} /></a></li>
                             </ul>
                         </div>
                     </div>
@@ -159,9 +159,9 @@ export function HomePage() {
                                 <h4 className="title">FullStuck Developer</h4>
                             </div>
                             <ul className="social">
-                                <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-facebook" aria-hidden="true"><FontAwesomeIcon icon={faFacebookF} /></a></li>
-                                <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-twitter" aria-hidden="true"><FontAwesomeIcon icon={faGithub} /></a></li>
-                                <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-google-plus" aria-hidden="true"><FontAwesomeIcon icon={faLinkedin} /></a></li>
+                                <li><a href="https://codepen.io/collection/XdWJOQ/" className="fa fa-facebook" aria-hidden="true"><FontAwesomeIcon icon={faFacebookF} /></a></li>
+                                <li><a href="https://codepen.io/collection/XdWJOQ/" className="fa fa-twitter" aria-hidden="true"><FontAwesomeIcon icon={faGithub} /></a></li>
+                                <li><a href="https://codepen.io/collection/XdWJOQ/" className="fa fa-google-plus" aria-hidden="true"><FontAwesomeIcon icon={faLinkedin} /></a></li>
                             </ul>
                         </div>
                     </div>

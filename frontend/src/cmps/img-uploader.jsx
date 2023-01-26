@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { uploadService } from '../services/upload.service'
+import { userService } from '../services/user.service.js'
+import { updateUserImg } from '../store/user.actions.js'
 
-export function ImgUploader({ onUploaded = null }) {
+export function ImgUploader({ onUploaded = null, setImgSrc }) {
   const [imgData, setImgData] = useState({
     imgUrl: null,
     height: 500,
@@ -15,17 +17,30 @@ export function ImgUploader({ onUploaded = null }) {
     setImgData({ imgUrl: secure_url, width, height })
     setIsUploading(false)
     onUploaded && onUploaded(secure_url)
+    setUserImg(secure_url)
+    updateUserImg(secure_url)
+    setImgSrc(secure_url)
   }
 
-  function getUploadLabel() {
-    if (imgData.imgUrl) return 'Upload Another?'
-    return isUploading ? 'Uploading....' : 'Upload Image'
-  }
+  // function getUploadLabel() {
+  //   if (imgData.imgUrl) return 'Upload Another?'
+  //   return isUploading ? 'Uploading....' : 'Upload Image'
+  // }
+
+
+  async function setUserImg(img) {
+    try {
+        userService.changeImage(img)
+    }
+    catch (err) {
+        console.error(err)
+    }
+}
 
   return (
     <div className="upload-preview">
-      {imgData.imgUrl && <img src={imgData.imgUrl} style={{ maxWidth: '200px', float: 'right' }} />}
-      <label htmlFor="imgUpload">{getUploadLabel()}</label>
+      {/* {imgData.imgUrl && <img src={imgData.imgUrl} style={{ maxWidth: '200px', float: 'right' }} />} */}
+      {/* <label htmlFor="imgUpload">{getUploadLabel()}</label> */}
       <input type="file" onChange={uploadImg} accept="img/*" id="imgUpload" />
     </div>
   )

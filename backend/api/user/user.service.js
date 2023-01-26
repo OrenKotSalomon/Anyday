@@ -73,15 +73,17 @@ async function remove(userId) {
 }
 
 async function update(user) {
-    console.log('here?')
     try {
+        const prevUser = await getById(user._id)
+        prevUser.imgUrl = user.imgUrl
         // peek only updatable properties
-        const userToSave = {
-            _id: ObjectId(user._id), // needed for the returnd obj
-            fullname: user.fullname,
-            imgUrl: user.imgUrl,  
-        }
-        console.log(userToSave)
+         const userToSave = prevUser
+        // {
+        //     _id: ObjectId(user._id), // needed for the returnd obj
+        //     fullname: user.fullname,
+        //     imgUrl: user.imgUrl,
+        // }
+        console.log('usertosave......................' ,userToSave)
         const collection = await dbService.getCollection('user')
         await collection.updateOne({ _id: userToSave._id }, { $set: userToSave })
         return userToSave
@@ -99,7 +101,6 @@ async function add(user) {
             password: user.password,
             fullname: user.fullname,
             imgUrl: user.imgUrl,
-            score: 100
         }
         const collection = await dbService.getCollection('user')
         await collection.insertOne(userToAdd)

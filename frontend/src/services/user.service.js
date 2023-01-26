@@ -38,7 +38,6 @@ function remove(userId) {
 }
 
 async function update({ _id, imgUrl }) {
-    console.log('update user?',_id, imgUrl)
     // const user = await storageService.get('user', _id)
     // user.score = score
     // await storageService.put('user', user)
@@ -84,13 +83,17 @@ async function changeImage(img) {
     const user = getLoggedinUser()
     if (!user) throw new Error('Not loggedin')
     user.imgUrl = img
-    await update(user)
-    return user.imgUrl
+    try {
+        await update(user)
+        return user.imgUrl
+    }
+    catch (err) {
+        console.error(err)
+    }
 }
 
-
 function saveLocalUser(user) {
-    user = { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl, score: user.score }
+    user = { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl  }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user
 }
