@@ -24,6 +24,8 @@ export const DELETE_GROUP = 'DELETE_GROUP'
 export const ON_DRAG_TASK = 'ON_DRAG_TASK'
 export const UPDATE_GROUP_CHECKED = 'UPDATE_GROUP_CHECKED'
 export const REMOVE_TASKS_FROM_GROUP = 'REMOVE_TASKS_FROM_GROUP'
+export const DELETE_SELECTED_TASKS = 'REMOVE_TASKS_FROM_GROUP'
+export const REMOVE_CHECKED_VALUE_GROUPS = 'REMOVE_CHECKED_VALUE_GROUPS'
 
 //Tasks
 export const DELETE_TASK = 'DELETE_TASK'
@@ -229,10 +231,18 @@ function updateGroupsService(board, data, type) {
             groupToUpdate.isChecked = data.checked
             return board
         case REMOVE_TASKS_FROM_GROUP:
-            groupToUpdate = board.groups.find(currGroup => currGroup.id === data.id)
-            groupToUpdate.tasks.filter(task => {
-                data.forEach(taskId => {
-                    if (task.id === taskId) return task
+            groupToUpdate = board.groups.map((group, idx) => {
+                group.isChecked = false
+                return group.tasks = data[idx]
+            })
+
+            return board
+        case REMOVE_CHECKED_VALUE_GROUPS:
+            groupToUpdate = board.groups.forEach((group, idx) => {
+                group.isChecked = data
+                group.tasks.forEach(task => {
+
+                    task.isChecked = data
                 })
             })
             return board

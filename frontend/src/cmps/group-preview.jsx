@@ -297,7 +297,7 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                                 <input className='row-checkbox'
 
                                     onChange={(ev) => handleChangeCheckbox(ev, group.id)}
-                                    type="checkbox" />
+                                    type="checkbox" checked={group.isChecked} />
                             </div>
                             <div className='task-main-container'>
                                 <div className="task-row-container">Item</div>
