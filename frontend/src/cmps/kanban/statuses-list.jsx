@@ -23,12 +23,10 @@ export function StatusesList({ status, board, provided }) {
 
     return <Droppable key={status.id} droppableId={status.id} type='task-card' >
         {prov =>
-
             <section className='kanban-label-list'
                 style={{ backgroundColor: status.bgColor }}
                 {...prov.droppableProps}
                 ref={prov.innerRef}>
-
                 <div className="list-title"
                     {...provided.dragHandleProps}
                 >{status.label}</div>
@@ -36,7 +34,6 @@ export function StatusesList({ status, board, provided }) {
                     {board.groups.map(group =>
                         group.tasks.map((task, idx) =>
                             task.status === status.label ?
-
                                 <Draggable
                                     draggableId={task.id}
                                     key={task.id}
@@ -53,7 +50,6 @@ export function StatusesList({ status, board, provided }) {
 
                                     }
                                 </Draggable>
-
                                 : '')
                     )}
                     {prov.placeholder}

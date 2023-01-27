@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { utilService } from '../services/util.service';
-import { handleOnDragEnd, updateGroup } from '../store/board.actions';
+import { updateGroup } from '../store/board.actions';
 import { ADD_GROUP, ADD_GROUP_TASK, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, LABEL_STATUS_PICKER, MEMEBER_PICKER, NUMBER_PICKER, ON_DRAG_TASK, PRIORITY_PICKER, STATUS_PICKER, TEXT_LABEL, UPDATE_GROUP_CHECKED } from '../services/board.service.local';
 
 import { TaskPreview } from "./task-preview";
@@ -10,7 +10,7 @@ import { DynamicSummaryCmp } from './dynamicCmps/dynamic-summary-cmp';
 
 import { EditableHeading, Tooltip, MenuButton, Menu, MenuItem, ColorPicker, Icon } from 'monday-ui-react-core'
 import { Delete, Bullet, Duplicate, Add, DropdownChevronDown, DropdownChevronRight } from 'monday-ui-react-core/icons'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, isDndModeDisabled, index, setIsCheckedShow }) {
 
@@ -304,7 +304,6 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                             </div>
                         </div>
                     </div>
-                    <DragDropContext onDragEnd={(res) => handleOnDragEnd(res, { board, cmpsOrder: board.cmpsOrder })}>
                         <Droppable droppableId="label" direction="horizontal" type='label-list'>
                             {(provided) => (
                                 <div className={`main-header-labels-container flex`}
@@ -329,7 +328,6 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                                 </div>
                             )}
                         </Droppable>
-                    </DragDropContext>
                     <div className='main-right-header flex'>
                         <div className="add-label-btn-container"
                             style={{
@@ -355,12 +353,11 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
             </div>
 
             <div className="main-group-container">
-                <DragDropContext onDragEnd={(result) => handleOnDragEnd(result, { board })} >
                     <Droppable droppableId={group.id} type='task-list' >
-                        {(provided) => (
+                        {(taskProvider) => (
                             <section className={`tasks-container`}
-                                {...provided.droppableProps}
-                                ref={provided.innerRef}>
+                                {...taskProvider.droppableProps}
+                                ref={taskProvider.innerRef}>
 
                                 {group.tasks.map((task, index) =>
                                     <Draggable key={task.id} draggableId={task.id} index={index} isDragDisabled={isDndModeDisabled} >
@@ -379,7 +376,7 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                                         )}
                                     </Draggable>
                                 )}
-                                {provided.placeholder}
+                                {taskProvider.placeholder}
                                 <div className='add-task-wrapper'>
                                     <div className='add-task-container'>
                                         <div className='add-task-input-container'>
@@ -416,7 +413,6 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                                         <div className='white-box'></div>
                                     </div>
 
-                                    {/* TAHTIT */}
                                     <div className='label-sum-container'>
 
                                         <div className='hidden-task-container'>
@@ -447,7 +443,6 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
 
                         )}
                     </Droppable>
-                </DragDropContext>
             </div>
         </section>}
 

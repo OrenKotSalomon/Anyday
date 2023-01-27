@@ -96,7 +96,6 @@ export async function updateBoard(board, data, type) {
 export async function updateGroup(board, data, type) {
     try {
         const boardToUpdate = boardService.updateGroupsService(board, data, type)
-        console.log('boardToUpdate', boardToUpdate);
 
         const savedBoard = await boardService.save(boardToUpdate)
 
@@ -109,7 +108,7 @@ export async function updateGroup(board, data, type) {
     }
 }
 
-export async function updateTask(board, data, type , isDelete) {
+export async function updateTask(board, data, type, isDelete) {
     try {
         const boardToUpdate = boardService.updateTaskService(board, data, type, isDelete)
         const savedBoard = await boardService.save(boardToUpdate)
@@ -133,15 +132,13 @@ export function onGroupDragStart(board) {
 }
 
 export function handleOnDragEnd(res, data) {
-    console.log('res:', res)
     if (!res.destination) return
     let board
 
     if (data) {
-        if (data.board) board = data.board
         if (data.prevBoard) board = data.prevBoard
+        if (data.board) board = data.board
     }
-
     const { source, destination, type, draggableId } = res
     const draggedFromId = source.droppableId
     const draggedToId = destination.droppableId
@@ -179,13 +176,12 @@ export function handleOnDragEnd(res, data) {
             return updateBoard(board, newOrderedStatuses, ON_DRAG_STATUS)
         case 'task-card':
             if (source.droppableId !== destination.droppableId) {
-                // const sourceStatus = board.statuses.find(status => status.id === draggedFromId)
                 const destStatus = board.statuses.find(status => status.id === draggedToId)
-                const groupToUpdate = board.groups.find(group => 
+                const groupToUpdate = board.groups.find(group =>
                     group.tasks.find(task => task.id === draggableId))
-                    const taskToUpdate = groupToUpdate.tasks.find(task => task.id === draggableId) 
-                    taskToUpdate.status = destStatus.label
-                    console.log('taskToUpdate:', taskToUpdate)
+                const taskToUpdate = groupToUpdate.tasks.find(task => task.id === draggableId)
+                taskToUpdate.status = destStatus.label
+                console.log('taskToUpdate:', taskToUpdate)
                 // const sourceTasks = sourceStatus.tasks
                 // const destTasks = destStatus.tasks
                 // const [removed] = sourceTasks.splice(source.index, 1)

@@ -62,7 +62,7 @@ export function BoardDetails() {
             case UPDATE_TASK_PRIORITY:
                 return updateTask(board, data, UPDATE_TASK_PRIORITY)
             case UPDATE_TASK_MEMBERS:
-                return updateTask(board, data, UPDATE_TASK_MEMBERS , isDelete)
+                return updateTask(board, data, UPDATE_TASK_MEMBERS, isDelete)
 
         }
 
@@ -167,6 +167,7 @@ export function BoardDetails() {
         setIsCheckedShow(false)
 
     }
+
     function onDeleteTasks() {
         // let boardToUpdate = structuredClone(board)
 
@@ -221,9 +222,9 @@ export function BoardDetails() {
         }
     }
 
-    function onDragGroup(e) {
-        console.log('e:', e)
-        // if (task) return
+    function onDragGroup({ type }) {
+        console.log('type:', type)
+        if (type !== 'group-list') return
         setPrevBoard(board)
         onGroupDragStart(board)
     }
@@ -237,7 +238,13 @@ export function BoardDetails() {
                 onSetFilterBy={onSetFilterBy}
             />
 
-            <DragDropContext onDragStart={(e) => onDragGroup(e)} onDragEnd={(res) => handleOnDragEnd(res, { prevBoard, grouplist: prevBoard.groups })}>
+            <DragDropContext onDragStart={onDragGroup}
+                onDragEnd={(res) => handleOnDragEnd(res, {
+                    board,
+                    prevBoard,
+                    grouplist: prevBoard.groups,
+                    cmpsOrder: board.cmpsOrder
+                })}>
                 <Droppable droppableId='groups' type="group-list" >
                     {(provided) => (
 
@@ -245,11 +252,9 @@ export function BoardDetails() {
                             {...provided.droppableProps}
                             ref={provided.innerRef}
                         >
-
                             {board.groups.map((group, index) =>
                                 <GroupPreview
                                     index={index}
-
                                     // provided={provided}
                                     key={group.id}
                                     board={board}
