@@ -7,6 +7,8 @@ import { httpService } from './http.service.js'
 const BOARD_KEY = 'boardDB'
 const BASE_URL = 'board/'
 
+const loggedInUser = userService.getLoggedinUser()
+
 //Board
 export const CHANGE_TITLE = 'CHANGE_TITLE'
 export const ON_DRAG_GROUP = 'ON_DRAG_GROUP'
@@ -329,15 +331,23 @@ async function updateGroupsService(board, data, type) {
     }
 }
 
-async function updateTaskService(board, data, type, isDelete) {
+async function updateTaskService(board, data, type) {
     let boardToUpdate = await getById(board._id)
     board = structuredClone(boardToUpdate)
     const newTask = getNewTask()
     let currTask, groupIdx, taskIdx
+    const activity = {
+        time: Date.now(),
+        byUser: loggedInUser ? loggedInUser : 'Guest',
+    }
 
     if (data) {
         groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
         taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.taskId)
+    }
+
+    if (!board.groups[groupIdx].tasks[taskIdx].activity) {
+        board.groups[groupIdx].tasks[taskIdx].activity = []
     }
 
     switch (type) {
@@ -397,11 +407,16 @@ async function updateTaskService(board, data, type, isDelete) {
             board.groups[groupIdx].tasks[taskIdx].labelStatus = data.labelPick
             return board
         case UPDATE_TASK_MEMBERS:
-            if (isDelete) {
+            activity.toUser = data.labelPick.fullname
+            if (data.isDelete){
+                activity.action = 'remove member'
+                board.groups[groupIdx].tasks[taskIdx].activity.unshift(activity)
                 let memberToDeleteIdx = board.groups[groupIdx].tasks[taskIdx].members.findIndex(member => member._id === data.labelPick._id)
                 board.groups[groupIdx].tasks[taskIdx].members.splice(memberToDeleteIdx, 1)
             } else {
-                if (board.groups[groupIdx].tasks[taskIdx].members.some((member) => member._id === data.labelPick._id)) return
+                activity.action = 'add member'
+                board.groups[groupIdx].tasks[taskIdx].activity.unshift(activity)
+                if (board.groups[groupIdx].tasks[taskIdx].members.find((member) => member._id === data.labelPick._id)) return
                 board.groups[groupIdx].tasks[taskIdx].members.push(data.labelPick)
             }
             return board
