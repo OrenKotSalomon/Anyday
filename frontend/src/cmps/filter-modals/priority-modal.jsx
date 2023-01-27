@@ -1,4 +1,4 @@
-export function PriorityModal({ board }) {
+export function PriorityModal({ board, onClickLabelFilter }) {
     return (
         <section className='status-container'>
 
@@ -7,7 +7,10 @@ export function PriorityModal({ board }) {
                 {
                     board.priorities.map((prior, idx) => {
 
-                        return <div className="status-filter" key={idx}
+                        return <div className="status-filter"
+                            onClick={() => onClickLabelFilter(prior.label)}
+
+                            key={idx}
 
                         >
                             <div className="status-color-circle"
