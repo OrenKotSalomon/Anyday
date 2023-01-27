@@ -102,6 +102,10 @@ export function HomePage() {
                 </div>
             </div>
             <div className='home-page-bottom-container'>
+<div className='home-page-brake'>.</div>
+{/* height: 10vh;
+    background-color: #07083c;
+    background: linear-gradient(to top, #07083c00 0%, rgb(12 13 74 / 32%)25%, rgb(15 16 72 / 51%)50%, rgb(15 16 72) 100%); */}
 
                 {/* <img className='home-page-image' src={hero} alt="" /> */}
                 <h3>Trusted by 152,000+ customers worldwide</h3>
@@ -112,7 +116,7 @@ export function HomePage() {
 
                 {/* ******************team******************** */}
 
-                <h2>Our Team:</h2>
+                <h2 className='team-header'>Our Team:</h2>
 
                 <div className="team-container">
 

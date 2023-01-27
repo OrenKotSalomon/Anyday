@@ -23,16 +23,36 @@ export function Dashboard() {
         loadBoard(boardId)
     }, [boardId])
 
-    function getStatuses() {
-        
+    // function getStatuses() {
+    //   let statuses = []
+    //   board.statuses.forEach(status => statuses.push(status))
+    //   return statuses  
+    // }
+
+    // function getStatusesAmount() {
+    //     board.groups
+    // }
+
+    function getStatusesMap() {
+        const statusMap = []
+        board.groups.forEach(group =>
+             group.tasks.forEach(task =>
+                 statusMap.push(task.status.charAt(0).toUpperCase() + task.status.slice(1))))
+
+        return statusMap.reduce((acc, val) => {
+            acc[val] = acc[val] ? ++acc[val] : 1
+            return acc
+        }, {})
     }
 
+    const statusesMap = getStatusesMap()
+
     const data = {
-        labels: ['name', 'description', 'description', 'description'],
+        labels: Object.keys(statusesMap),
         datasets: [
             {
-                label: 'Status Summary',
-                data: [5, 8, 6, 3],
+                label: 'Tasks',
+                data: Object.values(statusesMap),
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -43,12 +63,12 @@ export function Dashboard() {
                     'rgba(269, 140, 205, 0.5)',
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)',
                     'rgba(269, 140, 205, 0.5)',
                 ],
                 borderWidth: 2,
@@ -67,7 +87,7 @@ export function Dashboard() {
 
                 <div style={{ width: '40%', margin: 'auto' }}>
                     <h1>Status Summary</h1>
-                    <Doughnut data={data} />
+                    <PolarArea data={data} />
                 </div>
 
             </section>

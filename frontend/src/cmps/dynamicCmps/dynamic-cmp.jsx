@@ -64,7 +64,7 @@ export function DynamicCmp({ cmp, info, openModal, handleChange }) {
                 onClick={(ev) => openModal(ev, { task: cmp.task, groupId: cmp.groupId }, MEMEBER_PICKER)} >
                 {cmp.task.members.length > 0 ? <AvatarGroup size={Avatar.sizes.SMALL} type={Avatar.types.IMG} max={2}>
                     {cmp.task.members.map((member) =>
-                        <Avatar key={member._id + '' + Math.random(9)} type={Avatar.types.IMG} src={member.imgUrl !== '' ? member.imgUrl : `https://robohash.org/${Math.random(9)}`} ariaLabel={member?.fullname} />
+                        <Avatar className='member-avatar-img' key={member._id + '' + Math.random(9)} type={Avatar.types.IMG} src={member.imgUrl !== '' ? member.imgUrl : `https://robohash.org/${Math.random(9)}`} ariaLabel={member?.fullname} />
                     )}
                 </AvatarGroup>
                     : <span className='empty-member-container' >
