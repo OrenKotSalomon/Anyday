@@ -231,6 +231,91 @@
         }
     }
 
+
+
+    .task-activity-log {
+        display: flex;
+        flex-direction: column;
+        margin: 16.8px;
+
+        //todo- delete test props below
+        .task-details-by-user-img-test {
+            width: 30px;
+            height: 30px;
+            background-color: cadetblue;
+            border-radius: 222em;
+            line-height: 30px;
+            text-align: center;
+        }
+
+        .activity-row {
+            display: flex;
+            border-bottom: 1px solid $li-grey;
+            height: 56px;
+            align-items: flex-end;
+            font-size: rem(14px);
+            font-family: roboto-regular;
+            color: $main-color;
+            padding: 0 8px;
+            padding-inline-start: 16px;
+
+
+            .activity-by {
+                display: flex;
+                flex-direction: row;
+                align-self: center;
+                text-align: -webkit-auto;
+
+                .activity-by-time {
+                    display: inline-table;
+                    align-self: center;
+                    width: 56px;
+                }
+
+                .activity-by-avatar {
+                    display: inline-table;
+                    align-self: self-end;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 25em;
+                    margin-inline-start: 12px;
+                }
+
+                .activity-by-task {
+                    display: inline-table;
+                    align-self: center;
+                    text-align: -webkit-auto;
+                    padding-inline-start: 5px;
+                    width: 200px;
+                }
+
+
+            }
+
+
+            .activity-type {
+                display: inline-table;
+                align-self: center;
+                text-align: -webkit-auto;
+                width: 104px;
+
+            }
+
+            .activity-data {
+                display: inline-table;
+                align-self: center;
+                text-align: -webkit-auto;
+                width: 184px;
+                padding-inline-start: 32px;
+
+                .activity-color {
+                    display: inline-table;
+                    color: red;
+                }
+            }
+
+        }
+    }
 }
 
 .emoji-picker {
