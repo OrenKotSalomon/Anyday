@@ -78,8 +78,9 @@ export function LoginFaceBook() {
                 scope="email"
                 onError={handleError}
                 onSuccess={handleSuccess}
+                className='btn login-fb'
             >
-                Login via Facebook
+                <FontAwesomeIcon icon={faFacebookF} /> <span>Login via Facebook</span>
             </LoginButton>
         </FacebookProvider>
     );
@@ -95,6 +96,7 @@ export function LoginFaceBook() {
 // className='btn login-fb'
 //<FontAwesomeIcon icon={faFacebookF}/> <span>Login via Facebook</span>
 //-----key: 731484244948295
+//test key : 674289491133356
 
 
 

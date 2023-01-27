@@ -59,23 +59,30 @@
 }
 
 .login-fb {
-    display: block;
+    display: flex;
     margin: 0 auto;
     font-size: rem(16px);
     line-height: rem(16px);
-    padding: 8px;
+    background-color: rgb(12, 102, 174);
+    border: 2px solid rgb(211 233 252 / 52%);
+    border-radius: 5px;
+    padding: 0;
 
     svg {
+        padding: 8px;
         font-size: rem(24px);
+        padding-right: 8px;
+        border-right: 1px solid rgba(211, 233, 252, 0.543);
     }
 
     span {
-        vertical-align: text-top;
+        align-self: center;
+        padding: 10px;
     }
 
     &:hover {
         cursor: pointer;
-        padding: 9px;
+        padding: 1px;
     }
 }
 
