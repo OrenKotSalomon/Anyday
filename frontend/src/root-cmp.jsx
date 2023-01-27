@@ -9,6 +9,7 @@ import { SignUp } from './pages/sign-up'
 import { UserMsg } from './cmps/user-msg'
 import { Kanban } from './pages/kanban'
 import { Dashboard } from './pages/dashboard'
+import { Test } from './pages/MyAnnie'
 
 export function RootCmp() {
 

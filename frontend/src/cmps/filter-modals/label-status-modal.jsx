@@ -1,27 +1,25 @@
-export function LabelModal({ board, onClickLabelFilter }) {
+import { useState } from "react"
+
+export function LabelModal({ label, onClickLabelFilter }) {
+    const [isStatusChose, setIsStatusChose] = useState(false)
+
+    function onClickStatus(label) {
+        onClickLabelFilter(label, isStatusChose)
+        setIsStatusChose(!isStatusChose)
+    }
+
     return (
-        <section className='status-container'>
 
-            <div className="filter-options-container">
+        <div className={`status-filter ${isStatusChose ? 'active-filter' : ''}`}
+            onClick={() => onClickStatus(label.label)}
 
-                {
-                    board.labelStatuses.map((label, idx) => {
+        >
+            <div className="status-color-circle"
+                style={{ backgroundColor: label.bgColor }}
+            ></div>
+            <div className="status-txt"> {label.label === 'default' ? 'blank' : label.label}</div>
 
-                        return <div className="status-filter" key={idx}
-                            onClick={() => onClickLabelFilter(label.label)}
+        </div>
 
-                        >
-                            <div className="status-color-circle"
-                                style={{ backgroundColor: label.bgColor }}
-                            ></div>
-                            <div className="status-txt"> {label.label === 'default' ? 'blank' : label.label}</div>
-
-                        </div>
-
-                    })
-                }
-            </div>
-
-        </section>
     )
 }

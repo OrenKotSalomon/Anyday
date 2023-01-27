@@ -121,10 +121,15 @@ async function getById(boardId, filterBy = getDefaultFilter()) {
             filteredBoard.groups = check
         }
 
-        if (filterBy.label) {
+        if (filterBy.label.length) {
             const regex = new RegExp(filterBy.label, 'i')
             let check = filteredGroups.filter((group, idx) => {
-                let tasks = group.tasks.filter(task => (task.status.match(regex) || task.priority.match(regex) || task.labelStatus.match(regex)))
+                let tasks = group.tasks.filter(task => {
+                    if (filterBy.label.includes(task.status) || filterBy.label.includes(task.priority) || filterBy.label.includes(task.labelStatus)) {
+                        return true
+                    }
+                    return false
+                })
                 console.log('tasks', tasks);
                 if (tasks.length) return filteredGroups[idx].tasks = tasks
             })
@@ -441,7 +446,7 @@ async function updateTaskService(board, data, type) {
 }
 
 function getDefaultFilter() {
-    return { title: '', sortBy: '', desc: 1 }
+    return { title: '', sortBy: '', label: [], desc: 1 }
 }
 
 function getEmptyGroup() {
