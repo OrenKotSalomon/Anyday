@@ -260,7 +260,33 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
 
 
 
-                <div className="activity-row">
+                {task.activity && task.activity.length ?
+                    task.activity.map(activ => <div className="activity-row">
+
+                        <div className="activity-by">
+                            <span className="activity-by-time">
+                                <Icon className='task-details-header-time-icon'
+                                    iconType={Icon.type.SVG} icon={Time} iconLabel="my svg icon" iconSize={14} />
+                                {utilService.time_ago(activ.time)}
+                            </span>
+                            <span className="activity-by-avatar">
+                                <img className='task-details-by-user-img' src={activ.byUser?.imgUrl} alt="" />
+                            </span>
+                            <span className="activity-by-task">{task.title}</span>
+                        </div>
+
+                        <div className="activity-type">
+                            {activ.action}
+                        </div>
+
+                        <div className="activity-data">
+                            {activ.toUser}
+                        </div>
+
+                    </div>) : 'NO ACTIVITY FOR THIS TASK YET...'}
+
+
+                {/* <div className="activity-row">
 
                     <div className="activity-by">
                         <span className="activity-by-time">🕛20m</span>
@@ -320,28 +346,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                         To group <span className="activity-color">New Group</span>
                     </div>
 
-                </div>
-
-
-                <div className="activity-row">
-
-                    <div className="activity-by">
-                        <span className="activity-by-time">🕛20m</span>
-                        <span className="activity-by-avatar">
-                            <div className='task-details-by-user-img-test' >🥸</div>
-                        </span>
-                        <span className="activity-by-task">Task1</span>
-                    </div>
-
-                    <div className="activity-type">
-                        ➡️ Moved
-                    </div>
-
-                    <div className="activity-data">
-                        To group <span className="activity-color">New Group</span>
-                    </div>
-
-                </div>
+                </div> */}
 
             </div>}
 

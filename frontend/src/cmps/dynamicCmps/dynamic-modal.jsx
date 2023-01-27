@@ -59,7 +59,8 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
     }
 
     function onMemberPick(user, isDelete = false) {
-        onUpdateTaskLabel(UPDATE_TASK_MEMBERS, cmp.data, user, isDelete)
+        cmp.data.isDelete = isDelete
+        onUpdateTaskLabel(UPDATE_TASK_MEMBERS, cmp.data, user)
         setIsModalOpen(false)
     }
 
