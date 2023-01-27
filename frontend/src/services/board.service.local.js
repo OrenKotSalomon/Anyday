@@ -128,7 +128,6 @@ async function getById(boardId, filterBy = getDefaultFilter()) {
                     }
                     return false
                 })
-                console.log('tasks', tasks);
                 if (tasks.length) return filteredGroups[idx].tasks = tasks
             })
             filteredBoard.groups = check

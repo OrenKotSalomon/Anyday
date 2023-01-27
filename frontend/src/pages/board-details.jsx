@@ -21,10 +21,13 @@ import { utilService } from "../services/util.service";
 import { socketService, SOCKET_EMIT_SET_TOPIC, SOCKET_EVENT_UPDATE_BOARD } from "../services/socket.service";
 import { Kanban } from "./kanban";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
+import { useDispatch } from "react-redux";
+import { SET_FILTERBY } from "../store/board.reducer";
 
 export function BoardDetails() {
 
     const board = useSelector((storeState) => storeState.boardModule.board)
+    const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
     const prevBoard = useSelector((storeState) => storeState.boardModule.prevBoard)
     const { boardId } = useParams()
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -35,15 +38,16 @@ export function BoardDetails() {
     const [isMoveToShow, setisMoveToShow] = useState(false)
 
     const boardContainer = useRef()
-
+    const dispatch = useDispatch()
+    console.log('filterBy', filterBy);
     useEffect(() => {
-        loadBoard(boardId)
+        loadBoard(boardId, filterBy)
         socketService.on(SOCKET_EVENT_UPDATE_BOARD, loadBoard)
         socketService.emit(SOCKET_EMIT_SET_TOPIC, boardId)
         return () => {
             socketService.off(SOCKET_EVENT_UPDATE_BOARD, loadBoard)
         }
-    }, [boardId])
+    }, [boardId, filterBy])
 
     function onUpdateTaskLabel(type, data, labelPick) {
         data.labelPick = labelPick
@@ -205,12 +209,16 @@ export function BoardDetails() {
         onGroupDragStart(board)
     }
 
+    function onSetFilterBy(filterBy) {
+        dispatch({ type: SET_FILTERBY, filterBy })
+    }
+
     if (!board.groups || !board) return <div className="loader"><Loader size={Loader.sizes.LARGE} /></div>
     return <section className="board-details">
         <NavBar />
         <SideGroupBar />
         {board && <div ref={boardContainer} className="board-container">
-            <BoardHeader board={board} />
+            <BoardHeader board={board} onSetFilterBy={onSetFilterBy} />
 
             <DragDropContext onDragStart={(e) => onDragGroup(e)} onDragEnd={(res) => handleOnDragEnd(res, 'group', { prevBoard, grouplist: prevBoard.groups })}>
                 <Droppable droppableId='groups' >

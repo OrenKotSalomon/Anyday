@@ -56,7 +56,6 @@ export function BoardFilter({ board, onSetFilterBy }) {
         })
         // setisFilterFocues(false)
     }
-    console.log(filterBy);
     function handleChange({ target }) {
         let { value, name: field, type } = target
 

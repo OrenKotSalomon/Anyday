@@ -14,6 +14,7 @@
 .label-sum-container {
 
     visibility: hidden;
+    height: 50px;
 
     @include for-narrow-layout {
         visibility: visible;
