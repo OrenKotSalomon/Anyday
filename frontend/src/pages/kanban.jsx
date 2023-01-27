@@ -26,49 +26,48 @@ export function Kanban() {
     }, [boardId])
 
     if (!board.groups || !board) return <div className="loader"><Loader size={Loader.sizes.LARGE} /></div>
-
     return <section className="board-details">
         <NavBar />
         <SideGroupBar />
         <div className="board-container">
             <BoardHeader board={board} />
-            {board &&
-                <DragDropContext onDragEnd={(res) => handleOnDragEnd(res, {board, statuses: board.statuses})}>
-                    <Droppable droppableId={board._id} direction='horizontal' type='statuses-list' >
-                        {provided =>
 
-                            <section className='main-kanban-container flex'
-                                // {...provided.droppableProps}
-                                ref={provided.innerRef}>
+            <DragDropContext onDragEnd={(res) => handleOnDragEnd(res, { board, statuses: board.statuses })}>
+                <Droppable droppableId={board._id} direction='horizontal' type='statuses-list' >
+                    {provided =>
 
-                                {/* DragHere */}
-                                {board.statuses.map((status, idx) =>
-                                    <Draggable
-                                        draggableId={status.id}
-                                        key={status.id}
-                                        index={idx}
-                                    >
-                                        {provided =>
+                        <section className='main-kanban-container flex'
+                            // {...provided.droppableProps}
+                            ref={provided.innerRef}>
 
-                                            <div
-                                                ref={provided.innerRef}
-                                                {...provided.draggableProps}>
+                            {/* DragHere */}
+                            {board.statuses.map((status, idx) =>
+                                <Draggable
+                                    draggableId={status.id}
+                                    key={status.id}
+                                    index={idx}
+                                >
+                                    {provided =>
 
-                                                <StatusesList key={status.label} status={status} board={board} provided={provided} />
-                                            </div>
-                                        }
-                                    </Draggable>
-                                )}
-                                {/* DragHere */}
-                                
-                                {provided.placeholder}
-                            </section>
-                        }
+                                        <div
+                                            ref={provided.innerRef}
+                                            {...provided.draggableProps}>
+
+                                            <StatusesList key={status.label} status={status} board={board} provided={provided} />
+                                        </div>
+                                    }
+                                </Draggable>
+                            )}
+                            {/* DragHere */}
+
+                            {provided.placeholder}
+                        </section>
+                    }
 
 
-                    </Droppable>
-                </DragDropContext>
-            }
+                </Droppable>
+            </DragDropContext>
+
 
         </div>
     </section>

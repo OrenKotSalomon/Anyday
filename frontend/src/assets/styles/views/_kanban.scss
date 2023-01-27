@@ -51,15 +51,20 @@
       max-width: 229px;
       max-height: 42px;
 
+      &:hover {
+        .card-menu-btn-container {
+          opacity: 1;
+        }
+      }
+
       h5 {
         width: max-content;
       }
-      //   .card-task-title {
-      //     @include line-elipsis;
-      //     margin-top: 4px;
-      //     padding-left: 20px;
-      //     width: min-content;
-      //   }
+      
+      .card-menu-btn-container {
+        transition: .3s;
+        opacity: 0;
+      }
     }
   }
 }

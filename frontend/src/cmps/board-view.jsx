@@ -113,6 +113,10 @@ export function BoardView({ board }) {
                         <NavLink to={`/${board._id}/views/kanban`} >Kanban</NavLink>
                     </div>
                     <span>|</span>
+                    <div className='kanban-a'>
+                        <NavLink to={`/${board._id}/views/dashboard`} >Dashboard</NavLink>
+                    </div>
+                    <span>|</span>
                 </div>
             </div>
         </div>
