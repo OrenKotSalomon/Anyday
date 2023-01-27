@@ -401,3 +401,20 @@
   }
 
 }
+
+.annie-icon-header {
+  cursor: pointer;
+}
+
+.annie-container {
+  position: absolute;
+  top: 80%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  background-color: $main-bgc-white;
+  height: 200px;
+  width: 200px;
+  border-radius: 5px;
+  z-index: 500;
+  background-color: #dcdfec;
+}

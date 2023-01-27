@@ -9,12 +9,16 @@ import { utilService } from '../services/util.service';
 import { StatusModal } from './filter-modals/status-filter';
 import { PriorityModal } from './filter-modals/priority-modal';
 import { LabelModal } from './filter-modals/label-status-modal';
+import { faMicrophone } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { MyAnnie } from '../pages/MyAnnie';
 
 export function BoardFilter({ board, onSetFilterBy }) {
 
     const [filterBy, setfilterBy] = useState(boardService.getDefaultFilter())
     const [isFilterModalOpen, setIsFilterModalOpen] = useState()
     const [isInputFocused, setIsInputFocused] = useState(false)
+    const [isAnnieOn, setisAnnieOn] = useState(false)
 
     onSetFilterBy = useRef(utilService.debounce(onSetFilterBy))
 
@@ -29,9 +33,28 @@ export function BoardFilter({ board, onSetFilterBy }) {
 
     // configure filter to mobile also
 
-    function onClickLabelFilter(label) {
-        console.log(label);
-        setfilterBy(prev => ({ ...prev, label: label }))
+    function onCancelFilter() {
+        setfilterBy(prev => ({ ...prev, label: [] }))
+    }
+
+    function onClickLabelFilter(label, isChosed) {
+        console.log(isChosed);
+        setfilterBy(prev => {
+            if (!isChosed) {
+                prev.label.push(label)
+                return { ...prev }
+            }
+
+            let newLabelsFilter = prev.label.filter(filterLabel => {
+                if (filterLabel === label) {
+                    return false
+                }
+                return label
+            })
+
+            return { ...prev, label: newLabelsFilter }
+        })
+        // setisFilterFocues(false)
     }
     console.log(filterBy);
     function handleChange({ target }) {
@@ -40,12 +63,17 @@ export function BoardFilter({ board, onSetFilterBy }) {
         setfilterBy(prev => ({ ...prev, [field]: value }))
     }
     return <Fragment>
-
+        {isAnnieOn && <MyAnnie
+            board={board}
+            setfilterBy={setfilterBy}
+        />}
         <section className='board-filter'>
             <Flex gap='10' align='End'
 
             >
-
+                <div className='annie-icon-header' onClick={() => setisAnnieOn(!isAnnieOn)}>
+                    <FontAwesomeIcon icon={faMicrophone} style={{ color: isAnnieOn ? '#F52918' : '#232918' }} />
+                </div>
                 <SplitButton className="new-task-btn"
 
                     children='New Item' size={Button.sizes.SMALL} onClick={onAddNewTask} secondaryDialogContent={<HeaderMenu board={board} />} >
@@ -108,36 +136,65 @@ export function BoardFilter({ board, onSetFilterBy }) {
         {isFilterModalOpen &&
             <div className='modal-filter'>
                 <button className='btn-clear-filter'
-                    onClick={() => onClickLabelFilter('')}
+                    onClick={() => onCancelFilter()}
                 >Clear filter</button>
                 <div className='modal-filter-wrapper'>
                     <div className='modal-filter-container'>
                         <div className="filter-status-title">Status</div>
                         <div className='statuses-wrapper'>
-                            <StatusModal
-                                board={board}
-                                onClickLabelFilter={onClickLabelFilter}
-                            />
-                        </div>
+                            <section className='status-container'>
 
+                                <div className="filter-options-container">
+                                    {board.statuses.map((status, idx) => {
+
+                                        return <StatusModal
+                                            key={idx}
+                                            status={status}
+                                            onClickLabelFilter={onClickLabelFilter}
+                                        />
+                                    })}
+                                </div>
+
+                            </section>
+                        </div>
                     </div>
                     <div className='modal-filter-container'>
                         <div className="filter-status-title">Priority</div>
                         <div className='statuses-wrapper'>
-                            <PriorityModal
-                                onClickLabelFilter={onClickLabelFilter}
-                                board={board}
-                            />
+                            <section className='status-container'>
+                                <div className="filter-options-container">
+                                    {board.priorities.map((prior, idx) => {
+                                        console.log();
+                                        return <PriorityModal
+                                            key={idx}
+                                            prior={prior}
+                                            onClickLabelFilter={onClickLabelFilter}
+                                        />
+                                    })}
+                                </div>
+
+                            </section>
                         </div>
 
                     </div>
                     <div className='modal-filter-container'>
                         <div className="filter-status-title">Label</div>
                         <div className='statuses-wrapper'>
-                            <LabelModal
-                                onClickLabelFilter={onClickLabelFilter}
-                                board={board}
-                            />
+
+                            <section className='status-container'>
+
+                                <div className="filter-options-container">
+                                    {board.labelStatuses.map((label, idx) => {
+                                        console.log();
+                                        return <LabelModal
+                                            key={idx}
+                                            label={label}
+                                            onClickLabelFilter={onClickLabelFilter}
+                                        />
+                                    })}
+                                </div>
+
+                            </section>
                         </div>
 
                     </div>

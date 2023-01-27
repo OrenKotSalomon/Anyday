@@ -1,29 +1,25 @@
-export function PriorityModal({ board, onClickLabelFilter }) {
+import { useState } from "react"
+
+export function PriorityModal({ prior, onClickLabelFilter }) {
+    const [isStatusChose, setIsStatusChose] = useState(false)
+
+    function onClickStatus(label) {
+        onClickLabelFilter(label, isStatusChose)
+        setIsStatusChose(!isStatusChose)
+    }
+
     return (
-        <section className='status-container'>
 
-            <div className="filter-options-container">
+        <div className={`status-filter ${isStatusChose ? 'active-filter' : ''}`}
+            onClick={() => onClickStatus(prior.label)}
 
-                {
-                    board.priorities.map((prior, idx) => {
+        >
+            <div className="status-color-circle"
+                style={{ backgroundColor: prior.bgColor }}
+            ></div>
+            <div className="status-txt"> {prior.label === 'default' ? 'blank' : prior.label}</div>
 
-                        return <div className="status-filter"
-                            onClick={() => onClickLabelFilter(prior.label)}
+        </div>
 
-                            key={idx}
-
-                        >
-                            <div className="status-color-circle"
-                                style={{ backgroundColor: prior.bgColor }}
-                            ></div>
-                            <div className="status-txt"> {prior.label === 'default' ? 'blank' : prior.label}</div>
-
-                        </div>
-
-                    })
-                }
-            </div>
-
-        </section>
     )
 }
