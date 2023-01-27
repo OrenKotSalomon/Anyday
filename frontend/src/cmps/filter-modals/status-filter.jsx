@@ -1,6 +1,6 @@
 
 
-export function StatusModal({ board }) {
+export function StatusModal({ board, onClickLabelFilter }) {
     return (
         <section className='status-container'>
 
@@ -9,7 +9,9 @@ export function StatusModal({ board }) {
                 {
                     board.statuses.map((status, idx) => {
 
-                        return <div className="status-filter" key={idx}
+                        return <div className="status-filter"
+
+                            key={idx}
 
                         >
                             <div className="status-color-circle"

@@ -113,6 +113,7 @@ export function BoardFilter({ board, onSetFilterBy }) {
                         <div className='statuses-wrapper'>
                             <StatusModal
                                 board={board}
+                                onClickLabelFilter={onClickLabelFilter}
                             />
                         </div>
 
