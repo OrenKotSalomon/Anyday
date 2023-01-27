@@ -60,7 +60,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
     }
 
     function onMemberPick(user, isDelete = false) {
-        onUpdateTaskLabel(UPDATE_TASK_MEMBERS, cmp.data, user , isDelete )
+        onUpdateTaskLabel(UPDATE_TASK_MEMBERS, cmp.data, user, isDelete)
         setIsModalOpen(false)
     }
 
@@ -106,9 +106,10 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
                     {/* here goes amount of users connected to board  */}
                     <DialogContentContainer className="monday-style-story-chips_search-bar">
                         <div className='member-picker-user-container'>
+                            <Icon onClick={() => setIsModalOpen(false)} className='member-picker-close-modal' iconType={Icon.type.SVG} icon={CloseSmall} iconLabel="my bolt svg icon" iconSize={18}  />
                             <div className='member-picker-user-delete-container'>
                                 {cmp.info?.members.map(member =>
-                                    <div className='member-picker-user-delete' key={member._id+''+Math.random(9)}>
+                                    <div className='member-picker-user-delete' key={member._id + '' + Math.random(9)}>
                                         <Avatar size={Avatar.sizes.SMALL} src={member.imgUrl} type={Avatar.types.IMG} ariaLabel={member.fullname} />
                                         <span className='member-picker-user-delete-fullname' >{member.fullname}</span>
                                         <Icon onClick={() => onMemberPick(member, true)} className='member-picker-user-delete-btn' iconType={Icon.type.SVG} icon={CloseSmall} iconLabel="my bolt svg icon" iconSize={12} />
@@ -116,7 +117,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
                             </div>
                             <Search placeholder="Search names, positions, or a team" />
                             <div className='member-picker-suggested'>Suggested people</div>
-                            {users && users.map(user => <div key={user._id+''+Math.random(9)} className="member-picker-user"
+                            {users && users.map(user => <div key={user._id + '' + Math.random(9)} className="member-picker-user"
                                 onClick={() => onMemberPick(user)}>
                                 <div className='member-picker-fullname'>{user.fullname}</div>
                                 {user.imgUrl !== '' ? <img className="member-picker-img" src={`${user.imgUrl}`} alt="" />
