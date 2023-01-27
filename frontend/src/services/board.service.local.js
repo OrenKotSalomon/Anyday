@@ -102,6 +102,7 @@ async function query(filterBy = getDefaultFilter()) {
 }
 
 async function getById(boardId, filterBy = getDefaultFilter()) {
+
     try {
         const board = await httpService.get(`board/${boardId}`)
         let filteredBoard = structuredClone(board)
@@ -116,6 +117,17 @@ async function getById(boardId, filterBy = getDefaultFilter()) {
                 if (tasks.length) return filteredGroups[idx].tasks = tasks
             })
             filteredBoard.groups = check
+        }
+
+        if (filterBy.label) {
+            const regex = new RegExp(filterBy.label, 'i')
+            let check = filteredGroups.filter((group, idx) => {
+                let tasks = group.tasks.filter(task => (task.status.match(regex) || task.priority.match(regex) || task.labelStatus.match(regex)))
+                console.log('tasks', tasks);
+                if (tasks.length) return filteredGroups[idx].tasks = tasks
+            })
+            filteredBoard.groups = check
+
         }
 
         return filteredBoard

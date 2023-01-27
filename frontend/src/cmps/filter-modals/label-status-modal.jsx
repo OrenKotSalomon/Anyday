@@ -1,4 +1,4 @@
-export function LabelModal({ board }) {
+export function LabelModal({ board, onClickLabelFilter }) {
     return (
         <section className='status-container'>
 
@@ -8,6 +8,7 @@ export function LabelModal({ board }) {
                     board.labelStatuses.map((label, idx) => {
 
                         return <div className="status-filter" key={idx}
+                            onClick={() => onClickLabelFilter(label.label)}
 
                         >
                             <div className="status-color-circle"

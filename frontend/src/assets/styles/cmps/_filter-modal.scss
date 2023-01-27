@@ -13,6 +13,24 @@
     right: 60%;
     transform: translate(40%, -50%);
     background-color: $main-bgc-white;
+
+    .btn-clear-filter {
+        border: none;
+        background-color: $main-bgc-white;
+        position: relative;
+        // align-self: flex-end;
+        cursor: pointer;
+        left: 400px;
+        padding: 5px;
+        border-radius: 5px;
+        transition: 0.4s ease-in-out;
+
+        // z-index: 1000;
+        &:hover {
+            background-color: #dcdfec;
+        }
+
+    }
 }
 
 .modal-filter-wrapper {
@@ -95,4 +113,8 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 5px;
+}
+
+.active-filter {
+    background-color: #cce5ff;
 }

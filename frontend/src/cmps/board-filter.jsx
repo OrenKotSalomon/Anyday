@@ -30,10 +30,10 @@ export function BoardFilter({ board, onSetFilterBy }) {
     // configure filter to mobile also
 
     function onClickLabelFilter(label) {
-
+        console.log(label);
         setfilterBy(prev => ({ ...prev, label: label }))
     }
-
+    console.log(filterBy);
     function handleChange({ target }) {
         let { value, name: field, type } = target
 
@@ -107,6 +107,9 @@ export function BoardFilter({ board, onSetFilterBy }) {
 
         {isFilterModalOpen &&
             <div className='modal-filter'>
+                <button className='btn-clear-filter'
+                    onClick={() => onClickLabelFilter('')}
+                >Clear filter</button>
                 <div className='modal-filter-wrapper'>
                     <div className='modal-filter-container'>
                         <div className="filter-status-title">Status</div>
@@ -122,6 +125,7 @@ export function BoardFilter({ board, onSetFilterBy }) {
                         <div className="filter-status-title">Priority</div>
                         <div className='statuses-wrapper'>
                             <PriorityModal
+                                onClickLabelFilter={onClickLabelFilter}
                                 board={board}
                             />
                         </div>
@@ -131,6 +135,7 @@ export function BoardFilter({ board, onSetFilterBy }) {
                         <div className="filter-status-title">Label</div>
                         <div className='statuses-wrapper'>
                             <LabelModal
+                                onClickLabelFilter={onClickLabelFilter}
                                 board={board}
                             />
                         </div>
