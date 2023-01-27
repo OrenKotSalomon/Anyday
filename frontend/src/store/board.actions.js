@@ -1,4 +1,4 @@
-import { boardService, ON_DRAG_GROUP, ON_DRAG_LABEL, ON_DRAG_TASK } from "../services/board.service.local.js";
+import { boardService, ON_DRAG_CARD, ON_DRAG_GROUP, ON_DRAG_LABEL, ON_DRAG_STATUS, ON_DRAG_TASK } from "../services/board.service.local.js";
 import { userService } from "../services/user.service.js";
 import { store } from './store.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
@@ -132,19 +132,22 @@ export function onGroupDragStart(board) {
     store.dispatch({ type: SET_BOARD, board: newBoard })
 }
 
-export function handleOnDragEnd(res, type, data) {
+export function handleOnDragEnd(res, data) {
+    console.log('res:', res)
     if (!res.destination) return
-
     let board
-    if (data.board) board = data.board
-    if (data.prevBoard) board = data.prevBoard
 
-    const { source, destination } = res
+    if (data) {
+        if (data.board) board = data.board
+        if (data.prevBoard) board = data.prevBoard
+    }
+
+    const { source, destination, type, draggableId } = res
     const draggedFromId = source.droppableId
     const draggedToId = destination.droppableId
 
     switch (type) {
-        case 'task':
+        case 'task-list':
             if (source.droppableId !== destination.droppableId) {
                 const sourceGroup = board.groups.find(group => group.id === draggedFromId)
                 const destGroup = board.groups.find(group => group.id === draggedToId)
@@ -157,21 +160,45 @@ export function handleOnDragEnd(res, type, data) {
                 const [removed] = group.tasks.splice(source.index, 1)
                 group.tasks.splice(destination.index, 0, removed)
             } return updateBoard(board, board.groups, ON_DRAG_GROUP)
-        case 'group':
+        case 'group-list':
             const groupsToUpdate = data.grouplist
             const [reorderedGroup] = groupsToUpdate.splice(res.source.index, 1)
             groupsToUpdate.splice(res.destination.index, 0, reorderedGroup)
             store.dispatch({ type: SET_BOARD, board })
             return updateBoard(board, groupsToUpdate, ON_DRAG_GROUP)
 
-        case 'label':
+        case 'label-list':
             const newOrderedLabels = data.cmpsOrder
             const [reorderedLabel] = newOrderedLabels.splice(res.source.index, 1)
             newOrderedLabels.splice(res.destination.index, 0, reorderedLabel)
             return updateBoard(board, newOrderedLabels, ON_DRAG_LABEL)
+        case 'statuses-list':
+            const newOrderedStatuses = data.statuses
+            const [reorderedStatus] = newOrderedStatuses.splice(res.source.index, 1)
+            newOrderedStatuses.splice(res.destination.index, 0, reorderedStatus)
+            return updateBoard(board, newOrderedStatuses, ON_DRAG_STATUS)
+        case 'task-card':
+            if (source.droppableId !== destination.droppableId) {
+                // const sourceStatus = board.statuses.find(status => status.id === draggedFromId)
+                const destStatus = board.statuses.find(status => status.id === draggedToId)
+                const groupToUpdate = board.groups.find(group => 
+                    group.tasks.find(task => task.id === draggableId))
+                    const taskToUpdate = groupToUpdate.tasks.find(task => task.id === draggableId) 
+                    taskToUpdate.status = destStatus.label
+                    console.log('taskToUpdate:', taskToUpdate)
+                // const sourceTasks = sourceStatus.tasks
+                // const destTasks = destStatus.tasks
+                // const [removed] = sourceTasks.splice(source.index, 1)
+                // destTasks.splice(destination.index, 0, removed)
+            } else {
+                const status = board.statuses.find(status => status.id === draggedFromId)
+                console.log('status:', status)
+                const [removed] = status.splice(source.index, 1)
+                status.splice(destination.index, 0, removed)
+            } return updateBoard(board, board.groups, ON_DRAG_CARD)
 
         default:
-            return updateGroup(board, data.group, ON_DRAG_TASK)
+            return updateGroup(board, board.groups, ON_DRAG_TASK)
     }
 
 }
