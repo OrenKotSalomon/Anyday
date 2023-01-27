@@ -103,24 +103,17 @@ async function getById(boardId, filterBy = getDefaultFilter()) {
     try {
         const board = await httpService.get(`board/${boardId}`)
         let filteredBoard = structuredClone(board)
-
+        let filteredGroups = filteredBoard.groups
+        // let filteredTasks
         if (filterBy.title) {
             const regex = new RegExp(filterBy.title, 'i')
-            filteredBoard.groups = filteredBoard.groups.filter(group => {
-                if (regex.test(group.title)) {
-                    return regex.test(group.title)
-                }
-                else {
-                    let filteredGroups = group.tasks.filter(task => {
-                        return regex.test(task.title)
-                    })
-                    console.log('filteredGroups', filteredGroups);
+            let check = filteredGroups.filter((group, idx) => {
+                if (group.title.match(regex)) return true
+                let tasks = group.tasks.filter(task => (task.title.match(regex)))
 
-                    if (filteredGroups.length) return filteredGroups
-                }
+                if (tasks.length) return filteredGroups[idx].tasks = tasks
             })
-            console.log('filteredBoard', filteredBoard.groups);
-
+            filteredBoard.groups = check
         }
 
         return filteredBoard
@@ -199,8 +192,9 @@ function getNewTask() {
 
 }
 
-function updateBoardService(board, data, type) {
-    board = structuredClone(board)
+async function updateBoardService(board, data, type) {
+    let boardToUpdate = await getById(board._id)
+    board = structuredClone(boardToUpdate)
     switch (type) {
         case CHANGE_TITLE:
             board.title = data
@@ -216,8 +210,9 @@ function updateBoardService(board, data, type) {
     }
 }
 
-function updateGroupsService(board, data, type) {
-    board = structuredClone(board)
+async function updateGroupsService(board, data, type) {
+    let boardToUpdate = await getById(board._id)
+    board = structuredClone(boardToUpdate)
     let groupToUpdate
     let newTask = getNewTask()
     let groupIdx
@@ -313,8 +308,9 @@ function updateGroupsService(board, data, type) {
     }
 }
 
-function updateTaskService(board, data, type, isDelete) {
-    board = structuredClone(board)
+async function updateTaskService(board, data, type, isDelete) {
+    let boardToUpdate = await getById(board._id)
+    board = structuredClone(boardToUpdate)
     const newTask = getNewTask()
     let currTask, groupIdx, taskIdx
 
