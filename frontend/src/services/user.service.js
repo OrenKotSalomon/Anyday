@@ -76,6 +76,10 @@ async function signup(userCred) {
 async function logout() {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
     // socketService.logout()
+    const FB = window.FB
+    FB.logout(function(response) {
+        // user is now logged out
+      })
     return await httpService.post('auth/logout')
 }
 

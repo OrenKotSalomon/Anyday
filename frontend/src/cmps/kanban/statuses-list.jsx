@@ -39,13 +39,13 @@ export function StatusesList({ status, board, provided }) {
                                     key={task.id}
                                     index={idx}
                                 >
-                                    {provided =>
+                                    {(provided, snapshot) =>
                                         <div
                                             ref={provided.innerRef}
                                             {...provided.draggableProps}
                                             {...provided.dragHandleProps}>
 
-                                            <TaskCard task={task} group={group} board={board} />
+                                            <TaskCard task={task} group={group} board={board} snapshot={snapshot}/>
                                         </div>
 
                                     }

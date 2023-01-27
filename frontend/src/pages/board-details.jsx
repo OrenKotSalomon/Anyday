@@ -223,7 +223,6 @@ export function BoardDetails() {
     }
 
     function onDragGroup({ type }) {
-        console.log('type:', type)
         if (type !== 'group-list') return
         setPrevBoard(board)
         onGroupDragStart(board)
@@ -255,7 +254,6 @@ export function BoardDetails() {
                             {board.groups.map((group, index) =>
                                 <GroupPreview
                                     index={index}
-                                    // provided={provided}
                                     key={group.id}
                                     board={board}
                                     group={group}
