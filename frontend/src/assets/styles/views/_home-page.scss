@@ -441,6 +441,42 @@
     max-width: 65vw;
     margin-right: auto;
     margin-top: 3em;
+    max-height: 7vh;
+    @include for-narrow-layout {
+        max-height: 10vh;
+    }
+
+    @include for-normal-layout {
+        max-height: 14vh;
+    }
+
+    @include for-wide-layout {
+        max-height: 35vh;
+    }
+}
+
+.home-page-brake{
+    height: 10vh;
+    background-color: #07083c;
+    background: linear-gradient(to top, #07083c00 0%, rgb(12 13 74 / 32%)25%, rgb(15 16 72 / 51%)50%, rgb(15 16 72) 100%);
+    @include for-narrow-layout {
+        height: 12vh;
+    }
+
+    @include for-normal-layout {
+        height: 14vh;
+    }
+
+    @include for-wide-layout {
+        height: 20vh;
+    }
+
+}
+
+.team-header{
+    background: linear-gradient(to top, rgb(202 202 202)0%, rgb(202 202 202 / 72%)25%, rgb(202 202 202 / 64%)50%, rgb(202 202 202 / 6%) 100%);
+    padding-top: 10vh;
+    padding-bottom: 1vh;
 }
 
 .carousel__container {
