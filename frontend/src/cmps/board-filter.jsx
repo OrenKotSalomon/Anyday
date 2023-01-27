@@ -7,6 +7,8 @@ import { Menu as MenuIcon } from "monday-ui-react-core/icons";
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { utilService } from '../services/util.service';
 import { StatusModal } from './filter-modals/status-filter';
+import { PriorityModal } from './filter-modals/priority-modal';
+import { LabelModal } from './filter-modals/label-status-modal';
 
 export function BoardFilter({ board, onSetFilterBy }) {
 
@@ -23,6 +25,13 @@ export function BoardFilter({ board, onSetFilterBy }) {
 
     function onAddNewTask() {
         updateTask(board, undefined, ADD_TASK_FROM_HEADER)
+    }
+
+    // configure filter to mobile also
+
+    function onClickLabelFilter(label) {
+
+        setfilterBy(prev => ({ ...prev, label: label }))
     }
 
     function handleChange({ target }) {
@@ -100,8 +109,27 @@ export function BoardFilter({ board, onSetFilterBy }) {
             <div className='modal-filter'>
                 <div className='modal-filter-wrapper'>
                     <div className='modal-filter-container'>
+                        <div className="filter-status-title">Status</div>
                         <div className='statuses-wrapper'>
                             <StatusModal
+                                board={board}
+                            />
+                        </div>
+
+                    </div>
+                    <div className='modal-filter-container'>
+                        <div className="filter-status-title">Priority</div>
+                        <div className='statuses-wrapper'>
+                            <PriorityModal
+                                board={board}
+                            />
+                        </div>
+
+                    </div>
+                    <div className='modal-filter-container'>
+                        <div className="filter-status-title">Label</div>
+                        <div className='statuses-wrapper'>
+                            <LabelModal
                                 board={board}
                             />
                         </div>

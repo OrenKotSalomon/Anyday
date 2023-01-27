@@ -1,15 +1,98 @@
 .modal-filter {
-    height: 100px;
-    width: unset;
-    position: relative;
+    padding: 8px 24px 24px 24px;
+    overflow-y: hidden;
+    overflow-x: auto;
     z-index: 1000;
+    font-family: figtree-regular;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 1px 10px 1px;
+    border-radius: 10px;
+    width: fit-content;
+    max-width: 800px;
+    position: absolute;
+    top: 145%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    background-color: $main-bgc-white;
+}
+
+.modal-filter-wrapper {
+    min-height: rem(120px);
+    display: inline-block;
+    display: flex;
+    gap: 15px;
+    width: fit-content;
+    margin: 0;
+}
+
+.modal-filter-container {
+    position: relative;
+    overflow: auto;
+    will-change: transform;
+    direction: ltr;
+
+}
+
+.statuses-wrapper {
+    min-width: fit-content;
+    height: fit-content;
 }
 
 .status-container {
 
-    .status-filter {
-        width: 142px;
-        height: 32px;
-        background-color: #f5f6f8;
+    height: fit-content;
+
+    width: 150px;
+
+}
+
+.filter-status-title {
+    // width: max-content;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    line-height: 14px;
+    font-size: 14px;
+}
+
+.status-filter {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    height: 32px;
+    background-color: #f5f6f8;
+    border-radius: 5px;
+    transition: 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #dcdfec;
     }
+
+    .status-color-circle {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        position: absolute;
+        left: 10px;
+        justify-self: flex-start;
+    }
+
+    .status-txt {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        flex: 1 1 auto;
+        font-size: 14px;
+
+        &::first-letter {
+            text-transform: capitalize;
+        }
+    }
+}
+
+.filter-options-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
 }

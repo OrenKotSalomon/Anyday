@@ -1,21 +1,19 @@
-
-
-export function StatusModal({ board }) {
+export function PriorityModal({ board }) {
     return (
         <section className='status-container'>
 
             <div className="filter-options-container">
 
                 {
-                    board.statuses.map((status, idx) => {
+                    board.priorities.map((prior, idx) => {
 
                         return <div className="status-filter" key={idx}
 
                         >
                             <div className="status-color-circle"
-                                style={{ backgroundColor: status.bgColor }}
+                                style={{ backgroundColor: prior.bgColor }}
                             ></div>
-                            <div className="status-txt"> {status.label === 'default' ? 'blank' : status.label}</div>
+                            <div className="status-txt"> {prior.label === 'default' ? 'blank' : prior.label}</div>
 
                         </div>
 
