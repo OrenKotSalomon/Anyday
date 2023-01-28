@@ -201,9 +201,8 @@ export function BoardDetails() {
         }
     }
 
-    function onDragGroup(e) {
-        console.log('e:', e)
-        // if (task) return
+    function onDragStart({ type }) {
+        if (type !== 'group-list') return
         setPrevBoard(board)
         onGroupDragStart(board)
     }
@@ -219,8 +218,16 @@ export function BoardDetails() {
         {board && <div ref={boardContainer} className="board-container">
             <BoardHeader board={board} onSetFilterBy={onSetFilterBy} />
 
-            <DragDropContext onDragStart={(e) => onDragGroup(e)} onDragEnd={(res) => handleOnDragEnd(res, 'group', { prevBoard, grouplist: prevBoard.groups })}>
-                <Droppable droppableId='groups' >
+            <DragDropContext onDragStart={onDragStart}
+                onDragEnd={(res) =>
+                    handleOnDragEnd(res,
+                        {
+                            board,
+                            prevBoard,
+                            grouplist: prevBoard.groups,
+                            cmpsOrder: board.cmpsOrder
+                        })}>
+                <Droppable droppableId='groups' type="group-list">
                     {(provided) => (
 
                         <section className="groups-container"
@@ -231,7 +238,6 @@ export function BoardDetails() {
                             {board.groups.map((group, index) =>
                                 <GroupPreview
                                     index={index}
-
                                     // provided={provided}
                                     key={group.id}
                                     board={board}
@@ -245,7 +251,6 @@ export function BoardDetails() {
 
                             {provided.placeholder}
                             <div className="bottom-add-group-btn-container">
-
                                 <button className="btn clean bottom-add-group-btn"
                                     onClick={() => updateGroup(board, null, ADD_GROUP_FROM_BUTTOM)}>
                                     <Icon iconType={Icon.type.SVG} icon={Add} iconSize={19} /> Add  new group

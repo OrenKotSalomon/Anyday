@@ -99,6 +99,7 @@ export async function updateGroup(board, data, type) {
         console.log('boardToUpdate', boardToUpdate);
 
         const savedBoard = await boardService.save(boardToUpdate)
+        store.dispatch(getActionUpdateboard(boardToUpdate))
         socketService.emit(SOCKET_EMIT_UPDATE_BOARD, savedBoard._id)
         return savedBoard
     } catch (err) {
@@ -167,6 +168,7 @@ export function handleOnDragEnd(res, data) {
             const newOrderedLabels = data.cmpsOrder
             const [reorderedLabel] = newOrderedLabels.splice(res.source.index, 1)
             newOrderedLabels.splice(res.destination.index, 0, reorderedLabel)
+            console.log('newOrderedLabels:', newOrderedLabels)
             return updateBoard(board, newOrderedLabels, ON_DRAG_LABEL)
         case 'statuses-list':
             const newOrderedStatuses = data.statuses

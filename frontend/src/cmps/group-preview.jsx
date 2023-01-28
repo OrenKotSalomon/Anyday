@@ -16,7 +16,7 @@ import { faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons';
 import { SET_FILTERBY } from '../store/board.reducer';
 import { useDispatch } from 'react-redux';
 
-export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, isDndModeDisabled, index, setIsCheckedShow }) {
+export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, isDndModeDisabled, index, setIsCheckedShow, provided }) {
 
     const [isAddingLabel, setIsAddingLabel] = useState(false)
     const [isPickColor, setIsPickColor] = useState(false)
@@ -174,115 +174,120 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
     return <div className="group-list">
 
         {group.isCollapsed &&
-            <Draggable key={group.id} draggableId={group.id} index={index} isDragDisabled={isDndModeDisabled}>
-                {(provided) => (
-                    <section className="collapsed-group-container flex"
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}>
+            <div>
+                <Draggable key={group.id} draggableId={group.id} index={index} isDragDisabled={isDndModeDisabled}>
+                    {(provided) => (
+                        <section className="collapsed-group-container flex"
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            ref={provided.innerRef}>
 
-                        <div className="group-header-container collapsed">
-                            <div className="group-header-name"
-                                style={{ color: group.style }}>
+                            <div className="group-header-container collapsed">
+                                <div className="group-header-name"
+                                    style={{ color: group.style }}>
 
-                                <MenuButton className="group-list-menu-btn" >
-                                    <Menu
-                                        id="menu"
-                                        size="medium"
-                                        style={{
-                                            backgroundColor: 'red',
-                                            color: 'red'
-                                        }}
-                                    >
-                                        <MenuItem
-                                            onClick={() => onAddGroup(group)}
-                                            icon={Add}
-                                            title="Add Group"
-                                        />
-                                        <MenuItem
-                                            onClick={() => onSetColorGroup()}
-                                            icon={Bullet}
-                                            title="Change Color"
-                                        />
-                                        <MenuItem
-                                            onClick={() => onDuplicateGroup(group)}
-                                            icon={Duplicate}
-                                            title="Duplicate Group"
-                                        />
-                                        <MenuItem
-                                            onClick={() => onDeleteGroup(group)}
-                                            icon={Delete}
-                                            title="Delete"
-                                        />
-                                    </Menu>
-                                </MenuButton>
+                                    <MenuButton className="group-list-menu-btn" >
+                                        <Menu
+                                            id="menu"
+                                            size="medium"
+                                            style={{
+                                                backgroundColor: 'red',
+                                                color: 'red'
+                                            }}
+                                        >
+                                            <MenuItem
+                                                onClick={() => onAddGroup(group)}
+                                                icon={Add}
+                                                title="Add Group"
+                                            />
+                                            <MenuItem
+                                                onClick={() => onSetColorGroup()}
+                                                icon={Bullet}
+                                                title="Change Color"
+                                            />
+                                            <MenuItem
+                                                onClick={() => onDuplicateGroup(group)}
+                                                icon={Duplicate}
+                                                title="Duplicate Group"
+                                            />
+                                            <MenuItem
+                                                onClick={() => onDeleteGroup(group)}
+                                                icon={Delete}
+                                                title="Delete"
+                                            />
+                                        </Menu>
+                                    </MenuButton>
 
-                                {isPickColor && <ColorPicker className="group-color-picker"
-                                    colorSize={ColorPicker.sizes.SMALL}
-                                    onSave={(value) => onColorPick(value)} />}
+                                    {isPickColor && <ColorPicker className="group-color-picker"
+                                        colorSize={ColorPicker.sizes.SMALL}
+                                        onSave={(value) => onColorPick(value)} />}
 
-                            </div>
-                            <div className='row-collapsed-group-container'>
-                                <div className='main-left-header'>
-                                    <div className='floatin-white-box'></div>
-                                    <div className="group-collapse-btn-container">
-                                        <Tooltip content="Expand group" animationType="expand">
-                                            <button onClick={() => onCollapseGroup(group)}><Icon style={{ color: group.style }} iconType={Icon.type.SVG} icon={DropdownChevronRight} iconSize={19} /></button>
-                                        </Tooltip>
-                                    </div>
-                                    <div className='left-row-container collapsed '>
-                                        <div style={{ backgroundColor: group.style }} className='left-border collapsed'></div>
-                                        <div className='collapsed-group-header'>
-                                            <div className="monday-storybook-tooltip_bottom group-list-editable-header flex column">
-                                                <Tooltip>
-                                                    <EditableHeading
-                                                        insetFocus={true}
-                                                        className="group-header-editable-name"
-                                                        customColor={group.style}
-                                                        onFinishEditing={onFinishEditing}
-                                                        onChange={handleChange}
-                                                        brandFont={true}
-                                                        value={group.title}
-                                                        style={{ fontWeight: 'bold' }}
-                                                        type={EditableHeading.types.h4}
-                                                    />
-                                                </Tooltip>
-                                                <div className='tasks-count-container'>{group.tasks.length + ' '} Tasks</div>
+                                </div>
+                                <div className='row-collapsed-group-container'>
+                                    <div className='main-left-header'>
+                                        <div className='floatin-white-box'></div>
+                                        <div className="group-collapse-btn-container">
+                                            <Tooltip content="Expand group" animationType="expand">
+                                                <button onClick={() => onCollapseGroup(group)}><Icon style={{ color: group.style }} iconType={Icon.type.SVG} icon={DropdownChevronRight} iconSize={19} /></button>
+                                            </Tooltip>
+                                        </div>
+                                        <div className='left-row-container collapsed '>
+                                            <div style={{ backgroundColor: group.style }} className='left-border collapsed'></div>
+                                            <div className='collapsed-group-header'>
+                                                <div className="monday-storybook-tooltip_bottom group-list-editable-header flex column">
+                                                    <Tooltip>
+                                                        <EditableHeading
+                                                            insetFocus={true}
+                                                            className="group-header-editable-name"
+                                                            customColor={group.style}
+                                                            onFinishEditing={onFinishEditing}
+                                                            onChange={handleChange}
+                                                            brandFont={true}
+                                                            value={group.title}
+                                                            style={{ fontWeight: 'bold' }}
+                                                            type={EditableHeading.types.h4}
+                                                        />
+                                                    </Tooltip>
+                                                    <div className='tasks-count-container'>{group.tasks.length + ' '} Tasks</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="main-header-labels-container collapsed flex">
-                                    {board.cmpsOrder.map((cmp, idx) => renderGroupLabels(cmp, idx))}
-                                </div>
-
-                                <div className='main-right-header flex'>
-                                    <div className="add-label-btn-container"
-                                        style={{
-                                            backgroundColor: isAddingLabel ? '#d5d8e4' : ''
-                                        }}>
-                                        <button onClick={toggleAddLabelModal} className='btn clean add-label-btn'>
-                                            <Icon className="add-label-icon"
-                                                ignoreFocusStyle={true}
-                                                style={{
-                                                    position: 'absolute',
-                                                    top: '10%',
-                                                    left: '10%',
-                                                    transform: 'translate(-50%, -50%)',
-                                                    color: isAddingLabel ? '#005fb7' : '',
-                                                    transition: '.2s',
-                                                    transform: isAddingLabel ? 'rotate(45deg)' : ''
-                                                }} iconType={Icon.type.SVG} icon={Add} iconSize={20} />
-                                        </button>
+                                    <div className="main-header-labels-container collapsed flex">
+                                        {board.cmpsOrder.map((cmp, idx) => renderGroupLabels(cmp, idx))}
                                     </div>
-                                    {isAddingLabel && <AddLabelModal />}
+
+                                    <div className='main-right-header flex'>
+                                        <div className="add-label-btn-container"
+                                            style={{
+                                                backgroundColor: isAddingLabel ? '#d5d8e4' : ''
+                                            }}>
+                                            <button onClick={toggleAddLabelModal} className='btn clean add-label-btn'>
+                                                <Icon className="add-label-icon"
+                                                    ignoreFocusStyle={true}
+                                                    style={{
+                                                        position: 'absolute',
+                                                        top: '10%',
+                                                        left: '10%',
+                                                        transform: 'translate(-50%, -50%)',
+                                                        color: isAddingLabel ? '#005fb7' : '',
+                                                        transition: '.2s',
+                                                        transform: isAddingLabel ? 'rotate(45deg)' : ''
+                                                    }} iconType={Icon.type.SVG} icon={Add} iconSize={20} />
+                                            </button>
+                                        </div>
+                                        {isAddingLabel && <AddLabelModal />}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                    </section>
-                )}
-            </Draggable>
+                        </section>
+                    )}
+
+
+                </Draggable>
+                    {/* {provided.placeholder} */}
+            </div>
         }
 
         {!group.isCollapsed && <section className='expand-group-container'>
@@ -391,12 +396,12 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                                                 ref={provided.innerRef} >
                                                 {renderGroupLabels(cmp)}
                                                 <div className={snapshot.isDragging ? 'label-white-bgc-on-drag' : ''}></div>
+                                                {provided.placeholder}
                                             </div>
                                         )}
                                     </Draggable>
                                 }
                                 )}
-                                {provided.placeholder}
                             </div>
                         )}
                     </Droppable>
