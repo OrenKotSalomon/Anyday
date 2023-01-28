@@ -412,7 +412,7 @@ async function updateTaskService(board, data, type) {
             return board
         case UPDATE_TASK_MEMBERS:
             activity.toUser = data.labelPick.fullname
-            if (data.isDelete){
+            if (data.isDelete) {
                 activity.action = 'remove member'
                 board.groups[groupIdx].tasks[taskIdx].activity.unshift(activity)
                 let memberToDeleteIdx = board.groups[groupIdx].tasks[taskIdx].members.findIndex(member => member._id === data.labelPick._id)
