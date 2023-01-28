@@ -385,9 +385,7 @@ async function updateTaskService(board, data, type) {
     if (data) {
         groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
         taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.taskId)
-        if (!board.groups[groupIdx].tasks[taskIdx].activity) {
-            board.groups[groupIdx].tasks[taskIdx].activity = []
-        }
+        if (!board.groups[groupIdx].tasks[taskIdx].activity) board.groups[groupIdx].tasks[taskIdx].activity = []
     }
 
     switch (type) {
