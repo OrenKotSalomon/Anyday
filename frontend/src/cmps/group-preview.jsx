@@ -174,7 +174,7 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
     return <div className="group-list">
 
         {group.isCollapsed &&
-            <div>
+            <div key={group.id} >
                 <Draggable key={group.id} draggableId={group.id} index={index} isDragDisabled={isDndModeDisabled}>
                     {(provided) => (
                         <section className="collapsed-group-container flex"
