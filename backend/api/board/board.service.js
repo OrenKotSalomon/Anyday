@@ -20,7 +20,7 @@ function _buildCriteria(filterBy) {
     const criteria = {
         title: { $regex: filterBy.title, $options: 'i' }
     }
-    
+
     return criteria
 }
 
@@ -59,11 +59,11 @@ async function add(board) {
 
 async function update(board) {
     try {
-        const boardToSave = structuredClone(board)
-        delete boardToSave._id
-        console.log('boardToSave:', boardToSave)
+        // const boardToSave = structuredClone(board)
+        // delete boardToSave._id
+        // console.log('boardToSave:', boardToSave)
         const collection = await dbService.getCollection('board')
-        await collection.updateOne({ _id: ObjectId(board._id) }, { $set: boardToSave })
+        await collection.updateOne({ _id: ObjectId(board._id) }, { $set: board })
         console.log('board:', board)
         return board
     } catch (err) {
