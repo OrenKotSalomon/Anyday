@@ -411,7 +411,7 @@ async function updateTaskService(board, data, type) {
             activity.toStatus = data.labelPick
             board.groups[groupIdx].tasks[taskIdx].activity.unshift(activity)
             board.groups[groupIdx].tasks[taskIdx].status = data.labelPick
-            console.log(board.groups[groupIdx].tasks[taskIdx].activity)
+            // console.log(board.groups[groupIdx].tasks[taskIdx].activity)
             return board
         case UPDATE_TASK_LABEL_STATUS:
             board.groups[groupIdx].tasks[taskIdx].labelStatus = data.labelPick
