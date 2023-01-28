@@ -424,12 +424,16 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                 </div>
             </div>
 
-            <div className="main-group-container">
-                <Droppable droppableId={group.id} type='task-list' >
+            <div className="main-group-container"
+                key={group.id}
+            >
+                <Droppable key={utilService.makeId()} droppableId={group.id} type='task-list' >
                     {(taskProvider) => (
                         <section className={`tasks-container`}
                             {...taskProvider.droppableProps}
-                            ref={taskProvider.innerRef}>
+                            ref={taskProvider.innerRef}
+
+                        >
 
                             {group.tasks.map((task, index) =>
                                 <Draggable key={task.id} draggableId={task.id} index={index} isDragDisabled={isDndModeDisabled} >

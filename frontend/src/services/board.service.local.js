@@ -136,21 +136,32 @@ async function getById(boardId, filterBy = getDefaultFilter()) {
             filteredBoard.groups = check
         }
         if (filterBy.sortBy === STATUS_PICKER) {
-            let check = filteredGroups.map(group => group.tasks = group.tasks.sort((a, b) => a.status.localeCompare(b.status) * filterBy.desc))
+            let check = filteredGroups.map(group => {
+                group.tasks = group.tasks.sort((a, b) => a.status.localeCompare(b.status) * filterBy.desc)
+                return group
+            })
             filteredBoard.groups = check
-
         }
 
         if (filterBy.sortBy === LABEL_STATUS_PICKER) {
-            let check = filteredGroups.map(group => group.tasks = group.tasks.sort((a, b) => a.labelStatus.localeCompare(b.labelStatus) * filterBy.desc))
+            let check = filteredGroups.map(group => {
+                group.tasks = group.tasks.sort((a, b) => a.labelStatus.localeCompare(b.labelStatus) * filterBy.desc)
+                return group
+            })
             filteredBoard.groups = check
         }
         if (filterBy.sortBy === PRIORITY_PICKER) {
-            let check = filteredGroups.map(group => group.tasks = group.tasks.sort((a, b) => a.priority.localeCompare(b.priority) * filterBy.desc))
+            let check = filteredGroups.map(group => {
+                group.tasks = group.tasks.sort((a, b) => a.priority.localeCompare(b.priority) * filterBy.desc)
+                return group
+            })
             filteredBoard.groups = check
         }
         if (filterBy.sortBy === TEXT_LABEL) {
-            let check = filteredGroups.map(group => group.tasks = group.tasks.sort((a, b) => a.txt.localeCompare(b.txt) * filterBy.desc))
+            let check = filteredGroups.map(group => {
+                group.tasks = group.tasks.sort((a, b) => a.txt.localeCompare(b.txt) * filterBy.desc)
+                return group
+            })
             filteredBoard.groups = check
         }
         //todo!!!
@@ -161,6 +172,8 @@ async function getById(boardId, filterBy = getDefaultFilter()) {
         // if (filterBy.sortBy === DATE_PICKER) {
         //     filteredBoard.groups = filteredGroups.map(group => group.tasks = group.tasks.sort((a, b) => a.status.localeCompare(b.status) * filterBy.desc))
         // }
+        console.log('filteredBoard', filteredBoard);
+
         return filteredBoard
     } catch (error) {
         throw new Error('cant load board from service front', error)

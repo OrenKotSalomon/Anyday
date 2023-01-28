@@ -16,8 +16,8 @@ export function MyAnnie({ board, setfilterBy, setisAnnieOn, isAnnieOn }) {
 
     const commands = [
         {
-            command: '(Please) create a new task',
-            callback: () => updateTask(board, undefined, ADD_TASK_FROM_HEADER)
+            command: '(Please) create new task',
+            callback: () => updateTask(board, null, ADD_TASK_FROM_HEADER)
         },
         {
             command: 'Filter by done',
@@ -60,19 +60,19 @@ export function MyAnnie({ board, setfilterBy, setisAnnieOn, isAnnieOn }) {
             callback: () => onFilterBy([])
         },
         {
-            command: '(Please) create a new group',
+            command: '(Please) create new group',
             callback: () => updateGroup(board, null, ADD_GROUP_FROM_HEADER)
         },
         {
-            command: '(Amir) stop propagation',
+            command: 'stop propagation',
             callback: () => setisAnnieOn(false)
         },
         {
-            command: '(Amir) shut down',
+            command: 'shut down',
             callback: () => setisAnnieOn(false)
         },
         {
-            command: '(Amir) back to the future',
+            command: 'back to the future',
             callback: () => setisAnnieOn(false)
         },
 
