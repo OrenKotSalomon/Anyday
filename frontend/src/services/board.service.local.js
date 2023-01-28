@@ -104,7 +104,8 @@ async function query(filterBy = getDefaultFilter()) {
 }
 
 async function getById(boardId, filterBy = getDefaultFilter()) {
-    console.log('filterBy', filterBy);
+    let num = 0
+    console.log('num', num++);
 
     try {
         const board = await httpService.get(`board/${boardId}`)
@@ -172,7 +173,6 @@ async function getById(boardId, filterBy = getDefaultFilter()) {
         // if (filterBy.sortBy === DATE_PICKER) {
         //     filteredBoard.groups = filteredGroups.map(group => group.tasks = group.tasks.sort((a, b) => a.status.localeCompare(b.status) * filterBy.desc))
         // }
-        console.log('filteredBoard', filteredBoard);
 
         return filteredBoard
     } catch (error) {

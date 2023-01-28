@@ -230,7 +230,7 @@ export function BoardDetails() {
 
                             {board.groups.map((group, index) =>
                                 <GroupPreview
-                                    index={index}
+                                    index={group.id}
 
                                     // provided={provided}
                                     key={group.id}
