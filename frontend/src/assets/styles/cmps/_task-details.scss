@@ -270,15 +270,10 @@
                     display: inline-table;
                     align-self: center;
                     width: 56px;
-                }
 
-                .activity-by-avatar {
-                    display: inline-table;
-                    align-self: self-end;
-                    width: 30px;
-                    height: 30px;
-                    border-radius: 25em;
-                    margin-inline-start: 12px;
+                    svg {
+                        right: 2px;
+                    }
                 }
 
                 .activity-by-task {
@@ -289,15 +284,29 @@
                     width: 200px;
                 }
 
-
             }
 
+            .activity-by-avatar {
+                margin: 0;
+                display: inline-table;
+                align-self: self-end;
+                width: 30px;
+                height: 30px;
+                border-radius: 25em;
+                margin-inline-start: 12px;
+            }
 
             .activity-type {
                 display: inline-table;
                 align-self: center;
                 text-align: -webkit-auto;
                 width: 104px;
+                line-height: 24px;
+
+                svg {
+                    top: 2px;
+                    right: 4px;
+                }
 
             }
 
@@ -314,6 +323,67 @@
                 }
             }
 
+        }
+
+        .activity-picker-container {
+            display: flex;
+            align-self: center;
+            min-width: -webkit-fill-available;
+
+
+            .activity-status {
+                height: 39px;
+                padding: 8px;
+                color: $main-bgc-white;
+                min-width: 140px;
+            }
+
+            .activity-status-arrow {
+                svg {
+                    margin-top: 11px;
+                    width: 30px;
+                }
+            }
+
+            .activity-status.default {
+                background-color: rgb(196, 196, 196);
+            }
+
+            .activity-status.working.on.it {
+                background-color: rgb(253, 171, 61);
+            }
+
+            .activity-status.done {
+                background-color: rgb(0, 200, 117);
+            }
+
+            .activity-status.stuck {
+                background-color: rgb(226, 68, 92);
+            }
+
+
+
+        }
+
+        .activity-action {
+            display: inline-table;
+            align-self: center;
+            text-align: -webkit-auto;
+            width: 104px;
+            padding-inline-start: 120px;
+
+        }
+
+
+
+        .task-details-by-user-img {
+            color: $main-bgc-white;
+            background-color: #1c4f92;
+            width: 30px;
+            height: 30px;
+            border-radius: 25em;
+            text-align: -webkit-center;
+            line-height: 30px;
         }
     }
 }

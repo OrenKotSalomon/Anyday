@@ -8,7 +8,8 @@ import { CHANGE_TASK_TITLE, ADD_TASK_COMMENT, DELETE_TASK_COMMENT, PIN_TASK_COMM
 import { userService } from '../services/user.service.js'
 
 import { TabList, Tab, EditableHeading, Icon, MenuButton, Menu, MenuItem, } from 'monday-ui-react-core'
-import { Home, Time, Delete, Gallery, Emoji, Drag, Close, Pin } from 'monday-ui-react-core/icons'
+import { Home, Time, Delete, Gallery, Emoji, Drag, Close, Pin, Team } from 'monday-ui-react-core/icons'
+import { TaskActivity } from "./task-activity";
 
 export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, group, setIsDndModeDisabled }) {
 
@@ -258,10 +259,10 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                 </section >}
             </div> : <div className="task-activity-log">
 
+                <TaskActivity task={task} />
 
-
-                {task.activity && task.activity.length ?
-                    task.activity.map(activ => <div className="activity-row">
+                {/* {task.activity && task.activity.length ?
+                    task.activity.map(activ => <div key={activ.id} className="activity-row">
 
                         <div className="activity-by">
                             <span className="activity-by-time">
@@ -269,85 +270,26 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                                     iconType={Icon.type.SVG} icon={Time} iconLabel="my svg icon" iconSize={14} />
                                 {utilService.time_ago(activ.time)}
                             </span>
-                            <span className="activity-by-avatar">
-                                <img className='task-details-by-user-img' src={activ.byUser?.imgUrl} alt="" />
-                            </span>
+                                <img className='activity-by-avatar' src={activ.byUser?.imgUrl} alt="" />
                             <span className="activity-by-task">{task.title}</span>
                         </div>
 
                         <div className="activity-type">
+                        <Icon className='activity-person-icon' iconType={Icon.type.SVG}
+                            icon={Team} iconLabel="my svg icon" iconSize={14} />
+                            Person
+                        </div>
+
+                        <div className="activity-action">
                             {activ.action}
                         </div>
 
                         <div className="activity-data">
-                            {activ.toUser}
+                        {activ.toUserImg?<img className='activity-by-avatar' src={activ.toUserImg} alt="" />
+                            :<div className='task-details-by-user-img activity-by-avatar' >{(activ.toUserName).charAt(0).toUpperCase()}</div>}
                         </div>
 
-                    </div>) : 'NO ACTIVITY FOR THIS TASK YET...'}
-
-
-                {/* <div className="activity-row">
-
-                    <div className="activity-by">
-                        <span className="activity-by-time">🕛20m</span>
-                        <span className="activity-by-avatar">
-                            <div className='task-details-by-user-img-test' >🥸</div>
-                        </span>
-                        <span className="activity-by-task">Task1</span>
-                    </div>
-
-                    <div className="activity-type">
-                        ➡️ Moved
-                    </div>
-
-                    <div className="activity-data">
-                        To group <span className="activity-color">New Group</span>
-                    </div>
-
-                </div>
-
-
-                <div className="activity-row">
-
-                    <div className="activity-by">
-                        <span className="activity-by-time">🕛20m</span>
-                        <span className="activity-by-avatar">
-                            <div className='task-details-by-user-img-test' >🥸</div>
-                        </span>
-                        <span className="activity-by-task">Task1</span>
-                    </div>
-
-                    <div className="activity-type">
-                        ➡️ Moved
-                    </div>
-
-                    <div className="activity-data">
-                        To group <span className="activity-color">New Group</span>
-                    </div>
-
-                </div>
-
-
-                <div className="activity-row">
-
-                    <div className="activity-by">
-                        <span className="activity-by-time">🕛20m</span>
-                        <span className="activity-by-avatar">
-                            <div className='task-details-by-user-img-test' >🥸</div>
-                        </span>
-                        <span className="activity-by-task">Task1</span>
-                    </div>
-
-                    <div className="activity-type">
-                        ➡️ Moved
-                    </div>
-
-                    <div className="activity-data">
-                        To group <span className="activity-color">New Group</span>
-                    </div>
-
-                </div> */}
-
+                    </div>) : 'NO ACTIVITY FOR THIS TASK YET...'} */}
             </div>}
 
             <div className="slide-panel-resizer" draggable="true" onDrag={dragstart} onMouseDown={getInitX}>

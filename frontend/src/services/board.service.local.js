@@ -342,6 +342,7 @@ async function updateTaskService(board, data, type) {
     const newTask = getNewTask()
     let currTask, groupIdx, taskIdx
     const activity = {
+        id: utilService.makeId(),
         time: Date.now(),
         byUser: loggedInUser ? loggedInUser : 'Guest',
     }
@@ -406,20 +407,27 @@ async function updateTaskService(board, data, type) {
             return board
         // Need to make it Dynamic for each label
         case UPDATE_TASK_STATUS:
+            activity.type = 'update_status'
+            activity.fromStatus = board.groups[groupIdx].tasks[taskIdx].status
+            activity.toStatus = data.labelPick
+            board.groups[groupIdx].tasks[taskIdx].activity.unshift(activity)
             board.groups[groupIdx].tasks[taskIdx].status = data.labelPick
+            console.log(board.groups[groupIdx].tasks[taskIdx].activity)
             return board
         case UPDATE_TASK_LABEL_STATUS:
             board.groups[groupIdx].tasks[taskIdx].labelStatus = data.labelPick
             return board
         case UPDATE_TASK_MEMBERS:
-            activity.toUser = data.labelPick.fullname
-            if (data.isDelete){
-                activity.action = 'remove member'
+            activity.type = 'update_member'
+            activity.toUserImg = data.labelPick.imgUrl
+            activity.toUserName = data.labelPick.fullname
+            if (data.isDelete) {
+                activity.action = 'remove'
                 board.groups[groupIdx].tasks[taskIdx].activity.unshift(activity)
                 let memberToDeleteIdx = board.groups[groupIdx].tasks[taskIdx].members.findIndex(member => member._id === data.labelPick._id)
                 board.groups[groupIdx].tasks[taskIdx].members.splice(memberToDeleteIdx, 1)
             } else {
-                activity.action = 'add member'
+                activity.action = 'add'
                 board.groups[groupIdx].tasks[taskIdx].activity.unshift(activity)
                 if (board.groups[groupIdx].tasks[taskIdx].members.find((member) => member._id === data.labelPick._id)) return
                 board.groups[groupIdx].tasks[taskIdx].members.push(data.labelPick)
