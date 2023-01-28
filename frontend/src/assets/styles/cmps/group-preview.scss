@@ -457,12 +457,24 @@
   position: relative;
   @include status-layout;
   @include left-bottom-right-border;
+
+  &:hover {
+    .sort-wrapper {
+      visibility: visible;
+    }
+  }
 }
 
 .priority-label-header {
   @include left-bottom-right-border;
   position: relative;
   @include status-layout;
+
+  &:hover {
+    .sort-wrapper {
+      visibility: visible;
+    }
+  }
 }
 
 .person-label-header {
@@ -470,6 +482,12 @@
   @include person-layout;
   text-align: center;
   @include left-bottom-right-border;
+
+  &:hover {
+    .sort-wrapper {
+      visibility: visible;
+    }
+  }
 }
 
 .date-label-header {
@@ -478,5 +496,12 @@
 
   @include date-layout;
   text-align: center;
+
+  &:hover {
+    .sort-wrapper {
+      visibility: visible;
+    }
+  }
+
   // @include left-bottom-border;
 }

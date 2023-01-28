@@ -39,7 +39,6 @@ export function BoardDetails() {
 
     const boardContainer = useRef()
     const dispatch = useDispatch()
-    console.log('filterBy', filterBy);
     useEffect(() => {
         loadBoard(boardId, filterBy)
         socketService.on(SOCKET_EVENT_UPDATE_BOARD, loadBoard)

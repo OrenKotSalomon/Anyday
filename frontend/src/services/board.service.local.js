@@ -104,6 +104,7 @@ async function query(filterBy = getDefaultFilter()) {
 }
 
 async function getById(boardId, filterBy = getDefaultFilter()) {
+    console.log('filterBy', filterBy);
 
     try {
         const board = await httpService.get(`board/${boardId}`)
@@ -133,9 +134,33 @@ async function getById(boardId, filterBy = getDefaultFilter()) {
                 if (tasks.length) return filteredGroups[idx].tasks = tasks
             })
             filteredBoard.groups = check
+        }
+        if (filterBy.sortBy === STATUS_PICKER) {
+            let check = filteredGroups.map(group => group.tasks = group.tasks.sort((a, b) => a.status.localeCompare(b.status) * filterBy.desc))
+            filteredBoard.groups = check
 
         }
 
+        if (filterBy.sortBy === LABEL_STATUS_PICKER) {
+            let check = filteredGroups.map(group => group.tasks = group.tasks.sort((a, b) => a.labelStatus.localeCompare(b.labelStatus) * filterBy.desc))
+            filteredBoard.groups = check
+        }
+        if (filterBy.sortBy === PRIORITY_PICKER) {
+            let check = filteredGroups.map(group => group.tasks = group.tasks.sort((a, b) => a.priority.localeCompare(b.priority) * filterBy.desc))
+            filteredBoard.groups = check
+        }
+        if (filterBy.sortBy === TEXT_LABEL) {
+            let check = filteredGroups.map(group => group.tasks = group.tasks.sort((a, b) => a.txt.localeCompare(b.txt) * filterBy.desc))
+            filteredBoard.groups = check
+        }
+        //todo!!!
+        // change sort method
+        // if (filterBy.sortBy === NUMBER_PICKER) {
+        //     filteredBoard.groups = filteredGroups.map(group => group.tasks = group.tasks.sort((a, b) => a.status.localeCompare(b.status) * filterBy.desc))
+        // }
+        // if (filterBy.sortBy === DATE_PICKER) {
+        //     filteredBoard.groups = filteredGroups.map(group => group.tasks = group.tasks.sort((a, b) => a.status.localeCompare(b.status) * filterBy.desc))
+        // }
         return filteredBoard
     } catch (error) {
         throw new Error('cant load board from service front', error)
@@ -420,7 +445,7 @@ async function updateTaskService(board, data, type) {
             activity.type = 'update_member'
             activity.toUserImg = data.labelPick.imgUrl
             activity.toUserName = data.labelPick.fullname
-            if (data.isDelete)  {
+            if (data.isDelete) {
                 activity.action = 'remove'
                 board.groups[groupIdx].tasks[taskIdx].activity.unshift(activity)
                 let memberToDeleteIdx = board.groups[groupIdx].tasks[taskIdx].members.findIndex(member => member._id === data.labelPick._id)

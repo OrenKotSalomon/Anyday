@@ -1,22 +1,36 @@
 .sort-wrapper {
     z-index: 50;
-    top: -18px;
+    top: -8px;
     position: absolute;
     width: 20px;
     height: 20px;
     border-radius: 50%;
     background-color: rgb(255, 255, 255);
-    left: 57px;
-    // visibility: hidden;
+    left: 58px;
+    visibility: hidden;
     cursor: pointer;
+
+    &:hover {
+        background-color: #0073ea;
+
+        .sort-up {
+            color: $main-bgc-white;
+        }
+
+        .sort-down {
+            color: $main-bgc-white;
+        }
+    }
 
     .sort-up {
         position: relative;
         top: -9px;
-        left: 5px;
+        left: 4px;
+        font-size: 13px;
     }
 
     .sort-down {
+        font-size: 13px;
         position: relative;
         top: -8px;
         left: -4px;

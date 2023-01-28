@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { utilService } from '../services/util.service';
 import { updateGroup } from '../store/board.actions';
-import { ADD_GROUP, ADD_GROUP_TASK, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, LABEL_STATUS_PICKER, MEMEBER_PICKER, NUMBER_PICKER, ON_DRAG_TASK, PRIORITY_PICKER, STATUS_PICKER, TEXT_LABEL, UPDATE_GROUP_CHECKED } from '../services/board.service.local';
+import { ADD_GROUP, ADD_GROUP_TASK, boardService, CHANGE_GROUP_COLOR, CHANGE_GROUP_TITLE, DATE_PICKER, DELETE_GROUP, DUPLICATE_GROUP, LABEL_STATUS_PICKER, MEMEBER_PICKER, NUMBER_PICKER, ON_DRAG_TASK, PRIORITY_PICKER, STATUS_PICKER, TEXT_LABEL, UPDATE_GROUP_CHECKED } from '../services/board.service.local';
 
 import { TaskPreview } from "./task-preview";
 import { AddLabelModal } from './task-labels-dropdown/add-label-modal';
@@ -13,6 +13,8 @@ import { Delete, Bullet, Duplicate, Add, DropdownChevronDown, DropdownChevronRig
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons';
+import { SET_FILTERBY } from '../store/board.reducer';
+import { useDispatch } from 'react-redux';
 
 export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, isDndModeDisabled, index, setIsCheckedShow }) {
 
@@ -21,6 +23,15 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
     const [groupToUpdate, setGroupToUpdate] = useState(group)
     const [newTaskTitle, setNewTaskTitle] = useState('')
     const [listToUpdate, setListToUpdate] = useState(group.tasks)
+    const [sortBy, setSortBy] = useState(boardService.getDefaultFilter())
+
+    const dispatch = useDispatch()
+    onSetSortBy = useRef(utilService.debounce(onSetSortBy))
+
+    useEffect(() => {
+
+        onSetSortBy.current(sortBy)
+    }, [sortBy]);
 
     useEffect(() => {
         setListToUpdate(group.tasks)
@@ -76,28 +87,82 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
 
         updateGroup(board, { id: groupId, checked: target.checked }, UPDATE_GROUP_CHECKED)
     }
+    function SetSortBy(type) {
+        setSortBy(prev => {
+            return { ...prev, sortBy: type }
+        })
+    }
+
+    function onSetSortBy(filterBy) {
+        filterBy.desc = filterBy.desc * -1
+        dispatch({ type: SET_FILTERBY, filterBy })
+    }
 
     function renderGroupLabels(cmp) {
         switch (cmp) {
             case STATUS_PICKER:
                 return <div className="status-label-header ">Status
-                    <div className='sort-wrapper'>
+                    <div className='sort-wrapper'
+                        onClick={() => SetSortBy(STATUS_PICKER)}
+                    >
                         <FontAwesomeIcon className='sort-up' icon={faSortUp} />
                         <FontAwesomeIcon className='sort-down' icon={faSortDown} />
                     </div>
                 </div>
             case LABEL_STATUS_PICKER:
-                return <div className="label-statuses-header">Label</div>
+                return <div className="label-statuses-header">Label
+                    <div className='sort-wrapper'
+                        onClick={() => SetSortBy(LABEL_STATUS_PICKER)}
+                    >
+                        <FontAwesomeIcon className='sort-up' icon={faSortUp} />
+                        <FontAwesomeIcon className='sort-down' icon={faSortDown} />
+                    </div>
+                </div>
             case MEMEBER_PICKER:
-                return <div className="person-label-header ">Person</div>
+                return <div className="person-label-header ">Person
+                    {/* <div className='sort-wrapper'
+                        onClick={() => SetSortBy(STATUS_PICKER)}
+                    >
+                        <FontAwesomeIcon className='sort-up' icon={faSortUp} />
+                        <FontAwesomeIcon className='sort-down' icon={faSortDown} />
+                    </div> */}
+                </div>
             case DATE_PICKER:
-                return <div className="date-label-header ">Date</div>
+                return <div className="date-label-header ">Date
+                    <div className='sort-wrapper'
+                        onClick={() => SetSortBy(DATE_PICKER)}
+                    >
+                        <FontAwesomeIcon className='sort-up' icon={faSortUp} />
+                        <FontAwesomeIcon className='sort-down' icon={faSortDown} />
+                    </div>
+                </div>
             case PRIORITY_PICKER:
-                return <div className="priority-label-header ">Priority</div>
+                return <div className="priority-label-header ">Priority
+                    <div className='sort-wrapper'
+                        onClick={() => SetSortBy(PRIORITY_PICKER)}
+                    >
+                        <FontAwesomeIcon className='sort-up' icon={faSortUp} />
+                        <FontAwesomeIcon className='sort-down' icon={faSortDown} />
+                    </div>
+                </div>
             case TEXT_LABEL:
-                return <div className="priority-label-header ">Text</div>
+                return <div className="priority-label-header ">Text
+                    <div className='sort-wrapper'
+                        onClick={() => SetSortBy(TEXT_LABEL)}
+                    >
+                        <FontAwesomeIcon className='sort-up' icon={faSortUp} />
+                        <FontAwesomeIcon className='sort-down' icon={faSortDown} />
+                    </div>
+                </div>
             case NUMBER_PICKER:
-                return <div className="date-label-header ">Number</div>
+                return <div className="date-label-header ">Number
+                    <div className='sort-wrapper'
+                        onClick={() => SetSortBy(NUMBER_PICKER)}
+                    >
+                        <FontAwesomeIcon className='sort-up' icon={faSortUp} />
+                        <FontAwesomeIcon className='sort-down' icon={faSortDown} />
+                    </div>
+                </div>
         }
     }
 
@@ -317,7 +382,7 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}>
                                 {board.cmpsOrder.map((cmp, idx) => {
-                                    return <Draggable key={cmp} draggableId={cmp} index={idx} >
+                                    return <Draggable key={idx} draggableId={cmp} index={idx} >
                                         {(provided, snapshot) => (
                                             <div key={idx}
                                                 className={snapshot.isDragging ? 'dragged-label ' : ''}

@@ -88,9 +88,12 @@ export function MyAnnie({ board, setfilterBy, setisAnnieOn, isAnnieOn }) {
     if (!browserSupportsSpeechRecognition) {
         return <span>Browser doesn't support speech recognition.</span>;
     }
-    console.log(transcript);
+
     return (
-        <div className="annie-wrapper"
+        <div tabIndex={0} className="annie-wrapper"
+            onKeyUp={() => SpeechRecognition.startListening({
+                language: 'en-US'
+            })}
             style={{ top: isAnnieOn ? '80%' : '-500px' }}
         >
 
@@ -107,6 +110,7 @@ export function MyAnnie({ board, setfilterBy, setisAnnieOn, isAnnieOn }) {
                 onClick={() => SpeechRecognition.startListening({
                     language: 'en-US'
                 })}
+
                 className="mic-modal"
                 icon={faMicrophone} style={{ color: listening ? '#F52918' : '#ffffff' }} />
 
