@@ -62,10 +62,12 @@ export function BoardFilter({ board, onSetFilterBy }) {
         setfilterBy(prev => ({ ...prev, [field]: value }))
     }
     return <Fragment>
-        {isAnnieOn && <MyAnnie
+        <MyAnnie
+            setisAnnieOn={setisAnnieOn}
             board={board}
             setfilterBy={setfilterBy}
-        />}
+            isAnnieOn={isAnnieOn}
+        />
         <section className='board-filter'>
             <Flex gap='10' align='End'
 

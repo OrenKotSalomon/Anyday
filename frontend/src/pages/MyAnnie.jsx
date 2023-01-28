@@ -1,20 +1,12 @@
+import { faArrowRotateRight, faMicrophone, faPowerOff } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { ADD_GROUP_FROM_HEADER, ADD_TASK_FROM_HEADER } from "../services/board.service.local";
 import { updateGroup, updateTask } from "../store/board.actions";
 
-export function MyAnnie({ board, setfilterBy }) {
-    const [temp, settemp] = useState('')
-
-    useEffect(() => {
-        SpeechRecognition.startListening({
-            language: 'en-US'
-        })
-        setTimeout(() => {
-            SpeechRecognition.stopListening()
-        }, 3500);
-    }, []);
+export function MyAnnie({ board, setfilterBy, setisAnnieOn, isAnnieOn }) {
 
     function onFilterBy(type) {
         setfilterBy(prev => {
@@ -71,6 +63,18 @@ export function MyAnnie({ board, setfilterBy }) {
             command: '(Please) create a new group',
             callback: () => updateGroup(board, null, ADD_GROUP_FROM_HEADER)
         },
+        {
+            command: '(Amir) stop propagation',
+            callback: () => setisAnnieOn(false)
+        },
+        {
+            command: '(Amir) shut down',
+            callback: () => setisAnnieOn(false)
+        },
+        {
+            command: '(Amir) back to the future',
+            callback: () => setisAnnieOn(false)
+        },
 
     ]
 
@@ -86,20 +90,38 @@ export function MyAnnie({ board, setfilterBy }) {
     }
     console.log(transcript);
     return (
-        <div className="annie-container">
-            <p>Microphone: {listening ? 'on' : 'off'}</p>
-            <div className="text-container">
-                <p>{transcript}</p>
+        <div className="annie-wrapper"
+            style={{ top: isAnnieOn ? '80%' : '-500px' }}
+        >
+
+            <div className="annie-container">
+                <p>Microphone: {listening ? 'on' : 'off'}</p>
+                <div className="text-container-modal">
+                    <div>{transcript}</div>
+
+                </div>
 
             </div>
-            <div className="btn-annie-container">
-                {/* <button onClick={() => SpeechRecognition.startListening({
+
+            <FontAwesomeIcon
+                onClick={() => SpeechRecognition.startListening({
                     language: 'en-US'
-                })}>Start</button> */}
-                <button onClick={SpeechRecognition.stopListening}>Stop</button>
-                <button onClick={resetTranscript}>Reset</button>
+                })}
+                className="mic-modal"
+                icon={faMicrophone} style={{ color: listening ? '#F52918' : '#ffffff' }} />
 
-            </div>
+            <div className="white-circle"></div>
+
+            {/* <button>Start</button> */}
+            <FontAwesomeIcon
+                className="power-off"
+                onClick={() => setisAnnieOn(false)}
+                icon={faPowerOff} />
+            <FontAwesomeIcon
+                className="arrow-rotate-off"
+                onClick={resetTranscript}
+                icon={faArrowRotateRight} />
+
         </div>
     );
 };
