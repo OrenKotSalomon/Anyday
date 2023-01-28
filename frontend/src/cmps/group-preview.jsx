@@ -396,12 +396,12 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                                                 ref={provided.innerRef} >
                                                 {renderGroupLabels(cmp)}
                                                 <div className={snapshot.isDragging ? 'label-white-bgc-on-drag' : ''}></div>
-                                                {provided.placeholder}
                                             </div>
                                         )}
                                     </Draggable>
                                 }
                                 )}
+                                {provided.placeholder}
                             </div>
                         )}
                     </Droppable>
