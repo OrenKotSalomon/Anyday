@@ -385,10 +385,9 @@ async function updateTaskService(board, data, type) {
     if (data) {
         groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
         taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.taskId)
-    }
-
-    if (!board.groups[groupIdx].tasks[taskIdx].activity) {
-        board.groups[groupIdx].tasks[taskIdx].activity = []
+        if (!board.groups[groupIdx].tasks[taskIdx].activity) {
+            board.groups[groupIdx].tasks[taskIdx].activity = []
+        }
     }
 
     switch (type) {
@@ -401,6 +400,8 @@ async function updateTaskService(board, data, type) {
             board.groups[groupIdx].tasks.splice(taskIdx + 1, 0, data.taskToDuplicate)
             return board
         case ADD_TASK_FROM_HEADER:
+            console.log('board', board);
+
             board.groups[0].tasks.unshift(newTask)
             return board
         case CHANGE_TASK_TITLE:
