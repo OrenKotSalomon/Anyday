@@ -152,6 +152,19 @@ export function BoardDetails() {
 
     }
 
+    function onMoveTasks(ev, groupId) {
+        console.log(groupId);
+        let boardToUpdate = structuredClone(board)
+        let checkedTasks = boardToUpdate.groups.map(group => {
+            return group.tasks.filter(task => task.isChecked)
+        })
+        console.log(checkedTasks);
+        console.log('boardToUpdate', boardToUpdate);
+        console.log('board', board);
+        // if (!checkedTasks[0].length) return
+        updateGroup(board, { groupId, tasks: checkedTasks.flat(1) }, MOVE_TASK_TO_GROUP)
+    }
+
     function onDuplicateTasks() {
         let boardToUpdate = structuredClone(board)
         let CheckedTasks = boardToUpdate.groups.map(group => {
@@ -296,7 +309,29 @@ export function BoardDetails() {
                     </div>
 
                 </div>
-
+                {isMoveToShow &&
+                    <div className="move-to-wrapper">
+                        <div className="menu-checkbox-controls">
+                            <div className="choose-group-txt">
+                                Choose group
+                            </div>
+                            <div className="choose-back" onClick={() => setisMoveToShow(false)}>Back</div>
+                        </div>
+                        <Menu size="small">
+                            {board.groups.map((group, idx) => {
+                                return <MenuItem
+                                    onClick={(ev) => onMoveTasks(ev, group.id)}
+                                    key={idx}
+                                    icon={MoveArrowRight}
+                                    iconBackgroundColor={group.style}
+                                    iconColor={group.style}
+                                    iconType="SVG"
+                                    title={group.title}
+                                />
+                            })}
+                        </Menu>
+                    </div>
+                }
             </div>}
 
         </div>
