@@ -28,19 +28,32 @@ export function TaskActivity({ task }) {
                 return <section className='activity-picker-container'>< div className="activity-type">
                     <Icon className='activity-person-icon' iconType={Icon.type.SVG}
                         icon={Status} iconLabel="my svg icon" iconSize={14} />
-                   Status
+                    Status
                 </div>
-                    <div className={ 'activity-status'+` ${activ.fromStatus}`}>
+                    <div className={'activity-status' + ` ${activ.fromStatus}`}>
                         {activ.fromStatus}
                     </div>
                     <span className='activity-status-arrow'><Icon className='activity-person-icon' iconType={Icon.type.SVG}
                         icon={DropdownChevronRight} iconLabel="my svg icon" iconSize={16} /></span>
-                    <div className={'activity-status'+` ${activ.toStatus}`}>
+                    <div className={'activity-status' + ` ${activ.toStatus}`}>
                         {activ.toStatus}
                     </div>
                 </section>
-            // case 'update_priority':
-            //     return <div></div>
+            case 'update_priority':
+                return <section className='activity-picker-container'>< div className="activity-type">
+                    <Icon className='activity-person-icon' iconType={Icon.type.SVG}
+                        icon={Status} iconLabel="my svg icon" iconSize={14} />
+                    Priority
+                </div>
+                    <div className={'activity-status' + ` ${activ.fromPriority}`}>
+                        {activ.fromPriority !== 'critical'?activ.fromPriority:activ.fromPriority+'⚠️'}
+                    </div>
+                    <span className='activity-status-arrow'><Icon className='activity-person-icon' iconType={Icon.type.SVG}
+                        icon={DropdownChevronRight} iconLabel="my svg icon" iconSize={16} /></span>
+                    <div className={'activity-status' + ` ${activ.toPriority}`}>
+                        {activ.toPriority!== 'critical'?activ.toPriority:activ.toPriority+'⚠️'}
+                    </div>
+                </section>
         }
     }
 

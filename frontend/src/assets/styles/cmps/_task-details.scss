@@ -336,6 +336,7 @@
                 padding: 8px;
                 color: $main-bgc-white;
                 min-width: 140px;
+                line-height: 24px;
             }
 
             .activity-status-arrow {
@@ -361,8 +362,21 @@
                 background-color: rgb(226, 68, 92);
             }
 
+            .activity-status.low {
+                background-color: rgb(87, 155, 252);
+            }
 
+            .activity-status.medium {
+                background-color: #5559df;
+            }
 
+            .activity-status.high {
+                background-color: rgb(64, 22, 148);
+            }
+
+            .activity-status.critical {
+                background-color: rgb(51, 51, 51);
+            }
         }
 
         .activity-action {

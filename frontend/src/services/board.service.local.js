@@ -436,6 +436,10 @@ async function updateTaskService(board, data, type) {
             board.groups[groupIdx].tasks[taskIdx].dueDate = data.labelPick
             return board
         case UPDATE_TASK_PRIORITY:
+            activity.type = 'update_priority'
+            activity.fromPriority = board.groups[groupIdx].tasks[taskIdx].priority
+            activity.toPriority = data.labelPick
+            board.groups[groupIdx].tasks[taskIdx].activity.unshift(activity)
             board.groups[groupIdx].tasks[taskIdx].priority = data.labelPick
             return board
         case UPDATE_TASK_LABEL_NUMBER:
