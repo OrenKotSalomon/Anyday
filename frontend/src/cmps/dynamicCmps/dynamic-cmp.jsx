@@ -70,8 +70,8 @@ export function DynamicCmp({ cmp, info, openModal, handleChange }) {
                     : <span className='empty-member-container' >
                         <img className='guest-avatar-icon' src={`${guestAvatar}`} alt="" />
                         <span className='guest-avatar-plus'>
-                        <Icon iconType={Icon.type.SVG} ignoreFocusStyle={true} icon={AddSmall} iconLabel="my bolt svg icon" iconSize={20} />
- 
+                            <Icon iconType={Icon.type.SVG} ignoreFocusStyle={true} icon={AddSmall} iconLabel="my bolt svg icon" iconSize={20} />
+
                         </span>
                     </span>
                 }

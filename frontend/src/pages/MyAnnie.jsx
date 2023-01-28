@@ -1,20 +1,12 @@
+import { faArrowRotateRight, faMicrophone, faPowerOff } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import { ADD_TASK_FROM_HEADER } from "../services/board.service.local";
-import { updateTask } from "../store/board.actions";
+import { ADD_GROUP_FROM_HEADER, ADD_TASK_FROM_HEADER } from "../services/board.service.local";
+import { updateGroup, updateTask } from "../store/board.actions";
 
-export function MyAnnie({ board, setfilterBy }) {
-    const [temp, settemp] = useState('')
-
-    useEffect(() => {
-        SpeechRecognition.startListening({
-            language: 'en-US'
-        })
-        setTimeout(() => {
-            SpeechRecognition.stopListening()
-        }, 3500);
-    }, []);
+export function MyAnnie({ board, setfilterBy, setisAnnieOn, isAnnieOn }) {
 
     function onFilterBy(type) {
         setfilterBy(prev => {
@@ -32,12 +24,56 @@ export function MyAnnie({ board, setfilterBy }) {
             callback: () => onFilterBy('done')
         },
         {
+            command: 'Filter by dan',
+            callback: () => onFilterBy('done')
+        },
+        {
+            command: 'Filter by working on it',
+            callback: () => onFilterBy('working on it')
+        },
+        {
+            command: 'Filter by default',
+            callback: () => onFilterBy('default')
+        },
+        {
+            command: 'Filter by stuck',
+            callback: () => onFilterBy('stuck')
+        },
+        {
+            command: 'Filter by stock',
+            callback: () => onFilterBy('stuck')
+        },
+        {
+            command: 'Filter by low',
+            callback: () => onFilterBy('low')
+        },
+        {
+            command: 'Filter by critical',
+            callback: () => onFilterBy('critical ⚠️')
+        },
+        {
+            command: 'Filter by high',
+            callback: () => onFilterBy('high')
+        },
+        {
             command: 'Clear filter',
             callback: () => onFilterBy([])
         },
         {
             command: '(Please) create a new group',
-            callback: () => onFilterBy([])
+            callback: () => updateGroup(board, null, ADD_GROUP_FROM_HEADER)
+        },
+        {
+            command: '(Amir) stop propagation',
+            callback: () => setisAnnieOn(false)
+        },
+        {
+            command: '(Amir) shut down',
+            callback: () => setisAnnieOn(false)
+        },
+        {
+            command: '(Amir) back to the future',
+            callback: () => setisAnnieOn(false)
         },
 
     ]
@@ -54,18 +90,38 @@ export function MyAnnie({ board, setfilterBy }) {
     }
     console.log(transcript);
     return (
-        <div className="annie-container">
-            <p>Microphone: {listening ? 'on' : 'off'}</p>
+        <div className="annie-wrapper"
+            style={{ top: isAnnieOn ? '80%' : '-500px' }}
+        >
 
-            <p>{transcript}</p>
-            <div className="btn-annie-container">
+            <div className="annie-container">
+                <p>Microphone: {listening ? 'on' : 'off'}</p>
+                <div className="text-container-modal">
+                    <div>{transcript}</div>
 
-                {/* <button onClick={() => SpeechRecognition.startListening({
-                    language: 'en-US'
-                })}>Start</button> */}
-                <button onClick={SpeechRecognition.stopListening}>Stop</button>
-                <button onClick={resetTranscript}>Reset</button>
+                </div>
+
             </div>
+
+            <FontAwesomeIcon
+                onClick={() => SpeechRecognition.startListening({
+                    language: 'en-US'
+                })}
+                className="mic-modal"
+                icon={faMicrophone} style={{ color: listening ? '#F52918' : '#ffffff' }} />
+
+            <div className="white-circle"></div>
+
+            {/* <button>Start</button> */}
+            <FontAwesomeIcon
+                className="power-off"
+                onClick={() => setisAnnieOn(false)}
+                icon={faPowerOff} />
+            <FontAwesomeIcon
+                className="arrow-rotate-off"
+                onClick={resetTranscript}
+                icon={faArrowRotateRight} />
+
         </div>
     );
 };

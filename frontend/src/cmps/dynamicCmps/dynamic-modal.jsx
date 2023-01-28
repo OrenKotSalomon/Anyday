@@ -51,7 +51,6 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
     }
 
     function onPriorityPick(priority) {
-        console.log('priority:', priority)
         onUpdateTaskLabel(UPDATE_TASK_PRIORITY, cmp.data, priority)
     }
     function onLabelStatusPick(labelStatus) {
@@ -107,7 +106,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
                     {/* here goes amount of users connected to board  */}
                     <DialogContentContainer className="monday-style-story-chips_search-bar">
                         <div className='member-picker-user-container'>
-                            <Icon onClick={() => setIsModalOpen(false)} className='member-picker-close-modal' iconType={Icon.type.SVG} icon={CloseSmall} iconLabel="my bolt svg icon" iconSize={18}  />
+                            <Icon onClick={() => setIsModalOpen(false)} className='member-picker-close-modal' iconType={Icon.type.SVG} icon={CloseSmall} iconLabel="my bolt svg icon" iconSize={18} />
                             <div className='member-picker-user-delete-container'>
                                 {cmp.info?.members.map(member =>
                                     <div className='member-picker-user-delete' key={member._id + '' + Math.random(9)}>
@@ -128,8 +127,6 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
                     </DialogContentContainer>
                 </div>
             </div>
-
-
 
             {/* <div className="monday-style-story-chips_lable">Suggested people</div>
 <div className="monday-style-story-chips_search">

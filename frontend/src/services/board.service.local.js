@@ -130,7 +130,6 @@ async function getById(boardId, filterBy = getDefaultFilter()) {
                     }
                     return false
                 })
-                console.log('tasks', tasks);
                 if (tasks.length) return filteredGroups[idx].tasks = tasks
             })
             filteredBoard.groups = check
@@ -421,7 +420,7 @@ async function updateTaskService(board, data, type) {
             activity.type = 'update_member'
             activity.toUserImg = data.labelPick.imgUrl
             activity.toUserName = data.labelPick.fullname
-            if (data.isDelete) {
+            if (data.isDelete)  {
                 activity.action = 'remove'
                 board.groups[groupIdx].tasks[taskIdx].activity.unshift(activity)
                 let memberToDeleteIdx = board.groups[groupIdx].tasks[taskIdx].members.findIndex(member => member._id === data.labelPick._id)

@@ -24,9 +24,7 @@ export function DynamicSummaryCmp({ cmp, board, group }) {
                         }
                     })
                 }
-
                 return labels
-
             case LABEL_STATUS_PICKER:
                 labels = []
                 const GroupLabelsStatuses = group.tasks.reduce((acc, task) => {

@@ -1,0 +1,25 @@
+.sort-wrapper {
+    z-index: 50;
+    top: -18px;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+    left: 57px;
+    // visibility: hidden;
+    cursor: pointer;
+
+    .sort-up {
+        position: relative;
+        top: -9px;
+        left: 5px;
+    }
+
+    .sort-down {
+        position: relative;
+        top: -8px;
+        left: -4px;
+    }
+
+}

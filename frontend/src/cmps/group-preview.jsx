@@ -11,6 +11,8 @@ import { DynamicSummaryCmp } from './dynamicCmps/dynamic-summary-cmp';
 import { EditableHeading, Tooltip, MenuButton, Menu, MenuItem, ColorPicker, Icon } from 'monday-ui-react-core'
 import { Delete, Bullet, Duplicate, Add, DropdownChevronDown, DropdownChevronRight } from 'monday-ui-react-core/icons'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons';
 
 export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, isDndModeDisabled, index, setIsCheckedShow }) {
 
@@ -78,7 +80,12 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
     function renderGroupLabels(cmp) {
         switch (cmp) {
             case STATUS_PICKER:
-                return <div className="status-label-header ">Status</div>
+                return <div className="status-label-header ">Status
+                    <div className='sort-wrapper'>
+                        <FontAwesomeIcon className='sort-up' icon={faSortUp} />
+                        <FontAwesomeIcon className='sort-down' icon={faSortDown} />
+                    </div>
+                </div>
             case LABEL_STATUS_PICKER:
                 return <div className="label-statuses-header">Label</div>
             case MEMEBER_PICKER:
@@ -304,30 +311,30 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                             </div>
                         </div>
                     </div>
-                        <Droppable droppableId="label" direction="horizontal" type='label-list'>
-                            {(provided) => (
-                                <div className={`main-header-labels-container flex`}
-                                    {...provided.droppableProps}
-                                    ref={provided.innerRef}>
-                                    {board.cmpsOrder.map((cmp, idx) => {
-                                        return <Draggable key={cmp} draggableId={cmp} index={idx} >
-                                            {(provided, snapshot) => (
-                                                <div key={idx}
-                                                    className={snapshot.isDragging ? 'dragged-label ' : ''}
-                                                    {...provided.draggableProps}
-                                                    {...provided.dragHandleProps}
-                                                    ref={provided.innerRef} >
-                                                    {renderGroupLabels(cmp)}
-                                                    <div className={snapshot.isDragging ? 'label-white-bgc-on-drag' : ''}></div>
-                                                </div>
-                                            )}
-                                        </Draggable>
-                                    }
-                                    )}
-                                    {provided.placeholder}
-                                </div>
-                            )}
-                        </Droppable>
+                    <Droppable droppableId="label" direction="horizontal" type='label-list'>
+                        {(provided) => (
+                            <div className={`main-header-labels-container flex`}
+                                {...provided.droppableProps}
+                                ref={provided.innerRef}>
+                                {board.cmpsOrder.map((cmp, idx) => {
+                                    return <Draggable key={cmp} draggableId={cmp} index={idx} >
+                                        {(provided, snapshot) => (
+                                            <div key={idx}
+                                                className={snapshot.isDragging ? 'dragged-label ' : ''}
+                                                {...provided.draggableProps}
+                                                {...provided.dragHandleProps}
+                                                ref={provided.innerRef} >
+                                                {renderGroupLabels(cmp)}
+                                                <div className={snapshot.isDragging ? 'label-white-bgc-on-drag' : ''}></div>
+                                            </div>
+                                        )}
+                                    </Draggable>
+                                }
+                                )}
+                                {provided.placeholder}
+                            </div>
+                        )}
+                    </Droppable>
                     <div className='main-right-header flex'>
                         <div className="add-label-btn-container"
                             style={{
@@ -353,96 +360,96 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
             </div>
 
             <div className="main-group-container">
-                    <Droppable droppableId={group.id} type='task-list' >
-                        {(taskProvider) => (
-                            <section className={`tasks-container`}
-                                {...taskProvider.droppableProps}
-                                ref={taskProvider.innerRef}>
+                <Droppable droppableId={group.id} type='task-list' >
+                    {(taskProvider) => (
+                        <section className={`tasks-container`}
+                            {...taskProvider.droppableProps}
+                            ref={taskProvider.innerRef}>
 
-                                {group.tasks.map((task, index) =>
-                                    <Draggable key={task.id} draggableId={task.id} index={index} isDragDisabled={isDndModeDisabled} >
-                                        {(provided, snapshot) => (
-                                            <TaskPreview
-                                                snapshot={snapshot}
-                                                provided={provided}
-                                                key={task.id}
-                                                task={task}
-                                                board={board}
-                                                group={group}
-                                                openModal={openModal}
-                                                setIsDndModeDisabled={setIsDndModeDisabled}
-                                                setIsCheckedShow={setIsCheckedShow}
-                                            />
-                                        )}
-                                    </Draggable>
-                                )}
-                                {taskProvider.placeholder}
-                                <div className='add-task-wrapper'>
-                                    <div className='add-task-container'>
-                                        <div className='add-task-input-container'>
-                                            <div className='floatin-white-box-under'></div>
-                                            <div style={{ backgroundColor: group.style }} className='left-border-add-task'></div>
-                                            <div className='checkbox-row-container-add-task'>
-                                                <input className='row-checkbox-add-task' type="checkbox" disabled />
-                                            </div>
-                                            <EditableHeading
-                                                className='editable-add-task'
-                                                type={EditableHeading.types.h6}
-                                                onFinishEditing={onAddGroupTask}
-                                                onChange={handleChangeTask}
-                                                placeholder={'+ Add Task'}
-                                                value={newTaskTitle}
-                                                brandFont
-                                            />
+                            {group.tasks.map((task, index) =>
+                                <Draggable key={task.id} draggableId={task.id} index={index} isDragDisabled={isDndModeDisabled} >
+                                    {(provided, snapshot) => (
+                                        <TaskPreview
+                                            snapshot={snapshot}
+                                            provided={provided}
+                                            key={task.id}
+                                            task={task}
+                                            board={board}
+                                            group={group}
+                                            openModal={openModal}
+                                            setIsDndModeDisabled={setIsDndModeDisabled}
+                                            setIsCheckedShow={setIsCheckedShow}
+                                        />
+                                    )}
+                                </Draggable>
+                            )}
+                            {taskProvider.placeholder}
+                            <div className='add-task-wrapper'>
+                                <div className='add-task-container'>
+                                    <div className='add-task-input-container'>
+                                        <div className='floatin-white-box-under'></div>
+                                        <div style={{ backgroundColor: group.style }} className='left-border-add-task'></div>
+                                        <div className='checkbox-row-container-add-task'>
+                                            <input className='row-checkbox-add-task' type="checkbox" disabled />
                                         </div>
-                                        <div className='summary-for-mobile'>
-
-                                            {
-                                                board.cmpsOrder.map((cmp, idx) => {
-
-                                                    return <DynamicSummaryCmp
-                                                        key={idx}
-                                                        cmp={cmp}
-                                                        board={board}
-                                                        group={group}
-
-                                                    />
-                                                })
-                                            }
-                                        </div>
-                                        <div className='white-box'></div>
+                                        <EditableHeading
+                                            className='editable-add-task'
+                                            type={EditableHeading.types.h6}
+                                            onFinishEditing={onAddGroupTask}
+                                            onChange={handleChangeTask}
+                                            placeholder={'+ Add Task'}
+                                            value={newTaskTitle}
+                                            brandFont
+                                        />
                                     </div>
+                                    <div className='summary-for-mobile'>
 
-                                    <div className='label-sum-container'>
+                                        {
+                                            board.cmpsOrder.map((cmp, idx) => {
 
-                                        <div className='hidden-task-container'>
+                                                return <DynamicSummaryCmp
+                                                    key={idx}
+                                                    cmp={cmp}
+                                                    board={board}
+                                                    group={group}
 
-                                            <div className='floatin-white-box-sum'></div>
-                                            <div className='hidden-task'></div>
-                                            <div className='right-floating-border'></div>
-                                        </div>
-
-                                        <div className='sum-labels-container'>
-                                            {
-                                                board.cmpsOrder.map((cmp, idx) => {
-                                                    return <DynamicSummaryCmp
-                                                        key={idx}
-                                                        cmp={cmp}
-                                                        board={board}
-                                                        group={group}
-                                                    />
-                                                })
-                                            }
-
-                                        </div>
-                                        <div className='white-box'></div>
-
+                                                />
+                                            })
+                                        }
                                     </div>
+                                    <div className='white-box'></div>
                                 </div>
-                            </section>
 
-                        )}
-                    </Droppable>
+                                <div className='label-sum-container'>
+
+                                    <div className='hidden-task-container'>
+
+                                        <div className='floatin-white-box-sum'></div>
+                                        <div className='hidden-task'></div>
+                                        <div className='right-floating-border'></div>
+                                    </div>
+
+                                    <div className='sum-labels-container'>
+                                        {
+                                            board.cmpsOrder.map((cmp, idx) => {
+                                                return <DynamicSummaryCmp
+                                                    key={idx}
+                                                    cmp={cmp}
+                                                    board={board}
+                                                    group={group}
+                                                />
+                                            })
+                                        }
+
+                                    </div>
+                                    <div className='white-box'></div>
+
+                                </div>
+                            </div>
+                        </section>
+
+                    )}
+                </Droppable>
             </div>
         </section>}
 

@@ -441,28 +441,41 @@
 }
 
 .status-label-header {
+
+  position: relative;
   @include status-layout;
   @include left-bottom-right-border;
+
+  &:hover {
+    .sort-wrapper {
+      visibility: visible;
+    }
+  }
 }
 
 .label-statuses-header {
+  position: relative;
   @include status-layout;
   @include left-bottom-right-border;
 }
 
 .priority-label-header {
   @include left-bottom-right-border;
+  position: relative;
   @include status-layout;
 }
 
 .person-label-header {
+  position: relative;
   @include person-layout;
   text-align: center;
   @include left-bottom-right-border;
 }
 
 .date-label-header {
+  position: relative;
   @include left-bottom-right-border;
+
   @include date-layout;
   text-align: center;
   // @include left-bottom-border;
