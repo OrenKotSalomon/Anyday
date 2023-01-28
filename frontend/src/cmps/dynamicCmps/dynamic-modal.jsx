@@ -72,7 +72,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
 
                 <div className="arrow-up"></div>
                 <div className="status-picker-view">
-                    {cmp.statuses.map((status, idx) => {
+                    {cmp.info.map((status, idx) => {
                         return <button onClick={() => onStatusPick(status.label)} key={idx}
                             style={{ background: status.bgColor }}
                             className="status-picker">
@@ -87,7 +87,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
 
                 <div className="arrow-up"></div>
                 <div className="status-picker-view">
-                    {cmp.labelStatuses.map((labelStatus, idx) => {
+                    {cmp.info.map((labelStatus, idx) => {
 
                         return <button onClick={() => onLabelStatusPick(labelStatus.label)} key={idx}
                             style={{ background: labelStatus.bgColor }}
@@ -157,7 +157,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
             return <div onClick={() => setIsModalOpen(false)} className="status-picker-container" style={{ left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
                 <div className="arrow-up"></div>
                 <div className="status-picker-view">
-                    {cmp.priorities.map((priority, idx) => {
+                    {cmp.info.map((priority, idx) => {
                         return <button onClick={() => onPriorityPick(priority.label)} key={idx}
                             style={{ background: priority.bgColor }}
                             className="status-picker">
