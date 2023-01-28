@@ -94,7 +94,8 @@ export function BoardView({ board }) {
                 </div>
             </div>
             <div className='board-header-description'>
-                <div className='board-header-txt'>Final Project For Coding Academy</div>
+            {/* // Board Dexc */}
+                <div className='board-header-txt'>Final Project For Coding Academy</div> 
                 <div className='description-modal'>See More</div>
             </div>
             <div className="header-tablist">

@@ -1,12 +1,33 @@
 import { faArrowRotateRight, faMicrophone, faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import { ADD_GROUP_FROM_HEADER, ADD_TASK_FROM_HEADER } from "../services/board.service.local";
-import { updateGroup, updateTask } from "../store/board.actions";
+import { ADD_GROUP_FROM_HEADER, ADD_TASK_FROM_HEADER, boardService } from "../services/board.service.local";
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
+import { addBoard, updateGroup, updateTask } from "../store/board.actions";
 
 export function MyAnnie({ board, setfilterBy, setisAnnieOn, isAnnieOn }) {
+
+    const navigate = useNavigate()
+    const [boardToEdit, setBoardToEdit] = useState(boardService.getEmptyBoard())
+
+    async function onAddBoard() {
+        // if (!boardToEdit.title ) return
+        boardToEdit.title = 'Management Board'
+        boardToEdit.description = 'Best Way To Manage Your Projects'
+
+        try {
+            const savedBoard = await addBoard(boardToEdit)
+            setBoardToEdit(boardService.getEmptyBoard())
+            
+            navigate(`/board/${savedBoard._id}`)
+            showSuccessMsg(`Board added (id: ${savedBoard._id})`)
+        } catch (err) {
+            showErrorMsg('Cannot Add Board', err)
+        }
+    }
 
     function onFilterBy(type) {
         setfilterBy(prev => {
@@ -15,6 +36,14 @@ export function MyAnnie({ board, setfilterBy, setisAnnieOn, isAnnieOn }) {
     }
 
     const commands = [
+        {
+            command: '(Please) create a new (management) board',
+            callback: () => onAddBoard()
+        },
+        {
+            command: '(Please) create new (management) board',
+            callback: () => onAddBoard()
+        },
         {
             command: '(Please) create new task',
             callback: () => updateTask(board, null, ADD_TASK_FROM_HEADER)
