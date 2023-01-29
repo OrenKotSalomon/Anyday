@@ -42,7 +42,7 @@ export function TaskCard({ task, group, board, snapshot }) {
         <div className="card-menu-btn-container flex"
             style={{ display: snapshot.isDragging ? 'none' : '' }}>
 
-            <div className="card-msg-btn-container" onClick={() => {
+            {/* <div className="card-msg-btn-container" onClick={() => {
                 setIsOpenDetails(!isOpenDetails)
             }}
             >
@@ -59,7 +59,7 @@ export function TaskCard({ task, group, board, snapshot }) {
 
                     </div>}
                 </button>
-            </div>
+            </div> */}
 
             <MenuButton className="task-preview-menu-btn">
                 <Menu
