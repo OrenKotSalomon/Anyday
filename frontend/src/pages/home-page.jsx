@@ -54,12 +54,18 @@ export function HomePage() {
                 <div className='home-page-logo-container'><img className="header-logo" src={logo} alt="logo" />Anyday<span>.com</span></div>
                 {loggedInUser ?
                     <div className='home-page-login-signup-container'>
-                        Welcome {loggedInUser.fullname} | <Link className='home-page-login-signup-link' to={`/user-details/:userId`}> Profile </Link>
+                        Welcome {loggedInUser.fullname}
                         | <a href="#" onClick={onLogout}>LogOut</a>
                     </div>
                     : <div className='home-page-login-signup-container'>
                         Welcome Guest <Link className='home-page-login-signup-link' to={`/login`}> LogIn </Link> |
                         <Link className='home-page-login-signup-link' to={`/signup`}> SignUp </Link>
+
+                        <Link className='home-page-start-nav' to={`/board/${boards[0]._id}`}>
+                            Get Started
+                            <Icon iconType={Icon.type.SVG} icon={MoveArrowRight} iconSize={14} />
+                        </Link>
+
                     </div>}
             </header>
 
@@ -105,8 +111,8 @@ export function HomePage() {
                 </div>
             </div>
             <div className='home-page-bottom-container'>
-<div className='home-page-brake'>.</div>
-{/* height: 10vh;
+                <div className='home-page-brake'>.</div>
+                {/* height: 10vh;
     background-color: #07083c;
     background: linear-gradient(to top, #07083c00 0%, rgb(12 13 74 / 32%)25%, rgb(15 16 72 / 51%)50%, rgb(15 16 72) 100%); */}
 
@@ -143,7 +149,7 @@ export function HomePage() {
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                         <div className="our-team">
                             <div className="picture">
-                            <img className="img-fluid" src={`${Oren}`} />
+                                <img className="img-fluid" src={`${Oren}`} />
                             </div>
                             <div className="team-content">
                                 <h3 className="name">Oren Kot</h3>
@@ -160,7 +166,7 @@ export function HomePage() {
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                         <div className="our-team">
                             <div className="picture">
-                            <img className="img-fluid" src={`${Harel}`} />
+                                <img className="img-fluid" src={`${Harel}`} />
                             </div>
                             <div className="team-content">
                                 <h3 className="name">Harel Natan</h3>

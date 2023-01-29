@@ -146,7 +146,6 @@
     }
 
     .home-page-link {
-
         .btn-get-started {
             color: $main-bgc-white;
             margin-top: 3em;
@@ -188,10 +187,13 @@
                     }
                 }
 
-
             }
-        }
 
+
+
+
+
+        }
 
 
         .btn-get-started:hover .btn-get-started-arrow {
@@ -442,6 +444,7 @@
     margin-right: auto;
     margin-top: 3em;
     max-height: 7vh;
+
     @include for-narrow-layout {
         max-height: 10vh;
     }
@@ -455,10 +458,11 @@
     }
 }
 
-.home-page-brake{
+.home-page-brake {
     height: 10vh;
     background-color: #07083c;
     background: linear-gradient(to top, #07083c00 0%, rgb(12 13 74 / 32%)25%, rgb(15 16 72 / 51%)50%, rgb(15 16 72) 100%);
+
     @include for-narrow-layout {
         height: 12vh;
     }
@@ -473,7 +477,7 @@
 
 }
 
-.team-header{
+.team-header {
     background: linear-gradient(to top, rgb(202 202 202)0%, rgb(202 202 202 / 72%)25%, rgb(202 202 202 / 64%)50%, rgb(202 202 202 / 6%) 100%);
     padding-top: 10vh;
     padding-bottom: 1vh;
@@ -656,5 +660,23 @@
     .our-team .social li a:hover {
         color: #1369ce;
         background-color: #f7f5ec;
+    }
+}
+
+.home-page-start-nav {
+    color: $main-bgc-white;
+    // margin-top: 3em;
+    align-self: center;
+    display: inline-block;
+    font-size: rem(14px);
+    padding: 12px 20px;
+    background: linear-gradient(-60deg, $start-btn-li-blue 20%, $start-btn-blue 80%);
+    border-radius: 25px;
+    transform: 1s;
+    font-family: poppins-regular-400;
+
+    svg {
+        color: $main-bgc-white;
+        padding-left: 5px;
     }
 }
