@@ -73,7 +73,7 @@ async function update(board) {
             title: board.title,
         }
 
-        delete board._id
+        // delete board._id
         // console.log('boardToSave:', boardToSave)
         console.log('boardToSave:', boardToSave)
         console.log('board:', board)
