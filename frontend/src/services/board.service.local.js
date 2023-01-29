@@ -187,19 +187,19 @@ async function remove(boardId,) {
 }
 
 async function save(board) {
-    var savedBoard
+
     if (board._id) {
 
         // savedBoard = await storageService.put(BOARD_KEY, board)
-        savedBoard = await httpService.put(`board/${board._id}`, board)
-        return savedBoard
+        return await httpService.put(`board/${board._id}`, board)
+
     } else {
         // Later, owner is set by the backend
         board.owner = userService.getLoggedinUser()
-        // savedBoard = await storageService.post(BOARD_KEY, board)
-        savedBoard = await httpService.post('board', board)
+        //  await storageService.post(BOARD_KEY, board)
+        return await httpService.post('board', board)
     }
-    return savedBoard
+
 }
 
 async function duplicate(board) {
@@ -389,13 +389,12 @@ async function updateTaskService(board, data, type) {
     }
 
     if ((type === UPDATE_TASK_MEMBERS ||
-        type === UPDATE_TASK_LABEL_STATUS || 
-        type === UPDATE_TASK_STATUS || 
-        type === UPDATE_TASK_PRIORITY)  
+        type === UPDATE_TASK_LABEL_STATUS ||
+        type === UPDATE_TASK_STATUS ||
+        type === UPDATE_TASK_PRIORITY)
         && !board.groups[groupIdx].tasks[taskIdx].activity) {
-       board.groups[groupIdx].tasks[taskIdx].activity = []
-   }
-
+        board.groups[groupIdx].tasks[taskIdx].activity = []
+    }
 
     switch (type) {
         case DELETE_TASK:
@@ -457,13 +456,13 @@ async function updateTaskService(board, data, type) {
             board.groups[groupIdx].tasks[taskIdx].status = data.labelPick
             // console.log(board.groups[groupIdx].tasks[taskIdx].activity)
             return board
-            case UPDATE_TASK_LABEL_STATUS:
-                activity.type = 'update_label'
-                activity.fromLabel = board.groups[groupIdx].tasks[taskIdx].labelStatus
-                activity.toLabel = data.labelPick
-                board.groups[groupIdx].tasks[taskIdx].activity.unshift(activity)
-                board.groups[groupIdx].tasks[taskIdx].labelStatus = data.labelPick
-                return board
+        case UPDATE_TASK_LABEL_STATUS:
+            activity.type = 'update_label'
+            activity.fromLabel = board.groups[groupIdx].tasks[taskIdx].labelStatus
+            activity.toLabel = data.labelPick
+            board.groups[groupIdx].tasks[taskIdx].activity.unshift(activity)
+            board.groups[groupIdx].tasks[taskIdx].labelStatus = data.labelPick
+            return board
         case UPDATE_TASK_MEMBERS:
             activity.type = 'update_member'
             activity.toUserImg = data.labelPick.imgUrl
@@ -552,22 +551,22 @@ function getDevTemplate() {
         "archivedAt": "1589983468418",
         "statuses": [
             {
-                "id": utilService.makeId() ,
+                "id": utilService.makeId(),
                 "label": "done",
                 "bgColor": "#00c875"
             },
             {
-                "id": utilService.makeId() ,
+                "id": utilService.makeId(),
                 "label": "working on it",
                 "bgColor": "#fdab3d"
             },
             {
-                "id": utilService.makeId() ,
+                "id": utilService.makeId(),
                 "label": "stuck",
                 "bgColor": "#e2445c"
             },
             {
-                "id": utilService.makeId() ,
+                "id": utilService.makeId(),
                 "label": "default",
                 "bgColor": "#c4c4c4"
             }
@@ -614,14 +613,14 @@ function getDevTemplate() {
         ],
         "groups": [
             {
-                "id": utilService.makeId() ,
+                "id": utilService.makeId(),
                 "title": "Feature Enhancements",
                 "archivedAt": "1589983468418",
                 "isCollapsed": false,
                 "isChecked": false,
                 "tasks": [
                     {
-                        "id": utilService.makeId() ,
+                        "id": utilService.makeId(),
                         "isChecked": false,
                         "title": "Committed Feature",
                         "status": "done",
@@ -633,7 +632,7 @@ function getDevTemplate() {
                         "txt": "",
                         "activity": [
                             {
-                                "id": utilService.makeId() ,
+                                "id": utilService.makeId(),
                                 "time": "1674988412373",
                                 "byUser": "Guest",
                                 "type": "update_priority",
@@ -641,7 +640,7 @@ function getDevTemplate() {
                                 "toPriority": "critical ⚠️"
                             },
                             {
-                                "id": utilService.makeId() ,
+                                "id": utilService.makeId(),
                                 "time": "1674988409892"
                             },
                             {
@@ -653,7 +652,7 @@ function getDevTemplate() {
                         ],
                     },
                     {
-                        "id": utilService.makeId() ,
+                        "id": utilService.makeId(),
                         "title": "Committed Feature",
                         "status": "done",
                         "priority": "low",
@@ -665,7 +664,7 @@ function getDevTemplate() {
                         "txt": "",
                         "activity": [
                             {
-                                "id": utilService.makeId() ,
+                                "id": utilService.makeId(),
                                 "time": "1674988660370",
                                 "byUser": "Guest",
                                 "type": "update_priority",
@@ -673,7 +672,7 @@ function getDevTemplate() {
                                 "toPriority": "low"
                             },
                             {
-                                "id": utilService.makeId() ,
+                                "id": utilService.makeId(),
                                 "time": "1674988655917",
                                 "byUser": "Guest",
                                 "type": "update_status",
@@ -683,7 +682,7 @@ function getDevTemplate() {
                         ]
                     },
                     {
-                        "id": utilService.makeId() ,
+                        "id": utilService.makeId(),
                         "isChecked": false,
                         "title": "Committed Plan board",
                         "status": "working on it",
@@ -695,7 +694,7 @@ function getDevTemplate() {
                         "txt": "",
                         "activity": [
                             {
-                                "id": utilService.makeId() ,
+                                "id": utilService.makeId(),
                                 "time": "1674988414377",
                                 "byUser": "Guest",
                                 "type": "update_priority",
@@ -703,7 +702,7 @@ function getDevTemplate() {
                                 "toPriority": "medium"
                             },
                             {
-                                "id": utilService.makeId() ,
+                                "id": utilService.makeId(),
                                 "time": "1674988411061",
                                 "byUser": "Guest",
                                 "type": "update_status",
@@ -716,14 +715,14 @@ function getDevTemplate() {
                 "style": "#4eccc6"
             },
             {
-                "id": utilService.makeId() ,
+                "id": utilService.makeId(),
                 "title": "Bugs",
                 "archivedAt": "1589983468418",
                 "isCollapsed": false,
                 "isChecked": false,
                 "tasks": [
                     {
-                        "id": utilService.makeId() ,
+                        "id": utilService.makeId(),
                         "isChecked": false,
                         "title": "Committed Bug",
                         "status": "stuck",
@@ -735,7 +734,7 @@ function getDevTemplate() {
                         "txt": "",
                         "activity": [
                             {
-                                "id": utilService.makeId() ,
+                                "id": utilService.makeId(),
                                 "time": "1674988428184",
                                 "byUser": "Guest",
                                 "type": "update_priority",
@@ -743,7 +742,7 @@ function getDevTemplate() {
                                 "toPriority": "high"
                             },
                             {
-                                "id": utilService.makeId() ,
+                                "id": utilService.makeId(),
                                 "time": "1674988423469",
                                 "byUser": "Guest",
                                 "type": "update_status",
@@ -756,14 +755,14 @@ function getDevTemplate() {
                 "style": "#9cd326"
             },
             {
-                "id": utilService.makeId() ,
+                "id": utilService.makeId(),
                 "title": "Team",
                 "archivedAt": "1589983468418",
                 "isCollapsed": false,
                 "isChecked": false,
                 "tasks": [
                     {
-                        "id": utilService.makeId() ,
+                        "id": utilService.makeId(),
                         "isChecked": false,
                         "title": "Commited Team Task",
                         "status": "working on it",
@@ -776,7 +775,7 @@ function getDevTemplate() {
                         "txt": "",
                         "activity": [
                             {
-                                "id": utilService.makeId() ,
+                                "id": utilService.makeId(),
                                 "time": "1674988251849",
                                 "byUser": "Guest",
                                 "type": "update_priority",
@@ -784,7 +783,7 @@ function getDevTemplate() {
                                 "toPriority": "medium"
                             },
                             {
-                                "id": utilService.makeId() ,
+                                "id": utilService.makeId(),
                                 "time": "1674988242845",
                                 "byUser": "Guest",
                                 "type": "update_status",
@@ -794,7 +793,7 @@ function getDevTemplate() {
                         ]
                     },
                     {
-                        "id": utilService.makeId() ,
+                        "id": utilService.makeId(),
                         "isChecked": false,
                         "title": "Commited Team Task",
                         "status": "done",
@@ -806,7 +805,7 @@ function getDevTemplate() {
                         "txt": "",
                         "activity": [
                             {
-                                "id": utilService.makeId() ,
+                                "id": utilService.makeId(),
                                 "time": "1674988254184",
                                 "byUser": "Guest",
                                 "type": "update_priority",
@@ -814,7 +813,7 @@ function getDevTemplate() {
                                 "toPriority": "critical ⚠️"
                             },
                             {
-                                "id": utilService.makeId() ,
+                                "id": utilService.makeId(),
                                 "time": "1674988246466",
                                 "byUser": "Guest",
                                 "type": "update_status",
