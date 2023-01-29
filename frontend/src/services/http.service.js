@@ -32,7 +32,7 @@ async function ajax(endpoint, method = 'GET', data = null) {
             data,
             params: (method === 'GET') ? data : null
         })
-        console.log('resAjax', res);
+        console.log('resAjax', method);
 
         return res.data
     } catch (err) {
