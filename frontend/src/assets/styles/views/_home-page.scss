@@ -31,8 +31,13 @@
             }
 
             .home-page-login-signup-link {
+                display: none;
                 font-size: rem(16px);
+                @include for-narrow-layout {
+                    display: inline-block;
+                }
             }
+          
         }
 
         @include for-narrow-layout {

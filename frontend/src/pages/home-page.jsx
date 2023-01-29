@@ -63,6 +63,8 @@ export function HomePage() {
 
 
 <div className='home-page-login-signup-container'>
+<Link className='home-page-login-signup-link' to={`/login`}> LogIn  </Link> 
+                        <Link className='home-page-login-signup-link' to={`/signup`}> SignUp </Link>
                         <Link className='home-page-start-nav' to={`/board/${boards[0]._id}`}>
                             Get Started
                             <Icon iconType={Icon.type.SVG} icon={MoveArrowRight} iconSize={14} />
