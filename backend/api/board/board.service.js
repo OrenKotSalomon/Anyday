@@ -62,7 +62,7 @@ async function update(board) {
     try {
         const boardToSave = structuredClone(board)
 
-        delete board._id
+        delete boardToSave._id
         // console.log('boardToSave:', boardToSave)
         // console.log('boardToSave:', boardToSave)
         // console.log('board:', board)
