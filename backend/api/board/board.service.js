@@ -4,6 +4,7 @@ const utilService = require('../../services/util.service')
 const ObjectId = require('mongodb').ObjectId
 
 async function query(filterBy = {}) {
+
     try {
         const criteria = _buildCriteria(filterBy)
 

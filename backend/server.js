@@ -10,7 +10,6 @@ const http = require('http').createServer(app)
 app.use(cookieParser())
 app.use(express.json())
 
-
 // window.FB
 
 // initFB()
@@ -55,7 +54,6 @@ setupSocketAPI(http)
 app.get('/**', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'))
 })
-
 
 const logger = require('./services/logger.service')
 const port = process.env.PORT || 3030

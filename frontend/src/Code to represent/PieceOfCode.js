@@ -1,3 +1,4 @@
+
 function DynamicInfo(data, info) {
     switch (info) {
         case STATUS_PICKER:
@@ -18,12 +19,10 @@ function DynamicInfo(data, info) {
 
     }
 }
-
 function openModal(ev, data, info) {
     let labelPos = ev.target.getBoundingClientRect()
     let boardScrollTop = boardContainer.current.scrollTop
     let boardScrollLeft = boardContainer.current.scrollLeft
-    setIsModalOpen(true)
 
     setCmp(prev => {
         return {
@@ -34,4 +33,9 @@ function openModal(ev, data, info) {
             info: DynamicInfo(data, info)
         }
     })
+
+    setIsModalOpen(true)
 }
+
+<DynamicModal cmp={cmp} setIsModalOpen={setIsModalOpen} onUpdateTaskLabel={onUpdateTaskLabel} />
+
