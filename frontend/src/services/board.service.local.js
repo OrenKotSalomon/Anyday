@@ -400,9 +400,6 @@ async function updateTaskService(board, data, type) {
         type === UPDATE_TASK_LABEL_STATUS ||
         type === UPDATE_TASK_STATUS ||
         type === UPDATE_TASK_PRIORITY)
-        type === UPDATE_TASK_LABEL_STATUS ||
-        type === UPDATE_TASK_STATUS ||
-        type === UPDATE_TASK_PRIORITY)
         && !board.groups[groupIdx].tasks[taskIdx].activity) {
         board.groups[groupIdx].tasks[taskIdx].activity = []
     }
