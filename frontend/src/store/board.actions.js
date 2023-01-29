@@ -114,9 +114,12 @@ export async function updateTask(board, data, type) {
         store.dispatch(getActionUpdateboard(boardToUpdate))
         const savedBoard = await boardService.save(boardToUpdate)
         socketService.emit(SOCKET_EMIT_UPDATE_BOARD, savedBoard._id)
+        console.log('savedBoard', savedBoard);
+
         return savedBoard
     } catch (err) {
         console.log('Cannot save board', err)
+        console.log('Cannot save board222', err.message)
         throw err.message
     }
 }
