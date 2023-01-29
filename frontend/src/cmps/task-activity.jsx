@@ -8,6 +8,35 @@ import { Time, Team, Status, DropdownChevronRight } from 'monday-ui-react-core/i
 
 export function TaskActivity({ task }) {
 
+    function lableStrToUpperCase(str) {
+        console.log(str)
+        switch (str) {
+            case 'done':
+                return 'Done'
+            case 'working on it':
+                return 'Working on it'
+            case 'stuck':
+                return 'Stuck'
+            case 'default':
+                return 'Default'
+            case 'label 1':
+                return 'Label 1'
+            case 'label 2':
+                return 'Label 2'
+            case 'label 3':
+                return 'Label 3'
+            case 'low':
+                return 'Low'
+            case 'medium':
+                return 'Medium'
+            case 'high':
+                return 'High'
+            case 'critical ⚠️':
+                return 'Critical ⚠️'
+        }
+    }
+
+
     function taskActivityTypePicker(type, activ) {
         switch (type) {
             case 'update_member':
@@ -31,12 +60,12 @@ export function TaskActivity({ task }) {
                     Status
                 </div>
                     <div className={'activity-status' + ` ${activ.fromStatus}`}>
-                        {activ.fromStatus}
+                        {lableStrToUpperCase(activ.fromStatus)}
                     </div>
                     <span className='activity-status-arrow'><Icon className='activity-person-icon' iconType={Icon.type.SVG}
                         icon={DropdownChevronRight} iconLabel="my svg icon" iconSize={16} /></span>
                     <div className={'activity-status' + ` ${activ.toStatus}`}>
-                        {activ.toStatus}
+                        {lableStrToUpperCase(activ.toStatus)}
                     </div>
                 </section>
             case 'update_priority':
@@ -46,12 +75,12 @@ export function TaskActivity({ task }) {
                     Priority
                 </div>
                     <div className={'activity-status' + ` ${activ.fromPriority}`}>
-                        {activ.fromPriority !== 'critical' ? activ.fromPriority : activ.fromPriority + '⚠️'}
+                        {lableStrToUpperCase(activ.fromPriority)}
                     </div>
                     <span className='activity-status-arrow'><Icon className='activity-person-icon' iconType={Icon.type.SVG}
                         icon={DropdownChevronRight} iconLabel="my svg icon" iconSize={16} /></span>
                     <div className={'activity-status' + ` ${activ.toPriority}`}>
-                        {activ.toPriority !== 'critical' ? activ.toPriority : activ.toPriority + '⚠️'}
+                        {lableStrToUpperCase(activ.toPriority)}
                     </div>
                 </section>
             case 'update_label':
@@ -61,12 +90,12 @@ export function TaskActivity({ task }) {
                     Label
                 </div>
                     <div className={'activity-status' + ` ${activ.fromLabel}`}>
-                        {activ.fromLabel}
+                        {lableStrToUpperCase(activ.fromLabel)}
                     </div>
                     <span className='activity-status-arrow'><Icon className='activity-person-icon' iconType={Icon.type.SVG}
                         icon={DropdownChevronRight} iconLabel="my svg icon" iconSize={16} /></span>
                     <div className={'activity-status' + ` ${activ.toLabel}`}>
-                        {activ.toLabel}
+                        {lableStrToUpperCase(activ.toLabel)}
                     </div>
                 </section>
         }
@@ -82,7 +111,7 @@ export function TaskActivity({ task }) {
                             iconType={Icon.type.SVG} icon={Time} iconLabel="my svg icon" iconSize={14} />
                         {utilService.time_ago(activ.time)}
                     </span>
-                    <img className='activity-by-avatar' src={activ.byUser?.imgUrl} alt="" />
+                    <img className='activity-by-avatar' src={activ.byUser?.imgUrl ? activ.byUser.imgUrl : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqOplc5fcAaHwZ-1SD2Az_1Fp9-x1QDCt6-w&usqp=CAU'} alt="" />
                     <span className="activity-by-task">{task.title}</span>
                 </div>
 
