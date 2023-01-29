@@ -61,7 +61,7 @@ async function add(board) {
 async function update(board) {
     try {
         const boardToSave = structuredClone(board)
-        const tempBoardToSave = {
+        let tempBoardToSave = {
             archivedAt: board.archivedAt,
             cmpsOrder: board.cmpsOrder,
             groups: board.groups,
@@ -73,7 +73,7 @@ async function update(board) {
             title: board.title,
         }
 
-        // delete board._id
+        delete board._id
         // console.log('boardToSave:', boardToSave)
         console.log('boardToSave:', boardToSave)
         console.log('board:', board)
