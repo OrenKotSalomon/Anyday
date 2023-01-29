@@ -193,6 +193,7 @@ async function save(board) {
 
     try {
         if (board._id) {
+            console.log('board', board);
 
             // savedBoard = await storageService.put(BOARD_KEY, board)
             return httpService.put(BASE_URL + board._id, board)
