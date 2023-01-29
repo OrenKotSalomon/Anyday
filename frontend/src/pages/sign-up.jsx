@@ -46,7 +46,7 @@ export function SignUp() {
     return (
         <section className='signup'>
             <Link to='/' className="top-header">
-                <img className="login-logo" src={logo} alt="logo" />
+            <div className='login-signup-logo'>  <img className="login-logo" src={logo} alt="logo" /> Anyday<span>.com</span> </div>
             </Link>
             <div className="router-wrapper">
                 <div className="email-password-container">

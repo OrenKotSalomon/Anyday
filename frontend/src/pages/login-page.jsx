@@ -31,7 +31,7 @@ export function Login() {
     return (
         <section className='login-page'>
             <Link to='/' className="top-header">
-                <img className="login-logo" src={logo} alt="logo" />
+              <div className='login-signup-logo'>  <img className="login-logo" src={logo} alt="logo" /> Anyday<span>.com</span> </div>
             </Link>
             <LoginDynamicCmp
                 users={users}
