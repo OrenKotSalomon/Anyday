@@ -1,10 +1,9 @@
 
 function DynamicInfo(data, info) {
     switch (info) {
-        case STATUS_PICKER:
-            return board.statuses
-        case LABEL_STATUS_PICKER:
-            return board.labelStatuses
+        case STATUS_PICKER: return board.statuses
+        case PRIORITY_PICKER: return board.priorities
+        case LABEL_STATUS_PICKER: return board.labelStatuses
         case MEMEBER_PICKER:
             return {
                 selectedMembers: ['m1', 'm2'],
@@ -14,8 +13,6 @@ function DynamicInfo(data, info) {
             return {
                 selectedDate: data.task.dueDate
             }
-        case PRIORITY_PICKER:
-            return board.priorities
     }
 }
 function openModal(ev, data, info) {
@@ -32,8 +29,6 @@ function openModal(ev, data, info) {
             info: DynamicInfo(data, info)
         }
     })
-
     setIsModalOpen(true)
 }
-
 <DynamicModal cmp={cmp} setIsModalOpen={setIsModalOpen} onUpdateTaskLabel={onUpdateTaskLabel} />
