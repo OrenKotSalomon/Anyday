@@ -117,7 +117,7 @@ export async function updateTask(board, data, type) {
         return savedBoard
     } catch (err) {
         console.log('Cannot save board', err)
-        throw err
+        throw err.message
     }
 }
 
