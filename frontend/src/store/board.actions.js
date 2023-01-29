@@ -83,8 +83,8 @@ export async function addBoard(board) {
 export async function updateBoard(board, data, type) {
     try {
         const boardToUpdate = await boardService.updateBoardService(board, data, type)
-        const savedBoard = await boardService.save(boardToUpdate)
         store.dispatch(getActionUpdateboard(boardToUpdate))
+        const savedBoard = await boardService.save(boardToUpdate)
         socketService.emit(SOCKET_EMIT_UPDATE_BOARD, savedBoard._id)
         return savedBoard
     } catch (err) {
@@ -98,8 +98,8 @@ export async function updateGroup(board, data, type) {
         const boardToUpdate = await boardService.updateGroupsService(board, data, type)
         console.log('boardToUpdate', boardToUpdate);
 
+        store.dispatch(getActionUpdateboard(boardToUpdate))
         const savedBoard = await boardService.save(boardToUpdate)
-        store.dispatch(getActionUpdateboard(savedBoard))
         socketService.emit(SOCKET_EMIT_UPDATE_BOARD, savedBoard._id)
         return savedBoard
     } catch (err) {
@@ -111,8 +111,8 @@ export async function updateGroup(board, data, type) {
 export async function updateTask(board, data, type) {
     try {
         const boardToUpdate = await boardService.updateTaskService(board, data, type)
+        store.dispatch(getActionUpdateboard(boardToUpdate))
         const savedBoard = await boardService.save(boardToUpdate)
-        store.dispatch(getActionUpdateboard(savedBoard))
         socketService.emit(SOCKET_EMIT_UPDATE_BOARD, savedBoard._id)
         return savedBoard
     } catch (err) {
