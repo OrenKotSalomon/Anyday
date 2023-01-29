@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux';
 import { userService } from '../services/user.service.js'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js';
 
+import logo from '../assets/img/logo.png'
+
 import { Icon } from 'monday-ui-react-core';
 import { MoveArrowRight } from 'monday-ui-react-core/icons';
 
@@ -28,7 +30,7 @@ export function SignUp() {
     async function onSignup(ev = null) {
         if (ev) ev.preventDefault()
         if (!credentials.email || !credentials.password || !credentials.fullname) return
-        console.log('credentials:', credentials)
+        // console.log('credentials:', credentials)
         try {
             const user = await userService.signup(credentials)
             showSuccessMsg(`Welcome ${user.fullname}`)
@@ -36,14 +38,15 @@ export function SignUp() {
             navigate(`/board/${boards[0]._id}`)
         }
         catch (err) {
-            showErrorMsg('OOps try again', err)
+            // showErrorMsg('OOps try again', err)
+            console.log('error: ',err)
         }
     }
 
     return (
         <section className='signup'>
             <Link to='/' className="top-header">
-                <img className="login-logo" src="" alt="logo" />
+                <img className="login-logo" src={logo} alt="logo" />
             </Link>
             <div className="router-wrapper">
                 <div className="email-password-container">

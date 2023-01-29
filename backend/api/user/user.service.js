@@ -83,7 +83,7 @@ async function update(user) {
         //     fullname: user.fullname,
         //     imgUrl: user.imgUrl,
         // }
-        console.log('usertosave......................' ,userToSave)
+        // console.log('usertosave......................' ,userToSave)
         const collection = await dbService.getCollection('user')
         await collection.updateOne({ _id: userToSave._id }, { $set: userToSave })
         return userToSave

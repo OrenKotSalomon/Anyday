@@ -42,6 +42,10 @@
         }
     }
 
+.task-comment-inner-text{
+    text-align: -webkit-left;
+    padding-inline-start: 17px;
+}
 
 }
 
@@ -375,6 +379,15 @@
             }
 
             .activity-status.critical {
+                background-color: rgb(51, 51, 51);
+            }
+            .activity-status.label {
+                background-color: rgb(51, 51, 51);
+            }
+            .activity-status.label {
+                background-color: rgb(51, 51, 51);
+            }
+            .activity-status.label {
                 background-color: rgb(51, 51, 51);
             }
         }

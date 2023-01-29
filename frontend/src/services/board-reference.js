@@ -256,7 +256,7 @@ export function TaskPreview({ task }) {
                         cmp={cmp}
                         key={idx}
                         onUpdate={(data) => {
-                            console.log("Updating: ", cmp, "with data:", data);
+                            // console.log("Updating: ", cmp, "with data:", data);
                             // make a copy, update the task
                             // Call action: updateTask(task)
                         }}

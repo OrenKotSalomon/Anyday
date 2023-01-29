@@ -38,7 +38,7 @@ export function BoardFilter({ board, onSetFilterBy }) {
     }
 
     function onClickLabelFilter(label, isChosed) {
-        console.log(isChosed);
+        // console.log(isChosed);
         setfilterBy(prev => {
             if (!isChosed) {
                 prev.label.push(label)
@@ -165,7 +165,7 @@ export function BoardFilter({ board, onSetFilterBy }) {
                             <section className='status-container'>
                                 <div className="filter-options-container">
                                     {board.priorities.map((prior, idx) => {
-                                        console.log();
+                                        // console.log();
                                         return <PriorityModal
                                             key={idx}
                                             prior={prior}
@@ -186,7 +186,7 @@ export function BoardFilter({ board, onSetFilterBy }) {
 
                                 <div className="filter-options-container">
                                     {board.labelStatuses.map((label, idx) => {
-                                        console.log();
+                                        // console.log();
                                         return <LabelModal
                                             key={idx}
                                             label={label}

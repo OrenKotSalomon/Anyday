@@ -22,6 +22,10 @@ export function NavBar() {
     const navigate = useNavigate()
     const [imgSrc, setImgSrc] = useState(loggedInUser?.imgUrl)
     // const user = useSelector(storeState => storeState.userModule.user)
+    useEffect(() => {
+        setImgSrc(loggedInUser?.imgUrl)
+    }, [loggedInUser])
+
 
     async function onLogin(credentials) {
         try {
@@ -42,7 +46,7 @@ export function NavBar() {
     async function onLogout() {
         try {
             await logout()
-            showSuccessMsg(`Good bye`)
+            // showSuccessMsg(`Good bye`)
             setToggleUserModal('none')
         } catch (err) {
             showErrorMsg('Cannot logout')
@@ -58,8 +62,9 @@ export function NavBar() {
     }
 
     function getAvatarImg() {
+        // console.log('img',imgSrc)
         return (<img className='nav-bar-avatar-img' onClick={onClickUserAvatar}
-            src={imgSrc !== '' ? imgSrc : `https://robohash.org/${Math.random(9)}`}alt="" />)
+            src={imgSrc === undefined ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3CPFSTpcN-YwAU8Euffs0uXuywMvSYwVpJA&usqp=CAU' : imgSrc }alt="" />)
     }
 
     return <div className='side-bar-container'><header className="nav-bar">

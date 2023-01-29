@@ -31,13 +31,13 @@
 
       }
 
-      img {
-        &:hover {
-          background-color: #131523;
-          border-radius: 6px;
-          text-transform: none;
-        }
-      }
+      // img {
+      //   &:hover {
+      //     background-color: #131523;
+      //     border-radius: 6px;
+      //     text-transform: none;
+      //   }
+      // }
 
       .main-board-link-container {
         position: relative;
@@ -215,7 +215,7 @@
   bottom: 10px;
   width: 44px;
   height: 44px;
-  border-radius: 555em;
+  border-radius: 25em;
   object-fit: contain;
 
   &:hover {
@@ -274,41 +274,45 @@
 }
 
 
-.miniUserPanel{
-#imgUpload{
-  opacity: 0;
-  width: 300px !important;
-  &:hover{
-    cursor: pointer;
-  }
-}
-#file-upload-button{
-  position: absolute;
-  &:hover{
-    cursor: pointer;
-  }
-}
-.task-details-input-upload {
-  position: absolute;
-  bottom: 110px;
-}
+.miniUserPanel {
+  #imgUpload {
+    opacity: 0;
+    width: 300px !important;
 
-.nav-bar-avatar-img{
-  top: 69px;
-  left: 107px;
-  width: 80px;
-  height: 80px;
-  line-height: 76px;
-  font-size: 36px;
-}
+    &:hover {
+      cursor: pointer;
+    }
+  }
 
-.uploaded-img{
-  position: absolute;
-  top: 69px;
-  left: 107px;
-  width: 80px;
-  height: 80px;
-  z-index: 3;
-  border-radius: 25em;
-}
+  #file-upload-button {
+    position: absolute;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .task-details-input-upload {
+    position: absolute;
+    bottom: 110px;
+  }
+
+  .nav-bar-avatar-img {
+    top: 69px;
+    left: 107px;
+    width: 80px;
+    height: 80px;
+    line-height: 76px;
+    font-size: 36px;
+  }
+
+  .uploaded-img {
+    position: absolute;
+    top: 69px;
+    left: 107px;
+    width: 80px;
+    height: 80px;
+    z-index: 3;
+    border-radius: 25em;
+  }
 }

@@ -25,7 +25,7 @@ export function LoginStepTwo({ props }) {
 
     async function onSubmitLogin(ev) {
         ev.preventDefault()
-        console.log('login cred..', loginCredentials)
+        // console.log('login cred..', loginCredentials)
         const valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
         if (loginCredentials.email.match(valid)) {
             try {
@@ -34,7 +34,8 @@ export function LoginStepTwo({ props }) {
                 clearState()
                 navigate(`/board/${boards[0]._id}`)
             } catch (err) {
-                showErrorMsg('OOps try again', err)
+                // showErrorMsg('OOps try again', err)
+                console.log('err:',err)
             }
         }
     }
