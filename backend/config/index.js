@@ -5,6 +5,6 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   config = require('./dev')
 }
-config.isGuestMode = false
+config.isGuestMode = true
 
 module.exports = config
