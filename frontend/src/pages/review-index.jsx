@@ -22,7 +22,7 @@ export function ReviewIndex() {
     loadUsers()
 
     socketService.on(SOCKET_EVENT_REVIEW_ADDED, (review) => {
-      console.log('GOT from socket', review)
+      // console.log('GOT from socket', review)
       dispatch(getActionAddReview(review))
     })
 

@@ -39,7 +39,7 @@ export function BoardDetails() {
 
     const boardContainer = useRef()
     const dispatch = useDispatch()
-    console.log('filterBy', filterBy);
+    // console.log('filterBy', filterBy);
     useEffect(() => {
         loadBoard(boardId, filterBy)
         socketService.on(SOCKET_EVENT_UPDATE_BOARD, loadBoard)
@@ -51,7 +51,7 @@ export function BoardDetails() {
 
     function onUpdateTaskLabel(type, data, labelPick) {
         data.labelPick = labelPick
-        console.log(data);
+        // console.log(data);
         switch (type) {
             case UPDATE_TASK_STATUS:
                 return updateTask(board, data, UPDATE_TASK_STATUS)
@@ -203,7 +203,7 @@ export function BoardDetails() {
     }
 
     function onDragGroup(e) {
-        console.log('e:', e)
+        // console.log('e:', e)
         // if (task) return
         setPrevBoard(board)
         onGroupDragStart(board)

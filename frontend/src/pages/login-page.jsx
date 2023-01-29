@@ -6,6 +6,8 @@ import { userService } from '../services/user.service.js'
 import { LoginStepTwo } from "../cmps/login-steps/login-step-two";
 import { LoginStepOne } from "../cmps/login-steps/login-step-one";
 
+import logo from '../assets/img/logo.png'
+
 export function Login() {
     const [loginPaging, setLoginPaging] = useState("login-step-1")
     const [credentials, setCredentials] = useState({ email: '', username: '', password: '', fullname: '', imgUrl: '' })
@@ -19,7 +21,7 @@ export function Login() {
         try {
             const users = await userService.getUsers()
             setUsers(users)
-            console.log('users',users)
+            // console.log('users',users)
         }
         catch (err) {
             console.error('Error:', err)
@@ -29,7 +31,7 @@ export function Login() {
     return (
         <section className='login-page'>
             <Link to='/' className="top-header">
-                <img className="login-logo" src="" alt="logo" />
+                <img className="login-logo" src={logo} alt="logo" />
             </Link>
             <LoginDynamicCmp
                 users={users}

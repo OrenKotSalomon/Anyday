@@ -46,12 +46,27 @@ export function TaskActivity({ task }) {
                     Priority
                 </div>
                     <div className={'activity-status' + ` ${activ.fromPriority}`}>
-                        {activ.fromPriority !== 'critical'?activ.fromPriority:activ.fromPriority+'⚠️'}
+                        {activ.fromPriority !== 'critical' ? activ.fromPriority : activ.fromPriority + '⚠️'}
                     </div>
                     <span className='activity-status-arrow'><Icon className='activity-person-icon' iconType={Icon.type.SVG}
                         icon={DropdownChevronRight} iconLabel="my svg icon" iconSize={16} /></span>
                     <div className={'activity-status' + ` ${activ.toPriority}`}>
-                        {activ.toPriority!== 'critical'?activ.toPriority:activ.toPriority+'⚠️'}
+                        {activ.toPriority !== 'critical' ? activ.toPriority : activ.toPriority + '⚠️'}
+                    </div>
+                </section>
+            case 'update_label':
+                return <section className='activity-picker-container'>< div className="activity-type">
+                    <Icon className='activity-person-icon' iconType={Icon.type.SVG}
+                        icon={Status} iconLabel="my svg icon" iconSize={14} />
+                    Label
+                </div>
+                    <div className={'activity-status' + ` ${activ.fromLabel}`}>
+                        {activ.fromLabel}
+                    </div>
+                    <span className='activity-status-arrow'><Icon className='activity-person-icon' iconType={Icon.type.SVG}
+                        icon={DropdownChevronRight} iconLabel="my svg icon" iconSize={16} /></span>
+                    <div className={'activity-status' + ` ${activ.toLabel}`}>
+                        {activ.toLabel}
                     </div>
                 </section>
         }

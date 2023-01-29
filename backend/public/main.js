@@ -50,7 +50,7 @@ async function onAddBoardMsg() {
 }
 
 function render(title, mix = '') {
-    console.log(title, mix)
+    // console.log(title, mix)
     const output = utilService.prettyJSON(mix)
     document.querySelector('h2').innerText = title
     document.querySelector('pre').innerHTML = output

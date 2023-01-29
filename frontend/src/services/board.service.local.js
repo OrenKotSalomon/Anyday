@@ -280,7 +280,6 @@ async function updateGroupsService(board, data, type) {
             board.groups.splice(groupIdx, 1, data)
             return board
         case UPDATE_GROUP_CHECKED:
-            console.log('hhhh');
 
             groupToUpdate = board.groups.find(currGroup => currGroup.id === data.id)
             groupToUpdate.tasks.forEach(task => task.isChecked = data.checked)
@@ -351,7 +350,11 @@ async function updateTaskService(board, data, type) {
         taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.taskId)
     }
 
-    if (!board.groups[groupIdx].tasks[taskIdx].activity) {
+    if ((type === UPDATE_TASK_MEMBERS ||
+         type === UPDATE_TASK_LABEL_STATUS || 
+         type === UPDATE_TASK_STATUS || 
+         type === UPDATE_TASK_PRIORITY)  
+         && !board.groups[groupIdx].tasks[taskIdx].activity) {
         board.groups[groupIdx].tasks[taskIdx].activity = []
     }
 
@@ -414,13 +417,17 @@ async function updateTaskService(board, data, type) {
             // console.log(board.groups[groupIdx].tasks[taskIdx].activity)
             return board
         case UPDATE_TASK_LABEL_STATUS:
+            activity.type = 'update_label'
+            activity.fromLabel = board.groups[groupIdx].tasks[taskIdx].labelStatus
+            activity.toLabel = data.labelPick
+            board.groups[groupIdx].tasks[taskIdx].activity.unshift(activity)
             board.groups[groupIdx].tasks[taskIdx].labelStatus = data.labelPick
             return board
         case UPDATE_TASK_MEMBERS:
             activity.type = 'update_member'
             activity.toUserImg = data.labelPick.imgUrl
             activity.toUserName = data.labelPick.fullname
-            if (data.isDelete)  {
+            if (data.isDelete) {
                 activity.action = 'remove'
                 board.groups[groupIdx].tasks[taskIdx].activity.unshift(activity)
                 let memberToDeleteIdx = board.groups[groupIdx].tasks[taskIdx].members.findIndex(member => member._id === data.labelPick._id)

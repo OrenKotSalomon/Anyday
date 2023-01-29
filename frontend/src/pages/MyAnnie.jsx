@@ -88,7 +88,7 @@ export function MyAnnie({ board, setfilterBy, setisAnnieOn, isAnnieOn }) {
     if (!browserSupportsSpeechRecognition) {
         return <span>Browser doesn't support speech recognition.</span>;
     }
-    console.log(transcript);
+    // console.log(transcript);
     return (
         <div className="annie-wrapper"
             style={{ top: isAnnieOn ? '80%' : '-500px' }}
