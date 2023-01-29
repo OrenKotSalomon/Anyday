@@ -33,12 +33,13 @@
             .home-page-login-signup-link {
                 display: none;
                 font-size: rem(16px);
+
                 @include for-narrow-layout {
                     display: inline-block;
                     margin-left: 5px;
                 }
             }
-          
+
         }
 
         @include for-narrow-layout {
@@ -671,16 +672,21 @@
 
 .home-page-start-nav {
     color: $main-bgc-white;
-    // margin-top: 3em;
     align-self: center;
     display: inline-block;
     font-size: rem(14px);
-    padding: 8px 15px;
+    padding: 6px 15px;
     background: linear-gradient(-60deg, $start-btn-li-blue 20%, $start-btn-blue 80%);
     border-radius: 25px;
     transform: 1s;
     font-family: poppins-regular-400;
     margin: 3px;
+    line-height: 19px;
+    margin-inline-start: 8px;
+
+    svg {
+        padding-top: 5px;
+    }
 
     @include for-normal-layout {
         padding: 12px 20px;
@@ -689,5 +695,19 @@
     svg {
         color: $main-bgc-white;
         padding-left: 5px;
+    }
+}
+
+.login-signup-logo {
+    color: $main-color;
+    font-family: poppins-semi-bold-600;
+    span {
+        font-family: poppins-regular-400;
+        font-size: rem(12px);
+        padding-top: rem(8px);
+        letter-spacing: 0em;
+    }
+    &:hover{
+        cursor: default;
     }
 }
