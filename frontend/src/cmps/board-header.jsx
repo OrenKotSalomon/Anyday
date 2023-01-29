@@ -94,5 +94,6 @@ export function BoardHeader({ board, onSetFilterBy }) {
                 />
             </div>
         </section>
+
     </Fragment>
 }
