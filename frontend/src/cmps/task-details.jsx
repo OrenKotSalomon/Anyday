@@ -54,7 +54,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
         setComment('')
         setImg('')
         setAddComment(!isAddComment)
-        console.log(data)
+        // console.log(data)
     }
 
     function onDeleteComment(comment, isPinned = false) {
@@ -176,7 +176,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                         </div>
                     </div>
 
-                    <p dangerouslySetInnerHTML={{ __html: comment.txt }}></p>
+                    <p className="task-comment-inner-text" dangerouslySetInnerHTML={{ __html: comment.txt }}></p>
                     {comment.imgUrl && comment.imgUrl !== '' ? <img src={`${comment.imgUrl}`} alt="" /> : ''}
 
                 </div>)}
@@ -251,7 +251,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                 {renderComments(task.pinnedComments, true)}
                 {renderComments(task.comments)}
 
-                {(task.pinnedComments && task.comments) ? '' : <section>
+                {(task.pinnedComments&&task.pinnedComments !== [] || task.comments&&task.comments !== []||undefined) ? '' : <section>
                     <div className='details-img-container'><img className="details-img" src="https://cdn.monday.com/images/pulse-page-empty-state.svg" alt="" /></div>
                     <p className='details-p' ><span className="details-p-header">No updates yet for this item</span>
                         <span className='details-p-txt'>Be the first one to update about progress, mention someone

@@ -386,8 +386,16 @@ async function updateTaskService(board, data, type) {
     if (data) {
         groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
         taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.taskId)
-        if (!board.groups[groupIdx].tasks[taskIdx].activity) board.groups[groupIdx].tasks[taskIdx].activity = []
     }
+
+    if ((type === UPDATE_TASK_MEMBERS ||
+        type === UPDATE_TASK_LABEL_STATUS || 
+        type === UPDATE_TASK_STATUS || 
+        type === UPDATE_TASK_PRIORITY)  
+        && !board.groups[groupIdx].tasks[taskIdx].activity) {
+       board.groups[groupIdx].tasks[taskIdx].activity = []
+   }
+
 
     switch (type) {
         case DELETE_TASK:
@@ -449,9 +457,13 @@ async function updateTaskService(board, data, type) {
             board.groups[groupIdx].tasks[taskIdx].status = data.labelPick
             // console.log(board.groups[groupIdx].tasks[taskIdx].activity)
             return board
-        case UPDATE_TASK_LABEL_STATUS:
-            board.groups[groupIdx].tasks[taskIdx].labelStatus = data.labelPick
-            return board
+            case UPDATE_TASK_LABEL_STATUS:
+                activity.type = 'update_label'
+                activity.fromLabel = board.groups[groupIdx].tasks[taskIdx].labelStatus
+                activity.toLabel = data.labelPick
+                board.groups[groupIdx].tasks[taskIdx].activity.unshift(activity)
+                board.groups[groupIdx].tasks[taskIdx].labelStatus = data.labelPick
+                return board
         case UPDATE_TASK_MEMBERS:
             activity.type = 'update_member'
             activity.toUserImg = data.labelPick.imgUrl

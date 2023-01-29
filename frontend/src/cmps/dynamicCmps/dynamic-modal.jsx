@@ -64,7 +64,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
         setIsModalOpen(false)
     }
 
-    console.log('cmp', cmp);
+    // console.log('cmp', cmp);
     switch (cmp.type) {
 
         case STATUS_PICKER:
@@ -120,8 +120,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
                             {users && users.map(user => <div key={user._id + '' + Math.random(9)} className="member-picker-user"
                                 onClick={() => onMemberPick(user)}>
                                 <div className='member-picker-fullname'>{user.fullname}</div>
-                                {user.imgUrl !== '' ? <img className="member-picker-img" src={`${user.imgUrl}`} alt="" />
-                                    : <div className='member-picker-img'><span className='member-picker-name-char'>{user.fullname.charAt(0).toUpperCase()}</span></div>}
+                                <img className="member-picker-img" src={user.imgUrl?user.imgUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqOplc5fcAaHwZ-1SD2Az_1Fp9-x1QDCt6-w&usqp=CAU'} alt="" />
                             </div>)}
                         </div>
                     </DialogContentContainer>

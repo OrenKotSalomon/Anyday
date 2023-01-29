@@ -23,7 +23,7 @@ export function TaskCard({ task, group, board, snapshot }) {
 
         updateTask(board, data, DELETE_TASK)
         showSuccessMsg(`Task deleted successfully taskId:${data.id} `)
-        console.log('data', data);
+        // console.log('data', data);
     }
 
 

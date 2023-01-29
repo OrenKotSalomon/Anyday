@@ -30,7 +30,7 @@ export function TaskPreview({ task, board, group, openModal, provided, snapshot,
 
         updateTask(board, data, DELETE_TASK)
         showSuccessMsg(`Task deleted successfully taskId:${data.id} `)
-        console.log('data', data);
+        // console.log('data', data);
     }
 
     ///////////////////// TODO ////////////////////////

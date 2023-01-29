@@ -29,7 +29,7 @@ function doLog(level, ...args) {
     const userId = store?.loggedinUser?._id
     const str = userId ? `(userId: ${userId})` : ''
     line = `${getTime()} - ${level} - ${line} ${str}\n`
-    console.log(line)
+    // console.log(line)
     fs.appendFile('./logs/backend.log', line, (err) =>{
         if (err) console.log('FATAL: cannot write to log file')
     })
