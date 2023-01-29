@@ -71,7 +71,8 @@ export const boardService = {
     updateBoardService,
     updateGroupsService,
     updateTaskService,
-    getDefaultFilter
+    getDefaultFilter,
+    getDevTemplate
 }
 
 window.bs = boardService
@@ -529,6 +530,293 @@ function getEmptyGroup() {
             }
         ],
         style: '#808080'
+    }
+}
+
+function getDevTemplate() {
+    return {
+        "title": "Development Board",
+        "isStarred": false,
+        "archivedAt": "1589983468418",
+        "statuses": [
+            {
+                "id": utilService.makeId() ,
+                "label": "done",
+                "bgColor": "#00c875"
+            },
+            {
+                "id": utilService.makeId() ,
+                "label": "working on it",
+                "bgColor": "#fdab3d"
+            },
+            {
+                "id": utilService.makeId() ,
+                "label": "stuck",
+                "bgColor": "#e2445c"
+            },
+            {
+                "id": utilService.makeId() ,
+                "label": "default",
+                "bgColor": "#c4c4c4"
+            }
+        ],
+        "priorities": [
+            {
+                "label": "critical ⚠️",
+                "bgColor": "#333333"
+            },
+            {
+                "label": "high",
+                "bgColor": "#401694"
+            },
+            {
+                "label": "medium",
+                "bgColor": "#5559df"
+            },
+            {
+                "label": "low",
+                "bgColor": "#579bfc"
+            },
+            {
+                "label": "default",
+                "bgColor": "#c4c4c4"
+            }
+        ],
+        "labelStatuses": [
+            {
+                "label": "label 1",
+                "bgColor": "#9aadbd"
+            },
+            {
+                "label": "label 2",
+                "bgColor": "#0086c0"
+            },
+            {
+                "label": "label 3",
+                "bgColor": "#9d99b9"
+            },
+            {
+                "label": "default",
+                "bgColor": "#c4c4c4"
+            }
+        ],
+        "groups": [
+            {
+                "id": utilService.makeId() ,
+                "title": "Feature Enhancements",
+                "archivedAt": "1589983468418",
+                "isCollapsed": false,
+                "isChecked": false,
+                "tasks": [
+                    {
+                        "id": utilService.makeId() ,
+                        "isChecked": false,
+                        "title": "Committed Feature",
+                        "status": "done",
+                        "priority": "critical ⚠️",
+                        "members": [],
+                        "labelStatus": "label 3",
+                        "dueDate": "1589983468418",
+                        "number": "0",
+                        "txt": "",
+                        "activity": [
+                            {
+                                "id": utilService.makeId() ,
+                                "time": "1674988412373",
+                                "byUser": "Guest",
+                                "type": "update_priority",
+                                "fromPriority": "default",
+                                "toPriority": "critical ⚠️"
+                            },
+                            {
+                                "id": utilService.makeId() ,
+                                "time": "1674988409892"
+                            },
+                            {
+                                "byUser": "Guest",
+                                "type": "update_status",
+                                "fromStatus": "default",
+                                "toStatus": "done"
+                            }
+                        ],
+                    },
+                    {
+                        "id": utilService.makeId() ,
+                        "title": "Committed Feature",
+                        "status": "done",
+                        "priority": "low",
+                        "members": [],
+                        "isChecked": false,
+                        "dueDate": "1674988648",
+                        "labelStatus": "label 3",
+                        "number": "0",
+                        "txt": "",
+                        "activity": [
+                            {
+                                "id": utilService.makeId() ,
+                                "time": "1674988660370",
+                                "byUser": "Guest",
+                                "type": "update_priority",
+                                "fromPriority": "default",
+                                "toPriority": "low"
+                            },
+                            {
+                                "id": utilService.makeId() ,
+                                "time": "1674988655917",
+                                "byUser": "Guest",
+                                "type": "update_status",
+                                "fromStatus": "default",
+                                "toStatus": "done"
+                            }
+                        ]
+                    },
+                    {
+                        "id": utilService.makeId() ,
+                        "isChecked": false,
+                        "title": "Committed Plan board",
+                        "status": "working on it",
+                        "priority": "medium",
+                        "number": "0",
+                        "members": [],
+                        "labelStatus": "label 2",
+                        "dueDate": "1589983468418",
+                        "txt": "",
+                        "activity": [
+                            {
+                                "id": utilService.makeId() ,
+                                "time": "1674988414377",
+                                "byUser": "Guest",
+                                "type": "update_priority",
+                                "fromPriority": "default",
+                                "toPriority": "medium"
+                            },
+                            {
+                                "id": utilService.makeId() ,
+                                "time": "1674988411061",
+                                "byUser": "Guest",
+                                "type": "update_status",
+                                "fromStatus": "default",
+                                "toStatus": "working on it"
+                            }
+                        ]
+                    }
+                ],
+                "style": "#4eccc6"
+            },
+            {
+                "id": utilService.makeId() ,
+                "title": "Bugs",
+                "archivedAt": "1589983468418",
+                "isCollapsed": false,
+                "isChecked": false,
+                "tasks": [
+                    {
+                        "id": utilService.makeId() ,
+                        "isChecked": false,
+                        "title": "Committed Bug",
+                        "status": "stuck",
+                        "priority": "high",
+                        "members": [],
+                        "labelStatus": "label 3",
+                        "number": "0",
+                        "dueDate": "1589983468418",
+                        "txt": "",
+                        "activity": [
+                            {
+                                "id": utilService.makeId() ,
+                                "time": "1674988428184",
+                                "byUser": "Guest",
+                                "type": "update_priority",
+                                "fromPriority": "default",
+                                "toPriority": "high"
+                            },
+                            {
+                                "id": utilService.makeId() ,
+                                "time": "1674988423469",
+                                "byUser": "Guest",
+                                "type": "update_status",
+                                "fromStatus": "default",
+                                "toStatus": "stuck"
+                            }
+                        ]
+                    }
+                ],
+                "style": "#9cd326"
+            },
+            {
+                "id": utilService.makeId() ,
+                "title": "Team",
+                "archivedAt": "1589983468418",
+                "isCollapsed": false,
+                "isChecked": false,
+                "tasks": [
+                    {
+                        "id": utilService.makeId() ,
+                        "isChecked": false,
+                        "title": "Commited Team Task",
+                        "status": "working on it",
+                        "priority": "medium",
+                        "members": [],
+                        "labelStatus":
+                            "label 1",
+                        "dueDate": "1589983468418",
+                        "number": "0",
+                        "txt": "",
+                        "activity": [
+                            {
+                                "id": utilService.makeId() ,
+                                "time": "1674988251849",
+                                "byUser": "Guest",
+                                "type": "update_priority",
+                                "fromPriority": "default",
+                                "toPriority": "medium"
+                            },
+                            {
+                                "id": utilService.makeId() ,
+                                "time": "1674988242845",
+                                "byUser": "Guest",
+                                "type": "update_status",
+                                "fromStatus": "default",
+                                "toStatus": "working on it"
+                            }
+                        ]
+                    },
+                    {
+                        "id": utilService.makeId() ,
+                        "isChecked": false,
+                        "title": "Commited Team Task",
+                        "status": "done",
+                        "priority": "critical ⚠️",
+                        "members": [],
+                        "labelStatus": "label 2",
+                        "dueDate": "1589983468418",
+                        "number": "0",
+                        "txt": "",
+                        "activity": [
+                            {
+                                "id": utilService.makeId() ,
+                                "time": "1674988254184",
+                                "byUser": "Guest",
+                                "type": "update_priority",
+                                "fromPriority": "default",
+                                "toPriority": "critical ⚠️"
+                            },
+                            {
+                                "id": utilService.makeId() ,
+                                "time": "1674988246466",
+                                "byUser": "Guest",
+                                "type": "update_status",
+                                "fromStatus": "default",
+                                "toStatus": "done"
+                            }
+                        ]
+                    }
+                ],
+                "style": "#e2445c"
+            }
+        ],
+        "cmpsOrder": ["MEMEBER_PICKER", "STATUS_PICKER", "DATE_PICKER", "PRIORITY_PICKER", "TEXT_LABEL", "LABEL_STATUS_PICKER", "NUMBER_PICKER"],
+        "owner": null
     }
 }
 
