@@ -101,6 +101,9 @@ export async function updateGroup(board, data, type) {
         store.dispatch(getActionUpdateboard(boardToUpdate))
         const savedBoard = await boardService.save(boardToUpdate)
         socketService.emit(SOCKET_EMIT_UPDATE_BOARD, savedBoard._id)
+        console.log('savedBoardsavedBoard', savedBoard);
+        console.log('boardToUpdateboardToUpdate', boardToUpdate);
+
         return savedBoard
     } catch (err) {
         console.log('Cannot save board', err)
