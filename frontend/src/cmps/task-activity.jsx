@@ -9,7 +9,6 @@ import { Time, Team, Status, DropdownChevronRight } from 'monday-ui-react-core/i
 export function TaskActivity({ task }) {
 
     function lableStrToUpperCase(str) {
-        console.log(str)
         switch (str) {
             case 'done':
                 return 'Done'
@@ -45,19 +44,24 @@ export function TaskActivity({ task }) {
                         icon={Team} iconLabel="my svg icon" iconSize={14} />
                     Person
                 </div>
-                    <div className="activity-action">
-                        {activ.action}
-                    </div>
-                    <div className="activity-data">
-                        {activ.toUserImg ? <img className='activity-by-avatar' src={activ.toUserImg} alt="" />
-                            : <div className='task-details-by-user-img activity-by-avatar' >{(activ.toUserName).charAt(0).toUpperCase()}</div>}
+                    <div className='activity-member-container'>
+                        <div className="activity-action">
+                            {activ.action}
+                        </div>
+                        <div className="activity-data">
+                            {activ.toUserImg ? <img style={{right:`${activ.action === 'Removed'? 5:0}px`}} className='activity-by-avatar' src={activ.toUserImg} alt="" />
+                                : <div className='task-details-by-user-img activity-by-avatar' >{(activ.toUserName).charAt(0).toUpperCase()}</div>}
+                        </div>
                     </div>
                 </section>
             case 'update_status':
                 return <section className='activity-picker-container'>< div className="activity-type">
-                    <Icon className='activity-person-icon' iconType={Icon.type.SVG}
-                        icon={Status} iconLabel="my svg icon" iconSize={14} />
-                    Status
+                    {/* <Icon className='activity-person-icon' iconType={Icon.type.SVG}
+                        icon={Status} iconLabel="my svg icon" iconSize={14} /> */}
+                    <div className='activity-type-container'>
+                        {statusIcon()}
+                        Status
+                    </div>
                 </div>
                     <div className={'activity-status' + ` ${activ.fromStatus}`}>
                         {lableStrToUpperCase(activ.fromStatus)}
@@ -70,9 +74,12 @@ export function TaskActivity({ task }) {
                 </section>
             case 'update_priority':
                 return <section className='activity-picker-container'>< div className="activity-type">
-                    <Icon className='activity-person-icon' iconType={Icon.type.SVG}
-                        icon={Status} iconLabel="my svg icon" iconSize={14} />
-                    Priority
+                    {/* <Icon className='activity-person-icon' iconType={Icon.type.SVG}
+                        icon={Status} iconLabel="my svg icon" iconSize={14} /> */}
+                    <div className='activity-type-container'>
+                        {statusIcon()}
+                        Priority
+                    </div>
                 </div>
                     <div className={'activity-status' + ` ${activ.fromPriority}`}>
                         {lableStrToUpperCase(activ.fromPriority)}
@@ -85,9 +92,12 @@ export function TaskActivity({ task }) {
                 </section>
             case 'update_label':
                 return <section className='activity-picker-container'>< div className="activity-type">
-                    <Icon className='activity-person-icon' iconType={Icon.type.SVG}
-                        icon={Status} iconLabel="my svg icon" iconSize={14} />
-                    Label
+                    {/* <Icon className='activity-person-icon' iconType={Icon.type.SVG}
+                        icon={Status} iconLabel="my svg icon" iconSize={14} /> */}
+                    <div className='activity-type-container'>
+                        {statusIcon()}
+                        Label
+                    </div>
                 </div>
                     <div className={'activity-status' + ` ${activ.fromLabel}`}>
                         {lableStrToUpperCase(activ.fromLabel)}
@@ -99,6 +109,14 @@ export function TaskActivity({ task }) {
                     </div>
                 </section>
         }
+    }
+
+    function statusIcon() {
+        return <div className="status-icon" >
+            <div className='status-icon-green'></div>
+            <div className='status-icon-orange'></div>
+            <div className='status-icon-red'></div>
+        </div>
     }
 
     return <section>

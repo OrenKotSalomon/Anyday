@@ -190,19 +190,24 @@ async function remove(boardId,) {
 }
 
 async function save(board) {
-    var savedBoard
-    if (board._id) {
 
-        // savedBoard = await storageService.put(BOARD_KEY, board)
-        savedBoard = await httpService.put(`board/${board._id}`, board)
-        return savedBoard
-    } else {
-        // Later, owner is set by the backend
-        board.owner = userService.getLoggedinUser()
-        // savedBoard = await storageService.post(BOARD_KEY, board)
-        savedBoard = await httpService.post('board', board)
+    try {
+        if (board._id) {
+
+            // savedBoard = await storageService.put(BOARD_KEY, board)
+            return await httpService.put(`board/${board._id}`, board)
+
+        } else {
+            // Later, owner is set by the backend
+            board.owner = userService.getLoggedinUser()
+            //  await storageService.post(BOARD_KEY, board)
+            return await httpService.post('board', board)
+        }
+    } catch (error) {
+        console.log('cannot save/create board', error);
+
     }
-    return savedBoard
+
 }
 
 async function duplicate(board) {
@@ -395,10 +400,15 @@ async function updateTaskService(board, data, type) {
         type === UPDATE_TASK_LABEL_STATUS ||
         type === UPDATE_TASK_STATUS ||
         type === UPDATE_TASK_PRIORITY)
+        type === UPDATE_TASK_LABEL_STATUS ||
+        type === UPDATE_TASK_STATUS ||
+        type === UPDATE_TASK_PRIORITY)
         && !board.groups[groupIdx].tasks[taskIdx].activity) {
         board.groups[groupIdx].tasks[taskIdx].activity = []
     }
 
+        board.groups[groupIdx].tasks[taskIdx].activity = []
+    }
 
     switch (type) {
         case DELETE_TASK:
@@ -467,17 +477,24 @@ async function updateTaskService(board, data, type) {
             board.groups[groupIdx].tasks[taskIdx].activity.unshift(activity)
             board.groups[groupIdx].tasks[taskIdx].labelStatus = data.labelPick
             return board
+        case UPDATE_TASK_LABEL_STATUS:
+            activity.type = 'update_label'
+            activity.fromLabel = board.groups[groupIdx].tasks[taskIdx].labelStatus
+            activity.toLabel = data.labelPick
+            board.groups[groupIdx].tasks[taskIdx].activity.unshift(activity)
+            board.groups[groupIdx].tasks[taskIdx].labelStatus = data.labelPick
+            return board
         case UPDATE_TASK_MEMBERS:
             activity.type = 'update_member'
             activity.toUserImg = data.labelPick.imgUrl
             activity.toUserName = data.labelPick.fullname
             if (data.isDelete) {
-                activity.action = 'remove'
+                activity.action = 'Removed'
                 board.groups[groupIdx].tasks[taskIdx].activity.unshift(activity)
                 let memberToDeleteIdx = board.groups[groupIdx].tasks[taskIdx].members.findIndex(member => member._id === data.labelPick._id)
                 board.groups[groupIdx].tasks[taskIdx].members.splice(memberToDeleteIdx, 1)
             } else {
-                activity.action = 'add'
+                activity.action = 'Added'
                 board.groups[groupIdx].tasks[taskIdx].activity.unshift(activity)
                 if (board.groups[groupIdx].tasks[taskIdx].members.find((member) => member._id === data.labelPick._id)) return
                 board.groups[groupIdx].tasks[taskIdx].members.push(data.labelPick)
@@ -556,20 +573,24 @@ function getDevTemplate() {
         "statuses": [
             {
                 "id": utilService.makeId(),
+                "id": utilService.makeId(),
                 "label": "done",
                 "bgColor": "#00c875"
             },
             {
+                "id": utilService.makeId(),
                 "id": utilService.makeId(),
                 "label": "working on it",
                 "bgColor": "#fdab3d"
             },
             {
                 "id": utilService.makeId(),
+                "id": utilService.makeId(),
                 "label": "stuck",
                 "bgColor": "#e2445c"
             },
             {
+                "id": utilService.makeId(),
                 "id": utilService.makeId(),
                 "label": "default",
                 "bgColor": "#c4c4c4"
@@ -618,12 +639,14 @@ function getDevTemplate() {
         "groups": [
             {
                 "id": utilService.makeId(),
+                "id": utilService.makeId(),
                 "title": "Feature Enhancements",
                 "archivedAt": 1589983468418,
                 "isCollapsed": false,
                 "isChecked": false,
                 "tasks": [
                     {
+                        "id": utilService.makeId(),
                         "id": utilService.makeId(),
                         "isChecked": false,
                         "title": "Committed Feature",
@@ -657,6 +680,7 @@ function getDevTemplate() {
                     },
                     {
                         "id": utilService.makeId(),
+                        "id": utilService.makeId(),
                         "title": "Committed Feature",
                         "status": "done",
                         "priority": "low",
@@ -686,6 +710,7 @@ function getDevTemplate() {
                         ]
                     },
                     {
+                        "id": utilService.makeId(),
                         "id": utilService.makeId(),
                         "isChecked": false,
                         "title": "Committed Plan board",
@@ -720,12 +745,14 @@ function getDevTemplate() {
             },
             {
                 "id": utilService.makeId(),
+                "id": utilService.makeId(),
                 "title": "Bugs",
                 "archivedAt": 1589983468418,
                 "isCollapsed": false,
                 "isChecked": false,
                 "tasks": [
                     {
+                        "id": utilService.makeId(),
                         "id": utilService.makeId(),
                         "isChecked": false,
                         "title": "Committed Bug",
@@ -760,12 +787,14 @@ function getDevTemplate() {
             },
             {
                 "id": utilService.makeId(),
+                "id": utilService.makeId(),
                 "title": "Team",
                 "archivedAt": 1589983468418,
                 "isCollapsed": false,
                 "isChecked": false,
                 "tasks": [
                     {
+                        "id": utilService.makeId(),
                         "id": utilService.makeId(),
                         "isChecked": false,
                         "title": "Commited Team Task",
@@ -797,6 +826,7 @@ function getDevTemplate() {
                         ]
                     },
                     {
+                        "id": utilService.makeId(),
                         "id": utilService.makeId(),
                         "isChecked": false,
                         "title": "Commited Team Task",

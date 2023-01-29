@@ -35,6 +35,7 @@
                 font-size: rem(16px);
                 @include for-narrow-layout {
                     display: inline-block;
+                    margin-left: 5px;
                 }
             }
           
@@ -535,7 +536,7 @@
     position: absolute;
     width: 100%;
     border-radius: 2px;
-    filter: brightness(70%)
+    // filter: brightness(70%)
 }
 
 // team

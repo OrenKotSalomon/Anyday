@@ -302,6 +302,51 @@
                 height: 30px;
                 border-radius: 25em;
                 margin-inline-start: 12px;
+                position: relative;
+            }
+
+            .activity-type-container {
+                display: flex;
+                justify-content: space-between;
+                max-width: fit-content;
+
+                .status-icon {
+
+                    .status-icon-green,
+                    .status-icon-orange,
+                    .status-icon-red {
+                        width: 15px;
+                        height: 2px;
+                        margin-top: 2px;
+                        display: flex;
+                        flex-direction: column;
+                        position: relative;
+                        right: 5px;
+                        top: 4px;
+
+                    }
+
+                    .status-icon-green {
+                        background-color: #00ca72;
+                    }
+
+                    .status-icon-orange {
+                        background-color: #fdab3d;
+                    }
+
+                    .status-icon-red {
+                        background-color: #ff3e59;
+                    }
+                }
+
+            }
+
+            .activity-member-container {
+                display: flex;
+                justify-content: space-around;
+                flex-grow: 1;
+                max-width: 309px;
+                align-items: center;
             }
 
             .activity-type {
@@ -318,20 +363,21 @@
 
             }
 
-            .activity-data {
-                display: inline-table;
-                align-self: center;
-                text-align: -webkit-auto;
-                width: 184px;
-                padding-inline-start: 32px;
+            // .activity-data {
+            //     display: inline-table;
+            //     align-self: center;
+            //     text-align: -webkit-auto;
+            //     width: 184px;
+            //     padding-inline-start: 32px;
 
-                .activity-color {
-                    display: inline-table;
-                    color: red;
-                }
-            }
+            //     .activity-color {
+            //         display: inline-table;
+            //         color: red;
+            //     }
+            // }
 
         }
+
 
         .activity-picker-container {
             display: flex;
@@ -399,14 +445,14 @@
             }
         }
 
-        .activity-action {
-            display: inline-table;
-            align-self: center;
-            text-align: -webkit-auto;
-            width: 104px;
-            padding-inline-start: 120px;
+        // .activity-action {
+        //     display: inline-table;
+        //     align-self: center;
+        //     text-align: -webkit-auto;
+        //     width: 104px;
+        //     padding-inline-start: 120px;
 
-        }
+        // }
 
 
 
