@@ -225,6 +225,8 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                                 </div>
                                 <div className='row-collapsed-group-container'>
                                     <div className='main-left-header'>
+                                        <div className='white-box-collapsed'></div>
+
                                         <div className='floatin-white-box'></div>
                                         <div className="group-collapse-btn-container">
                                             <Tooltip content="Expand group" animationType="expand">
@@ -250,11 +252,39 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                                                     </Tooltip>
                                                     <div className='tasks-count-container'>{group.tasks.length + ' '} Tasks</div>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
                                     <div className="main-header-labels-container collapsed flex">
-                                        {board.cmpsOrder.map((cmp, idx) => renderGroupLabels(cmp, idx))}
+                                        <div className='collapsed-label-container'>
+
+                                            {board.cmpsOrder.map((cmp, idx) => renderGroupLabels(cmp, idx))}
+                                        </div>
+                                        <div className='label-sum-container'>
+
+                                            {/* <div className='hidden-task-container'>
+
+                                                {/* <div className='floatin-white-box-sum'></div> */}
+                                            {/* <div className='hidden-task'></div> */}
+                                            {/* <div className='right-floating-border'></div>
+                                            </div>  */}
+
+                                            <div className='sum-labels-container'>
+                                                {
+                                                    board.cmpsOrder.map((cmp, idx) => {
+                                                        return <DynamicSummaryCmp
+                                                            key={idx}
+                                                            cmp={cmp}
+                                                            board={board}
+                                                            group={group}
+                                                        />
+                                                    })
+                                                }
+
+                                            </div>
+
+                                        </div>
                                     </div>
 
                                     <div className='main-right-header flex'>
@@ -278,15 +308,15 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                                         </div>
                                         {isAddingLabel && <AddLabelModal />}
                                     </div>
+
                                 </div>
                             </div>
 
                         </section>
                     )}
 
-
                 </Draggable>
-                    {/* {provided.placeholder} */}
+                {/* {provided.placeholder} */}
             </div>
         }
 
