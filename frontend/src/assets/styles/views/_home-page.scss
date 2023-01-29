@@ -35,6 +35,7 @@
                 font-size: rem(16px);
                 @include for-narrow-layout {
                     display: inline-block;
+                    margin-left: 5px;
                 }
             }
           

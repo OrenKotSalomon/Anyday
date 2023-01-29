@@ -469,12 +469,12 @@ async function updateTaskService(board, data, type) {
             activity.toUserImg = data.labelPick.imgUrl
             activity.toUserName = data.labelPick.fullname
             if (data.isDelete) {
-                activity.action = 'remove'
+                activity.action = 'Removed'
                 board.groups[groupIdx].tasks[taskIdx].activity.unshift(activity)
                 let memberToDeleteIdx = board.groups[groupIdx].tasks[taskIdx].members.findIndex(member => member._id === data.labelPick._id)
                 board.groups[groupIdx].tasks[taskIdx].members.splice(memberToDeleteIdx, 1)
             } else {
-                activity.action = 'add'
+                activity.action = 'Added'
                 board.groups[groupIdx].tasks[taskIdx].activity.unshift(activity)
                 if (board.groups[groupIdx].tasks[taskIdx].members.find((member) => member._id === data.labelPick._id)) return
                 board.groups[groupIdx].tasks[taskIdx].members.push(data.labelPick)
