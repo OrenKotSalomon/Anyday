@@ -47,6 +47,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
     }
 
     function onStatusPick(status) {
+
         onUpdateTaskLabel(UPDATE_TASK_STATUS, cmp.data, status)
     }
 
@@ -54,7 +55,6 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
         onUpdateTaskLabel(UPDATE_TASK_PRIORITY, cmp.data, priority)
     }
     function onLabelStatusPick(labelStatus) {
-
         onUpdateTaskLabel(UPDATE_TASK_LABEL_STATUS, cmp.data, labelStatus)
     }
 

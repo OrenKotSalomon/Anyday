@@ -21,6 +21,7 @@ import Harel from '../assets/img/Harel.jpg'
 import heroOne from '../assets/img/hero-1.jpg'
 import heroTwo from '../assets/img/hero-2.jpg'
 import heroThree from '../assets/img/hero-3.jpg'
+import { Templates } from '../cmps/templates.jsx'
 
 
 export function HomePage() {
@@ -66,6 +67,8 @@ export function HomePage() {
                 <h1 className='home-page-hero-header'><span className='header-top-txt'>A platform built for a</span><span className='header-lower-txt'>new way of working</span></h1>
                 <h3 className='home-page-hero-sub-header' >What would you like <span className='home-page-sub-header-span'>to manage</span> with sprint4.com Work OS?</h3>
             </div>
+
+            <Templates />
 
             <span className="elementToFadeInAndOut" style={{ fontSize: '18px', position: 'absolute', top: '4em', right: '11em' }}>✦</span>
             <span className="SecondElementToFadeInAndOut" style={{ fontSize: '12px', position: 'absolute', top: '6em', right: '14em' }}>✦</span>

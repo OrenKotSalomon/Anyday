@@ -1,0 +1,60 @@
+.templates-container {
+  margin: 0 auto;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  gap: 27px;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+
+.template-picker {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 124px;
+  width: 124px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  transition: 0.3s;
+  cursor: pointer;
+  padding: 7px;
+
+  &.dev {
+    svg {
+      color: rgb(0, 200, 117);
+    }
+    &:hover {
+      border-color: rgb(0, 200, 117);
+    }
+  }
+
+  &.marketing {
+    svg {
+      color: rgb(240, 64, 149);
+    }
+    &:hover {
+      border-color: rgb(240, 64, 149);
+    }
+  }
+
+  &.PRM {
+    svg {
+      color: rgb(255, 153, 0);
+    }
+    &:hover {
+      border-color: rgb(255, 153, 0);
+    }
+  }
+
+  &.CRM {
+    svg {
+      color: rgb(0, 210, 210);
+    }
+    &:hover {
+      border-color: rgb(0, 210, 210);
+    }
+  }
+}
