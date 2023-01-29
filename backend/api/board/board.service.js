@@ -61,13 +61,25 @@ async function add(board) {
 async function update(board) {
     try {
         const boardToSave = structuredClone(board)
-        delete board._id
+        const tempBoardToSave = {
+            archivedAt: board.archivedAt,
+            cmpsOrder: board.cmpsOrder,
+            groups: board.groups,
+            isStarred: board.isStarred,
+            labelStatuses: board.labelStatuses,
+            owner: board.owner,
+            priorities: board.priorities,
+            statuses: board.statuses,
+            title: board.title,
+        }
+
+        // delete board._id
         // console.log('boardToSave:', boardToSave)
-        const collection = await dbService.getCollection('board')
-        await collection.updateOne({ _id: ObjectId(boardToSave._id) }, { $set: board })
         console.log('boardToSave:', boardToSave)
         console.log('board:', board)
-        return boardToSave
+        const collection = await dbService.getCollection('board')
+        await collection.updateOne({ _id: ObjectId(board._id) }, { $set: tempBoardToSave })
+        return board
     } catch (err) {
         logger.error(`cannot update board ${board._id}`, err)
         throw err

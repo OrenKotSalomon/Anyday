@@ -28,7 +28,7 @@ async function getBoardById(req, res) {
 }
 
 async function addBoard(req, res) {
-  const {loggedinUser} = req
+  const { loggedinUser } = req
 
   try {
     const board = req.body
@@ -41,10 +41,11 @@ async function addBoard(req, res) {
   }
 }
 
-
 async function updateBoard(req, res) {
   try {
     const board = req.body
+
+    console.log('updatedBoardupdatedBoard', board);
     const updatedBoard = await boardService.update(board)
     res.json(updatedBoard)
   } catch (err) {
@@ -66,7 +67,7 @@ async function removeBoard(req, res) {
 }
 
 async function addBoardMsg(req, res) {
-  const {loggedinUser} = req
+  const { loggedinUser } = req
   try {
     const boardId = req.params.id
     const msg = {
@@ -83,10 +84,10 @@ async function addBoardMsg(req, res) {
 }
 
 async function removeBoardMsg(req, res) {
-  const {loggedinUser} = req
+  const { loggedinUser } = req
   try {
     const boardId = req.params.id
-    const {msgId} = req.params
+    const { msgId } = req.params
 
     const removedId = await boardService.removeBoardMsg(boardId, msgId)
     res.send(removedId)

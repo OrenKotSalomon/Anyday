@@ -26,7 +26,6 @@ async function login(email, password, isSocialMedia) {
     return user
 }
 
-
 async function signup({ email, password, fullname, imgUrl }) {
     const saltRounds = 10
 
@@ -39,7 +38,6 @@ async function signup({ email, password, fullname, imgUrl }) {
     const hash = await bcrypt.hash(password, saltRounds)
     return userService.add({ email, password: hash, fullname, imgUrl })
 }
-
 
 function getLoginToken(user) {
     const userInfo = { _id: user._id, fullname: user.fullname, isAdmin: user.isAdmin }
@@ -54,13 +52,10 @@ function validateToken(loginToken) {
         return loggedinUser
 
     } catch (err) {
-        console.log('Invalid login token')
+        // console.log('Invalid login token')
     }
     return null
 }
-
-
-
 
 // ;(async ()=>{
 //     await signup('bubu', '123', 'Bubu Bi')
