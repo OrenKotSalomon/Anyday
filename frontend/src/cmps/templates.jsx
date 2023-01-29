@@ -15,15 +15,13 @@ export function Templates() {
         let boardToAdd
         switch (boardType) {
             case 'dev board': boardToAdd = boardService.getDevTemplate()
-            // case 'marketing board': boardToAdd = getMarketingTemplate()
-            // case 'PRM board': boardToAdd = getPRMTemplate()
-            // case 'CRM board': boardToAdd = getCRMTemplate()
-            // default: boardToAdd = getDevTemplate()
+            case 'marketing board': boardToAdd = boardService.getMarketingTemplate()
+            case 'PRM board': boardToAdd = boardService.getPRMTemplate()
+            case 'CRM board': boardToAdd = boardService.getCRMTemplate()
+            // default: boardToAdd = boardService.getDevTemplate()
             //     break
         }
-
         try {
-
             const savedBoard = await addBoard(boardToAdd)
             navigate(`/board/${savedBoard._id}`)
             showSuccessMsg(`Board added (id: ${savedBoard._id})`)

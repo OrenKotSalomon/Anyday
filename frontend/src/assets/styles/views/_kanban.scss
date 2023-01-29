@@ -17,6 +17,15 @@
   padding-right: 0;
   border-radius: 8px;
 
+  h6 {
+    padding-left: 15px;
+  }
+
+  input {
+    width: 97%;
+    padding-left: 10px;
+  }
+
   .list-title {
     color: #fff;
     text-align: center;
@@ -36,7 +45,6 @@
     padding: 8px 4px 0 10px;
     margin: 8px 0 0;
     align-items: center;
-    // border-bottom-right-radius: 8px;
     gap: 7px;
 
     .card {
@@ -46,9 +54,9 @@
       background-color: $main-bgc-white;
       border-radius: 4px;
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-      width: 229px;
+      width: 247px;
       height: 42px;
-      max-width: 229px;
+      max-width: 247px;
       max-height: 42px;
 
       &:hover {
@@ -65,6 +73,7 @@
         transition: .3s;
         opacity: 0;
       }
+
     }
   }
 }
