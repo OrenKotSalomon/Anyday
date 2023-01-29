@@ -31,6 +31,7 @@ async function ajax(endpoint, method = 'GET', data = null) {
             data,
             params: (method === 'GET') ? data : null
         })
+        console.log('res', BASE_URL, res.endpoint);
 
         return res.data
     } catch (err) {
