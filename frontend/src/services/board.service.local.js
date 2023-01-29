@@ -404,9 +404,6 @@ async function updateTaskService(board, data, type) {
         board.groups[groupIdx].tasks[taskIdx].activity = []
     }
 
-        board.groups[groupIdx].tasks[taskIdx].activity = []
-    }
-
     switch (type) {
         case DELETE_TASK:
             board.groups[groupIdx].tasks = board.groups[groupIdx].tasks.filter(task => task.id !== data.taskId)
