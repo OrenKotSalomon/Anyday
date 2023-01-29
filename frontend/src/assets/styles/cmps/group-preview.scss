@@ -139,11 +139,40 @@
 }
 
 .main-header-labels-container {
-  &.collapsed {
+  // flex-direction: column;
+
+  .collapsed-label-container {
     >* {
-      height: 60px;
+      border-bottom: none;
+      height: 30px;
     }
   }
+
+  .sum-labels-container {
+
+    >* {
+      height: 30px;
+
+    }
+  }
+
+  &.collapsed {
+    display: block;
+
+    >* {
+      height: 30px;
+      border-bottom: none;
+    }
+  }
+}
+
+.white-box-collapsed {
+  height: 30px;
+  width: 40px;
+  position: absolute;
+  background-color: white;
+  left: -40px;
+  top: 31px;
 }
 
 .main-group-container {
@@ -504,4 +533,8 @@
   }
 
   // @include left-bottom-border;
+}
+
+.collapsed-label-container {
+  display: flex;
 }

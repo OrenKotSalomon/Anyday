@@ -16,7 +16,6 @@ function DynamicInfo(data, info) {
             }
         case PRIORITY_PICKER:
             return board.priorities
-
     }
 }
 function openModal(ev, data, info) {
@@ -38,4 +37,3 @@ function openModal(ev, data, info) {
 }
 
 <DynamicModal cmp={cmp} setIsModalOpen={setIsModalOpen} onUpdateTaskLabel={onUpdateTaskLabel} />
-
