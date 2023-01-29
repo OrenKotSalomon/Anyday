@@ -188,16 +188,21 @@ async function remove(boardId,) {
 
 async function save(board) {
 
-    if (board._id) {
+    try {
+        if (board._id) {
 
-        // savedBoard = await storageService.put(BOARD_KEY, board)
-        return await httpService.put(`board/${board._id}`, board)
+            // savedBoard = await storageService.put(BOARD_KEY, board)
+            return await httpService.put(`board/${board._id}`, board)
 
-    } else {
-        // Later, owner is set by the backend
-        board.owner = userService.getLoggedinUser()
-        //  await storageService.post(BOARD_KEY, board)
-        return await httpService.post('board', board)
+        } else {
+            // Later, owner is set by the backend
+            board.owner = userService.getLoggedinUser()
+            //  await storageService.post(BOARD_KEY, board)
+            return await httpService.post('board', board)
+        }
+    } catch (error) {
+        console.log('cannot save/create board', error);
+
     }
 
 }
