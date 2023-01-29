@@ -195,7 +195,7 @@ async function save(board) {
         if (board._id) {
 
             // savedBoard = await storageService.put(BOARD_KEY, board)
-            return await httpService.put(`${BASE_URL}${board._id}`, board)
+            return await httpService.put(BASE_URL + board._id, board)
 
         } else {
             // Later, owner is set by the backend
