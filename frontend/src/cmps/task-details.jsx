@@ -34,10 +34,10 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
 
     function mediaSizeOptimize() {
         if (desktopLayout.matches) {
-            SetTaskCommentsSize(44)
+            SetTaskCommentsSize(60)
         }
         else if (tabletLayout.matches) {
-            SetTaskCommentsSize(60)
+            SetTaskCommentsSize(70)
         }
         else if (mobileLayout.matches) {
             SetTaskCommentsSize(100)

@@ -42,10 +42,10 @@
         }
     }
 
-.task-comment-inner-text{
-    text-align: -webkit-left;
-    padding-inline-start: 17px;
-}
+    .task-comment-inner-text {
+        text-align: -webkit-left;
+        padding-inline-start: 17px;
+    }
 
 }
 
@@ -59,6 +59,10 @@
 
     // hidden scroll bar y
     overflow-y: scroll;
+
+    h4 {
+        margin-bottom: 5px;
+    }
 
     &.task-main:-webkit-scrollbar {
         display: none;
@@ -381,12 +385,15 @@
             .activity-status.critical {
                 background-color: rgb(51, 51, 51);
             }
+
             .activity-status.label {
                 background-color: rgb(51, 51, 51);
             }
+
             .activity-status.label {
                 background-color: rgb(51, 51, 51);
             }
+
             .activity-status.label {
                 background-color: rgb(51, 51, 51);
             }
