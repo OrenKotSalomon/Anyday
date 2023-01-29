@@ -52,21 +52,23 @@ export function HomePage() {
             <header className="home-page-top-header"
                 onClick={scrollTop}>
                 <div className='home-page-logo-container'><img className="header-logo" src={logo} alt="logo" />Anyday<span>.com</span></div>
-                {loggedInUser ?
+                {/* {loggedInUser ?
                     <div className='home-page-login-signup-container'>
                         Welcome {loggedInUser.fullname}
                         | <a href="#" onClick={onLogout}>LogOut</a>
                     </div>
                     : <div className='home-page-login-signup-container'>
                         Welcome Guest <Link className='home-page-login-signup-link' to={`/login`}> LogIn </Link> |
-                        <Link className='home-page-login-signup-link' to={`/signup`}> SignUp </Link>
+                        <Link className='home-page-login-signup-link' to={`/signup`}> SignUp </Link> */}
 
-                        {/* <Link className='home-page-start-nav' to={`/board/${boards[0]._id}`}>
+
+<div className='home-page-login-signup-container'>
+                        <Link className='home-page-start-nav' to={`/board/${boards[0]._id}`}>
                             Get Started
                             <Icon iconType={Icon.type.SVG} icon={MoveArrowRight} iconSize={14} />
-                        </Link> */}
-
-                    </div>}
+                        </Link>
+</div>
+                    {/* </div>} */}
             </header>
 
             <div className='home-page-hero'>
