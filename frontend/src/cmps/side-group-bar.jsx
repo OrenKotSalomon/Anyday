@@ -32,7 +32,7 @@ export function SideGroupBar() {
     }
 
     async function onAddBoard() {
-        if (!boardToEdit.title) return
+        if (!boardToEdit.title ) return
         try {
             const savedBoard = await addBoard(boardToEdit)
             setBoardToEdit(boardService.getEmptyBoard())

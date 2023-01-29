@@ -20,7 +20,7 @@ function _buildCriteria(filterBy) {
     const criteria = {
         title: { $regex: filterBy.title, $options: 'i' }
     }
-    
+
     return criteria
 }
 

@@ -133,8 +133,44 @@ async function getById(boardId, filterBy = getDefaultFilter()) {
                 if (tasks.length) return filteredGroups[idx].tasks = tasks
             })
             filteredBoard.groups = check
-
         }
+        if (filterBy.sortBy === STATUS_PICKER) {
+            let check = filteredGroups.map(group => {
+                group.tasks = group.tasks.sort((a, b) => a.status.localeCompare(b.status) * filterBy.desc)
+                return group
+            })
+            filteredBoard.groups = check
+        }
+
+        if (filterBy.sortBy === LABEL_STATUS_PICKER) {
+            let check = filteredGroups.map(group => {
+                group.tasks = group.tasks.sort((a, b) => a.labelStatus.localeCompare(b.labelStatus) * filterBy.desc)
+                return group
+            })
+            filteredBoard.groups = check
+        }
+        if (filterBy.sortBy === PRIORITY_PICKER) {
+            let check = filteredGroups.map(group => {
+                group.tasks = group.tasks.sort((a, b) => a.priority.localeCompare(b.priority) * filterBy.desc)
+                return group
+            })
+            filteredBoard.groups = check
+        }
+        if (filterBy.sortBy === TEXT_LABEL) {
+            let check = filteredGroups.map(group => {
+                group.tasks = group.tasks.sort((a, b) => a.txt.localeCompare(b.txt) * filterBy.desc)
+                return group
+            })
+            filteredBoard.groups = check
+        }
+        //todo!!!
+        // change sort method
+        // if (filterBy.sortBy === NUMBER_PICKER) {
+        //     filteredBoard.groups = filteredGroups.map(group => group.tasks = group.tasks.sort((a, b) => a.status.localeCompare(b.status) * filterBy.desc))
+        // }
+        // if (filterBy.sortBy === DATE_PICKER) {
+        //     filteredBoard.groups = filteredGroups.map(group => group.tasks = group.tasks.sort((a, b) => a.status.localeCompare(b.status) * filterBy.desc))
+        // }
 
         return filteredBoard
     } catch (error) {
@@ -280,6 +316,7 @@ async function updateGroupsService(board, data, type) {
             board.groups.splice(groupIdx, 1, data)
             return board
         case UPDATE_GROUP_CHECKED:
+            console.log('hhhh');
 
             groupToUpdate = board.groups.find(currGroup => currGroup.id === data.id)
             groupToUpdate.tasks.forEach(task => task.isChecked = data.checked)
@@ -348,14 +385,7 @@ async function updateTaskService(board, data, type) {
     if (data) {
         groupIdx = board.groups.findIndex(currGroup => currGroup.id === data.groupId)
         taskIdx = board.groups[groupIdx].tasks.findIndex(currGroup => currGroup.id === data.taskId)
-    }
-
-    if ((type === UPDATE_TASK_MEMBERS ||
-         type === UPDATE_TASK_LABEL_STATUS || 
-         type === UPDATE_TASK_STATUS || 
-         type === UPDATE_TASK_PRIORITY)  
-         && !board.groups[groupIdx].tasks[taskIdx].activity) {
-        board.groups[groupIdx].tasks[taskIdx].activity = []
+        if (!board.groups[groupIdx].tasks[taskIdx].activity) board.groups[groupIdx].tasks[taskIdx].activity = []
     }
 
     switch (type) {
@@ -368,6 +398,8 @@ async function updateTaskService(board, data, type) {
             board.groups[groupIdx].tasks.splice(taskIdx + 1, 0, data.taskToDuplicate)
             return board
         case ADD_TASK_FROM_HEADER:
+            console.log('board', board);
+
             board.groups[0].tasks.unshift(newTask)
             return board
         case CHANGE_TASK_TITLE:
@@ -417,10 +449,6 @@ async function updateTaskService(board, data, type) {
             // console.log(board.groups[groupIdx].tasks[taskIdx].activity)
             return board
         case UPDATE_TASK_LABEL_STATUS:
-            activity.type = 'update_label'
-            activity.fromLabel = board.groups[groupIdx].tasks[taskIdx].labelStatus
-            activity.toLabel = data.labelPick
-            board.groups[groupIdx].tasks[taskIdx].activity.unshift(activity)
             board.groups[groupIdx].tasks[taskIdx].labelStatus = data.labelPick
             return board
         case UPDATE_TASK_MEMBERS:

@@ -8,18 +8,17 @@ import { DynamicModal } from "../cmps/dynamicCmps/dynamic-modal.jsx";
 import { GroupPreview } from "../cmps/group-preview";
 import { SideGroupBar } from "../cmps/side-group-bar";
 
-import { ADD_GROUP_FROM_BUTTOM, ADD_GROUP_FROM_HEADER, ADD_TASK_FROM_HEADER, DATE_PICKER, DUPLICATE_CHECKED_TASKS, LABEL_STATUS_PICKER, MEMEBER_PICKER, ON_DRAG_GROUP, PRIORITY_PICKER, REMOVE_CHECKED_VALUE_GROUPS, REMOVE_TASKS_FROM_GROUP, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_LABEL_STATUS, UPDATE_TASK_MEMBERS, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../services/board.service.local";
+import { ADD_GROUP_FROM_BUTTOM, ADD_GROUP_FROM_HEADER, ADD_TASK_FROM_HEADER, DATE_PICKER, DUPLICATE_CHECKED_TASKS, LABEL_STATUS_PICKER, MEMEBER_PICKER, MOVE_TASK_TO_GROUP, ON_DRAG_GROUP, PRIORITY_PICKER, REMOVE_CHECKED_VALUE_GROUPS, REMOVE_TASKS_FROM_GROUP, STATUS_PICKER, UPDATE_TASK_DATE, UPDATE_TASK_LABEL_STATUS, UPDATE_TASK_MEMBERS, UPDATE_TASK_PRIORITY, UPDATE_TASK_STATUS } from "../services/board.service.local";
 import { handleOnDragEnd, loadBoard, onGroupDragStart, setPrevBoard, updateBoard, updateGroup, updateTask } from "../store/board.actions";
 
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Loader, Icon, DialogContentContainer, MenuItem, Menu, MenuDivider } from 'monday-ui-react-core';
-import { Add, Group, Item, Close } from 'monday-ui-react-core/icons';
+import { Add, Group, Item, Close, MoveArrowRight } from 'monday-ui-react-core/icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faCircleArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { faCopy } from '@fortawesome/free-regular-svg-icons'
 import { utilService } from "../services/util.service";
 import { socketService, SOCKET_EMIT_SET_TOPIC, SOCKET_EVENT_UPDATE_BOARD } from "../services/socket.service";
-import { Kanban } from "./kanban";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
 import { useDispatch } from "react-redux";
 import { SET_FILTERBY } from "../store/board.reducer";
@@ -39,7 +38,6 @@ export function BoardDetails() {
 
     const boardContainer = useRef()
     const dispatch = useDispatch()
-    // console.log('filterBy', filterBy);
     useEffect(() => {
         loadBoard(boardId, filterBy)
         socketService.on(SOCKET_EVENT_UPDATE_BOARD, loadBoard)
@@ -51,7 +49,7 @@ export function BoardDetails() {
 
     function onUpdateTaskLabel(type, data, labelPick) {
         data.labelPick = labelPick
-        // console.log(data);
+        console.log(data);
         switch (type) {
             case UPDATE_TASK_STATUS:
                 return updateTask(board, data, UPDATE_TASK_STATUS)
@@ -78,69 +76,42 @@ export function BoardDetails() {
         return tasksChecked.flat(1).length
     }
 
+    function DynamicInfo(data, info) {
+        switch (info) {
+            case STATUS_PICKER:
+                return board.statuses
+            case LABEL_STATUS_PICKER:
+                return board.labelStatuses
+            case MEMEBER_PICKER:
+                return {
+                    selectedMembers: ['m1', 'm2'],
+                    members: data.task.members
+                }
+            case DATE_PICKER:
+                return {
+                    selectedDate: data.task.dueDate
+                }
+            case PRIORITY_PICKER:
+                return board.priorities
+
+        }
+    }
+
     function openModal(ev, data, info) {
         let labelPos = ev.target.getBoundingClientRect()
         let boardScrollTop = boardContainer.current.scrollTop
         let boardScrollLeft = boardContainer.current.scrollLeft
         setIsModalOpen(true)
 
-        switch (info) {
-            case STATUS_PICKER:
-                return setCmp(prev => {
-                    return {
-                        ...prev,
-                        data: { groupId: data.groupId, taskId: data.task.id },
-                        pos: { top: labelPos.top + boardScrollTop, left: labelPos.left + boardScrollLeft },
-                        type: info,
-                        statuses: board.statuses
-                    }
-                })
-            case LABEL_STATUS_PICKER:
-                return setCmp(prev => {
-                    return {
-                        ...prev,
-                        data: { groupId: data.groupId, taskId: data.task.id },
-                        pos: { top: labelPos.top + boardScrollTop, left: labelPos.left + boardScrollLeft },
-                        type: info,
-                        labelStatuses: board.labelStatuses
-                    }
-                })
-            case MEMEBER_PICKER:
-                return setCmp(prev => {
-                    return {
-                        ...prev,
-                        data: { groupId: data.groupId, taskId: data.task.id },
-                        type: info,
-                        pos: { top: labelPos.top + boardScrollTop, left: labelPos.left + boardScrollLeft },
-                        info: {
-                            selectedMembers: ['m1', 'm2'],
-                            members: data.task.members
-                        }
-                    }
-                })
-            case DATE_PICKER:
-                return setCmp(prev => {
-                    return {
-                        ...prev,
-                        data: { groupId: data.groupId, taskId: data.task.id },
-                        type: info,
-                        pos: { top: labelPos.top + boardScrollTop, left: labelPos.left + boardScrollLeft },
-                        info: {
-                            selectedDate: data.task.dueDate
-                        }
-                    }
-                })
-            case PRIORITY_PICKER:
-                return setCmp(prev => {
-                    return {
-                        ...prev,
-                        data: { groupId: data.groupId, taskId: data.task.id },
-                        pos: { top: labelPos.top + boardScrollTop, left: labelPos.left + boardScrollLeft },
-                        type: info,
-                        priorities: board.priorities
-                    }
-                })
-        }
+        return setCmp(prev => {
+            return {
+                ...prev,
+                data: { groupId: data.groupId, taskId: data.task.id },
+                pos: { top: labelPos.top + boardScrollTop, left: labelPos.left + boardScrollLeft },
+                type: info,
+                info: DynamicInfo(data, info)
+            }
+        })
     }
 
     function onAddFromMobile(ev, type) {
@@ -180,6 +151,19 @@ export function BoardDetails() {
 
     }
 
+    function onMoveTasks(ev, groupId) {
+        console.log(groupId);
+        let boardToUpdate = structuredClone(board)
+        let checkedTasks = boardToUpdate.groups.map(group => {
+            return group.tasks.filter(task => task.isChecked)
+        })
+        console.log(checkedTasks);
+        console.log('boardToUpdate', boardToUpdate);
+        console.log('board', board);
+        // if (!checkedTasks[0].length) return
+        updateGroup(board, { groupId, tasks: checkedTasks.flat(1) }, MOVE_TASK_TO_GROUP)
+    }
+
     function onDuplicateTasks() {
         let boardToUpdate = structuredClone(board)
         let CheckedTasks = boardToUpdate.groups.map(group => {
@@ -202,9 +186,8 @@ export function BoardDetails() {
         }
     }
 
-    function onDragGroup(e) {
-        // console.log('e:', e)
-        // if (task) return
+    function onDragStart({ type }) {
+        if (type !== 'group-list') return
         setPrevBoard(board)
         onGroupDragStart(board)
     }
@@ -220,8 +203,16 @@ export function BoardDetails() {
         {board && <div ref={boardContainer} className="board-container">
             <BoardHeader board={board} onSetFilterBy={onSetFilterBy} />
 
-            <DragDropContext onDragStart={(e) => onDragGroup(e)} onDragEnd={(res) => handleOnDragEnd(res, 'group', { prevBoard, grouplist: prevBoard.groups })}>
-                <Droppable droppableId='groups' >
+            <DragDropContext onDragStart={onDragStart}
+                onDragEnd={(res) =>
+                    handleOnDragEnd(res,
+                        {
+                            board,
+                            prevBoard,
+                            grouplist: prevBoard.groups,
+                            cmpsOrder: board.cmpsOrder
+                        })}>
+                <Droppable droppableId='groups' type="group-list">
                     {(provided) => (
 
                         <section className="groups-container"
@@ -232,7 +223,6 @@ export function BoardDetails() {
                             {board.groups.map((group, index) =>
                                 <GroupPreview
                                     index={index}
-
                                     // provided={provided}
                                     key={group.id}
                                     board={board}
@@ -246,7 +236,6 @@ export function BoardDetails() {
 
                             {provided.placeholder}
                             <div className="bottom-add-group-btn-container">
-
                                 <button className="btn clean bottom-add-group-btn"
                                     onClick={() => updateGroup(board, null, ADD_GROUP_FROM_BUTTOM)}>
                                     <Icon iconType={Icon.type.SVG} icon={Add} iconSize={19} /> Add  new group
@@ -319,7 +308,29 @@ export function BoardDetails() {
                     </div>
 
                 </div>
-
+                {isMoveToShow &&
+                    <div className="move-to-wrapper">
+                        <div className="menu-checkbox-controls">
+                            <div className="choose-group-txt">
+                                Choose group
+                            </div>
+                            <div className="choose-back" onClick={() => setisMoveToShow(false)}>Back</div>
+                        </div>
+                        <Menu size="small">
+                            {board.groups.map((group, idx) => {
+                                return <MenuItem
+                                    onClick={(ev) => onMoveTasks(ev, group.id)}
+                                    key={idx}
+                                    icon={MoveArrowRight}
+                                    iconBackgroundColor={group.style}
+                                    iconColor={group.style}
+                                    iconType="SVG"
+                                    title={group.title}
+                                />
+                            })}
+                        </Menu>
+                    </div>
+                }
             </div>}
 
         </div>

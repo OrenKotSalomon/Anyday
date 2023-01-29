@@ -146,7 +146,7 @@ export function TaskPreview({ task, board, group, openModal, provided, snapshot,
 
                         return (
                             <DynamicCmp
-                                key={idx}
+                                key={idx.toString()}
                                 cmp={{ cmp, task, groupId: group.id }}
                                 info={{
                                     status: task?.status,
