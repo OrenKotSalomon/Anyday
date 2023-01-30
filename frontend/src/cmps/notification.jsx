@@ -36,43 +36,48 @@ export function NotificationCheck() {
     //     })
     // }
 
+    const keys = {
+        publicKey: 'BPY_RuGOwM90gBBl5uE - UNzg8ysDgpNnuvQopor1bSXBX1sEzpbcRvA5LDwNztEt7dgLXdLs_KlE4VeW6VGsMjg',
+        // privateKey: '4uKu_pMxZmJHmmrbGn7vMIb0FkGLmHKDdJwcKHWAhyg'
+    }
+
     const vapidKeys = {
         publicKey: 'BDCiIgksnjwlagT8ybRRu1FFdXXm-xYVVnhWE6gIR-nQ3tN4T_r_rlydP2FLOLnV_Iz5V5FXRWGgQMDRiL43UIM',
         privateKey: 'cVqnlPZmw3G6no9SVVSLkUt2j-dd2T2A_73dJjUtWvQ'
     }
 
     if ("serviceWorker" in navigator) {
-        send().catch(err => console.error(err));
-      }
-      
-      // Register SW, Register Push, Send Push
-      async function send() {
+        send().catch(err => console.error(err))
+    }
+
+    // Register SW, Register Push, Send Push
+    async function send() {
         // Register Service Worker
         console.log("Registering service worker...");
         const register = await navigator.serviceWorker.register("../../service-worker.js", {
-          scope: "/"
+            scope: "/"
         });
         console.log("Service Worker Registered...");
-      
+
         // Register Push
         console.log("Registering Push...");
         const subscription = await register.pushManager.subscribe({
-          userVisibleOnly: true,
-          applicationServerKey: urlBase64ToUint8Array(vapidKeys.publicKey)
+            userVisibleOnly: true,
+            applicationServerKey: urlBase64ToUint8Array(vapidKeys.publicKey)
         });
         console.log("Push Registered...");
-      
+
         // Send Push Notification
         console.log("Sending Push...");
         await fetch("/subscribe", {
-          method: "POST",
-          body: JSON.stringify(subscription),
-          headers: {
-            "content-type": "application/json"
-          }
+            method: "POST",
+            body: JSON.stringify(subscription),
+            headers: {
+                "content-type": "application/json"
+            }
         });
         console.log("Push Sent...");
-      }
+    }
 
     function urlBase64ToUint8Array(base64String) {
         const padding = "=".repeat((4 - base64String.length % 4) % 4);
