@@ -6,6 +6,7 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 
 import { Icon } from 'monday-ui-react-core'
 import { Code, CreditCard, Gantt, Connect } from 'monday-ui-react-core/icons'
+import { templateService } from '../services/templates-boards'
 
 export function Templates() {
 
@@ -14,12 +15,16 @@ export function Templates() {
     async function onTemplateSelect(boardType) {
         let boardToAdd
         switch (boardType) {
-            case 'dev board': boardToAdd = boardService.getDevTemplate()
-            case 'marketing board': boardToAdd = boardService.getMarketingTemplate()
-            case 'PRM board': boardToAdd = boardService.getPRMTemplate()
-            case 'CRM board': boardToAdd = boardService.getCRMTemplate()
-            // default: boardToAdd = boardService.getDevTemplate()
-            //     break
+            case 'dev board': boardToAdd = templateService.getDevTemplate()
+                break
+            case 'marketing board': boardToAdd = templateService.getMarketingTemplate()
+                break
+            case 'PRM board': boardToAdd = templateService.getPRMTemplate()
+                break
+            case 'CRM board': boardToAdd = templateService.getCRMTemplate()
+                break
+            default: boardToAdd = boardService.getDevTemplate()
+                break
         }
         try {
             const savedBoard = await addBoard(boardToAdd)
@@ -33,18 +38,18 @@ export function Templates() {
 
     return <section className='templates-container flex'>
 
-        <div className="template-picker dev"
-            onClick={() => onTemplateSelect('dev board')} >
-            <div><Icon iconType={Icon.type.SVG} icon={Code} iconSize={40} /></div> Software Development</div>
-        <div className="template-picker marketing"
-            onClick={() => onTemplateSelect('marketing board')} >
-            <div><Icon iconType={Icon.type.SVG} icon={CreditCard} iconSize={40} /></div> Marketing</div>
-        <div className="template-picker PRM"
-            onClick={() => onTemplateSelect('PRM board')} >
-            <div><Icon iconType={Icon.type.SVG} icon={Gantt} iconSize={40} /></div> Project Managment</div>
-        <div className="template-picker CRM"
-            onClick={() => onTemplateSelect('CRM board')} >
-            <div><Icon iconType={Icon.type.SVG} icon={Connect} iconSize={25} /></div> Sales & CRM</div>
+        <div className="template-picker dev" onClick={() => onTemplateSelect('dev board')} >
+            <div><Icon iconType={Icon.type.SVG} icon={Code} iconSize={40} /></div> Software Development
+        </div>
+        <div className="template-picker marketing" onClick={() => onTemplateSelect('marketing board')} >
+            <div><Icon iconType={Icon.type.SVG} icon={CreditCard} iconSize={40} /></div> Marketing
+        </div>
+        <div className="template-picker PRM" onClick={() => onTemplateSelect('PRM board')} >
+            <div><Icon iconType={Icon.type.SVG} icon={Gantt} iconSize={40} /></div> Project Managment
+        </div>
+        <div className="template-picker CRM" onClick={() => onTemplateSelect('CRM board')} >
+            <div><Icon iconType={Icon.type.SVG} icon={Connect} iconSize={25} /></div> Sales & CRM
+        </div>
 
     </section>
 }
