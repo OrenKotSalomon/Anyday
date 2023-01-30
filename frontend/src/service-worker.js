@@ -89,6 +89,6 @@ self.addEventListener('push', (e) => {
     ]
   }
   e.waitUntil(
-    ServiceWorkerRegistration.showNotification('test message', options))
+    self.registration.showNotification('test message', options))
 })
 
