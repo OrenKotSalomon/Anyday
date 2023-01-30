@@ -176,7 +176,7 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
         {group.isCollapsed &&
             <div key={group.id} >
                 <Draggable key={group.id} draggableId={group.id} index={index} isDragDisabled={isDndModeDisabled}>
-                    {(provided) => (
+                    {(provided, snapshot) => (
                         <section className="collapsed-group-container flex"
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
@@ -186,37 +186,37 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                                 <div className="group-header-name"
                                     style={{ color: group.style }}>
 
-                                    <MenuButton className="group-list-menu-btn" >
-                                        <Menu
-                                            id="menu"
-                                            size="medium"
-                                            style={{
-                                                backgroundColor: 'red',
-                                                color: 'red'
-                                            }}
-                                        >
-                                            <MenuItem
-                                                onClick={() => onAddGroup(group)}
-                                                icon={Add}
-                                                title="Add Group"
-                                            />
-                                            <MenuItem
-                                                onClick={() => onSetColorGroup()}
-                                                icon={Bullet}
-                                                title="Change Color"
-                                            />
-                                            <MenuItem
-                                                onClick={() => onDuplicateGroup(group)}
-                                                icon={Duplicate}
-                                                title="Duplicate Group"
-                                            />
-                                            <MenuItem
-                                                onClick={() => onDeleteGroup(group)}
-                                                icon={Delete}
-                                                title="Delete"
-                                            />
-                                        </Menu>
-                                    </MenuButton>
+                                        <MenuButton className="group-list-menu-btn" >
+                                            <Menu
+                                                id="menu"
+                                                size="medium"
+                                                style={{
+                                                    backgroundColor: 'red',
+                                                    color: 'red'
+                                                }}
+                                            >
+                                                <MenuItem
+                                                    onClick={() => onAddGroup(group)}
+                                                    icon={Add}
+                                                    title="Add Group"
+                                                />
+                                                <MenuItem
+                                                    onClick={() => onSetColorGroup()}
+                                                    icon={Bullet}
+                                                    title="Change Color"
+                                                />
+                                                <MenuItem
+                                                    onClick={() => onDuplicateGroup(group)}
+                                                    icon={Duplicate}
+                                                    title="Duplicate Group"
+                                                />
+                                                <MenuItem
+                                                    onClick={() => onDeleteGroup(group)}
+                                                    icon={Delete}
+                                                    title="Delete"
+                                                />
+                                            </Menu>
+                                        </MenuButton>
 
                                     {isPickColor && <ColorPicker className="group-color-picker"
                                         colorSize={ColorPicker.sizes.SMALL}
@@ -225,9 +225,9 @@ export function GroupPreview({ board, group, openModal, setIsDndModeDisabled, is
                                 </div>
                                 <div className='row-collapsed-group-container'>
                                     <div className='main-left-header'>
-                                        <div className='white-box-collapsed'></div>
+                                        <div style={{ display: snapshot.isDragging ? 'none' : '' }} className='white-box-collapsed'></div>
 
-                                        <div className='floatin-white-box'></div>
+                                        <div style={{ display: snapshot.isDragging ? 'none' : '' }} className='floatin-white-box'></div>
                                         <div className="group-collapse-btn-container">
                                             <Tooltip content="Expand group" animationType="expand">
                                                 <button onClick={() => onCollapseGroup(group)}><Icon style={{ color: group.style }} iconType={Icon.type.SVG} icon={DropdownChevronRight} iconSize={19} /></button>
