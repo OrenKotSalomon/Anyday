@@ -28,7 +28,7 @@ export function BoardHeader({ board, onSetFilterBy }) {
 
         onSetFilterBy.current(filterBy)
     }, [filterBy]);
-    console.log(filterBy);
+
     function handleChange({ target }) {
         let { value, name: field, type } = target
 
