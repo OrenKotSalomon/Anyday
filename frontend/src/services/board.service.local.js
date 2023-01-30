@@ -193,15 +193,16 @@ async function save(board) {
 
     try {
         if (board._id) {
+            console.log('board', board);
 
             // savedBoard = await storageService.put(BOARD_KEY, board)
-            return await httpService.put(BASE_URL + board._id, board)
+            return httpService.put(BASE_URL + board._id, board)
 
         } else {
             // Later, owner is set by the backend
             board.owner = userService.getLoggedinUser()
             //  await storageService.post(BOARD_KEY, board)
-            return await httpService.post('board', board)
+            return httpService.post('board', board)
         }
     } catch (error) {
         console.log('cannot save/create board', error);
@@ -282,10 +283,10 @@ async function updateBoardService(board, data, type) {
 }
 
 async function updateGroupsService(board, data, type) {
-    let boardToUpdate = await getById(board._id)
+    const boardToUpdate = await getById(board._id)
     board = structuredClone(boardToUpdate)
     let groupToUpdate
-    let newTask = getNewTask()
+    const newTask = getNewTask()
     let groupIdx
     switch (type) {
         case CHANGE_GROUP_TITLE:
