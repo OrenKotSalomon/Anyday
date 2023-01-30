@@ -188,10 +188,6 @@ export function handleOnDragEnd(res, data) {
                     group.tasks.find(task => task.id === draggableId))
                 const taskToUpdate = groupToUpdate.tasks.find(task => task.id === draggableId)
                 taskToUpdate.status = destStatus.label
-                // const sourceTasks = sourceStatus.tasks
-                // const destTasks = destStatus.tasks
-                // const [removed] = sourceTasks.splice(source.index, 1)
-                // destTasks.splice(destination.index, 0, removed)
             } else {
                 const status = board.statuses.find(status => status.id === draggedFromId)
                 console.log('status:', status)

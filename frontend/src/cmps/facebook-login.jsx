@@ -61,7 +61,7 @@ export function LoginFaceBook() {
                 // console.log('fb user signup:', FBuser)
                 userService.signup(FBuser)
             }
-            navigate(`/board/${boards[0]._id}`)
+            navigate(`/`)
         }
         catch (err) {
             console.log(err)

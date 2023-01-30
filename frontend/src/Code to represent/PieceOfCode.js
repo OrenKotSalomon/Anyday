@@ -1,6 +1,6 @@
 
-function DynamicInfo(data, info) {
-    switch (info) {
+function DynamicInfo(data, infoType) {
+    switch (infoType) {
         case STATUS_PICKER: return board.statuses
         case PRIORITY_PICKER: return board.priorities
         case LABEL_STATUS_PICKER: return board.labelStatuses
@@ -15,18 +15,18 @@ function DynamicInfo(data, info) {
             }
     }
 }
-function openModal(ev, data, info) {
-    let labelPos = ev.target.getBoundingClientRect()
-    let boardScrollTop = boardContainer.current.scrollTop
-    let boardScrollLeft = boardContainer.current.scrollLeft
+function openModal(ev, data, infoType) {
+    const labelPos = ev.target.getBoundingClientRect()
+    const boardScrollTop = boardContainer.current.scrollTop
+    const boardScrollLeft = boardContainer.current.scrollLeft
 
     setCmp(prev => {
         return {
             ...prev,
             data: { groupId: data.groupId, taskId: data.task.id },
             pos: { top: labelPos.top + boardScrollTop, left: labelPos.left + boardScrollLeft },
-            type: info,
-            info: DynamicInfo(data, info)
+            type: infoType,
+            info: DynamicInfo(data, infoType)
         }
     })
     setIsModalOpen(true)

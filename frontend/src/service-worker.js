@@ -71,24 +71,32 @@ self.addEventListener('message', (event) => {
 
 // Any other custom service worker logic can go here.
 
-self.addEventListener('push', (e) => {
+// self.addEventListener('push', (e) => {
 
-  var options = {
-    body: 'ZONA',
-    icon: './assets/img/logo.png',
-    vibrate: [100, 50, 100], 
-    data: {
-      dateOfArrival: Date.now(),
-      primaryKey: '2'
-    },
-    actions: [
-      {action: 'explore', title: 'Explore This App',
-      icon: 'images/checkmark.png'},
-      {action: 'close', title: 'Close',
-      icon: 'images/xmark.png'}
-    ]
-  }
-  e.waitUntil(
-    self.registration.showNotification('test message', options))
-})
+//   var options = {
+//     body: 'ZONA',
+//     icon: './assets/img/logo.png',
+//     vibrate: [100, 50, 100], 
+//     data: {
+//       dateOfArrival: Date.now(),
+//       primaryKey: '2'
+//     },
+//     actions: [
+//       {action: 'explore', title: 'Explore This App',
+//       icon: 'images/checkmark.png'},
+//       {action: 'close', title: 'Close',
+//       icon: 'images/xmark.png'}
+//     ]
+//   }
+//   e.waitUntil(
+//     self.registration.showNotification('test message', options))
+// })
 
+self.addEventListener("push", e => {
+  const data = e.data.json();
+  console.log("Push Recieved...");
+  self.registration.showNotification(data.title, {
+    body: "Notified by Traversy Media!",
+    icon: "http://image.ibb.co/frYOFd/tmlogo.png"
+  });
+});
