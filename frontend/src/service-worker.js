@@ -71,63 +71,24 @@ self.addEventListener('message', (event) => {
 
 // Any other custom service worker logic can go here.
 
-if ('Notification' in window) {
-  Notification.requestPermission().then(function(permission) {
-    if (permission === 'granted') {
-      var notification = new Notification('Notification Title', {
-        body: 'Notification Body',
-      });
-      notification.show()
-    }
-  });
-}
+self.addEventListener('push', (e) => {
 
-
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("/service-worker.js").then(
-      (registration) => {
-        console.log("Service worker registered:", registration);
-        subscribeUserToPush();
-      },
-      (error) => {
-        console.error("Service worker registration failed:", error);
-      }
-    );
-  });
-}
-
-function subscribeUserToPush() {
-  return navigator.serviceWorker.register("/service-worker.js").then(
-    (registration) => {
-      const subscribeOptions = {
-        userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(
-          'https://anyday-za1z.onrender.com/api'
-        ),
-      };
-
-      return registration.pushManager
-        .subscribe(subscribeOptions)
-        .then((pushSubscription) => {
-          console.log("Received PushSubscription: ", JSON.stringify(pushSubscription));
-          // Send the push subscription object to your server
-        });
-    }
-  );
-}
-
-function urlBase64ToUint8Array(base64String) {
-  const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
-  const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
-
-  const rawData = window.atob(base64);
-  const outputArray = new Uint8Array(rawData.length);
-
-  for (let i = 0; i < rawData.length; ++i) {
-    outputArray[i] = rawData.charCodeAt(i);
+  var options = {
+    body: 'ZONA',
+    icon: './assets/img/logo.png',
+    vibrate: [100, 50, 100], 
+    data: {
+      dateOfArrival: Date.now(),
+      primaryKey: '2'
+    },
+    actions: [
+      {action: 'explore', title: 'Explore This App',
+      icon: 'images/checkmark.png'},
+      {action: 'close', title: 'Close',
+      icon: 'images/xmark.png'}
+    ]
   }
-
-  return outputArray;
-}
+  e.waitUntil(
+    self.registration.sendNotification('test message', options))
+})
 
