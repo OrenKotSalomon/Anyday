@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { NavBar } from "../cmps/nav-bar";
 import { SideGroupBar } from "../cmps/side-group-bar";
 import { BoardHeader } from "../cmps/board-header";
-import { handleOnDragEnd, loadBoard } from "../store/board.actions";
+import { handleOnDragEnd, loadBoard, loadBoards } from "../store/board.actions";
 import { socketService, SOCKET_EMIT_SET_TOPIC, SOCKET_EVENT_UPDATE_BOARD } from "../services/socket.service";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { StatusesList } from "../cmps/kanban/statuses-list";
@@ -24,20 +24,26 @@ export function Dashboard() {
 
     const { boardId } = useParams()
     const board = useSelector((storeState) => storeState.boardModule.board)
+    const boards = useSelector((storeState) => storeState.boardModule.boards)
+    const [groups, setGroups] = useState([])
+    const [tasks, setTasks] = useState([])
 
     useEffect(() => {
+        loadBoards()
         loadBoard(boardId)
+        loadCounts(boards)
     }, [boardId])
 
-    // function getStatuses() {
-    //   let statuses = []
-    //   board.statuses.forEach(status => statuses.push(status))
-    //   return statuses  
-    // }
-
-    // function getStatusesAmount() {
-    //     board.groups
-    // }
+    function loadCounts(boards) {
+        let groups = []
+        let tasks = []
+        boards.forEach(board =>
+            board.groups.forEach(group => {
+                groups.push(group)
+                group.tasks.forEach(task => tasks.push(task))}))
+        setGroups(groups)
+        setTasks(tasks)
+    }
 
     function getStatusesMap() {
         const statusMap = []
@@ -113,21 +119,21 @@ export function Dashboard() {
                         <div className="card-icon">
                             <Icon iconType={Icon.type.SVG} icon={Board} iconSize={22} />
                         </div>
-                        <div className="dash-board-card-counter">4</div>
+                        <div className="dash-board-card-counter">{boards && boards.length}</div>
                         <div className="dash-board-card-counter-by">Boards</div>
                     </div>
                     <div className="card-groups">
                         <div className="card-icon">
                             <Icon iconType={Icon.type.SVG} icon={Group} iconSize={22} />
                         </div>
-                        <div className="dash-board-card-counter">17</div>
+                        <div className="dash-board-card-counter">{groups && groups.length}</div>
                         <div className="dash-board-card-counter-by">Groups</div>
                     </div>
                     <div className="card-tasks">
                         <div className="card-icon">
                             <Icon iconType={Icon.type.SVG} icon={Note} iconSize={22} />
                         </div>
-                        <div className="dash-board-card-counter">56</div>
+                        <div className="dash-board-card-counter">{tasks && tasks.length}</div>
                         <div className="dash-board-card-counter-by">Tasks</div>
                     </div>
                 </div>
