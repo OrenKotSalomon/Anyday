@@ -149,6 +149,7 @@ async function getById(boardId, filterBy = getDefaultFilter()) {
             filteredBoard.groups = groupsToSet
         }
         //todo!!!
+        // ssss
         // change sort method
         // if (filterBy.sortBy === NUMBER_PICKER) {
         //     filteredBoard.groups = filteredGroups.map(group => group.tasks = group.tasks.sort((a, b) => a.status.localeCompare(b.status) * filterBy.desc))
@@ -703,7 +704,6 @@ function getEmptyBoard() {
         cmpsOrder: [MEMEBER_PICKER, STATUS_PICKER, DATE_PICKER, PRIORITY_PICKER, TEXT_LABEL, LABEL_STATUS_PICKER, NUMBER_PICKER]
     }
 }
-
 
 const demoBoard = {
     title: 'Demo Board',
