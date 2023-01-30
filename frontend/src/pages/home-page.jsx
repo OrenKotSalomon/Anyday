@@ -7,7 +7,7 @@ import { userService } from '../services/user.service.js'
 import { loadBoards } from '../store/board.actions'
 
 import { Icon, Loader } from 'monday-ui-react-core'
-import { MoveArrowRight } from 'monday-ui-react-core/icons'
+import { MoveArrowRight, LogIn } from 'monday-ui-react-core/icons'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookF, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
@@ -62,15 +62,20 @@ export function HomePage() {
                         <Link className='home-page-login-signup-link' to={`/signup`}> SignUp </Link> */}
 
 
-<div className='home-page-login-signup-container'>
-<Link className='home-page-login-signup-link' to={`/login`}> LogIn |</Link> 
-                        <Link className='home-page-login-signup-link' to={`/signup`}> SignUp </Link>
-                        <Link className='home-page-start-nav' to={`/board/${boards[0]._id}`}>
-                            Get Started
-                            <Icon iconType={Icon.type.SVG} icon={MoveArrowRight} iconSize={16} />
-                        </Link>
-</div>
-                    {/* </div>} */}
+                <div className='home-page-login-signup-container'>
+                <span className="home-page-login-signup-link"> Wellcome!</span>
+                    <Link className='home-page-login-signup-link' to={`/login`}>
+                        Login
+                        <Icon iconType={Icon.type.SVG} icon={LogIn} iconSize={20} />
+                    </Link>
+                    <span className="home-page-login-signup-link"> or </span>
+                    {/* <Link className='home-page-login-signup-link' to={`/signup`}> Signup </Link> */}
+                    <Link className='home-page-start-nav' to={`/board/${boards[0]._id}`}>
+                        Get Started
+                        <Icon iconType={Icon.type.SVG} icon={MoveArrowRight} iconSize={16} />
+                    </Link>
+                </div>
+                {/* </div>} */}
             </header>
 
             <div className='home-page-hero'>

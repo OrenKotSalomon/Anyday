@@ -34,9 +34,19 @@
                 display: none;
                 font-size: rem(16px);
 
+                svg {
+                    position: relative;
+                    top: 5px;
+                    color: #551a8b;
+                }
+
+                a {
+                    text-decoration: underline;
+                }
+
                 @include for-narrow-layout {
                     display: inline-block;
-                    margin-left: 5px;
+                    margin: 6px;
                 }
             }
 
@@ -701,13 +711,15 @@
 .login-signup-logo {
     color: $main-color;
     font-family: poppins-semi-bold-600;
+
     span {
         font-family: poppins-regular-400;
         font-size: rem(12px);
         padding-top: rem(8px);
         letter-spacing: 0em;
     }
-    &:hover{
+
+    &:hover {
         cursor: default;
     }
 }
