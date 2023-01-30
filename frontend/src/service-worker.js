@@ -77,11 +77,11 @@ if ('Notification' in window) {
       var notification = new Notification('Notification Title', {
         body: 'Notification Body',
       });
+      notification.show()
     }
   });
 }
 
-notification.show()
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
