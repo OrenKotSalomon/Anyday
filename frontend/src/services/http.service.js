@@ -16,7 +16,6 @@ export const httpService = {
         return ajax(endpoint, 'POST', data)
     },
     put(endpoint, data) {
-        console.log('resHttp', BASE_URL, endpoint);
         return ajax(endpoint, 'PUT', data)
     },
     delete(endpoint, data) {
@@ -32,7 +31,6 @@ async function ajax(endpoint, method = 'GET', data = null) {
             data,
             params: (method === 'GET') ? data : null
         })
-        console.log('resAjax', method);
 
         return res.data
     } catch (err) {

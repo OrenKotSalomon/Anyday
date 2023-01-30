@@ -82,28 +82,14 @@ window.bs = boardService
 
 async function query(filterBy = getDefaultFilter()) {
     const queryParams = `?title=${filterBy.title}&sortBy=${filterBy.sortBy}&desc=${filterBy.desc}`
-    // let boards = await storageService.query(BOARD_KEY)
     let boards = await httpService.get(BASE_URL)
 
     if (!boards.length) {
-        // await storageService.post(BOARD_KEY, demoBoard)
         await httpService.post('board', demoBoard)
-        // boards = await storageService.query(BOARD_KEY)
         boards = await httpService.get(BASE_URL + queryParams)
         return boards
     }
 
-    // Filters
-    // if (filterBy.txt) {
-    //     const regex = new RegExp(filterBy.txt, 'i')
-    //     regex.test(board.vendor) || regex.test(board.description)
-    //     boards = boards.filter(board => {
-    //         board.groups.
-    //     })
-    // }
-    // if (filterBy.price) {
-    //     boards = boards.filter(board => board.price <= filterBy.price)
-    // }
     return boards
 }
 
@@ -113,7 +99,6 @@ async function getById(boardId, filterBy = getDefaultFilter()) {
         const board = await httpService.get(`board/${boardId}`)
         let filteredBoard = structuredClone(board)
         let filteredGroups = filteredBoard.groups
-        // let filteredTasks
         if (filterBy.title) {
             const regex = new RegExp(filterBy.title, 'i')
             let check = filteredGroups.filter((group, idx) => {
@@ -193,15 +178,10 @@ async function save(board) {
 
     try {
         if (board._id) {
-            console.log('board', board);
-
-            // savedBoard = await storageService.put(BOARD_KEY, board)
             return httpService.put(BASE_URL + board._id, board)
 
         } else {
-            // Later, owner is set by the backend
             board.owner = userService.getLoggedinUser()
-            //  await storageService.post(BOARD_KEY, board)
             return httpService.post('board', board)
         }
     } catch (error) {
@@ -213,7 +193,6 @@ async function save(board) {
 
 async function duplicate(board) {
     let newBoard = structuredClone(board)
-    // newBoard._id = utilService.makeId()
     delete newBoard._id
     newBoard.title = `Duplicate of ${board.title}`
     newBoard.groups.map(group => {
@@ -221,13 +200,11 @@ async function duplicate(board) {
         group.tasks.map(task => task.id = utilService.makeId())
         return group
     })
-    // await storageService.post(BOARD_KEY, newBoard)
     newBoard = await httpService.post('board', newBoard)
     return newBoard
 }
 
 async function addBoardMsg(boardId, txt) {
-    // Later, this is all done by the backend
     const board = await getById(boardId)
     if (!board.msgs) board.msgs = []
 
@@ -326,8 +303,6 @@ async function updateGroupsService(board, data, type) {
             board.groups.splice(groupIdx, 1, data)
             return board
         case UPDATE_GROUP_CHECKED:
-            console.log('hhhh');
-
             groupToUpdate = board.groups.find(currGroup => currGroup.id === data.id)
             groupToUpdate.tasks.forEach(task => task.isChecked = data.checked)
             groupToUpdate.isChecked = data.checked
@@ -343,7 +318,6 @@ async function updateGroupsService(board, data, type) {
             groupToUpdate = board.groups.forEach((group, idx) => {
                 group.isChecked = data
                 group.tasks.forEach(task => {
-
                     task.isChecked = data
                 })
             })
@@ -415,8 +389,6 @@ async function updateTaskService(board, data, type) {
             board.groups[groupIdx].tasks.splice(taskIdx + 1, 0, data.taskToDuplicate)
             return board
         case ADD_TASK_FROM_HEADER:
-            console.log('board', board);
-
             board.groups[0].tasks.unshift(newTask)
             return board
         case CHANGE_TASK_TITLE:
