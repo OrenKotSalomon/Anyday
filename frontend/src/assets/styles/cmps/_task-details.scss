@@ -54,9 +54,9 @@
     color: $main-color;
     background-color: $main-bgc-white;
     // width: 44vw;
-    border-inline-start: 12px solid $grey;
+    // border-inline-start: 12px solid $grey;
     // transition: .5s;
-
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
     // hidden scroll bar y
     overflow-y: scroll;
 
@@ -547,9 +547,9 @@
 }
 
 .task-details-task-comment {
-    margin: 1.5em auto;
-    max-width: 90%;
-    min-height: rem(205px);
+    margin: 1.5em 19px;
+    max-width: 100%;
+    min-height: rem(170px);
     border: 1px solid $li-grey;
     border-radius: rem(10px);
     display: flex;

@@ -7,7 +7,9 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/user.actions.js'
 
 import logo from '../assets/img/logo.png'
-import wm_icon from '../assets/img/wm_icon.avif'
+// import wm_icon from '../assets/img/wm_icon.avif'
+import wm_icon from '../assets/img/sub-icon.png'
+
 import { UserMsg } from './user-msg'
 import { ImgUploader } from '../cmps/img-uploader'
 import { userService } from '../services/user.service'
@@ -64,7 +66,7 @@ export function NavBar() {
     function getAvatarImg() {
         // console.log('img',imgSrc)
         return (<img className='nav-bar-avatar-img' onClick={onClickUserAvatar}
-            src={imgSrc === undefined ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3CPFSTpcN-YwAU8Euffs0uXuywMvSYwVpJA&usqp=CAU' : imgSrc }alt="" />)
+            src={imgSrc === undefined ? 'https://static-00.iconduck.com/assets.00/profile-user-icon-256x256-zhsk04ey.png' : imgSrc }alt="" />)
     }
 
     return <div className='side-bar-container'><header className="nav-bar">
@@ -73,12 +75,15 @@ export function NavBar() {
                 <div className="nav-a-container">
                     <NavLink to='/'><img className='nav-bar-logo' src={logo} style={{ minWidth: '55px' }} /></NavLink>
                 </div>
-                <hr style={{ width: '75%' }} />
+                <hr  className='nav-logo-hr'/>
                 <div className="nav-a-container">
+                    {/* <NavLink to='/board/'><span className='nav-bar-board-logo-container'>< img className='nav-bar-board-logo' src={wm_icon} style={{ maxWidth: '30px' }} /></span></NavLink> */}
                     <NavLink to='/board/'>< img className='nav-bar-board-logo' src={wm_icon} style={{ maxWidth: '30px' }} /></NavLink>
+                <div className='nav-bar-triangle'></div>
                 </div>
             </div>
             {getAvatarImg()}
+            <hr  className='nav-user-hr'/>
             {loggedInUser && <div className='miniUserPanel' style={{ display: `${toggleUserModal}` }}>
                 wellcome {loggedInUser.fullname}
                 <div>{getAvatarImg()}</div>

@@ -85,6 +85,12 @@ export function Dashboard() {
             <BoardHeader board={board} />
             <section className="dashboard">
 
+<div className="dashboard-cards-container">
+<div className="card-groups"></div>
+<div className="card-tasks"></div>
+<div className="card-comments"></div>
+</div>
+
                 <div style={{ width: '40%', margin: 'auto' }}>
                     <h1>Status Summary</h1>
                     <PolarArea data={data} />
