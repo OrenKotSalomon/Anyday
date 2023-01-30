@@ -40,7 +40,8 @@ export function Dashboard() {
         boards.forEach(board =>
             board.groups.forEach(group => {
                 groups.push(group)
-                group.tasks.forEach(task => tasks.push(task))}))
+                group.tasks.forEach(task => tasks.push(task))
+            }))
         setGroups(groups)
         setTasks(tasks)
     }
@@ -57,7 +58,21 @@ export function Dashboard() {
         }, {})
     }
 
+
+    function getPriorityMap() {
+        const priorityMap = []
+        board.groups.forEach(group =>
+            group.tasks.forEach(task =>
+                priorityMap.push(task.status.charAt(0).toUpperCase() + task.status.slice(1))))
+
+        return priorityMap.reduce((acc, val) => {
+            acc[val] = acc[val] ? ++acc[val] : 1
+            return acc
+        }, {})
+    }
+
     const statusesMap = getStatusesMap()
+    const priorityMap = getPriorityMap()
 
     // const data = {
     //     labels: Object.keys(statusesMap),
@@ -104,6 +119,30 @@ export function Dashboard() {
             },
         ],
     };
+
+
+    const priorityData = {
+        labels: Object.keys(priorityMap),
+        datasets: [
+            {
+                label: 'priorities',
+                data: Object.values(priorityMap),
+                backgroundColor: [
+                    'rgba(196, 196, 196, 1)',
+                    'rgba(87, 155, 252, 1)',
+                    'rgba(85, 89, 223, 1)',
+                    'rgba(64, 22, 148, 1)',
+                    'rgba(51, 51, 51, 1)'
+                ],
+                hoverOffset: 5
+            },
+
+        ],
+    };
+
+
+
+
 
 
     if (!board.groups || !board) return <div className="loader"><Loader size={Loader.sizes.LARGE} /></div>
@@ -157,7 +196,7 @@ export function Dashboard() {
                     </div>
 
                     <div className="dashboard-status-polar">
-                        <RadarChart />
+                        <RadarChart priorityData={priorityData} />
                     </div>
                 </div>
 

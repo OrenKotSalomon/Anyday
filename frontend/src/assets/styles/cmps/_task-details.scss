@@ -264,13 +264,19 @@
         .activity-row {
             display: flex;
             border-bottom: 1px solid $li-grey;
-            height: 56px;
+            height: 110px;
             align-items: flex-end;
             font-size: rem(14px);
             font-family: roboto-regular;
             color: $main-color;
-            padding: 0 8px;
-            padding-inline-start: 16px;
+            flex-wrap: wrap;
+
+            @include for-narrow-layout {
+                flex-wrap: nowrap;
+                height: 56px;
+                padding: 0 8px;
+                padding-inline-start: 16px;
+            }
 
 
             .activity-by {
@@ -328,6 +334,7 @@
                         position: relative;
                         right: 5px;
                         top: 4px;
+                        margin-left: 15px;
 
                     }
 
@@ -364,6 +371,7 @@
                 svg {
                     top: 2px;
                     right: 4px;
+                    margin-left: 15px;
                 }
 
             }
@@ -394,8 +402,13 @@
                 height: 39px;
                 padding: 8px;
                 color: $main-bgc-white;
-                min-width: 140px;
+                min-width: 80px;
                 line-height: 24px;
+
+                @include for-narrow-layout {
+                    min-width: 140px;
+                }
+
             }
 
             .activity-status-arrow {

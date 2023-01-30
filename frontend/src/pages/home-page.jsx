@@ -63,12 +63,12 @@ export function HomePage() {
 
 
                 <div className='home-page-login-signup-container'>
-                <span className="home-page-login-signup-link"> Wellcome!</span>
+                <span className="home-page-login-signup-link"> Welcome!</span>
                     <Link className='home-page-login-signup-link' to={`/login`}>
                         Login
                         <Icon iconType={Icon.type.SVG} icon={LogIn} iconSize={20} />
                     </Link>
-                    <span className="home-page-login-signup-link"> or </span>
+                    
                     {/* <Link className='home-page-login-signup-link' to={`/signup`}> Signup </Link> */}
                     <Link className='home-page-start-nav' to={`/board/${boards[0]._id}`}>
                         Get Started
