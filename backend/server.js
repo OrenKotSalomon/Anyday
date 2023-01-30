@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const path = require('path')
 const cookieParser = require('cookie-parser')
+const webPush = require('web-push')
 
 const app = express()
 const http = require('http').createServer(app)
@@ -10,17 +11,27 @@ const http = require('http').createServer(app)
 app.use(cookieParser())
 app.use(express.json())
 
-// window.FB
+let vapidKeys = {
+    publicKey: 'BDCiIgksnjwlagT8ybRRu1FFdXXm-xYVVnhWE6gIR-nQ3tN4T_r_rlydP2FLOLnV_Iz5V5FXRWGgQMDRiL43UIM',
+    privateKey: 'cVqnlPZmw3G6no9SVVSLkUt2j-dd2T2A_73dJjUtWvQ'
+}
 
-// initFB()
-// function initFB() {
-// window.fbAsyncInit = function () {
-//     FB.init({
-//         appId: "731484244948295",
-//         version: 'v2.1' // use version 2.1
-//     });
-// }
-// }
+webPush.setVapidDetails('mailto:harelcr7@gmail.com', vapidKeys.publicKey, vapidKeys.privateKey)
+
+app.post('/subscribe', (req, res) => {
+
+    const subscription = req.body
+
+    res.status(201).json({})
+
+    const payload = JSON.stringify({ title: 'Push Test' })
+
+    webPush.sendNotification(subscription, payload).catch(console.log)
+})
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.resolve(__dirname, 'public')))
