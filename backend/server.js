@@ -15,10 +15,10 @@ app.use(express.json())
 //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 //   next();
 
-let vapidKeys = {
-    publicKey: 'BDCiIgksnjwlagT8ybRRu1FFdXXm-xYVVnhWE6gIR-nQ3tN4T_r_rlydP2FLOLnV_Iz5V5FXRWGgQMDRiL43UIM',
-    privateKey: 'cVqnlPZmw3G6no9SVVSLkUt2j-dd2T2A_73dJjUtWvQ'
-}
+// let vapidKeys = {
+//     publicKey: 'BDCiIgksnjwlagT8ybRRu1FFdXXm-xYVVnhWE6gIR-nQ3tN4T_r_rlydP2FLOLnV_Iz5V5FXRWGgQMDRiL43UIM',
+//     privateKey: 'cVqnlPZmw3G6no9SVVSLkUt2j-dd2T2A_73dJjUtWvQ'
+// }
 
 // const keys = {
 //     publicKey:'BPY_RuGOwM90gBBl5uE - UNzg8ysDgpNnuvQopor1bSXBX1sEzpbcRvA5LDwNztEt7dgLXdLs_KlE4VeW6VGsMjg',
@@ -39,20 +39,16 @@ if (process.env.NODE_ENV === 'production') {
 
 // webPush.setVapidDetails('mailto:harelcr7@gmail.com', vapidKeys.publicKey, vapidKeys.privateKey)
 
-app.post('/subscribe', (req, res) => {
+// app.post('/subscribe', (req, res) => {
 
-    const subscription = req.body
+//     const subscription = req.body
 
-    res.status(201).json({})
+//     res.status(201).json({})
 
-    const payload = JSON.stringify({ title: 'Push Test' })
+//     const payload = JSON.stringify({ title: 'Push Test' })
 
-    webPush.sendNotification(subscription, payload).catch(console.log)
-})
-
-
-
-
+//     webPush.sendNotification(subscription, payload).catch(console.log)
+// })
 
 const authRoutes = require('./api/auth/auth.routes')
 const userRoutes = require('./api/user/user.routes')

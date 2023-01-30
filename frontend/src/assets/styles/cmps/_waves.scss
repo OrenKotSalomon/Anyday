@@ -44,9 +44,9 @@
     display: flex;
     justify-content: space-between;
     position: absolute;
-    bottom: 17px;
-    left: 225px;
-    height: 30px;
+    bottom: 10px;
+    left: 178px;
+    height: 20px;
     --boxSize: 8px;
     --gutter: 4px;
     width: calc((var(--boxSize) + var(--gutter)) * 5);

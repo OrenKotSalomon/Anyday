@@ -452,7 +452,7 @@
 
 .mic-modal {
   position: absolute;
-  bottom: 22px;
+  bottom: 31px;
   cursor: pointer;
   left: 200px;
 
@@ -470,7 +470,7 @@
   top: 20px;
 
   transition: 0.3s;
-  color: #424242;
+  color: $icon-color;
   cursor: pointer;
 
   &:hover {
@@ -481,13 +481,11 @@
 .arrow-rotate-off {
   color: $main-bgc-white;
   position: absolute;
-  right: 48px;
-
+  right: 51px;
   top: 20px;
   transition: 0.3s;
   cursor: pointer;
-  color: #424242;
-
+  color: $icon-color;
   &:hover {
     color: #44444d;
   }
@@ -508,8 +506,12 @@
 .arrow-info {
   cursor: pointer;
   position: absolute;
-  right: 75px;
+  right: 84px;
   top: 18px;
+  color: $icon-color;
+  &:hover {
+    color: #44444d;
+  }
 }
 
 .info-modal {

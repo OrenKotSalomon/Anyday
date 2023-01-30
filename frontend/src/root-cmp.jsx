@@ -26,7 +26,7 @@ export function RootCmp() {
                 <Route element={<SignUp />} path="/signup" />
             </Routes>
         </main>
-        <NotificationCheck />
+        {/* <NotificationCheck /> */}
         <UserMsg />
     </div>
 }

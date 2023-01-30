@@ -73,7 +73,9 @@ export function BoardFilter({ board, onSetFilterBy }) {
 
             >
                 <div className='annie-icon-header' onClick={() => setisAnnieOn(!isAnnieOn)}>
-                    <FontAwesomeIcon className='open-annie-mic' icon={faMicrophone} style={{ color: isAnnieOn ? '#F52918' : '#676879' }} />
+                    <FontAwesomeIcon className='open-annie-mic' icon={faMicrophone} style={{ 
+                        height: '25px',
+                        color: isAnnieOn ? '#F52918' : '#676879' }} />
                 </div>
                 <SplitButton className="new-task-btn"
 
