@@ -1,15 +1,39 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 
 import { BoardFilter } from "./board-filter";
 import { BoardView } from "./board-view";
 
-import { MenuButton, Menu, Icon } from 'monday-ui-react-core'
-import { MoveArrowLeft, Search, Filter } from 'monday-ui-react-core/icons'
+import { MenuButton, Menu, Icon, MenuItem } from 'monday-ui-react-core'
+import { MoveArrowLeft, Search, Filter, Board } from 'monday-ui-react-core/icons'
+import { useSelector } from "react-redux";
+import { loadBoards } from "../store/board.actions";
+import { useDispatch } from "react-redux";
+import { boardService } from "../services/board.service.local";
+import { utilService } from "../services/util.service";
 
 export function BoardHeader({ board, onSetFilterBy }) {
     const [isFilterOn, setIsFilterOn] = useState(false)
     const navigate = useNavigate()
+    const boards = useSelector((storeState) => storeState.boardModule.boards)
+    const [filterBy, setfilterBy] = useState(boardService.getDefaultFilter())
+    // need to clean filter with mobile and desktop app
+    onSetFilterBy = useRef(utilService.debounce(onSetFilterBy))
+
+    useEffect(() => {
+        loadBoards()
+    }, [])
+
+    useEffect(() => {
+
+        onSetFilterBy.current(filterBy)
+    }, [filterBy]);
+
+    function handleChange({ target }) {
+        let { value, name: field, type } = target
+
+        setfilterBy(prev => ({ ...prev, [field]: value }))
+    }
 
     return <Fragment>
 
@@ -31,11 +55,18 @@ export function BoardHeader({ board, onSetFilterBy }) {
                     <Menu
                         id="menu"
                         size="medium"
-                        style={{
-                            backgroundColor: 'red',
-                            color: 'red'
-                        }}
                     >
+                        {
+                            boards.map((board, idx) => {
+                                return <MenuItem
+                                    key={idx}
+                                    icon={Board}
+                                    iconType="SVG"
+                                    onClick={() => navigate(`/board/${board._id}`)}
+                                    title={board.title}
+                                />
+                            })
+                        }
 
                     </Menu>
                 </MenuButton>
@@ -74,8 +105,9 @@ export function BoardHeader({ board, onSetFilterBy }) {
                         style={{ display: isFilterOn ? `block` : `none` }}>Cancel</button>
 
                     <input className="mobile-input-filter"
+                        onChange={handleChange}
                         placeholder="Search Board"
-                        type="text" name="txt" id="txt" />
+                        type="text" name="title" id="title" />
                 </div>
 
             </div>
@@ -89,7 +121,7 @@ export function BoardHeader({ board, onSetFilterBy }) {
                 />
                 <div className="spacer-header"></div>
                 <BoardFilter
-                    onSetFilterBy={onSetFilterBy}
+                    onSetFilterBy={onSetFilterBy.current}
                     board={board}
                 />
             </div>
