@@ -40,6 +40,7 @@
 
             @include for-wide-layout {
                 font-size: rem(24px);
+                height: 30px;
             }
         }
     }
@@ -51,17 +52,7 @@
 
 }
 
-.tab-list-border{
-    width: 1px;
-    background-color: $li-grey;
-    color: $li-grey;
-    height: 30px;
-    position: relative;
-    top: -32px;
-    left: -167px;
-    opacity: 100%;
-    font-size: 9px;
-}
+
 
 .task-main {
     text-align: center;

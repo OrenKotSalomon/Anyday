@@ -1,11 +1,11 @@
 .user-msg {
-    color:white;
+    color: white;
     padding: 10px;
     font-size: rem(14px);
     font-family: roboto-regular;
     position: fixed;
-    top:17%;
-    left:50%;
+    top: 35px;
+    left: 50%;
     background-color: grey;
     transform: translate(-50%, -20%);
     border-radius: 4px;
@@ -13,16 +13,34 @@
 }
 
 .user-msg button {
-    float:right;
-    border:0;
+    float: right;
+    border: 0;
     margin: 5px;
     cursor: pointer;
     background-color: transparent;
 }
 
-.user-msg.success {
+.user-msg.error,.user-msg.success {
     background-color: #258750;
+    line-height: 39px;
+    padding: 4px 8px;
+    padding-left: 15px;
+
+    button {
+        color: $main-bgc-white;
+        position: relative;
+        top: 1px;
+        left: 8px;
+    }
+
+    svg {
+        color: $main-bgc-white;
+        position: relative;
+        top: 8px;
+        right: 4px;
+    }
 }
+
 .user-msg.error {
-    background-color: lightpink;
+    background-color: #d83a52;
 }

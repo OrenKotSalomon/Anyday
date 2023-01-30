@@ -2,6 +2,9 @@ import { eventBus, showSuccessMsg } from "../services/event-bus.service.js"
 import { socketService, SOCKET_EVENT_REVIEW_ABOUT_YOU } from "../services/socket.service.js"
 
 import { useState, useEffect, useRef } from 'react'
+
+import {Icon} from 'monday-ui-react-core'
+import { Info, Close } from 'monday-ui-react-core/icons'
 export function UserMsg() {
 
   const [msg, setMsg] = useState(null)
@@ -35,7 +38,10 @@ export function UserMsg() {
   if (!msg) return <span></span>
   return (
     <section className={`user-msg ${msg.type}`}>
-      <button onClick={closeMsg}>x</button>
+      <button onClick={closeMsg}>
+      <Icon iconType={Icon.type.SVG} icon={Close} iconSize={14} />
+      </button>
+      <Icon iconType={Icon.type.SVG} icon={Info} iconSize={26} />
       {msg.txt}
     </section>
   )
