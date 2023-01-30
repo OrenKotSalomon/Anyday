@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.a8f4f840.css",
-    "main.js": "/static/js/main.39d40b9c.js",
+    "main.css": "/static/css/main.cb06f164.css",
+    "main.js": "/static/js/main.e0aefb0f.js",
     "static/media/Oren.jpg": "/static/media/Oren.56ebc4c02af778cb0177.jpg",
     "static/media/home-page-hero.jpg": "/static/media/home-page-hero.5745e65cf942d2634e4c.jpg",
     "static/media/hero-3.jpg": "/static/media/hero-3.7111c93c335f549a757e.jpg",
@@ -22,13 +22,12 @@
     "static/media/Figtree-Bold.ttf": "/static/media/Figtree-Bold.a8df5e99e8028be4dfe1.ttf",
     "static/media/Figtree-Regular.ttf": "/static/media/Figtree-Regular.083435b8ca5203a524c2.ttf",
     "static/media/Figtree-Light.ttf": "/static/media/Figtree-Light.8865564ba180c8f5caee.ttf",
-    "static/media/wm_icon.avif": "/static/media/wm_icon.b548b42c43c55fa43390.avif",
     "index.html": "/index.html",
-    "main.a8f4f840.css.map": "/static/css/main.a8f4f840.css.map",
-    "main.39d40b9c.js.map": "/static/js/main.39d40b9c.js.map"
+    "main.cb06f164.css.map": "/static/css/main.cb06f164.css.map",
+    "main.e0aefb0f.js.map": "/static/js/main.e0aefb0f.js.map"
   },
   "entrypoints": [
-    "static/css/main.a8f4f840.css",
-    "static/js/main.39d40b9c.js"
+    "static/css/main.cb06f164.css",
+    "static/js/main.e0aefb0f.js"
   ]
 }
