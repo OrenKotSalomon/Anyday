@@ -60,10 +60,10 @@ async function add(board) {
 
 async function update(board) {
     try {
-        const boardToSave = structuredClone(board)
+        const boardToSave = { ...board }
 
         delete boardToSave._id
-        // console.log('boardToSave:', boardToSave)
+        console.log('boardToSave:', boardToSave)
         // console.log('boardToSave:', boardToSave)
         // console.log('board:', board)
         const collection = await dbService.getCollection('board')
