@@ -11,12 +11,33 @@ const http = require('http').createServer(app)
 app.use(cookieParser())
 app.use(express.json())
 
+// res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+
 let vapidKeys = {
     publicKey: 'BDCiIgksnjwlagT8ybRRu1FFdXXm-xYVVnhWE6gIR-nQ3tN4T_r_rlydP2FLOLnV_Iz5V5FXRWGgQMDRiL43UIM',
     privateKey: 'cVqnlPZmw3G6no9SVVSLkUt2j-dd2T2A_73dJjUtWvQ'
 }
 
-webPush.setVapidDetails('mailto:harelcr7@gmail.com', vapidKeys.publicKey, vapidKeys.privateKey)
+// const keys = {
+//     publicKey:'BPY_RuGOwM90gBBl5uE - UNzg8ysDgpNnuvQopor1bSXBX1sEzpbcRvA5LDwNztEt7dgLXdLs_KlE4VeW6VGsMjg',
+//     privateKey: '4uKu_pMxZmJHmmrbGn7vMIb0FkGLmHKDdJwcKHWAhyg'
+// }
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.resolve(__dirname, 'public')))
+} else {
+    const corsOptions = {
+        origin: ['http://127.0.0.1:3000', 'http://localhost:3000'],
+        credentials: true
+    }
+    app.use(cors(corsOptions))
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+// webPush.setVapidDetails('mailto:harelcr7@gmail.com', vapidKeys.publicKey, vapidKeys.privateKey)
 
 app.post('/subscribe', (req, res) => {
 
@@ -30,18 +51,8 @@ app.post('/subscribe', (req, res) => {
 })
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.resolve(__dirname, 'public')))
-} else {
-    const corsOptions = {
-        origin: ['http://127.0.0.1:3000', 'http://localhost:3000'],
-        credentials: true
-    }
-    app.use(cors(corsOptions))
-}
 
 const authRoutes = require('./api/auth/auth.routes')
 const userRoutes = require('./api/user/user.routes')
