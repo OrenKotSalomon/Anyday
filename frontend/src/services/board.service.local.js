@@ -101,18 +101,18 @@ async function getById(boardId, filterBy = getDefaultFilter()) {
         let filteredGroups = filteredBoard.groups
         if (filterBy.title) {
             const regex = new RegExp(filterBy.title, 'i')
-            let check = filteredGroups.filter((group, idx) => {
+            let groupsToSet = filteredGroups.filter((group, idx) => {
                 if (group.title.match(regex)) return true
                 let tasks = group.tasks.filter(task => (task.title.match(regex)))
 
                 if (tasks.length) return filteredGroups[idx].tasks = tasks
             })
-            filteredBoard.groups = check
+            filteredBoard.groups = groupsToSet
         }
 
         if (filterBy.label.length) {
             const regex = new RegExp(filterBy.label, 'i')
-            let check = filteredGroups.filter((group, idx) => {
+            let groupsToSet = filteredGroups.filter((group, idx) => {
                 let tasks = group.tasks.filter(task => {
                     if (filterBy.label.includes(task.status) || filterBy.label.includes(task.priority) || filterBy.label.includes(task.labelStatus)) {
                         return true
@@ -121,36 +121,36 @@ async function getById(boardId, filterBy = getDefaultFilter()) {
                 })
                 if (tasks.length) return filteredGroups[idx].tasks = tasks
             })
-            filteredBoard.groups = check
+            filteredBoard.groups = groupsToSet
         }
         if (filterBy.sortBy === STATUS_PICKER) {
-            let check = filteredGroups.map(group => {
+            let groupsToSet = filteredGroups.map(group => {
                 group.tasks = group.tasks.sort((a, b) => a.status.localeCompare(b.status) * filterBy.desc)
                 return group
             })
-            filteredBoard.groups = check
+            filteredBoard.groups = groupsToSet
         }
 
         if (filterBy.sortBy === LABEL_STATUS_PICKER) {
-            let check = filteredGroups.map(group => {
+            let groupsToSet = filteredGroups.map(group => {
                 group.tasks = group.tasks.sort((a, b) => a.labelStatus.localeCompare(b.labelStatus) * filterBy.desc)
                 return group
             })
-            filteredBoard.groups = check
+            filteredBoard.groups = groupsToSet
         }
         if (filterBy.sortBy === PRIORITY_PICKER) {
-            let check = filteredGroups.map(group => {
+            let groupsToSet = filteredGroups.map(group => {
                 group.tasks = group.tasks.sort((a, b) => a.priority.localeCompare(b.priority) * filterBy.desc)
                 return group
             })
-            filteredBoard.groups = check
+            filteredBoard.groups = groupsToSet
         }
         if (filterBy.sortBy === TEXT_LABEL) {
-            let check = filteredGroups.map(group => {
+            let groupsToSet = filteredGroups.map(group => {
                 group.tasks = group.tasks.sort((a, b) => a.txt.localeCompare(b.txt) * filterBy.desc)
                 return group
             })
-            filteredBoard.groups = check
+            filteredBoard.groups = groupsToSet
         }
         //todo!!!
         // change sort method
