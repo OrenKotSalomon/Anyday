@@ -152,7 +152,7 @@ export function MyAnnie({ board, setfilterBy, setisAnnieOn, isAnnieOn }) {
                     })}
 
                     className="mic-modal"
-                    icon={faMicrophone} style={{ color: listening ? '#F52918' : '#424242' }} />
+                    icon={faMicrophone} style={{ color: listening ? '#F52918' : 'rgb(78 79 77)' }} />
 
                 <div className="white-circle"></div>
                 {listening && <div className="waves-container">
