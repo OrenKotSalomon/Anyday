@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 
-export function Notification() {
+export function NotificationCheck() {
 
     useEffect(() => {
         window.addEventListener('load', async () => {
@@ -23,9 +23,21 @@ export function Notification() {
         })
         console.log(JSON.stringify(push))
     }
+
+    function temp() {
+        Notification.requestPermission().then(prem => {
+            if (prem === 'granted') {
+                const notification = new Notification('Example', {
+                    body: 'HIIIIIII',
+                    data: {hello: 'world'},
+            
+                })
+            }
+        })
+    }
     return <section className='notification'>
 
-<button onClick={subscribe} >Subscribe !!!!!</button>
+<button onClick={temp} >Subscribe</button>
 
     </section>
 }
