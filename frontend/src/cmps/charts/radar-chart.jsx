@@ -56,6 +56,6 @@ export const data = {
   ],
 };
 
-export function RadarChart() {
+export function RadarChart({priorityData}) {
   return <Radar data={data} />;
 }
