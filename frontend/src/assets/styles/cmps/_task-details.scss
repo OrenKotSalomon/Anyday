@@ -8,6 +8,8 @@
     z-index: 101;
     // transition: .5s;
 
+
+
     img {
         width: 90%;
         margin: 19px auto;
@@ -16,7 +18,7 @@
 
     a.tab-inner {
 
-        border-right: 1px solid #e6e6e6;
+        // border-right: 1px solid #e6e6e6;
 
         svg {
             margin-right: 6px;
@@ -47,6 +49,18 @@
         padding-inline-start: 17px;
     }
 
+}
+
+.tab-list-border{
+    width: 1px;
+    background-color: $li-grey;
+    color: $li-grey;
+    height: 30px;
+    position: relative;
+    top: -32px;
+    left: -167px;
+    opacity: 100%;
+    font-size: 9px;
 }
 
 .task-main {

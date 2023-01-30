@@ -1,0 +1,114 @@
+.dashboard-cards-container {
+    display: flex;
+    min-width: 100%;
+    text-align: center;
+    flex-wrap: wrap;
+
+    .card-boards,
+    .card-groups,
+    .card-tasks {
+        padding: 40px 0;
+        border-radius: 10px;
+        width: 308px;
+        height: 208px;
+        margin: 10px;
+        min-width: 300px;
+        margin: 10px auto;
+
+        svg {
+            color: $main-color;
+        }
+    }
+
+    .card-boards {
+        background-color: rgb(209, 233, 252);
+        color: #061B64;
+    }
+
+    .card-groups {
+        background-color: rgb(208, 242, 255);
+        color: #04297A;
+    }
+
+    .card-tasks {
+        background-color: rgb(255, 247, 205);
+        color: #7A4F01;
+    }
+
+    .card-icon {
+        margin: auto auto 24px;
+        display: flex;
+        border-radius: 50%;
+        -webkit-box-align: center;
+        align-items: center;
+        width: 64px;
+        height: 64px;
+        -webkit-box-pack: center;
+        justify-content: center;
+        color: rgb(16, 57, 150);
+        background-image: linear-gradient(135deg, rgba(16, 57, 150, 0) 0%, rgba(16, 57, 150, 0.24) 100%);
+    }
+
+
+    .dash-board-card-counter {
+        font-size: 2rem;
+        font-weight: 700;
+        line-height: 1.5;
+        font-size: 1.5rem;
+        font-family: "Public Sans", sans-serif;
+    }
+
+    .dash-board-card-counter-by {
+        font-weight: 600;
+        line-height: 1.57143;
+        font-size: 0.875rem;
+        font-family: "Public Sans", sans-serif;
+        opacity: 0.72;
+    }
+
+}
+
+
+.dashboard-second-line-header {
+    font-family: roboto-regular;
+    text-align: center;
+}
+
+.dashboard-second-line {
+    min-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    .dashboard-status-polar {
+        background-color: rgb(249, 250, 251);
+        padding: 20px;
+        border-radius: 10px;
+        margin: 10px;
+        width: 100%;
+
+        @include for-narrow-layout {
+            width: 40%;
+        }
+    }
+
+    .dashboard-status-line {
+        background-color: rgb(249, 250, 251);
+        padding: 20px;
+        border-radius: 10px;
+        margin: 10px;
+        width: max-content;
+
+        @include for-narrow-layout {
+            width: 55%;
+        }
+
+        canvas {
+            position: relative;
+            @include for-narrow-layout {
+                top: 58px;
+            }
+        }
+    }
+
+
+}
