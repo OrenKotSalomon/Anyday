@@ -69,7 +69,7 @@ async function update(board) {
         const collection = await dbService.getCollection('board')
         // console.log('collectioncollectioncollectioncollection', collection);
         const test = await collection.findOne({ _id: ObjectId(board._id) }, { $set: boardToSave })
-        console.log('test:', test)
+
         await collection.updateOne({ _id: ObjectId(board._id) }, { $set: boardToSave })
         return board
     } catch (err) {
