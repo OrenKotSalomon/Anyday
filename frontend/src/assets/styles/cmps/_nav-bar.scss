@@ -187,13 +187,45 @@
   max-width: 40.5px;
   object-fit: contain;
   top: 6px;
+  filter: brightness(95%);
+}
+
+.nav-bar-board-logo-container {
+  background-color: rgba(0, 0, 0, 50%);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.nav-user-hr,
+.nav-logo-hr {
+  opacity: 0.25;
+  margin-top: 18px;
+  width: 75%;
+}
+
+.nav-user-hr {
+  position: absolute;
+  bottom: 54px;
+  left: 8px;
+}
+
+.nav-bar-triangle{
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid #f5f6fa;
+  position: absolute;
+  left: 58px;
+  top: 76px;
 }
 
 .nav-bar-board-logo {
-  max-width: 32px;
+  min-width: 36px;
   position: relative;
-  top: 2px;
-  mix-blend-mode: plus-lighter;
+  // top: 2px;
+  top: 10px;
+  // mix-blend-mode: plus-lighter;
 }
 
 .nav-bar-avatar {
@@ -205,9 +237,9 @@
 }
 
 .nav-bar-avatar-img {
-  color: $main-bgc-white;
-  background-color: #1c4f92;
-  border: 2px solid $main-bgc-white;
+  // color: $main-bgc-white;
+  // background-color: #1c4f92;
+  // border: 2px solid $main-bgc-white;
   line-height: 40px;
   font-size: rem(22px);
   position: absolute;

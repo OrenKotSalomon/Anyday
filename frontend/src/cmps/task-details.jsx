@@ -213,7 +213,7 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                     Activity Log
                 </Tab>
             </TabList>
-
+<span className="tab-list-border">.</span>
             <hr className="task-details-hr"></hr>
             {tabList === 0 ? <div>
                 {!isAddComment && <div className='task-details-open-input-btn-container'><button onClick={() => setAddComment(!isAddComment)} className='task-details-open-input-btn'>Write an update...</button></div>}
