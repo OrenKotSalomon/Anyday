@@ -299,6 +299,7 @@
   left: 40px;
 }
 
+//not working on the render
 @mixin arrow-up-modal($num) {
 
   position: absolute;
@@ -307,8 +308,8 @@
   transform: translate(-50%, 0);
   top: -9px;
   left: $num;
-  border-left: 10px solid #ffffff00;
-  border-right: 10px solid #ffffff00;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
   border-bottom: 10px solid rgb(255, 255, 255);
   border-color: $border-cell;
 
