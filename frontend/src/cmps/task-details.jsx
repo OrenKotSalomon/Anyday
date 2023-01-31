@@ -6,6 +6,7 @@ import { updateTask } from '../store/board.actions';
 import { TextEditor } from './text-editor.jsx';
 import { CHANGE_TASK_TITLE, ADD_TASK_COMMENT, DELETE_TASK_COMMENT, PIN_TASK_COMMENT, UNPIN_TASK_COMMENT } from '../services/board.service.local.js';
 import { userService } from '../services/user.service.js'
+import { useSelector } from 'react-redux'
 
 import { TabList, Tab, EditableHeading, Icon, MenuButton, Menu, MenuItem, } from 'monday-ui-react-core'
 import { Home, Time, Delete, Gallery, Emoji, Drag, Close, Pin, Team } from 'monday-ui-react-core/icons'
@@ -13,7 +14,7 @@ import { TaskActivity } from "./task-activity";
 
 export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, group, setIsDndModeDisabled }) {
 
-    const [loggedInUser, setLoggedInUser] = useState(userService.getLoggedinUser())
+    // const [loggedInUser, setLoggedInUser] = useState(userService.getLoggedinUser())
     const [isAddComment, setAddComment] = useState(false)
     const [newTitle, setNewTitle] = useState(task.title)
     const [newCommentTxt, setComment] = useState('')
@@ -23,6 +24,8 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
     const [taskCommentsSize, SetTaskCommentsSize] = useState(44)
     const [initX, setX] = useState('')
     const [tabList, setTabList] = useState(0)
+    const loggedInUser = useSelector(storeState => storeState.userModule.user)
+
 
     var mobileLayout = window.matchMedia("(min-width: 320px)")
     var tabletLayout = window.matchMedia("(min-width: 700px)")

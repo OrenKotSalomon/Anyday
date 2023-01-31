@@ -85,7 +85,7 @@ export function NavBar() {
             {getAvatarImg()}
             <hr  className='nav-user-hr'/>
             {loggedInUser && <div className='miniUserPanel' style={{ display: `${toggleUserModal}` }}>
-                wellcome {loggedInUser.fullname}
+                Welcome {loggedInUser.fullname}
                 <div>{getAvatarImg()}</div>
                 {imgSrc && <img className='uploaded-img' src={`${imgSrc}`} alt="" />}
                 <span className='task-details-input-upload'><Icon className='task-details-header-time-icon' iconType={Icon.type.SVG} icon={Gallery} iconLabel="my svg icon" iconSize={18} />Upload profile image</span>
