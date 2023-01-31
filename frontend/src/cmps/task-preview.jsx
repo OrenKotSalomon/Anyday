@@ -8,7 +8,6 @@ import { CHANGE_TASK_TITLE, DELETE_TASK, DUPLICATE_TASK, UPDATE_TASK_CHECKED, UP
 
 import { MenuButton, Menu, MenuItem, Icon, EditableHeading, Counter } from 'monday-ui-react-core'
 import { Open, Duplicate, Delete, AddUpdate, Update } from 'monday-ui-react-core/icons'
-import { utilService } from "../services/util.service";
 
 export function TaskPreview({ task, board, group, openModal, provided, snapshot, setIsDndModeDisabled, setIsCheckedShow }) {
 
@@ -29,11 +28,9 @@ export function TaskPreview({ task, board, group, openModal, provided, snapshot,
         const data = { taskId: taskToDelete.id, groupId: group.id }
 
         updateTask(board, data, DELETE_TASK)
-        showSuccessMsg(`Task deleted successfully taskId:${data.id} `)
-        // console.log('data', data);
+        showSuccessMsg(`Task deleted successfully`)
     }
 
-    ///////////////////// TODO ////////////////////////
     function handleChange({ target }) {
         let { value, name: field, type } = target
         value = type === 'number' ? +value : value
