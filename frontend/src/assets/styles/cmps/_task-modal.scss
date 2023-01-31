@@ -17,7 +17,7 @@
         border-left: 10px solid transparent;
         border-right: 10px solid transparent;
         border-bottom: 10px solid rgb(255, 255, 255);
-        border-color: $border-cell;
+        // border-color: $border-cell;
 
         @include for-narrow-layout {
 
@@ -30,7 +30,7 @@
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
             border-bottom: 10px solid rgb(255, 255, 255);
-            border-color: $border-cell;
+            // border-color: $border-cell;
         }
     }
 

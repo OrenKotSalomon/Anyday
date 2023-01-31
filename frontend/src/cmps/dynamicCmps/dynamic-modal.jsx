@@ -70,7 +70,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
         case STATUS_PICKER:
             return <div onClick={() => setIsModalOpen(false)} className="status-picker-container" style={{ left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
 
-                <div className="arrow-up"></div>
+                <div className="arrow-up arrow-up-modal"></div>
                 <div className="status-picker-view">
                     {cmp.info.map((status, idx) => {
                         return <button onClick={() => onStatusPick(status.label)} key={idx}
@@ -85,7 +85,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
         case LABEL_STATUS_PICKER:
             return <div onClick={() => setIsModalOpen(false)} className="status-picker-container" style={{ left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
 
-                <div className="arrow-up"></div>
+                <div className="arrow-up arrow-up-modal"></div>
                 <div className="status-picker-view">
                     {cmp.info.map((labelStatus, idx) => {
 
@@ -145,7 +145,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
         case DATE_PICKER:
 
             return <div className="date-picker-view" style={{ left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
-                <div className="arrow-up"></div>
+                <div className="arrow-up arrow-up-modal"></div>
                 <DialogContentContainer className={'styles.datepickerDialogContentContainer'}>
 
                     <DatePicker data-testid="date-picker" onPickDate={getDate} />
@@ -154,7 +154,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
             </div>
         case PRIORITY_PICKER:
             return <div onClick={() => setIsModalOpen(false)} className="status-picker-container" style={{ left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
-                <div className="arrow-up"></div>
+                <div className="arrow-up arrow-up-modal"></div>
                 <div className="status-picker-view">
                     {cmp.info.map((priority, idx) => {
                         return <button onClick={() => onPriorityPick(priority.label)} key={idx}

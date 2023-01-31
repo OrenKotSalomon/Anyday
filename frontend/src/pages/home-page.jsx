@@ -63,11 +63,13 @@ export function HomePage() {
 
 
                 <div className='home-page-login-signup-container'>
-                <span className="home-page-login-signup-link"> Welcome!</span>
+                {loggedInUser?<span className="home-page-login-signup-link"> Welcome {loggedInUser.fullname}</span>
+                    :
+                    (<span><span className="home-page-login-signup-link"> Welcome!</span>
                     <Link className='home-page-login-signup-link' to={`/login`}>
                         Login
                         <Icon iconType={Icon.type.SVG} icon={LogIn} iconSize={20} />
-                    </Link>
+                    </Link></span>)}
                     
                     {/* <Link className='home-page-login-signup-link' to={`/signup`}> Signup </Link> */}
                     <Link className='home-page-start-nav' to={`/board/${boards[0]._id}`}>
