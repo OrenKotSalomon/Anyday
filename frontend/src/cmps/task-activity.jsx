@@ -129,7 +129,7 @@ export function TaskActivity({ task }) {
                             iconType={Icon.type.SVG} icon={Time} iconLabel="my svg icon" iconSize={14} />
                         {utilService.time_ago(activ.time)}
                     </span>
-                    <img className='activity-by-avatar' src={activ.byUser?.imgUrl ? activ.byUser.imgUrl : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqOplc5fcAaHwZ-1SD2Az_1Fp9-x1QDCt6-w&usqp=CAU'} alt="" />
+                    <img className='activity-by-avatar' src={activ.byUser?.imgUrl ? activ.byUser.imgUrl : 'https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=5642366172555987&height=50&width=50&ext=1677684563&hash=AeRtHaLPzcN5dY_QQcA'} alt="" />
                     <span className="activity-by-task">{task.title}</span>
                 </div>
 

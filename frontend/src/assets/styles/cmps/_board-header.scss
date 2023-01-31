@@ -423,9 +423,11 @@
   p {
     margin: 0;
     padding-bottom: 5px;
+    font-size: rem(14px);
   }
-
+  
   .text-container {
+    font-size: rem(16px);
     padding-top: 10px;
     padding-bottom: 10px;
 
@@ -467,7 +469,7 @@
   color: $main-bgc-white;
   position: absolute;
   right: 20px;
-  top: 20px;
+  top: 27px;
 
   transition: 0.3s;
   color: $icon-color;
@@ -482,7 +484,7 @@
   color: $main-bgc-white;
   position: absolute;
   right: 51px;
-  top: 20px;
+  top: 27px;
   transition: 0.3s;
   cursor: pointer;
   color: $icon-color;
@@ -508,7 +510,7 @@
   cursor: pointer;
   position: absolute;
   right: 84px;
-  top: 18px;
+  top: 25px;
   color: $icon-color;
 
   &:hover {

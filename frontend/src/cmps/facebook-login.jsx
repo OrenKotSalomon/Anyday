@@ -53,7 +53,7 @@ export function LoginFaceBook() {
         const ACCESS_TOKEN = response.authResponse.accessToken
         try {
             const userData = await axios.get(`https://graph.facebook.com/me?fields=name,email,picture&access_token=${ACCESS_TOKEN}`)
-            const FBuser = { isSocialMediaLogin: true, email: userData.data.email, username: '', password: 'social-media-pw', fullname: userData.data.name, imgUrl: userData.data.picture.data.url ? userData.data.picture.data.url : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqOplc5fcAaHwZ-1SD2Az_1Fp9-x1QDCt6-w&usqp=CAU' }
+            const FBuser = { isSocialMediaLogin: true, email: userData.data.email, username: '', password: 'social-media-pw', fullname: userData.data.name, imgUrl: userData.data.picture.data.url ? userData.data.picture.data.url : 'https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=10228639569717408&height=50&width=50&ext=1677684524&hash=AeSzD8dsx8BSqcN34cg' }
             if (DBusers.find(user => user.fullname === FBuser.fullname)) {
                 // console.log('fb user login:', FBuser)
                 userService.login(FBuser)

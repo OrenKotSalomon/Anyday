@@ -64,7 +64,7 @@ export function DynamicCmp({ cmp, info, openModal, handleChange }) {
                 onClick={(ev) => openModal(ev, { task: cmp.task, groupId: cmp.groupId }, MEMEBER_PICKER)} >
                 {cmp.task.members.length > 0 ? <AvatarGroup size={Avatar.sizes.SMALL} type={Avatar.types.IMG} max={2}>
                     {cmp.task.members.map((member) =>
-                        <Avatar className='member-avatar-img' key={member._id + '' + Math.random(9)} type={Avatar.types.IMG} src={member.imgUrl !== '' ? member.imgUrl : `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqOplc5fcAaHwZ-1SD2Az_1Fp9-x1QDCt6-w&usqp=CAU`} ariaLabel={member?.fullname} />
+                        <Avatar className='member-avatar-img' key={member._id + '' + Math.random(9)} type={Avatar.types.IMG} src={member.imgUrl !== '' ? member.imgUrl : `https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=10228639569717408&height=50&width=50&ext=1677684524&hash=AeSzD8dsx8BSqcN34cg`} ariaLabel={member?.fullname} />
                     )}
                 </AvatarGroup>
                     : <span className='empty-member-container' >
