@@ -486,6 +486,7 @@
   transition: 0.3s;
   cursor: pointer;
   color: $icon-color;
+
   &:hover {
     color: #44444d;
   }
@@ -509,6 +510,7 @@
   right: 84px;
   top: 18px;
   color: $icon-color;
+
   &:hover {
     color: #44444d;
   }
@@ -536,5 +538,15 @@
 }
 
 .arrow-top {
-  @include arrow-up-modal(23%);
+  // @include arrow-up-modal();
+  position: absolute;
+  width: 0;
+  height: 0;
+  transform: translate(-50%, 0);
+  top: -9px;
+  left: 23%;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid rgb(255, 255, 255);
+  border-color: $border-cell;
 }

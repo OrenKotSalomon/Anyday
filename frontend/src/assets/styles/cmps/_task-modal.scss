@@ -7,11 +7,30 @@
     z-index: 100;
 
     .arrow-up {
-        @include arrow-up-modal(85%);
+        // @include arrow-up-modal(85%);
+        position: absolute;
+        width: 0;
+        height: 0;
+        transform: translate(-50%, 0);
+        top: -9px;
+        left: 85%;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid rgb(255, 255, 255);
+        border-color: $border-cell;
 
         @include for-narrow-layout {
 
-            @include arrow-up-modal(50%);
+            position: absolute;
+            width: 0;
+            height: 0;
+            transform: translate(-50%, 0);
+            top: -9px;
+            left: 50%;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid rgb(255, 255, 255);
+            border-color: $border-cell;
         }
     }
 
@@ -59,7 +78,16 @@
     }
 
     .arrow-up {
-        @include arrow-up-modal(89%)
+        position: absolute;
+        width: 0;
+        height: 0;
+        transform: translate(-50%, 0);
+        top: -9px;
+        left: 89%;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid rgb(255, 255, 255);
+        border-color: $border-cell;
     }
 
     @include for-narrow-layout {
