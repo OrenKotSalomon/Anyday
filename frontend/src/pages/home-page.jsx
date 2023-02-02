@@ -25,9 +25,11 @@ import { Templates } from '../cmps/templates.jsx'
 
 
 export function HomePage() {
-    const loggedInUser = userService.getLoggedinUser()
+    // const loggedInUser = userService.getLoggedinUser()
     const boards = useSelector((storeState) => storeState.boardModule.boards)
     const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
+    const loggedInUser = useSelector(storeState => storeState.userModule.user)
+
 
     useEffect(() => {
         loadBoards()

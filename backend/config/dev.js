@@ -1,4 +1,5 @@
 module.exports = {
-  dbURL: 'mongodb+srv://harelnatan:harelnatan7@cluster0.fmxlsbf.mongodb.net/?retryWrites=true&w=majority',
+  dbURL: process.env.DB_KEY,
   dbName: 'anyday_db'
 }
+'../'
