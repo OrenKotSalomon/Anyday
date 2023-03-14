@@ -64,9 +64,8 @@ export function NavBar() {
     }
 
     function getAvatarImg() {
-        // console.log('img',imgSrc)
         return (<img className='nav-bar-avatar-img' onClick={onClickUserAvatar}
-            src={imgSrc === undefined ? 'https://static-00.iconduck.com/assets.00/profile-user-icon-256x256-zhsk04ey.png' : imgSrc }alt="" />)
+            src={imgSrc === undefined ? 'https://static-00.iconduck.com/assets.00/profile-user-icon-256x256-zhsk04ey.png' : imgSrc} alt="" />)
     }
 
     return <div className='side-bar-container'><header className="nav-bar">
@@ -75,15 +74,15 @@ export function NavBar() {
                 <div className="nav-a-container">
                     <NavLink to='/'><img className='nav-bar-logo' src={logo} style={{ minWidth: '55px' }} /></NavLink>
                 </div>
-                <hr  className='nav-logo-hr'/>
+                <hr className='nav-logo-hr' />
                 <div className="nav-a-container">
                     {/* <NavLink to='/board/'><span className='nav-bar-board-logo-container'>< img className='nav-bar-board-logo' src={wm_icon} style={{ maxWidth: '30px' }} /></span></NavLink> */}
                     <NavLink to='/board/'>< img className='nav-bar-board-logo' src={wm_icon} style={{ maxWidth: '30px' }} /></NavLink>
-                <div className='nav-bar-triangle'></div>
+                    <div className='nav-bar-triangle'></div>
                 </div>
             </div>
             {getAvatarImg()}
-            <hr  className='nav-user-hr'/>
+            <hr className='nav-user-hr' />
             {loggedInUser && <div className='miniUserPanel' style={{ display: `${toggleUserModal}` }}>
                 Welcome {loggedInUser.fullname}
                 <div>{getAvatarImg()}</div>

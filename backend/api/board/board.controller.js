@@ -46,7 +46,6 @@ async function updateBoard(req, res) {
     const board = req.body
 
     const updatedBoard = await boardService.update(board)
-    console.log('updatedBoardupdatedBoard', updatedBoard);
 
     res.json(updatedBoard)
   } catch (err) {

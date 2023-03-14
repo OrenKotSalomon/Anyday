@@ -23,7 +23,6 @@ export function TaskCard({ task, group, board, snapshot }) {
 
         updateTask(board, data, DELETE_TASK)
         showSuccessMsg(`Task deleted successfully taskId:${data.id} `)
-        // console.log('data', data);
     }
 
 
@@ -92,11 +91,11 @@ export function TaskCard({ task, group, board, snapshot }) {
         </div>
 
         {isOpenDetails && <TaskDetails
-                board={board}
-                task={task}
-                group={group}
-                isOpenDetails={isOpenDetails}
-                setIsOpenDetails={setIsOpenDetails} />}
+            board={board}
+            task={task}
+            group={group}
+            isOpenDetails={isOpenDetails}
+            setIsOpenDetails={setIsOpenDetails} />}
 
     </section>
 

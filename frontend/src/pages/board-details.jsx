@@ -49,7 +49,6 @@ export function BoardDetails() {
 
     function onUpdateTaskLabel(type, data, labelPick) {
         data.labelPick = labelPick
-        console.log(data);
         switch (type) {
             case UPDATE_TASK_STATUS:
                 return updateTask(board, data, UPDATE_TASK_STATUS)
@@ -146,20 +145,15 @@ export function BoardDetails() {
             showSuccessMsg(`successfully deleted ${checkIfTaskChecked()} tasks`)
         } catch (error) {
             showErrorMsg('Couldn\'t delete tasks')
-            console.log(error);
         }
 
     }
 
     function onMoveTasks(ev, groupId) {
-        console.log(groupId);
         let boardToUpdate = structuredClone(board)
         let checkedTasks = boardToUpdate.groups.map(group => {
             return group.tasks.filter(task => task.isChecked)
         })
-        console.log(checkedTasks);
-        console.log('boardToUpdate', boardToUpdate);
-        console.log('board', board);
         // if (!checkedTasks[0].length) return
         updateGroup(board, { groupId, tasks: checkedTasks.flat(1) }, MOVE_TASK_TO_GROUP)
     }

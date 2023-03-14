@@ -77,13 +77,12 @@ async function update(user) {
         const prevUser = await getById(user._id)
         prevUser.imgUrl = user.imgUrl
         // peek only updatable properties
-         const userToSave = prevUser
+        const userToSave = prevUser
         // {
         //     _id: ObjectId(user._id), // needed for the returnd obj
         //     fullname: user.fullname,
         //     imgUrl: user.imgUrl,
         // }
-        // console.log('usertosave......................' ,userToSave)
         const collection = await dbService.getCollection('user')
         await collection.updateOne({ _id: userToSave._id }, { $set: userToSave })
         return userToSave

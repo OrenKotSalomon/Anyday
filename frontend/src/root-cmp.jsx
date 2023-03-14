@@ -9,8 +9,6 @@ import { SignUp } from './pages/sign-up'
 import { UserMsg } from './cmps/user-msg'
 import { Kanban } from './pages/kanban'
 import { Dashboard } from './pages/dashboard'
-import { Test } from './pages/MyAnnie'
-import { Notification, NotificationCheck } from './cmps/notification'
 
 export function RootCmp() {
 
@@ -26,7 +24,6 @@ export function RootCmp() {
                 <Route element={<SignUp />} path="/signup" />
             </Routes>
         </main>
-        {/* <NotificationCheck /> */}
         <UserMsg />
     </div>
 }

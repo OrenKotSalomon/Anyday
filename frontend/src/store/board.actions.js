@@ -68,10 +68,8 @@ export async function removeBoard(boardId) {
 
 export async function addBoard(board) {
     try {
-        console.log('board', board);
 
         const savedBoard = await boardService.save(board)
-        console.log('savedBoard', savedBoard);
         store.dispatch(getActionAddboard(savedBoard))
         return savedBoard
     } catch (err) {
@@ -96,14 +94,10 @@ export async function updateBoard(board, data, type) {
 export async function updateGroup(board, data, type) {
     try {
         const boardToUpdate = await boardService.updateGroupsService(board, data, type)
-        console.log('boardToUpdate', boardToUpdate);
 
         store.dispatch(getActionUpdateboard(boardToUpdate))
         const savedBoard = await boardService.save(boardToUpdate)
         socketService.emit(SOCKET_EMIT_UPDATE_BOARD, savedBoard._id)
-        console.log('savedBoardsavedBoard', savedBoard);
-        console.log('boardToUpdateboardToUpdate', boardToUpdate);
-
         return savedBoard
     } catch (err) {
         console.log('Cannot save board', err)
@@ -117,12 +111,10 @@ export async function updateTask(board, data, type) {
         store.dispatch(getActionUpdateboard(boardToUpdate))
         const savedBoard = await boardService.save(boardToUpdate)
         socketService.emit(SOCKET_EMIT_UPDATE_BOARD, savedBoard._id)
-        console.log('savedBoard', savedBoard);
 
         return savedBoard
     } catch (err) {
         console.log('Cannot save board', err)
-        console.log('Cannot save board222', err.message)
         throw err.message
     }
 }
@@ -174,7 +166,6 @@ export function handleOnDragEnd(res, data) {
             const newOrderedLabels = data.cmpsOrder
             const [reorderedLabel] = newOrderedLabels.splice(res.source.index, 1)
             newOrderedLabels.splice(res.destination.index, 0, reorderedLabel)
-            console.log('newOrderedLabels:', newOrderedLabels)
             return updateBoard(board, newOrderedLabels, ON_DRAG_LABEL)
         case 'statuses-list':
             const newOrderedStatuses = data.statuses
@@ -190,7 +181,6 @@ export function handleOnDragEnd(res, data) {
                 taskToUpdate.status = destStatus.label
             } else {
                 const status = board.statuses.find(status => status.id === draggedFromId)
-                console.log('status:', status)
                 const [removed] = status.splice(source.index, 1)
                 status.splice(destination.index, 0, removed)
             } return updateBoard(board, board.groups, ON_DRAG_CARD)

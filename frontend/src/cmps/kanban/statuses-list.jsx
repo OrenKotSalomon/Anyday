@@ -12,7 +12,6 @@ export function StatusesList({ status, board, provided }) {
 
     function onAddGroupTask() {
         if (!newTaskTitle) throw new Error('Task title is empty')
-        // console.log('newTaskTitle:', newTaskTitle)
         updateGroup(board, { group: board.groups[0], newTaskTitle, status: status.label }, ADD_GROUP_TASK)
         setNewTaskTitle('')
     }
@@ -45,7 +44,7 @@ export function StatusesList({ status, board, provided }) {
                                             {...provided.draggableProps}
                                             {...provided.dragHandleProps}>
 
-                                            <TaskCard task={task} group={group} board={board} snapshot={snapshot}/>
+                                            <TaskCard task={task} group={group} board={board} snapshot={snapshot} />
                                         </div>
 
                                     }

@@ -30,7 +30,6 @@ export function SignUp() {
     async function onSignup(ev = null) {
         if (ev) ev.preventDefault()
         if (!credentials.email || !credentials.password || !credentials.fullname) return
-        // console.log('credentials:', credentials)
         try {
             const user = await userService.signup(credentials)
             showSuccessMsg(`Welcome ${user.fullname}`)
@@ -39,14 +38,14 @@ export function SignUp() {
         }
         catch (err) {
             // showErrorMsg('OOps try again', err)
-            console.log('error: ',err)
+            console.log('error: ', err)
         }
     }
 
     return (
         <section className='signup'>
             <Link to='/' className="top-header">
-            <div className='login-signup-logo'>  <img className="login-logo" src={logo} alt="logo" /> Anyday<span>.com</span> </div>
+                <div className='login-signup-logo'>  <img className="login-logo" src={logo} alt="logo" /> Anyday<span>.com</span> </div>
             </Link>
             <div className="router-wrapper">
                 <div className="email-password-container">
@@ -100,7 +99,7 @@ export function SignUp() {
                                     <button type="submit" className="next-btn">
                                         <div className="next-wrapper">Sign up</div>
                                         <div className="right-arrow-icon">
-                                        <Icon iconType={Icon.type.SVG} icon={MoveArrowRight} iconSize={18} />
+                                            <Icon iconType={Icon.type.SVG} icon={MoveArrowRight} iconSize={18} />
                                         </div>
                                     </button>
                                 </div>

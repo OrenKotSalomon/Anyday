@@ -57,7 +57,6 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
         setComment('')
         setImg('')
         setAddComment(!isAddComment)
-        // console.log(data)
     }
 
     function onDeleteComment(comment, isPinned = false) {
@@ -207,16 +206,16 @@ export function TaskDetails({ task, isOpenDetails, setIsOpenDetails, board, grou
                 onChange={handleChange}
                 type={EditableHeading.types.h4}
                 value={newTitle} />
-            
-                <TabList className='task-main-nav'>
-                    <Tab onClick={(ev) => setTabList(ev)}>
-                        <Icon iconType={Icon.type.SVG} icon={Home} iconLabel="my svg icon" iconSize={16} /> Updates
-                    </Tab>
-                    <Tab onClick={(ev) => setTabList(ev)}>
-                        Activity Log
-                    </Tab>
-                </TabList>
-         
+
+            <TabList className='task-main-nav'>
+                <Tab onClick={(ev) => setTabList(ev)}>
+                    <Icon iconType={Icon.type.SVG} icon={Home} iconLabel="my svg icon" iconSize={16} /> Updates
+                </Tab>
+                <Tab onClick={(ev) => setTabList(ev)}>
+                    Activity Log
+                </Tab>
+            </TabList>
+
             <hr className="task-details-hr"></hr>
             {tabList === 0 ? <div>
                 {!isAddComment && <div className='task-details-open-input-btn-container'><button onClick={() => setAddComment(!isAddComment)} className='task-details-open-input-btn'>Write an update...</button></div>}

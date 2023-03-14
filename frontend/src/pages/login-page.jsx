@@ -21,7 +21,6 @@ export function Login() {
         try {
             const users = await userService.getUsers()
             setUsers(users)
-            // console.log('users',users)
         }
         catch (err) {
             console.error('Error:', err)
@@ -31,7 +30,7 @@ export function Login() {
     return (
         <section className='login-page'>
             <Link to='/' className="top-header">
-              <div className='login-signup-logo'>  <img className="login-logo" src={logo} alt="logo" /> Anyday<span>.com</span> </div>
+                <div className='login-signup-logo'>  <img className="login-logo" src={logo} alt="logo" /> Anyday<span>.com</span> </div>
             </Link>
             <LoginDynamicCmp
                 users={users}
@@ -43,10 +42,10 @@ export function Login() {
     )
 }
 
-export function LoginDynamicCmp(props , users) {
+export function LoginDynamicCmp(props, users) {
     switch (props.loginPaging) {
         case "login-step-1":
-            return <LoginStepOne props={{ ...props }} users={users}/>;
+            return <LoginStepOne props={{ ...props }} users={users} />;
         case "login-step-2":
             return <LoginStepTwo props={{ ...props }} />;
     }

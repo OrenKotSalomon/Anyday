@@ -8,7 +8,6 @@ export const templateService = {
 }
 
 function getDevTemplate() {
-    console.log('hiiiiiii');
     return {
         "title": "Development Board",
         "isStarred": false,

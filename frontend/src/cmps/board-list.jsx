@@ -10,12 +10,8 @@ import { useEffect } from "react"
 export function BoardList({ onDuplicateBoard, onRemoveBoard }) {
     const navigate = useNavigate()
     const boards = useSelector((storeState) => storeState.boardModule.boards)
-    // useEffect(() => {
-    //     loadBoards()
-    // }, [])
+
     function onMenuClick(ev) {
-        // console.log('ev:', ev)
-        // console.log('Menu Click');
         ev.preventDefault()
         ev.stopPropagation()
     }
