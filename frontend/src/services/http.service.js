@@ -1,7 +1,7 @@
 import Axios from 'axios'
 
 const BASE_URL = process.env.NODE_ENV === 'production'
-    ? '/api/'
+    ? 'https://https://anyday-za1z.onrender.com/api/'
     : '//localhost:3030/api/'
 
 var axios = Axios.create({
