@@ -6,7 +6,7 @@ import { DialogContentContainer, DatePicker, Avatar, Search, Icon } from 'monday
 import { CloseSmall } from 'monday-ui-react-core/icons';
 
 import Harel from '../../assets/img/Harel.jpg'
-import Yossi from '../../assets/img/Yossi.jpg'
+import Yossi from '../../assets/img/yossi.jpg'
 import Oren from '../../assets/img/Oren.jpg'
 
 import { userService } from '../../services/user.service.js'

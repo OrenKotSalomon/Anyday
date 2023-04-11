@@ -3,18 +3,15 @@ import { DATE_PICKER, MEMEBER_PICKER, STATUS_PICKER, PRIORITY_PICKER, TEXT_LABEL
 import { Avatar, AvatarGroup, Icon } from 'monday-ui-react-core';
 import { TextCopy, PersonRound, AddSmall } from 'monday-ui-react-core/icons';
 import dayjs from 'dayjs';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
+
 import { utilService } from '../../services/util.service';
 import guestAvatar from '../../assets/img/guest-avatar.png'
 
 // import { Avatar, AvatarGroup, StoryDescription } from 'monday-ui-react-core'
 
-
-
 export function DynamicCmp({ cmp, info, openModal, handleChange }) {
 
-    const inputPlaceholder = <Icon iconType={Icon.type.SVG} ignoreFocusStyle={true} icon={TextCopy} iconSize={19} />
+    // const inputPlaceholder = <Icon iconType={Icon.type.SVG} ignoreFocusStyle={true} icon={TextCopy} iconSize={19} />
 
     function getLabelColor(type) {
 
