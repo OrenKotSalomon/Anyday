@@ -9,7 +9,7 @@ import { Activity, Favorite, Info, Home } from "monday-ui-react-core/icons";
 
 import Harel from '../assets/img/Harel.jpg'
 import Oren from '../assets/img/Oren.jpg'
-import Yossi from '../assets/img/Yossi.jpg'
+import Yossi from '../assets/img/yossi.jpg'
 
 export function BoardView({ board }) {
     const [newTitle, setNewTitle] = useState(board.title)
@@ -94,8 +94,8 @@ export function BoardView({ board }) {
                 </div>
             </div>
             <div className='board-header-description'>
-            {/* // Board Dexc */}
-                <div className='board-header-txt'>Final Project For Coding Academy</div> 
+                {/* // Board Dexc */}
+                <div className='board-header-txt'>Final Project For Coding Academy</div>
                 <div className='description-modal'>See More</div>
             </div>
             <div className="header-tablist">
@@ -103,12 +103,12 @@ export function BoardView({ board }) {
                 <div className='tablist-container'>
 
                     <div className='main-table-txt'>
-                    <NavLink className='main-table-a' to={`/board/${board._id}`} ><Icon iconType={Icon.type.SVG} icon={Home} iconSize={16} style={{ marginRight: '5px' }} />
-                        Main Table
+                        <NavLink className='main-table-a' to={`/board/${board._id}`} ><Icon iconType={Icon.type.SVG} icon={Home} iconSize={16} style={{ marginRight: '5px' }} />
+                            Main Table
 
-                    {/* <div className='blue-line'></div> */}
-                    </NavLink>
-                    </div>  
+                            {/* <div className='blue-line'></div> */}
+                        </NavLink>
+                    </div>
                     <span>|</span>
                     <div className='kanban-a'>
                         <NavLink to={`/${board._id}/views/kanban`} >Kanban</NavLink>
