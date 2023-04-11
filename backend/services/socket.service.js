@@ -35,6 +35,7 @@ function setupSocketAPI(http) {
             // emits to all sockets:
             // gIo.emit('chat addMsg', msg)
             // emits only to sockets in the same room
+
             socket.broadcast.to(socket.myTopic).emit('event-update-board', board)
         })
 
