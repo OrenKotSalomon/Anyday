@@ -16,6 +16,7 @@ import { TaskDetails } from '../task-details'
 
 export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
     const [users, setUsers] = useState([])
+
     useEffect(() => {
         loadUsers()
     }, [])
@@ -38,6 +39,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
         label: "Oren Kot",
         leftAvatar: Oren
     }]
+
     function getDate(date) {
         setIsModalOpen(false)
         onUpdateTaskLabel(UPDATE_TASK_DATE, cmp.data, dayjs(date).unix())
@@ -125,24 +127,7 @@ export function DynamicModal({ cmp, setIsModalOpen, onUpdateTaskLabel }) {
                     </DialogContentContainer>
                 </div>
             </div>
-
-            {/* <div className="monday-style-story-chips_lable">Suggested people</div>
-<div className="monday-style-story-chips_search">
-    <div className="monday-style-story-chips_inline-container" key="cont-1">
-        <Avatar size={Avatar.sizes.MEDIUM} src={Oren} type={Avatar.types.IMG} />
-        <span className="monday-style-story-chips_name">
-            Oren
-        </span>
-    </div>
-    <div className="monday-style-story-chips_inline-container" key="cont-2">
-        <Avatar size={Avatar.sizes.MEDIUM} backgroundColor={Avatar.colors.DARK_PURPLE} text="LC" type={Avatar.types.TEXT} />
-
-    </div>
-
-</div> */}
-
         case DATE_PICKER:
-
             return <div className="date-picker-view" style={{ left: cmp.pos.left, top: cmp.pos.top, position: 'absolute', }}>
                 <div className="arrow-up arrow-up-modal"></div>
                 <DialogContentContainer className={'styles.datepickerDialogContentContainer'}>

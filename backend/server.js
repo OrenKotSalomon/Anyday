@@ -2,9 +2,13 @@ const express = require('express')
 const cors = require('cors')
 const path = require('path')
 const cookieParser = require('cookie-parser')
+const http = require('http').createServer(app)
+
+const authRoutes = require('./api/auth/auth.routes')
+const userRoutes = require('./api/user/user.routes')
+const boardRoutes = require('./api/board/board.routes')
 
 const app = express()
-const http = require('http').createServer(app)
 
 // Express App Config
 app.use(cookieParser())
@@ -19,12 +23,6 @@ if (process.env.NODE_ENV === 'production') {
     }
     app.use(cors(corsOptions))
 }
-
-
-
-const authRoutes = require('./api/auth/auth.routes')
-const userRoutes = require('./api/user/user.routes')
-const boardRoutes = require('./api/board/board.routes')
 
 const { setupSocketAPI } = require('./services/socket.service')
 

@@ -28,7 +28,9 @@ export function BoardDetails() {
     const board = useSelector((storeState) => storeState.boardModule.board)
     const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
     const prevBoard = useSelector((storeState) => storeState.boardModule.prevBoard)
+
     const { boardId } = useParams()
+
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [cmp, setCmp] = useState({})
     const [isDndModeDisabled, setIsDndModeDisabled] = useState(false)

@@ -357,6 +357,7 @@ async function updateTaskService(board, data, type) {
     board = structuredClone(boardToUpdate)
     const newTask = getNewTask()
     let currTask, groupIdx, taskIdx
+
     const activity = {
         id: utilService.makeId(),
         time: Date.now(),
@@ -379,7 +380,6 @@ async function updateTaskService(board, data, type) {
     switch (type) {
         case DELETE_TASK:
             board.groups[groupIdx].tasks = board.groups[groupIdx].tasks.filter(task => task.id !== data.taskId)
-
             return board
         case DUPLICATE_TASK:
             data.taskToDuplicate.id = utilService.makeId()

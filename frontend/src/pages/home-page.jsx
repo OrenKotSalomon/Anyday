@@ -13,23 +13,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookF, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 
 import logo from '../assets/img/logo.png'
-import hero from '../assets/img/home-page-hero.jpg'
 
-import Yossi from '../assets/img/Yossi.jpg'
-import Oren from '../assets/img/Oren.jpg'
-import Harel from '../assets/img/Harel.jpg'
 import heroOne from '../assets/img/hero-1.jpg'
 import heroTwo from '../assets/img/hero-2.jpg'
 import heroThree from '../assets/img/hero-3.jpg'
 import { Templates } from '../cmps/templates.jsx'
-
 
 export function HomePage() {
     // const loggedInUser = userService.getLoggedinUser()
     const boards = useSelector((storeState) => storeState.boardModule.boards)
     const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
     const loggedInUser = useSelector(storeState => storeState.userModule.user)
-
 
     useEffect(() => {
         loadBoards()
@@ -63,16 +57,15 @@ export function HomePage() {
                         Welcome Guest <Link className='home-page-login-signup-link' to={`/login`}> LogIn </Link> |
                         <Link className='home-page-login-signup-link' to={`/signup`}> SignUp </Link> */}
 
-
                 <div className='home-page-login-signup-container'>
-                {loggedInUser?<span className="home-page-login-signup-link"> Welcome {loggedInUser.fullname}</span>
-                    :
-                    (<span><span className="home-page-login-signup-link"> Welcome!</span>
-                    <Link className='home-page-login-signup-link' to={`/login`}>
-                        Login
-                        <Icon iconType={Icon.type.SVG} icon={LogIn} iconSize={20} />
-                    </Link></span>)}
-                    
+                    {loggedInUser ? <span className="home-page-login-signup-link"> Welcome {loggedInUser.fullname}</span>
+                        :
+                        (<span><span className="home-page-login-signup-link"> Welcome!</span>
+                            <Link className='home-page-login-signup-link' to={`/login`}>
+                                Login
+                                <Icon iconType={Icon.type.SVG} icon={LogIn} iconSize={20} />
+                            </Link></span>)}
+
                     {/* <Link className='home-page-login-signup-link' to={`/signup`}> Signup </Link> */}
                     <Link className='home-page-start-nav' to={`/board/${boards[0]._id}`}>
                         Get Started
@@ -193,10 +186,6 @@ export function HomePage() {
                         </div>
                     </div>
                 </div> */}
-
-
-
-
 
             </div>
         </section >
